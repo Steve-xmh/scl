@@ -23,17 +23,30 @@
         #main {
             height: 100vh;
             width: 100%;
-            position: relative;
             display: flex;
             flex-direction: column;
             justify-content: center;
             user-select: none;
-            background-image: url("assets/scl-icon-bg.webp");
+            background-color: #550D0D;
+        }
+
+        #main>.bg {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
             background-size: cover;
             background-position: center;
             background-clip: border-box;
             background-origin: content-box;
-            background-color: #550D0D;
+        }
+
+        #main>.bg>img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
         }
 
         #main>#inner {
@@ -110,7 +123,7 @@
             justify-self: center;
         }
 
-        .afdian > iframe {
+        .afdian>iframe {
             border-radius: 0.5rem;
             margin: 2rem auto;
         }
@@ -123,6 +136,13 @@
 
 <body>
     <div id="main">
+        <picture class="bg">
+            <source type="image/webp" srcset="assets/scl-icon-bg-7680w.webp 7680w,
+                        assets/scl-icon-bg-3840w.webp 3840w,
+                        assets/scl-icon-bg-1920w.webp 1920w,
+                        assets/scl-icon-bg-960w.webp 960w">
+            <img src="assets/scl-icon-bg-7680w.webp" />
+        </picture>
         <div id="inner">
             <img src="assets/scl-icon.svg" class="scl-icon" />
             <div>
@@ -148,7 +168,7 @@
     <div class="page">
         <div class="body">
             <h1>完美出场</h1>
-            这是一个使用 Rust 编程语言开发的第三方 Minecraft 启动器。致力于跨平台，高性能，低内存占用为目标。
+            这是一个使用 Rust 编程语言开发的第三方 Minecraft 启动器。以跨平台，高性能，低内存占用为目标。
         </div>
     </div>
     <div class="page">
@@ -160,6 +180,7 @@
                 <li>启动游戏</li>
                 <li>游戏下载</li>
                 <li>修改启动内存/参数</li>
+                <li>三种主流登录方式：离线，Mojang，Microsoft</li>
             </ul>
             <div class="p"></div>
             同时启动器的独特特点也定能让你眼前一亮：
@@ -170,7 +191,6 @@
                 <li>百万并发级异步下载</li>
                 <li>更好的启动器主题自定义能力</li>
                 <li>安装 Curseforge 模组包</li>
-                <li>三种主流登录方式：离线，Mojang，Microsoft</li>
                 <li>还有更多...</li>
             </ul>
         </div>
@@ -198,7 +218,7 @@
             目前启动器仍在制作中，正式版发布之前将使用内测方式发放内测版本，你可以通过在爱发电赞助来获得内测版本的启动器。
             <div class="afdian">
                 <iframe scrolling="no" width="500" height="230" frameborder="0"
-                src="https://afdian.net/leaflet?slug=SteveXMH"></iframe>
+                    src="https://afdian.net/leaflet?slug=SteveXMH"></iframe>
             </div>
         </div>
     </div>
