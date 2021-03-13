@@ -130,6 +130,19 @@
             padding: 0 1rem;
         }
 
+        .chart-bar {
+            padding: 1vh;
+            margin: 1vh 0;
+        }
+
+        .chart-text {
+            margin: 1vh;
+        }
+
+        .chart-highlight {
+            font-weight: bold;
+        }
+
         @media screen and (max-width: 600px) {
             #main>.bg {
                 width: 100%;
@@ -451,6 +464,54 @@
                 <iframe title="爱发电" scrolling="no" width="500" height="230" frameborder="0"
                     src="https://afdian.net/leaflet?slug=SteveXMH"></iframe>
             </div>
+        </div>
+    </div>
+    <div id="time-stats" class="page">
+        <div class="body">
+            <h1>与同类启动器的比较</h1>
+            这里展示了启动器的各项指标测试排行及对比，包括启动时间、占用内存和程序大小。
+            <div id="time-stats-main">
+            </div>
+            <script>
+                fetch('time-stats.json')
+                    .then(r => r.json())
+                    .then(r => {
+                        const exes = r.exes
+                        const el = document.querySelector('#time-stats-main')
+                        function getItem(item, text, width) {
+                            return '<div class="chart-text' + (item.name.startsWith('Sharp Craft Launcher') ? ' chart-highlight' : '') + '">' + item.name + ": " + text + '</div>' +
+                                '<div class="chart-bar" style="background-color:' + item.themeColor + ';width:' + width + '"></div>'
+
+                        }
+                        function size(v) {
+                            const units = ['B', 'KiB', 'MiB']
+                            let t = v, i = 0
+                            for (i = 0; i < units.length; i++) {
+                                if (t < 1024) break
+                                t /= 1024
+                            }
+                            return t.toFixed(2) + units[i]
+                        }
+                        exes.sort((a, b) => a.exeSize - b.exeSize)
+                        const binsMax = exes[exes.length - 1].exeSize
+                        el.innerHTML += '<h2>执行文件大小</h2>'
+                        exes.forEach(e => {
+                            el.innerHTML += getItem(e, size(e.exeSize), e.exeSize / binsMax * 100 + '%')
+                        });
+                        exes.sort((a, b) => a.launchTime - b.launchTime)
+                        const timesMax = exes[exes.length - 1].launchTime
+                        el.innerHTML += '<h2>启动启动器用时</h2>'
+                        exes.forEach(e => {
+                            el.innerHTML += getItem(e, e.launchTime + 'ms', e.launchTime / timesMax * 100 + '%')
+                        });
+                        exes.sort((a, b) => a.averageMemSize - b.averageMemSize)
+                        const memsMax = exes[exes.length - 1].averageMemSize
+                        el.innerHTML += '<h2>平均静置内存用量</h2>'
+                        exes.forEach(e => {
+                            el.innerHTML += getItem(e, size(e.averageMemSize), e.averageMemSize / memsMax * 100 + '%')
+                        });
+                    })
+            </script>
         </div>
     </div>
     <div id="bottom" class="page">
