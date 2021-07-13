@@ -1,0 +1,42 @@
+doctype html
+html(lang="zh-CN")
+    head
+        title SharpCraftLauncher - 一个无比轻量，迅速，简洁的启动器
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(name="description" content="一个无比轻量，迅速，简洁的启动器")
+        meta(name="keywords" content="Rust, 启动器, Minecraft, 编程, SCL, Sharp Craft Launcher, SharpCraftLauncher")
+        meta(name="author" content="SteveXMH")
+        link(rel="shortcut icon" href="favicon.ico" type="image/vnd.microsoft.icon")
+        link(rel="icon" href="favicon.ico" type="image/vnd.microsoft.icon")
+        link(rel="stylesheet" type="text/css" charset="utf-8" href="index.css")
+        block head
+    body
+        block before-header
+        block header
+            header
+                span
+                    a.name(href="/")
+                    a(href="/#main") 首页
+                    a(href="/download.html") 下载
+                    a(href="/#support") 支持
+        .content
+            block content
+        block footer
+            .footer
+                div SharpCraftLauncher - Copyright © 2021 SteveXMH
+                div
+                    a(rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/")
+                        img(alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png")
+                    | 　
+                    a(rel="github" href="https://github.com/Steve-xmh/scl")
+                        img(alt="SCL 网站仓库" style="border-width:0;width:32px;height:32px" src="GitHub-Mark-Light-64px.png")
+                    | 　
+                    a(rel="github" href="http://afdian.net/@SteveXMH")
+                        img(alt="爱发电" style="border-width:0;width:32px;height:32px" src="afd-logo.svg")
+                div
+                    | 本网站采用 
+                    a(rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/") 知识共享署名 - 相同方式共享 4.0 国际许可协议
+                    |
+                    | 进行许可。
