@@ -11,6 +11,10 @@ const pagesPath = resolve(rootPath, 'pages')
 const publicPath = resolve(rootPath, 'public')
 const stylesPath = resolve(rootPath, 'styles')
 
+const pugOptions = {
+    baseUrl: '/scl'
+}
+
 /**
  * @param {string} path
  * @param {string} ext
@@ -31,7 +35,7 @@ async function compilePages(path, relPath = '/') {
         const fstat = await fsp.stat(pagePath)
         if (fstat.isFile()) {
             console.log('Building Page ', relPath + page)
-            const result = pug.renderFile(pagePath)
+            const result = pug.compileFile(pagePath)(pugOptions)
             const outputPath = join(distPath, replaceFileExt(page, '.html'))
             await fsp.mkdir(resolve(outputPath, '..'), { recursive: true })
             await fsp.writeFile(outputPath, result)

@@ -12,6 +12,10 @@ const pagesPath = resolve(rootPath, 'pages')
 const publicPath = resolve(rootPath, 'public')
 const stylesPath = resolve(rootPath, 'styles')
 
+const pugOptions = {
+    baseUrl: ''
+}
+
 /**
  * @param {string} path
  */
@@ -43,7 +47,8 @@ app.get('*', async (req, res, next) => {
             {
                 const relPath = join(pagesPath, replaceFileExt(path, '.pug'))
                 if (fs.existsSync(relPath) && (await fs.promises.stat(relPath)).isFile()) {
-                    res.type('html').send(pug.renderFile(relPath))
+                    const page = pug.compileFile(relPath)
+                    res.type('html').send(page(pugOptions))
                 } else {
                     next()
                 }
@@ -78,7 +83,7 @@ app.get('*', async (req, res, next) => {
 
 app.use((_req, res) => {
     const notFountPath = join(pagesPath, '404.pug')
-    res.type('html').send(pug.renderFile(notFountPath)).end()
+    res.type('html').send(pug.compileFile(notFountPath)(pugOptions)).end()
 })
 
 app.listen(8080, () => {
