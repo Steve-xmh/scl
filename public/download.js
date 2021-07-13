@@ -9,7 +9,7 @@ function h(tag, attr = {}, children = []) {
     return el
 }
 (async () => {
-    const files = await (await fetch('./demo-download-sources.json')).json()
+    const files = await (await fetch('demo-download-sources.json')).json()
     const filesEl = document.querySelector('.demo-files')
     filesEl.innerHTML = ''
     for (const file of files) {
