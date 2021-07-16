@@ -12,7 +12,7 @@ const publicPath = resolve(rootPath, 'public')
 const stylesPath = resolve(rootPath, 'styles')
 
 const pugOptions = {
-    baseUrl: '/scl'
+    baseUrl: process.env.BASE_URL || '/scl'
 }
 
 /**
