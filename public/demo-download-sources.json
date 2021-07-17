@@ -1,13 +1,101 @@
-[{
-    "name": "SharpCraftLauncherDEMO-20210712-d71b5f-i686.exe",
-    "sha256": "DBCB26B1D9E9824588431A4E1075E92D9B0FD21E663939BD9AE068B75C1D709A",
-    "virustotal": "https://www.virustotal.com/gui/file-analysis/OTBmZGU4ZjYwZDVhN2I2MzRmMTNhZTM3MzdmMDFiNDM6MTYyNjE4Mzc4NA==",
-    "sources": [{
-        "name": "蓝奏云",
-        "url": "https://wwa.lanzoui.com/iMKeMrdo6ch"
-    }, {
-        "name": "百度云",
-        "url": "https://pan.baidu.com/s/1_EWhBlr7gdrIDzp28gDfvA",
-        "desc": "密码：mku1"
-    }]
-}]
+[
+    {
+        "name": "SharpCraftLauncherDEMO-20210714-44e1d0-i686.exe",
+        "sha256": "6f26a189fb7445d1b1930024b92a8c19aaafbfe0e1f9fb4894ea1c782776916e",
+        "virustotal": "https://www.virustotal.com/gui/file/6f26a189fb7445d1b1930024b92a8c19aaafbfe0e1f9fb4894ea1c782776916e/details",
+        "sources": [
+            {
+                "name": "蓝奏云",
+                "url": "https://wwa.lanzoui.com/iBr3xrirx8d"
+            }
+        ]
+    },
+    {
+        "name": "SharpCraftLauncherDEMO-20210712-da19ab-i686.exe",
+        "sha256": "dc4483c313cbb0c04ad2c053831929e511655d3f3e7b81d28d9eaa09168bdaf1",
+        "virustotal": "https://www.virustotal.com/gui/file/dc4483c313cbb0c04ad2c053831929e511655d3f3e7b81d28d9eaa09168bdaf1/details",
+        "sources": [
+            {
+                "name": "蓝奏云",
+                "url": "https://wwa.lanzoui.com/iwNysrirx7c"
+            }
+        ]
+    },
+    {
+        "name": "SharpCraftLauncherDEMO-20210712-d71b5f-i686.exe",
+        "sha256": "dbcb26b1d9e9824588431a4e1075e92d9b0fd21e663939bd9ae068b75c1d709a",
+        "virustotal": "https://www.virustotal.com/gui/file/dbcb26b1d9e9824588431a4e1075e92d9b0fd21e663939bd9ae068b75c1d709a/details",
+        "sources": [
+            {
+                "name": "蓝奏云",
+                "url": "https://wwa.lanzoui.com/ifWcErirx5a"
+            }
+        ]
+    },
+    {
+        "name": "SharpCraftLauncherDEMO-20210712-6c696e-i686.exe",
+        "sha256": "3e266cc3987c5f224fb4d71b3c5256afa4281674f65478baf87e5288446baba8",
+        "virustotal": "https://www.virustotal.com/gui/file/3e266cc3987c5f224fb4d71b3c5256afa4281674f65478baf87e5288446baba8/details",
+        "sources": [
+            {
+                "name": "蓝奏云",
+                "url": "https://wwa.lanzoui.com/i9z8Wrirx3i"
+            }
+        ]
+    },
+    {
+        "name": "SharpCraftLauncherDEMO-20210712-4194e8-i686.exe",
+        "sha256": "b2e1fb6d1c69017edd08e0b4de714bcbbaec256897abefeb8f1e1863fb4bec30",
+        "virustotal": "https://www.virustotal.com/gui/file/b2e1fb6d1c69017edd08e0b4de714bcbbaec256897abefeb8f1e1863fb4bec30/details",
+        "sources": [
+            {
+                "name": "蓝奏云",
+                "url": "https://wwa.lanzoui.com/icMAVrirx2h"
+            }
+        ]
+    },
+    {
+        "name": "SharpCraftLauncherDEMO-20210712-08a1e7-i686.exe",
+        "sha256": "758b9316dcc381bff102938872a1c6071b123040e3f07e9590fa5c7e2091c785",
+        "virustotal": "https://www.virustotal.com/gui/file/758b9316dcc381bff102938872a1c6071b123040e3f07e9590fa5c7e2091c785/details",
+        "sources": [
+            {
+                "name": "蓝奏云",
+                "url": "https://wwa.lanzoui.com/inEGArirwyd"
+            }
+        ]
+    },
+    {
+        "name": "SharpCraftLauncherDEMO-20210711-d24606-i686.exe",
+        "sha256": "2b1c4f7d1393c38d8037c0559c86ae7462dfd9c4b137c4a2763feebf8ac87319",
+        "virustotal": "https://www.virustotal.com/gui/file/2b1c4f7d1393c38d8037c0559c86ae7462dfd9c4b137c4a2763feebf8ac87319/details",
+        "sources": [
+            {
+                "name": "蓝奏云",
+                "url": "https://wwa.lanzoui.com/iHCyirirwwb"
+            }
+        ]
+    },
+    {
+        "name": "SharpCraftLauncherDEMO-20210711-a761ba-i686.exe",
+        "sha256": "c188287c49800c39c8057a195fde85096558156cda46bd4b88498575286a38da",
+        "virustotal": "https://www.virustotal.com/gui/file/c188287c49800c39c8057a195fde85096558156cda46bd4b88498575286a38da/details",
+        "sources": [
+            {
+                "name": "蓝奏云",
+                "url": "https://wwa.lanzoui.com/i6pBtrirwsh"
+            }
+        ]
+    },
+    {
+        "name": "SharpCraftLauncherDEMO-20210711-1e5bb7-i686.exe",
+        "sha256": "19114c3737b944058ccc3228a6490725d3f61cd30748552ccdebb5a878df48d2",
+        "virustotal": "https://www.virustotal.com/gui/file/19114c3737b944058ccc3228a6490725d3f61cd30748552ccdebb5a878df48d2/details",
+        "sources": [
+            {
+                "name": "蓝奏云",
+                "url": "https://wwa.lanzoui.com/islLrrirwpe"
+            }
+        ]
+    }
+]

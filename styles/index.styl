@@ -2,14 +2,30 @@
 *
     margin 0
     box-sizing content-box
+    text-decoration none
     color white
 
 html
     scroll-behavior smooth
+    font-family sans-serif
 
 body
     background-color #0A0202
     user-select none
+
+blur-level = 15px
+
+img[data-src]
+    transition filter 0.5s, opacity 0.5s
+    filter blur(blur-level)
+    overflow hidden
+    opacity 0
+    &[src]
+        filter blur(0)
+        opacity 1
+    &[src*=".min"]
+        filter blur(blur-level)
+
 
 @keyframes fd-ease-in
     0%
@@ -96,11 +112,22 @@ body
         max-width 100%
         margin 2rem auto
 
-.demo-files > *
+.showall
     background-color #FFF1
     border-radius 0.5rem
     padding 1.5rem 2rem
-    margin: 1rem 0
+    text-align center
+    cursor pointer
+
+.demo,
+.demo-files > .file
+    background-color #FFF1
+    border-radius 0.5rem
+    padding 1.5rem 2rem
+    margin 1rem 0
+    display none
+    &.show
+        display block
     > .name
         font-weight bold
         user-select text
@@ -112,7 +139,6 @@ body
         margin-bottom 1rem
     .button
         display inline-block
-        text-decoration none
         cursor pointer
         margin-right:  1rem
         padding 0.5rem 1rem
@@ -123,14 +149,16 @@ body
 
 
 header
-    background-color #13020255
+    background url(noise.png), linear-gradient(0deg, rgba(12, 3, 4, 0.4), rgba(12, 3, 4, 0.4)), rgba(12, 3, 4, 0.7)
+    background-blend-mode normal, color, luminosity
     display flex
     position sticky
     top 0
     width 100%
     overflow hidden
     justify-content center
-    backdrop-filter blur(1rem)
+    backdrop-filter blur(60px)
+    box-shadow 0px 3.2px 7.2px rgba(0, 0, 0, 0.13), 0px 0.6px 1.8px rgba(0, 0, 0, 0.11)
     line-height 5rem
     height 5rem
     border-bottom 1px solid #FFF1
@@ -142,12 +170,11 @@ header
         width 60%
         height 5rem
         > .name::after
-            content 'Sharp Craft Launcher'
-            display inline
-            position relative
+                content 'Sharp Craft Launcher'
+                display inline
+                position relative
         > *
             padding 0 1rem
-            text-decoration none
             &:hover 
                 background-color #FFF1
         @media screen and (max-width 960px)

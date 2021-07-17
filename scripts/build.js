@@ -1,8 +1,10 @@
 const stylus = require('stylus')
 const pug = require('pug')
-const { resolve, join } = require('path')
+const { resolve, join, basename, extname } = require('path')
 const fs = require('fs')
 const nib = require('nib')
+const sharp = require('sharp')
+const ClosureCompiler = require('google-closure-compiler').compiler
 const fsp = fs.promises
 
 const rootPath = resolve(__dirname, '..')
@@ -12,7 +14,7 @@ const publicPath = resolve(rootPath, 'public')
 const stylesPath = resolve(rootPath, 'styles')
 
 const pugOptions = {
-    baseUrl: process.env.BASE_URL || '/scl'
+    baseUrl: process.env.BASE_URL || ''
 }
 
 /**
@@ -40,7 +42,7 @@ async function compilePages(path, relPath = '/') {
             await fsp.mkdir(resolve(outputPath, '..'), { recursive: true })
             await fsp.writeFile(outputPath, result)
         } else if (fstat.isDirectory()) {
-            compilePages(pagePath, relPath + '/' + page)
+            compilePages(pagePath, relPath + '/' + page + '/')
         }
     }
 }
@@ -65,14 +67,132 @@ async function compileStyles(path, relPath = '/') {
             await fsp.mkdir(resolve(outputPath, '..'), { recursive: true })
             await fsp.writeFile(outputPath, result)
         } else if (fstat.isDirectory()) {
-            compilePages(stylePath, relPath + '/' + style)
+            compilePages(stylePath, relPath + '/' + style + '/')
         }
     }
 }
 
-async function copyPublicFiles() {
+function closureCompile(input, output) {
+    return new Promise((resolve, reject) => {
+        const closureCompiler = new ClosureCompiler({
+            js: input,
+            js_output_file: output,
+            compilation_level: 'ADVANCED',
+            language_out: 'ECMASCRIPT5_STRICT'
+        })
+        closureCompiler.run((exitCode, stdOut, stdErr) => {
+            if (exitCode != 0) {
+                reject(stdErr)
+            } else {
+                resolve([stdOut, stdErr])
+            }
+        })
+    })
+}
+
+async function copyPublicFiles(path, relPath = '/') {
     const files = await fsp.readdir(publicPath)
-    await Promise.all(files.map(v => fsp.copyFile(resolve(publicPath, v), resolve(distPath, v))))
+    const threads = []
+    for (const file of files) {
+        const filePath = resolve(path, file)
+        const fstat = await fsp.stat(filePath)
+        threads.push((async () => {
+            if (fstat.isFile()) {
+                switch (extname(file)) {
+                    case '.png':
+                    case '.jpg':
+                    case '.jpeg':
+                    case '.webp':
+                        {
+                            console.log('Processing file', relPath + file)
+                            const outputPath = join(distPath, file)
+                            const minOutputPath = join(distPath, basename(file, extname(file)) + '.min' + extname(file))
+                            await fsp.mkdir(resolve(outputPath, '..'), { recursive: true })
+                            switch (extname(outputPath)) {
+                                case '.jpg':
+                                case '.jpeg':
+                                    {
+                                        await sharp(filePath)
+                                            .jpeg({
+                                                progressive: true
+                                            })
+                                            .toFile(outputPath)
+                                        await sharp(outputPath)
+                                            .jpeg({
+                                                progressive: true
+                                            })
+                                            .resize(64)
+                                            .toFile(minOutputPath)
+                                        break
+                                    }
+                                case '.png':
+                                    {
+                                        await sharp(filePath)
+                                            .png({
+                                                progressive: true
+                                            })
+                                            .toFile(outputPath)
+                                        await sharp(outputPath)
+                                            .png({
+                                                progressive: true
+                                            })
+                                            .resize(64)
+                                            .toFile(minOutputPath)
+                                        break
+                                    }
+                                case '.webp':
+                                    {
+                                        await sharp(filePath)
+                                            .webp({
+                                                nearLossless: true
+                                            })
+                                            .toFile(outputPath)
+                                        await sharp(outputPath)
+                                            .webp({
+                                                nearLossless: true
+                                            })
+                                            .resize(64)
+                                            .toFile(minOutputPath)
+                                        break
+                                    }
+                            }
+                            break
+                        }
+                    case '.json':
+                        {
+                            console.log('Minifing json file', relPath + file)
+                            const outputPath = join(distPath, file)
+                            await fsp.mkdir(resolve(outputPath, '..'), { recursive: true })
+                            const rawJson = await fsp.readFile(filePath, { encoding: 'utf8' })
+                            await fsp.writeFile(outputPath, JSON.stringify(JSON.parse(rawJson)))
+                            break
+                        }
+                    case '.js':
+                        {
+
+                            console.log('Minifing script', relPath + file)
+                            const outputPath = join(distPath, file)
+                            await fsp.mkdir(resolve(outputPath, '..'), { recursive: true })
+                            const [, err] = await closureCompile(filePath, outputPath)
+                            if (err) {
+                                console.log('Minified script with warns', relPath + file, err)
+                            }
+                            break
+                        }
+                    default:
+                        {
+                            console.log('Copying file', relPath + file)
+                            const outputPath = join(distPath, file)
+                            await fsp.mkdir(resolve(outputPath, '..'), { recursive: true })
+                            await fsp.copyFile(filePath, outputPath)
+                        }
+                }
+            } else if (fstat.isDirectory()) {
+                copyPublicFiles(filePath, relPath + '/' + file)
+            }
+        })())
+    }
+    await Promise.all(threads)
 }
 
 async function main() {
@@ -81,7 +201,7 @@ async function main() {
     await Promise.all([
         compilePages(pagesPath),
         compileStyles(stylesPath),
-        copyPublicFiles()
+        copyPublicFiles(publicPath)
     ])
 }
 

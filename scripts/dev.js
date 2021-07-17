@@ -1,10 +1,11 @@
 const express = require('express')
 const stylus = require('stylus')
 const pug = require('pug')
-const { resolve, join } = require('path')
+const { resolve, join, extname, basename } = require('path')
 const fs = require('fs')
 const nib = require('nib')
 const app = express()
+const sharp = require('sharp')
 
 const rootPath = resolve(__dirname, '..')
 const layoutPath = resolve(rootPath, 'layout/layout.pug')
@@ -16,15 +17,12 @@ const pugOptions = {
     baseUrl: process.env.BASE_URL || ''
 }
 
-/**
- * @param {string} path
- */
-function getFileExt(path) {
-    if (path.includes('.')) {
-        return path.substring(path.lastIndexOf('.'))
-    } else {
-        return ''
-    }
+function withMinExt(path) {
+    return extname(basename(path, extname(path))) === '.min'
+}
+
+function removeMinExt(path) {
+    return path.substring(0, path.lastIndexOf('.', path.lastIndexOf('.') - 1)) + extname(path)
 }
 
 /**
@@ -42,7 +40,33 @@ function replaceFileExt(path, ext) {
 app.get('*', async (req, res, next) => {
     let path = req.path
     path = path === '/' ? '/index.html' : path
-    switch (getFileExt(path)) {
+    switch (extname(path)) {
+        case '.png':
+        case '.jpg':
+        case '.jpeg':
+        case '.webp':
+            {
+                if (withMinExt(path)) {
+                    // Minizize image
+                    const relPath = join(publicPath, removeMinExt(path))
+                    const ext = extname(relPath)
+                    if (fs.existsSync(relPath) && (await fs.promises.stat(relPath)).isFile()) {
+                        const processed = await sharp(relPath).resize(100).toBuffer()
+                        res.type(ext.substring(1)).send(processed)
+                    } else {
+                        next()
+                    }
+                } else {
+                    const relPath = join(publicPath, path)
+                    const ext = extname(relPath)
+                    if (fs.existsSync(relPath) && (await fs.promises.stat(relPath)).isFile()) {
+                        res.type(ext.substring(1)).send(await fs.promises.readFile(relPath))
+                    } else {
+                        next()
+                    }
+                }
+                break
+            }
         case '.html':
             {
                 const relPath = join(pagesPath, replaceFileExt(path, '.pug'))
@@ -71,7 +95,7 @@ app.get('*', async (req, res, next) => {
         default:
             {
                 const relPath = join(publicPath, path)
-                const ext = getFileExt(relPath)
+                const ext = extname(relPath)
                 if (fs.existsSync(relPath) && (await fs.promises.stat(relPath)).isFile()) {
                     res.type(ext.substring(1)).send(await fs.promises.readFile(relPath))
                 } else {

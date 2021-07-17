@@ -2,9 +2,9 @@ extends ../layout/layout.pug
 
 block before-header
     .main#main
-        img.bg(alt="背景" src="scl-icon-bg-1920w.jpg")
+        img.bg(alt="背景" data-src="scl-icon-bg-1920w.png")
         .inner
-            img.scl-icon(src="scl-icon.svg", alt="SCL 图标")
+            img.scl-icon(data-src="scl-icon.svg" alt="SCL 图标")
             div
                 .main-1 SharpCraftLauncher
                 .main-2 一个轻量，迅速，简洁的 Minecraft 启动器
@@ -55,12 +55,12 @@ block content
     .showcase
         - let n = 0
         while n < 6
-            img(alt=`展示图 #${n}`, src=`showcase-${n}.png` draggable="false")
+            img(alt=`展示图 #${n}` width=358 height=478 data-src=`showcase-${n}.png` draggable="false")
             - n++
     h1 备注
     ol
         li 模组下载支持 Curseforge 平台和新兴的 Modrinth 平台；
         li MacOS 由于没有开发设备故无法进行开发，为何不试试给作者发电买个 Mac Mini 呢？
         li 我是真的没想到，都 2021 年了还有人在用易语言……
-        li 内测用户会需要在启动器发生错误时提交错误报告到内测群中，其报告会包含用户的操作系统、启动器版      本号、系统时间等数据，由于作者没有资金经营服务器，所以只能在内测群内提交错误，公开体验版本将不会包含错误报告收集功能。
+        li 内测用户会需要在启动器发生错误时提交错误报告到内测群中，其报告会包含用户的操作系统、启动器版本号、系统时间等数据，由于作者没有资金经营服务器，所以只能在内测群内提交错误，公开体验版本将不会包含错误报告收集功能。
 

@@ -1,26 +1,27 @@
 doctype html
 html(lang="zh-CN")
     head
-        title SharpCraftLauncher - 一个无比轻量，迅速，简洁的启动器
         meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
         meta(name="description" content="一个无比轻量，迅速，简洁的启动器")
         meta(name="keywords" content="Rust, 启动器, Minecraft, 编程, SCL, Sharp Craft Launcher, SharpCraftLauncher")
         meta(name="author" content="SteveXMH")
-        link(rel="shortcut icon" href=baseUrl + "/favicon.ico" type="image/vnd.microsoft.icon")
-        link(rel="icon" href=baseUrl + "/favicon.ico" type="image/vnd.microsoft.icon")
-        link(rel="stylesheet" type="text/css" charset="utf-8" href=baseUrl + "/index.css")
+        title SharpCraftLauncher - 一个无比轻量，迅速，简洁的启动器
+        link(rel="shortcut icon" href=baseUrl + "favicon.ico" type="image/vnd.microsoft.icon")
+        link(rel="icon" href=baseUrl + "favicon.ico" type="image/vnd.microsoft.icon")
+        link(rel="stylesheet" type="text/css" charset="utf-8" href=baseUrl + "index.css")
+        script(src="lazy-load.js" defer) 
         block head
     body
         block before-header
         block header
             header
                 span
-                    a.name(href=baseUrl + "/index.html")
-                    a(href=baseUrl + "/index.html#main") 首页
-                    a(href=baseUrl + "/download.html") 下载
-                    a(href=baseUrl + "/index.html#support") 支持
+                    a.name(title="SCL" href=baseUrl + "index.html")
+                    a(href=baseUrl + "index.html#main") 首页
+                    a(href=baseUrl + "download.html") 下载
+                    a(href=baseUrl + "index.html#support") 支持
         .content
             block content
         block footer
@@ -28,13 +29,13 @@ html(lang="zh-CN")
                 div SharpCraftLauncher - Copyright © 2021 SteveXMH
                 div
                     a(rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/")
-                        img(alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png")
+                        img(alt="知识共享许可协议" style="border-width:0" data-src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png")
                     | 　
                     a(rel="github" href="https://github.com/Steve-xmh/scl")
-                        img(alt="SCL 网站仓库" style="border-width:0;width:32px;height:32px" src=baseUrl + "/GitHub-Mark-Light-64px.png")
+                        img(alt="SCL 网站仓库" style="border-width:0;width:32px;height:32px" data-src=baseUrl + "GitHub-Mark-Light-64px.png")
                     | 　
                     a(rel="github" href="http://afdian.net/@SteveXMH")
-                        img(alt="爱发电" style="border-width:0;width:32px;height:32px" src=baseUrl + "/afd-logo.svg")
+                        img(alt="爱发电" style="border-width:0;width:32px;height:32px" data-src=baseUrl + "afd-logo.svg")
                 div
                     | 本网站采用 
                     a(rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/") 知识共享署名 - 相同方式共享 4.0 国际许可协议
