@@ -52,27 +52,27 @@ function downloadSourceCallback(files) {
     {
         const latest = files.shift()
         const children = [
-            h('div', { className: 'name', innerText: `最新版本：${latest.name}` }),
-            h('div', { className: 'hash', innerText: `SHA256: ${latest.sha256}` }),
-            h('a', { className: 'button vt', innerText: `VirusTotal 查毒报告`, href: latest.virustotal }),
+            h('div', { className: 'name', innerText: `最新版本：${latest['name']}` }),
+            h('div', { className: 'hash', innerText: `SHA256: ${latest['sha256']}` }),
+            h('a', { className: 'button vt', innerText: `VirusTotal 查毒报告`, href: latest['virustotal'] }),
         ]
-        latest.sources.forEach(source => children.push(h('a', {
+        latest['sources'].forEach(source => children.push(h('a', {
             className: 'button d',
-            href: source.url,
-            innerText: `从 ${source.name} 下载`
+            href: source['url'],
+            innerText: `从 ${source['name']} 下载`
         })))
         filesEl.append(h('div', { className: 'file show' }, children))
     }
     const olderVersions = files.map(file => {
         const children = [
-            h('div', { className: 'name', innerText: `${file.name}` }),
-            h('div', { className: 'hash', innerText: `SHA256: ${file.sha256}` }),
-            h('a', { className: 'button vt', innerText: `VirusTotal 查毒报告`, href: file.virustotal }),
+            h('div', { className: 'name', innerText: `${file['name']}` }),
+            h('div', { className: 'hash', innerText: `SHA256: ${file['sha256']}` }),
+            h('a', { className: 'button vt', innerText: `VirusTotal 查毒报告`, href: file['virustotal'] }),
         ]
-        file.sources.forEach(source => children.push(h('a', {
+        file['sources'].forEach(source => children.push(h('a', {
             className: 'button d',
-            href: source.url,
-            innerText: `从 ${source.name} 下载`
+            href: source['url'],
+            innerText: `从 ${source['name']} 下载`
         })))
         return h('div', { className: 'file' }, children)
     })
