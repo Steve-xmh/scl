@@ -8,11 +8,14 @@ function getMinUrl(path) {
 /**
  * @param {string} url 
  * @param {Function} callback 
+ * @returns {string}
  */
 function fakeLoadImage(url, callback) {
     const img = document.createElement('img')
-    img.onload = callback
+    img.onload = callback.bind(undefined, true)
+    img.onerror = callback.bind(undefined, false)
     img.src = url
+    return img.src
 }
 /**
  * @param {string} str 
@@ -26,18 +29,16 @@ document.addEventListener('DOMContentLoaded', function () {
         const obs = new IntersectionObserver(function (entries) {
             entries.forEach(el => {
                 if (el.intersectionRatio > 0) {
-                    const dataSrc = el.target.dataset.src
-                    const minSrc = endsWith(dataSrc, '.svg') ? dataSrc : getMinUrl(dataSrc)
-                    fakeLoadImage(minSrc, function () {
-                        if (minSrc !== dataSrc && el.target.src !== dataSrc) {
-                            fakeLoadImage(dataSrc, function () {
-                                console.log('Lazy original', dataSrc)
-                                el.target.src = dataSrc
-                            })
-                        }
-                        el.target.src = minSrc
+                    const target = el.target
+                    const dataSrc = fakeLoadImage(target.dataset.src, function () {
+                        target.src = dataSrc
                     })
-                    this.unobserve(el.target)
+                    const minSrc =  fakeLoadImage(endsWith(dataSrc, '.svg') ? dataSrc : getMinUrl(dataSrc), function (loaded) {
+                        if (target.src !== dataSrc && loaded && minSrc !== dataSrc) {
+                            target.src = minSrc
+                        }
+                    })
+                    this.unobserve(target)
                 }
             })
         })

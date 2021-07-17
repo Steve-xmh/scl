@@ -111,5 +111,5 @@ app.use((_req, res) => {
 })
 
 app.listen(8080, () => {
-    console.log('Start listening on port 8080')
+    console.log('Start listening on port http://localhost:8080')
 })
