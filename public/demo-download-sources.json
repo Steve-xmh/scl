@@ -1,5 +1,49 @@
 [
     {
+        "name": "SharpCraftLauncherDEMO-20210721-872bae-i686.exe",
+        "sha256": "f2098552c5d43c72da3c14ce67d3f02988404106701a407f450fcb952be78053",
+        "virustotal": "https://www.virustotal.com/gui/file/f2098552c5d43c72da3c14ce67d3f02988404106701a407f450fcb952be78053/details",
+        "sources": [
+            {
+                "name": "蓝奏云",
+                "url": "https://wwa.lanzoui.com/i4zXorpq2qb"
+            }
+        ]
+    },
+    {
+        "name": "SharpCraftLauncherDEMO-20210720-89ba97-i686.exe",
+        "sha256": "4ecc1405f75ad81ce672f1982d58cc2db29816ca84cf158c5bbe7585f021bd1e",
+        "virustotal": "https://www.virustotal.com/gui/file/4ecc1405f75ad81ce672f1982d58cc2db29816ca84cf158c5bbe7585f021bd1e/details",
+        "sources": [
+            {
+                "name": "蓝奏云",
+                "url": "https://wwa.lanzoui.com/iqMbPrpq2lg"
+            }
+        ]
+    },
+    {
+        "name": "SharpCraftLauncherDEMO-20210717-3216d1-i686.exe",
+        "sha256": "af2c69914927ac376e2d31d539afcb00e6f22808a3ff528e7d536757a861ee09",
+        "virustotal": "https://www.virustotal.com/gui/file/af2c69914927ac376e2d31d539afcb00e6f22808a3ff528e7d536757a861ee09/details",
+        "sources": [
+            {
+                "name": "蓝奏云",
+                "url": "https://wwa.lanzoui.com/ioVdzrpq2id"
+            }
+        ]
+    },
+    {
+        "name": "SharpCraftLauncherDEMO-20210715-671d3b-i686.exe",
+        "sha256": "1b73b0361ed21265a9a709df74a10bcfae437c9a5c0856f54b315feb3f088741",
+        "virustotal": "https://www.virustotal.com/gui/file/1b73b0361ed21265a9a709df74a10bcfae437c9a5c0856f54b315feb3f088741/details",
+        "sources": [
+            {
+                "name": "蓝奏云",
+                "url": "https://wwa.lanzoui.com/iLU1Xrpq2ej"
+            }
+        ]
+    },
+    {
         "name": "SharpCraftLauncherDEMO-20210714-44e1d0-i686.exe",
         "sha256": "6f26a189fb7445d1b1930024b92a8c19aaafbfe0e1f9fb4894ea1c782776916e",
         "virustotal": "https://www.virustotal.com/gui/file/6f26a189fb7445d1b1930024b92a8c19aaafbfe0e1f9fb4894ea1c782776916e/details",
