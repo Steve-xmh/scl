@@ -112,6 +112,21 @@ Windows UI 3（前 Fluent Design）的全新圆角流式设计，被大量用于
 
 </div>
 
+<div class="showcase mac">
+
+<img src="./assets/showcase-mac-1.png">
+<img src="./assets/showcase-mac-2.png">
+<img src="./assets/showcase-mac-3.png">
+<img src="./assets/showcase-mac-4.png">
+<img src="./assets/showcase-mac-5.png">
+<img src="./assets/showcase-mac-6.png">
+<img src="./assets/showcase-mac-7.png">
+<img src="./assets/showcase-mac-8.png">
+<img src="./assets/showcase-mac-9.png">
+<img src="./assets/showcase-mac-10.png">
+<img src="./assets/showcase-mac-11.png">
+
+</div>
 ## 鸣谢
 
 在此处感谢绝大多数被 SCL 直接或间接引用的各种允许闭源的开发框架！
