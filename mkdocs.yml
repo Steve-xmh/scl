@@ -1,0 +1,26 @@
+site_name: Sharp Craft Launcher
+site_url: https://steve-xmh.github.io/scl/
+repo_name: Steve-xmh/scl
+repo_url: https://github.com/Steve-xmh/scl
+edit_uri: ''
+dev_addr: '127.0.0.1:2546'
+
+extra_css:
+  - stylesheets/main.css
+
+theme:
+  name: material
+  language: zh
+  logo: assets/scl-icon-flat.svg
+  favicon: assets/favicon.ico
+  features:
+    - navigation.tabs
+    - navigation.instant
+  icon:
+    repo: fontawesome/brands/github
+
+nav:
+  - 主页: index.md
+  - 下载: download.md
+  - 文档:
+    - 自定义主题教程: theme-edit.md
