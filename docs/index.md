@@ -94,6 +94,24 @@ Windows UI 3（前 Fluent Design）的全新圆角流式设计，被大量用于
 
 > 注：只要五块钱呀！求求了！(っ °Д °;)っ
 
+## 截图展示
+
+<div class="showcase">
+
+<img src="./assets/showcase-1.png">
+<img src="./assets/showcase-2.png">
+<img src="./assets/showcase-3.png">
+<img src="./assets/showcase-4.png">
+<img src="./assets/showcase-5.png">
+<img src="./assets/showcase-6.png">
+<img src="./assets/showcase-7.png">
+<img src="./assets/showcase-8.png">
+<img src="./assets/showcase-9.png">
+<img src="./assets/showcase-10.png">
+<img src="./assets/showcase-11.png">
+
+</div>
+
 ## 鸣谢
 
 在此处感谢绝大多数被 SCL 直接或间接引用的各种允许闭源的开发框架！
