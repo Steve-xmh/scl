@@ -16,9 +16,17 @@
 |Windows 64 位|SharpCraftLauncher-20220910-1.0.0-x86_64.exe||
 |Windows ARM64|SharpCraftLauncher-20220910-1.0.0-aarch64.exe|需要安装 [ARM64 版本的 Microsoft Visual C++ Redistributable](https://aka.ms/vs/17/release/vc_redist.arm64.exe) 作为依赖|
 |MacOS Intel/Apple Selicon|SharpCraftLauncher-20220910-1.0.0-universal-darwin.tar.gz|该版本原生通用于两个平台，请勿使用转译执行，否则会影响到软件的相关功能|
-|Linux x86_64|SharpCraftLauncher-20220910-1.0.0-linux-x86_64.zip||
-|Linux aarch64|SharpCraftLauncher-20220910-1.0.0-linux-aarch64.zip||
-|Linux aarch64 AppImage|SharpCraftLauncher-20220910-1.0.0-linux-aarch64.appimage||
+|Linux x86_64|SharpCraftLauncher-20220910-1.0.0-linux-x86_64.zip|请参阅[特殊安装要求](#linux)确认依赖是否安装|
+|Linux aarch64|SharpCraftLauncher-20220910-1.0.0-linux-aarch64.zip|请参阅[特殊安装要求](#linux)确认依赖是否安装|
+|Linux aarch64 AppImage|SharpCraftLauncher-20220910-1.0.0-linux-aarch64.appimage|理论上本单文件执行程序不需要依赖，但如果遇到问题请参阅[特殊安装要求](#linux)再次确认|
+
+# 历史版本下载
+
+以下是已经过时的 Beta 以及 DEMO 公开版本，供归档查阅使用。
+
+[Beta 版本蓝奏云总下载链接](https://wwu.lanzouy.com/b07neavof) 密码：474u
+
+[DEMO 版本蓝奏云总下载链接](https://wwu.lanzouy.com/b07mrdope) 密码：a3xg
 
 # 特殊安装要求
 
