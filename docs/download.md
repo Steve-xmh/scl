@@ -24,6 +24,8 @@
 
 以下是已经过时的 Beta 以及 DEMO 公开版本，供归档查阅使用。
 
+[Beta 0.4.1 蓝奏云下载链接](https://wwu.lanzouy.com/iLEYv09l1b8b)
+
 [Beta 版本蓝奏云总下载链接](https://wwu.lanzouy.com/b07neavof) 密码：474u
 
 [DEMO 版本蓝奏云总下载链接](https://wwu.lanzouy.com/b07mrdope) 密码：a3xg
