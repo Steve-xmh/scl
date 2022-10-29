@@ -23,7 +23,7 @@ jobs:
         with:
           toolchain: stable
           profile: minimal
-          components: rustdoc
+          components: rust-docs
           override: true
       - name: 生成 SCL 开发文档
         run: |
