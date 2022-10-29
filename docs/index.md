@@ -78,7 +78,7 @@ Windows UI 3（前 Fluent Design）的全新圆角流式设计，被大量用于
 
 同时我们希望这样一个通用功能不应该被嵌入在一个特定游戏用途的启动器中，故单独制作出来，供大家随意使用！
 
-> 注：HiPer 服务需要付费购买组网凭证使用，可以通过 [https://zkitefly.github.io/hipertoken.html(https://zkitefly.github.io/hipertoken.html) 购买对应服务
+> 注：HiPer 服务需要付费购买组网凭证使用，可以通过 [https://zkitefly.github.io/hipertoken.html](https://zkitefly.github.io/hipertoken.html) 购买对应服务
 >
 > 当然，猫猫的讨论群也有不定期活动可以获得组网凭证，同时也有其他方式免费获取！
 
