@@ -74,11 +74,11 @@ Windows UI 3（前 Fluent Design）的全新圆角流式设计，被大量用于
 
 通过 Matrix 链式组网技术，可以将玩家们同时放入一个稳定的网络环境，完全不限制流量和带宽，让你更加快乐地沉浸在朋友之乐中！
 
-我们基于长期编写 SCL 启动器积累下来的组件库，特别制作了一个 HiPer Plus 启动工具 HiPer Bridge 来方便大家使用 HiPer。
+我们基于长期编写 SCL 启动器积累下来的组件库，特别制作了一个 HiPer 启动工具 HiPer Bridge 来方便大家使用 HiPer。
 
 同时我们希望这样一个通用功能不应该被嵌入在一个特定游戏用途的启动器中，故单独制作出来，供大家随意使用！
 
-> 注：HiPer 服务需要付费购买组网凭证使用，可以通过 [https://mcer.cn/shop](https://mcer.cn/shop) 购买对应服务
+> 注：HiPer 服务需要付费购买组网凭证使用，可以通过 [https://zkitefly.github.io/hipertoken.html(https://zkitefly.github.io/hipertoken.html) 购买对应服务
 >
 > 当然，猫猫的讨论群也有不定期活动可以获得组网凭证，同时也有其他方式免费获取！
 
