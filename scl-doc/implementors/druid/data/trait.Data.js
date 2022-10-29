@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["scl_gui_widgets"] = [{"text":"impl Data for <a class=\"struct\" href=\"scl_gui_widgets/theme/icons/struct.IconData.html\" title=\"struct scl_gui_widgets::theme::icons::IconData\">IconData</a>","synthetic":false,"types":["scl_gui_widgets::theme::icons::IconData"]},{"text":"impl Data for <a class=\"struct\" href=\"scl_gui_widgets/theme/icons/struct.IconThemeConfig.html\" title=\"struct scl_gui_widgets::theme::icons::IconThemeConfig\">IconThemeConfig</a>","synthetic":false,"types":["scl_gui_widgets::theme::icons::IconThemeConfig"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

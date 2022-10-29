@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["empty","Lens for the field `empty` on `IconThemeConfig`."]]};

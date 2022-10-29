@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":[["IS_DARK","是否处于黑暗模式下，默认为 `false`"],["PRIMARY","默认情况下 亮色模式为 `#F74C00` 黑暗模式为 `#F74C00`"],["SECONDARY","默认情况下 亮色模式为 `#CC3F00` 黑暗模式为 `#CC3F00`"],["TITLE_BAR","默认情况下 亮色模式为 `#FFFFFF - 0%` 黑暗模式为 `#FFFFFF - 0%`"]]};

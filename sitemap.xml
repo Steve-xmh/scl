@@ -11,6 +11,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://steve-xmh.github.io/scl/scl-docs/</loc>
+         <lastmod>2022-10-29</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://steve-xmh.github.io/scl/theme-edit/</loc>
          <lastmod>2022-10-29</lastmod>
          <changefreq>daily</changefreq>

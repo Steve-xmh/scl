@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["search_for_java","搜索可能存在 Java 的地方找到可用的 Java 运行时 返回的结果列表项均为 java.exe/javaw.exe 或 java 执行文件的目录"]],"struct":[["JavaRuntime","一个 Java 运行时类型"]]};

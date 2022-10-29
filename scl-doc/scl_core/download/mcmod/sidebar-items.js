@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["get_mod_cname","获取模组中文名称，如果没有则为空字符串，名称来自 MCMOD - Minecraft 模组中文百科"]]};

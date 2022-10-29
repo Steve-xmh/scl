@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["refresh_token","根据初次登陆/二次验证取得的用户令牌，刷新验证出可供正常游戏的登录令牌"],["start_auth","使用指定的 Authlib 服务器地址和对应的账户密码开始进行 Authlib 第三方登录验证"],["validate","验证对应的访问令牌和当前启动器令牌是否可以用于现在进行游戏"]]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"trait":[["ForgeDownloadExt","Forge 模组加载器的安装特质"]]};

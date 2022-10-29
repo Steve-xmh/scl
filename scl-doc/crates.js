@@ -1,0 +1,1 @@
+window.ALL_CRATES = ["scl_core","scl_gui_animation","scl_gui_widgets","scl_macro","scl_webview"];

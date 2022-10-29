@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["scl_core"] = [{"text":"impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.64.0/core/cmp/trait.PartialOrd.html\" title=\"trait core::cmp::PartialOrd\">PartialOrd</a>&lt;<a class=\"enum\" href=\"scl_core/semver/enum.MinecraftVersion.html\" title=\"enum scl_core::semver::MinecraftVersion\">MinecraftVersion</a>&gt; for <a class=\"enum\" href=\"scl_core/semver/enum.MinecraftVersion.html\" title=\"enum scl_core::semver::MinecraftVersion\">MinecraftVersion</a>","synthetic":false,"types":["scl_core::semver::MinecraftVersion"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":[["EDGE_HIGHTLIGHT","默认情况下 亮色模式为 `#FFFFFF - 60%` 黑暗模式为 `#FFFFFF - 5%`"],["TRANSIENT","默认情况下 亮色模式为 `#000000 - 14%` 黑暗模式为 `#000000 - 36%`"]]};

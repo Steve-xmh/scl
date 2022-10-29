@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":[["get","Perform a one-off `GET` request."],["get_data","获取 JSON 对象"],["post_data","带请求体去获取 JSON 对象"]]};
