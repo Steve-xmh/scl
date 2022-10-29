@@ -1,0 +1,8 @@
+[workspace]
+members = [
+    "scl-macro",
+    "scl-core",
+    "scl-webview",
+    "scl-gui-widgets",
+    "scl-gui-animation"
+]

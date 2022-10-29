@@ -1,0 +1,27 @@
+                    Sharp Craft Launcher License
+                          September 3, 2022
+
+Sharp Craft Launcher Open Source Project（Shorten as SCL Project below）and
+included programs are provided under the terms of the GNU Lesser General Public
+License 3.0 (LGPL) with the following exceptions:
+
+    1. Static linking of applications to the SCL Project does not constitute a
+       derivative work and does not require the author to provide the source
+       code for the applications, use the shared SCL Project libraries, or link
+       their applications against a user-supplied version of SCL Project.
+       
+       If you link the application to a modified version of SCL Project, then
+       the changes to SCL Project must be provided under the terms of the LGPL
+       in sections 1, 2, and 4.
+
+    2. You do not have to provide a copy of the Sharp Craft Launcher License
+       with programs that are linked to the SCL Project, nor do you have to
+       identify the Sharp Craft Launcher License in your program or
+       documentation as required by section 6 of the LGPL.
+       
+       However, programs must still identify their use of SCL Project.
+       The following example statement can be included in user documentation to
+       satisfy this requirement:
+       
+            [program/widget] is based in part on the work of the SCL Project.
+            (https://github.com/Steve-xmh/scl)
