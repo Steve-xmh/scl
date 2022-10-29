@@ -50,11 +50,13 @@ jobs:
         uses: Swatinem/rust-cache@v1
 
       - name: cargo clippy 检查 scl-gui-animation
+        uses: actions-rs/cargo@v1
         with:
           command: clippy
           args: --manifest-path=scl-gui-animation/Cargo.toml --all-targets --no-default-features -- -D warnings
 
       - name: cargo clippy 检查 scl-macro
+        uses: actions-rs/cargo@v1
         with:
           command: clippy
           args: --manifest-path=scl-macro/Cargo.toml --all-targets --no-default-features -- -D warnings
