@@ -1,0 +1,83 @@
+name: 合并检查
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  rustfmt:
+    name: 语法格式检查
+    runs-on: ubuntu-latest
+    steps:
+      - name: 克隆仓库
+        uses: actions/checkout@v2
+
+      - name: 安装 Rust 工具链
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          profile: minimal
+          components: rustfmt
+          override: true
+
+      - name: 运行 cargo fmt 格式检查
+        uses: actions-rs/cargo@v1
+        with:
+          command: fmt
+          args: --all -- --check
+    
+  test:
+    name: 平台检查
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macOS-latest, windows-latest, ubuntu-latest]
+    steps:
+      - name: 克隆仓库
+        uses: actions/checkout@v2
+
+      - name: Linux - 安装 GTK 3.0 和 Webkit2GTK 4.0 依赖
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          sudo DEBIAN_FRONTEND=noninteractive apt-get -yq update
+          sudo DEBIAN_FRONTEND=noninteractive apt-get -yq install libgtk-3-dev libwebkit2gtk-4.0-dev
+        if: contains(matrix.os, 'ubuntu')
+
+      - name: 缓存
+        uses: Swatinem/rust-cache@v1
+
+      - name: cargo clippy 检查 scl-gui-animation
+        with:
+          command: clippy
+          args: --manifest-path=scl-gui-animation/Cargo.toml --all-targets --no-default-features -- -D warnings
+
+      - name: cargo clippy 检查 scl-macro
+        with:
+          command: clippy
+          args: --manifest-path=scl-macro/Cargo.toml --all-targets --no-default-features -- -D warnings
+
+      - name: cargo clippy 检查 scl-core
+        uses: actions-rs/cargo@v1
+        with:
+          command: clippy
+          args: --manifest-path=scl-core/Cargo.toml --all-targets --no-default-features -- -D warnings
+          
+      - name: cargo clippy 检查 scl-webview
+        uses: actions-rs/cargo@v1
+        with:
+          command: clippy
+          args: --manifest-path=scl-webview/Cargo.toml --all-targets --no-default-features -- -D warnings
+          
+      - name: cargo clippy 检查 scl-gui-widgets
+        uses: actions-rs/cargo@v1
+        with:
+          command: clippy
+          args: --manifest-path=scl-gui-widgets/Cargo.toml --all-targets --no-default-features -- -D warnings
+          
+      - name: cargo test 测试
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
