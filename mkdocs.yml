@@ -24,3 +24,4 @@ nav:
   - 下载: download.md
   - 文档:
     - 自定义主题教程: theme-edit.md
+    - SCL 开发者文档: scl-docs.md
