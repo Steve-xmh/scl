@@ -5,7 +5,7 @@ on:
       - site
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/checkout@v2
@@ -27,7 +27,7 @@ jobs:
           override: true
       - name: 生成 SCL 开发文档
         run: |
-          cargo doc --manifest-path=scl-src/Cargo.toml --no-deps
+          cargo doc --manifest-path=scl-src/Cargo.toml --all-features --no-deps
           cp -rf scl-src/target/doc site/scl-doc
       - name: 部署到 Github Pages 分支
         uses: peaceiris/actions-gh-pages@v3
