@@ -1,0 +1,17 @@
+:root {
+    --md-primary-fg-color: #f74c00;
+}
+
+.title {
+    text-align: center;
+}
+
+.title .name {
+    font-size: xx-large;
+}
+
+.title img {
+    margin: 0 auto;
+    display: inline-block;
+    vertical-align: middle;
+}

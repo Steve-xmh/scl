@@ -1,0 +1,867 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://steve-xmh.github.io/scl/theme-edit/">
+      
+      <link rel="icon" href="../assets/favicon.ico">
+      <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.7">
+    
+    
+      
+        <title>自定义主题教程 - Sharp Craft Launcher</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.20d9efc8.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/main.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#scl" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href=".." title="Sharp Craft Launcher" class="md-header__button md-logo" aria-label="Sharp Craft Launcher" data-md-component="logo">
+      
+  <img src="../assets/scl-icon-flat.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sharp Craft Launcher
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              自定义主题教程
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Steve-xmh/scl" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Steve-xmh/scl
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href=".." class="md-tabs__link">
+      主页
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../download/" class="md-tabs__link">
+      下载
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="./" class="md-tabs__link md-tabs__link--active">
+        文档
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Sharp Craft Launcher" class="md-nav__button md-logo" aria-label="Sharp Craft Launcher" data-md-component="logo">
+      
+  <img src="../assets/scl-icon-flat.svg" alt="logo">
+
+    </a>
+    Sharp Craft Launcher
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Steve-xmh/scl" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Steve-xmh/scl
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        主页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../download/" class="md-nav__link">
+        下载
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          文档
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="文档" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          文档
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          自定义主题教程
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        自定义主题教程
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    要求
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    编辑
+  </a>
+  
+    <nav class="md-nav" aria-label="编辑">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    相关特殊类型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#theme" class="md-nav__link">
+    修改 theme 对象
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#themeicons_theme" class="md-nav__link">
+    修改图标的 theme.icons_theme 对象
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    要求
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    编辑
+  </a>
+  
+    <nav class="md-nav" aria-label="编辑">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    相关特殊类型
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#theme" class="md-nav__link">
+    修改 theme 对象
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#themeicons_theme" class="md-nav__link">
+    修改图标的 theme.icons_theme 对象
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="scl">SCL 的主题详细设置教程</h1>
+<h2 id="_1">要求</h2>
+<ul>
+<li>手</li>
+<li>眼睛</li>
+<li>脑袋</li>
+<li>识字能力</li>
+<li>理解能力</li>
+<li>一个文本编辑器</li>
+<li>了解如何编辑 JSON 数据</li>
+</ul>
+<h2 id="_2">编辑</h2>
+<p>SCL 会在程序运行目录里写入文件 <code>.scl.json</code> 存储你的各种设置，在目前没有较为友好的图形设置页面的情况下，我们只能先手动编辑这个文件来修改主题配色/图标。</p>
+<blockquote>
+<p>警告：如果文件格式修改有误，很有可能导致启动器读取错误而用默认配置覆盖掉你原有的配置文件！
+故修改配置文件请注意格式正确哦！</p>
+</blockquote>
+<p><code>.scl.json</code> 的文件结构大概长这样：</p>
+<pre><code class="language-json">{
+  &quot;selected_version&quot;: &quot;&quot;,
+  &quot;javas&quot;: {
+    &quot;selected_leagzy&quot;: &quot;javaw&quot;,
+    &quot;selected_modern&quot;: &quot;javaw&quot;,
+    &quot;javapaths&quot;: [
+        // 此处忽略大量 Java 对象...
+    ]
+  },
+  &quot;wait_until_launched&quot;: true,
+  &quot;version_independent_method&quot;: &quot;NoIndependent&quot;,
+  &quot;dont_close_window_when_launched&quot;: false,
+  &quot;hide_window_when_launched&quot;: false,
+  &quot;auto_check_when_first_start_failed&quot;: false,
+  &quot;auto_mem_size&quot;: true,
+  &quot;mem_size&quot;: 0,
+  &quot;theme&quot;: { // 我们要修改的主题设置就在这里
+    &quot;slide_page_animation&quot;: false,
+    &quot;icons_theme&quot;: {}
+  },
+  &quot;download_source&quot;: &quot;Default&quot;,
+  &quot;download_parallel_amount&quot;: 64,
+  &quot;client_token&quot;: &quot;34228fd9-87c8-4876-8454-ed33693a2a9c&quot;
+}
+</code></pre>
+<p>可以看到有一个 <code>theme</code> 对象存储了一部分我们的主题配置信息，有一些不存在是因为被按照默认值处理了。</p>
+<h3 id="_3">相关特殊类型</h3>
+<p>配置文件中的值除了字符串和数字之外还有以下特殊格式类型：</p>
+<table>
+<thead>
+<tr>
+<th align="left">格式名称</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">SVG 路径字符串</td>
+<td align="left">一个合法的 SVG 绘图路径字符串，可以参考<a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG/Tutorial/Paths">此处文档</a>学习如何编写</td>
+</tr>
+<tr>
+<td align="left">颜色字符串</td>
+<td align="left">一个符合 <code>#RRGGBB</code> 或 <code>#RRGGBBAA</code> 格式的颜色字符串，支持透明颜色但不推荐（因为有可能会在部分情况下有瑕疵）</td>
+</tr>
+<tr>
+<td align="left">图标对象</td>
+<td align="left">一个有三个对象的数组 <code>[0xRRGGBBAA, 0xRRGGBBAA, "SVGPATH"]</code> 分别存储亮色模式时的 RGBA 颜色、黑暗模式时的 RGBA 颜色和进行奇偶填充使用的 SVG 路径字符串。注意颜色值必须是 RGBA 数字，而不是上面的颜色字符串！</td>
+</tr>
+</tbody>
+</table>
+<p>那么我们开始按以下清单和规则向里面增加东西吧！</p>
+<h3 id="theme">修改 <code>theme</code> 对象</h3>
+<p>在 <code>theme</code> 有很多可供调节的颜色和属性：</p>
+<table>
+<thead>
+<tr>
+<th align="left">键名</th>
+<th align="left">类型</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>dark_theme</code></td>
+<td align="left">布尔值</td>
+<td align="left">是否使用黑暗模式</td>
+</tr>
+<tr>
+<td align="left"><code>slide_page_animation</code></td>
+<td align="left">布尔值</td>
+<td align="left">是否使用左右滑动的切换页面的动画而不是缩放动画，这在你特别想用半透明配色时能让你背景看起来不会很突兀</td>
+</tr>
+<tr>
+<td align="left"><code>icons_theme</code></td>
+<td align="left">对象</td>
+<td align="left"><a href="#修改图标的-themeicons_theme-对象">参见下文</a></td>
+</tr>
+<tr>
+<td align="left"><code>theme_background_image_path</code></td>
+<td align="left">字符串</td>
+<td align="left">对窗口使用图片作为背景，此处写入绝对路径字符串或相对于启动器文件所在位置的相对路径字符串</td>
+</tr>
+<tr>
+<td align="left"><code>theme_color_primary</code></td>
+<td align="left">颜色字符串</td>
+<td align="left">设定大部分控件的主要配色</td>
+</tr>
+<tr>
+<td align="left"><code>theme_color_secondary</code></td>
+<td align="left">颜色字符串</td>
+<td align="left">设定大部分控件的次要配色</td>
+</tr>
+<tr>
+<td align="left"><code>theme_color_accent</code></td>
+<td align="left">颜色字符串</td>
+<td align="left">设定大部分控件的主配色</td>
+</tr>
+<tr>
+<td align="left"><code>theme_color_accent_1</code></td>
+<td align="left">颜色字符串</td>
+<td align="left">设定大部分控件的主配色的次级配色</td>
+</tr>
+<tr>
+<td align="left"><code>theme_color_accent_dark_1</code></td>
+<td align="left">颜色字符串</td>
+<td align="left">设定大部分控件的主配色的次级暗色配色</td>
+</tr>
+<tr>
+<td align="left"><code>theme_color_accent_light_1</code></td>
+<td align="left">颜色字符串</td>
+<td align="left">设定大部分控件的主配色的次级亮色配色</td>
+</tr>
+<tr>
+<td align="left"><code>theme_color_title_bar</code></td>
+<td align="left">颜色字符串</td>
+<td align="left">设定窗口标题栏的背景颜色，你可以设置成透明（这样可以直接看到背景颜色）</td>
+</tr>
+<tr>
+<td align="left"><code>theme_color_background</code></td>
+<td align="left">颜色字符串</td>
+<td align="left">设定窗口背景颜色，当使用了图片时颜色将会被图片覆盖</td>
+</tr>
+</tbody>
+</table>
+<h3 id="themeicons_theme">修改图标的 <code>theme.icons_theme</code> 对象</h3>
+<p>在 <code>theme.icons_theme</code> 对象内可以设置不同情况下的图标颜色和填充路径形状，以下列出了可以修改的图标们：</p>
+<table>
+<thead>
+<tr>
+<th align="left">键名</th>
+<th align="left">类型</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>empty</code></td>
+<td align="left">图标对象</td>
+<td align="left">空白图标，不建议修改它</td>
+</tr>
+<tr>
+<td align="left"><code>versions</code></td>
+<td align="left">图标对象</td>
+<td align="left">设定主页面下方按钮组左上的“版本列表”图标按钮的图标</td>
+</tr>
+<tr>
+<td align="left"><code>settings</code></td>
+<td align="left">图标对象</td>
+<td align="left">设定主页面下方按钮组右下的“启动器设置”图标按钮的图标</td>
+</tr>
+<tr>
+<td align="left"><code>download</code></td>
+<td align="left">图标对象</td>
+<td align="left">设定主页面下方按钮组左下的“游戏版本下载安装”图标按钮的图标</td>
+</tr>
+<tr>
+<td align="left"><code>mods</code></td>
+<td align="left">图标对象</td>
+<td align="left">设定主页面下方按钮组右上的“游戏模组安装”图标按钮的图标</td>
+</tr>
+<tr>
+<td align="left"><code>curseforge</code></td>
+<td align="left">图标对象</td>
+<td align="left">设定模组安装页面中的“Curseforge”模组平台图标</td>
+</tr>
+<tr>
+<td align="left"><code>modrinth</code></td>
+<td align="left">图标对象</td>
+<td align="left">设定模组安装页面中的“Modrinth”模组平台图标</td>
+</tr>
+<tr>
+<td align="left"><code>folder</code></td>
+<td align="left">图标对象</td>
+<td align="left">一个文件夹图标，用在了版本高级设置里右上角的打开版本所在文件夹图标按钮上</td>
+</tr>
+<tr>
+<td align="left"><code>search</code></td>
+<td align="left">图标对象</td>
+<td align="left">一个搜索图标，用在了很多需要搜索功能的页面上</td>
+</tr>
+<tr>
+<td align="left"><code>game_vanilla</code></td>
+<td align="left">图标对象</td>
+<td align="left">设定版本列表里被 SCL 识别为纯净版的版本左侧的图标和下载页面中选择纯净版本按钮左侧的图标</td>
+</tr>
+<tr>
+<td align="left"><code>game_forge</code></td>
+<td align="left">图标对象</td>
+<td align="left">设定版本列表里被 SCL 识别为 Forge 模组版的版本左侧的图标和下载页面中选择 Forge 版本按钮左侧的图标</td>
+</tr>
+<tr>
+<td align="left"><code>game_fabric</code></td>
+<td align="left">图标对象</td>
+<td align="left">设定版本列表里被 SCL 识别为 Fabric 模组版的版本左侧的图标和下载页面中选择 Fabric 版本按钮左侧的图标</td>
+</tr>
+<tr>
+<td align="left"><code>game_optifine</code></td>
+<td align="left">图标对象</td>
+<td align="left">设定版本列表里被 SCL 识别为 Optifine 模组版的版本左侧的图标和下载页面中选择 Optifine 版本按钮左侧的图标</td>
+</tr>
+<tr>
+<td align="left"><code>login_offline</code></td>
+<td align="left">图标对象</td>
+<td align="left">设定增加账户页面中使用离线登录的图标</td>
+</tr>
+<tr>
+<td align="left"><code>login_mojang</code></td>
+<td align="left">图标对象</td>
+<td align="left">设定增加账户页面中使用 Mojang 登录的图标</td>
+</tr>
+<tr>
+<td align="left"><code>login_microsoft</code></td>
+<td align="left">图标对象</td>
+<td align="left">设定增加账户页面中使用微软登录（嵌入式网页）的图标</td>
+</tr>
+<tr>
+<td align="left"><code>login_microsoft_manual</code></td>
+<td align="left">图标对象</td>
+<td align="left">设定增加账户页面中使用手动微软登录（外部浏览器复制回调）的图标</td>
+</tr>
+<tr>
+<td align="left"><code>login_authlib</code></td>
+<td align="left">图标对象</td>
+<td align="left">设定增加账户页面中使用 Authlib 第三方登录的图标</td>
+</tr>
+<tr>
+<td align="left"><code>sort_by_name</code></td>
+<td align="left">图标对象</td>
+<td align="left">设定版本列表页面左上角的排序方式中按照名称排序的图标</td>
+</tr>
+<tr>
+<td align="left"><code>sort_by_version_release_date</code></td>
+<td align="left">图标对象</td>
+<td align="left">设定版本列表页面左上角的排序方式中按照版本发布日期排序的图标</td>
+</tr>
+<tr>
+<td align="left"><code>sort_by_download_date</code></td>
+<td align="left">图标对象</td>
+<td align="left">设定版本列表页面左上角的排序方式中按照安装时间排序的图标</td>
+</tr>
+<tr>
+<td align="left"><code>categoried_by_version_type</code></td>
+<td align="left">图标对象</td>
+<td align="left">设定版本列表页面左上角的排序方式中按照版本类型分类的图标</td>
+</tr>
+<tr>
+<td align="left"><code>desktop</code></td>
+<td align="left">图标对象</td>
+<td align="left">一个计算机图标，设定模组安装位置页面时保存到本地时的图标</td>
+</tr>
+<tr>
+<td align="left"><code>delete</code></td>
+<td align="left">图标对象</td>
+<td align="left">一个垃圾箱删除图标，设定 Java 管理中删除 Java 实例的图标</td>
+</tr>
+<tr>
+<td align="left"><code>paint_brush</code></td>
+<td align="left">图标对象</td>
+<td align="left">一个刷子图标，设定账户管理时的皮肤编辑图标</td>
+</tr>
+<tr>
+<td align="left"><code>java</code></td>
+<td align="left">图标对象</td>
+<td align="left">设定设置页面里进入 Java 管理页面按钮的线描式图标</td>
+</tr>
+<tr>
+<td align="left"><code>java_fulled</code></td>
+<td align="left">图标对象</td>
+<td align="left">设定设置页面里进入 Java 管理页面按钮的填充式图标</td>
+</tr>
+<tr>
+<td align="left"><code>java_8</code></td>
+<td align="left">图标对象</td>
+<td align="left">设定 Java 管理页面中未被选中的 Java 8+ 运行时的图标</td>
+</tr>
+<tr>
+<td align="left"><code>java_8_fulled</code></td>
+<td align="left">图标对象</td>
+<td align="left">设定 Java 管理页面中被选中的 Java 8+ 运行时的图标</td>
+</tr>
+<tr>
+<td align="left"><code>java_16</code></td>
+<td align="left">图标对象</td>
+<td align="left">设定 Java 管理页面中未被选中的 Java 16+ 运行时的图标</td>
+</tr>
+<tr>
+<td align="left"><code>java_16_fulled</code></td>
+<td align="left">图标对象</td>
+<td align="left">设定 Java 管理页面中被选中的 Java 16+ 运行时的图标</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="页脚" >
+      
+        
+        <a href="../download/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 下载" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              下载
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.instant"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.8492ddcf.min.js"></script>
+      
+    
+  </body>
+</html>

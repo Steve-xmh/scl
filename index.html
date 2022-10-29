@@ -1,0 +1,776 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://steve-xmh.github.io/scl/">
+      
+      <link rel="icon" href="assets/favicon.ico">
+      <meta name="generator" content="mkdocs-1.4.1, mkdocs-material-8.5.7">
+    
+    
+      
+        <title>Sharp Craft Launcher</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.20d9efc8.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="stylesheets/main.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="." title="Sharp Craft Launcher" class="md-header__button md-logo" aria-label="Sharp Craft Launcher" data-md-component="logo">
+      
+  <img src="assets/scl-icon-flat.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sharp Craft Launcher
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              主页
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Steve-xmh/scl" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Steve-xmh/scl
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+
+
+  <li class="md-tabs__item">
+    <a href="." class="md-tabs__link md-tabs__link--active">
+      主页
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="download/" class="md-tabs__link">
+      下载
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="theme-edit/" class="md-tabs__link">
+        文档
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Sharp Craft Launcher" class="md-nav__button md-logo" aria-label="Sharp Craft Launcher" data-md-component="logo">
+      
+  <img src="assets/scl-icon-flat.svg" alt="logo">
+
+    </a>
+    Sharp Craft Launcher
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Steve-xmh/scl" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Steve-xmh/scl
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          主页
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        主页
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    竖向设计，全新体验
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    你的启动器，你的风格
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rust" class="md-nav__link">
+    Rust 编程语言，领先一步
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    三大系统，一次满足
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    异步不便秘，下载如串稀
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    流而不阻，畅而不滞
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    自身净，安全行，隐私信
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hiper" class="md-nav__link">
+    与朋友众乐？HiPer 来帮你！
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    喜欢吗？来发电支持吧！
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    截图展示
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    鸣谢
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    正式版本下载
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="download/" class="md-nav__link">
+        下载
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          文档
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="文档" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          文档
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="theme-edit/" class="md-nav__link">
+        自定义主题教程
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    竖向设计，全新体验
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    你的启动器，你的风格
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rust" class="md-nav__link">
+    Rust 编程语言，领先一步
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    三大系统，一次满足
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    异步不便秘，下载如串稀
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    流而不阻，畅而不滞
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    自身净，安全行，隐私信
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hiper" class="md-nav__link">
+    与朋友众乐？HiPer 来帮你！
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    喜欢吗？来发电支持吧！
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    截图展示
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    鸣谢
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    正式版本下载
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<p><link rel="stylesheet" href="assets/index.css" /></p>
+<div class="title">
+
+<img src="assets/scl-icon.svg" />
+
+<div>
+  <div class="name">Sharp Craft Launcher</div>
+  <div>更快，更轻，更锋利的启动器</div>
+</div>
+
+</div>
+
+<h2 id="_1">竖向设计，全新体验</h2>
+<p>独特的竖向流式设计，去掉了很多启动器并无必要的空白（虽然我们清楚这较为美观），空间利用率大为提高。</p>
+<p>麻雀虽小，五脏俱全。在狭小的体积装下现有启动器应有的功能，是我们的目标。</p>
+<p>启动游戏、下载游戏、模组下载安装、多 Java 支持、版本独立，我们都准备好了。</p>
+<h2 id="_2">你的启动器，你的风格</h2>
+<p>Sharp Craft Launcher 提供了大量的个性化配置选项，你可以自由修改主题颜色，黑暗模式，背景图片还有更多东西！</p>
+<p>如果不会调节个性化的话，默认预设的亮色和暗色风格也可以满足你！</p>
+<h2 id="rust">Rust 编程语言，领先一步</h2>
+<p>我们使用了 Rust 作为编写启动器的主要语言，得到了性能和内存的强力优化，同时作为编译型编程语言，没有 VM，没有运行时，更没有动态链接库，冷启动速度得到非常大的提升，同时也减少了用户的安装难度。</p>
+<h2 id="_3">三大系统，一次满足</h2>
+<p>Rust 原生级别的跨平台兼容性，不仅原生支持 Windows Linux MacOS 三大主流操作系统平台，甚至使得你几乎不需要任何依赖即可运行 Sharp Craft Launcher。</p>
+<blockquote>
+<p>注：除 Linux 需要安装诸如 gtk3 webkit2gtk 等依赖项目，Windows 和 MacOS 均无需安装任何依赖即可运行。
+WinARM 因构建环境问题，需要安装 <a href="https://aka.ms/vs/17/release/vc_redist.arm64.exe">ARM64 版本的 Microsoft Visual C++ Redistributable</a> 作为依赖方可运行</p>
+</blockquote>
+<h2 id="_4">异步不便秘，下载如串稀</h2>
+<p>得益于 Rust 的零开销异步和强大的多线程操作，只需要一个线程，与异步的百万级并发相结合，就可以用最少的硬件资源，达到最快的下载速度。</p>
+<p>同时，我们的下载引擎经过当今 HTTP 传输协议新标准的优化，连接复用、压缩数据等新特性也能大幅提升下载速度。</p>
+<blockquote>
+<p>注：在默认设置的情况下（并发数 64），下载原版 1.19 时内存会上涨到 45MB 左右，后会随着下载的完成而逐渐减小。</p>
+<p>而在并发数不限的情况下（预计并发量 3000+），下载原版 1.19 时内存会上涨到 300MB 左右，后会随着下载的完成而逐渐减小。</p>
+<p>尽管异步下载速度非常之快，但是我们认为 64 的并发量已经足够大部分电脑和网络环境使用，如非必要无需调节并发数。</p>
+</blockquote>
+<h2 id="_5">流而不阻，畅而不滞</h2>
+<p>Windows UI 3（前 Fluent Design）的全新圆角流式设计，被大量用于启动器的页面设计。</p>
+<p>在设计的同时精简了很多布局，并去掉了大部分启动器长期保留的大侧边留空（或在启动流程内只做到了装饰作用的），采取了竖向流动尺寸的设计，提高了启动器的空间利用率和效率，让你在前往 Minecraft 的路上更加“行云流水”。</p>
+<h2 id="_6">自身净，安全行，隐私信</h2>
+<p>不像一些由易语言开发的软件有近半成安全软件会被误报成病毒文件，或者是为了刻意避开病毒审查而去向杀毒软件申诉的启动器，Sharp Craft Launcher 只会使用必要的代码与接口，绝不触碰任何敏感系统接口，更不会刻意收集用户隐私数据。</p>
+<p>您在 Sharp Craft Launcher 输入的正版账户和密码，我们不会保存，更不会上传到某处服务器。唯一留在你的电脑里的只有你的用于游戏正版启动的启动令牌和用户名，不仅如此还会进行必要的加密手段，以防止他人未经允许使用你的账户进行游戏。</p>
+<blockquote>
+<p>注：现在 VirusTotal 还是会有不定误报问题，似乎社区内也有类似情况，用 Rust 编译的产物最近的构建都会有极少数杀毒软件出现误报问题，请忽略即可。</p>
+</blockquote>
+<h2 id="hiper">与朋友众乐？HiPer 来帮你！</h2>
+<p>期望更加稳定的联机工具？尝试一下来自联机框架大佬猫猫研发出来的 HiPer 组网工具吧！</p>
+<p>通过 Matrix 链式组网技术，可以将玩家们同时放入一个稳定的网络环境，完全不限制流量和带宽，让你更加快乐地沉浸在朋友之乐中！</p>
+<p>我们基于长期编写 SCL 启动器积累下来的组件库，特别制作了一个 HiPer 启动工具 HiPer Bridge 来方便大家使用 HiPer。</p>
+<p>同时我们希望这样一个通用功能不应该被嵌入在一个特定游戏用途的启动器中，故单独制作出来，供大家随意使用！</p>
+<blockquote>
+<p>注：HiPer 服务需要付费购买组网凭证使用，可以通过 <a href="https://zkitefly.github.io/hipertoken.html">https://zkitefly.github.io/hipertoken.html</a> 购买对应服务</p>
+<p>当然，猫猫的讨论群也有不定期活动可以获得组网凭证，同时也有其他方式免费获取！</p>
+</blockquote>
+<h2 id="_7">喜欢吗？来发电支持吧！</h2>
+<p>随着 SCL 1.0.0 正式版本的发布，我们终于迎来了首个 Rust 编写的 Minecraft 启动器。但是即便如此受限于 Druid 框架的自身限制，有太多功能我们还是无法实现。所以我们同样在计划着新的 SCL 2.0.0 版本的编写，通过使用 FLTK 框架重构我们的 GUI 代码，来带给大家更加出色优秀的 UI！</p>
+<p>如果你喜欢我们的启动器，也欢迎来为我们发电，在给予我们鼓励支持的情况下你也可以抢先体验到 SCL1 和 SCL2 的开发构建版本，更快一步知晓我们的进度！</p>
+<p>我们相信长时间的打磨和玩家们的发电支持能让 SCL1 / SCL2 变得更加舒适易用。</p>
+<p>如果你感兴趣想体验开发中的内测版本，可以通过爱发电搜索 SteveXMH 来找到我们。</p>
+<blockquote>
+<p>注：只要五块钱呀！求求了！(っ °Д °;)っ</p>
+</blockquote>
+<h2 id="_8">截图展示</h2>
+<div class="showcase">
+
+<img src="./assets/showcase-1.png">
+<img src="./assets/showcase-2.png">
+<img src="./assets/showcase-3.png">
+<img src="./assets/showcase-4.png">
+<img src="./assets/showcase-5.png">
+<img src="./assets/showcase-6.png">
+<img src="./assets/showcase-7.png">
+<img src="./assets/showcase-8.png">
+<img src="./assets/showcase-9.png">
+<img src="./assets/showcase-10.png">
+<img src="./assets/showcase-11.png">
+
+</div>
+
+<div class="showcase mac">
+
+<img src="./assets/showcase-mac-1.png">
+<img src="./assets/showcase-mac-2.png">
+<img src="./assets/showcase-mac-3.png">
+<img src="./assets/showcase-mac-4.png">
+<img src="./assets/showcase-mac-5.png">
+<img src="./assets/showcase-mac-6.png">
+<img src="./assets/showcase-mac-7.png">
+<img src="./assets/showcase-mac-8.png">
+<img src="./assets/showcase-mac-9.png">
+<img src="./assets/showcase-mac-10.png">
+<img src="./assets/showcase-mac-11.png">
+
+</div>
+<h2 id="_9">鸣谢</h2>
+<p>在此处感谢绝大多数被 SCL 直接或间接引用的各种允许闭源的开发框架！
+没有他们的贡献，这个项目就不可能出现了！</p>
+<p>经过了作者的精心挑选，SCL 启动器所直接引用的依赖框架均允许商业闭源发放，为了感谢这些框架作者，此处列出了主要使用的框架名称以及仓库链接：</p>
+<ul>
+<li>Druid GUI 框架</li>
+<li>Smol 异步框架</li>
+<li>Surf HTTP 客户端框架</li>
+<li>Serde 序列化/逆序列化框架</li>
+<li>Serde JSON 序列化/逆序列化框架</li>
+<li>Nom 二进制/字符串解析框架</li>
+<li>TOML 解析框架</li>
+<li>Image 图片解析框架</li>
+<li>Futures 异步辅助框架</li>
+<li>Windows 绑定库</li>
+<li>WebView2 嵌入式浏览器框架</li>
+<li>Webkit2GTK-rs 嵌入式浏览器框架</li>
+<li>Chrono 时间框架</li>
+<li>……还有很多！</li>
+</ul>
+<p>如果以上列表中没能列出您开发的框架，请立刻联系我们添加！</p>
+<p>最后感谢每一个发电的金主爸爸！还有前来下载使用的大家！非常感谢！</p>
+<h2 id="_10">正式版本下载</h2>
+<p>你可以访问我们的主页（Github Pages，部分地区可能无法直接连接）获取到下载链接</p>
+<!-- 为了不让标题改变留一个空标题在底下 -->
+<h1 id="_11"></h1>
+
+
+
+  
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+    
+    <nav class="md-footer__inner md-grid" aria-label="页脚" >
+      
+      
+        
+        <a href="download/" class="md-footer__link md-footer__link--next" aria-label="下一页: 下载" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              下载
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.instant"], "search": "assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\s\\-\uff0c\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.8492ddcf.min.js"></script>
+      
+    
+  </body>
+</html>
