@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/download_module_item.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>download_module_item.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/download_module_item.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>download_module_item.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -191,198 +191,198 @@
 <span id="191">191</span>
 <span id="192">192</span>
 <span id="193">193</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">druid</span>::{
-    <span class="ident">kurbo</span>::{<span class="ident">BezPath</span>, <span class="ident">Shape</span>},
-    <span class="ident">piet</span>::{<span class="ident">PaintBrush</span>, <span class="ident">TextStorage</span>},
-    <span class="ident">widget</span>::{<span class="ident">Click</span>, <span class="ident">ControllerHost</span>, <span class="ident">LabelText</span>},
-    <span class="ident">Affine</span>, <span class="ident">BoxConstraints</span>, <span class="ident">Data</span>, <span class="ident">Env</span>, <span class="ident">Event</span>, <span class="ident">LifeCycle</span>, <span class="ident">RenderContext</span>, <span class="ident">Widget</span>, <span class="ident">WidgetExt</span>,
-    <span class="ident">WidgetPod</span>,
+</pre><pre class="rust"><code><span class="kw">use </span>druid::{
+    kurbo::{BezPath, Shape},
+    piet::{PaintBrush, TextStorage},
+    widget::{Click, ControllerHost, LabelText},
+    Affine, BoxConstraints, Data, Env, Event, LifeCycle, RenderContext, Widget, WidgetExt,
+    WidgetPod,
 };
 
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::label</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::theme</span>::{
-    <span class="ident">color</span>::{
-        <span class="ident">base</span>, <span class="ident">list</span>,
-        <span class="ident">main::IS_DARK</span>,
-        <span class="ident">typography</span>::{<span class="ident">BODY</span>, <span class="ident">CAPTION_ALT</span>},
+<span class="kw">use </span><span class="kw">super</span>::label;
+<span class="kw">use </span><span class="kw">crate</span>::theme::{
+    color::{
+        base, list,
+        main::IS_DARK,
+        typography::{BODY, CAPTION_ALT},
     },
-    <span class="ident">icons::IconKeyPair</span>,
+    icons::IconKeyPair,
 };
 
-<span class="doccomment">/// 一个左侧有图标和说明信息，右侧有副文本信息的可点击项组件</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">DownloadModuleItem</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span> {
-    <span class="ident">icon_key</span>: <span class="ident">IconKeyPair</span>,
-    <span class="ident">icon_path</span>: <span class="ident">BezPath</span>,
-    <span class="ident">text</span>: <span class="ident">WidgetPod</span><span class="op">&lt;</span><span class="ident">D</span>, <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="ident">desc</span>: <span class="ident">WidgetPod</span><span class="op">&lt;</span><span class="ident">D</span>, <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="doccomment">/// 一个左侧有图标和说明信息，右侧有副文本信息的可点击项组件
+</span><span class="kw">pub struct </span>DownloadModuleItem&lt;D&gt; {
+    icon_key: IconKeyPair,
+    icon_path: BezPath,
+    text: WidgetPod&lt;D, Box&lt;<span class="kw">dyn </span>Widget&lt;D&gt;&gt;&gt;,
+    desc: WidgetPod&lt;D, Box&lt;<span class="kw">dyn </span>Widget&lt;D&gt;&gt;&gt;,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">D</span>: <span class="ident">Data</span><span class="op">&gt;</span> <span class="ident">DownloadModuleItem</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// 根据所给的图标对（通过 `scl-macros` 来生成图标）创建组件</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(
-        <span class="ident">icon_key</span>: <span class="ident">IconKeyPair</span>,
-        <span class="ident">text</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">LabelText</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-        <span class="ident">desc</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">LabelText</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">icon_key</span>,
-            <span class="ident">icon_path</span>: <span class="ident">BezPath::new</span>(),
-            <span class="ident">text</span>: <span class="ident">WidgetPod::new</span>(<span class="ident">Box::new</span>(
-                <span class="ident">label::new</span>(<span class="ident">text</span>)
-                    .<span class="ident">with_text_size</span>(<span class="number">14.</span>)
-                    .<span class="ident">with_text_color</span>(<span class="ident">base::MEDIUM</span>)
-                    .<span class="ident">with_font</span>(<span class="ident">BODY</span>)
-                    .<span class="ident">align_vertical</span>(<span class="ident">druid::UnitPoint::LEFT</span>),
+<span class="kw">impl</span>&lt;D: Data&gt; DownloadModuleItem&lt;D&gt; {
+    <span class="doccomment">/// 根据所给的图标对（通过 `scl-macros` 来生成图标）创建组件
+    </span><span class="kw">pub fn </span>new(
+        icon_key: IconKeyPair,
+        text: <span class="kw">impl </span>Into&lt;LabelText&lt;D&gt;&gt;,
+        desc: <span class="kw">impl </span>Into&lt;LabelText&lt;D&gt;&gt;,
+    ) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            icon_key,
+            icon_path: BezPath::new(),
+            text: WidgetPod::new(Box::new(
+                label::new(text)
+                    .with_text_size(<span class="number">14.</span>)
+                    .with_text_color(base::MEDIUM)
+                    .with_font(BODY)
+                    .align_vertical(druid::UnitPoint::LEFT),
             )),
-            <span class="ident">desc</span>: <span class="ident">WidgetPod::new</span>(<span class="ident">Box::new</span>(
-                <span class="ident">label::new</span>(<span class="ident">desc</span>)
-                    .<span class="ident">with_text_color</span>(<span class="ident">base::MEDIUM</span>)
-                    .<span class="ident">with_font</span>(<span class="ident">CAPTION_ALT</span>)
-                    .<span class="ident">align_vertical</span>(<span class="ident">druid::UnitPoint::RIGHT</span>),
-            )),
-        }
-    }
-
-    <span class="doccomment">/// 根据所给的图标对（通过 `scl-macros` 来生成图标）创建组件，但可以是动态文字</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">dynamic</span>(
-        <span class="ident">icon_key</span>: <span class="ident">IconKeyPair</span>,
-        <span class="ident">text</span>: <span class="kw">impl</span> <span class="ident">Fn</span>(<span class="kw-2">&amp;</span><span class="ident">D</span>, <span class="kw-2">&amp;</span><span class="ident">Env</span>) -&gt; <span class="ident">String</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-        <span class="ident">desc</span>: <span class="kw">impl</span> <span class="ident">Fn</span>(<span class="kw-2">&amp;</span><span class="ident">D</span>, <span class="kw-2">&amp;</span><span class="ident">Env</span>) -&gt; <span class="ident">String</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-    ) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">icon_key</span>,
-            <span class="ident">icon_path</span>: <span class="ident">BezPath::new</span>(),
-            <span class="ident">text</span>: <span class="ident">WidgetPod::new</span>(<span class="ident">Box::new</span>(
-                <span class="ident">label::dynamic</span>(<span class="ident">text</span>)
-                    .<span class="ident">with_text_size</span>(<span class="number">14.</span>)
-                    .<span class="ident">with_text_color</span>(<span class="ident">base::MEDIUM</span>)
-                    .<span class="ident">with_font</span>(<span class="ident">BODY</span>)
-                    .<span class="ident">with_line_break_mode</span>(<span class="ident">druid::widget::LineBreaking::Clip</span>)
-                    .<span class="ident">align_vertical</span>(<span class="ident">druid::UnitPoint::LEFT</span>),
-            )),
-            <span class="ident">desc</span>: <span class="ident">WidgetPod::new</span>(<span class="ident">Box::new</span>(
-                <span class="ident">label::dynamic</span>(<span class="ident">desc</span>)
-                    .<span class="ident">with_text_color</span>(<span class="ident">base::MEDIUM</span>)
-                    .<span class="ident">with_font</span>(<span class="ident">CAPTION_ALT</span>)
-                    .<span class="ident">with_line_break_mode</span>(<span class="ident">druid::widget::LineBreaking::Clip</span>)
-                    .<span class="ident">align_vertical</span>(<span class="ident">druid::UnitPoint::RIGHT</span>),
+            desc: WidgetPod::new(Box::new(
+                label::new(desc)
+                    .with_text_color(base::MEDIUM)
+                    .with_font(CAPTION_ALT)
+                    .align_vertical(druid::UnitPoint::RIGHT),
             )),
         }
     }
 
-    <span class="doccomment">/// Provide a closure to be called when this button is clicked.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">on_click</span>(
+    <span class="doccomment">/// 根据所给的图标对（通过 `scl-macros` 来生成图标）创建组件，但可以是动态文字
+    </span><span class="kw">pub fn </span>dynamic(
+        icon_key: IconKeyPair,
+        text: <span class="kw">impl </span>Fn(<span class="kw-2">&amp;</span>D, <span class="kw-2">&amp;</span>Env) -&gt; String + <span class="lifetime">&#39;static</span>,
+        desc: <span class="kw">impl </span>Fn(<span class="kw-2">&amp;</span>D, <span class="kw-2">&amp;</span>Env) -&gt; String + <span class="lifetime">&#39;static</span>,
+    ) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            icon_key,
+            icon_path: BezPath::new(),
+            text: WidgetPod::new(Box::new(
+                label::dynamic(text)
+                    .with_text_size(<span class="number">14.</span>)
+                    .with_text_color(base::MEDIUM)
+                    .with_font(BODY)
+                    .with_line_break_mode(druid::widget::LineBreaking::Clip)
+                    .align_vertical(druid::UnitPoint::LEFT),
+            )),
+            desc: WidgetPod::new(Box::new(
+                label::dynamic(desc)
+                    .with_text_color(base::MEDIUM)
+                    .with_font(CAPTION_ALT)
+                    .with_line_break_mode(druid::widget::LineBreaking::Clip)
+                    .align_vertical(druid::UnitPoint::RIGHT),
+            )),
+        }
+    }
+
+    <span class="doccomment">/// Provide a closure to be called when this button is clicked.
+    </span><span class="kw">pub fn </span>on_click(
         <span class="self">self</span>,
-        <span class="ident">f</span>: <span class="kw">impl</span> <span class="ident">Fn</span>(<span class="kw-2">&amp;mut</span> <span class="ident">druid::EventCtx</span>, <span class="kw-2">&amp;mut</span> <span class="ident">D</span>, <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>) <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-    ) -&gt; <span class="ident">ControllerHost</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Click</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="ident">ControllerHost::new</span>(<span class="self">self</span>, <span class="ident">Click::new</span>(<span class="ident">f</span>))
+        f: <span class="kw">impl </span>Fn(<span class="kw-2">&amp;mut </span>druid::EventCtx, <span class="kw-2">&amp;mut </span>D, <span class="kw-2">&amp;</span>druid::Env) + <span class="lifetime">&#39;static</span>,
+    ) -&gt; ControllerHost&lt;<span class="self">Self</span>, Click&lt;D&gt;&gt; {
+        ControllerHost::new(<span class="self">self</span>, Click::new(f))
     }
 
-    <span class="kw">fn</span> <span class="ident">reload_icon</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>) {
-        <span class="self">self</span>.<span class="ident">icon_path</span> <span class="op">=</span> <span class="ident">BezPath::from_svg</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">icon_key</span>.<span class="number">0</span>).<span class="ident">as_str</span>()).<span class="ident">unwrap_or_default</span>();
+    <span class="kw">fn </span>reload_icon(<span class="kw-2">&amp;mut </span><span class="self">self</span>, env: <span class="kw-2">&amp;</span>druid::Env) {
+        <span class="self">self</span>.icon_path = BezPath::from_svg(env.get(<span class="kw-2">&amp;</span><span class="self">self</span>.icon_key.<span class="number">0</span>).as_str()).unwrap_or_default();
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">D</span>: <span class="ident">Data</span><span class="op">&gt;</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">DownloadModuleItem</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">event</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::EventCtx</span>, <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">Event</span>, <span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="ident">D</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>) {
-        <span class="kw">match</span> <span class="ident">event</span> {
-            <span class="ident">Event::MouseDown</span>(<span class="kw">_</span>) =&gt; {
-                <span class="ident">ctx</span>.<span class="ident">set_active</span>(<span class="bool-val">true</span>);
-                <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+<span class="kw">impl</span>&lt;D: Data&gt; Widget&lt;D&gt; <span class="kw">for </span>DownloadModuleItem&lt;D&gt; {
+    <span class="kw">fn </span>event(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>druid::EventCtx, event: <span class="kw-2">&amp;</span>Event, data: <span class="kw-2">&amp;mut </span>D, env: <span class="kw-2">&amp;</span>druid::Env) {
+        <span class="kw">match </span>event {
+            Event::MouseDown(<span class="kw">_</span>) =&gt; {
+                ctx.set_active(<span class="bool-val">true</span>);
+                ctx.request_paint();
             }
-            <span class="ident">Event::MouseUp</span>(<span class="kw">_</span>) =&gt; {
-                <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_active</span>() {
-                    <span class="ident">ctx</span>.<span class="ident">set_active</span>(<span class="bool-val">false</span>);
-                    <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+            Event::MouseUp(<span class="kw">_</span>) =&gt; {
+                <span class="kw">if </span>ctx.is_active() {
+                    ctx.set_active(<span class="bool-val">false</span>);
+                    ctx.request_paint();
                 }
             }
-            <span class="kw">_</span> =&gt; (),
+            <span class="kw">_ </span>=&gt; (),
         }
-        <span class="self">self</span>.<span class="ident">text</span>.<span class="ident">event</span>(<span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>);
-        <span class="self">self</span>.<span class="ident">desc</span>.<span class="ident">event</span>(<span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>);
+        <span class="self">self</span>.text.event(ctx, event, data, env);
+        <span class="self">self</span>.desc.event(ctx, event, data, env);
     }
 
-    <span class="kw">fn</span> <span class="ident">lifecycle</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::LifeCycleCtx</span>,
-        <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">druid::LifeCycle</span>,
-        <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">D</span>,
-        <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>,
+    <span class="kw">fn </span>lifecycle(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        ctx: <span class="kw-2">&amp;mut </span>druid::LifeCycleCtx,
+        event: <span class="kw-2">&amp;</span>druid::LifeCycle,
+        data: <span class="kw-2">&amp;</span>D,
+        env: <span class="kw-2">&amp;</span>druid::Env,
     ) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">LifeCycle::WidgetAdded</span> <span class="op">=</span> <span class="ident">event</span> {
-            <span class="self">self</span>.<span class="ident">reload_icon</span>(<span class="ident">env</span>);
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="ident">LifeCycle::HotChanged</span>(<span class="kw">_</span>) <span class="op">=</span> <span class="ident">event</span> {
-            <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+        <span class="kw">if let </span>LifeCycle::WidgetAdded = event {
+            <span class="self">self</span>.reload_icon(env);
+        } <span class="kw">else if let </span>LifeCycle::HotChanged(<span class="kw">_</span>) = event {
+            ctx.request_paint();
         }
-        <span class="self">self</span>.<span class="ident">text</span>.<span class="ident">lifecycle</span>(<span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>);
-        <span class="self">self</span>.<span class="ident">desc</span>.<span class="ident">lifecycle</span>(<span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>);
+        <span class="self">self</span>.text.lifecycle(ctx, event, data, env);
+        <span class="self">self</span>.desc.lifecycle(ctx, event, data, env);
     }
 
-    <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::UpdateCtx</span>, <span class="ident">old_data</span>: <span class="kw-2">&amp;</span><span class="ident">D</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">D</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>) {
-        <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">env_key_changed</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">icon_key</span>.<span class="number">0</span>) {
-            <span class="self">self</span>.<span class="ident">reload_icon</span>(<span class="ident">env</span>);
+    <span class="kw">fn </span>update(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>druid::UpdateCtx, old_data: <span class="kw-2">&amp;</span>D, data: <span class="kw-2">&amp;</span>D, env: <span class="kw-2">&amp;</span>druid::Env) {
+        <span class="kw">if </span>ctx.env_key_changed(<span class="kw-2">&amp;</span><span class="self">self</span>.icon_key.<span class="number">0</span>) {
+            <span class="self">self</span>.reload_icon(env);
         }
-        <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">env_key_changed</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">icon_key</span>.<span class="number">1</span>) {
-            <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+        <span class="kw">if </span>ctx.env_key_changed(<span class="kw-2">&amp;</span><span class="self">self</span>.icon_key.<span class="number">1</span>) {
+            ctx.request_paint();
         }
-        <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">has_requested_update</span>() <span class="op">|</span><span class="op">|</span> <span class="op">!</span><span class="ident">old_data</span>.<span class="ident">same</span>(<span class="ident">data</span>) {
-            <span class="self">self</span>.<span class="ident">text</span>.<span class="ident">update</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>);
-            <span class="self">self</span>.<span class="ident">desc</span>.<span class="ident">update</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>);
+        <span class="kw">if </span>ctx.has_requested_update() || !old_data.same(data) {
+            <span class="self">self</span>.text.update(ctx, data, env);
+            <span class="self">self</span>.desc.update(ctx, data, env);
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">layout</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::LayoutCtx</span>,
-        <span class="ident">bc</span>: <span class="kw-2">&amp;</span><span class="ident">druid::BoxConstraints</span>,
-        <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">D</span>,
-        <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>,
-    ) -&gt; <span class="ident">druid::Size</span> {
-        <span class="ident">bc</span>.<span class="ident">debug_check</span>(<span class="string">&quot;LoginMethodItem&quot;</span>);
-        <span class="kw">let</span> <span class="ident">min_height</span> <span class="op">=</span> <span class="number">40.</span>;
-        <span class="kw">let</span> <span class="ident">min_bc</span> <span class="op">=</span> <span class="ident">BoxConstraints::new</span>(
-            (<span class="ident">bc</span>.<span class="ident">min</span>().<span class="ident">width</span>, <span class="ident">min_height</span>).<span class="ident">into</span>(),
-            (<span class="ident">bc</span>.<span class="ident">max</span>().<span class="ident">width</span>, <span class="ident">min_height</span>).<span class="ident">into</span>(),
+    <span class="kw">fn </span>layout(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        ctx: <span class="kw-2">&amp;mut </span>druid::LayoutCtx,
+        bc: <span class="kw-2">&amp;</span>druid::BoxConstraints,
+        data: <span class="kw-2">&amp;</span>D,
+        env: <span class="kw-2">&amp;</span>druid::Env,
+    ) -&gt; druid::Size {
+        bc.debug_check(<span class="string">&quot;LoginMethodItem&quot;</span>);
+        <span class="kw">let </span>min_height = <span class="number">40.</span>;
+        <span class="kw">let </span>min_bc = BoxConstraints::new(
+            (bc.min().width, min_height).into(),
+            (bc.max().width, min_height).into(),
         );
-        <span class="kw">let</span> <span class="ident">text_bc</span> <span class="op">=</span> <span class="ident">min_bc</span>.<span class="ident">shrink</span>((<span class="number">40.</span>, <span class="number">0.</span>));
-        <span class="kw">let</span> <span class="ident">desc_bc</span> <span class="op">=</span> <span class="ident">min_bc</span>.<span class="ident">shrink</span>((<span class="number">50.</span>, <span class="number">0.</span>));
-        <span class="kw">let</span> <span class="ident">_text_size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">text</span>.<span class="ident">layout</span>(<span class="ident">ctx</span>, <span class="kw-2">&amp;</span><span class="ident">text_bc</span>, <span class="ident">data</span>, <span class="ident">env</span>);
-        <span class="kw">let</span> <span class="ident">_desc_size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">desc</span>.<span class="ident">layout</span>(<span class="ident">ctx</span>, <span class="kw-2">&amp;</span><span class="ident">desc_bc</span>, <span class="ident">data</span>, <span class="ident">env</span>);
-        <span class="self">self</span>.<span class="ident">text</span>.<span class="ident">set_origin</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>, (<span class="number">40.</span>, <span class="number">0.</span>).<span class="ident">into</span>());
-        <span class="self">self</span>.<span class="ident">desc</span>.<span class="ident">set_origin</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>, (<span class="number">40.</span>, <span class="number">0.</span>).<span class="ident">into</span>());
-        <span class="ident">min_bc</span>.<span class="ident">constrain</span>((<span class="number">0.</span>, <span class="ident">min_height</span>))
+        <span class="kw">let </span>text_bc = min_bc.shrink((<span class="number">40.</span>, <span class="number">0.</span>));
+        <span class="kw">let </span>desc_bc = min_bc.shrink((<span class="number">50.</span>, <span class="number">0.</span>));
+        <span class="kw">let </span>_text_size = <span class="self">self</span>.text.layout(ctx, <span class="kw-2">&amp;</span>text_bc, data, env);
+        <span class="kw">let </span>_desc_size = <span class="self">self</span>.desc.layout(ctx, <span class="kw-2">&amp;</span>desc_bc, data, env);
+        <span class="self">self</span>.text.set_origin(ctx, data, env, (<span class="number">40.</span>, <span class="number">0.</span>).into());
+        <span class="self">self</span>.desc.set_origin(ctx, data, env, (<span class="number">40.</span>, <span class="number">0.</span>).into());
+        min_bc.constrain((<span class="number">0.</span>, min_height))
     }
 
-    <span class="kw">fn</span> <span class="ident">paint</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::PaintCtx</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">D</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>) {
-        <span class="kw">let</span> <span class="ident">icon_brush</span> <span class="op">=</span> <span class="ident">PaintBrush::Color</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="kw">if</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">IS_DARK</span>) {
-            <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">icon_key</span>.<span class="number">2</span>
-        } <span class="kw">else</span> {
-            <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">icon_key</span>.<span class="number">1</span>
-        }));
-        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">size</span>();
-        <span class="kw">let</span> <span class="ident">is_hot</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">is_hot</span>();
-        <span class="kw">let</span> <span class="ident">is_active</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">is_active</span>();
+    <span class="kw">fn </span>paint(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>druid::PaintCtx, data: <span class="kw-2">&amp;</span>D, env: <span class="kw-2">&amp;</span>druid::Env) {
+        <span class="kw">let </span>icon_brush = PaintBrush::Color(env.get(<span class="kw">if </span>env.get(IS_DARK) {
+            <span class="kw-2">&amp;</span><span class="self">self</span>.icon_key.<span class="number">2
+        </span>} <span class="kw">else </span>{
+            <span class="kw-2">&amp;</span><span class="self">self</span>.icon_key.<span class="number">1
+        </span>}));
+        <span class="kw">let </span>size = ctx.size();
+        <span class="kw">let </span>is_hot = ctx.is_hot();
+        <span class="kw">let </span>is_active = ctx.is_active();
 
-        <span class="kw">if</span> <span class="ident">is_hot</span> {
-            <span class="ident">ctx</span>.<span class="ident">fill</span>(
-                <span class="kw-2">&amp;</span><span class="ident">size</span>.<span class="ident">to_rect</span>(),
-                <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="kw">if</span> <span class="ident">is_active</span> {
-                    <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">base::LOW</span>)
-                } <span class="kw">else</span> {
-                    <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">list::LIST_LOW</span>)
+        <span class="kw">if </span>is_hot {
+            ctx.fill(
+                <span class="kw-2">&amp;</span>size.to_rect(),
+                <span class="kw-2">&amp;</span>PaintBrush::Color(<span class="kw">if </span>is_active {
+                    env.get(base::LOW)
+                } <span class="kw">else </span>{
+                    env.get(list::LIST_LOW)
                 }),
             )
         }
-        <span class="kw">let</span> <span class="ident">icon_size</span> <span class="op">=</span> <span class="ident">druid::Size::new</span>(<span class="ident">size</span>.<span class="ident">height</span>, <span class="ident">size</span>.<span class="ident">height</span>);
-        <span class="ident">ctx</span>.<span class="ident">with_save</span>(<span class="op">|</span><span class="ident">ctx</span><span class="op">|</span> {
-            <span class="ident">ctx</span>.<span class="ident">transform</span>(<span class="ident">Affine::translate</span>(
-                ((<span class="ident">icon_size</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">icon_path</span>.<span class="ident">bounding_box</span>().<span class="ident">size</span>()) <span class="op">/</span> <span class="number">2.</span>).<span class="ident">to_vec2</span>(),
+        <span class="kw">let </span>icon_size = druid::Size::new(size.height, size.height);
+        ctx.with_save(|ctx| {
+            ctx.transform(Affine::translate(
+                ((icon_size - <span class="self">self</span>.icon_path.bounding_box().size()) / <span class="number">2.</span>).to_vec2(),
             ));
-            <span class="ident">ctx</span>.<span class="ident">fill_even_odd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">icon_path</span>, <span class="kw-2">&amp;</span><span class="ident">icon_brush</span>)
+            ctx.fill_even_odd(<span class="kw-2">&amp;</span><span class="self">self</span>.icon_path, <span class="kw-2">&amp;</span>icon_brush)
         });
-        <span class="self">self</span>.<span class="ident">text</span>.<span class="ident">paint</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>);
-        <span class="self">self</span>.<span class="ident">desc</span>.<span class="ident">paint</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>);
+        <span class="self">self</span>.text.paint(ctx, data, env);
+        <span class="self">self</span>.desc.paint(ctx, data, env);
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

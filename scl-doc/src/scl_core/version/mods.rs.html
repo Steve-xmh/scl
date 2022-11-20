@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/version/mods.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mods.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_core/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/version/mods.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mods.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_core/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -254,261 +254,261 @@
 <span id="254">254</span>
 <span id="255">255</span>
 <span id="256">256</span>
-</pre><pre class="rust"><code><span class="doccomment">//! 模组文件的管理</span>
-<span class="kw">use</span> <span class="ident">std</span>::{
-    <span class="ident">collections::HashMap</span>,
-    <span class="ident">io::Read</span>,
-    <span class="ident">path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>},
+</pre><pre class="rust"><code><span class="doccomment">//! 模组文件的管理
+</span><span class="kw">use </span>std::{
+    collections::HashMap,
+    io::Read,
+    path::{Path, PathBuf},
 };
 
-<span class="kw">use</span> <span class="ident">anyhow::Context</span>;
-<span class="kw">use</span> <span class="ident">image::DynamicImage</span>;
+<span class="kw">use </span>anyhow::Context;
+<span class="kw">use </span>image::DynamicImage;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::prelude::<span class="kw-2">*</span>;
 
-<span class="doccomment">/// 模组文件数据</span>
-<span class="doccomment">/// 可通过 [`crate::version::structs::VersionInfo::get_mods`] 获取</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Mod</span> {
-    <span class="ident">file_name</span>: <span class="ident">String</span>,
-    <span class="ident">path</span>: <span class="ident">PathBuf</span>,
-    <span class="ident">enabled</span>: <span class="ident">bool</span>,
+<span class="doccomment">/// 模组文件数据
+/// 可通过 [`crate::version::structs::VersionInfo::get_mods`] 获取
+</span><span class="attribute">#[derive(Debug, Clone, Default)]
+</span><span class="kw">pub struct </span>Mod {
+    file_name: String,
+    path: PathBuf,
+    enabled: bool,
 }
 
-<span class="doccomment">/// 一个 Fabric 模组的图标集，其内的成员都是文件路径</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 图标可以是单个也可以是多个</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 在 SCL 里，如果提供多个则默认展示第一个</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="attribute">#[<span class="ident">serde</span>(<span class="ident">untagged</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">FabricModIcon</span> {
-    <span class="doccomment">/// 多个图标</span>
-    <span class="ident">Multiply</span>(<span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">String</span><span class="op">&gt;</span>),
-    <span class="doccomment">/// 单个图标</span>
-    <span class="ident">Single</span>(<span class="ident">String</span>),
+<span class="doccomment">/// 一个 Fabric 模组的图标集，其内的成员都是文件路径
+///
+/// 图标可以是单个也可以是多个
+///
+/// 在 SCL 里，如果提供多个则默认展示第一个
+</span><span class="attribute">#[derive(Debug, Clone, Deserialize)]
+#[serde(untagged)]
+</span><span class="kw">pub enum </span>FabricModIcon {
+    <span class="doccomment">/// 多个图标
+    </span>Multiply(HashMap&lt;String, String&gt;),
+    <span class="doccomment">/// 单个图标
+    </span>Single(String),
 }
 
-<span class="doccomment">/// 一个 Fabric 模组的元数据信息</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">FabricModMeta</span> {
-    <span class="doccomment">/// 模组的名称</span>
-    <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 模组的介绍</span>
-    <span class="kw">pub</span> <span class="ident">description</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 模组的版本号</span>
-    <span class="kw">pub</span> <span class="ident">version</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 模组的图标集</span>
-    <span class="kw">pub</span> <span class="ident">icon</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">FabricModIcon</span><span class="op">&gt;</span>,
+<span class="doccomment">/// 一个 Fabric 模组的元数据信息
+</span><span class="attribute">#[derive(Debug, Clone, Default, Deserialize)]
+#[serde(default)]
+</span><span class="kw">pub struct </span>FabricModMeta {
+    <span class="doccomment">/// 模组的名称
+    </span><span class="kw">pub </span>name: String,
+    <span class="doccomment">/// 模组的介绍
+    </span><span class="kw">pub </span>description: String,
+    <span class="doccomment">/// 模组的版本号
+    </span><span class="kw">pub </span>version: String,
+    <span class="doccomment">/// 模组的图标集
+    </span><span class="kw">pub </span>icon: <span class="prelude-ty">Option</span>&lt;FabricModIcon&gt;,
 }
 
-<span class="doccomment">/// 一个 Forge 模组的元数据信息</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 注：在对老版本 1.12.2 以前的模组需要使用 [`Vec&lt;ForgeModMeta&gt;`] 来反序列化模组信息</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ForgeModMeta</span> {
-    <span class="doccomment">/// 模组的名称</span>
-    <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 模组的介绍</span>
-    <span class="kw">pub</span> <span class="ident">description</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 模组的版本号</span>
-    <span class="kw">pub</span> <span class="ident">version</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 模组的图标文件路径</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;logoFile&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">logo_file</span>: <span class="ident">String</span>,
+<span class="doccomment">/// 一个 Forge 模组的元数据信息
+///
+/// 注：在对老版本 1.12.2 以前的模组需要使用 [`Vec&lt;ForgeModMeta&gt;`] 来反序列化模组信息
+</span><span class="attribute">#[derive(Debug, Clone, Default, Deserialize)]
+#[serde(default)]
+</span><span class="kw">pub struct </span>ForgeModMeta {
+    <span class="doccomment">/// 模组的名称
+    </span><span class="kw">pub </span>name: String,
+    <span class="doccomment">/// 模组的介绍
+    </span><span class="kw">pub </span>description: String,
+    <span class="doccomment">/// 模组的版本号
+    </span><span class="kw">pub </span>version: String,
+    <span class="doccomment">/// 模组的图标文件路径
+    </span><span class="attribute">#[serde(rename = <span class="string">&quot;logoFile&quot;</span>)]
+    </span><span class="kw">pub </span>logo_file: String,
 }
 
-<span class="doccomment">/// 一个模组的元数据信息</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 有可能是 Forge 模组或者 Fabric 模组</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">ModMeta</span> {
-    <span class="doccomment">/// 一个 Fabric 模组的元数据</span>
-    <span class="ident">Fabric</span>(<span class="ident">FabricModMeta</span>),
-    <span class="doccomment">/// 一个 Forge 模组的元数据</span>
-    <span class="ident">Forge</span>(<span class="ident">ForgeModMeta</span>),
+<span class="doccomment">/// 一个模组的元数据信息
+///
+/// 有可能是 Forge 模组或者 Fabric 模组
+</span><span class="attribute">#[derive(Debug, Clone)]
+</span><span class="kw">pub enum </span>ModMeta {
+    <span class="doccomment">/// 一个 Fabric 模组的元数据
+    </span>Fabric(FabricModMeta),
+    <span class="doccomment">/// 一个 Forge 模组的元数据
+    </span>Forge(ForgeModMeta),
 }
 
-<span class="kw">impl</span> <span class="ident">ModMeta</span> {
-    <span class="doccomment">/// 获取模组的名字</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span> {
-        <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="self">self</span> {
-            <span class="ident">ModMeta::Fabric</span>(<span class="ident">m</span>) =&gt; <span class="ident">m</span>.<span class="ident">name</span>.<span class="ident">as_str</span>(),
-            <span class="ident">ModMeta::Forge</span>(<span class="ident">m</span>) =&gt; <span class="ident">m</span>.<span class="ident">name</span>.<span class="ident">as_str</span>(),
+<span class="kw">impl </span>ModMeta {
+    <span class="doccomment">/// 获取模组的名字
+    </span><span class="kw">pub fn </span>name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>str {
+        <span class="kw">match </span><span class="kw-2">&amp;</span><span class="self">self </span>{
+            ModMeta::Fabric(m) =&gt; m.name.as_str(),
+            ModMeta::Forge(m) =&gt; m.name.as_str(),
         }
     }
 
-    <span class="doccomment">/// 获取模组的版本号</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">version</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span> {
-        <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="self">self</span> {
-            <span class="ident">ModMeta::Fabric</span>(<span class="ident">m</span>) =&gt; <span class="ident">m</span>.<span class="ident">version</span>.<span class="ident">as_str</span>(),
-            <span class="ident">ModMeta::Forge</span>(<span class="ident">m</span>) =&gt; <span class="ident">m</span>.<span class="ident">version</span>.<span class="ident">as_str</span>(),
+    <span class="doccomment">/// 获取模组的版本号
+    </span><span class="kw">pub fn </span>version(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>str {
+        <span class="kw">match </span><span class="kw-2">&amp;</span><span class="self">self </span>{
+            ModMeta::Fabric(m) =&gt; m.version.as_str(),
+            ModMeta::Forge(m) =&gt; m.version.as_str(),
         }
     }
 }
 
-<span class="doccomment">/// 新版 Forge 模组的元数据信息</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 新版采用了 TOML 文件记录元数据，且支持单包多模组，故此处的 [`NewForgeModMeta::mods`] 是一个数组</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">NewForgeModMeta</span> {
-    <span class="doccomment">/// 当前模组包包含的所有模组</span>
-    <span class="kw">pub</span> <span class="ident">mods</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ForgeModMeta</span><span class="op">&gt;</span>,
+<span class="doccomment">/// 新版 Forge 模组的元数据信息
+///
+/// 新版采用了 TOML 文件记录元数据，且支持单包多模组，故此处的 [`NewForgeModMeta::mods`] 是一个数组
+</span><span class="attribute">#[derive(Debug, Clone, Deserialize)]
+</span><span class="kw">pub struct </span>NewForgeModMeta {
+    <span class="doccomment">/// 当前模组包包含的所有模组
+    </span><span class="kw">pub </span>mods: Vec&lt;ForgeModMeta&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">Mod</span> {
-    <span class="doccomment">/// 通过模组文件路径获取当前模组的信息</span>
-    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">from_path</span>(<span class="ident">path</span>: <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">as_ref</span>();
-        <span class="kw">let</span> <span class="ident">file_name</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">file_name</span>().<span class="ident">unwrap</span>().<span class="ident">to_string_lossy</span>().<span class="ident">to_string</span>();
-        <span class="kw">let</span> <span class="ident">enabled</span> <span class="op">=</span> <span class="op">!</span><span class="ident">file_name</span>.<span class="ident">ends_with</span>(<span class="string">&quot;.disabled&quot;</span>);
-        <span class="prelude-val">Ok</span>(<span class="self">Self</span> {
-            <span class="ident">file_name</span>,
-            <span class="ident">path</span>: <span class="ident">path</span>.<span class="ident">to_path_buf</span>(),
-            <span class="ident">enabled</span>,
+<span class="kw">impl </span>Mod {
+    <span class="doccomment">/// 通过模组文件路径获取当前模组的信息
+    </span><span class="kw">pub async fn </span>from_path(path: <span class="kw">impl </span>AsRef&lt;Path&gt;) -&gt; DynResult&lt;<span class="self">Self</span>&gt; {
+        <span class="kw">let </span>path = path.as_ref();
+        <span class="kw">let </span>file_name = path.file_name().unwrap().to_string_lossy().to_string();
+        <span class="kw">let </span>enabled = !file_name.ends_with(<span class="string">&quot;.disabled&quot;</span>);
+        <span class="prelude-val">Ok</span>(<span class="self">Self </span>{
+            file_name,
+            path: path.to_path_buf(),
+            enabled,
         })
     }
 
-    <span class="doccomment">/// 模组是否已经启用（既是否以 `.jar.disabled` 结尾）</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_enabled</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">enabled</span>
+    <span class="doccomment">/// 模组是否已经启用（既是否以 `.jar.disabled` 结尾）
+    </span><span class="kw">pub fn </span>is_enabled(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.enabled
     }
 
-    <span class="doccomment">/// 模组的文件名</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">file_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">file_name</span>
+    <span class="doccomment">/// 模组的文件名
+    </span><span class="kw">pub fn </span>file_name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>str {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.file_name
     }
 
-    <span class="doccomment">/// 尝试获取一个可供显示的模组名称</span>
-    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">display_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">String</span> {
-        <span class="self">self</span>.<span class="ident">try_get_mod_name</span>().<span class="kw">await</span>.<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> {
-            <span class="self">self</span>.<span class="ident">file_name</span>()
-                .<span class="ident">trim_end_matches</span>(<span class="string">&quot;.jar.disabled&quot;</span>)
-                .<span class="ident">trim_end_matches</span>(<span class="string">&quot;.jar&quot;</span>)
-                .<span class="ident">to_owned</span>()
+    <span class="doccomment">/// 尝试获取一个可供显示的模组名称
+    </span><span class="kw">pub async fn </span>display_name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; String {
+        <span class="self">self</span>.try_get_mod_name().<span class="kw">await</span>.unwrap_or_else(|<span class="kw">_</span>| {
+            <span class="self">self</span>.file_name()
+                .trim_end_matches(<span class="string">&quot;.jar.disabled&quot;</span>)
+                .trim_end_matches(<span class="string">&quot;.jar&quot;</span>)
+                .to_owned()
         })
     }
 
-    <span class="doccomment">/// 模组的文件所在路径</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">path</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">PathBuf</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">path</span>
+    <span class="doccomment">/// 模组的文件所在路径
+    </span><span class="kw">pub fn </span>path(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>PathBuf {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.path
     }
 
-    <span class="doccomment">/// 尝试获取模组的元数据信息</span>
-    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">try_get_mod_meta</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">ModMeta</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">path</span>.<span class="ident">to_owned</span>();
-        <span class="ident">inner_future::unblock</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">ModMeta</span><span class="op">&gt;</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">z</span> <span class="op">=</span> <span class="ident">zip::ZipArchive::new</span>(
-                <span class="ident">std::fs::OpenOptions::new</span>()
-                    .<span class="ident">read</span>(<span class="bool-val">true</span>)
-                    .<span class="ident">open</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>)
-                    .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;无法打开模组文件 {}&quot;</span>, <span class="ident">path</span>.<span class="ident">to_string_lossy</span>()))
-                    .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;无法读取模组文件 {}&quot;</span>, <span class="ident">path</span>.<span class="ident">to_string_lossy</span>()))<span class="question-mark">?</span>,
+    <span class="doccomment">/// 尝试获取模组的元数据信息
+    </span><span class="kw">pub async fn </span>try_get_mod_meta(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; DynResult&lt;ModMeta&gt; {
+        <span class="kw">let </span>path = <span class="self">self</span>.path.to_owned();
+        inner_future::unblock(<span class="kw">move </span>|| -&gt; DynResult&lt;ModMeta&gt; {
+            <span class="kw">let </span><span class="kw-2">mut </span>z = zip::ZipArchive::new(
+                std::fs::OpenOptions::new()
+                    .read(<span class="bool-val">true</span>)
+                    .open(<span class="kw-2">&amp;</span>path)
+                    .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;无法打开模组文件 {}&quot;</span>, path.to_string_lossy()))
+                    .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;无法读取模组文件 {}&quot;</span>, path.to_string_lossy()))<span class="question-mark">?</span>,
             )<span class="question-mark">?</span>;
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">meta</span>) <span class="op">=</span> <span class="ident">z</span>.<span class="ident">by_name</span>(<span class="string">&quot;fabric.mod.json&quot;</span>).<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">r</span><span class="op">|</span> {
-                <span class="ident">serde_json::from_reader</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">FabricModMeta</span><span class="op">&gt;</span>(<span class="ident">r</span>)
-                    .<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">zip::result::ZipError::InvalidArchive</span>(<span class="string">&quot;fabric.mod.json&quot;</span>))
+            <span class="kw">if let </span><span class="prelude-val">Ok</span>(meta) = z.by_name(<span class="string">&quot;fabric.mod.json&quot;</span>).and_then(|r| {
+                serde_json::from_reader::&lt;<span class="kw">_</span>, FabricModMeta&gt;(r)
+                    .map_err(|<span class="kw">_</span>| zip::result::ZipError::InvalidArchive(<span class="string">&quot;fabric.mod.json&quot;</span>))
             }) {
-                <span class="comment">// fabric.mod.json https://github.com/FabricMC/fabric-example-mod/blob/1.19/src/main/resources/fabric.mod.json</span>
-                <span class="prelude-val">Ok</span>(<span class="ident">ModMeta::Fabric</span>(<span class="ident">meta</span>))
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">meta</span>) <span class="op">=</span> <span class="ident">z</span>.<span class="ident">by_name</span>(<span class="string">&quot;mods.toml&quot;</span>).<span class="ident">and_then</span>(<span class="op">|</span><span class="kw-2">mut</span> <span class="ident">r</span><span class="op">|</span> {
-                <span class="comment">// mods.toml https://docs.minecraftforge.net/en/1.19.x/gettingstarted/structuring/</span>
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="ident">r</span>.<span class="ident">size</span>() <span class="kw">as</span> <span class="kw">_</span>);
-                <span class="ident">r</span>.<span class="ident">read_to_end</span>(<span class="kw-2">&amp;mut</span> <span class="ident">buf</span>).<span class="ident">unwrap_or_default</span>();
-                <span class="ident">toml::from_slice</span>::<span class="op">&lt;</span><span class="ident">NewForgeModMeta</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="ident">buf</span>)
-                    .<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">zip::result::ZipError::InvalidArchive</span>(<span class="string">&quot;mods.toml&quot;</span>))
+                <span class="comment">// fabric.mod.json https://github.com/FabricMC/fabric-example-mod/blob/1.19/src/main/resources/fabric.mod.json
+                </span><span class="prelude-val">Ok</span>(ModMeta::Fabric(meta))
+            } <span class="kw">else if let </span><span class="prelude-val">Ok</span>(meta) = z.by_name(<span class="string">&quot;mods.toml&quot;</span>).and_then(|<span class="kw-2">mut </span>r| {
+                <span class="comment">// mods.toml https://docs.minecraftforge.net/en/1.19.x/gettingstarted/structuring/
+                </span><span class="kw">let </span><span class="kw-2">mut </span>buf = Vec::with_capacity(r.size() <span class="kw">as _</span>);
+                r.read_to_end(<span class="kw-2">&amp;mut </span>buf).unwrap_or_default();
+                toml::from_slice::&lt;NewForgeModMeta&gt;(<span class="kw-2">&amp;</span>buf)
+                    .map_err(|<span class="kw">_</span>| zip::result::ZipError::InvalidArchive(<span class="string">&quot;mods.toml&quot;</span>))
             }) {
-                <span class="prelude-val">Ok</span>(<span class="ident">ModMeta::Forge</span>(<span class="ident">meta</span>.<span class="ident">mods</span>.<span class="ident">first</span>().<span class="ident">cloned</span>().<span class="ident">ok_or_else</span>(
-                    <span class="op">|</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;Can&#39;t get mod info from mcmod.info&quot;</span>),
+                <span class="prelude-val">Ok</span>(ModMeta::Forge(meta.mods.first().cloned().ok_or_else(
+                    || <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;Can&#39;t get mod info from mcmod.info&quot;</span>),
                 )<span class="question-mark">?</span>))
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">meta</span>) <span class="op">=</span> <span class="ident">z</span>.<span class="ident">by_name</span>(<span class="string">&quot;mcmod.info&quot;</span>).<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">r</span><span class="op">|</span> {
-                <span class="comment">// mcmod.info https://docs.minecraftforge.net/en/1.12.x/gettingstarted/structuring/</span>
-                <span class="ident">serde_json::from_reader</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ForgeModMeta</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">r</span>)
-                    .<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">zip::result::ZipError::InvalidArchive</span>(<span class="string">&quot;mcmod.info&quot;</span>))
+            } <span class="kw">else if let </span><span class="prelude-val">Ok</span>(meta) = z.by_name(<span class="string">&quot;mcmod.info&quot;</span>).and_then(|r| {
+                <span class="comment">// mcmod.info https://docs.minecraftforge.net/en/1.12.x/gettingstarted/structuring/
+                </span>serde_json::from_reader::&lt;<span class="kw">_</span>, Vec&lt;ForgeModMeta&gt;&gt;(r)
+                    .map_err(|<span class="kw">_</span>| zip::result::ZipError::InvalidArchive(<span class="string">&quot;mcmod.info&quot;</span>))
             }) {
-                <span class="prelude-val">Ok</span>(<span class="ident">ModMeta::Forge</span>(<span class="ident">meta</span>.<span class="ident">first</span>().<span class="ident">cloned</span>().<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> {
+                <span class="prelude-val">Ok</span>(ModMeta::Forge(meta.first().cloned().ok_or_else(|| {
                     <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;Can&#39;t get mod info from mcmod.info&quot;</span>)
                 })<span class="question-mark">?</span>))
-            } <span class="kw">else</span> {
+            } <span class="kw">else </span>{
                 <span class="macro">anyhow::bail!</span>(<span class="string">&quot;Mod name not found&quot;</span>)
             }
         })
-        .<span class="kw">await</span>
+        .<span class="kw">await
+    </span>}
+
+    <span class="doccomment">/// [`Mod::try_get_mod_meta`] 的语法糖，尝试根据模组元数据获取模组名称
+    </span><span class="kw">pub async fn </span>try_get_mod_name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; DynResult&lt;String&gt; {
+        <span class="prelude-val">Ok</span>(<span class="self">self</span>.try_get_mod_meta().<span class="kw">await</span><span class="question-mark">?</span>.name().to_owned())
     }
 
-    <span class="doccomment">/// [`Mod::try_get_mod_meta`] 的语法糖，尝试根据模组元数据获取模组名称</span>
-    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">try_get_mod_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
-        <span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">try_get_mod_meta</span>().<span class="kw">await</span><span class="question-mark">?</span>.<span class="ident">name</span>().<span class="ident">to_owned</span>())
-    }
-
-    <span class="doccomment">/// [`Mod::try_get_mod_meta`] 的语法糖，尝试根据模组元数据获取模组的其中一个图标</span>
-    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">try_get_mod_icon</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">DynamicImage</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">icon_path</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">try_get_mod_meta</span>().<span class="kw">await</span><span class="question-mark">?</span> {
-            <span class="ident">ModMeta::Fabric</span>(<span class="ident">meta</span>) =&gt; <span class="kw">match</span> <span class="ident">meta</span>.<span class="ident">icon</span> {
-                <span class="prelude-val">Some</span>(<span class="ident">FabricModIcon::Multiply</span>(<span class="ident">icon</span>)) =&gt; {
-                    <span class="ident">icon</span>.<span class="ident">iter</span>().<span class="ident">next</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="number">0</span>.<span class="ident">to_owned</span>()).<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> {
+    <span class="doccomment">/// [`Mod::try_get_mod_meta`] 的语法糖，尝试根据模组元数据获取模组的其中一个图标
+    </span><span class="kw">pub async fn </span>try_get_mod_icon(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; DynResult&lt;DynamicImage&gt; {
+        <span class="kw">let </span>icon_path = <span class="kw">match </span><span class="self">self</span>.try_get_mod_meta().<span class="kw">await</span><span class="question-mark">? </span>{
+            ModMeta::Fabric(meta) =&gt; <span class="kw">match </span>meta.icon {
+                <span class="prelude-val">Some</span>(FabricModIcon::Multiply(icon)) =&gt; {
+                    icon.iter().next().map(|x| x.<span class="number">0</span>.to_owned()).ok_or_else(|| {
                         <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;Can&#39;t find icon from such multiply fabric mod icons&quot;</span>)
-                    })<span class="question-mark">?</span>
-                }
-                <span class="prelude-val">Some</span>(<span class="ident">FabricModIcon::Single</span>(<span class="ident">icon</span>)) =&gt; <span class="ident">icon</span>,
-                <span class="prelude-val">None</span> =&gt; <span class="macro">anyhow::bail!</span>(<span class="string">&quot;Can&#39;t find icon from such multiply fabric mod icons&quot;</span>),
+                    })<span class="question-mark">?
+                </span>}
+                <span class="prelude-val">Some</span>(FabricModIcon::Single(icon)) =&gt; icon,
+                <span class="prelude-val">None </span>=&gt; <span class="macro">anyhow::bail!</span>(<span class="string">&quot;Can&#39;t find icon from such multiply fabric mod icons&quot;</span>),
             },
-            <span class="ident">ModMeta::Forge</span>(<span class="ident">meta</span>) =&gt; <span class="ident">meta</span>.<span class="ident">logo_file</span>,
+            ModMeta::Forge(meta) =&gt; meta.logo_file,
         };
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">path</span>.<span class="ident">to_owned</span>();
-        <span class="ident">inner_future::unblock</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">DynamicImage</span><span class="op">&gt;</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">z</span> <span class="op">=</span> <span class="ident">zip::ZipArchive::new</span>(<span class="ident">std::fs::OpenOptions::new</span>().<span class="ident">read</span>(<span class="bool-val">true</span>).<span class="ident">open</span>(<span class="ident">path</span>)<span class="question-mark">?</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">z</span>.<span class="ident">by_name</span>(<span class="ident">icon_path</span>.<span class="ident">trim_start_matches</span>([<span class="string">&#39;/&#39;</span>, <span class="string">&#39;\\&#39;</span>]))<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="ident">r</span>.<span class="ident">size</span>() <span class="kw">as</span> <span class="kw">_</span>);
-            <span class="ident">r</span>.<span class="ident">read_to_end</span>(<span class="kw-2">&amp;mut</span> <span class="ident">buf</span>)<span class="question-mark">?</span>;
-            <span class="prelude-val">Ok</span>(<span class="ident">image::load_from_memory</span>(<span class="kw-2">&amp;</span><span class="ident">buf</span>)<span class="question-mark">?</span>)
+        <span class="kw">let </span>path = <span class="self">self</span>.path.to_owned();
+        inner_future::unblock(<span class="kw">move </span>|| -&gt; DynResult&lt;DynamicImage&gt; {
+            <span class="kw">let </span><span class="kw-2">mut </span>z = zip::ZipArchive::new(std::fs::OpenOptions::new().read(<span class="bool-val">true</span>).open(path)<span class="question-mark">?</span>)<span class="question-mark">?</span>;
+            <span class="kw">let </span><span class="kw-2">mut </span>r = z.by_name(icon_path.trim_start_matches([<span class="string">&#39;/&#39;</span>, <span class="string">&#39;\\&#39;</span>]))<span class="question-mark">?</span>;
+            <span class="kw">let </span><span class="kw-2">mut </span>buf = Vec::with_capacity(r.size() <span class="kw">as _</span>);
+            r.read_to_end(<span class="kw-2">&amp;mut </span>buf)<span class="question-mark">?</span>;
+            <span class="prelude-val">Ok</span>(image::load_from_memory(<span class="kw-2">&amp;</span>buf)<span class="question-mark">?</span>)
         })
-        .<span class="kw">await</span>
-    }
+        .<span class="kw">await
+    </span>}
 
-    <span class="doccomment">/// 如果模组是禁用的（既以 `.jar.disabled` 结尾），启用该模组（既还原成 `.jar` 结尾）</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 如果重命名失败则会返回错误</span>
-    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">enable</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">DynResult</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">file_name</span>.<span class="ident">ends_with</span>(<span class="string">&quot;.disabled&quot;</span>) <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">enabled</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">path</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">path</span>.<span class="ident">clone</span>();
-            <span class="ident">path</span>.<span class="ident">set_file_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">file_name</span>[..<span class="self">self</span>.<span class="ident">file_name</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">9</span>]);
-            <span class="ident">inner_future::fs::rename</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">path</span>, <span class="kw-2">&amp;</span><span class="ident">path</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-            <span class="self">self</span>.<span class="ident">file_name</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">file_name</span>().<span class="ident">unwrap</span>().<span class="ident">to_string_lossy</span>().<span class="ident">to_string</span>();
-            <span class="self">self</span>.<span class="ident">path</span> <span class="op">=</span> <span class="ident">path</span>;
-            <span class="self">self</span>.<span class="ident">enabled</span> <span class="op">=</span> <span class="bool-val">true</span>;
+    <span class="doccomment">/// 如果模组是禁用的（既以 `.jar.disabled` 结尾），启用该模组（既还原成 `.jar` 结尾）
+    ///
+    /// 如果重命名失败则会返回错误
+    </span><span class="kw">pub async fn </span>enable(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; DynResult {
+        <span class="kw">if </span><span class="self">self</span>.file_name.ends_with(<span class="string">&quot;.disabled&quot;</span>) &amp;&amp; !<span class="self">self</span>.enabled {
+            <span class="kw">let </span><span class="kw-2">mut </span>path = <span class="self">self</span>.path.clone();
+            path.set_file_name(<span class="kw-2">&amp;</span><span class="self">self</span>.file_name[..<span class="self">self</span>.file_name.len() - <span class="number">9</span>]);
+            inner_future::fs::rename(<span class="kw-2">&amp;</span><span class="self">self</span>.path, <span class="kw-2">&amp;</span>path).<span class="kw">await</span><span class="question-mark">?</span>;
+            <span class="self">self</span>.file_name = path.file_name().unwrap().to_string_lossy().to_string();
+            <span class="self">self</span>.path = path;
+            <span class="self">self</span>.enabled = <span class="bool-val">true</span>;
         }
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// 如果模组是启用的（既以 `.jar` 结尾），禁用该模组（既重命名为以 `.jar.disabled` 结尾）</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 如果重命名失败则会返回错误</span>
-    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">disable</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">DynResult</span> {
-        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">file_name</span>.<span class="ident">ends_with</span>(<span class="string">&quot;.disabled&quot;</span>) <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">enabled</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">path</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">path</span>.<span class="ident">clone</span>();
-            <span class="ident">path</span>.<span class="ident">set_file_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">file_name</span>);
-            <span class="ident">path</span>.<span class="ident">set_extension</span>(<span class="macro">format!</span>(
+    <span class="doccomment">/// 如果模组是启用的（既以 `.jar` 结尾），禁用该模组（既重命名为以 `.jar.disabled` 结尾）
+    ///
+    /// 如果重命名失败则会返回错误
+    </span><span class="kw">pub async fn </span>disable(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; DynResult {
+        <span class="kw">if </span>!<span class="self">self</span>.file_name.ends_with(<span class="string">&quot;.disabled&quot;</span>) &amp;&amp; <span class="self">self</span>.enabled {
+            <span class="kw">let </span><span class="kw-2">mut </span>path = <span class="self">self</span>.path.clone();
+            path.set_file_name(<span class="kw-2">&amp;</span><span class="self">self</span>.file_name);
+            path.set_extension(<span class="macro">format!</span>(
                 <span class="string">&quot;{}.disabled&quot;</span>,
-                <span class="ident">path</span>.<span class="ident">extension</span>()
-                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">to_string_lossy</span>())
-                    .<span class="ident">unwrap_or_default</span>()
+                path.extension()
+                    .map(|x| x.to_string_lossy())
+                    .unwrap_or_default()
             ));
-            <span class="ident">inner_future::fs::rename</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">path</span>, <span class="kw-2">&amp;</span><span class="ident">path</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-            <span class="self">self</span>.<span class="ident">file_name</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">file_name</span>().<span class="ident">unwrap</span>().<span class="ident">to_string_lossy</span>().<span class="ident">to_string</span>();
-            <span class="self">self</span>.<span class="ident">path</span> <span class="op">=</span> <span class="ident">path</span>;
-            <span class="self">self</span>.<span class="ident">enabled</span> <span class="op">=</span> <span class="bool-val">false</span>;
+            inner_future::fs::rename(<span class="kw-2">&amp;</span><span class="self">self</span>.path, <span class="kw-2">&amp;</span>path).<span class="kw">await</span><span class="question-mark">?</span>;
+            <span class="self">self</span>.file_name = path.file_name().unwrap().to_string_lossy().to_string();
+            <span class="self">self</span>.path = path;
+            <span class="self">self</span>.enabled = <span class="bool-val">false</span>;
         }
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// 删除该模组，**此操作不可撤销**</span>
-    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">remove</span>(<span class="self">self</span>) -&gt; <span class="ident">DynResult</span> {
-        <span class="ident">inner_future::fs::remove_file</span>(<span class="self">self</span>.<span class="ident">path</span>).<span class="kw">await</span><span class="question-mark">?</span>;
+    <span class="doccomment">/// 删除该模组，**此操作不可撤销**
+    </span><span class="kw">pub async fn </span>remove(<span class="self">self</span>) -&gt; DynResult {
+        inner_future::fs::remove_file(<span class="self">self</span>.path).<span class="kw">await</span><span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

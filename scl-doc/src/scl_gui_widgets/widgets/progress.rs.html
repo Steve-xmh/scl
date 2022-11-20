@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/progress.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>progress.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/progress.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>progress.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -135,142 +135,142 @@
 <span id="135">135</span>
 <span id="136">136</span>
 <span id="137">137</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">druid</span>::{
-    <span class="ident">kurbo::BezPath</span>,
-    <span class="ident">piet</span>::{<span class="ident">PaintBrush</span>, <span class="ident">StrokeStyle</span>},
-    <span class="ident">Affine</span>, <span class="ident">BoxConstraints</span>, <span class="ident">Data</span>, <span class="ident">Env</span>, <span class="ident">Event</span>, <span class="ident">EventCtx</span>, <span class="ident">LayoutCtx</span>, <span class="ident">LifeCycle</span>, <span class="ident">LifeCycleCtx</span>,
-    <span class="ident">PaintCtx</span>, <span class="ident">RenderContext</span>, <span class="ident">Size</span>, <span class="ident">UpdateCtx</span>, <span class="ident">Widget</span>,
+</pre><pre class="rust"><code><span class="kw">use </span>druid::{
+    kurbo::BezPath,
+    piet::{PaintBrush, StrokeStyle},
+    Affine, BoxConstraints, Data, Env, Event, EventCtx, LayoutCtx, LifeCycle, LifeCycleCtx,
+    PaintCtx, RenderContext, Size, UpdateCtx, Widget,
 };
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::theme::color</span> <span class="kw">as</span> <span class="ident">theme</span>;
+<span class="kw">use </span><span class="kw">crate</span>::theme::color <span class="kw">as </span>theme;
 
-<span class="doccomment">/// 一个仿 WinUI 3 的进度指示圈，仅支持无界进度动画</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ProgressRing</span> {
-    <span class="ident">indeterminate</span>: <span class="ident">bool</span>,
-    <span class="ident">indeterminate_time</span>: <span class="ident">f64</span>,
+<span class="doccomment">/// 一个仿 WinUI 3 的进度指示圈，仅支持无界进度动画
+</span><span class="kw">pub struct </span>ProgressRing {
+    indeterminate: bool,
+    indeterminate_time: f64,
 }
 
-<span class="kw">impl</span> <span class="ident">ProgressRing</span> {
-    <span class="doccomment">/// 创建一个进度指示圈</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::default</span>()
+<span class="kw">impl </span>ProgressRing {
+    <span class="doccomment">/// 创建一个进度指示圈
+    </span><span class="kw">pub fn </span>new() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::default()
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">ProgressRing</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">indeterminate</span>: <span class="bool-val">true</span>,
-            <span class="ident">indeterminate_time</span>: <span class="number">0.</span>,
+<span class="kw">impl </span>Default <span class="kw">for </span>ProgressRing {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            indeterminate: <span class="bool-val">true</span>,
+            indeterminate_time: <span class="number">0.</span>,
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Data</span><span class="op">&gt;</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ProgressRing</span> {
-    <span class="kw">fn</span> <span class="ident">event</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EventCtx</span>, <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">Event</span>, <span class="ident">_data</span>: <span class="kw-2">&amp;mut</span> <span class="ident">T</span>, <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Event::AnimFrame</span>(<span class="ident">t</span>) <span class="op">=</span> <span class="ident">event</span> {
-            <span class="self">self</span>.<span class="ident">indeterminate_time</span> <span class="op">-</span><span class="op">=</span> <span class="kw-2">*</span><span class="ident">t</span> <span class="kw">as</span> <span class="ident">f64</span> <span class="op">/</span> <span class="number">1_000_000_000.</span>;
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">indeterminate</span> {
-                <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
-                <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
+<span class="kw">impl</span>&lt;T: Data&gt; Widget&lt;T&gt; <span class="kw">for </span>ProgressRing {
+    <span class="kw">fn </span>event(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>EventCtx, event: <span class="kw-2">&amp;</span>Event, _data: <span class="kw-2">&amp;mut </span>T, _env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">if let </span>Event::AnimFrame(t) = event {
+            <span class="self">self</span>.indeterminate_time -= <span class="kw-2">*</span>t <span class="kw">as </span>f64 / <span class="number">1_000_000_000.</span>;
+            <span class="kw">if </span><span class="self">self</span>.indeterminate {
+                ctx.request_paint();
+                ctx.request_anim_frame();
             }
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">lifecycle</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LifeCycleCtx</span>, <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">LifeCycle</span>, <span class="ident">_data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">LifeCycle::WidgetAdded</span> <span class="op">=</span> <span class="ident">event</span> {
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">indeterminate</span> {
-                <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
+    <span class="kw">fn </span>lifecycle(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>LifeCycleCtx, event: <span class="kw-2">&amp;</span>LifeCycle, _data: <span class="kw-2">&amp;</span>T, _env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">if let </span>LifeCycle::WidgetAdded = event {
+            <span class="kw">if </span><span class="self">self</span>.indeterminate {
+                ctx.request_anim_frame();
             }
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">_ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">UpdateCtx</span>, <span class="ident">_old_data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">_data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {}
+    <span class="kw">fn </span>update(<span class="kw-2">&amp;mut </span><span class="self">self</span>, _ctx: <span class="kw-2">&amp;mut </span>UpdateCtx, _old_data: <span class="kw-2">&amp;</span>T, _data: <span class="kw-2">&amp;</span>T, _env: <span class="kw-2">&amp;</span>Env) {}
 
-    <span class="kw">fn</span> <span class="ident">layout</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">_ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LayoutCtx</span>, <span class="ident">bc</span>: <span class="kw-2">&amp;</span><span class="ident">BoxConstraints</span>, <span class="ident">_data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) -&gt; <span class="ident">Size</span> {
-        <span class="ident">bc</span>.<span class="ident">debug_check</span>(<span class="string">&quot;ProgressRing&quot;</span>);
-        <span class="ident">bc</span>.<span class="ident">constrain</span>((<span class="number">60.</span>, <span class="number">60.</span>))
+    <span class="kw">fn </span>layout(<span class="kw-2">&amp;mut </span><span class="self">self</span>, _ctx: <span class="kw-2">&amp;mut </span>LayoutCtx, bc: <span class="kw-2">&amp;</span>BoxConstraints, _data: <span class="kw-2">&amp;</span>T, _env: <span class="kw-2">&amp;</span>Env) -&gt; Size {
+        bc.debug_check(<span class="string">&quot;ProgressRing&quot;</span>);
+        bc.constrain((<span class="number">60.</span>, <span class="number">60.</span>))
     }
 
-    <span class="kw">fn</span> <span class="ident">paint</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">PaintCtx</span>, <span class="ident">_data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">let</span> <span class="ident">front</span> <span class="op">=</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">theme::main::SECONDARY</span>);
-        <span class="kw">let</span> <span class="ident">back</span> <span class="op">=</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">theme::chrome::HIGH</span>);
+    <span class="kw">fn </span>paint(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>PaintCtx, _data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">let </span>front = env.get(theme::main::SECONDARY);
+        <span class="kw">let </span>back = env.get(theme::chrome::HIGH);
 
-        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">Size::new</span>(<span class="number">52.</span>, <span class="number">52.</span>);
-        <span class="kw">let</span> <span class="ident">rect</span> <span class="op">=</span> <span class="ident">size</span>.<span class="ident">to_rounded_rect</span>(<span class="number">30.</span>);
+        <span class="kw">let </span>size = Size::new(<span class="number">52.</span>, <span class="number">52.</span>);
+        <span class="kw">let </span>rect = size.to_rounded_rect(<span class="number">30.</span>);
 
-        <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">indeterminate_time</span>;
-        <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> ((<span class="ident">t</span> <span class="op">*</span> <span class="op">-</span><span class="ident">std::f64::consts::PI</span>).<span class="ident">sin</span>() <span class="op">+</span> <span class="number">1.</span>) <span class="op">/</span> <span class="number">2.</span>; <span class="comment">// ((t * -std::f64::consts::PI).sin() + 1.) / 2.;</span>
+        <span class="kw">let </span>t = <span class="self">self</span>.indeterminate_time;
+        <span class="kw">let </span>l = ((t * -std::f64::consts::PI).sin() + <span class="number">1.</span>) / <span class="number">2.</span>; <span class="comment">// ((t * -std::f64::consts::PI).sin() + 1.) / 2.;
 
-        <span class="comment">// 曲线的长度</span>
-        <span class="kw">let</span> <span class="ident">thera</span> <span class="op">=</span> <span class="ident">l</span> <span class="op">*</span> <span class="ident">std::f64::consts::PI</span>;
+        // 曲线的长度
+        </span><span class="kw">let </span>thera = l * std::f64::consts::PI;
 
-        <span class="comment">// 计算切线长度</span>
-        <span class="kw">let</span> <span class="ident">rad</span> <span class="op">=</span> <span class="ident">thera</span>.<span class="ident">cos</span>().<span class="ident">acos</span>();
-        <span class="kw">let</span> <span class="ident">tangent_scale</span> <span class="op">=</span> <span class="number">4.</span> <span class="op">/</span> <span class="number">3.</span> <span class="op">*</span> (<span class="number">1.</span> <span class="op">-</span> (<span class="ident">rad</span> <span class="op">/</span> <span class="number">2.</span>).<span class="ident">cos</span>()) <span class="op">/</span> (<span class="ident">rad</span> <span class="op">/</span> <span class="number">2.</span>).<span class="ident">sin</span>();
-        <span class="kw">let</span> <span class="ident">tangent_len</span> <span class="op">=</span> <span class="ident">tangent_scale</span> <span class="op">*</span> <span class="number">26.</span>;
+        <span class="comment">// 计算切线长度
+        </span><span class="kw">let </span>rad = thera.cos().acos();
+        <span class="kw">let </span>tangent_scale = <span class="number">4. </span>/ <span class="number">3. </span>* (<span class="number">1. </span>- (rad / <span class="number">2.</span>).cos()) / (rad / <span class="number">2.</span>).sin();
+        <span class="kw">let </span>tangent_len = tangent_scale * <span class="number">26.</span>;
 
-        <span class="comment">// 计算各个点的正弦余弦</span>
-        <span class="kw">let</span> (<span class="ident">sx</span>, <span class="ident">sy</span>) <span class="op">=</span> (<span class="ident">t</span> <span class="op">*</span> <span class="number">8.</span>).<span class="ident">sin_cos</span>();
-        <span class="kw">let</span> (<span class="ident">p1ox</span>, <span class="ident">p1oy</span>) <span class="op">=</span> (<span class="ident">t</span> <span class="op">*</span> <span class="number">8.</span> <span class="op">+</span> <span class="ident">std::f64::consts::FRAC_PI_2</span>).<span class="ident">sin_cos</span>();
-        <span class="kw">let</span> (<span class="ident">ex</span>, <span class="ident">ey</span>) <span class="op">=</span> (<span class="ident">t</span> <span class="op">*</span> <span class="number">8.</span> <span class="op">+</span> <span class="ident">thera</span>).<span class="ident">sin_cos</span>();
-        <span class="kw">let</span> (<span class="ident">p2ox</span>, <span class="ident">p2oy</span>) <span class="op">=</span> (<span class="ident">t</span> <span class="op">*</span> <span class="number">8.</span> <span class="op">+</span> <span class="ident">thera</span> <span class="op">-</span> <span class="ident">std::f64::consts::FRAC_PI_2</span>).<span class="ident">sin_cos</span>();
+        <span class="comment">// 计算各个点的正弦余弦
+        </span><span class="kw">let </span>(sx, sy) = (t * <span class="number">8.</span>).sin_cos();
+        <span class="kw">let </span>(p1ox, p1oy) = (t * <span class="number">8. </span>+ std::f64::consts::FRAC_PI_2).sin_cos();
+        <span class="kw">let </span>(ex, ey) = (t * <span class="number">8. </span>+ thera).sin_cos();
+        <span class="kw">let </span>(p2ox, p2oy) = (t * <span class="number">8. </span>+ thera - std::f64::consts::FRAC_PI_2).sin_cos();
 
-        <span class="comment">// 点的坐标</span>
-        <span class="kw">let</span> <span class="ident">start_point</span> <span class="op">=</span> (<span class="number">26.</span> <span class="op">+</span> <span class="ident">sx</span> <span class="op">*</span> <span class="number">26.</span>, <span class="number">26.</span> <span class="op">+</span> <span class="ident">sy</span> <span class="op">*</span> <span class="number">26.</span>);
-        <span class="kw">let</span> <span class="ident">end_point</span> <span class="op">=</span> (<span class="number">26.</span> <span class="op">+</span> <span class="ident">ex</span> <span class="op">*</span> <span class="number">26.</span>, <span class="number">26.</span> <span class="op">+</span> <span class="ident">ey</span> <span class="op">*</span> <span class="number">26.</span>);
-        <span class="kw">let</span> <span class="ident">control_1_point</span> <span class="op">=</span> (
-            <span class="number">26.</span> <span class="op">+</span> <span class="ident">sx</span> <span class="op">*</span> <span class="number">26.</span> <span class="op">+</span> <span class="ident">p1ox</span> <span class="op">*</span> <span class="ident">tangent_len</span>,
-            <span class="number">26.</span> <span class="op">+</span> <span class="ident">sy</span> <span class="op">*</span> <span class="number">26.</span> <span class="op">+</span> <span class="ident">p1oy</span> <span class="op">*</span> <span class="ident">tangent_len</span>,
+        <span class="comment">// 点的坐标
+        </span><span class="kw">let </span>start_point = (<span class="number">26. </span>+ sx * <span class="number">26.</span>, <span class="number">26. </span>+ sy * <span class="number">26.</span>);
+        <span class="kw">let </span>end_point = (<span class="number">26. </span>+ ex * <span class="number">26.</span>, <span class="number">26. </span>+ ey * <span class="number">26.</span>);
+        <span class="kw">let </span>control_1_point = (
+            <span class="number">26. </span>+ sx * <span class="number">26. </span>+ p1ox * tangent_len,
+            <span class="number">26. </span>+ sy * <span class="number">26. </span>+ p1oy * tangent_len,
         );
-        <span class="kw">let</span> <span class="ident">control_2_point</span> <span class="op">=</span> (
-            <span class="number">26.</span> <span class="op">+</span> <span class="ident">ex</span> <span class="op">*</span> <span class="number">26.</span> <span class="op">+</span> <span class="ident">p2ox</span> <span class="op">*</span> <span class="ident">tangent_len</span>,
-            <span class="number">26.</span> <span class="op">+</span> <span class="ident">ey</span> <span class="op">*</span> <span class="number">26.</span> <span class="op">+</span> <span class="ident">p2oy</span> <span class="op">*</span> <span class="ident">tangent_len</span>,
+        <span class="kw">let </span>control_2_point = (
+            <span class="number">26. </span>+ ex * <span class="number">26. </span>+ p2ox * tangent_len,
+            <span class="number">26. </span>+ ey * <span class="number">26. </span>+ p2oy * tangent_len,
         );
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">BezPath::new</span>();
-        <span class="ident">path</span>.<span class="ident">move_to</span>(<span class="ident">start_point</span>);
-        <span class="ident">path</span>.<span class="ident">curve_to</span>(<span class="ident">control_1_point</span>, <span class="ident">control_2_point</span>, <span class="ident">end_point</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>path = BezPath::new();
+        path.move_to(start_point);
+        path.curve_to(control_1_point, control_2_point, end_point);
 
-        <span class="comment">// 绘制</span>
-        <span class="ident">ctx</span>.<span class="ident">transform</span>(<span class="ident">Affine::translate</span>((<span class="number">4.</span>, <span class="number">4.</span>)));
-        <span class="ident">ctx</span>.<span class="ident">stroke</span>(<span class="ident">rect</span>, <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">back</span>), <span class="number">8.</span>);
-        <span class="ident">ctx</span>.<span class="ident">stroke_styled</span>(
-            <span class="ident">path</span>,
-            <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">front</span>),
+        <span class="comment">// 绘制
+        </span>ctx.transform(Affine::translate((<span class="number">4.</span>, <span class="number">4.</span>)));
+        ctx.stroke(rect, <span class="kw-2">&amp;</span>PaintBrush::Color(back), <span class="number">8.</span>);
+        ctx.stroke_styled(
+            path,
+            <span class="kw-2">&amp;</span>PaintBrush::Color(front),
             <span class="number">8.</span>,
-            <span class="kw-2">&amp;</span><span class="ident">StrokeStyle</span> {
-                <span class="ident">line_cap</span>: <span class="ident">druid::piet::LineCap::Round</span>,
-                ..<span class="ident">Default::default</span>()
+            <span class="kw-2">&amp;</span>StrokeStyle {
+                line_cap: druid::piet::LineCap::Round,
+                ..Default::default()
             },
         );
-        <span class="kw">if</span> <span class="bool-val">false</span> {
-            <span class="kw">fn</span> <span class="ident">re</span>((<span class="ident">x</span>, <span class="ident">y</span>): (<span class="ident">f64</span>, <span class="ident">f64</span>)) -&gt; <span class="ident">druid::Rect</span> {
-                <span class="ident">druid::Rect::new</span>(<span class="ident">x</span> <span class="op">-</span> <span class="number">0.5</span>, <span class="ident">y</span> <span class="op">-</span> <span class="number">0.5</span>, <span class="ident">x</span> <span class="op">+</span> <span class="number">0.5</span>, <span class="ident">y</span> <span class="op">+</span> <span class="number">0.5</span>)
+        <span class="kw">if </span><span class="bool-val">false </span>{
+            <span class="kw">fn </span>re((x, y): (f64, f64)) -&gt; druid::Rect {
+                druid::Rect::new(x - <span class="number">0.5</span>, y - <span class="number">0.5</span>, x + <span class="number">0.5</span>, y + <span class="number">0.5</span>)
             }
-            <span class="comment">// 绘制调试点</span>
-            <span class="ident">ctx</span>.<span class="ident">stroke</span>(<span class="ident">re</span>(<span class="ident">start_point</span>), <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">druid::Color::RED</span>), <span class="number">8.</span>);
-            <span class="ident">ctx</span>.<span class="ident">stroke</span>(
-                <span class="ident">re</span>(<span class="ident">control_1_point</span>),
-                <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">druid::Color::AQUA</span>),
+            <span class="comment">// 绘制调试点
+            </span>ctx.stroke(re(start_point), <span class="kw-2">&amp;</span>PaintBrush::Color(druid::Color::RED), <span class="number">8.</span>);
+            ctx.stroke(
+                re(control_1_point),
+                <span class="kw-2">&amp;</span>PaintBrush::Color(druid::Color::AQUA),
                 <span class="number">8.</span>,
             );
-            <span class="ident">ctx</span>.<span class="ident">stroke</span>(
-                <span class="ident">re</span>(<span class="ident">control_2_point</span>),
-                <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">druid::Color::OLIVE</span>),
+            ctx.stroke(
+                re(control_2_point),
+                <span class="kw-2">&amp;</span>PaintBrush::Color(druid::Color::OLIVE),
                 <span class="number">8.</span>,
             );
-            <span class="ident">ctx</span>.<span class="ident">stroke</span>(<span class="ident">re</span>(<span class="ident">end_point</span>), <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">druid::Color::GREEN</span>), <span class="number">8.</span>);
+            ctx.stroke(re(end_point), <span class="kw-2">&amp;</span>PaintBrush::Color(druid::Color::GREEN), <span class="number">8.</span>);
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">druid::WidgetId</span><span class="op">&gt;</span> {
-        <span class="prelude-val">None</span>
-    }
+    <span class="kw">fn </span>id(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;druid::WidgetId&gt; {
+        <span class="prelude-val">None
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">type_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> {
-        <span class="ident">std::any::type_name</span>::<span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>()
+    <span class="kw">fn </span>type_name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str {
+        std::any::type_name::&lt;<span class="self">Self</span>&gt;()
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

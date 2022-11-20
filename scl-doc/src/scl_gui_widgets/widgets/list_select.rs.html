@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/list_select.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>list_select.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/list_select.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>list_select.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -243,250 +243,250 @@
 <span id="243">243</span>
 <span id="244">244</span>
 <span id="245">245</span>
-</pre><pre class="rust"><code><span class="doccomment">//! 一个列表项目组件，修改自 [`druid`]</span>
+</pre><pre class="rust"><code><span class="doccomment">//! 一个列表项目组件，修改自 [`druid`]
 
-<span class="kw">use</span> <span class="ident">druid</span>::{
-    <span class="ident">keyboard_types::Key</span>,
-    <span class="ident">theme</span>,
-    <span class="ident">widget</span>::{<span class="ident">Controller</span>, <span class="ident">CrossAxisAlignment</span>, <span class="ident">Flex</span>, <span class="ident">Label</span>, <span class="ident">LabelText</span>},
-    <span class="ident">BoxConstraints</span>, <span class="ident">Data</span>, <span class="ident">Env</span>, <span class="ident">Event</span>, <span class="ident">EventCtx</span>, <span class="ident">LayoutCtx</span>, <span class="ident">LifeCycle</span>, <span class="ident">LifeCycleCtx</span>, <span class="ident">LinearGradient</span>,
-    <span class="ident">PaintCtx</span>, <span class="ident">RenderContext</span>, <span class="ident">Size</span>, <span class="ident">UnitPoint</span>, <span class="ident">UpdateCtx</span>, <span class="ident">Widget</span>,
+</span><span class="kw">use </span>druid::{
+    keyboard_types::Key,
+    theme,
+    widget::{Controller, CrossAxisAlignment, Flex, Label, LabelText},
+    BoxConstraints, Data, Env, Event, EventCtx, LayoutCtx, LifeCycle, LifeCycleCtx, LinearGradient,
+    PaintCtx, RenderContext, Size, UnitPoint, UpdateCtx, Widget,
 };
 
-<span class="comment">// added padding between the edges of the widget and the text.</span>
-<span class="kw">const</span> <span class="ident">LABEL_X_PADDING</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="number">8.0</span>;
+<span class="comment">// added padding between the edges of the widget and the text.
+</span><span class="kw">const </span>LABEL_X_PADDING: f64 = <span class="number">8.0</span>;
 
-<span class="doccomment">/// Builds a simple list selection widget, for selecting a single value out of a list.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ListSelect</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Internal widget data.</span>
-    <span class="ident">widget</span>: <span class="ident">Flex</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// A controller handling item selection.</span>
-    <span class="ident">controller</span>: <span class="ident">ListSelectController</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Builds a simple list selection widget, for selecting a single value out of a list.
+</span><span class="kw">pub struct </span>ListSelect&lt;T&gt; {
+    <span class="doccomment">/// Internal widget data.
+    </span>widget: Flex&lt;T&gt;,
+    <span class="doccomment">/// A controller handling item selection.
+    </span>controller: ListSelectController&lt;T&gt;,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Data</span><span class="op">&gt;</span> <span class="ident">ListSelect</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Given a vector of `(label_text, enum_variant)` tuples, create a list of items to select from</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(
-        <span class="ident">values</span>: <span class="kw">impl</span> <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (<span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">LabelText</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>, <span class="ident">T</span>)<span class="op">&gt;</span>,
-    ) -&gt; <span class="ident">ListSelect</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">col</span> <span class="op">=</span> <span class="ident">Flex::column</span>().<span class="ident">cross_axis_alignment</span>(<span class="ident">CrossAxisAlignment::Fill</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">variants</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-        <span class="kw">for</span> (<span class="ident">index</span>, (<span class="ident">label</span>, <span class="ident">variant</span>)) <span class="kw">in</span> <span class="ident">values</span>.<span class="ident">into_iter</span>().<span class="ident">enumerate</span>() {
-            <span class="ident">variants</span>.<span class="ident">insert</span>(<span class="ident">index</span>, <span class="ident">variant</span>.<span class="ident">clone</span>());
-            <span class="ident">col</span>.<span class="ident">add_child</span>(<span class="ident">ListItem::new</span>(<span class="ident">label</span>, <span class="ident">variant</span>));
+<span class="kw">impl</span>&lt;T: Data&gt; ListSelect&lt;T&gt; {
+    <span class="doccomment">/// Given a vector of `(label_text, enum_variant)` tuples, create a list of items to select from
+    </span><span class="kw">pub fn </span>new(
+        values: <span class="kw">impl </span>IntoIterator&lt;Item = (<span class="kw">impl </span>Into&lt;LabelText&lt;T&gt;&gt; + <span class="lifetime">&#39;static</span>, T)&gt;,
+    ) -&gt; ListSelect&lt;T&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>col = Flex::column().cross_axis_alignment(CrossAxisAlignment::Fill);
+        <span class="kw">let </span><span class="kw-2">mut </span>variants = Vec::new();
+        <span class="kw">for </span>(index, (label, variant)) <span class="kw">in </span>values.into_iter().enumerate() {
+            variants.insert(index, variant.clone());
+            col.add_child(ListItem::new(label, variant));
         }
 
-        <span class="ident">ListSelect</span> {
-            <span class="ident">widget</span>: <span class="ident">col</span>,
-            <span class="ident">controller</span>: <span class="ident">ListSelectController</span> {
-                <span class="ident">variants</span>,
-                <span class="ident">action</span>: <span class="prelude-val">None</span>,
+        ListSelect {
+            widget: col,
+            controller: ListSelectController {
+                variants,
+                action: <span class="prelude-val">None</span>,
             },
         }
     }
 
-    <span class="doccomment">/// Provide a closure to be called when an item is selected.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">on_select</span>(<span class="self">self</span>, <span class="ident">f</span>: <span class="kw">impl</span> <span class="ident">Fn</span>(<span class="kw-2">&amp;mut</span> <span class="ident">EventCtx</span>, <span class="kw-2">&amp;mut</span> <span class="ident">T</span>, <span class="kw-2">&amp;</span><span class="ident">Env</span>) <span class="op">+</span> <span class="lifetime">&#39;static</span>) -&gt; <span class="ident">ListSelect</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">widget</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">widget</span>;
-        <span class="kw">let</span> <span class="ident">ListSelectController</span> { <span class="ident">variants</span>, .. } <span class="op">=</span> <span class="self">self</span>.<span class="ident">controller</span>;
+    <span class="doccomment">/// Provide a closure to be called when an item is selected.
+    </span><span class="kw">pub fn </span>on_select(<span class="self">self</span>, f: <span class="kw">impl </span>Fn(<span class="kw-2">&amp;mut </span>EventCtx, <span class="kw-2">&amp;mut </span>T, <span class="kw-2">&amp;</span>Env) + <span class="lifetime">&#39;static</span>) -&gt; ListSelect&lt;T&gt; {
+        <span class="kw">let </span>widget = <span class="self">self</span>.widget;
+        <span class="kw">let </span>ListSelectController { variants, .. } = <span class="self">self</span>.controller;
 
-        <span class="ident">ListSelect</span> {
-            <span class="ident">widget</span>,
-            <span class="ident">controller</span>: <span class="ident">ListSelectController</span> {
-                <span class="ident">variants</span>,
-                <span class="ident">action</span>: <span class="prelude-val">Some</span>(<span class="ident">Box::new</span>(<span class="ident">f</span>)),
+        ListSelect {
+            widget,
+            controller: ListSelectController {
+                variants,
+                action: <span class="prelude-val">Some</span>(Box::new(f)),
             },
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Data</span><span class="op">&gt;</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ListSelect</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">event</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EventCtx</span>, <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">Event</span>, <span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="self">self</span>.<span class="ident">controller</span>
-            .<span class="ident">event</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">widget</span>, <span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>)
+<span class="kw">impl</span>&lt;T: Data&gt; Widget&lt;T&gt; <span class="kw">for </span>ListSelect&lt;T&gt; {
+    <span class="kw">fn </span>event(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>EventCtx, event: <span class="kw-2">&amp;</span>Event, data: <span class="kw-2">&amp;mut </span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="self">self</span>.controller
+            .event(<span class="kw-2">&amp;mut </span><span class="self">self</span>.widget, ctx, event, data, env)
     }
 
-    <span class="kw">fn</span> <span class="ident">lifecycle</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LifeCycleCtx</span>, <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">LifeCycle</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="self">self</span>.<span class="ident">controller</span>
-            .<span class="ident">lifecycle</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">widget</span>, <span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>)
+    <span class="kw">fn </span>lifecycle(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>LifeCycleCtx, event: <span class="kw-2">&amp;</span>LifeCycle, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="self">self</span>.controller
+            .lifecycle(<span class="kw-2">&amp;mut </span><span class="self">self</span>.widget, ctx, event, data, env)
     }
 
-    <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">UpdateCtx</span>, <span class="ident">old_data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="self">self</span>.<span class="ident">controller</span>
-            .<span class="ident">update</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">widget</span>, <span class="ident">ctx</span>, <span class="ident">old_data</span>, <span class="ident">data</span>, <span class="ident">env</span>)
+    <span class="kw">fn </span>update(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>UpdateCtx, old_data: <span class="kw-2">&amp;</span>T, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="self">self</span>.controller
+            .update(<span class="kw-2">&amp;mut </span><span class="self">self</span>.widget, ctx, old_data, data, env)
     }
 
-    <span class="kw">fn</span> <span class="ident">layout</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LayoutCtx</span>, <span class="ident">bc</span>: <span class="kw-2">&amp;</span><span class="ident">BoxConstraints</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) -&gt; <span class="ident">Size</span> {
-        <span class="self">self</span>.<span class="ident">widget</span>.<span class="ident">layout</span>(<span class="ident">ctx</span>, <span class="ident">bc</span>, <span class="ident">data</span>, <span class="ident">env</span>)
+    <span class="kw">fn </span>layout(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>LayoutCtx, bc: <span class="kw-2">&amp;</span>BoxConstraints, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) -&gt; Size {
+        <span class="self">self</span>.widget.layout(ctx, bc, data, env)
     }
 
-    <span class="kw">fn</span> <span class="ident">paint</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">PaintCtx</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="self">self</span>.<span class="ident">widget</span>.<span class="ident">paint</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>)
+    <span class="kw">fn </span>paint(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>PaintCtx, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="self">self</span>.widget.paint(ctx, data, env)
     }
 }
 
-<span class="kw">type</span> <span class="ident">ListSelectAction</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Fn</span>(<span class="kw-2">&amp;mut</span> <span class="ident">EventCtx</span>, <span class="kw-2">&amp;mut</span> <span class="ident">T</span>, <span class="kw-2">&amp;</span><span class="ident">Env</span>) <span class="op">+</span> <span class="lifetime">&#39;static</span><span class="op">&gt;</span>;
+<span class="kw">type </span>ListSelectAction&lt;T&gt; = Box&lt;<span class="kw">dyn </span>Fn(<span class="kw-2">&amp;mut </span>EventCtx, <span class="kw-2">&amp;mut </span>T, <span class="kw-2">&amp;</span>Env) + <span class="lifetime">&#39;static</span>&gt;;
 
-<span class="comment">// A Controller to handle arrow key in the list selection widget.</span>
-<span class="kw">struct</span> <span class="ident">ListSelectController</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">variants</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-    <span class="ident">action</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ListSelectAction</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="comment">// A Controller to handle arrow key in the list selection widget.
+</span><span class="kw">struct </span>ListSelectController&lt;T&gt; {
+    variants: Vec&lt;T&gt;,
+    action: <span class="prelude-ty">Option</span>&lt;ListSelectAction&lt;T&gt;&gt;,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Data</span><span class="op">&gt;</span> <span class="ident">ListSelectController</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">change_index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="ident">T</span>, <span class="ident">next_else_previous</span>: <span class="ident">bool</span>) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">mut</span> <span class="ident">index</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">variants</span>.<span class="ident">iter</span>().<span class="ident">position</span>(<span class="op">|</span><span class="ident">variant</span><span class="op">|</span> <span class="ident">variant</span>.<span class="ident">same</span>(<span class="ident">data</span>)) {
-            <span class="kw">if</span> <span class="ident">next_else_previous</span> {
-                <span class="ident">index</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">index</span> <span class="op">&gt;</span> <span class="number">0</span> {
-                <span class="ident">index</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>
-            }
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">new_data</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">variants</span>.<span class="ident">get</span>(<span class="ident">index</span>) {
-                <span class="kw-2">*</span><span class="ident">data</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">new_data</span>).<span class="ident">clone</span>();
+<span class="kw">impl</span>&lt;T: Data&gt; ListSelectController&lt;T&gt; {
+    <span class="kw">fn </span>change_index(<span class="kw-2">&amp;</span><span class="self">self</span>, data: <span class="kw-2">&amp;mut </span>T, next_else_previous: bool) {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">mut </span>index) = <span class="self">self</span>.variants.iter().position(|variant| variant.same(data)) {
+            <span class="kw">if </span>next_else_previous {
+                index += <span class="number">1
+            </span>} <span class="kw">else if </span>index &gt; <span class="number">0 </span>{
+                index -= <span class="number">1
+            </span>}
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(new_data) = <span class="self">self</span>.variants.get(index) {
+                <span class="kw-2">*</span>data = (<span class="kw-2">*</span>new_data).clone();
             }
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Data</span><span class="op">&gt;</span> <span class="ident">Controller</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Flex</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ListSelectController</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">event</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">child</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Flex</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-        <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EventCtx</span>,
-        <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">Event</span>,
-        <span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="ident">T</span>,
-        <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>,
+<span class="kw">impl</span>&lt;T: Data&gt; Controller&lt;T, Flex&lt;T&gt;&gt; <span class="kw">for </span>ListSelectController&lt;T&gt; {
+    <span class="kw">fn </span>event(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        child: <span class="kw-2">&amp;mut </span>Flex&lt;T&gt;,
+        ctx: <span class="kw-2">&amp;mut </span>EventCtx,
+        event: <span class="kw-2">&amp;</span>Event,
+        data: <span class="kw-2">&amp;mut </span>T,
+        env: <span class="kw-2">&amp;</span>Env,
     ) {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">selected</span> <span class="op">=</span> <span class="bool-val">false</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>selected = <span class="bool-val">false</span>;
 
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Event::MouseDown</span>(<span class="kw">_</span>) <span class="op">=</span> <span class="ident">event</span> {
-            <span class="ident">ctx</span>.<span class="ident">request_focus</span>();
+        <span class="kw">if let </span>Event::MouseDown(<span class="kw">_</span>) = event {
+            ctx.request_focus();
         }
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Event::MouseUp</span>(<span class="kw">_</span>) <span class="op">=</span> <span class="ident">event</span> {
-            <span class="ident">selected</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">is_hot</span>() <span class="op">&amp;&amp;</span> <span class="ident">ctx</span>.<span class="ident">has_focus</span>();
+        <span class="kw">if let </span>Event::MouseUp(<span class="kw">_</span>) = event {
+            selected = ctx.is_hot() &amp;&amp; ctx.has_focus();
         }
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Event::KeyDown</span>(<span class="ident">key_event</span>) <span class="op">=</span> <span class="ident">event</span> {
-            <span class="kw">match</span> <span class="ident">key_event</span>.<span class="ident">key</span> {
-                <span class="ident">Key::ArrowUp</span> =&gt; {
-                    <span class="ident">selected</span> <span class="op">=</span> <span class="bool-val">true</span>;
-                    <span class="self">self</span>.<span class="ident">change_index</span>(<span class="ident">data</span>, <span class="bool-val">false</span>);
-                    <span class="ident">ctx</span>.<span class="ident">request_update</span>();
+        <span class="kw">if let </span>Event::KeyDown(key_event) = event {
+            <span class="kw">match </span>key_event.key {
+                Key::ArrowUp =&gt; {
+                    selected = <span class="bool-val">true</span>;
+                    <span class="self">self</span>.change_index(data, <span class="bool-val">false</span>);
+                    ctx.request_update();
                 }
-                <span class="ident">Key::ArrowDown</span> =&gt; {
-                    <span class="ident">selected</span> <span class="op">=</span> <span class="bool-val">true</span>;
-                    <span class="self">self</span>.<span class="ident">change_index</span>(<span class="ident">data</span>, <span class="bool-val">true</span>);
-                    <span class="ident">ctx</span>.<span class="ident">request_update</span>();
+                Key::ArrowDown =&gt; {
+                    selected = <span class="bool-val">true</span>;
+                    <span class="self">self</span>.change_index(data, <span class="bool-val">true</span>);
+                    ctx.request_update();
                 }
-                <span class="kw">_</span> =&gt; {}
+                <span class="kw">_ </span>=&gt; {}
             }
-        } <span class="kw">else</span> {
-            <span class="ident">child</span>.<span class="ident">event</span>(<span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>)
+        } <span class="kw">else </span>{
+            child.event(ctx, event, data, env)
         }
 
-        <span class="comment">// fire the callback if a valid index was selected</span>
-        <span class="kw">if</span> <span class="ident">selected</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">cb</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">action</span> {
-                <span class="ident">cb</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>);
+        <span class="comment">// fire the callback if a valid index was selected
+        </span><span class="kw">if </span>selected {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(cb) = <span class="kw-2">&amp;</span><span class="self">self</span>.action {
+                cb(ctx, data, env);
             }
         }
     }
 }
 
-<span class="doccomment">/// A single list item.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ListItem</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="comment">// Ultimately this shall be able to display either a label, a label with an icon, or a single icon</span>
-    <span class="ident">variant</span>: <span class="ident">T</span>,
-    <span class="ident">child_label</span>: <span class="ident">Label</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-    <span class="ident">label_y</span>: <span class="ident">f64</span>,
+<span class="doccomment">/// A single list item.
+</span><span class="kw">pub struct </span>ListItem&lt;T&gt; {
+    <span class="comment">// Ultimately this shall be able to display either a label, a label with an icon, or a single icon
+    </span>variant: T,
+    child_label: Label&lt;T&gt;,
+    label_y: f64,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Data</span><span class="op">&gt;</span> <span class="ident">ListItem</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Create a single ListItem from label text and an enum variant</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">label</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">LabelText</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">variant</span>: <span class="ident">T</span>) -&gt; <span class="ident">ListItem</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="ident">ListItem</span> {
-            <span class="ident">variant</span>,
-            <span class="ident">child_label</span>: <span class="ident">Label::new</span>(<span class="ident">label</span>),
-            <span class="ident">label_y</span>: <span class="number">0.0</span>,
+<span class="kw">impl</span>&lt;T: Data&gt; ListItem&lt;T&gt; {
+    <span class="doccomment">/// Create a single ListItem from label text and an enum variant
+    </span><span class="kw">pub fn </span>new(label: <span class="kw">impl </span>Into&lt;LabelText&lt;T&gt;&gt;, variant: T) -&gt; ListItem&lt;T&gt; {
+        ListItem {
+            variant,
+            child_label: Label::new(label),
+            label_y: <span class="number">0.0</span>,
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Data</span><span class="op">&gt;</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ListItem</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">event</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EventCtx</span>, <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">Event</span>, <span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="ident">T</span>, <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">match</span> <span class="ident">event</span> {
-            <span class="ident">Event::MouseDown</span>(<span class="kw">_</span>) =&gt; {
-                <span class="ident">ctx</span>.<span class="ident">set_active</span>(<span class="bool-val">true</span>);
-                <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+<span class="kw">impl</span>&lt;T: Data&gt; Widget&lt;T&gt; <span class="kw">for </span>ListItem&lt;T&gt; {
+    <span class="kw">fn </span>event(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>EventCtx, event: <span class="kw-2">&amp;</span>Event, data: <span class="kw-2">&amp;mut </span>T, _env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">match </span>event {
+            Event::MouseDown(<span class="kw">_</span>) =&gt; {
+                ctx.set_active(<span class="bool-val">true</span>);
+                ctx.request_paint();
             }
-            <span class="ident">Event::MouseUp</span>(<span class="kw">_</span>) =&gt; {
-                <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_active</span>() {
-                    <span class="ident">ctx</span>.<span class="ident">set_active</span>(<span class="bool-val">false</span>);
-                    <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_hot</span>() {
-                        <span class="kw-2">*</span><span class="ident">data</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">variant</span>.<span class="ident">clone</span>();
+            Event::MouseUp(<span class="kw">_</span>) =&gt; {
+                <span class="kw">if </span>ctx.is_active() {
+                    ctx.set_active(<span class="bool-val">false</span>);
+                    <span class="kw">if </span>ctx.is_hot() {
+                        <span class="kw-2">*</span>data = <span class="self">self</span>.variant.clone();
                     }
-                    <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+                    ctx.request_paint();
                 }
             }
-            <span class="kw">_</span> =&gt; (),
+            <span class="kw">_ </span>=&gt; (),
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">lifecycle</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LifeCycleCtx</span>, <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">LifeCycle</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="self">self</span>.<span class="ident">child_label</span>.<span class="ident">lifecycle</span>(<span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>);
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">LifeCycle::HotChanged</span>(<span class="kw">_</span>) <span class="op">=</span> <span class="ident">event</span> {
-            <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+    <span class="kw">fn </span>lifecycle(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>LifeCycleCtx, event: <span class="kw-2">&amp;</span>LifeCycle, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="self">self</span>.child_label.lifecycle(ctx, event, data, env);
+        <span class="kw">if let </span>LifeCycle::HotChanged(<span class="kw">_</span>) = event {
+            ctx.request_paint();
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">UpdateCtx</span>, <span class="ident">old_data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="self">self</span>.<span class="ident">child_label</span>.<span class="ident">update</span>(<span class="ident">ctx</span>, <span class="ident">old_data</span>, <span class="ident">data</span>, <span class="ident">env</span>);
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">old_data</span>.<span class="ident">same</span>(<span class="ident">data</span>) {
-            <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+    <span class="kw">fn </span>update(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>UpdateCtx, old_data: <span class="kw-2">&amp;</span>T, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="self">self</span>.child_label.update(ctx, old_data, data, env);
+        <span class="kw">if </span>!old_data.same(data) {
+            ctx.request_paint();
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">layout</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LayoutCtx</span>, <span class="ident">bc</span>: <span class="kw-2">&amp;</span><span class="ident">BoxConstraints</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) -&gt; <span class="ident">Size</span> {
-        <span class="kw">let</span> <span class="ident">label_size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">child_label</span>.<span class="ident">layout</span>(<span class="ident">ctx</span>, <span class="kw-2">&amp;</span><span class="ident">bc</span>.<span class="ident">loosen</span>(), <span class="ident">data</span>, <span class="ident">env</span>);
-        <span class="kw">let</span> <span class="ident">height</span> <span class="op">=</span> (<span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">theme::BASIC_WIDGET_HEIGHT</span>)
-            <span class="op">+</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">theme::WIDGET_PADDING_VERTICAL</span>))
-        .<span class="ident">max</span>(<span class="ident">label_size</span>.<span class="ident">height</span>);
-        <span class="self">self</span>.<span class="ident">label_y</span> <span class="op">=</span> (<span class="ident">height</span> <span class="op">-</span> <span class="ident">label_size</span>.<span class="ident">height</span>) <span class="op">/</span> <span class="number">2.0</span>;
-        <span class="ident">bc</span>.<span class="ident">constrain</span>(<span class="ident">Size::new</span>(<span class="ident">label_size</span>.<span class="ident">width</span> <span class="op">+</span> <span class="ident">LABEL_X_PADDING</span> <span class="op">*</span> <span class="number">2.0</span>, <span class="ident">height</span>))
+    <span class="kw">fn </span>layout(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>LayoutCtx, bc: <span class="kw-2">&amp;</span>BoxConstraints, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) -&gt; Size {
+        <span class="kw">let </span>label_size = <span class="self">self</span>.child_label.layout(ctx, <span class="kw-2">&amp;</span>bc.loosen(), data, env);
+        <span class="kw">let </span>height = (env.get(theme::BASIC_WIDGET_HEIGHT)
+            + env.get(theme::WIDGET_PADDING_VERTICAL))
+        .max(label_size.height);
+        <span class="self">self</span>.label_y = (height - label_size.height) / <span class="number">2.0</span>;
+        bc.constrain(Size::new(label_size.width + LABEL_X_PADDING * <span class="number">2.0</span>, height))
     }
 
-    <span class="kw">fn</span> <span class="ident">paint</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">PaintCtx</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">let</span> <span class="ident">border_width</span> <span class="op">=</span> <span class="number">1.0</span>;
-        <span class="kw">let</span> <span class="ident">rect</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">size</span>().<span class="ident">to_rect</span>().<span class="ident">inset</span>(<span class="op">-</span><span class="ident">border_width</span> <span class="op">/</span> <span class="number">2.0</span>);
+    <span class="kw">fn </span>paint(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>PaintCtx, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">let </span>border_width = <span class="number">1.0</span>;
+        <span class="kw">let </span>rect = ctx.size().to_rect().inset(-border_width / <span class="number">2.0</span>);
 
-        <span class="comment">// Paint the data in the primary color if we are selected</span>
-        <span class="kw">if</span> <span class="ident">data</span>.<span class="ident">same</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">variant</span>) {
-            <span class="kw">let</span> <span class="ident">background_gradient</span> <span class="op">=</span> <span class="ident">LinearGradient::new</span>(
-                <span class="ident">UnitPoint::TOP</span>,
-                <span class="ident">UnitPoint::BOTTOM</span>,
-                (<span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">theme::PRIMARY_LIGHT</span>), <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">theme::PRIMARY_DARK</span>)),
+        <span class="comment">// Paint the data in the primary color if we are selected
+        </span><span class="kw">if </span>data.same(<span class="kw-2">&amp;</span><span class="self">self</span>.variant) {
+            <span class="kw">let </span>background_gradient = LinearGradient::new(
+                UnitPoint::TOP,
+                UnitPoint::BOTTOM,
+                (env.get(theme::PRIMARY_LIGHT), env.get(theme::PRIMARY_DARK)),
             );
-            <span class="ident">ctx</span>.<span class="ident">fill</span>(<span class="ident">rect</span>, <span class="kw-2">&amp;</span><span class="ident">background_gradient</span>);
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_active</span>() {
-            <span class="kw">let</span> <span class="ident">background_gradient</span> <span class="op">=</span> <span class="ident">LinearGradient::new</span>(
-                <span class="ident">UnitPoint::TOP</span>,
-                <span class="ident">UnitPoint::BOTTOM</span>,
+            ctx.fill(rect, <span class="kw-2">&amp;</span>background_gradient);
+        } <span class="kw">else if </span>ctx.is_active() {
+            <span class="kw">let </span>background_gradient = LinearGradient::new(
+                UnitPoint::TOP,
+                UnitPoint::BOTTOM,
                 (
-                    <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">theme::BACKGROUND_LIGHT</span>),
-                    <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">theme::BACKGROUND_DARK</span>),
+                    env.get(theme::BACKGROUND_LIGHT),
+                    env.get(theme::BACKGROUND_DARK),
                 ),
             );
-            <span class="ident">ctx</span>.<span class="ident">fill</span>(<span class="ident">rect</span>, <span class="kw-2">&amp;</span><span class="ident">background_gradient</span>);
+            ctx.fill(rect, <span class="kw-2">&amp;</span>background_gradient);
         }
 
-        <span class="comment">// Paint a light rectangle around the item if hot</span>
-        <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_hot</span>() {
-            <span class="ident">ctx</span>.<span class="ident">stroke</span>(<span class="ident">rect</span>, <span class="kw-2">&amp;</span><span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">theme::BORDER_LIGHT</span>), <span class="number">1.</span>);
+        <span class="comment">// Paint a light rectangle around the item if hot
+        </span><span class="kw">if </span>ctx.is_hot() {
+            ctx.stroke(rect, <span class="kw-2">&amp;</span>env.get(theme::BORDER_LIGHT), <span class="number">1.</span>);
         }
 
-        <span class="comment">// Paint the text label</span>
-        <span class="self">self</span>.<span class="ident">child_label</span>
-            .<span class="ident">draw_at</span>(<span class="ident">ctx</span>, (<span class="ident">LABEL_X_PADDING</span>, <span class="self">self</span>.<span class="ident">label_y</span>));
+        <span class="comment">// Paint the text label
+        </span><span class="self">self</span>.child_label
+            .draw_at(ctx, (LABEL_X_PADDING, <span class="self">self</span>.label_y));
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

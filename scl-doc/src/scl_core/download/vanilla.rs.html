@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/download/vanilla.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>vanilla.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_core/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/download/vanilla.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>vanilla.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_core/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -648,655 +648,655 @@
 <span id="648">648</span>
 <span id="649">649</span>
 <span id="650">650</span>
-</pre><pre class="rust"><code><span class="doccomment">//! 原版游戏的下载模块</span>
+</pre><pre class="rust"><code><span class="doccomment">//! 原版游戏的下载模块
 
-<span class="kw">use</span> <span class="ident">std::path::Path</span>;
+</span><span class="kw">use </span>std::path::Path;
 
-<span class="kw">use</span> <span class="ident">anyhow::Context</span>;
-<span class="kw">use</span> <span class="ident">async_trait::async_trait</span>;
-<span class="kw">use</span> <span class="ident">inner_future</span>::{<span class="ident">fs::create_dir_all</span>, <span class="ident">io::AsyncWriteExt</span>};
+<span class="kw">use </span>anyhow::Context;
+<span class="kw">use </span>async_trait::async_trait;
+<span class="kw">use </span>inner_future::{fs::create_dir_all, io::AsyncWriteExt};
 
-<span class="kw">use</span> <span class="kw">super</span>::{
-    <span class="ident">structs</span>::{<span class="ident">AssetIndexes</span>, <span class="ident">VersionManifest</span>},
-    <span class="ident">DownloadSource</span>, <span class="ident">Downloader</span>,
+<span class="kw">use super</span>::{
+    structs::{AssetIndexes, VersionManifest},
+    DownloadSource, Downloader,
 };
-<span class="kw">use</span> <span class="kw">crate</span>::{
-    <span class="ident">download::VersionInfo</span>,
-    <span class="ident">prelude</span>::<span class="kw-2">*</span>,
-    <span class="ident">progress::Reporter</span>,
-    <span class="ident">utils::NATIVE_ARCH_LAZY</span>,
-    <span class="ident">version::structs</span>::{<span class="ident">Allowed</span>, <span class="ident">Library</span>, <span class="ident">VersionMeta</span>},
+<span class="kw">use crate</span>::{
+    download::VersionInfo,
+    prelude::<span class="kw-2">*</span>,
+    progress::Reporter,
+    utils::NATIVE_ARCH_LAZY,
+    version::structs::{Allowed, Library, VersionMeta},
 };
 
-<span class="doccomment">/// 一个用于下载安装原版的扩展特质，可以使用 [`crate::download::Downloader`] 来安装</span>
-<span class="attribute">#[<span class="ident">async_trait</span>]</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">VanillaDownloadExt</span>: <span class="ident">Sync</span> {
-    <span class="doccomment">/// 获取现在所有可下载版本</span>
-    <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_avaliable_vanilla_versions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">VersionManifest</span><span class="op">&gt;</span>;
+<span class="doccomment">/// 一个用于下载安装原版的扩展特质，可以使用 [`crate::download::Downloader`] 来安装
+</span><span class="attribute">#[async_trait]
+</span><span class="kw">pub trait </span>VanillaDownloadExt: Sync {
+    <span class="doccomment">/// 获取现在所有可下载版本
+    </span><span class="kw">async fn </span>get_avaliable_vanilla_versions(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; DynResult&lt;VersionManifest&gt;;
 
-    <span class="doccomment">/// 下载原版客户端 JAR 文件</span>
-    <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">download_vanilla_jar</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">save_path</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">sha1</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">DynResult</span>;
+    <span class="doccomment">/// 下载原版客户端 JAR 文件
+    </span><span class="kw">async fn </span>download_vanilla_jar(<span class="kw-2">&amp;</span><span class="self">self</span>, path: <span class="kw-2">&amp;</span>str, save_path: <span class="kw-2">&amp;</span>str, sha1: <span class="kw-2">&amp;</span>str) -&gt; DynResult;
 
-    <span class="doccomment">/// 下载一个依赖库，并存放到指定位置</span>
-    <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">download_library</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">sha1</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">save_path</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">DynResult</span>;
+    <span class="doccomment">/// 下载一个依赖库，并存放到指定位置
+    </span><span class="kw">async fn </span>download_library(<span class="kw-2">&amp;</span><span class="self">self</span>, sha1: <span class="kw-2">&amp;</span>str, path: <span class="kw-2">&amp;</span>str, save_path: <span class="kw-2">&amp;</span>str) -&gt; DynResult;
 
-    <span class="doccomment">/// 下载一组依赖库，安装位置由特质实现而定</span>
-    <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">download_libraries</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">libraries</span>: <span class="kw-2">&amp;</span>[<span class="ident">Library</span>]) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+    <span class="doccomment">/// 下载一组依赖库，安装位置由特质实现而定
+    </span><span class="kw">async fn </span>download_libraries(<span class="kw-2">&amp;</span><span class="self">self</span>, libraries: <span class="kw-2">&amp;</span>[Library]) -&gt; DynResult&lt;Vec&lt;String&gt;&gt;;
 
-    <span class="doccomment">/// 下载游戏资源索引</span>
-    <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">download_asset_index</span>(
+    <span class="doccomment">/// 下载游戏资源索引
+    </span><span class="kw">async fn </span>download_asset_index(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">url</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">save_path</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-    ) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">AssetIndexes</span><span class="op">&gt;</span>;
+        name: <span class="kw-2">&amp;</span>str,
+        url: <span class="kw-2">&amp;</span>str,
+        save_path: <span class="kw-2">&amp;</span>str,
+    ) -&gt; DynResult&lt;AssetIndexes&gt;;
 
-    <span class="doccomment">/// 下载一个游戏素材，并存放到指定位置</span>
-    <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">download_asset</span>(
+    <span class="doccomment">/// 下载一个游戏素材，并存放到指定位置
+    </span><span class="kw">async fn </span>download_asset(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">sha1</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">save_path</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">is_pre</span>: <span class="ident">bool</span>,
-        <span class="ident">r</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">impl</span> <span class="ident">Reporter</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="ident">DynResult</span>;
+        sha1: <span class="kw-2">&amp;</span>str,
+        name: <span class="kw-2">&amp;</span>str,
+        save_path: <span class="kw-2">&amp;</span>str,
+        is_pre: bool,
+        r: <span class="prelude-ty">Option</span>&lt;<span class="kw">impl </span>Reporter&gt;,
+    ) -&gt; DynResult;
 
-    <span class="doccomment">/// 下载一个游戏版本</span>
-    <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">download_vanilla</span>(
+    <span class="doccomment">/// 下载一个游戏版本
+    </span><span class="kw">async fn </span>download_vanilla(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">version_name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">version_meta</span>: <span class="kw-2">&amp;</span><span class="ident">VersionMeta</span>,
-        <span class="ident">is_repair</span>: <span class="ident">bool</span>,
-    ) -&gt; <span class="ident">DynResult</span>;
+        version_name: <span class="kw-2">&amp;</span>str,
+        version_meta: <span class="kw-2">&amp;</span>VersionMeta,
+        is_repair: bool,
+    ) -&gt; DynResult;
 
-    <span class="doccomment">/// 安装一个游戏版本</span>
-    <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">install_vanilla</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">version_name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">version_info</span>: <span class="kw-2">&amp;</span><span class="ident">VersionInfo</span>) -&gt; <span class="ident">DynResult</span>;
+    <span class="doccomment">/// 安装一个游戏版本
+    </span><span class="kw">async fn </span>install_vanilla(<span class="kw-2">&amp;</span><span class="self">self</span>, version_name: <span class="kw-2">&amp;</span>str, version_info: <span class="kw-2">&amp;</span>VersionInfo) -&gt; DynResult;
 }
 
-<span class="attribute">#[<span class="ident">async_trait</span>]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Reporter</span><span class="op">&gt;</span> <span class="ident">VanillaDownloadExt</span> <span class="kw">for</span> <span class="ident">Downloader</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
-    <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_avaliable_vanilla_versions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">VersionManifest</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::http::retry_get_json</span>(<span class="kw">match</span> <span class="self">self</span>.<span class="ident">source</span> {
-            <span class="ident">DownloadSource::Default</span> =&gt; {
-                <span class="string">&quot;https://piston-meta.mojang.com/mc/game/version_manifest.json&quot;</span>
-            }
-            <span class="ident">DownloadSource::BMCLAPI</span> =&gt; {
-                <span class="string">&quot;https://bmclapi2.bangbang93.com/mc/game/version_manifest.json&quot;</span>
-            }
-            <span class="ident">DownloadSource::MCBBS</span> =&gt; <span class="string">&quot;https://download.mcbbs.net/mc/game/version_manifest.json&quot;</span>,
-            <span class="kw">_</span> =&gt; <span class="string">&quot;https://piston-meta.mojang.com/mc/game/version_manifest.json&quot;</span>,
+<span class="attribute">#[async_trait]
+</span><span class="kw">impl</span>&lt;R: Reporter&gt; VanillaDownloadExt <span class="kw">for </span>Downloader&lt;R&gt; {
+    <span class="kw">async fn </span>get_avaliable_vanilla_versions(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; DynResult&lt;VersionManifest&gt; {
+        <span class="kw">let </span>res = <span class="kw">crate</span>::http::retry_get_json(<span class="kw">match </span><span class="self">self</span>.source {
+            DownloadSource::Default =&gt; {
+                <span class="string">&quot;https://piston-meta.mojang.com/mc/game/version_manifest.json&quot;
+            </span>}
+            DownloadSource::BMCLAPI =&gt; {
+                <span class="string">&quot;https://bmclapi2.bangbang93.com/mc/game/version_manifest.json&quot;
+            </span>}
+            DownloadSource::MCBBS =&gt; <span class="string">&quot;https://download.mcbbs.net/mc/game/version_manifest.json&quot;</span>,
+            <span class="kw">_ </span>=&gt; <span class="string">&quot;https://piston-meta.mojang.com/mc/game/version_manifest.json&quot;</span>,
         })
-        .<span class="kw">await</span>
-        .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;获取可用原版列表失败：{:?}&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="ident">res</span>)
+        .<span class="kw">await
+        </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;获取可用原版列表失败：{:?}&quot;</span>, e))<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(res)
     }
 
-    <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">download_vanilla_jar</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">save_path</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">_sha1</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">DynResult</span> {
-        <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">parallel_lock</span>.<span class="ident">acquire</span>().<span class="kw">await</span>;
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">reporter</span>.<span class="ident">sub</span>();
-        <span class="ident">r</span>.<span class="ident">add_max_progress</span>(<span class="number">1.</span>);
-        <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">save_path</span>[<span class="ident">save_path</span>.<span class="ident">rfind</span>(<span class="ident">std::path::is_separator</span>).<span class="ident">unwrap_or</span>(<span class="number">0</span>) <span class="op">+</span> <span class="number">1</span>..];
-        <span class="ident">r</span>.<span class="ident">set_message</span>(<span class="macro">format!</span>(<span class="string">&quot;正在下载原版 {}&quot;</span>, <span class="ident">name</span>));
-        <span class="ident">inner_future::fs::create_dir_all</span>(
-            <span class="kw-2">&amp;</span><span class="ident">save_path</span>[..<span class="ident">save_path</span>
-                .<span class="ident">rfind</span>(<span class="ident">std::path::is_separator</span>)
-                .<span class="ident">unwrap_or</span>(<span class="ident">save_path</span>.<span class="ident">len</span>())],
+    <span class="kw">async fn </span>download_vanilla_jar(<span class="kw-2">&amp;</span><span class="self">self</span>, path: <span class="kw-2">&amp;</span>str, save_path: <span class="kw-2">&amp;</span>str, _sha1: <span class="kw-2">&amp;</span>str) -&gt; DynResult {
+        <span class="kw">let </span>l = <span class="self">self</span>.parallel_lock.acquire().<span class="kw">await</span>;
+        <span class="kw">let </span>r = <span class="self">self</span>.reporter.sub();
+        r.add_max_progress(<span class="number">1.</span>);
+        <span class="kw">let </span>name = <span class="kw-2">&amp;</span>save_path[save_path.rfind(std::path::is_separator).unwrap_or(<span class="number">0</span>) + <span class="number">1</span>..];
+        r.set_message(<span class="macro">format!</span>(<span class="string">&quot;正在下载原版 {}&quot;</span>, name));
+        inner_future::fs::create_dir_all(
+            <span class="kw-2">&amp;</span>save_path[..save_path
+                .rfind(std::path::is_separator)
+                .unwrap_or(save_path.len())],
         )
         .<span class="kw">await</span><span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">url::Url</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">uris</span> <span class="op">=</span> [
-            <span class="kw">match</span> <span class="self">self</span>.<span class="ident">source</span> {
-                <span class="ident">DownloadSource::Default</span> =&gt; {
-                    <span class="macro">format!</span>(<span class="string">&quot;https://launcher.mojang.com{}&quot;</span>, <span class="ident">path</span>.<span class="ident">path</span>())
+        <span class="kw">let </span>path = path.parse::&lt;url::Url&gt;()<span class="question-mark">?</span>;
+        <span class="kw">let </span>uris = [
+            <span class="kw">match </span><span class="self">self</span>.source {
+                DownloadSource::Default =&gt; {
+                    <span class="macro">format!</span>(<span class="string">&quot;https://launcher.mojang.com{}&quot;</span>, path.path())
                 }
-                <span class="ident">DownloadSource::BMCLAPI</span> =&gt; {
-                    <span class="macro">format!</span>(<span class="string">&quot;https://bmclapi2.bangbang93.com{}&quot;</span>, <span class="ident">path</span>.<span class="ident">path</span>())
+                DownloadSource::BMCLAPI =&gt; {
+                    <span class="macro">format!</span>(<span class="string">&quot;https://bmclapi2.bangbang93.com{}&quot;</span>, path.path())
                 }
-                <span class="ident">DownloadSource::MCBBS</span> =&gt; <span class="macro">format!</span>(<span class="string">&quot;https://download.mcbbs.net{}&quot;</span>, <span class="ident">path</span>.<span class="ident">path</span>()),
-                <span class="kw">_</span> =&gt; <span class="macro">format!</span>(<span class="string">&quot;https://launcher.mojang.com{}&quot;</span>, <span class="ident">path</span>.<span class="ident">path</span>()),
+                DownloadSource::MCBBS =&gt; <span class="macro">format!</span>(<span class="string">&quot;https://download.mcbbs.net{}&quot;</span>, path.path()),
+                <span class="kw">_ </span>=&gt; <span class="macro">format!</span>(<span class="string">&quot;https://launcher.mojang.com{}&quot;</span>, path.path()),
             },
-            <span class="macro">format!</span>(<span class="string">&quot;https://bmclapi2.bangbang93.com{}&quot;</span>, <span class="ident">path</span>.<span class="ident">path</span>()),
-            <span class="macro">format!</span>(<span class="string">&quot;https://download.mcbbs.net{}&quot;</span>, <span class="ident">path</span>.<span class="ident">path</span>()),
-            <span class="macro">format!</span>(<span class="string">&quot;https://launcher.mojang.com{}&quot;</span>, <span class="ident">path</span>.<span class="ident">path</span>()),
+            <span class="macro">format!</span>(<span class="string">&quot;https://bmclapi2.bangbang93.com{}&quot;</span>, path.path()),
+            <span class="macro">format!</span>(<span class="string">&quot;https://download.mcbbs.net{}&quot;</span>, path.path()),
+            <span class="macro">format!</span>(<span class="string">&quot;https://launcher.mojang.com{}&quot;</span>, path.path()),
         ];
-        <span class="ident"><span class="kw">crate</span>::http::download</span>(<span class="kw-2">&amp;</span><span class="ident">uris</span>, <span class="ident">save_path</span>, <span class="number">0</span>)
-            .<span class="kw">await</span>
-            .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;下载原版游戏 Jar 失败：{:?}&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-        <span class="ident">r</span>.<span class="ident">add_progress</span>(<span class="number">1.</span>);
-        <span class="ident">drop</span>(<span class="ident">l</span>);
+        <span class="kw">crate</span>::http::download(<span class="kw-2">&amp;</span>uris, save_path, <span class="number">0</span>)
+            .<span class="kw">await
+            </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;下载原版游戏 Jar 失败：{:?}&quot;</span>, e))<span class="question-mark">?</span>;
+        r.add_progress(<span class="number">1.</span>);
+        drop(l);
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">download_library</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">sha1</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">save_path</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">DynResult</span> {
-        <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">parallel_lock</span>.<span class="ident">acquire</span>().<span class="kw">await</span>;
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">reporter</span>.<span class="ident">sub</span>();
-        <span class="kw">let</span> <span class="ident">full_path</span> <span class="op">=</span> <span class="macro">format!</span>(<span class="string">&quot;{}/{}&quot;</span>, <span class="ident">save_path</span>, <span class="ident">path</span>);
-        <span class="ident">r</span>.<span class="ident">set_message</span>(<span class="macro">format!</span>(<span class="string">&quot;正在下载原版库 {}&quot;</span>, <span class="ident">path</span>));
-        <span class="ident">r</span>.<span class="ident">add_max_progress</span>(<span class="number">1.</span>);
-        <span class="kw">if</span> <span class="ident">std::path::Path::new</span>(<span class="kw-2">&amp;</span><span class="ident">full_path</span>).<span class="ident">is_file</span>() {
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">verify_data</span> {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">inner_future::fs::OpenOptions::new</span>()
-                    .<span class="ident">read</span>(<span class="bool-val">true</span>)
-                    .<span class="ident">open</span>(<span class="kw-2">&amp;</span><span class="ident">full_path</span>)
+    <span class="kw">async fn </span>download_library(<span class="kw-2">&amp;</span><span class="self">self</span>, sha1: <span class="kw-2">&amp;</span>str, path: <span class="kw-2">&amp;</span>str, save_path: <span class="kw-2">&amp;</span>str) -&gt; DynResult {
+        <span class="kw">let </span>l = <span class="self">self</span>.parallel_lock.acquire().<span class="kw">await</span>;
+        <span class="kw">let </span>r = <span class="self">self</span>.reporter.sub();
+        <span class="kw">let </span>full_path = <span class="macro">format!</span>(<span class="string">&quot;{}/{}&quot;</span>, save_path, path);
+        r.set_message(<span class="macro">format!</span>(<span class="string">&quot;正在下载原版库 {}&quot;</span>, path));
+        r.add_max_progress(<span class="number">1.</span>);
+        <span class="kw">if </span>std::path::Path::new(<span class="kw-2">&amp;</span>full_path).is_file() {
+            <span class="kw">if </span><span class="self">self</span>.verify_data {
+                <span class="kw">let </span><span class="kw-2">mut </span>file = inner_future::fs::OpenOptions::new()
+                    .read(<span class="bool-val">true</span>)
+                    .open(<span class="kw-2">&amp;</span>full_path)
                     .<span class="kw">await</span><span class="question-mark">?</span>;
-                <span class="kw">let</span> <span class="ident">current_sha1</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::utils::get_data_sha1</span>(<span class="kw-2">&amp;mut</span> <span class="ident">file</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-                <span class="kw">if</span> <span class="ident">sha1</span> <span class="op">==</span> <span class="ident">current_sha1</span> {
-                    <span class="ident">r</span>.<span class="ident">add_progress</span>(<span class="number">1.</span>);
-                    <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+                <span class="kw">let </span>current_sha1 = <span class="kw">crate</span>::utils::get_data_sha1(<span class="kw-2">&amp;mut </span>file).<span class="kw">await</span><span class="question-mark">?</span>;
+                <span class="kw">if </span>sha1 == current_sha1 {
+                    r.add_progress(<span class="number">1.</span>);
+                    <span class="kw">return </span><span class="prelude-val">Ok</span>(());
                 }
-            } <span class="kw">else</span> {
-                <span class="ident">r</span>.<span class="ident">add_progress</span>(<span class="number">1.</span>);
-                <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+            } <span class="kw">else </span>{
+                r.add_progress(<span class="number">1.</span>);
+                <span class="kw">return </span><span class="prelude-val">Ok</span>(());
             }
-        } <span class="kw">else</span> {
-            <span class="ident">inner_future::fs::create_dir_all</span>(
-                <span class="kw-2">&amp;</span><span class="ident">full_path</span>[..<span class="ident">full_path</span>
-                    .<span class="ident">rfind</span>(<span class="ident">std::path::is_separator</span>)
-                    .<span class="ident">unwrap_or</span>(<span class="ident">full_path</span>.<span class="ident">len</span>())],
+        } <span class="kw">else </span>{
+            inner_future::fs::create_dir_all(
+                <span class="kw-2">&amp;</span>full_path[..full_path
+                    .rfind(std::path::is_separator)
+                    .unwrap_or(full_path.len())],
             )
             .<span class="kw">await</span><span class="question-mark">?</span>;
         }
-        <span class="kw">let</span> <span class="ident">default_uris</span> <span class="op">=</span> [
-            <span class="kw">match</span> <span class="self">self</span>.<span class="ident">source</span> {
-                <span class="ident">DownloadSource::Default</span> =&gt; {
-                    <span class="macro">format!</span>(<span class="string">&quot;https://libraries.minecraft.net/{}&quot;</span>, <span class="ident">path</span>)
+        <span class="kw">let </span>default_uris = [
+            <span class="kw">match </span><span class="self">self</span>.source {
+                DownloadSource::Default =&gt; {
+                    <span class="macro">format!</span>(<span class="string">&quot;https://libraries.minecraft.net/{}&quot;</span>, path)
                 }
-                <span class="ident">DownloadSource::BMCLAPI</span> =&gt; {
-                    <span class="macro">format!</span>(<span class="string">&quot;https://bmclapi2.bangbang93.com/maven/{}&quot;</span>, <span class="ident">path</span>)
+                DownloadSource::BMCLAPI =&gt; {
+                    <span class="macro">format!</span>(<span class="string">&quot;https://bmclapi2.bangbang93.com/maven/{}&quot;</span>, path)
                 }
-                <span class="ident">DownloadSource::MCBBS</span> =&gt; <span class="macro">format!</span>(<span class="string">&quot;https://download.mcbbs.net/maven/{}&quot;</span>, <span class="ident">path</span>),
-                <span class="kw">_</span> =&gt; <span class="macro">format!</span>(<span class="string">&quot;https://libraries.minecraft.net/{}&quot;</span>, <span class="ident">path</span>),
+                DownloadSource::MCBBS =&gt; <span class="macro">format!</span>(<span class="string">&quot;https://download.mcbbs.net/maven/{}&quot;</span>, path),
+                <span class="kw">_ </span>=&gt; <span class="macro">format!</span>(<span class="string">&quot;https://libraries.minecraft.net/{}&quot;</span>, path),
             },
-            <span class="macro">format!</span>(<span class="string">&quot;https://bmclapi2.bangbang93.com/maven/{}&quot;</span>, <span class="ident">path</span>),
-            <span class="macro">format!</span>(<span class="string">&quot;https://download.mcbbs.net/maven/{}&quot;</span>, <span class="ident">path</span>),
-            <span class="macro">format!</span>(<span class="string">&quot;https://libraries.minecraft.net/{}&quot;</span>, <span class="ident">path</span>),
+            <span class="macro">format!</span>(<span class="string">&quot;https://bmclapi2.bangbang93.com/maven/{}&quot;</span>, path),
+            <span class="macro">format!</span>(<span class="string">&quot;https://download.mcbbs.net/maven/{}&quot;</span>, path),
+            <span class="macro">format!</span>(<span class="string">&quot;https://libraries.minecraft.net/{}&quot;</span>, path),
         ];
-        <span class="ident"><span class="kw">crate</span>::http::download</span>(<span class="kw-2">&amp;</span><span class="ident">default_uris</span>, <span class="kw-2">&amp;</span><span class="ident">full_path</span>, <span class="number">0</span>)
-            .<span class="kw">await</span>
-            .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;下载库 {} 失败：{:?}&quot;</span>, <span class="ident">path</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-        <span class="ident">r</span>.<span class="ident">add_progress</span>(<span class="number">1.</span>);
-        <span class="ident">drop</span>(<span class="ident">l</span>);
+        <span class="kw">crate</span>::http::download(<span class="kw-2">&amp;</span>default_uris, <span class="kw-2">&amp;</span>full_path, <span class="number">0</span>)
+            .<span class="kw">await
+            </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;下载库 {} 失败：{:?}&quot;</span>, path, e))<span class="question-mark">?</span>;
+        r.add_progress(<span class="number">1.</span>);
+        drop(l);
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">download_asset_index</span>(
+    <span class="kw">async fn </span>download_asset_index(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">url</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">save_path</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-    ) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">AssetIndexes</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">reporter</span>.<span class="ident">sub</span>();
-        <span class="ident">r</span>.<span class="ident">set_message</span>(<span class="macro">format!</span>(<span class="string">&quot;正在下载原版资源索引 {}&quot;</span>, <span class="ident">name</span>));
-        <span class="kw">let</span> <span class="ident">full_path</span> <span class="op">=</span> <span class="macro">format!</span>(<span class="string">&quot;{}/indexes/{}.json&quot;</span>, <span class="ident">save_path</span>, <span class="ident">name</span>);
-        <span class="ident">inner_future::fs::create_dir_all</span>(
-            <span class="kw-2">&amp;</span><span class="ident">full_path</span>[..<span class="ident">full_path</span>
-                .<span class="ident">rfind</span>(<span class="ident">std::path::is_separator</span>)
-                .<span class="ident">unwrap_or</span>(<span class="ident">full_path</span>.<span class="ident">len</span>())],
+        name: <span class="kw-2">&amp;</span>str,
+        url: <span class="kw-2">&amp;</span>str,
+        save_path: <span class="kw-2">&amp;</span>str,
+    ) -&gt; DynResult&lt;AssetIndexes&gt; {
+        <span class="kw">let </span>r = <span class="self">self</span>.reporter.sub();
+        r.set_message(<span class="macro">format!</span>(<span class="string">&quot;正在下载原版资源索引 {}&quot;</span>, name));
+        <span class="kw">let </span>full_path = <span class="macro">format!</span>(<span class="string">&quot;{}/indexes/{}.json&quot;</span>, save_path, name);
+        inner_future::fs::create_dir_all(
+            <span class="kw-2">&amp;</span>full_path[..full_path
+                .rfind(std::path::is_separator)
+                .unwrap_or(full_path.len())],
         )
         .<span class="kw">await</span><span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> {
-            <span class="kw">let</span> <span class="ident">url</span> <span class="op">=</span> <span class="ident">url</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">url::Url</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">url</span>.<span class="ident">path</span>();
-            <span class="ident">p</span>.<span class="ident">to_owned</span>()
+        <span class="kw">let </span>p = {
+            <span class="kw">let </span>url = url.parse::&lt;url::Url&gt;()<span class="question-mark">?</span>;
+            <span class="kw">let </span>p = url.path();
+            p.to_owned()
         };
-        <span class="kw">let</span> <span class="ident">uris</span> <span class="op">=</span> [
-            <span class="kw">match</span> <span class="self">self</span>.<span class="ident">source</span> {
-                <span class="ident">DownloadSource::Default</span> =&gt; {
-                    <span class="macro">format!</span>(<span class="string">&quot;https://launchermeta.mojang.com{}&quot;</span>, <span class="ident">p</span>)
+        <span class="kw">let </span>uris = [
+            <span class="kw">match </span><span class="self">self</span>.source {
+                DownloadSource::Default =&gt; {
+                    <span class="macro">format!</span>(<span class="string">&quot;https://launchermeta.mojang.com{}&quot;</span>, p)
                 }
-                <span class="ident">DownloadSource::BMCLAPI</span> =&gt; {
-                    <span class="macro">format!</span>(<span class="string">&quot;https://bmclapi2.bangbang93.com{}&quot;</span>, <span class="ident">p</span>)
+                DownloadSource::BMCLAPI =&gt; {
+                    <span class="macro">format!</span>(<span class="string">&quot;https://bmclapi2.bangbang93.com{}&quot;</span>, p)
                 }
-                <span class="ident">DownloadSource::MCBBS</span> =&gt; <span class="macro">format!</span>(<span class="string">&quot;https://download.mcbbs.net{}&quot;</span>, <span class="ident">p</span>),
-                <span class="kw">_</span> =&gt; <span class="macro">format!</span>(<span class="string">&quot;https://launchermeta.mojang.com{}&quot;</span>, <span class="ident">p</span>),
+                DownloadSource::MCBBS =&gt; <span class="macro">format!</span>(<span class="string">&quot;https://download.mcbbs.net{}&quot;</span>, p),
+                <span class="kw">_ </span>=&gt; <span class="macro">format!</span>(<span class="string">&quot;https://launchermeta.mojang.com{}&quot;</span>, p),
             },
-            <span class="macro">format!</span>(<span class="string">&quot;https://bmclapi2.bangbang93.com{}&quot;</span>, <span class="ident">p</span>),
-            <span class="macro">format!</span>(<span class="string">&quot;https://download.mcbbs.net{}&quot;</span>, <span class="ident">p</span>),
-            <span class="macro">format!</span>(<span class="string">&quot;https://launchermeta.mojang.com{}&quot;</span>, <span class="ident">p</span>),
+            <span class="macro">format!</span>(<span class="string">&quot;https://bmclapi2.bangbang93.com{}&quot;</span>, p),
+            <span class="macro">format!</span>(<span class="string">&quot;https://download.mcbbs.net{}&quot;</span>, p),
+            <span class="macro">format!</span>(<span class="string">&quot;https://launchermeta.mojang.com{}&quot;</span>, p),
         ];
-        <span class="kw">for</span> <span class="ident">uri</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">uris</span> {
-            <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::http::retry_get_bytes</span>(<span class="ident">uri</span>).<span class="kw">await</span>;
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">res</span>) <span class="op">=</span> <span class="ident">res</span> {
-                <span class="ident">inner_future::fs::write</span>(<span class="ident">full_path</span>, <span class="kw-2">&amp;</span><span class="ident">res</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-                <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">serde_json::from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">res</span>)<span class="question-mark">?</span>);
+        <span class="kw">for </span>uri <span class="kw">in </span><span class="kw-2">&amp;</span>uris {
+            <span class="kw">let </span>res = <span class="kw">crate</span>::http::retry_get_bytes(uri).<span class="kw">await</span>;
+            <span class="kw">if let </span><span class="prelude-val">Ok</span>(res) = res {
+                inner_future::fs::write(full_path, <span class="kw-2">&amp;</span>res).<span class="kw">await</span><span class="question-mark">?</span>;
+                <span class="kw">return </span><span class="prelude-val">Ok</span>(serde_json::from_slice(<span class="kw-2">&amp;</span>res)<span class="question-mark">?</span>);
             }
         }
-        <span class="macro">anyhow::bail!</span>(<span class="string">&quot;获取素材索引失败，已尝试的链接：{}&quot;</span>, <span class="ident">uris</span>.<span class="ident">join</span>(<span class="string">&quot;\n&quot;</span>))
+        <span class="macro">anyhow::bail!</span>(<span class="string">&quot;获取素材索引失败，已尝试的链接：{}&quot;</span>, uris.join(<span class="string">&quot;\n&quot;</span>))
     }
-    <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">download_asset</span>(
+    <span class="kw">async fn </span>download_asset(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">sha1</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">save_path</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">is_pre</span>: <span class="ident">bool</span>,
-        <span class="ident">r</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">impl</span> <span class="ident">Reporter</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="ident">DynResult</span> {
-        <span class="kw">let</span> <span class="ident">sub_hash</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">sha1</span>[..<span class="number">2</span>];
-        <span class="kw">let</span> <span class="ident">full_path</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">is_pre</span> {
-            <span class="macro">format!</span>(<span class="string">&quot;{}/../virtual/pre-1.6/{}&quot;</span>, <span class="ident">save_path</span>, <span class="ident">name</span>)
-        } <span class="kw">else</span> {
-            <span class="macro">format!</span>(<span class="string">&quot;{}/{}/{}&quot;</span>, <span class="ident">save_path</span>, <span class="ident">sub_hash</span>, <span class="ident">sha1</span>)
+        sha1: <span class="kw-2">&amp;</span>str,
+        name: <span class="kw-2">&amp;</span>str,
+        save_path: <span class="kw-2">&amp;</span>str,
+        is_pre: bool,
+        r: <span class="prelude-ty">Option</span>&lt;<span class="kw">impl </span>Reporter&gt;,
+    ) -&gt; DynResult {
+        <span class="kw">let </span>sub_hash = <span class="kw-2">&amp;</span>sha1[..<span class="number">2</span>];
+        <span class="kw">let </span>full_path = <span class="kw">if </span>is_pre {
+            <span class="macro">format!</span>(<span class="string">&quot;{}/../virtual/pre-1.6/{}&quot;</span>, save_path, name)
+        } <span class="kw">else </span>{
+            <span class="macro">format!</span>(<span class="string">&quot;{}/{}/{}&quot;</span>, save_path, sub_hash, sha1)
         };
 
-        <span class="ident">r</span>.<span class="ident">set_message</span>(<span class="macro">format!</span>(<span class="string">&quot;正在下载原版资源 {}&quot;</span>, <span class="ident">name</span>));
-        <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">parallel_lock</span>.<span class="ident">acquire</span>().<span class="kw">await</span>;
-        <span class="kw">if</span> <span class="kw">if</span> <span class="ident">is_pre</span> {
-            <span class="ident">Path::new</span>(<span class="kw-2">&amp;</span><span class="ident">full_path</span>).<span class="ident">exists</span>()
-        } <span class="kw">else</span> {
-            <span class="ident">is_asset_exists</span>(<span class="ident">sha1</span>, <span class="ident">save_path</span>)
+        r.set_message(<span class="macro">format!</span>(<span class="string">&quot;正在下载原版资源 {}&quot;</span>, name));
+        <span class="kw">let </span>l = <span class="self">self</span>.parallel_lock.acquire().<span class="kw">await</span>;
+        <span class="kw">if if </span>is_pre {
+            Path::new(<span class="kw-2">&amp;</span>full_path).exists()
+        } <span class="kw">else </span>{
+            is_asset_exists(sha1, save_path)
         } {
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">verify_data</span> {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">inner_future::fs::OpenOptions::new</span>()
-                    .<span class="ident">read</span>(<span class="bool-val">true</span>)
-                    .<span class="ident">open</span>(<span class="kw-2">&amp;</span><span class="ident">full_path</span>)
+            <span class="kw">if </span><span class="self">self</span>.verify_data {
+                <span class="kw">let </span><span class="kw-2">mut </span>file = inner_future::fs::OpenOptions::new()
+                    .read(<span class="bool-val">true</span>)
+                    .open(<span class="kw-2">&amp;</span>full_path)
                     .<span class="kw">await</span><span class="question-mark">?</span>;
-                <span class="kw">let</span> <span class="ident">current_sha1</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::utils::get_data_sha1</span>(<span class="kw-2">&amp;mut</span> <span class="ident">file</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-                <span class="kw">if</span> <span class="ident">sha1</span> <span class="op">==</span> <span class="ident">current_sha1</span> {
-                    <span class="ident">r</span>.<span class="ident">add_progress</span>(<span class="number">1.</span>);
-                    <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+                <span class="kw">let </span>current_sha1 = <span class="kw">crate</span>::utils::get_data_sha1(<span class="kw-2">&amp;mut </span>file).<span class="kw">await</span><span class="question-mark">?</span>;
+                <span class="kw">if </span>sha1 == current_sha1 {
+                    r.add_progress(<span class="number">1.</span>);
+                    <span class="kw">return </span><span class="prelude-val">Ok</span>(());
                 }
-            } <span class="kw">else</span> {
-                <span class="ident">r</span>.<span class="ident">add_progress</span>(<span class="number">1.</span>);
-                <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+            } <span class="kw">else </span>{
+                r.add_progress(<span class="number">1.</span>);
+                <span class="kw">return </span><span class="prelude-val">Ok</span>(());
             }
         }
-        <span class="ident">inner_future::fs::create_dir_all</span>(
-            <span class="kw-2">&amp;</span><span class="ident">full_path</span>[..<span class="ident">full_path</span>
-                .<span class="ident">rfind</span>(<span class="ident">std::path::is_separator</span>)
-                .<span class="ident">unwrap_or</span>(<span class="ident">full_path</span>.<span class="ident">len</span>())],
+        inner_future::fs::create_dir_all(
+            <span class="kw-2">&amp;</span>full_path[..full_path
+                .rfind(std::path::is_separator)
+                .unwrap_or(full_path.len())],
         )
         .<span class="kw">await</span><span class="question-mark">?</span>;
 
-        <span class="kw">let</span> <span class="ident">uris</span> <span class="op">=</span> [
-            <span class="kw">match</span> <span class="self">self</span>.<span class="ident">source</span> {
-                <span class="ident">DownloadSource::Default</span> =&gt; {
+        <span class="kw">let </span>uris = [
+            <span class="kw">match </span><span class="self">self</span>.source {
+                DownloadSource::Default =&gt; {
                     <span class="macro">format!</span>(
                         <span class="string">&quot;https://resources.download.minecraft.net/{}/{}&quot;</span>,
-                        <span class="ident">sub_hash</span>, <span class="ident">sha1</span>
+                        sub_hash, sha1
                     )
                 }
-                <span class="ident">DownloadSource::BMCLAPI</span> =&gt; {
+                DownloadSource::BMCLAPI =&gt; {
                     <span class="macro">format!</span>(
                         <span class="string">&quot;https://bmclapi2.bangbang93.com/assets/{}/{}&quot;</span>,
-                        <span class="ident">sub_hash</span>, <span class="ident">sha1</span>
+                        sub_hash, sha1
                     )
                 }
-                <span class="ident">DownloadSource::MCBBS</span> =&gt; {
-                    <span class="macro">format!</span>(<span class="string">&quot;https://download.mcbbs.net/assets/{}/{}&quot;</span>, <span class="ident">sub_hash</span>, <span class="ident">sha1</span>)
+                DownloadSource::MCBBS =&gt; {
+                    <span class="macro">format!</span>(<span class="string">&quot;https://download.mcbbs.net/assets/{}/{}&quot;</span>, sub_hash, sha1)
                 }
-                <span class="kw">_</span> =&gt; <span class="macro">format!</span>(
+                <span class="kw">_ </span>=&gt; <span class="macro">format!</span>(
                     <span class="string">&quot;https://resources.download.minecraft.net/{}/{}&quot;</span>,
-                    <span class="ident">sub_hash</span>, <span class="ident">sha1</span>
+                    sub_hash, sha1
                 ),
             },
             <span class="macro">format!</span>(
                 <span class="string">&quot;https://bmclapi2.bangbang93.com/assets/{}/{}&quot;</span>,
-                <span class="ident">sub_hash</span>, <span class="ident">sha1</span>
+                sub_hash, sha1
             ),
-            <span class="macro">format!</span>(<span class="string">&quot;https://download.mcbbs.net/assets/{}/{}&quot;</span>, <span class="ident">sub_hash</span>, <span class="ident">sha1</span>),
+            <span class="macro">format!</span>(<span class="string">&quot;https://download.mcbbs.net/assets/{}/{}&quot;</span>, sub_hash, sha1),
             <span class="macro">format!</span>(
                 <span class="string">&quot;https://resources.download.minecraft.net/{}/{}&quot;</span>,
-                <span class="ident">sub_hash</span>, <span class="ident">sha1</span>
+                sub_hash, sha1
             ),
         ];
-        <span class="ident"><span class="kw">crate</span>::http::download</span>(<span class="kw-2">&amp;</span><span class="ident">uris</span>, <span class="kw-2">&amp;</span><span class="ident">full_path</span>, <span class="number">0</span>)
-            .<span class="kw">await</span>
-            .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> {
+        <span class="kw">crate</span>::http::download(<span class="kw-2">&amp;</span>uris, <span class="kw-2">&amp;</span>full_path, <span class="number">0</span>)
+            .<span class="kw">await
+            </span>.map_err(|e| {
                 <span class="macro">anyhow::anyhow!</span>(
                     <span class="string">&quot;下载资源文件失败 {:?}，已尝试的链接：{}&quot;</span>,
-                    <span class="ident">e</span>,
-                    <span class="ident">uris</span>.<span class="ident">join</span>(<span class="string">&quot;\n&quot;</span>)
+                    e,
+                    uris.join(<span class="string">&quot;\n&quot;</span>)
                 )
             })<span class="question-mark">?</span>;
-        <span class="ident">r</span>.<span class="ident">add_progress</span>(<span class="number">1.</span>);
-        <span class="ident">drop</span>(<span class="ident">l</span>);
+        r.add_progress(<span class="number">1.</span>);
+        drop(l);
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">download_libraries</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">libraries</span>: <span class="kw-2">&amp;</span>[<span class="ident">Library</span>]) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="comment">// Libraries</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_libraries_size</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">native_jars</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="ident">libraries</span>.<span class="ident">len</span>());
+    <span class="kw">async fn </span>download_libraries(<span class="kw-2">&amp;</span><span class="self">self</span>, libraries: <span class="kw-2">&amp;</span>[Library]) -&gt; DynResult&lt;Vec&lt;String&gt;&gt; {
+        <span class="comment">// Libraries
+        </span><span class="kw">let </span><span class="kw-2">mut </span>_libraries_size = <span class="number">0</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>native_jars = Vec::with_capacity(libraries.len());
 
-        <span class="kw">let</span> <span class="ident">lr</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">reporter</span>.<span class="ident">sub</span>();
-        <span class="ident">lr</span>.<span class="ident">set_message</span>(<span class="string">&quot;正在检索并安装需要安装的依赖库&quot;</span>.<span class="ident">into</span>());
+        <span class="kw">let </span>lr = <span class="self">self</span>.reporter.sub();
+        lr.set_message(<span class="string">&quot;正在检索并安装需要安装的依赖库&quot;</span>.into());
 
-        <span class="comment">// 截止至 1.19.2 原生库的后缀有以下类型：</span>
-        <span class="comment">// :natives-windows</span>
-        <span class="comment">// :natives-windows-x86</span>
-        <span class="comment">// :natives-linux</span>
-        <span class="comment">// :natives-macos</span>
-        <span class="comment">// :natives-macos-arm64</span>
+        <span class="comment">// 截止至 1.19.2 原生库的后缀有以下类型：
+        // :natives-windows
+        // :natives-windows-x86
+        // :natives-linux
+        // :natives-macos
+        // :natives-macos-arm64
 
-        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_variables</span>)]</span>
-        <span class="kw">let</span> <span class="ident">native_postfixes</span>: <span class="kw-2">&amp;</span>[<span class="ident">String</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[<span class="macro">format!</span>(<span class="string">&quot;:natives-{}&quot;</span>, <span class="ident"><span class="kw">crate</span>::utils::TARGET_OS</span>)];
+        </span><span class="attribute">#[allow(unused_variables)]
+        </span><span class="kw">let </span>native_postfixes: <span class="kw-2">&amp;</span>[String] = <span class="kw-2">&amp;</span>[<span class="macro">format!</span>(<span class="string">&quot;:natives-{}&quot;</span>, <span class="kw">crate</span>::utils::TARGET_OS)];
 
-        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">windows</span>)]</span>
-        <span class="kw">let</span> <span class="ident">native_postfixes</span>: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span><span class="ident">str</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[<span class="string">&quot;:natives-windows&quot;</span>, <span class="string">&quot;:natives-windows-x86&quot;</span>];
+        <span class="attribute">#[cfg(windows)]
+        </span><span class="kw">let </span>native_postfixes: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span>str] = <span class="kw-2">&amp;</span>[<span class="string">&quot;:natives-windows&quot;</span>, <span class="string">&quot;:natives-windows-x86&quot;</span>];
 
-        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>, <span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;aarch64&quot;</span>))]</span>
-        <span class="kw">let</span> <span class="ident">native_postfixes</span>: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span><span class="ident">str</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[<span class="string">&quot;:natives-macos-arm64&quot;</span>];
+        <span class="attribute">#[cfg(all(target_os = <span class="string">&quot;macos&quot;</span>, target_arch = <span class="string">&quot;aarch64&quot;</span>))]
+        </span><span class="kw">let </span>native_postfixes: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span>str] = <span class="kw-2">&amp;</span>[<span class="string">&quot;:natives-macos-arm64&quot;</span>];
 
-        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>, <span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>))]</span>
-        <span class="kw">let</span> <span class="ident">native_postfixes</span>: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span><span class="ident">str</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[<span class="string">&quot;:natives-macos&quot;</span>];
+        <span class="attribute">#[cfg(all(target_os = <span class="string">&quot;macos&quot;</span>, target_arch = <span class="string">&quot;x86_64&quot;</span>))]
+        </span><span class="kw">let </span>native_postfixes: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span>str] = <span class="kw-2">&amp;</span>[<span class="string">&quot;:natives-macos&quot;</span>];
 
-        <span class="kw">let</span> <span class="ident">libraries_threads</span> <span class="op">=</span> <span class="ident">libraries</span>.<span class="ident">iter</span>().<span class="ident">filter_map</span>(<span class="op">|</span><span class="ident">lib</span><span class="op">|</span> {
-            <span class="kw">if</span> <span class="ident">lib</span>.<span class="ident">rules</span>.<span class="ident">is_allowed</span>() {
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">downloads</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">lib</span>.<span class="ident">downloads</span> {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">natives</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">lib</span>.<span class="ident">natives</span> {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">classifier</span>) <span class="op">=</span> <span class="ident">natives</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::utils::TARGET_OS</span>) {
-                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">classifiers</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">downloads</span>.<span class="ident">classifiers</span> {
-                                <span class="kw">let</span> <span class="ident">classifier</span> <span class="op">=</span>
-                                    <span class="ident">classifier</span>.<span class="ident">replace</span>(<span class="string">&quot;${arch}&quot;</span>, <span class="ident">NATIVE_ARCH_LAZY</span>.<span class="ident">as_ref</span>());
-                                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">artifact</span>) <span class="op">=</span> <span class="ident">classifiers</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">classifier</span>) {
-                                    <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="macro">format!</span>(
+        <span class="kw">let </span>libraries_threads = libraries.iter().filter_map(|lib| {
+            <span class="kw">if </span>lib.rules.is_allowed() {
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(downloads) = <span class="kw-2">&amp;</span>lib.downloads {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(natives) = <span class="kw-2">&amp;</span>lib.natives {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(classifier) = natives.get(<span class="kw">crate</span>::utils::TARGET_OS) {
+                            <span class="kw">if let </span><span class="prelude-val">Some</span>(classifiers) = <span class="kw-2">&amp;</span>downloads.classifiers {
+                                <span class="kw">let </span>classifier =
+                                    classifier.replace(<span class="string">&quot;${arch}&quot;</span>, NATIVE_ARCH_LAZY.as_ref());
+                                <span class="kw">if let </span><span class="prelude-val">Some</span>(artifact) = classifiers.get(<span class="kw-2">&amp;</span>classifier) {
+                                    <span class="kw">let </span>p = <span class="macro">format!</span>(
                                         <span class="string">&quot;{}/{}&quot;</span>,
-                                        <span class="self">self</span>.<span class="ident">minecraft_library_path</span>.<span class="ident">as_str</span>(),
-                                        <span class="kw-2">&amp;</span><span class="ident">artifact</span>.<span class="ident">path</span>
+                                        <span class="self">self</span>.minecraft_library_path.as_str(),
+                                        <span class="kw-2">&amp;</span>artifact.path
                                     );
-                                    <span class="kw">if</span> <span class="op">!</span><span class="ident">native_jars</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">p</span>) {
-                                        <span class="ident">native_jars</span>.<span class="ident">push</span>(<span class="ident">p</span>);
-                                        <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="self">self</span>.<span class="ident">download_library</span>(
-                                            <span class="kw-2">&amp;</span><span class="ident">artifact</span>.<span class="ident">sha1</span>,
-                                            <span class="kw-2">&amp;</span><span class="ident">artifact</span>.<span class="ident">path</span>,
-                                            <span class="self">self</span>.<span class="ident">minecraft_library_path</span>.<span class="ident">as_str</span>(),
+                                    <span class="kw">if </span>!native_jars.contains(<span class="kw-2">&amp;</span>p) {
+                                        native_jars.push(p);
+                                        <span class="kw">return </span><span class="prelude-val">Some</span>(<span class="self">self</span>.download_library(
+                                            <span class="kw-2">&amp;</span>artifact.sha1,
+                                            <span class="kw-2">&amp;</span>artifact.path,
+                                            <span class="self">self</span>.minecraft_library_path.as_str(),
                                         ));
                                     }
                                 }
                             }
                         }
                     }
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">artifact</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">downloads</span>.<span class="ident">artifact</span> {
-                        <span class="kw">for</span> <span class="ident">postfix</span> <span class="kw">in</span> <span class="ident">native_postfixes</span> {
-                            <span class="kw">if</span> <span class="ident">lib</span>.<span class="ident">name</span>.<span class="ident">ends_with</span>(<span class="ident">postfix</span>) {
-                                <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="macro">format!</span>(
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(artifact) = <span class="kw-2">&amp;</span>downloads.artifact {
+                        <span class="kw">for </span>postfix <span class="kw">in </span>native_postfixes {
+                            <span class="kw">if </span>lib.name.ends_with(postfix) {
+                                <span class="kw">let </span>p = <span class="macro">format!</span>(
                                     <span class="string">&quot;{}/{}&quot;</span>,
-                                    <span class="self">self</span>.<span class="ident">minecraft_library_path</span>.<span class="ident">as_str</span>(),
-                                    <span class="kw-2">&amp;</span><span class="ident">artifact</span>.<span class="ident">path</span>
+                                    <span class="self">self</span>.minecraft_library_path.as_str(),
+                                    <span class="kw-2">&amp;</span>artifact.path
                                 );
-                                <span class="ident">native_jars</span>.<span class="ident">push</span>(<span class="ident">p</span>);
+                                native_jars.push(p);
                                 <span class="kw">break</span>;
                             }
                         }
-                        <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="self">self</span>.<span class="ident">download_library</span>(
-                            <span class="kw-2">&amp;</span><span class="ident">artifact</span>.<span class="ident">sha1</span>,
-                            <span class="kw-2">&amp;</span><span class="ident">artifact</span>.<span class="ident">path</span>,
-                            <span class="self">self</span>.<span class="ident">minecraft_library_path</span>.<span class="ident">as_str</span>(),
+                        <span class="kw">return </span><span class="prelude-val">Some</span>(<span class="self">self</span>.download_library(
+                            <span class="kw-2">&amp;</span>artifact.sha1,
+                            <span class="kw-2">&amp;</span>artifact.path,
+                            <span class="self">self</span>.minecraft_library_path.as_str(),
                         ));
                     }
                 }
             }
-            <span class="prelude-val">None</span>
-        });
+            <span class="prelude-val">None
+        </span>});
 
-        <span class="kw">for</span> <span class="ident">v</span> <span class="kw">in</span> <span class="ident">futures::future::join_all</span>(<span class="ident">libraries_threads</span>).<span class="kw">await</span> {
-            <span class="ident">v</span><span class="question-mark">?</span>;
+        <span class="kw">for </span>v <span class="kw">in </span>futures::future::join_all(libraries_threads).<span class="kw">await </span>{
+            v<span class="question-mark">?</span>;
         }
 
-        <span class="ident">lr</span>.<span class="ident">remove_progress</span>();
+        lr.remove_progress();
 
-        <span class="prelude-val">Ok</span>(<span class="ident">native_jars</span>)
+        <span class="prelude-val">Ok</span>(native_jars)
     }
 
-    <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">download_vanilla</span>(
+    <span class="kw">async fn </span>download_vanilla(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">version_name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">version_meta</span>: <span class="kw-2">&amp;</span><span class="ident">VersionMeta</span>,
-        <span class="ident">is_repair</span>: <span class="ident">bool</span>,
-    ) -&gt; <span class="ident">DynResult</span> {
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">reporter</span>.<span class="ident">sub</span>();
-        <span class="kw">let</span> <span class="ident">game_file</span> <span class="op">=</span> <span class="macro">format!</span>(
+        version_name: <span class="kw-2">&amp;</span>str,
+        version_meta: <span class="kw-2">&amp;</span>VersionMeta,
+        is_repair: bool,
+    ) -&gt; DynResult {
+        <span class="kw">let </span>r = <span class="self">self</span>.reporter.sub();
+        <span class="kw">let </span>game_file = <span class="macro">format!</span>(
             <span class="string">&quot;{}/{}/{}.jar&quot;</span>,
-            <span class="self">self</span>.<span class="ident">minecraft_version_path</span>.<span class="ident">as_str</span>(),
-            <span class="ident">version_name</span>,
-            <span class="ident">version_name</span>
+            <span class="self">self</span>.minecraft_version_path.as_str(),
+            version_name,
+            version_name
         );
-        <span class="ident">r</span>.<span class="ident">set_message</span>(<span class="macro">format!</span>(<span class="string">&quot;正在下载原版游戏 {}&quot;</span>, <span class="ident">version_name</span>));
-        <span class="kw">let</span> <span class="ident">main_jar</span> <span class="op">=</span> <span class="ident">version_meta</span>
-            .<span class="ident">downloads</span>
-            .<span class="ident">as_ref</span>()
-            .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;无法获取下载清单&quot;</span>))<span class="question-mark">?</span>
-            .<span class="ident">get</span>(<span class="string">&quot;client&quot;</span>)
-            .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;无法获取客户端下载元数据&quot;</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">main_jar_thread</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">download_vanilla_jar</span>(<span class="kw-2">&amp;</span><span class="ident">main_jar</span>.<span class="ident">url</span>, <span class="kw-2">&amp;</span><span class="ident">game_file</span>, <span class="kw-2">&amp;</span><span class="ident">main_jar</span>.<span class="ident">sha1</span>);
+        r.set_message(<span class="macro">format!</span>(<span class="string">&quot;正在下载原版游戏 {}&quot;</span>, version_name));
+        <span class="kw">let </span>main_jar = version_meta
+            .downloads
+            .as_ref()
+            .ok_or_else(|| <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;无法获取下载清单&quot;</span>))<span class="question-mark">?
+            </span>.get(<span class="string">&quot;client&quot;</span>)
+            .ok_or_else(|| <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;无法获取客户端下载元数据&quot;</span>))<span class="question-mark">?</span>;
+        <span class="kw">let </span>main_jar_thread = <span class="self">self</span>.download_vanilla_jar(<span class="kw-2">&amp;</span>main_jar.url, <span class="kw-2">&amp;</span>game_file, <span class="kw-2">&amp;</span>main_jar.sha1);
 
-        <span class="kw">if</span> <span class="ident">is_repair</span> {
-            <span class="kw">let</span> <span class="ident">lib_path</span> <span class="op">=</span> <span class="ident">std::path::Path::new</span>(<span class="self">self</span>.<span class="ident">minecraft_library_path</span>.<span class="ident">as_str</span>());
-            <span class="kw">let</span> <span class="ident">lib_path</span> <span class="op">=</span> <span class="ident">lib_path</span>
-                .<span class="ident">join</span>(<span class="string">&quot;org&quot;</span>)
-                .<span class="ident">join</span>(<span class="string">&quot;glavo&quot;</span>)
-                .<span class="ident">join</span>(<span class="string">&quot;1.0&quot;</span>)
-                .<span class="ident">join</span>(<span class="string">&quot;log4j-patch&quot;</span>);
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">lib_path</span>.<span class="ident">is_dir</span>() {
-                <span class="ident">inner_future::fs::create_dir_all</span>(<span class="kw-2">&amp;</span><span class="ident">lib_path</span>).<span class="kw">await</span><span class="question-mark">?</span>;
+        <span class="kw">if </span>is_repair {
+            <span class="kw">let </span>lib_path = std::path::Path::new(<span class="self">self</span>.minecraft_library_path.as_str());
+            <span class="kw">let </span>lib_path = lib_path
+                .join(<span class="string">&quot;org&quot;</span>)
+                .join(<span class="string">&quot;glavo&quot;</span>)
+                .join(<span class="string">&quot;1.0&quot;</span>)
+                .join(<span class="string">&quot;log4j-patch&quot;</span>);
+            <span class="kw">if </span>!lib_path.is_dir() {
+                inner_future::fs::create_dir_all(<span class="kw-2">&amp;</span>lib_path).<span class="kw">await</span><span class="question-mark">?</span>;
             }
-            <span class="kw">let</span> <span class="ident">log4j_path</span> <span class="op">=</span> <span class="ident">lib_path</span>.<span class="ident">join</span>(<span class="string">&quot;log4j-patch-agent-1.0.jar&quot;</span>);
-            <span class="ident">inner_future::fs::OpenOptions::new</span>()
-                .<span class="ident">write</span>(<span class="bool-val">true</span>)
-                .<span class="ident">create</span>(<span class="bool-val">true</span>)
-                .<span class="ident">truncate</span>(<span class="bool-val">true</span>)
-                .<span class="ident">open</span>(<span class="kw-2">&amp;</span><span class="ident">log4j_path</span>)
-                .<span class="kw">await</span><span class="question-mark">?</span>
-                .<span class="ident">write_all</span>(<span class="ident"><span class="kw">crate</span>::client::LOG4J_PATCH</span>)
+            <span class="kw">let </span>log4j_path = lib_path.join(<span class="string">&quot;log4j-patch-agent-1.0.jar&quot;</span>);
+            inner_future::fs::OpenOptions::new()
+                .write(<span class="bool-val">true</span>)
+                .create(<span class="bool-val">true</span>)
+                .truncate(<span class="bool-val">true</span>)
+                .open(<span class="kw-2">&amp;</span>log4j_path)
+                .<span class="kw">await</span><span class="question-mark">?
+                </span>.write_all(<span class="kw">crate</span>::client::LOG4J_PATCH)
                 .<span class="kw">await</span><span class="question-mark">?</span>;
         }
 
-        <span class="kw">let</span> <span class="ident">libraries_thread</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">download_libraries</span>(<span class="kw-2">&amp;</span><span class="ident">version_meta</span>.<span class="ident">libraries</span>);
+        <span class="kw">let </span>libraries_thread = <span class="self">self</span>.download_libraries(<span class="kw-2">&amp;</span>version_meta.libraries);
 
-        <span class="kw">let</span> <span class="ident">is_pre</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">version_meta</span>.<span class="ident">asset_index</span>.<span class="ident">as_ref</span>().<span class="ident">unwrap</span>().<span class="ident">id</span> <span class="op">==</span> <span class="string">&quot;pre-1.6&quot;</span>;
+        <span class="kw">let </span>is_pre = <span class="kw-2">&amp;</span>version_meta.asset_index.as_ref().unwrap().id == <span class="string">&quot;pre-1.6&quot;</span>;
 
-        <span class="comment">// Assets</span>
-        <span class="kw">let</span> <span class="ident">assets_index</span> <span class="op">=</span> <span class="self">self</span>
-            .<span class="ident">download_asset_index</span>(
-                <span class="kw-2">&amp;</span><span class="ident">version_meta</span>.<span class="ident">asset_index</span>.<span class="ident">as_ref</span>().<span class="ident">unwrap</span>().<span class="ident">id</span>,
-                <span class="kw-2">&amp;</span><span class="ident">version_meta</span>.<span class="ident">asset_index</span>.<span class="ident">as_ref</span>().<span class="ident">unwrap</span>().<span class="ident">url</span>,
-                <span class="self">self</span>.<span class="ident">minecraft_assets_path</span>.<span class="ident">as_str</span>(),
+        <span class="comment">// Assets
+        </span><span class="kw">let </span>assets_index = <span class="self">self
+            </span>.download_asset_index(
+                <span class="kw-2">&amp;</span>version_meta.asset_index.as_ref().unwrap().id,
+                <span class="kw-2">&amp;</span>version_meta.asset_index.as_ref().unwrap().url,
+                <span class="self">self</span>.minecraft_assets_path.as_str(),
             )
             .<span class="kw">await</span><span class="question-mark">?</span>;
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">assets_hashes</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="ident">assets_index</span>.<span class="ident">objects</span>.<span class="ident">len</span>());
+        <span class="kw">let </span><span class="kw-2">mut </span>assets_hashes = Vec::with_capacity(assets_index.objects.len());
 
-        <span class="kw">let</span> <span class="ident">ar</span> <span class="op">=</span> <span class="ident">r</span>.<span class="ident">sub</span>();
+        <span class="kw">let </span>ar = r.sub();
 
-        <span class="kw">let</span> <span class="ident">minecraft_assets_objects_path</span> <span class="op">=</span> <span class="macro">format!</span>(<span class="string">&quot;{}/objects&quot;</span>, <span class="self">self</span>.<span class="ident">minecraft_assets_path</span>);
+        <span class="kw">let </span>minecraft_assets_objects_path = <span class="macro">format!</span>(<span class="string">&quot;{}/objects&quot;</span>, <span class="self">self</span>.minecraft_assets_path);
 
-        <span class="kw">let</span> <span class="ident">amounts</span> <span class="op">=</span> <span class="ident">assets_index</span>
-            .<span class="ident">objects</span>
-            .<span class="ident">iter</span>()
-            .<span class="ident">filter</span>(<span class="op">|</span><span class="ident">a</span><span class="op">|</span> {
-                <span class="kw">if</span> <span class="ident">assets_hashes</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">a</span>.<span class="number">1</span>.<span class="ident">hash</span>) {
-                    <span class="bool-val">false</span>
-                } <span class="kw">else</span> {
-                    <span class="ident">assets_hashes</span>.<span class="ident">push</span>(<span class="ident">a</span>.<span class="number">1</span>.<span class="ident">hash</span>.<span class="ident">to_owned</span>());
-                    <span class="bool-val">true</span>
+        <span class="kw">let </span>amounts = assets_index
+            .objects
+            .iter()
+            .filter(|a| {
+                <span class="kw">if </span>assets_hashes.contains(<span class="kw-2">&amp;</span>a.<span class="number">1</span>.hash) {
+                    <span class="bool-val">false
+                </span>} <span class="kw">else </span>{
+                    assets_hashes.push(a.<span class="number">1</span>.hash.to_owned());
+                    <span class="bool-val">true
+                </span>}
+            })
+            .filter(|(path, obj)| {
+                <span class="kw">if </span>is_pre {
+                    !Path::new(<span class="kw-2">&amp;</span>minecraft_assets_objects_path)
+                        .parent()
+                        .unwrap()
+                        .join(<span class="string">&quot;virtual&quot;</span>)
+                        .join(<span class="string">&quot;pre-1.6&quot;</span>)
+                        .join(path)
+                        .exists()
+                } <span class="kw">else </span>{
+                    !is_asset_exists(<span class="kw-2">&amp;</span>obj.hash, <span class="kw-2">&amp;</span>minecraft_assets_objects_path)
                 }
             })
-            .<span class="ident">filter</span>(<span class="op">|</span>(<span class="ident">path</span>, <span class="ident">obj</span>)<span class="op">|</span> {
-                <span class="kw">if</span> <span class="ident">is_pre</span> {
-                    <span class="op">!</span><span class="ident">Path::new</span>(<span class="kw-2">&amp;</span><span class="ident">minecraft_assets_objects_path</span>)
-                        .<span class="ident">parent</span>()
-                        .<span class="ident">unwrap</span>()
-                        .<span class="ident">join</span>(<span class="string">&quot;virtual&quot;</span>)
-                        .<span class="ident">join</span>(<span class="string">&quot;pre-1.6&quot;</span>)
-                        .<span class="ident">join</span>(<span class="ident">path</span>)
-                        .<span class="ident">exists</span>()
-                } <span class="kw">else</span> {
-                    <span class="op">!</span><span class="ident">is_asset_exists</span>(<span class="kw-2">&amp;</span><span class="ident">obj</span>.<span class="ident">hash</span>, <span class="kw-2">&amp;</span><span class="ident">minecraft_assets_objects_path</span>)
-                }
-            })
-            .<span class="ident">count</span>();
+            .count();
 
-        <span class="ident">assets_hashes</span>.<span class="ident">clear</span>();
+        assets_hashes.clear();
 
-        <span class="kw">let</span> <span class="ident">assets_download_tasks</span> <span class="op">=</span> <span class="ident">assets_index</span>
-            .<span class="ident">objects</span>
-            .<span class="ident">iter</span>()
-            .<span class="ident">filter</span>(<span class="op">|</span><span class="ident">a</span><span class="op">|</span> {
-                <span class="kw">if</span> <span class="ident">assets_hashes</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">a</span>.<span class="number">1</span>.<span class="ident">hash</span>) {
-                    <span class="bool-val">false</span>
-                } <span class="kw">else</span> {
-                    <span class="ident">assets_hashes</span>.<span class="ident">push</span>(<span class="ident">a</span>.<span class="number">1</span>.<span class="ident">hash</span>.<span class="ident">to_owned</span>());
-                    <span class="bool-val">true</span>
-                }
+        <span class="kw">let </span>assets_download_tasks = assets_index
+            .objects
+            .iter()
+            .filter(|a| {
+                <span class="kw">if </span>assets_hashes.contains(<span class="kw-2">&amp;</span>a.<span class="number">1</span>.hash) {
+                    <span class="bool-val">false
+                </span>} <span class="kw">else </span>{
+                    assets_hashes.push(a.<span class="number">1</span>.hash.to_owned());
+                    <span class="bool-val">true
+                </span>}
             })
-            .<span class="ident">filter</span>(<span class="op">|</span>(<span class="ident">path</span>, <span class="ident">obj</span>)<span class="op">|</span> {
-                <span class="kw">if</span> <span class="ident">is_pre</span> {
-                    <span class="op">!</span><span class="ident">Path::new</span>(<span class="kw-2">&amp;</span><span class="ident">minecraft_assets_objects_path</span>)
-                        .<span class="ident">parent</span>()
-                        .<span class="ident">unwrap</span>()
-                        .<span class="ident">join</span>(<span class="string">&quot;virtual&quot;</span>)
-                        .<span class="ident">join</span>(<span class="string">&quot;pre-1.6&quot;</span>)
-                        .<span class="ident">join</span>(<span class="ident">path</span>)
-                        .<span class="ident">exists</span>()
-                } <span class="kw">else</span> {
-                    <span class="op">!</span><span class="ident">is_asset_exists</span>(<span class="kw-2">&amp;</span><span class="ident">obj</span>.<span class="ident">hash</span>, <span class="kw-2">&amp;</span><span class="ident">minecraft_assets_objects_path</span>)
+            .filter(|(path, obj)| {
+                <span class="kw">if </span>is_pre {
+                    !Path::new(<span class="kw-2">&amp;</span>minecraft_assets_objects_path)
+                        .parent()
+                        .unwrap()
+                        .join(<span class="string">&quot;virtual&quot;</span>)
+                        .join(<span class="string">&quot;pre-1.6&quot;</span>)
+                        .join(path)
+                        .exists()
+                } <span class="kw">else </span>{
+                    !is_asset_exists(<span class="kw-2">&amp;</span>obj.hash, <span class="kw-2">&amp;</span>minecraft_assets_objects_path)
                 }
             });
 
-        <span class="ident">ar</span>.<span class="ident">add_max_progress</span>(<span class="ident">amounts</span> <span class="kw">as</span> <span class="kw">_</span>);
+        ar.add_max_progress(amounts <span class="kw">as _</span>);
 
-        <span class="kw">let</span> <span class="ident">assets_index_objects</span> <span class="op">=</span> <span class="ident">assets_download_tasks</span>.<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">rpath</span>, <span class="ident">obj</span>)<span class="op">|</span> {
-            <span class="self">self</span>.<span class="ident">download_asset</span>(
-                <span class="kw-2">&amp;</span><span class="ident">obj</span>.<span class="ident">hash</span>,
-                <span class="ident">rpath</span>,
-                <span class="kw-2">&amp;</span><span class="ident">minecraft_assets_objects_path</span>,
-                <span class="ident">is_pre</span>,
-                <span class="ident">ar</span>.<span class="ident">sub</span>(),
+        <span class="kw">let </span>assets_index_objects = assets_download_tasks.map(|(rpath, obj)| {
+            <span class="self">self</span>.download_asset(
+                <span class="kw-2">&amp;</span>obj.hash,
+                rpath,
+                <span class="kw-2">&amp;</span>minecraft_assets_objects_path,
+                is_pre,
+                ar.sub(),
             )
         });
 
-        <span class="ident">ar</span>.<span class="ident">set_message</span>(<span class="string">&quot;下载资源文件&quot;</span>.<span class="ident">into</span>());
+        ar.set_message(<span class="string">&quot;下载资源文件&quot;</span>.into());
 
-        <span class="comment">// Wait all threads</span>
-        <span class="kw">let</span> <span class="ident">native_jars</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">is_repair</span> {
-            <span class="ident">futures::future::join</span>(
-                <span class="ident">libraries_thread</span>,
-                <span class="ident">futures::future::join_all</span>(<span class="ident">assets_index_objects</span>),
+        <span class="comment">// Wait all threads
+        </span><span class="kw">let </span>native_jars = <span class="kw">if </span>is_repair {
+            futures::future::join(
+                libraries_thread,
+                futures::future::join_all(assets_index_objects),
             )
-            .<span class="kw">await</span>
-            .<span class="number">0</span><span class="question-mark">?</span>
-        } <span class="kw">else</span> {
-            <span class="ident">futures::future::join3</span>(
-                <span class="ident">main_jar_thread</span>,
-                <span class="ident">libraries_thread</span>,
-                <span class="ident">futures::future::join_all</span>(<span class="ident">assets_index_objects</span>),
+            .<span class="kw">await
+            </span>.<span class="number">0</span><span class="question-mark">?
+        </span>} <span class="kw">else </span>{
+            futures::future::join3(
+                main_jar_thread,
+                libraries_thread,
+                futures::future::join_all(assets_index_objects),
             )
-            .<span class="kw">await</span>
-            .<span class="number">1</span><span class="question-mark">?</span>
-        };
+            .<span class="kw">await
+            </span>.<span class="number">1</span><span class="question-mark">?
+        </span>};
 
-        <span class="kw">let</span> <span class="ident">native_dir</span> <span class="op">=</span> <span class="macro">format!</span>(
+        <span class="kw">let </span>native_dir = <span class="macro">format!</span>(
             <span class="string">&quot;{}/{}/natives&quot;</span>,
-            <span class="self">self</span>.<span class="ident">minecraft_version_path</span>.<span class="ident">as_str</span>(),
-            <span class="ident">version_name</span>
+            <span class="self">self</span>.minecraft_version_path.as_str(),
+            version_name
         );
-        <span class="kw">let</span> <span class="ident">nr</span> <span class="op">=</span> <span class="ident">r</span>.<span class="ident">sub</span>();
-        <span class="ident">nr</span>.<span class="ident">set_max_progress</span>(<span class="ident">native_jars</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">f64</span>);
-        <span class="ident">nr</span>.<span class="ident">set_message</span>(<span class="string">&quot;正在解压原生库&quot;</span>.<span class="ident">into</span>());
-        <span class="kw">for</span> <span class="ident">item</span> <span class="kw">in</span> <span class="ident">native_jars</span>.<span class="ident">iter</span>() {
-            <span class="ident">unzip_natives</span>(<span class="ident">item</span>, <span class="kw-2">&amp;</span><span class="ident">native_dir</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-            <span class="ident">nr</span>.<span class="ident">add_progress</span>(<span class="number">1.</span>);
+        <span class="kw">let </span>nr = r.sub();
+        nr.set_max_progress(native_jars.len() <span class="kw">as </span>f64);
+        nr.set_message(<span class="string">&quot;正在解压原生库&quot;</span>.into());
+        <span class="kw">for </span>item <span class="kw">in </span>native_jars.iter() {
+            unzip_natives(item, <span class="kw-2">&amp;</span>native_dir).<span class="kw">await</span><span class="question-mark">?</span>;
+            nr.add_progress(<span class="number">1.</span>);
         }
-        <span class="ident">r</span>.<span class="ident">remove_progress</span>();
+        r.remove_progress();
 
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">install_vanilla</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">version_name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">version_info</span>: <span class="kw-2">&amp;</span><span class="ident">VersionInfo</span>) -&gt; <span class="ident">DynResult</span> {
-        <span class="self">self</span>.<span class="ident">reporter</span>.<span class="ident">set_max_progress</span>(<span class="number">4.</span>);
-        <span class="self">self</span>.<span class="ident">reporter</span>
-            .<span class="ident">set_message</span>(<span class="macro">format!</span>(<span class="string">&quot;正在获取版本元数据 {}&quot;</span>, <span class="ident">version_name</span>));
+    <span class="kw">async fn </span>install_vanilla(<span class="kw-2">&amp;</span><span class="self">self</span>, version_name: <span class="kw-2">&amp;</span>str, version_info: <span class="kw-2">&amp;</span>VersionInfo) -&gt; DynResult {
+        <span class="self">self</span>.reporter.set_max_progress(<span class="number">4.</span>);
+        <span class="self">self</span>.reporter
+            .set_message(<span class="macro">format!</span>(<span class="string">&quot;正在获取版本元数据 {}&quot;</span>, version_name));
 
-        <span class="ident">create_dir_all</span>(<span class="macro">format!</span>(<span class="string">&quot;{}/indexes&quot;</span>, <span class="self">self</span>.<span class="ident">minecraft_assets_path</span>)).<span class="kw">await</span><span class="question-mark">?</span>;
-        <span class="ident">create_dir_all</span>(<span class="macro">format!</span>(<span class="string">&quot;{}/objects&quot;</span>, <span class="self">self</span>.<span class="ident">minecraft_assets_path</span>)).<span class="kw">await</span><span class="question-mark">?</span>;
-        <span class="ident">create_dir_all</span>(<span class="self">self</span>.<span class="ident">minecraft_library_path</span>.<span class="ident">as_str</span>()).<span class="kw">await</span><span class="question-mark">?</span>;
-        <span class="ident">create_dir_all</span>(<span class="macro">format!</span>(
+        create_dir_all(<span class="macro">format!</span>(<span class="string">&quot;{}/indexes&quot;</span>, <span class="self">self</span>.minecraft_assets_path)).<span class="kw">await</span><span class="question-mark">?</span>;
+        create_dir_all(<span class="macro">format!</span>(<span class="string">&quot;{}/objects&quot;</span>, <span class="self">self</span>.minecraft_assets_path)).<span class="kw">await</span><span class="question-mark">?</span>;
+        create_dir_all(<span class="self">self</span>.minecraft_library_path.as_str()).<span class="kw">await</span><span class="question-mark">?</span>;
+        create_dir_all(<span class="macro">format!</span>(
             <span class="string">&quot;{}/{}&quot;</span>,
-            <span class="self">self</span>.<span class="ident">minecraft_version_path</span>.<span class="ident">as_str</span>(),
-            <span class="ident">version_name</span>
+            <span class="self">self</span>.minecraft_version_path.as_str(),
+            version_name
         ))
         .<span class="kw">await</span><span class="question-mark">?</span>;
 
-        <span class="kw">let</span> <span class="ident">version_file</span> <span class="op">=</span> <span class="macro">format!</span>(
+        <span class="kw">let </span>version_file = <span class="macro">format!</span>(
             <span class="string">&quot;{}/{}/{}.json&quot;</span>,
-            <span class="self">self</span>.<span class="ident">minecraft_version_path</span>.<span class="ident">as_str</span>(),
-            <span class="ident">version_name</span>,
-            <span class="ident">version_name</span>
+            <span class="self">self</span>.minecraft_version_path.as_str(),
+            version_name,
+            version_name
         );
-        <span class="kw">let</span> <span class="ident">url</span> <span class="op">=</span> <span class="ident">version_info</span>.<span class="ident">url</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">url::Url</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">url_path</span> <span class="op">=</span> <span class="ident">url</span>.<span class="ident">path</span>();
+        <span class="kw">let </span>url = version_info.url.parse::&lt;url::Url&gt;()<span class="question-mark">?</span>;
+        <span class="kw">let </span>url_path = url.path();
 
-        <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::http::retry_get_bytes</span>(<span class="kw">match</span> <span class="self">self</span>.<span class="ident">source</span> {
-            <span class="ident">DownloadSource::Default</span> =&gt; <span class="macro">format!</span>(<span class="string">&quot;https://launchermeta.mojang.com{}&quot;</span>, <span class="ident">url_path</span>),
-            <span class="ident">DownloadSource::BMCLAPI</span> =&gt; <span class="macro">format!</span>(<span class="string">&quot;https://bmclapi2.bangbang93.com{}&quot;</span>, <span class="ident">url_path</span>),
-            <span class="ident">DownloadSource::MCBBS</span> =&gt; <span class="macro">format!</span>(<span class="string">&quot;https://download.mcbbs.net{}&quot;</span>, <span class="ident">url_path</span>),
-            <span class="kw">_</span> =&gt; <span class="macro">format!</span>(<span class="string">&quot;https://launchermeta.mojang.com{}&quot;</span>, <span class="ident">url_path</span>),
+        <span class="kw">let </span>res = <span class="kw">crate</span>::http::retry_get_bytes(<span class="kw">match </span><span class="self">self</span>.source {
+            DownloadSource::Default =&gt; <span class="macro">format!</span>(<span class="string">&quot;https://launchermeta.mojang.com{}&quot;</span>, url_path),
+            DownloadSource::BMCLAPI =&gt; <span class="macro">format!</span>(<span class="string">&quot;https://bmclapi2.bangbang93.com{}&quot;</span>, url_path),
+            DownloadSource::MCBBS =&gt; <span class="macro">format!</span>(<span class="string">&quot;https://download.mcbbs.net{}&quot;</span>, url_path),
+            <span class="kw">_ </span>=&gt; <span class="macro">format!</span>(<span class="string">&quot;https://launchermeta.mojang.com{}&quot;</span>, url_path),
         })
-        .<span class="kw">await</span>
-        .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;下载版本元数据失败：{:?}&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
+        .<span class="kw">await
+        </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;下载版本元数据失败：{:?}&quot;</span>, e))<span class="question-mark">?</span>;
 
-        <span class="ident">inner_future::fs::write</span>(<span class="kw-2">&amp;</span><span class="ident">version_file</span>, <span class="kw-2">&amp;</span><span class="ident">res</span>).<span class="kw">await</span><span class="question-mark">?</span>;
+        inner_future::fs::write(<span class="kw-2">&amp;</span>version_file, <span class="kw-2">&amp;</span>res).<span class="kw">await</span><span class="question-mark">?</span>;
 
-        <span class="self">self</span>.<span class="ident">reporter</span>
-            .<span class="ident">set_message</span>(<span class="macro">format!</span>(<span class="string">&quot;正在下载游戏文件 {}&quot;</span>, <span class="ident">version_name</span>));
+        <span class="self">self</span>.reporter
+            .set_message(<span class="macro">format!</span>(<span class="string">&quot;正在下载游戏文件 {}&quot;</span>, version_name));
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">version_meta</span>: <span class="ident">VersionMeta</span> <span class="op">=</span> <span class="ident">serde_json::from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">res</span>)<span class="question-mark">?</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>version_meta: VersionMeta = serde_json::from_slice(<span class="kw-2">&amp;</span>res)<span class="question-mark">?</span>;
 
-        <span class="ident">version_meta</span>.<span class="ident">fix_libraries</span>();
+        version_meta.fix_libraries();
 
-        <span class="self">self</span>.<span class="ident">download_vanilla</span>(<span class="ident">version_name</span>, <span class="kw-2">&amp;</span><span class="ident">version_meta</span>, <span class="bool-val">false</span>)
+        <span class="self">self</span>.download_vanilla(version_name, <span class="kw-2">&amp;</span>version_meta, <span class="bool-val">false</span>)
             .<span class="kw">await</span><span class="question-mark">?</span>;
 
         <span class="prelude-val">Ok</span>(())
     }
 }
 
-<span class="kw">fn</span> <span class="ident">is_asset_exists</span>(<span class="ident">hash</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">save_path</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">bool</span> {
-    <span class="kw">let</span> <span class="ident">sub_hash</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">hash</span>[..<span class="number">2</span>];
-    <span class="kw">let</span> <span class="ident">full_path</span> <span class="op">=</span> <span class="macro">format!</span>(<span class="string">&quot;{}/{}/{}&quot;</span>, <span class="ident">save_path</span>, <span class="ident">sub_hash</span>, <span class="ident">hash</span>);
-    <span class="ident">std::path::Path::new</span>(<span class="kw-2">&amp;</span><span class="ident">full_path</span>).<span class="ident">is_file</span>()
+<span class="kw">fn </span>is_asset_exists(hash: <span class="kw-2">&amp;</span>str, save_path: <span class="kw-2">&amp;</span>str) -&gt; bool {
+    <span class="kw">let </span>sub_hash = <span class="kw-2">&amp;</span>hash[..<span class="number">2</span>];
+    <span class="kw">let </span>full_path = <span class="macro">format!</span>(<span class="string">&quot;{}/{}/{}&quot;</span>, save_path, sub_hash, hash);
+    std::path::Path::new(<span class="kw-2">&amp;</span>full_path).is_file()
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>)]</span>
-<span class="kw">const</span> <span class="ident">NATIVE_EXT</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;dll&quot;</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>)]</span>
-<span class="kw">const</span> <span class="ident">NATIVE_EXT</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;so&quot;</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>)]</span>
-<span class="kw">const</span> <span class="ident">NATIVE_EXT</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;dylib&quot;</span>;
+<span class="attribute">#[cfg(target_os = <span class="string">&quot;windows&quot;</span>)]
+</span><span class="kw">const </span>NATIVE_EXT: <span class="kw-2">&amp;</span>str = <span class="string">&quot;dll&quot;</span>;
+<span class="attribute">#[cfg(target_os = <span class="string">&quot;linux&quot;</span>)]
+</span><span class="kw">const </span>NATIVE_EXT: <span class="kw-2">&amp;</span>str = <span class="string">&quot;so&quot;</span>;
+<span class="attribute">#[cfg(target_os = <span class="string">&quot;macos&quot;</span>)]
+</span><span class="kw">const </span>NATIVE_EXT: <span class="kw-2">&amp;</span>str = <span class="string">&quot;dylib&quot;</span>;
 
-<span class="doccomment">/// 解压指定 ZIP 压缩文件的内容到指定文件夹</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 如果文件夹不存在则创建</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">unzip_natives</span>(<span class="ident">unzip_file</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">unzip_dir</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">DynResult</span> {
-    <span class="kw">let</span> <span class="ident">unzip_file</span> <span class="op">=</span> <span class="ident">unzip_file</span>.<span class="ident">to_owned</span>();
-    <span class="kw">let</span> <span class="ident">unzip_dir</span> <span class="op">=</span> <span class="ident">unzip_dir</span>.<span class="ident">to_owned</span>();
-    <span class="ident">inner_future::unblock</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> -&gt; <span class="ident">DynResult</span> {
-        <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">std::fs::File::open</span>(<span class="kw-2">&amp;</span><span class="ident">unzip_file</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">dir</span> <span class="op">=</span> <span class="ident">std::path::PathBuf::from</span>(<span class="ident">unzip_dir</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">archive</span> <span class="op">=</span> <span class="ident">zip::ZipArchive::new</span>(<span class="ident">file</span>)
-            .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;解压原生库 {} 时发生错误&quot;</span>, <span class="ident">unzip_file</span>))<span class="question-mark">?</span>;
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">archive</span>.<span class="ident">len</span>() {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">archive</span>.<span class="ident">by_index</span>(<span class="ident">i</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">file</span>.<span class="ident">enclosed_name</span>() {
-                <span class="prelude-val">Some</span>(<span class="ident">p</span>) =&gt; <span class="ident">p</span>.<span class="ident">to_owned</span>(),
-                <span class="prelude-val">None</span> =&gt; <span class="kw">continue</span>,
+<span class="doccomment">/// 解压指定 ZIP 压缩文件的内容到指定文件夹
+///
+/// 如果文件夹不存在则创建
+</span><span class="kw">pub async fn </span>unzip_natives(unzip_file: <span class="kw-2">&amp;</span>str, unzip_dir: <span class="kw-2">&amp;</span>str) -&gt; DynResult {
+    <span class="kw">let </span>unzip_file = unzip_file.to_owned();
+    <span class="kw">let </span>unzip_dir = unzip_dir.to_owned();
+    inner_future::unblock(<span class="kw">move </span>|| -&gt; DynResult {
+        <span class="kw">let </span>file = std::fs::File::open(<span class="kw-2">&amp;</span>unzip_file)<span class="question-mark">?</span>;
+        <span class="kw">let </span>dir = std::path::PathBuf::from(unzip_dir);
+        <span class="kw">let </span><span class="kw-2">mut </span>archive = zip::ZipArchive::new(file)
+            .with_context(|| <span class="macro">format!</span>(<span class="string">&quot;解压原生库 {} 时发生错误&quot;</span>, unzip_file))<span class="question-mark">?</span>;
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..archive.len() {
+            <span class="kw">let </span><span class="kw-2">mut </span>file = archive.by_index(i)<span class="question-mark">?</span>;
+            <span class="kw">let </span>p = <span class="kw">match </span>file.enclosed_name() {
+                <span class="prelude-val">Some</span>(p) =&gt; p.to_owned(),
+                <span class="prelude-val">None </span>=&gt; <span class="kw">continue</span>,
             };
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">ext</span>) <span class="op">=</span> <span class="ident">p</span>.<span class="ident">extension</span>() {
-                <span class="kw">if</span> <span class="ident">ext</span> <span class="op">!</span><span class="op">=</span> <span class="ident">std::ffi::OsStr::new</span>(<span class="ident">NATIVE_EXT</span>) {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(ext) = p.extension() {
+                <span class="kw">if </span>ext != std::ffi::OsStr::new(NATIVE_EXT) {
                     <span class="kw">continue</span>;
                 }
-            } <span class="kw">else</span> {
+            } <span class="kw">else </span>{
                 <span class="kw">continue</span>;
             }
-            <span class="kw">let</span> <span class="ident">save_path</span> <span class="op">=</span> <span class="ident">dir</span>.<span class="ident">join</span>(<span class="ident">p</span>);
-            <span class="kw">let</span> <span class="ident">save_dir</span> <span class="op">=</span> <span class="ident">save_path</span>.<span class="ident">parent</span>().<span class="ident">unwrap</span>();
-            <span class="ident">std::fs::create_dir_all</span>(<span class="ident">save_dir</span>).<span class="ident">unwrap_or_default</span>();
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">output</span> <span class="op">=</span> <span class="ident">std::fs::File::create</span>(<span class="ident">save_path</span>)<span class="question-mark">?</span>;
-            <span class="ident">std::io::copy</span>(<span class="kw-2">&amp;mut</span> <span class="ident">file</span>, <span class="kw-2">&amp;mut</span> <span class="ident">output</span>)<span class="question-mark">?</span>;
+            <span class="kw">let </span>save_path = dir.join(p);
+            <span class="kw">let </span>save_dir = save_path.parent().unwrap();
+            std::fs::create_dir_all(save_dir).unwrap_or_default();
+            <span class="kw">let </span><span class="kw-2">mut </span>output = std::fs::File::create(save_path)<span class="question-mark">?</span>;
+            std::io::copy(<span class="kw-2">&amp;mut </span>file, <span class="kw-2">&amp;mut </span>output)<span class="question-mark">?</span>;
         }
         <span class="prelude-val">Ok</span>(())
     })
-    .<span class="kw">await</span>
-}
+    .<span class="kw">await
+</span>}
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

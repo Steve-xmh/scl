@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/progress.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>progress.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../scl_core/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/progress.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>progress.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../scl_core/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -114,121 +114,121 @@
 <span id="114">114</span>
 <span id="115">115</span>
 <span id="116">116</span>
-</pre><pre class="rust"><code><span class="doccomment">//! 这里提供的特质用于报告异步进度</span>
+</pre><pre class="rust"><code><span class="doccomment">//! 这里提供的特质用于报告异步进度
 
-<span class="doccomment">/// 一个异步报告特质，用来给宿主提供目前异步程序的处理状态</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 实现该特质时需要注意，当对象被克隆时，其响应也应当和原始对象一致。</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 当进行调用时，如不需要报告进度可以使用 `None as Option&lt;()&gt;`（或本模块中的 `NR` 常量）来跳过报告</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Reporter</span>: <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> {
-    <span class="doccomment">/// 返回一个和原始对象分离的报告对象，应当是一个全新的报告对象</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 所响应的进度不会同时上报给原始对象</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">fn</span> <span class="ident">fork</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">to_owned</span>()
+/// 一个异步报告特质，用来给宿主提供目前异步程序的处理状态
+///
+/// 实现该特质时需要注意，当对象被克隆时，其响应也应当和原始对象一致。
+///
+/// 当进行调用时，如不需要报告进度可以使用 `None as Option&lt;()&gt;`（或本模块中的 `NR` 常量）来跳过报告
+</span><span class="kw">pub trait </span>Reporter: Clone + Send + Sync {
+    <span class="doccomment">/// 返回一个和原始对象分离的报告对象，应当是一个全新的报告对象
+    ///
+    /// 所响应的进度不会同时上报给原始对象
+    </span><span class="attribute">#[must_use]
+    </span><span class="kw">fn </span>fork(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.to_owned()
     }
 
-    <span class="doccomment">/// 返回一个报告会同时上报给原始报告的对象</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">fn</span> <span class="ident">sub</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">fork</span>()
+    <span class="doccomment">/// 返回一个报告会同时上报给原始报告的对象
+    </span><span class="attribute">#[must_use]
+    </span><span class="kw">fn </span>sub(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.fork()
     }
 
-    <span class="doccomment">/// 发送信息，并根据情况相继上报给原始对象</span>
-    <span class="kw">fn</span> <span class="ident">send</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">state</span>: <span class="ident">ReportState</span>);
+    <span class="doccomment">/// 发送信息，并根据情况相继上报给原始对象
+    </span><span class="kw">fn </span>send(<span class="kw-2">&amp;</span><span class="self">self</span>, state: ReportState);
 
-    <span class="doccomment">/// 发送信息，但是可变引用状态，并根据情况相继上报给原始对象</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 如果你的上报对象自身对不可变有限制可以考虑实现这个方法</span>
-    <span class="kw">fn</span> <span class="ident">send_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">state</span>: <span class="ident">ReportState</span>) {
-        <span class="self">self</span>.<span class="ident">send</span>(<span class="ident">state</span>)
+    <span class="doccomment">/// 发送信息，但是可变引用状态，并根据情况相继上报给原始对象
+    ///
+    /// 如果你的上报对象自身对不可变有限制可以考虑实现这个方法
+    </span><span class="kw">fn </span>send_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>, state: ReportState) {
+        <span class="self">self</span>.send(state)
     }
 }
 
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">trait</span> <span class="ident">Progress</span>: <span class="ident">Reporter</span> {
-    <span class="kw">fn</span> <span class="ident">set_message</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">msg</span>: <span class="ident">String</span>) {
-        <span class="self">self</span>.<span class="ident">send</span>(<span class="ident">ReportState::SetMessage</span>(<span class="ident">msg</span>));
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">trait </span>Progress: Reporter {
+    <span class="kw">fn </span>set_message(<span class="kw-2">&amp;</span><span class="self">self</span>, msg: String) {
+        <span class="self">self</span>.send(ReportState::SetMessage(msg));
     }
-    <span class="kw">fn</span> <span class="ident">set_sub_message</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">msg</span>: <span class="ident">String</span>) {
-        <span class="self">self</span>.<span class="ident">send</span>(<span class="ident">ReportState::SetSubMessage</span>(<span class="ident">msg</span>));
+    <span class="kw">fn </span>set_sub_message(<span class="kw-2">&amp;</span><span class="self">self</span>, msg: String) {
+        <span class="self">self</span>.send(ReportState::SetSubMessage(msg));
     }
-    <span class="kw">fn</span> <span class="ident">set_max_progress</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">value</span>: <span class="ident">f64</span>) {
-        <span class="self">self</span>.<span class="ident">send</span>(<span class="ident">ReportState::SetMaxProgress</span>(<span class="ident">value</span>));
+    <span class="kw">fn </span>set_max_progress(<span class="kw-2">&amp;</span><span class="self">self</span>, value: f64) {
+        <span class="self">self</span>.send(ReportState::SetMaxProgress(value));
     }
-    <span class="kw">fn</span> <span class="ident">add_max_progress</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">value</span>: <span class="ident">f64</span>) {
-        <span class="self">self</span>.<span class="ident">send</span>(<span class="ident">ReportState::AddMaxProgress</span>(<span class="ident">value</span>));
+    <span class="kw">fn </span>add_max_progress(<span class="kw-2">&amp;</span><span class="self">self</span>, value: f64) {
+        <span class="self">self</span>.send(ReportState::AddMaxProgress(value));
     }
-    <span class="kw">fn</span> <span class="ident">set_progress</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">value</span>: <span class="ident">f64</span>) {
-        <span class="self">self</span>.<span class="ident">send</span>(<span class="ident">ReportState::SetProgress</span>(<span class="ident">value</span>));
+    <span class="kw">fn </span>set_progress(<span class="kw-2">&amp;</span><span class="self">self</span>, value: f64) {
+        <span class="self">self</span>.send(ReportState::SetProgress(value));
     }
-    <span class="kw">fn</span> <span class="ident">add_progress</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">value</span>: <span class="ident">f64</span>) {
-        <span class="self">self</span>.<span class="ident">send</span>(<span class="ident">ReportState::AddProgress</span>(<span class="ident">value</span>));
+    <span class="kw">fn </span>add_progress(<span class="kw-2">&amp;</span><span class="self">self</span>, value: f64) {
+        <span class="self">self</span>.send(ReportState::AddProgress(value));
     }
-    <span class="kw">fn</span> <span class="ident">set_indeterminate_progress</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">send</span>(<span class="ident">ReportState::SetIndeterminateProgress</span>);
+    <span class="kw">fn </span>set_indeterminate_progress(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+        <span class="self">self</span>.send(ReportState::SetIndeterminateProgress);
     }
-    <span class="kw">fn</span> <span class="ident">hide_progress</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">send</span>(<span class="ident">ReportState::SetIndeterminateProgress</span>);
+    <span class="kw">fn </span>hide_progress(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+        <span class="self">self</span>.send(ReportState::SetIndeterminateProgress);
     }
-    <span class="kw">fn</span> <span class="ident">remove_progress</span>(<span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">send</span>(<span class="ident">ReportState::RemoveProgress</span>);
+    <span class="kw">fn </span>remove_progress(<span class="self">self</span>) {
+        <span class="self">self</span>.send(ReportState::RemoveProgress);
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Reporter</span><span class="op">&gt;</span> <span class="ident">Reporter</span> <span class="kw">for</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">fork</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">fork</span>())
+<span class="kw">impl</span>&lt;R: Reporter&gt; Reporter <span class="kw">for </span><span class="prelude-ty">Option</span>&lt;R&gt; {
+    <span class="kw">fn </span>fork(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.as_ref().map(|s| s.fork())
     }
 
-    <span class="kw">fn</span> <span class="ident">sub</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">sub</span>())
+    <span class="kw">fn </span>sub(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.as_ref().map(|s| s.sub())
     }
 
-    <span class="kw">fn</span> <span class="ident">send</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">state</span>: <span class="ident">ReportState</span>) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">s</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span> {
-            <span class="ident">s</span>.<span class="ident">send</span>(<span class="ident">state</span>);
+    <span class="kw">fn </span>send(<span class="kw-2">&amp;</span><span class="self">self</span>, state: ReportState) {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(s) = <span class="kw-2">&amp;</span><span class="self">self </span>{
+            s.send(state);
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">send_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">state</span>: <span class="ident">ReportState</span>) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">s</span>) <span class="op">=</span> <span class="self">self</span> {
-            <span class="ident">s</span>.<span class="ident">send_mut</span>(<span class="ident">state</span>);
+    <span class="kw">fn </span>send_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>, state: ReportState) {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(s) = <span class="self">self </span>{
+            s.send_mut(state);
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Reporter</span><span class="op">&gt;</span> <span class="ident">Progress</span> <span class="kw">for</span> <span class="ident">R</span> {}
+<span class="kw">impl</span>&lt;R: Reporter&gt; Progress <span class="kw">for </span>R {}
 
-<span class="doccomment">/// 一个不会有任何响应的报告对象，如果宿主不需要获悉进度或状态可将这个传入参数</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NR</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span>()<span class="op">&gt;</span> <span class="op">=</span> <span class="prelude-val">None</span>;
+<span class="doccomment">/// 一个不会有任何响应的报告对象，如果宿主不需要获悉进度或状态可将这个传入参数
+</span><span class="kw">pub const </span>NR: <span class="prelude-ty">Option</span>&lt;()&gt; = <span class="prelude-val">None</span>;
 
-<span class="kw">impl</span> <span class="ident">Reporter</span> <span class="kw">for</span> () {
-    <span class="kw">fn</span> <span class="ident">send</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: <span class="ident">ReportState</span>) {}
+<span class="kw">impl </span>Reporter <span class="kw">for </span>() {
+    <span class="kw">fn </span>send(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: ReportState) {}
 }
 
-<span class="doccomment">/// 核心库报告的异步进度的所有枚举</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">ReportState</span> {
-    <span class="doccomment">/// 设置主要文字信息</span>
-    <span class="ident">SetMessage</span>(<span class="ident">String</span>),
-    <span class="doccomment">/// 设置次要文字信息</span>
-    <span class="ident">SetSubMessage</span>(<span class="ident">String</span>),
-    <span class="doccomment">/// 设置进度的最大值</span>
-    <span class="ident">SetMaxProgress</span>(<span class="ident">f64</span>),
-    <span class="doccomment">/// 增加/减少进度的最大值</span>
-    <span class="ident">AddMaxProgress</span>(<span class="ident">f64</span>),
-    <span class="doccomment">/// 设置当前进度</span>
-    <span class="ident">SetProgress</span>(<span class="ident">f64</span>),
-    <span class="doccomment">/// 增加/减少当前进度</span>
-    <span class="ident">AddProgress</span>(<span class="ident">f64</span>),
-    <span class="doccomment">/// 将进度设置为不定进度模式</span>
-    <span class="ident">SetIndeterminateProgress</span>,
-    <span class="doccomment">/// 隐藏此进度</span>
-    <span class="ident">HideProgress</span>,
-    <span class="doccomment">/// 删除此进度</span>
-    <span class="ident">RemoveProgress</span>,
+<span class="doccomment">/// 核心库报告的异步进度的所有枚举
+</span><span class="attribute">#[derive(Debug, Clone)]
+</span><span class="kw">pub enum </span>ReportState {
+    <span class="doccomment">/// 设置主要文字信息
+    </span>SetMessage(String),
+    <span class="doccomment">/// 设置次要文字信息
+    </span>SetSubMessage(String),
+    <span class="doccomment">/// 设置进度的最大值
+    </span>SetMaxProgress(f64),
+    <span class="doccomment">/// 增加/减少进度的最大值
+    </span>AddMaxProgress(f64),
+    <span class="doccomment">/// 设置当前进度
+    </span>SetProgress(f64),
+    <span class="doccomment">/// 增加/减少当前进度
+    </span>AddProgress(f64),
+    <span class="doccomment">/// 将进度设置为不定进度模式
+    </span>SetIndeterminateProgress,
+    <span class="doccomment">/// 隐藏此进度
+    </span>HideProgress,
+    <span class="doccomment">/// 删除此进度
+    </span>RemoveProgress,
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

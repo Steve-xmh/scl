@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/icon_button.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>icon_button.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/icon_button.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>icon_button.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -165,172 +165,172 @@
 <span id="165">165</span>
 <span id="166">166</span>
 <span id="167">167</span>
-</pre><pre class="rust"><code><span class="doccomment">//! 一个图标按钮，修改自 [`druid::widget::Button`]</span>
+</pre><pre class="rust"><code><span class="doccomment">//! 一个图标按钮，修改自 [`druid::widget::Button`]
 
-<span class="kw">use</span> <span class="ident">druid</span>::{
-    <span class="ident">kurbo</span>::{<span class="ident">BezPath</span>, <span class="ident">Shape</span>},
-    <span class="ident">piet</span>::{<span class="ident">PaintBrush</span>, <span class="ident">TextStorage</span>},
-    <span class="ident">widget</span>::{<span class="ident">prelude</span>::<span class="kw-2">*</span>, <span class="ident">Click</span>, <span class="ident">ControllerHost</span>},
-    <span class="ident">Affine</span>, <span class="ident">Data</span>,
+</span><span class="kw">use </span>druid::{
+    kurbo::{BezPath, Shape},
+    piet::{PaintBrush, TextStorage},
+    widget::{prelude::<span class="kw-2">*</span>, Click, ControllerHost},
+    Affine, Data,
 };
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::theme</span>::{<span class="ident">color</span> <span class="kw">as</span> <span class="ident">theme</span>, <span class="ident">icons::IconKeyPair</span>};
+<span class="kw">use </span><span class="kw">crate</span>::theme::{color <span class="kw">as </span>theme, icons::IconKeyPair};
 
-<span class="kw">type</span> <span class="ident">DynamicIconCallback</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Fn</span>(<span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="kw-2">&amp;</span><span class="ident">Env</span>) -&gt; <span class="ident">IconKeyPair</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+<span class="kw">type </span>DynamicIconCallback&lt;T&gt; = <span class="prelude-ty">Option</span>&lt;Box&lt;<span class="kw">dyn </span>Fn(<span class="kw-2">&amp;</span>T, <span class="kw-2">&amp;</span>Env) -&gt; IconKeyPair&gt;&gt;;
 
-<span class="doccomment">/// A button with a text label.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">IconButton</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">icon_key</span>: <span class="ident">IconKeyPair</span>,
-    <span class="ident">icon_dyn</span>: <span class="ident">DynamicIconCallback</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-    <span class="ident">icon_path</span>: <span class="ident">BezPath</span>,
-    <span class="ident">flat</span>: <span class="ident">bool</span>,
-    <span class="ident">accent</span>: <span class="ident">bool</span>,
+<span class="doccomment">/// A button with a text label.
+</span><span class="kw">pub struct </span>IconButton&lt;T&gt; {
+    icon_key: IconKeyPair,
+    icon_dyn: DynamicIconCallback&lt;T&gt;,
+    icon_path: BezPath,
+    flat: bool,
+    accent: bool,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Data</span><span class="op">&gt;</span> <span class="ident">IconButton</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Create a new button with a text label.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Use the [`.on_click`] method to provide a closure to be called when the</span>
-    <span class="doccomment">/// button is clicked.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Examples</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// use druid::widget::Button;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let button = Button::new(&quot;Increment&quot;).on_click(|_ctx, data: &amp;mut u32, _env| {</span>
-    <span class="doccomment">///     *data += 1;</span>
-    <span class="doccomment">/// });</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// [`.on_click`]: #method.on_click</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">dynamic</span>(<span class="ident">icon_key</span>: <span class="kw">impl</span> <span class="ident">Fn</span>(<span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="kw-2">&amp;</span><span class="ident">Env</span>) -&gt; <span class="ident">IconKeyPair</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>) -&gt; <span class="ident">IconButton</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="ident">IconButton</span> {
-            <span class="ident">icon_key</span>: <span class="ident"><span class="kw">crate</span>::theme::icons::EMPTY</span>,
-            <span class="ident">icon_dyn</span>: <span class="prelude-val">Some</span>(<span class="ident">Box::new</span>(<span class="ident">icon_key</span>)),
-            <span class="ident">icon_path</span>: <span class="ident">BezPath::new</span>(),
-            <span class="ident">accent</span>: <span class="bool-val">false</span>,
-            <span class="ident">flat</span>: <span class="bool-val">false</span>,
+<span class="kw">impl</span>&lt;T: Data&gt; IconButton&lt;T&gt; {
+    <span class="doccomment">/// Create a new button with a text label.
+    ///
+    /// Use the [`.on_click`] method to provide a closure to be called when the
+    /// button is clicked.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// use druid::widget::Button;
+    ///
+    /// let button = Button::new(&quot;Increment&quot;).on_click(|_ctx, data: &amp;mut u32, _env| {
+    ///     *data += 1;
+    /// });
+    /// ```
+    ///
+    /// [`.on_click`]: #method.on_click
+    </span><span class="kw">pub fn </span>dynamic(icon_key: <span class="kw">impl </span>Fn(<span class="kw-2">&amp;</span>T, <span class="kw-2">&amp;</span>Env) -&gt; IconKeyPair + <span class="lifetime">&#39;static</span>) -&gt; IconButton&lt;T&gt; {
+        IconButton {
+            icon_key: <span class="kw">crate</span>::theme::icons::EMPTY,
+            icon_dyn: <span class="prelude-val">Some</span>(Box::new(icon_key)),
+            icon_path: BezPath::new(),
+            accent: <span class="bool-val">false</span>,
+            flat: <span class="bool-val">false</span>,
         }
     }
 
-    <span class="doccomment">/// 根据提供的图标键组对创建一个图标按钮</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">icon_key</span>: <span class="ident">IconKeyPair</span>) -&gt; <span class="ident">IconButton</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="ident">IconButton</span> {
-            <span class="ident">icon_key</span>,
-            <span class="ident">icon_dyn</span>: <span class="prelude-val">None</span>,
-            <span class="ident">icon_path</span>: <span class="ident">BezPath::new</span>(),
-            <span class="ident">accent</span>: <span class="bool-val">false</span>,
-            <span class="ident">flat</span>: <span class="bool-val">false</span>,
+    <span class="doccomment">/// 根据提供的图标键组对创建一个图标按钮
+    </span><span class="kw">pub fn </span>new(icon_key: IconKeyPair) -&gt; IconButton&lt;T&gt; {
+        IconButton {
+            icon_key,
+            icon_dyn: <span class="prelude-val">None</span>,
+            icon_path: BezPath::new(),
+            accent: <span class="bool-val">false</span>,
+            flat: <span class="bool-val">false</span>,
         }
     }
 
-    <span class="doccomment">/// Provide a closure to be called when this button is clicked.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">on_click</span>(
+    <span class="doccomment">/// Provide a closure to be called when this button is clicked.
+    </span><span class="kw">pub fn </span>on_click(
         <span class="self">self</span>,
-        <span class="ident">f</span>: <span class="kw">impl</span> <span class="ident">Fn</span>(<span class="kw-2">&amp;mut</span> <span class="ident">EventCtx</span>, <span class="kw-2">&amp;mut</span> <span class="ident">T</span>, <span class="kw-2">&amp;</span><span class="ident">Env</span>) <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-    ) -&gt; <span class="ident">ControllerHost</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Click</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="ident">ControllerHost::new</span>(<span class="self">self</span>, <span class="ident">Click::new</span>(<span class="ident">f</span>))
+        f: <span class="kw">impl </span>Fn(<span class="kw-2">&amp;mut </span>EventCtx, <span class="kw-2">&amp;mut </span>T, <span class="kw-2">&amp;</span>Env) + <span class="lifetime">&#39;static</span>,
+    ) -&gt; ControllerHost&lt;<span class="self">Self</span>, Click&lt;T&gt;&gt; {
+        ControllerHost::new(<span class="self">self</span>, Click::new(f))
     }
 
-    <span class="doccomment">/// Use accent color as button color</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_accent</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="ident">bool</span>) {
-        <span class="self">self</span>.<span class="ident">accent</span> <span class="op">=</span> <span class="ident">value</span>;
+    <span class="doccomment">/// Use accent color as button color
+    </span><span class="kw">pub fn </span>set_accent(<span class="kw-2">&amp;mut </span><span class="self">self</span>, value: bool) {
+        <span class="self">self</span>.accent = value;
     }
 
-    <span class="doccomment">/// Builder style to use accent color as button color</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_accent</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="ident">bool</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">set_accent</span>(<span class="ident">value</span>);
-        <span class="self">self</span>
+    <span class="doccomment">/// Builder style to use accent color as button color
+    </span><span class="kw">pub fn </span>with_accent(<span class="kw-2">mut </span><span class="self">self</span>, value: bool) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.set_accent(value);
+        <span class="self">self
+    </span>}
+
+    <span class="doccomment">/// Use no color as button color
+    </span><span class="kw">pub fn </span>set_flat(<span class="kw-2">&amp;mut </span><span class="self">self</span>, value: bool) {
+        <span class="self">self</span>.flat = value;
     }
 
-    <span class="doccomment">/// Use no color as button color</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_flat</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="ident">bool</span>) {
-        <span class="self">self</span>.<span class="ident">flat</span> <span class="op">=</span> <span class="ident">value</span>;
-    }
+    <span class="doccomment">/// Builder style to use no color as button color
+    </span><span class="kw">pub fn </span>with_flat(<span class="kw-2">mut </span><span class="self">self</span>, value: bool) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.set_flat(value);
+        <span class="self">self
+    </span>}
 
-    <span class="doccomment">/// Builder style to use no color as button color</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_flat</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="ident">bool</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">set_flat</span>(<span class="ident">value</span>);
-        <span class="self">self</span>
-    }
-
-    <span class="kw">fn</span> <span class="ident">reload_icon</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="self">self</span>.<span class="ident">icon_path</span> <span class="op">=</span> <span class="ident">BezPath::from_svg</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">icon_key</span>.<span class="number">0</span>).<span class="ident">as_str</span>()).<span class="ident">unwrap_or_default</span>();
+    <span class="kw">fn </span>reload_icon(<span class="kw-2">&amp;mut </span><span class="self">self</span>, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="self">self</span>.icon_path = BezPath::from_svg(env.get(<span class="kw-2">&amp;</span><span class="self">self</span>.icon_key.<span class="number">0</span>).as_str()).unwrap_or_default();
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Data</span><span class="op">&gt;</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">IconButton</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">event</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EventCtx</span>, <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">Event</span>, <span class="ident">_data</span>: <span class="kw-2">&amp;mut</span> <span class="ident">T</span>, <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">match</span> <span class="ident">event</span> {
-            <span class="ident">Event::MouseDown</span>(<span class="kw">_</span>) =&gt; {
-                <span class="ident">ctx</span>.<span class="ident">set_active</span>(<span class="bool-val">true</span>);
-                <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+<span class="kw">impl</span>&lt;T: Data&gt; Widget&lt;T&gt; <span class="kw">for </span>IconButton&lt;T&gt; {
+    <span class="kw">fn </span>event(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>EventCtx, event: <span class="kw-2">&amp;</span>Event, _data: <span class="kw-2">&amp;mut </span>T, _env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">match </span>event {
+            Event::MouseDown(<span class="kw">_</span>) =&gt; {
+                ctx.set_active(<span class="bool-val">true</span>);
+                ctx.request_paint();
             }
-            <span class="ident">Event::MouseUp</span>(<span class="kw">_</span>) =&gt; {
-                <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_active</span>() {
-                    <span class="ident">ctx</span>.<span class="ident">set_active</span>(<span class="bool-val">false</span>);
-                    <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+            Event::MouseUp(<span class="kw">_</span>) =&gt; {
+                <span class="kw">if </span>ctx.is_active() {
+                    ctx.set_active(<span class="bool-val">false</span>);
+                    ctx.request_paint();
                 }
             }
-            <span class="kw">_</span> =&gt; (),
+            <span class="kw">_ </span>=&gt; (),
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">lifecycle</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LifeCycleCtx</span>, <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">LifeCycle</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">LifeCycle::HotChanged</span>(<span class="kw">_</span>) <span class="op">=</span> <span class="ident">event</span> {
-            <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="ident">LifeCycle::WidgetAdded</span> <span class="op">=</span> <span class="ident">event</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">icon_callback</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">icon_dyn</span> {
-                <span class="self">self</span>.<span class="ident">icon_key</span> <span class="op">=</span> <span class="ident">icon_callback</span>(<span class="ident">data</span>, <span class="ident">env</span>);
+    <span class="kw">fn </span>lifecycle(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>LifeCycleCtx, event: <span class="kw-2">&amp;</span>LifeCycle, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">if let </span>LifeCycle::HotChanged(<span class="kw">_</span>) = event {
+            ctx.request_paint();
+        } <span class="kw">else if let </span>LifeCycle::WidgetAdded = event {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(icon_callback) = <span class="kw-2">&amp;</span><span class="self">self</span>.icon_dyn {
+                <span class="self">self</span>.icon_key = icon_callback(data, env);
             }
-            <span class="self">self</span>.<span class="ident">reload_icon</span>(<span class="ident">env</span>);
+            <span class="self">self</span>.reload_icon(env);
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">UpdateCtx</span>, <span class="ident">old_data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">icon_callback</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">icon_dyn</span> {
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">data</span>.<span class="ident">same</span>(<span class="ident">old_data</span>) <span class="op">|</span><span class="op">|</span> <span class="ident">ctx</span>.<span class="ident">env_changed</span>() {
-                <span class="self">self</span>.<span class="ident">icon_key</span> <span class="op">=</span> <span class="ident">icon_callback</span>(<span class="ident">data</span>, <span class="ident">env</span>);
-                <span class="self">self</span>.<span class="ident">reload_icon</span>(<span class="ident">env</span>);
+    <span class="kw">fn </span>update(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>UpdateCtx, old_data: <span class="kw-2">&amp;</span>T, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(icon_callback) = <span class="kw-2">&amp;</span><span class="self">self</span>.icon_dyn {
+            <span class="kw">if </span>!data.same(old_data) || ctx.env_changed() {
+                <span class="self">self</span>.icon_key = icon_callback(data, env);
+                <span class="self">self</span>.reload_icon(env);
             }
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">env_key_changed</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">icon_key</span>.<span class="number">0</span>) {
-            <span class="self">self</span>.<span class="ident">reload_icon</span>(<span class="ident">env</span>);
+        } <span class="kw">else if </span>ctx.env_key_changed(<span class="kw-2">&amp;</span><span class="self">self</span>.icon_key.<span class="number">0</span>) {
+            <span class="self">self</span>.reload_icon(env);
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">layout</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="kw">_</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LayoutCtx</span>, <span class="ident">bc</span>: <span class="kw-2">&amp;</span><span class="ident">BoxConstraints</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) -&gt; <span class="ident">Size</span> {
-        <span class="ident">bc</span>.<span class="ident">debug_check</span>(<span class="string">&quot;IconButton&quot;</span>);
-        <span class="ident">bc</span>.<span class="ident">constrain</span>((<span class="number">32.</span>, <span class="number">32.</span>))
+    <span class="kw">fn </span>layout(<span class="kw-2">&amp;mut </span><span class="self">self</span>, <span class="kw">_</span>: <span class="kw-2">&amp;mut </span>LayoutCtx, bc: <span class="kw-2">&amp;</span>BoxConstraints, <span class="kw">_</span>: <span class="kw-2">&amp;</span>T, <span class="kw">_</span>: <span class="kw-2">&amp;</span>Env) -&gt; Size {
+        bc.debug_check(<span class="string">&quot;IconButton&quot;</span>);
+        bc.constrain((<span class="number">32.</span>, <span class="number">32.</span>))
     }
 
-    <span class="kw">fn</span> <span class="ident">paint</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">PaintCtx</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">let</span> <span class="ident">is_hot</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">is_hot</span>();
-        <span class="kw">let</span> <span class="ident">is_active</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">is_active</span>();
-        <span class="kw">let</span> <span class="ident">is_disabled</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">is_disabled</span>();
-        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">size</span>();
+    <span class="kw">fn </span>paint(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>PaintCtx, <span class="kw">_</span>: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">let </span>is_hot = ctx.is_hot();
+        <span class="kw">let </span>is_active = ctx.is_active();
+        <span class="kw">let </span>is_disabled = ctx.is_disabled();
+        <span class="kw">let </span>size = ctx.size();
 
-        <span class="ident"><span class="kw">super</span>::common::print_common_button</span>(
-            (<span class="self">self</span>.<span class="ident">accent</span>, <span class="self">self</span>.<span class="ident">flat</span>, <span class="ident">is_active</span>, <span class="ident">is_hot</span>, <span class="ident">is_disabled</span>),
-            <span class="ident">ctx</span>,
-            <span class="ident">size</span>,
-            <span class="ident">env</span>,
+        <span class="kw">super</span>::common::print_common_button(
+            (<span class="self">self</span>.accent, <span class="self">self</span>.flat, is_active, is_hot, is_disabled),
+            ctx,
+            size,
+            env,
         );
 
-        <span class="ident">ctx</span>.<span class="ident">with_save</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">ctx</span><span class="op">|</span> {
-            <span class="ident">ctx</span>.<span class="ident">transform</span>(<span class="ident">Affine::translate</span>(
-                ((<span class="ident">size</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">icon_path</span>.<span class="ident">bounding_box</span>().<span class="ident">size</span>()) <span class="op">/</span> <span class="number">2.</span>).<span class="ident">to_vec2</span>(),
+        ctx.with_save(<span class="kw">move </span>|ctx| {
+            ctx.transform(Affine::translate(
+                ((size - <span class="self">self</span>.icon_path.bounding_box().size()) / <span class="number">2.</span>).to_vec2(),
             ));
-            <span class="ident">ctx</span>.<span class="ident">fill_even_odd</span>(
-                <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">icon_path</span>,
-                <span class="kw-2">&amp;</span><span class="kw">if</span> <span class="self">self</span>.<span class="ident">accent</span> {
-                    <span class="ident">PaintBrush::Color</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">theme::chrome::WHITE</span>))
-                } <span class="kw">else</span> {
-                    <span class="ident">PaintBrush::Color</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">theme::base::HIGH</span>))
+            ctx.fill_even_odd(
+                <span class="kw-2">&amp;</span><span class="self">self</span>.icon_path,
+                <span class="kw-2">&amp;</span><span class="kw">if </span><span class="self">self</span>.accent {
+                    PaintBrush::Color(env.get(theme::chrome::WHITE))
+                } <span class="kw">else </span>{
+                    PaintBrush::Color(env.get(theme::base::HIGH))
                 },
             )
         });
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

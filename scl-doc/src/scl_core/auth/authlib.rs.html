@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/auth/authlib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>authlib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_core/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/auth/authlib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>authlib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_core/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -339,346 +339,346 @@
 <span id="339">339</span>
 <span id="340">340</span>
 <span id="341">341</span>
-</pre><pre class="rust"><code><span class="doccomment">//! 用于 authlib-injector 第三方登录的登录逻辑</span>
+</pre><pre class="rust"><code><span class="doccomment">//! 用于 authlib-injector 第三方登录的登录逻辑
 
-<span class="kw">use</span> <span class="ident">std::str::FromStr</span>;
+</span><span class="kw">use </span>std::str::FromStr;
 
-<span class="kw">use</span> <span class="ident">anyhow::Context</span>;
-<span class="kw">use</span> <span class="ident">surf::StatusCode</span>;
+<span class="kw">use </span>anyhow::Context;
+<span class="kw">use </span>surf::StatusCode;
 
-<span class="kw">use</span> <span class="kw">crate</span>::{
-    <span class="ident">auth::structs</span>::{<span class="ident">mojang</span>::<span class="kw-2">*</span>, <span class="ident">AuthMethod</span>},
-    <span class="ident">http::RequestResult</span>,
-    <span class="ident">password::Password</span>,
-    <span class="ident">prelude</span>::<span class="kw-2">*</span>,
+<span class="kw">use crate</span>::{
+    auth::structs::{mojang::<span class="kw-2">*</span>, AuthMethod},
+    http::RequestResult,
+    password::Password,
+    prelude::<span class="kw-2">*</span>,
 };
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
-<span class="kw">struct</span> <span class="ident">ServerMetaLinks</span> {
-    <span class="kw">pub</span> <span class="ident">homepage</span>: <span class="ident">String</span>,
+<span class="attribute">#[derive(Debug, Default, Deserialize)]
+#[serde(default)]
+</span><span class="kw">struct </span>ServerMetaLinks {
+    <span class="kw">pub </span>homepage: String,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
-<span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename_all</span> <span class="op">=</span> <span class="string">&quot;camelCase&quot;</span>)]</span>
-<span class="kw">struct</span> <span class="ident">ServerMeta</span> {
-    <span class="kw">pub</span> <span class="ident">server_name</span>: <span class="ident">String</span>,
-    <span class="kw">pub</span> <span class="ident">links</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ServerMetaLinks</span><span class="op">&gt;</span>,
+<span class="attribute">#[derive(Debug, Default, Deserialize)]
+#[serde(default)]
+#[serde(rename_all = <span class="string">&quot;camelCase&quot;</span>)]
+</span><span class="kw">struct </span>ServerMeta {
+    <span class="kw">pub </span>server_name: String,
+    <span class="kw">pub </span>links: <span class="prelude-ty">Option</span>&lt;ServerMetaLinks&gt;,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">struct</span> <span class="ident">APIMetaData</span> {
-    <span class="kw">pub</span> <span class="ident">meta</span>: <span class="ident">ServerMeta</span>,
+<span class="attribute">#[derive(Debug, Default, Deserialize)]
+</span><span class="kw">struct </span>APIMetaData {
+    <span class="kw">pub </span>meta: ServerMeta,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>, <span class="ident">Serialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename_all</span> <span class="op">=</span> <span class="string">&quot;camelCase&quot;</span>)]</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">RefreshBody</span> {
-    <span class="kw">pub</span> <span class="ident">access_token</span>: <span class="ident">String</span>,
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;String::is_empty&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">client_token</span>: <span class="ident">String</span>,
-    <span class="kw">pub</span> <span class="ident">request_user</span>: <span class="ident">bool</span>,
-    <span class="kw">pub</span> <span class="ident">selected_profile</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">AvaliableProfile</span><span class="op">&gt;</span>,
+<span class="attribute">#[derive(Debug, Deserialize, Serialize, PartialEq, Eq)]
+#[serde(rename_all = <span class="string">&quot;camelCase&quot;</span>)]
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>RefreshBody {
+    <span class="kw">pub </span>access_token: String,
+    <span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;String::is_empty&quot;</span>)]
+    </span><span class="kw">pub </span>client_token: String,
+    <span class="kw">pub </span>request_user: bool,
+    <span class="kw">pub </span>selected_profile: <span class="prelude-ty">Option</span>&lt;AvaliableProfile&gt;,
 }
 
-<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_head_skin</span>(<span class="ident">api_location</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">uuid</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>)<span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">uri</span> <span class="op">=</span> <span class="macro">format!</span>(
+<span class="kw">async fn </span>get_head_skin(api_location: <span class="kw-2">&amp;</span>str, uuid: <span class="kw-2">&amp;</span>str) -&gt; DynResult&lt;(Vec&lt;u8&gt;, Vec&lt;u8&gt;)&gt; {
+    <span class="kw">let </span>uri = <span class="macro">format!</span>(
         <span class="string">&quot;{}sessionserver/session/minecraft/profile/{}&quot;</span>,
-        <span class="ident">api_location</span>, <span class="ident">uuid</span>
+        api_location, uuid
     );
-    <span class="kw">let</span> <span class="ident">result</span>: <span class="ident">ProfileResponse</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::http::no_retry::get</span>(<span class="kw-2">&amp;</span><span class="ident">uri</span>)
-        .<span class="kw">await</span>
-        .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;发送获取皮肤请求到 {} 时发生错误：{:?}&quot;</span>, <span class="ident">uri</span>, <span class="ident">e</span>))<span class="question-mark">?</span>
-        .<span class="ident">body_json</span>()
-        .<span class="kw">await</span>
-        .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;接收获取皮肤响应到 {} 时发生错误：{:?}&quot;</span>, <span class="ident">uri</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">prop</span>) <span class="op">=</span> <span class="ident">result</span>
-        .<span class="ident">properties</span>
-        .<span class="ident">iter</span>()
-        .<span class="ident">find</span>(<span class="op">|</span><span class="ident">a</span><span class="op">|</span> <span class="ident">a</span>.<span class="ident">name</span>.<span class="ident">as_str</span>() <span class="op">==</span> <span class="string">&quot;textures&quot;</span>)
+    <span class="kw">let </span>result: ProfileResponse = <span class="kw">crate</span>::http::no_retry::get(<span class="kw-2">&amp;</span>uri)
+        .<span class="kw">await
+        </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;发送获取皮肤请求到 {} 时发生错误：{:?}&quot;</span>, uri, e))<span class="question-mark">?
+        </span>.body_json()
+        .<span class="kw">await
+        </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;接收获取皮肤响应到 {} 时发生错误：{:?}&quot;</span>, uri, e))<span class="question-mark">?</span>;
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(prop) = result
+        .properties
+        .iter()
+        .find(|a| a.name.as_str() == <span class="string">&quot;textures&quot;</span>)
     {
-        <span class="kw">let</span> <span class="ident">texture_raw</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">prop</span>.<span class="ident">value</span>;
-        <span class="kw">let</span> <span class="ident">texture_raw</span> <span class="op">=</span> <span class="ident">base64::decode</span>(<span class="kw-2">&amp;</span><span class="ident">texture_raw</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">texture_data</span>: <span class="ident">ProfileTexture</span> <span class="op">=</span> <span class="ident">serde_json::from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">texture_raw</span>)<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">textures</span>) <span class="op">=</span> <span class="ident">texture_data</span>.<span class="ident">textures</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">skin</span>) <span class="op">=</span> <span class="ident">textures</span>.<span class="ident">skin</span> {
-                <span class="kw">let</span> <span class="ident">skin_url</span> <span class="op">=</span> <span class="ident">skin</span>.<span class="ident">url</span>;
-                <span class="ident"><span class="kw">crate</span>::auth::parse_head_skin</span>(
-                    <span class="ident"><span class="kw">crate</span>::http::no_retry::get</span>(<span class="ident">skin_url</span>)
-                        .<span class="ident">recv_bytes</span>()
-                        .<span class="kw">await</span>
-                        .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>,
+        <span class="kw">let </span>texture_raw = <span class="kw-2">&amp;</span>prop.value;
+        <span class="kw">let </span>texture_raw = base64::decode(<span class="kw-2">&amp;</span>texture_raw)<span class="question-mark">?</span>;
+        <span class="kw">let </span>texture_data: ProfileTexture = serde_json::from_slice(<span class="kw-2">&amp;</span>texture_raw)<span class="question-mark">?</span>;
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(textures) = texture_data.textures {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(skin) = textures.skin {
+                <span class="kw">let </span>skin_url = skin.url;
+                <span class="kw">crate</span>::auth::parse_head_skin(
+                    <span class="kw">crate</span>::http::no_retry::get(skin_url)
+                        .recv_bytes()
+                        .<span class="kw">await
+                        </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?</span>,
                 )
-            } <span class="kw">else</span> {
-                <span class="prelude-val">Ok</span>(<span class="ident">Default::default</span>())
+            } <span class="kw">else </span>{
+                <span class="prelude-val">Ok</span>(Default::default())
             }
-        } <span class="kw">else</span> {
-            <span class="prelude-val">Ok</span>(<span class="ident">Default::default</span>())
+        } <span class="kw">else </span>{
+            <span class="prelude-val">Ok</span>(Default::default())
         }
-    } <span class="kw">else</span> {
-        <span class="prelude-val">Ok</span>(<span class="ident">Default::default</span>())
+    } <span class="kw">else </span>{
+        <span class="prelude-val">Ok</span>(Default::default())
     }
 }
 
-<span class="doccomment">/// 根据初次登陆/二次验证取得的用户令牌，刷新验证出可供正常游戏的登录令牌</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 详情参考[启动器技术规范](https://github.com/yushijinhun/authlib-injector/wiki/Yggdrasil-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%8A%80%E6%9C%AF%E8%A7%84%E8%8C%83#%E5%88%B7%E6%96%B0)</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">refresh_token</span>(
-    <span class="ident">auth_method</span>: <span class="ident">AuthMethod</span>,
-    <span class="ident">client_token</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-    <span class="ident">provide_selected_profile</span>: <span class="ident">bool</span>,
-) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">AuthMethod</span><span class="op">&gt;</span> {
-    <span class="kw">if</span> <span class="kw">let</span> <span class="ident">AuthMethod::AuthlibInjector</span> {
-        <span class="ident">api_location</span>,
-        <span class="ident">server_name</span>,
-        <span class="ident">server_homepage</span>,
-        <span class="ident">server_meta</span>,
-        <span class="ident">access_token</span>,
-        <span class="ident">uuid</span>,
-        <span class="ident">player_name</span>,
+<span class="doccomment">/// 根据初次登陆/二次验证取得的用户令牌，刷新验证出可供正常游戏的登录令牌
+///
+/// 详情参考[启动器技术规范](https://github.com/yushijinhun/authlib-injector/wiki/Yggdrasil-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%8A%80%E6%9C%AF%E8%A7%84%E8%8C%83#%E5%88%B7%E6%96%B0)
+</span><span class="kw">pub async fn </span>refresh_token(
+    auth_method: AuthMethod,
+    client_token: <span class="kw-2">&amp;</span>str,
+    provide_selected_profile: bool,
+) -&gt; DynResult&lt;AuthMethod&gt; {
+    <span class="kw">if let </span>AuthMethod::AuthlibInjector {
+        api_location,
+        server_name,
+        server_homepage,
+        server_meta,
+        access_token,
+        uuid,
+        player_name,
         ..
-    } <span class="op">=</span> <span class="ident">auth_method</span>
+    } = auth_method
     {
-        <span class="kw">let</span> <span class="ident">res</span>: <span class="ident">RequestResult</span><span class="op">&lt;</span><span class="ident">AuthenticateResponse</span><span class="op">&gt;</span> <span class="op">=</span> <span class="macro">dbg!</span>(<span class="ident"><span class="kw">crate</span>::http::no_retry::post_data</span>(
-            <span class="macro">dbg!</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;{}authserver/refresh&quot;</span>, <span class="ident">api_location</span>)),
-            <span class="macro">dbg!</span>(<span class="kw-2">&amp;</span><span class="ident">RefreshBody</span> {
-                <span class="ident">access_token</span>: <span class="ident">access_token</span>.<span class="ident">to_owned_string</span>(),
-                <span class="ident">client_token</span>: <span class="ident">client_token</span>.<span class="ident">to_owned</span>(),
-                <span class="ident">request_user</span>: <span class="bool-val">true</span>,
-                <span class="ident">selected_profile</span>: <span class="kw">if</span> <span class="ident">provide_selected_profile</span> {
-                    <span class="prelude-val">Some</span>(<span class="ident">AvaliableProfile</span> {
-                        <span class="ident">name</span>: <span class="ident">player_name</span>.<span class="ident">to_owned</span>(),
-                        <span class="ident">id</span>: <span class="ident">uuid</span>.<span class="ident">to_owned</span>(),
+        <span class="kw">let </span>res: RequestResult&lt;AuthenticateResponse&gt; = <span class="macro">dbg!</span>(<span class="kw">crate</span>::http::no_retry::post_data(
+            <span class="macro">dbg!</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;{}authserver/refresh&quot;</span>, api_location)),
+            <span class="macro">dbg!</span>(<span class="kw-2">&amp;</span>RefreshBody {
+                access_token: access_token.to_owned_string(),
+                client_token: client_token.to_owned(),
+                request_user: <span class="bool-val">true</span>,
+                selected_profile: <span class="kw">if </span>provide_selected_profile {
+                    <span class="prelude-val">Some</span>(AvaliableProfile {
+                        name: player_name.to_owned(),
+                        id: uuid.to_owned(),
                     })
-                } <span class="kw">else</span> {
-                    <span class="prelude-val">None</span>
-                },
+                } <span class="kw">else </span>{
+                    <span class="prelude-val">None
+                </span>},
             }),
         )
-        .<span class="kw">await</span>
-        .<span class="ident">context</span>(<span class="string">&quot;无法请求刷新令牌接口&quot;</span>)<span class="question-mark">?</span>);
+        .<span class="kw">await
+        </span>.context(<span class="string">&quot;无法请求刷新令牌接口&quot;</span>)<span class="question-mark">?</span>);
 
-        <span class="kw">match</span> <span class="ident">res</span> {
-            <span class="ident">RequestResult::Ok</span>(<span class="ident">res</span>) =&gt; {
-                <span class="kw">let</span> <span class="ident">selected_profile</span> <span class="op">=</span> <span class="ident">res</span>.<span class="ident">selected_profile</span>.<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">AvaliableProfile</span> {
-                    <span class="ident">name</span>: <span class="ident">player_name</span>.<span class="ident">to_owned</span>(),
-                    <span class="ident">id</span>: <span class="ident">uuid</span>.<span class="ident">to_owned</span>(),
+        <span class="kw">match </span>res {
+            RequestResult::Ok(res) =&gt; {
+                <span class="kw">let </span>selected_profile = res.selected_profile.unwrap_or_else(|| AvaliableProfile {
+                    name: player_name.to_owned(),
+                    id: uuid.to_owned(),
                 });
 
-                <span class="kw">let</span> (<span class="ident">head_skin</span>, <span class="ident">hat_skin</span>) <span class="op">=</span>
-                    <span class="ident">get_head_skin</span>(<span class="kw-2">&amp;</span><span class="ident">api_location</span>, <span class="kw-2">&amp;</span><span class="ident">selected_profile</span>.<span class="ident">id</span>).<span class="kw">await</span><span class="question-mark">?</span>;
+                <span class="kw">let </span>(head_skin, hat_skin) =
+                    get_head_skin(<span class="kw-2">&amp;</span>api_location, <span class="kw-2">&amp;</span>selected_profile.id).<span class="kw">await</span><span class="question-mark">?</span>;
 
-                <span class="kw">let</span> <span class="ident">refreshed_method</span> <span class="op">=</span> <span class="ident">AuthMethod::AuthlibInjector</span> {
-                    <span class="ident">api_location</span>: <span class="ident">api_location</span>.<span class="ident">to_owned</span>(),
-                    <span class="ident">server_name</span>: <span class="ident">server_name</span>.<span class="ident">to_owned</span>(),
-                    <span class="ident">server_homepage</span>,
-                    <span class="ident">server_meta</span>,
-                    <span class="ident">access_token</span>: <span class="ident">res</span>.<span class="ident">access_token</span>.<span class="ident">into</span>(),
-                    <span class="ident">uuid</span>: <span class="ident">selected_profile</span>.<span class="ident">id</span>,
-                    <span class="ident">player_name</span>: <span class="ident">selected_profile</span>.<span class="ident">name</span>,
-                    <span class="ident">head_skin</span>,
-                    <span class="ident">hat_skin</span>,
+                <span class="kw">let </span>refreshed_method = AuthMethod::AuthlibInjector {
+                    api_location: api_location.to_owned(),
+                    server_name: server_name.to_owned(),
+                    server_homepage,
+                    server_meta,
+                    access_token: res.access_token.into(),
+                    uuid: selected_profile.id,
+                    player_name: selected_profile.name,
+                    head_skin,
+                    hat_skin,
                 };
 
-                <span class="prelude-val">Ok</span>(<span class="ident">refreshed_method</span>)
+                <span class="prelude-val">Ok</span>(refreshed_method)
             }
-            <span class="ident">RequestResult::Err</span>(<span class="ident">a</span>) =&gt; {
-                <span class="kw">if</span> <span class="ident">a</span>.<span class="ident">error_message</span>.<span class="ident">is_empty</span>() {
-                    <span class="kw">match</span> <span class="ident">a</span>.<span class="ident">error</span>.<span class="ident">as_str</span>() {
-                        <span class="string">&quot;ForbiddenOperationException&quot;</span> =&gt; <span class="macro">anyhow::bail!</span>(<span class="string">&quot;未授权的访问&quot;</span>),
-                        <span class="string">&quot;IllegalArgumentException&quot;</span> =&gt; <span class="macro">anyhow::bail!</span>(<span class="string">&quot;非法令牌绑定&quot;</span>),
-                        <span class="kw">_</span> =&gt; <span class="macro">anyhow::bail!</span>(<span class="string">&quot;未知原因：{}&quot;</span>, <span class="ident">a</span>.<span class="ident">error</span>),
+            RequestResult::Err(a) =&gt; {
+                <span class="kw">if </span>a.error_message.is_empty() {
+                    <span class="kw">match </span>a.error.as_str() {
+                        <span class="string">&quot;ForbiddenOperationException&quot; </span>=&gt; <span class="macro">anyhow::bail!</span>(<span class="string">&quot;未授权的访问&quot;</span>),
+                        <span class="string">&quot;IllegalArgumentException&quot; </span>=&gt; <span class="macro">anyhow::bail!</span>(<span class="string">&quot;非法令牌绑定&quot;</span>),
+                        <span class="kw">_ </span>=&gt; <span class="macro">anyhow::bail!</span>(<span class="string">&quot;未知原因：{}&quot;</span>, a.error),
                     }
-                } <span class="kw">else</span> {
-                    <span class="macro">anyhow::bail!</span>(<span class="string">&quot;{}：{}&quot;</span>, <span class="ident">a</span>.<span class="ident">error</span>, <span class="ident">a</span>.<span class="ident">error_message</span>)
+                } <span class="kw">else </span>{
+                    <span class="macro">anyhow::bail!</span>(<span class="string">&quot;{}：{}&quot;</span>, a.error, a.error_message)
                 }
             }
         }
-    } <span class="kw">else</span> {
+    } <span class="kw">else </span>{
         <span class="macro">anyhow::bail!</span>(<span class="string">&quot;此函数只支持 Authlib Injector 第三方登录&quot;</span>)
     }
 }
 
-<span class="doccomment">/// 使用指定的 Authlib 服务器地址和对应的账户密码开始进行 Authlib 第三方登录验证</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 根据[启动器技术规范](https://github.com/yushijinhun/authlib-injector/wiki/%E5%90%AF%E5%8A%A8%E5%99%A8%E6%8A%80%E6%9C%AF%E8%A7%84%E8%8C%83)编写</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 如果验证成功，则会返回这个账户旗下所有角色。</span>
-<span class="doccomment">/// 如果用户名和角色名称一致，则只会返回那个角色。</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">start_auth</span>(
-    <span class="ident">_ctx</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">impl</span> <span class="ident">Reporter</span><span class="op">&gt;</span>,
-    <span class="ident">authlib_host</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-    <span class="ident">username</span>: <span class="ident">String</span>,
-    <span class="ident">password</span>: <span class="ident">Password</span>,
-    <span class="ident">client_token</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">AuthMethod</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="comment">// 找到 API 地址，使用 ALI</span>
-    <span class="kw">let</span> <span class="ident">api_location</span> <span class="op">=</span> {
-        <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::http::get</span>(<span class="ident">authlib_host</span>)
-            .<span class="kw">await</span>
-            .<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;无法请求 Authlib API 服务器：{}&quot;</span>, <span class="ident">authlib_host</span>))<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">h</span>) <span class="op">=</span> <span class="ident">a</span>.<span class="ident">header</span>(<span class="string">&quot;X-Authlib-Injector-API-Location&quot;</span>) {
-            <span class="ident">h</span>.<span class="ident">last</span>().<span class="ident">to_string</span>()
-        } <span class="kw">else</span> {
-            <span class="ident">authlib_host</span>.<span class="ident">to_owned</span>()
+<span class="doccomment">/// 使用指定的 Authlib 服务器地址和对应的账户密码开始进行 Authlib 第三方登录验证
+///
+/// 根据[启动器技术规范](https://github.com/yushijinhun/authlib-injector/wiki/%E5%90%AF%E5%8A%A8%E5%99%A8%E6%8A%80%E6%9C%AF%E8%A7%84%E8%8C%83)编写
+///
+/// 如果验证成功，则会返回这个账户旗下所有角色。
+/// 如果用户名和角色名称一致，则只会返回那个角色。
+</span><span class="kw">pub async fn </span>start_auth(
+    _ctx: <span class="prelude-ty">Option</span>&lt;<span class="kw">impl </span>Reporter&gt;,
+    authlib_host: <span class="kw-2">&amp;</span>str,
+    username: String,
+    password: Password,
+    client_token: <span class="kw-2">&amp;</span>str,
+) -&gt; DynResult&lt;Vec&lt;AuthMethod&gt;&gt; {
+    <span class="comment">// 找到 API 地址，使用 ALI
+    </span><span class="kw">let </span>api_location = {
+        <span class="kw">let </span>a = <span class="kw">crate</span>::http::get(authlib_host)
+            .<span class="kw">await
+            </span>.map_err(|<span class="kw">_</span>| <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;无法请求 Authlib API 服务器：{}&quot;</span>, authlib_host))<span class="question-mark">?</span>;
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(h) = a.header(<span class="string">&quot;X-Authlib-Injector-API-Location&quot;</span>) {
+            h.last().to_string()
+        } <span class="kw">else </span>{
+            authlib_host.to_owned()
         }
     };
 
-    <span class="comment">// 处理链接格式</span>
-    <span class="kw">let</span> <span class="ident">api_location</span> <span class="op">=</span> {
-        <span class="kw">if</span> <span class="ident">api_location</span>.<span class="ident">starts_with</span>(<span class="string">&quot;http&quot;</span>) {
-            <span class="ident">url::Url::parse</span>(<span class="kw-2">&amp;</span><span class="ident">api_location</span>)<span class="question-mark">?</span>
-        } <span class="kw">else</span> {
-            <span class="ident">url::Url::parse</span>(<span class="ident">authlib_host</span>)<span class="question-mark">?</span>.<span class="ident">join</span>(<span class="kw-2">&amp;</span><span class="ident">api_location</span>)<span class="question-mark">?</span>
-        }
+    <span class="comment">// 处理链接格式
+    </span><span class="kw">let </span>api_location = {
+        <span class="kw">if </span>api_location.starts_with(<span class="string">&quot;http&quot;</span>) {
+            url::Url::parse(<span class="kw-2">&amp;</span>api_location)<span class="question-mark">?
+        </span>} <span class="kw">else </span>{
+            url::Url::parse(authlib_host)<span class="question-mark">?</span>.join(<span class="kw-2">&amp;</span>api_location)<span class="question-mark">?
+        </span>}
     };
 
-    <span class="kw">let</span> <span class="ident">api_location</span> <span class="op">=</span> <span class="ident">api_location</span>.<span class="ident">to_string</span>();
-    <span class="kw">let</span> <span class="ident">api_location</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">api_location</span>.<span class="ident">ends_with</span>(<span class="string">&#39;/&#39;</span>) {
-        <span class="ident">api_location</span>
-    } <span class="kw">else</span> {
-        <span class="macro">format!</span>(<span class="string">&quot;{}/&quot;</span>, <span class="ident">api_location</span>)
+    <span class="kw">let </span>api_location = api_location.to_string();
+    <span class="kw">let </span>api_location = <span class="kw">if </span>api_location.ends_with(<span class="string">&#39;/&#39;</span>) {
+        api_location
+    } <span class="kw">else </span>{
+        <span class="macro">format!</span>(<span class="string">&quot;{}/&quot;</span>, api_location)
     };
-    <span class="kw">let</span> <span class="ident">api_location_url</span> <span class="op">=</span> <span class="ident">url::Url::from_str</span>(<span class="kw-2">&amp;</span><span class="ident">api_location</span>)<span class="question-mark">?</span>;
+    <span class="kw">let </span>api_location_url = url::Url::from_str(<span class="kw-2">&amp;</span>api_location)<span class="question-mark">?</span>;
 
-    <span class="kw">let</span> <span class="ident">meta_res</span>: <span class="ident">RequestResult</span><span class="op">&lt;</span><span class="ident">APIMetaData</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::http::no_retry::get_data</span>(<span class="kw-2">&amp;</span><span class="ident">api_location</span>)
-        .<span class="kw">await</span>
-        .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;无法接收 Authlib 服务器元数据响应：{:?}&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
+    <span class="kw">let </span>meta_res: RequestResult&lt;APIMetaData&gt; = <span class="kw">crate</span>::http::no_retry::get_data(<span class="kw-2">&amp;</span>api_location)
+        .<span class="kw">await
+        </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;无法接收 Authlib 服务器元数据响应：{:?}&quot;</span>, e))<span class="question-mark">?</span>;
 
-    <span class="kw">let</span> (<span class="ident">server_name</span>, <span class="ident">server_homepage</span>) <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="ident">RequestResult::Ok</span>(<span class="ident">meta</span>) <span class="op">=</span> <span class="ident">meta_res</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> (<span class="ident">String::new</span>(), <span class="ident">String::new</span>());
-        <span class="kw">if</span> <span class="ident">meta</span>.<span class="ident">meta</span>.<span class="ident">server_name</span>.<span class="ident">is_empty</span>() {
-            <span class="ident">result</span>.<span class="number">0</span> <span class="op">=</span> <span class="ident">url::Url::from_str</span>(<span class="kw-2">&amp;</span><span class="ident">api_location</span>)<span class="question-mark">?</span>
-                .<span class="ident">host</span>()
-                .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;无法取得 Authlib 服务器接口的 Host 部分&quot;</span>))<span class="question-mark">?</span>
-                .<span class="ident">to_string</span>();
-        } <span class="kw">else</span> {
-            <span class="ident">result</span>.<span class="number">0</span> <span class="op">=</span> <span class="ident">meta</span>.<span class="ident">meta</span>.<span class="ident">server_name</span>;
+    <span class="kw">let </span>(server_name, server_homepage) = <span class="kw">if let </span>RequestResult::Ok(meta) = meta_res {
+        <span class="kw">let </span><span class="kw-2">mut </span>result = (String::new(), String::new());
+        <span class="kw">if </span>meta.meta.server_name.is_empty() {
+            result.<span class="number">0 </span>= url::Url::from_str(<span class="kw-2">&amp;</span>api_location)<span class="question-mark">?
+                </span>.host()
+                .ok_or_else(|| <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;无法取得 Authlib 服务器接口的 Host 部分&quot;</span>))<span class="question-mark">?
+                </span>.to_string();
+        } <span class="kw">else </span>{
+            result.<span class="number">0 </span>= meta.meta.server_name;
         }
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">server_homepage</span>) <span class="op">=</span> <span class="ident">meta</span>.<span class="ident">meta</span>.<span class="ident">links</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">a</span><span class="op">|</span> <span class="ident">a</span>.<span class="ident">homepage</span>) {
-            <span class="ident">result</span>.<span class="number">1</span> <span class="op">=</span> <span class="ident">server_homepage</span>;
-        } <span class="kw">else</span> {
-            <span class="ident">result</span>.<span class="number">1</span> <span class="op">=</span> <span class="ident">api_location_url</span>.<span class="ident">origin</span>().<span class="ident">ascii_serialization</span>();
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(server_homepage) = meta.meta.links.map(|a| a.homepage) {
+            result.<span class="number">1 </span>= server_homepage;
+        } <span class="kw">else </span>{
+            result.<span class="number">1 </span>= api_location_url.origin().ascii_serialization();
         }
-        <span class="ident">result</span>
-    } <span class="kw">else</span> {
+        result
+    } <span class="kw">else </span>{
         (
-            <span class="ident">api_location_url</span>
-                .<span class="ident">host</span>()
-                .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;无法取得 Authlib 服务器接口的 Host 部分&quot;</span>))<span class="question-mark">?</span>
-                .<span class="ident">to_string</span>(),
-            <span class="ident">api_location_url</span>.<span class="ident">origin</span>().<span class="ident">ascii_serialization</span>(),
+            api_location_url
+                .host()
+                .ok_or_else(|| <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;无法取得 Authlib 服务器接口的 Host 部分&quot;</span>))<span class="question-mark">?
+                </span>.to_string(),
+            api_location_url.origin().ascii_serialization(),
         )
     };
 
-    <span class="kw">let</span> <span class="ident">server_meta</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::http::no_retry::get</span>(<span class="kw-2">&amp;</span><span class="ident">api_location</span>)
-        .<span class="ident">recv_bytes</span>()
-        .<span class="kw">await</span>
-        .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;无法接收登录接口元数据：{:?}&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">server_meta</span> <span class="op">=</span> <span class="ident">base64::encode</span>(<span class="ident">server_meta</span>);
+    <span class="kw">let </span>server_meta = <span class="kw">crate</span>::http::no_retry::get(<span class="kw-2">&amp;</span>api_location)
+        .recv_bytes()
+        .<span class="kw">await
+        </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;无法接收登录接口元数据：{:?}&quot;</span>, e))<span class="question-mark">?</span>;
+    <span class="kw">let </span>server_meta = base64::encode(server_meta);
 
-    <span class="comment">// 登录链接</span>
-    <span class="kw">let</span> <span class="ident">auth_url</span> <span class="op">=</span> <span class="macro">format!</span>(<span class="string">&quot;{}authserver/authenticate&quot;</span>, <span class="ident">api_location</span>);
-    <span class="kw">let</span> <span class="ident">auth_body</span> <span class="op">=</span> <span class="ident">AuthenticateBody</span> {
-        <span class="ident">username</span>: <span class="ident">username</span>.<span class="ident">to_owned</span>(),
-        <span class="ident">password</span>: <span class="ident">password</span>.<span class="ident">take_string</span>(),
-        <span class="ident">client_token</span>: <span class="ident">client_token</span>.<span class="ident">to_owned</span>(),
-        ..<span class="ident">Default::default</span>()
+    <span class="comment">// 登录链接
+    </span><span class="kw">let </span>auth_url = <span class="macro">format!</span>(<span class="string">&quot;{}authserver/authenticate&quot;</span>, api_location);
+    <span class="kw">let </span>auth_body = AuthenticateBody {
+        username: username.to_owned(),
+        password: password.take_string(),
+        client_token: client_token.to_owned(),
+        ..Default::default()
     };
-    <span class="kw">let</span> <span class="ident">resp</span>: <span class="ident">RequestResult</span><span class="op">&lt;</span><span class="ident">AuthenticateResponse</span><span class="op">&gt;</span> <span class="op">=</span>
-        <span class="ident"><span class="kw">crate</span>::http::no_retry::post_data</span>(<span class="kw-2">&amp;</span><span class="ident">auth_url</span>, <span class="kw-2">&amp;</span><span class="ident">auth_body</span>)
-            .<span class="kw">await</span>
-            .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;无法解析登录接口回调：{} {:?}&quot;</span>, <span class="ident">auth_url</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
+    <span class="kw">let </span>resp: RequestResult&lt;AuthenticateResponse&gt; =
+        <span class="kw">crate</span>::http::no_retry::post_data(<span class="kw-2">&amp;</span>auth_url, <span class="kw-2">&amp;</span>auth_body)
+            .<span class="kw">await
+            </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;无法解析登录接口回调：{} {:?}&quot;</span>, auth_url, e))<span class="question-mark">?</span>;
 
-    <span class="kw">match</span> <span class="ident">resp</span> {
-        <span class="ident">RequestResult::Ok</span>(<span class="ident">a</span>) =&gt; {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">selected_profile</span>) <span class="op">=</span> <span class="ident">a</span>.<span class="ident">selected_profile</span> {
-                <span class="kw">if</span> <span class="ident">selected_profile</span>.<span class="ident">name</span> <span class="op">==</span> <span class="ident">username</span> {
-                    <span class="kw">let</span> (<span class="ident">head_skin</span>, <span class="ident">hat_skin</span>) <span class="op">=</span>
-                        <span class="ident">get_head_skin</span>(<span class="kw-2">&amp;</span><span class="ident">api_location</span>, <span class="kw-2">&amp;</span><span class="ident">selected_profile</span>.<span class="ident">id</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-                    <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="macro">vec!</span>[<span class="ident">AuthMethod::AuthlibInjector</span> {
-                        <span class="ident">api_location</span>,
-                        <span class="ident">server_name</span>,
-                        <span class="ident">server_homepage</span>,
-                        <span class="ident">server_meta</span>,
-                        <span class="ident">access_token</span>: <span class="ident">a</span>.<span class="ident">access_token</span>.<span class="ident">into</span>(),
-                        <span class="ident">uuid</span>: <span class="ident">selected_profile</span>.<span class="ident">id</span>,
-                        <span class="ident">player_name</span>: <span class="ident">selected_profile</span>.<span class="ident">name</span>,
-                        <span class="ident">head_skin</span>,
-                        <span class="ident">hat_skin</span>,
+    <span class="kw">match </span>resp {
+        RequestResult::Ok(a) =&gt; {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(selected_profile) = a.selected_profile {
+                <span class="kw">if </span>selected_profile.name == username {
+                    <span class="kw">let </span>(head_skin, hat_skin) =
+                        get_head_skin(<span class="kw-2">&amp;</span>api_location, <span class="kw-2">&amp;</span>selected_profile.id).<span class="kw">await</span><span class="question-mark">?</span>;
+                    <span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="macro">vec!</span>[AuthMethod::AuthlibInjector {
+                        api_location,
+                        server_name,
+                        server_homepage,
+                        server_meta,
+                        access_token: a.access_token.into(),
+                        uuid: selected_profile.id,
+                        player_name: selected_profile.name,
+                        head_skin,
+                        hat_skin,
                     }]);
                 }
             }
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">a</span>.<span class="ident">available_profiles</span>.<span class="ident">is_empty</span>() {
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">profile</span>) <span class="op">=</span> <span class="ident">a</span>.<span class="ident">available_profiles</span>.<span class="ident">iter</span>().<span class="ident">find</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">name</span> <span class="op">==</span> <span class="ident">username</span>) {
-                    <span class="kw">let</span> (<span class="ident">head_skin</span>, <span class="ident">hat_skin</span>) <span class="op">=</span> <span class="ident">get_head_skin</span>(<span class="kw-2">&amp;</span><span class="ident">api_location</span>, <span class="kw-2">&amp;</span><span class="ident">profile</span>.<span class="ident">id</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-                    <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="macro">vec!</span>[<span class="ident">AuthMethod::AuthlibInjector</span> {
-                        <span class="ident">api_location</span>,
-                        <span class="ident">server_name</span>,
-                        <span class="ident">server_homepage</span>,
-                        <span class="ident">server_meta</span>,
-                        <span class="ident">access_token</span>: <span class="ident">a</span>.<span class="ident">access_token</span>.<span class="ident">into</span>(),
-                        <span class="ident">uuid</span>: <span class="ident">profile</span>.<span class="ident">id</span>.<span class="ident">to_owned</span>(),
-                        <span class="ident">player_name</span>: <span class="ident">profile</span>.<span class="ident">name</span>.<span class="ident">to_owned</span>(),
-                        <span class="ident">head_skin</span>,
-                        <span class="ident">hat_skin</span>,
+            <span class="kw">if </span>!a.available_profiles.is_empty() {
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(profile) = a.available_profiles.iter().find(|x| x.name == username) {
+                    <span class="kw">let </span>(head_skin, hat_skin) = get_head_skin(<span class="kw-2">&amp;</span>api_location, <span class="kw-2">&amp;</span>profile.id).<span class="kw">await</span><span class="question-mark">?</span>;
+                    <span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="macro">vec!</span>[AuthMethod::AuthlibInjector {
+                        api_location,
+                        server_name,
+                        server_homepage,
+                        server_meta,
+                        access_token: a.access_token.into(),
+                        uuid: profile.id.to_owned(),
+                        player_name: profile.name.to_owned(),
+                        head_skin,
+                        hat_skin,
                     }]);
                 }
 
-                <span class="kw">let</span> <span class="ident">skins_threads</span> <span class="op">=</span>
-                    <span class="ident">futures::future::join_all</span>(<span class="ident">a</span>.<span class="ident">available_profiles</span>.<span class="ident">into_iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="kw">async</span> {
-                        <span class="kw">let</span> (<span class="ident">head_skin</span>, <span class="ident">hat_skin</span>) <span class="op">=</span> <span class="ident">get_head_skin</span>(<span class="kw-2">&amp;</span><span class="ident">api_location</span>, <span class="kw-2">&amp;</span><span class="ident">x</span>.<span class="ident">id</span>)
-                            .<span class="kw">await</span>
-                            .<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> (<span class="macro">vec!</span>[<span class="number">0</span>; <span class="number">2</span> <span class="op">*</span> <span class="number">4</span> <span class="op">*</span> <span class="number">64</span>], <span class="macro">vec!</span>[<span class="number">0</span>; <span class="number">2</span> <span class="op">*</span> <span class="number">4</span> <span class="op">*</span> <span class="number">64</span>]));
-                        <span class="ident">AuthMethod::AuthlibInjector</span> {
-                            <span class="ident">api_location</span>: <span class="ident">api_location</span>.<span class="ident">to_owned</span>(),
-                            <span class="ident">server_name</span>: <span class="ident">server_name</span>.<span class="ident">to_owned</span>(),
-                            <span class="ident">server_homepage</span>: <span class="ident">server_homepage</span>.<span class="ident">to_owned</span>(),
-                            <span class="ident">server_meta</span>: <span class="ident">server_meta</span>.<span class="ident">to_owned</span>(),
-                            <span class="ident">access_token</span>: <span class="ident">a</span>.<span class="ident">access_token</span>.<span class="ident">to_owned</span>().<span class="ident">into</span>(),
-                            <span class="ident">uuid</span>: <span class="ident">x</span>.<span class="ident">id</span>,
-                            <span class="ident">player_name</span>: <span class="ident">x</span>.<span class="ident">name</span>,
-                            <span class="ident">head_skin</span>,
-                            <span class="ident">hat_skin</span>,
+                <span class="kw">let </span>skins_threads =
+                    futures::future::join_all(a.available_profiles.into_iter().map(|x| <span class="kw">async </span>{
+                        <span class="kw">let </span>(head_skin, hat_skin) = get_head_skin(<span class="kw-2">&amp;</span>api_location, <span class="kw-2">&amp;</span>x.id)
+                            .<span class="kw">await
+                            </span>.unwrap_or_else(|<span class="kw">_</span>| (<span class="macro">vec!</span>[<span class="number">0</span>; <span class="number">2 </span>* <span class="number">4 </span>* <span class="number">64</span>], <span class="macro">vec!</span>[<span class="number">0</span>; <span class="number">2 </span>* <span class="number">4 </span>* <span class="number">64</span>]));
+                        AuthMethod::AuthlibInjector {
+                            api_location: api_location.to_owned(),
+                            server_name: server_name.to_owned(),
+                            server_homepage: server_homepage.to_owned(),
+                            server_meta: server_meta.to_owned(),
+                            access_token: a.access_token.to_owned().into(),
+                            uuid: x.id,
+                            player_name: x.name,
+                            head_skin,
+                            hat_skin,
                         }
                     }))
                     .<span class="kw">await</span>;
-                <span class="prelude-val">Ok</span>(<span class="ident">skins_threads</span>)
-            } <span class="kw">else</span> {
+                <span class="prelude-val">Ok</span>(skins_threads)
+            } <span class="kw">else </span>{
                 <span class="macro">anyhow::bail!</span>(<span class="string">&quot;该账户没有可用的角色！&quot;</span>)
             }
         }
-        <span class="ident">RequestResult::Err</span>(<span class="ident">a</span>) =&gt; {
-            <span class="kw">if</span> <span class="ident">a</span>.<span class="ident">error_message</span>.<span class="ident">is_empty</span>() {
-                <span class="kw">match</span> <span class="ident">a</span>.<span class="ident">error</span>.<span class="ident">as_str</span>() {
-                    <span class="string">&quot;ForbiddenOperationException&quot;</span> =&gt; <span class="macro">anyhow::bail!</span>(<span class="string">&quot;未授权的访问&quot;</span>),
-                    <span class="string">&quot;IllegalArgumentException&quot;</span> =&gt; <span class="macro">anyhow::bail!</span>(<span class="string">&quot;非法令牌绑定&quot;</span>),
-                    <span class="kw">_</span> =&gt; <span class="macro">anyhow::bail!</span>(<span class="string">&quot;未知原因：{}&quot;</span>, <span class="ident">a</span>.<span class="ident">error</span>),
+        RequestResult::Err(a) =&gt; {
+            <span class="kw">if </span>a.error_message.is_empty() {
+                <span class="kw">match </span>a.error.as_str() {
+                    <span class="string">&quot;ForbiddenOperationException&quot; </span>=&gt; <span class="macro">anyhow::bail!</span>(<span class="string">&quot;未授权的访问&quot;</span>),
+                    <span class="string">&quot;IllegalArgumentException&quot; </span>=&gt; <span class="macro">anyhow::bail!</span>(<span class="string">&quot;非法令牌绑定&quot;</span>),
+                    <span class="kw">_ </span>=&gt; <span class="macro">anyhow::bail!</span>(<span class="string">&quot;未知原因：{}&quot;</span>, a.error),
                 }
-            } <span class="kw">else</span> {
-                <span class="macro">anyhow::bail!</span>(<span class="string">&quot;{}：{}&quot;</span>, <span class="ident">a</span>.<span class="ident">error</span>, <span class="ident">a</span>.<span class="ident">error_message</span>)
+            } <span class="kw">else </span>{
+                <span class="macro">anyhow::bail!</span>(<span class="string">&quot;{}：{}&quot;</span>, a.error, a.error_message)
             }
         }
     }
 }
 
-<span class="doccomment">/// 验证对应的访问令牌和当前启动器令牌是否可以用于现在进行游戏</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">validate</span>(
-    <span class="ident">api_location</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-    <span class="ident">access_token</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-    <span class="ident">client_token</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">post_url</span> <span class="op">=</span> <span class="ident">url::Url::parse</span>(<span class="ident">api_location</span>)<span class="question-mark">?</span>.<span class="ident">join</span>(<span class="string">&quot;authserver/validate&quot;</span>)<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">resp</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::http::post</span>(<span class="ident">post_url</span>)
-        .<span class="ident">body_json</span>(<span class="kw-2">&amp;</span><span class="ident">ValidateResponse</span> {
-            <span class="ident">access_token</span>: <span class="ident">access_token</span>.<span class="ident">to_owned</span>(),
-            <span class="ident">client_token</span>: <span class="ident">client_token</span>.<span class="ident">to_owned</span>(),
+<span class="doccomment">/// 验证对应的访问令牌和当前启动器令牌是否可以用于现在进行游戏
+</span><span class="kw">pub async fn </span>validate(
+    api_location: <span class="kw-2">&amp;</span>str,
+    access_token: <span class="kw-2">&amp;</span>str,
+    client_token: <span class="kw-2">&amp;</span>str,
+) -&gt; DynResult&lt;bool&gt; {
+    <span class="kw">let </span>post_url = url::Url::parse(api_location)<span class="question-mark">?</span>.join(<span class="string">&quot;authserver/validate&quot;</span>)<span class="question-mark">?</span>;
+    <span class="kw">let </span>resp = <span class="kw">crate</span>::http::post(post_url)
+        .body_json(<span class="kw-2">&amp;</span>ValidateResponse {
+            access_token: access_token.to_owned(),
+            client_token: client_token.to_owned(),
         })
-        .<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;无法序列化请求&quot;</span>))<span class="question-mark">?</span>
-        .<span class="kw">await</span>
-        .<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;无法请求 Authlib API 服务器：{}&quot;</span>, <span class="ident">api_location</span>))<span class="question-mark">?</span>;
-    <span class="prelude-val">Ok</span>(<span class="ident">resp</span>.<span class="ident">status</span>() <span class="op">==</span> <span class="ident">StatusCode::NoContent</span>)
+        .map_err(|<span class="kw">_</span>| <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;无法序列化请求&quot;</span>))<span class="question-mark">?
+        </span>.<span class="kw">await
+        </span>.map_err(|<span class="kw">_</span>| <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;无法请求 Authlib API 服务器：{}&quot;</span>, api_location))<span class="question-mark">?</span>;
+    <span class="prelude-val">Ok</span>(resp.status() == StatusCode::NoContent)
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

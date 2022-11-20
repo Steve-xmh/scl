@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/on_notify.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>on_notify.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/on_notify.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>on_notify.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -54,61 +54,61 @@
 <span id="54">54</span>
 <span id="55">55</span>
 <span id="56">56</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">druid</span>::{<span class="ident">widget::prelude</span>::<span class="kw-2">*</span>, <span class="ident">Selector</span>, <span class="ident">WidgetPod</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>druid::{widget::prelude::<span class="kw-2">*</span>, Selector, WidgetPod};
 
-<span class="kw">type</span> <span class="ident">OnNotifyHandler</span><span class="op">&lt;</span><span class="ident">CT</span>, <span class="ident">WT</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Fn</span>(<span class="kw-2">&amp;mut</span> <span class="ident">EventCtx</span>, <span class="kw-2">&amp;</span><span class="ident">CT</span>, <span class="kw-2">&amp;mut</span> <span class="ident">WT</span>)<span class="op">&gt;</span>;
+<span class="kw">type </span>OnNotifyHandler&lt;CT, WT&gt; = Box&lt;<span class="kw">dyn </span>Fn(<span class="kw-2">&amp;mut </span>EventCtx, <span class="kw-2">&amp;</span>CT, <span class="kw-2">&amp;mut </span>WT)&gt;;
 
-<span class="doccomment">/// 一个组件，当子组件向上抛出指定的 [`druid::Notification`] 时触发回调</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 推荐使用 [`crate::widget_ext::WidgetExt::on_notify`] 来创建本组件于一个组件上</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">OnNotify</span><span class="op">&lt;</span><span class="ident">CT</span>, <span class="ident">WT</span><span class="op">&gt;</span> {
-    <span class="ident">selector</span>: <span class="ident">Selector</span><span class="op">&lt;</span><span class="ident">CT</span><span class="op">&gt;</span>,
-    <span class="ident">handler</span>: <span class="ident">OnNotifyHandler</span><span class="op">&lt;</span><span class="ident">CT</span>, <span class="ident">WT</span><span class="op">&gt;</span>,
-    <span class="ident">inner</span>: <span class="ident">WidgetPod</span><span class="op">&lt;</span><span class="ident">WT</span>, <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">WT</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="doccomment">/// 一个组件，当子组件向上抛出指定的 [`druid::Notification`] 时触发回调
+///
+/// 推荐使用 [`crate::widget_ext::WidgetExt::on_notify`] 来创建本组件于一个组件上
+</span><span class="kw">pub struct </span>OnNotify&lt;CT, WT&gt; {
+    selector: Selector&lt;CT&gt;,
+    handler: OnNotifyHandler&lt;CT, WT&gt;,
+    inner: WidgetPod&lt;WT, Box&lt;<span class="kw">dyn </span>Widget&lt;WT&gt;&gt;&gt;,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">CT</span>, <span class="ident">WT</span><span class="op">&gt;</span> <span class="ident">OnNotify</span><span class="op">&lt;</span><span class="ident">CT</span>, <span class="ident">WT</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// 一个组件，当子组件向上抛出指定的 [`druid::Notification`] 时触发回调</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 推荐使用 [`crate::widget_ext::WidgetExt::on_notify`] 来创建本组件于一个组件上</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(
-        <span class="ident">selector</span>: <span class="ident">Selector</span><span class="op">&lt;</span><span class="ident">CT</span><span class="op">&gt;</span>,
-        <span class="ident">handler</span>: <span class="kw">impl</span> <span class="ident">Fn</span>(<span class="kw-2">&amp;mut</span> <span class="ident">EventCtx</span>, <span class="kw-2">&amp;</span><span class="ident">CT</span>, <span class="kw-2">&amp;mut</span> <span class="ident">WT</span>) <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-        <span class="ident">inner</span>: <span class="kw">impl</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">WT</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-    ) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">selector</span>,
-            <span class="ident">handler</span>: <span class="ident">Box::new</span>(<span class="ident">handler</span>),
-            <span class="ident">inner</span>: <span class="ident">WidgetPod::new</span>(<span class="ident">Box::new</span>(<span class="ident">inner</span>)),
+<span class="kw">impl</span>&lt;CT, WT&gt; OnNotify&lt;CT, WT&gt; {
+    <span class="doccomment">/// 一个组件，当子组件向上抛出指定的 [`druid::Notification`] 时触发回调
+    ///
+    /// 推荐使用 [`crate::widget_ext::WidgetExt::on_notify`] 来创建本组件于一个组件上
+    </span><span class="kw">pub fn </span>new(
+        selector: Selector&lt;CT&gt;,
+        handler: <span class="kw">impl </span>Fn(<span class="kw-2">&amp;mut </span>EventCtx, <span class="kw-2">&amp;</span>CT, <span class="kw-2">&amp;mut </span>WT) + <span class="lifetime">&#39;static</span>,
+        inner: <span class="kw">impl </span>Widget&lt;WT&gt; + <span class="lifetime">&#39;static</span>,
+    ) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            selector,
+            handler: Box::new(handler),
+            inner: WidgetPod::new(Box::new(inner)),
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">WT</span>: <span class="ident">Data</span>, <span class="ident">CT</span>: <span class="lifetime">&#39;static</span><span class="op">&gt;</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">WT</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">OnNotify</span><span class="op">&lt;</span><span class="ident">CT</span>, <span class="ident">WT</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">event</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EventCtx</span>, <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">Event</span>, <span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="ident">WT</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Event::Notification</span>(<span class="ident">c</span>) <span class="op">=</span> <span class="ident">event</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">ct</span>) <span class="op">=</span> <span class="ident">c</span>.<span class="ident">get</span>(<span class="self">self</span>.<span class="ident">selector</span>) {
-                (<span class="self">self</span>.<span class="ident">handler</span>)(<span class="ident">ctx</span>, <span class="ident">ct</span>, <span class="ident">data</span>);
+<span class="kw">impl</span>&lt;WT: Data, CT: <span class="lifetime">&#39;static</span>&gt; Widget&lt;WT&gt; <span class="kw">for </span>OnNotify&lt;CT, WT&gt; {
+    <span class="kw">fn </span>event(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>EventCtx, event: <span class="kw-2">&amp;</span>Event, data: <span class="kw-2">&amp;mut </span>WT, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">if let </span>Event::Notification(c) = event {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(ct) = c.get(<span class="self">self</span>.selector) {
+                (<span class="self">self</span>.handler)(ctx, ct, data);
             }
         }
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">event</span>(<span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>);
+        <span class="self">self</span>.inner.event(ctx, event, data, env);
     }
 
-    <span class="kw">fn</span> <span class="ident">lifecycle</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LifeCycleCtx</span>, <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">LifeCycle</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">WT</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">lifecycle</span>(<span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>)
+    <span class="kw">fn </span>lifecycle(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>LifeCycleCtx, event: <span class="kw-2">&amp;</span>LifeCycle, data: <span class="kw-2">&amp;</span>WT, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="self">self</span>.inner.lifecycle(ctx, event, data, env)
     }
 
-    <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">UpdateCtx</span>, <span class="ident">_old_data</span>: <span class="kw-2">&amp;</span><span class="ident">WT</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">WT</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">update</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>)
+    <span class="kw">fn </span>update(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>UpdateCtx, _old_data: <span class="kw-2">&amp;</span>WT, data: <span class="kw-2">&amp;</span>WT, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="self">self</span>.inner.update(ctx, data, env)
     }
 
-    <span class="kw">fn</span> <span class="ident">layout</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LayoutCtx</span>, <span class="ident">bc</span>: <span class="kw-2">&amp;</span><span class="ident">BoxConstraints</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">WT</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) -&gt; <span class="ident">Size</span> {
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">layout</span>(<span class="ident">ctx</span>, <span class="ident">bc</span>, <span class="ident">data</span>, <span class="ident">env</span>)
+    <span class="kw">fn </span>layout(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>LayoutCtx, bc: <span class="kw-2">&amp;</span>BoxConstraints, data: <span class="kw-2">&amp;</span>WT, env: <span class="kw-2">&amp;</span>Env) -&gt; Size {
+        <span class="self">self</span>.inner.layout(ctx, bc, data, env)
     }
 
-    <span class="kw">fn</span> <span class="ident">paint</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">PaintCtx</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">WT</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">paint</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>)
+    <span class="kw">fn </span>paint(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>PaintCtx, data: <span class="kw-2">&amp;</span>WT, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="self">self</span>.inner.paint(ctx, data, env)
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/download/structs.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>structs.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_core/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/download/structs.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>structs.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_core/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -113,120 +113,120 @@
 <span id="113">113</span>
 <span id="114">114</span>
 <span id="115">115</span>
-</pre><pre class="rust"><code><span class="doccomment">//! 下载源数据结构</span>
-<span class="kw">use</span> <span class="ident">std::collections::BTreeMap</span> <span class="kw">as</span> <span class="ident">Map</span>;
+</pre><pre class="rust"><code><span class="doccomment">//! 下载源数据结构
+</span><span class="kw">use </span>std::collections::BTreeMap <span class="kw">as </span>Map;
 
-<span class="kw">use</span> <span class="ident">serde::Deserialize</span>;
+<span class="kw">use </span>serde::Deserialize;
 
-<span class="doccomment">/// 当前的最新版本和全部版本信息</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">VersionManifest</span> {
-    <span class="doccomment">/// 最新的正式版本和快照版本</span>
-    <span class="kw">pub</span> <span class="ident">latest</span>: <span class="ident">LatestVersion</span>,
-    <span class="doccomment">/// 所有版本</span>
-    <span class="kw">pub</span> <span class="ident">versions</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">VersionInfo</span><span class="op">&gt;</span>,
+<span class="doccomment">/// 当前的最新版本和全部版本信息
+</span><span class="attribute">#[derive(Debug, Deserialize, PartialEq, Eq)]
+</span><span class="kw">pub struct </span>VersionManifest {
+    <span class="doccomment">/// 最新的正式版本和快照版本
+    </span><span class="kw">pub </span>latest: LatestVersion,
+    <span class="doccomment">/// 所有版本
+    </span><span class="kw">pub </span>versions: Vec&lt;VersionInfo&gt;,
 }
 
-<span class="doccomment">/// 最新的正式版本和快照版本数据结构</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LatestVersion</span> {
-    <span class="doccomment">/// 最新的正式版本号</span>
-    <span class="kw">pub</span> <span class="ident">release</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 最新的快照版本号</span>
-    <span class="kw">pub</span> <span class="ident">snapshot</span>: <span class="ident">String</span>,
+<span class="doccomment">/// 最新的正式版本和快照版本数据结构
+</span><span class="attribute">#[derive(Debug, Deserialize, PartialEq, Eq)]
+</span><span class="kw">pub struct </span>LatestVersion {
+    <span class="doccomment">/// 最新的正式版本号
+    </span><span class="kw">pub </span>release: String,
+    <span class="doccomment">/// 最新的快照版本号
+    </span><span class="kw">pub </span>snapshot: String,
 }
 
-<span class="doccomment">/// 其中一个游戏版本的信息</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">VersionInfo</span> {
-    <span class="doccomment">/// 该版本的版本号</span>
-    <span class="kw">pub</span> <span class="ident">id</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 该版本的类型，有可能是 `release` 正式版本或 `snapshot` 快照版本</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;type&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">version_type</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 该版本的版本元数据下载链接</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// &lt;https://launchermeta.mojang.com/v1/packages/e849f376647fd7160146d77002a3084efa8fb36f/21w08b.json&gt;</span>
-    <span class="kw">pub</span> <span class="ident">url</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 该版本的更新日期</span>
-    <span class="kw">pub</span> <span class="ident">time</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 该版本的发布日期</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;releaseTime&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">release_time</span>: <span class="ident">String</span>,
+<span class="doccomment">/// 其中一个游戏版本的信息
+</span><span class="attribute">#[derive(Debug, Deserialize, PartialEq, Eq, Clone, Default)]
+</span><span class="kw">pub struct </span>VersionInfo {
+    <span class="doccomment">/// 该版本的版本号
+    </span><span class="kw">pub </span>id: String,
+    <span class="doccomment">/// 该版本的类型，有可能是 `release` 正式版本或 `snapshot` 快照版本
+    </span><span class="attribute">#[serde(rename = <span class="string">&quot;type&quot;</span>)]
+    </span><span class="kw">pub </span>version_type: String,
+    <span class="doccomment">/// 该版本的版本元数据下载链接
+    ///
+    /// &lt;https://launchermeta.mojang.com/v1/packages/e849f376647fd7160146d77002a3084efa8fb36f/21w08b.json&gt;
+    </span><span class="kw">pub </span>url: String,
+    <span class="doccomment">/// 该版本的更新日期
+    </span><span class="kw">pub </span>time: String,
+    <span class="doccomment">/// 该版本的发布日期
+    </span><span class="attribute">#[serde(rename = <span class="string">&quot;releaseTime&quot;</span>)]
+    </span><span class="kw">pub </span>release_time: String,
 }
 
-<span class="doccomment">/// 资源索引信息</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">AssetIndexes</span> {
-    <span class="doccomment">/// 所有的资源文件哈希对照表，键为原文件路径</span>
-    <span class="kw">pub</span> <span class="ident">objects</span>: <span class="ident">Map</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">AssetItem</span><span class="op">&gt;</span>,
+<span class="doccomment">/// 资源索引信息
+</span><span class="attribute">#[derive(Debug, Deserialize, PartialEq, Eq)]
+</span><span class="kw">pub struct </span>AssetIndexes {
+    <span class="doccomment">/// 所有的资源文件哈希对照表，键为原文件路径
+    </span><span class="kw">pub </span>objects: Map&lt;String, AssetItem&gt;,
 }
 
-<span class="doccomment">/// 资源项目信息</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">AssetItem</span> {
-    <span class="doccomment">/// 该资源文件的 SHA1 摘要值</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 通过将其拆解成开头两个字再和原摘要值组合即可取得该资源的下载链接</span>
-    <span class="kw">pub</span> <span class="ident">hash</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 该资源文件的大小，以字节为单位</span>
-    <span class="kw">pub</span> <span class="ident">size</span>: <span class="ident">usize</span>,
+<span class="doccomment">/// 资源项目信息
+</span><span class="attribute">#[derive(Debug, Deserialize, PartialEq, Eq)]
+</span><span class="kw">pub struct </span>AssetItem {
+    <span class="doccomment">/// 该资源文件的 SHA1 摘要值
+    ///
+    /// 通过将其拆解成开头两个字再和原摘要值组合即可取得该资源的下载链接
+    </span><span class="kw">pub </span>hash: String,
+    <span class="doccomment">/// 该资源文件的大小，以字节为单位
+    </span><span class="kw">pub </span>size: usize,
 }
 
-<span class="doccomment">/// Forge 加载器的版本信息</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ForgeVersionsData</span> {
-    <span class="doccomment">/// 推荐下载的加载器版本</span>
-    <span class="kw">pub</span> <span class="ident">recommended</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ForgeItemInfo</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// 最新的加载器版本</span>
-    <span class="kw">pub</span> <span class="ident">latest</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ForgeItemInfo</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// 所有加载器版本</span>
-    <span class="kw">pub</span> <span class="ident">all_versions</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ForgeItemInfo</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Forge 加载器的版本信息
+</span><span class="attribute">#[derive(Clone, Debug)]
+</span><span class="kw">pub struct </span>ForgeVersionsData {
+    <span class="doccomment">/// 推荐下载的加载器版本
+    </span><span class="kw">pub </span>recommended: <span class="prelude-ty">Option</span>&lt;ForgeItemInfo&gt;,
+    <span class="doccomment">/// 最新的加载器版本
+    </span><span class="kw">pub </span>latest: <span class="prelude-ty">Option</span>&lt;ForgeItemInfo&gt;,
+    <span class="doccomment">/// 所有加载器版本
+    </span><span class="kw">pub </span>all_versions: Vec&lt;ForgeItemInfo&gt;,
 }
 
-<span class="doccomment">/// 一个加载器的版本信息</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ForgeItemInfo</span> {
-    <span class="doccomment">/// 该加载器的版本号</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 在 1.14 以前，Forge 使用四元数来记录版本，而后去掉了最后一个构建版本号</span>
-    <span class="kw">pub</span> <span class="ident">version</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 该加载器对应支持的原版版本号</span>
-    <span class="kw">pub</span> <span class="ident">mcversion</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 该加载器的下载文件列表，有安装器或通用版本或模组开发套件（MDK）</span>
-    <span class="kw">pub</span> <span class="ident">files</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ForgeFile</span><span class="op">&gt;</span>,
+<span class="doccomment">/// 一个加载器的版本信息
+</span><span class="attribute">#[derive(Clone, Debug, Deserialize, PartialEq, Eq)]
+</span><span class="kw">pub struct </span>ForgeItemInfo {
+    <span class="doccomment">/// 该加载器的版本号
+    ///
+    /// 在 1.14 以前，Forge 使用四元数来记录版本，而后去掉了最后一个构建版本号
+    </span><span class="kw">pub </span>version: String,
+    <span class="doccomment">/// 该加载器对应支持的原版版本号
+    </span><span class="kw">pub </span>mcversion: String,
+    <span class="doccomment">/// 该加载器的下载文件列表，有安装器或通用版本或模组开发套件（MDK）
+    </span><span class="kw">pub </span>files: Vec&lt;ForgeFile&gt;,
 }
 
-<span class="doccomment">/// 被特殊标记的 Forge 版本</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ForgePromoItem</span> {
-    <span class="doccomment">/// 该 Forge 模组加载器的版本名称</span>
-    <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 该加载器的指定版本信息</span>
-    <span class="kw">pub</span> <span class="ident">build</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ForgeItemInfo</span><span class="op">&gt;</span>,
+<span class="doccomment">/// 被特殊标记的 Forge 版本
+</span><span class="attribute">#[derive(Clone, Debug, Deserialize, PartialEq, Eq)]
+</span><span class="kw">pub struct </span>ForgePromoItem {
+    <span class="doccomment">/// 该 Forge 模组加载器的版本名称
+    </span><span class="kw">pub </span>name: String,
+    <span class="doccomment">/// 该加载器的指定版本信息
+    </span><span class="kw">pub </span>build: <span class="prelude-ty">Option</span>&lt;ForgeItemInfo&gt;,
 }
 
-<span class="doccomment">/// 该文件的下载信息</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ForgeFile</span> {
-    <span class="doccomment">/// 文件的类型，有可能是安装器或通用版本或模组开发套件（MDK）</span>
-    <span class="kw">pub</span> <span class="ident">category</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 文件的格式，有可能是 EXE ZIP JAR 等</span>
-    <span class="kw">pub</span> <span class="ident">format</span>: <span class="ident">String</span>,
+<span class="doccomment">/// 该文件的下载信息
+</span><span class="attribute">#[derive(Clone, Debug, Deserialize, PartialEq, Eq)]
+</span><span class="kw">pub struct </span>ForgeFile {
+    <span class="doccomment">/// 文件的类型，有可能是安装器或通用版本或模组开发套件（MDK）
+    </span><span class="kw">pub </span>category: String,
+    <span class="doccomment">/// 文件的格式，有可能是 EXE ZIP JAR 等
+    </span><span class="kw">pub </span>format: String,
 }
 
-<span class="doccomment">/// Optifine 的版本信息</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">OptifineVersionMeta</span> {
-    <span class="doccomment">/// 该 Optifine 对应支持的原版版本</span>
-    <span class="kw">pub</span> <span class="ident">mcversion</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 该 Optifine 的类型， 1.6+ 后此处固定为 `HD_U`</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;type&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">version_type</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 该 Optifine 的修订版本号</span>
-    <span class="kw">pub</span> <span class="ident">patch</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 该 Optifine 的下载文件名称</span>
-    <span class="kw">pub</span> <span class="ident">filename</span>: <span class="ident">String</span>,
+<span class="doccomment">/// Optifine 的版本信息
+</span><span class="attribute">#[derive(Clone, Debug, Deserialize, PartialEq, Eq)]
+</span><span class="kw">pub struct </span>OptifineVersionMeta {
+    <span class="doccomment">/// 该 Optifine 对应支持的原版版本
+    </span><span class="kw">pub </span>mcversion: String,
+    <span class="doccomment">/// 该 Optifine 的类型， 1.6+ 后此处固定为 `HD_U`
+    </span><span class="attribute">#[serde(rename = <span class="string">&quot;type&quot;</span>)]
+    </span><span class="kw">pub </span>version_type: String,
+    <span class="doccomment">/// 该 Optifine 的修订版本号
+    </span><span class="kw">pub </span>patch: String,
+    <span class="doccomment">/// 该 Optifine 的下载文件名称
+    </span><span class="kw">pub </span>filename: String,
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

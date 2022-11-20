@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/auth/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_core/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/auth/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_core/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -178,181 +178,181 @@
 <span id="178">178</span>
 </pre><pre class="rust"><code><span class="doccomment">/*!
     此模块为登录验证模块，开发者可以调用此处的函数获取不同种类账户验证之后的登录令牌。
-*/</span>
+*/
 
-<span class="kw">use</span> <span class="ident">std::io::Cursor</span>;
+</span><span class="kw">use </span>std::io::Cursor;
 
-<span class="kw">use</span> <span class="ident">image</span>::{<span class="ident">GenericImageView</span>, <span class="ident">Pixel</span>};
-<span class="kw">use</span> <span class="ident">structs::mojang</span>::{<span class="ident">ProfileResponse</span>, <span class="ident">ProfileTexture</span>};
+<span class="kw">use </span>image::{GenericImageView, Pixel};
+<span class="kw">use </span>structs::mojang::{ProfileResponse, ProfileTexture};
 
-<span class="kw">use</span> <span class="ident"><span class="self">self</span>::structs::AuthMethod</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::{
-    <span class="ident">http</span>::{<span class="ident">no_retry</span>::<span class="kw-2">*</span>, <span class="ident">RequestResult</span>},
-    <span class="ident">password::Password</span>,
-    <span class="ident">prelude</span>::<span class="kw-2">*</span>,
+<span class="kw">use </span><span class="self">self</span>::structs::AuthMethod;
+<span class="kw">use crate</span>::{
+    http::{no_retry::<span class="kw-2">*</span>, RequestResult},
+    password::Password,
+    prelude::<span class="kw-2">*</span>,
 };
 
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">authlib</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">microsoft</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">structs</span>;
+<span class="kw">pub mod </span>authlib;
+<span class="kw">pub mod </span>microsoft;
+<span class="kw">pub mod </span>structs;
 
-<span class="doccomment">/// 提取一个皮肤位图的正面头部部分，用于 GUI 展示头像</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 传入的皮肤大小必须是 32x64 或 64x64</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parse_head_skin</span>(<span class="ident">result</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>)<span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">cursor</span> <span class="op">=</span> <span class="ident">Cursor::new</span>(<span class="ident">result</span>);
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">skin_data</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">2</span> <span class="op">*</span> <span class="number">4</span> <span class="op">*</span> <span class="number">64</span>);
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">skin_hat_data</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">2</span> <span class="op">*</span> <span class="number">4</span> <span class="op">*</span> <span class="number">64</span>);
-    <span class="kw">let</span> <span class="ident">skin</span> <span class="op">=</span> <span class="ident">image::load</span>(<span class="ident">cursor</span>, <span class="ident">image::ImageFormat::Png</span>)<span class="question-mark">?</span>;
-    <span class="kw">for</span> <span class="ident">y</span> <span class="kw">in</span> <span class="number">8</span>..<span class="number">16</span> {
-        <span class="kw">for</span> <span class="ident">x</span> <span class="kw">in</span> <span class="number">8</span>..<span class="number">16</span> {
-            <span class="kw">let</span> <span class="ident">pixel</span> <span class="op">=</span> <span class="ident">skin</span>.<span class="ident">get_pixel</span>(<span class="ident">x</span>, <span class="ident">y</span>).<span class="ident">to_rgba</span>();
-            <span class="ident">skin_data</span>.<span class="ident">push</span>(<span class="ident">pixel</span>.<span class="number">0</span>[<span class="number">0</span>]);
-            <span class="ident">skin_data</span>.<span class="ident">push</span>(<span class="ident">pixel</span>.<span class="number">0</span>[<span class="number">1</span>]);
-            <span class="ident">skin_data</span>.<span class="ident">push</span>(<span class="ident">pixel</span>.<span class="number">0</span>[<span class="number">2</span>]);
-            <span class="ident">skin_data</span>.<span class="ident">push</span>(<span class="ident">pixel</span>.<span class="number">0</span>[<span class="number">3</span>]);
+<span class="doccomment">/// 提取一个皮肤位图的正面头部部分，用于 GUI 展示头像
+///
+/// 传入的皮肤大小必须是 32x64 或 64x64
+</span><span class="kw">pub fn </span>parse_head_skin(result: Vec&lt;u8&gt;) -&gt; DynResult&lt;(Vec&lt;u8&gt;, Vec&lt;u8&gt;)&gt; {
+    <span class="kw">let </span>cursor = Cursor::new(result);
+    <span class="kw">let </span><span class="kw-2">mut </span>skin_data = Vec::with_capacity(<span class="number">2 </span>* <span class="number">4 </span>* <span class="number">64</span>);
+    <span class="kw">let </span><span class="kw-2">mut </span>skin_hat_data = Vec::with_capacity(<span class="number">2 </span>* <span class="number">4 </span>* <span class="number">64</span>);
+    <span class="kw">let </span>skin = image::load(cursor, image::ImageFormat::Png)<span class="question-mark">?</span>;
+    <span class="kw">for </span>y <span class="kw">in </span><span class="number">8</span>..<span class="number">16 </span>{
+        <span class="kw">for </span>x <span class="kw">in </span><span class="number">8</span>..<span class="number">16 </span>{
+            <span class="kw">let </span>pixel = skin.get_pixel(x, y).to_rgba();
+            skin_data.push(pixel.<span class="number">0</span>[<span class="number">0</span>]);
+            skin_data.push(pixel.<span class="number">0</span>[<span class="number">1</span>]);
+            skin_data.push(pixel.<span class="number">0</span>[<span class="number">2</span>]);
+            skin_data.push(pixel.<span class="number">0</span>[<span class="number">3</span>]);
         }
     }
-    <span class="kw">for</span> <span class="ident">y</span> <span class="kw">in</span> <span class="number">8</span>..<span class="number">16</span> {
-        <span class="kw">for</span> <span class="ident">x</span> <span class="kw">in</span> <span class="number">40</span>..<span class="number">48</span> {
-            <span class="kw">let</span> <span class="ident">pixel</span> <span class="op">=</span> <span class="ident">skin</span>.<span class="ident">get_pixel</span>(<span class="ident">x</span>, <span class="ident">y</span>).<span class="ident">to_rgba</span>();
-            <span class="ident">skin_hat_data</span>.<span class="ident">push</span>(<span class="ident">pixel</span>.<span class="number">0</span>[<span class="number">0</span>]);
-            <span class="ident">skin_hat_data</span>.<span class="ident">push</span>(<span class="ident">pixel</span>.<span class="number">0</span>[<span class="number">1</span>]);
-            <span class="ident">skin_hat_data</span>.<span class="ident">push</span>(<span class="ident">pixel</span>.<span class="number">0</span>[<span class="number">2</span>]);
-            <span class="ident">skin_hat_data</span>.<span class="ident">push</span>(<span class="ident">pixel</span>.<span class="number">0</span>[<span class="number">3</span>]);
+    <span class="kw">for </span>y <span class="kw">in </span><span class="number">8</span>..<span class="number">16 </span>{
+        <span class="kw">for </span>x <span class="kw">in </span><span class="number">40</span>..<span class="number">48 </span>{
+            <span class="kw">let </span>pixel = skin.get_pixel(x, y).to_rgba();
+            skin_hat_data.push(pixel.<span class="number">0</span>[<span class="number">0</span>]);
+            skin_hat_data.push(pixel.<span class="number">0</span>[<span class="number">1</span>]);
+            skin_hat_data.push(pixel.<span class="number">0</span>[<span class="number">2</span>]);
+            skin_hat_data.push(pixel.<span class="number">0</span>[<span class="number">3</span>]);
         }
     }
-    <span class="prelude-val">Ok</span>((<span class="ident">skin_data</span>, <span class="ident">skin_hat_data</span>))
+    <span class="prelude-val">Ok</span>((skin_data, skin_hat_data))
 }
 
-<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_head_skin</span>(<span class="ident">uuid</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>)<span class="op">&gt;</span> {
-    <span class="comment">// https://sessionserver.mojang.com/session/minecraft/profile/{uuid}</span>
-    <span class="kw">let</span> <span class="ident">uri</span> <span class="op">=</span> <span class="macro">format!</span>(
+<span class="kw">async fn </span>get_head_skin(uuid: <span class="kw-2">&amp;</span>str) -&gt; DynResult&lt;(Vec&lt;u8&gt;, Vec&lt;u8&gt;)&gt; {
+    <span class="comment">// https://sessionserver.mojang.com/session/minecraft/profile/{uuid}
+    </span><span class="kw">let </span>uri = <span class="macro">format!</span>(
         <span class="string">&quot;https://sessionserver.mojang.com/session/minecraft/profile/{}&quot;</span>,
-        <span class="ident">uuid</span>
+        uuid
     );
-    <span class="kw">let</span> <span class="ident">result</span>: <span class="ident">ProfileResponse</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::http::get</span>(<span class="ident">uri</span>)
-        .<span class="kw">await</span>
-        .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>
-        .<span class="ident">body_json</span>()
-        .<span class="kw">await</span>
-        .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>;
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">prop</span>) <span class="op">=</span> <span class="ident">result</span>
-        .<span class="ident">properties</span>
-        .<span class="ident">iter</span>()
-        .<span class="ident">find</span>(<span class="op">|</span><span class="ident">a</span><span class="op">|</span> <span class="ident">a</span>.<span class="ident">name</span>.<span class="ident">as_str</span>() <span class="op">==</span> <span class="string">&quot;textures&quot;</span>)
+    <span class="kw">let </span>result: ProfileResponse = <span class="kw">crate</span>::http::get(uri)
+        .<span class="kw">await
+        </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?
+        </span>.body_json()
+        .<span class="kw">await
+        </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?</span>;
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(prop) = result
+        .properties
+        .iter()
+        .find(|a| a.name.as_str() == <span class="string">&quot;textures&quot;</span>)
     {
-        <span class="kw">let</span> <span class="ident">texture_raw</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">prop</span>.<span class="ident">value</span>;
-        <span class="kw">let</span> <span class="ident">texture_raw</span> <span class="op">=</span> <span class="ident">base64::decode</span>(<span class="kw-2">&amp;</span><span class="ident">texture_raw</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">texture_data</span>: <span class="ident">ProfileTexture</span> <span class="op">=</span> <span class="ident">serde_json::from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">texture_raw</span>)<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">textures</span>) <span class="op">=</span> <span class="ident">texture_data</span>.<span class="ident">textures</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">skin</span>) <span class="op">=</span> <span class="ident">textures</span>.<span class="ident">skin</span> {
-                <span class="kw">let</span> <span class="ident">skin_url</span> <span class="op">=</span> <span class="ident">skin</span>.<span class="ident">url</span>;
-                <span class="ident">parse_head_skin</span>(
-                    <span class="ident"><span class="kw">crate</span>::http::get</span>(<span class="ident">skin_url</span>)
-                        .<span class="ident">recv_bytes</span>()
-                        .<span class="kw">await</span>
-                        .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>,
+        <span class="kw">let </span>texture_raw = <span class="kw-2">&amp;</span>prop.value;
+        <span class="kw">let </span>texture_raw = base64::decode(<span class="kw-2">&amp;</span>texture_raw)<span class="question-mark">?</span>;
+        <span class="kw">let </span>texture_data: ProfileTexture = serde_json::from_slice(<span class="kw-2">&amp;</span>texture_raw)<span class="question-mark">?</span>;
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(textures) = texture_data.textures {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(skin) = textures.skin {
+                <span class="kw">let </span>skin_url = skin.url;
+                parse_head_skin(
+                    <span class="kw">crate</span>::http::get(skin_url)
+                        .recv_bytes()
+                        .<span class="kw">await
+                        </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?</span>,
                 )
-            } <span class="kw">else</span> {
-                <span class="prelude-val">Ok</span>(<span class="ident">Default::default</span>())
+            } <span class="kw">else </span>{
+                <span class="prelude-val">Ok</span>(Default::default())
             }
-        } <span class="kw">else</span> {
-            <span class="prelude-val">Ok</span>(<span class="ident">Default::default</span>())
+        } <span class="kw">else </span>{
+            <span class="prelude-val">Ok</span>(Default::default())
         }
-    } <span class="kw">else</span> {
-        <span class="prelude-val">Ok</span>(<span class="ident">Default::default</span>())
+    } <span class="kw">else </span>{
+        <span class="prelude-val">Ok</span>(Default::default())
     }
 }
 
-<span class="doccomment">/// 进行 Mojang 正版验证</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// **此验证方式已经弃用**，请开发者建议用户迁移到 Microsoft 账户后使用 [`crate::auth::microsoft::start_auth`] 进行 Microsoft 正版验证</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">auth_mojang</span>(
-    <span class="ident">_ctx</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">impl</span> <span class="ident">Reporter</span><span class="op">&gt;</span>,
-    <span class="ident">username</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-    <span class="ident">password</span>: <span class="kw-2">&amp;</span><span class="ident">Password</span>,
-    <span class="ident">client_token</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">AuthMethod</span><span class="op">&gt;</span> {
-    <span class="comment">// https://authserver.mojang.com/authenticate</span>
-    <span class="kw">let</span> <span class="ident">body</span> <span class="op">=</span> <span class="ident">structs::mojang::AuthenticateBody</span> {
-        <span class="ident">username</span>: <span class="ident">username</span>.<span class="ident">into</span>(),
-        <span class="ident">password</span>: <span class="ident">password</span>.<span class="ident">to_string</span>(),
-        <span class="ident">client_token</span>: <span class="ident">client_token</span>.<span class="ident">into</span>(),
-        ..<span class="ident">Default::default</span>()
+<span class="doccomment">/// 进行 Mojang 正版验证
+///
+/// **此验证方式已经弃用**，请开发者建议用户迁移到 Microsoft 账户后使用 [`crate::auth::microsoft::start_auth`] 进行 Microsoft 正版验证
+</span><span class="kw">pub async fn </span>auth_mojang(
+    _ctx: <span class="prelude-ty">Option</span>&lt;<span class="kw">impl </span>Reporter&gt;,
+    username: <span class="kw-2">&amp;</span>str,
+    password: <span class="kw-2">&amp;</span>Password,
+    client_token: <span class="kw-2">&amp;</span>str,
+) -&gt; DynResult&lt;AuthMethod&gt; {
+    <span class="comment">// https://authserver.mojang.com/authenticate
+    </span><span class="kw">let </span>body = structs::mojang::AuthenticateBody {
+        username: username.into(),
+        password: password.to_string(),
+        client_token: client_token.into(),
+        ..Default::default()
     };
-    <span class="kw">let</span> <span class="ident">result</span>: <span class="ident">RequestResult</span><span class="op">&lt;</span><span class="ident">structs::mojang::AuthenticateResponse</span><span class="op">&gt;</span> <span class="op">=</span>
-        <span class="ident">post_data</span>(<span class="string">&quot;https://authserver.mojang.com/authenticate&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">body</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-    <span class="kw">match</span> <span class="ident">result</span> {
-        <span class="ident">RequestResult::Ok</span>(<span class="ident">a</span>) =&gt; {
-            <span class="kw">let</span> <span class="ident">selected_profile</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">selected_profile</span>) <span class="op">=</span> <span class="ident">a</span>.<span class="ident">selected_profile</span> {
-                <span class="ident">selected_profile</span>
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">profile</span>) <span class="op">=</span> <span class="ident">a</span>.<span class="ident">available_profiles</span>.<span class="ident">into_iter</span>().<span class="ident">next</span>() {
-                <span class="ident">profile</span> <span class="comment">// TODO: 选择所需要添加的多角色</span>
-            } <span class="kw">else</span> {
+    <span class="kw">let </span>result: RequestResult&lt;structs::mojang::AuthenticateResponse&gt; =
+        post_data(<span class="string">&quot;https://authserver.mojang.com/authenticate&quot;</span>, <span class="kw-2">&amp;</span>body).<span class="kw">await</span><span class="question-mark">?</span>;
+    <span class="kw">match </span>result {
+        RequestResult::Ok(a) =&gt; {
+            <span class="kw">let </span>selected_profile = <span class="kw">if let </span><span class="prelude-val">Some</span>(selected_profile) = a.selected_profile {
+                selected_profile
+            } <span class="kw">else if let </span><span class="prelude-val">Some</span>(profile) = a.available_profiles.into_iter().next() {
+                profile <span class="comment">// TODO: 选择所需要添加的多角色
+            </span>} <span class="kw">else </span>{
                 <span class="macro">anyhow::bail!</span>(<span class="string">&quot;该账户没有可用的角色！&quot;</span>)
             };
-            <span class="kw">let</span> (<span class="ident">head_skin</span>, <span class="ident">hat_skin</span>) <span class="op">=</span> <span class="ident">get_head_skin</span>(<span class="kw-2">&amp;</span><span class="ident">selected_profile</span>.<span class="ident">id</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-            <span class="prelude-val">Ok</span>(<span class="ident">AuthMethod::Mojang</span> {
-                <span class="ident">access_token</span>: <span class="ident">a</span>.<span class="ident">access_token</span>.<span class="ident">into</span>(),
-                <span class="ident">uuid</span>: <span class="ident">selected_profile</span>.<span class="ident">id</span>,
-                <span class="ident">player_name</span>: <span class="ident">selected_profile</span>.<span class="ident">name</span>,
-                <span class="ident">head_skin</span>,
-                <span class="ident">hat_skin</span>,
+            <span class="kw">let </span>(head_skin, hat_skin) = get_head_skin(<span class="kw-2">&amp;</span>selected_profile.id).<span class="kw">await</span><span class="question-mark">?</span>;
+            <span class="prelude-val">Ok</span>(AuthMethod::Mojang {
+                access_token: a.access_token.into(),
+                uuid: selected_profile.id,
+                player_name: selected_profile.name,
+                head_skin,
+                hat_skin,
             })
         }
-        <span class="ident">RequestResult::Err</span>(<span class="kw">_</span>) =&gt; <span class="prelude-val">Ok</span>(<span class="ident">AuthMethod::Offline</span> {
-            <span class="ident">player_name</span>: <span class="string">&quot;&quot;</span>.<span class="ident">into</span>(),
-            <span class="ident">uuid</span>: <span class="string">&quot;&quot;</span>.<span class="ident">into</span>(),
+        RequestResult::Err(<span class="kw">_</span>) =&gt; <span class="prelude-val">Ok</span>(AuthMethod::Offline {
+            player_name: <span class="string">&quot;&quot;</span>.into(),
+            uuid: <span class="string">&quot;&quot;</span>.into(),
         }),
     }
 }
 
-<span class="doccomment">/// 刷新/续期访问令牌</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">refresh_auth</span>(<span class="ident">am</span>: <span class="kw-2">&amp;mut</span> <span class="ident">AuthMethod</span>, <span class="ident">client_token</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
-    <span class="kw">if</span> <span class="kw">let</span> <span class="kw-2">&amp;mut</span> <span class="ident">AuthMethod::Microsoft</span> { .. } <span class="op">=</span> <span class="ident">am</span> {
-        <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">microsoft::refresh_auth</span>(<span class="ident">am</span>).<span class="kw">await</span>.<span class="ident">is_ok</span>());
+<span class="doccomment">/// 刷新/续期访问令牌
+</span><span class="kw">pub async fn </span>refresh_auth(am: <span class="kw-2">&amp;mut </span>AuthMethod, client_token: <span class="kw-2">&amp;</span>str) -&gt; DynResult&lt;bool&gt; {
+    <span class="kw">if let </span><span class="kw-2">&amp;mut </span>AuthMethod::Microsoft { .. } = am {
+        <span class="kw">return </span><span class="prelude-val">Ok</span>(microsoft::refresh_auth(am).<span class="kw">await</span>.is_ok());
     }
-    <span class="kw">match</span> <span class="ident">am</span> {
-        <span class="ident">AuthMethod::Mojang</span> { <span class="ident">access_token</span>, .. } =&gt; {
-            <span class="kw">let</span> <span class="ident">body</span> <span class="op">=</span> <span class="ident">structs::mojang::ValidateResponse</span> {
-                <span class="ident">access_token</span>: <span class="ident">access_token</span>.<span class="ident">to_string</span>(),
-                <span class="ident">client_token</span>: <span class="ident">client_token</span>.<span class="ident">to_owned</span>(),
+    <span class="kw">match </span>am {
+        AuthMethod::Mojang { access_token, .. } =&gt; {
+            <span class="kw">let </span>body = structs::mojang::ValidateResponse {
+                access_token: access_token.to_string(),
+                client_token: client_token.to_owned(),
             };
-            <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::http::post</span>(<span class="string">&quot;https://authserver.mojang.com/validate&quot;</span>)
-                .<span class="ident">body</span>(<span class="ident">serde_json::to_vec</span>(<span class="kw-2">&amp;</span><span class="ident">body</span>)<span class="question-mark">?</span>)
-                .<span class="ident">header</span>(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>)
-                .<span class="kw">await</span>
-                .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;发送用户信息请求失败，可能是网络问题：{:?}&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-            <span class="kw">if</span> <span class="ident">result</span>.<span class="ident">status</span>().<span class="ident">is_success</span>() {
+            <span class="kw">let </span>result = <span class="kw">crate</span>::http::post(<span class="string">&quot;https://authserver.mojang.com/validate&quot;</span>)
+                .body(serde_json::to_vec(<span class="kw-2">&amp;</span>body)<span class="question-mark">?</span>)
+                .header(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>)
+                .<span class="kw">await
+                </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;发送用户信息请求失败，可能是网络问题：{:?}&quot;</span>, e))<span class="question-mark">?</span>;
+            <span class="kw">if </span>result.status().is_success() {
                 <span class="prelude-val">Ok</span>(<span class="bool-val">true</span>)
-            } <span class="kw">else</span> {
+            } <span class="kw">else </span>{
                 <span class="prelude-val">Ok</span>(<span class="bool-val">false</span>)
             }
         }
-        <span class="ident">AuthMethod::Microsoft</span> { <span class="ident">access_token</span>, .. } =&gt; {
-            <span class="comment">// TODO: 增加正确的检测方式</span>
-            <span class="kw">let</span> <span class="ident">profile_resp</span> <span class="op">=</span>
-                <span class="ident"><span class="kw">crate</span>::http::get</span>(<span class="string">&quot;https://api.minecraftservices.com/minecraft/profile&quot;</span>)
-                    .<span class="ident">header</span>(<span class="string">&quot;Authorization&quot;</span>, <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;Bearer {}&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">access_token</span>))
-                    .<span class="kw">await</span>
-                    .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> {
-                        <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;发送用户信息请求失败，有可能是网络问题：{:?}&quot;</span>, <span class="ident">e</span>)
+        AuthMethod::Microsoft { access_token, .. } =&gt; {
+            <span class="comment">// TODO: 增加正确的检测方式
+            </span><span class="kw">let </span>profile_resp =
+                <span class="kw">crate</span>::http::get(<span class="string">&quot;https://api.minecraftservices.com/minecraft/profile&quot;</span>)
+                    .header(<span class="string">&quot;Authorization&quot;</span>, <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;Bearer {}&quot;</span>, <span class="kw-2">&amp;</span>access_token))
+                    .<span class="kw">await
+                    </span>.map_err(|e| {
+                        <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;发送用户信息请求失败，有可能是网络问题：{:?}&quot;</span>, e)
                     })<span class="question-mark">?</span>;
-            <span class="prelude-val">Ok</span>(<span class="ident">profile_resp</span>.<span class="ident">status</span>().<span class="ident">is_success</span>())
+            <span class="prelude-val">Ok</span>(profile_resp.status().is_success())
         }
-        <span class="ident">AuthMethod::AuthlibInjector</span> { .. } =&gt; {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">new_am</span>) <span class="op">=</span>
-                <span class="ident"><span class="kw">crate</span>::auth::authlib::refresh_token</span>(<span class="ident">am</span>.<span class="ident">to_owned</span>(), <span class="ident">client_token</span>, <span class="bool-val">false</span>).<span class="kw">await</span>
-            {
-                <span class="kw-2">*</span><span class="ident">am</span> <span class="op">=</span> <span class="ident">new_am</span>;
+        AuthMethod::AuthlibInjector { .. } =&gt; {
+            <span class="kw">if let </span><span class="prelude-val">Ok</span>(new_am) =
+                <span class="kw">crate</span>::auth::authlib::refresh_token(am.to_owned(), client_token, <span class="bool-val">false</span>).<span class="kw">await
+            </span>{
+                <span class="kw-2">*</span>am = new_am;
                 <span class="prelude-val">Ok</span>(<span class="bool-val">true</span>)
-            } <span class="kw">else</span> {
+            } <span class="kw">else </span>{
                 <span class="prelude-val">Ok</span>(<span class="bool-val">false</span>)
             }
         }
-        <span class="kw">_</span> =&gt; <span class="prelude-val">Ok</span>(<span class="bool-val">true</span>),
+        <span class="kw">_ </span>=&gt; <span class="prelude-val">Ok</span>(<span class="bool-val">true</span>),
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

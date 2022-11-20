@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/page_switcher.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>page_switcher.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/page_switcher.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>page_switcher.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -468,475 +468,475 @@
 <span id="468">468</span>
 <span id="469">469</span>
 <span id="470">470</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::collections</span>::{<span class="ident">HashMap</span>, <span class="ident">VecDeque</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>std::collections::{HashMap, VecDeque};
 
-<span class="kw">use</span> <span class="ident">druid</span>::{<span class="ident">piet</span>::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+<span class="kw">use </span>druid::{piet::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
 
-<span class="kw">type</span> <span class="ident">InnerBuilder</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">HashMap</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>, <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Fn</span>() -&gt; <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>;
-<span class="kw">type</span> <span class="ident">Inner</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">HashMap</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>, <span class="ident">WidgetPod</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+<span class="kw">type </span>InnerBuilder&lt;T&gt; = HashMap&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str, Box&lt;<span class="kw">dyn </span>Fn() -&gt; Box&lt;<span class="kw">dyn </span>Widget&lt;T&gt;&gt;&gt;&gt;;
+<span class="kw">type </span>Inner&lt;T&gt; = HashMap&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str, WidgetPod&lt;T, Box&lt;<span class="kw">dyn </span>Widget&lt;T&gt;&gt;&gt;&gt;;
 
-<span class="kw">const</span> <span class="ident">ANIMATION_TIME</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="number">300_000000</span>;
+<span class="kw">const </span>ANIMATION_TIME: u64 = <span class="number">300_000000</span>;
 
-<span class="doccomment">/// 当分页组件跳转到指定页面时抛出的 [`druid::Notification`]</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 参数是跳转到的当前页面 ID</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ON_PAGE</span>: <span class="ident">Selector</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Selector::new</span>(<span class="string">&quot;net.stevexmh.scl.on-page&quot;</span>);
-<span class="doccomment">/// 使分页组件跳转到指定页面时的 [`druid::Command`]</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 参数是需要跳转到的页面 ID</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PUSH_PAGE</span>: <span class="ident">Selector</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Selector::new</span>(<span class="string">&quot;net.stevexmh.scl.push-page&quot;</span>);
-<span class="doccomment">/// 当分页组件即将离开指定页面时抛出的 [`druid::Notification`]</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 参数是即将离开的页面 ID</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">POP_PAGE</span>: <span class="ident">Selector</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Selector::new</span>(<span class="string">&quot;net.stevexmh.scl.pop-page&quot;</span>);
-<span class="doccomment">/// 使分页组件回到上一个或指定页面时的 [`druid::Command`]</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 字符串为需要返回的页面，如果留空则回到上一个页面，如果非空则一直返回到该页面或回到第一页</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">QUERY_POP_PAGE</span>: <span class="ident">Selector</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Selector::new</span>(<span class="string">&quot;net.stevexmh.scl.query-pop-page&quot;</span>);
-<span class="doccomment">/// 使分页组件使用滑动动画而非缩放渐变动画的 [`druid::Command`]</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 参数为是否使用滑动动画</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SET_SLIDE_PAGE_ANIMATION</span>: <span class="ident">Selector</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> <span class="op">=</span>
-    <span class="ident">Selector::new</span>(<span class="string">&quot;net.stevexmh.scl.set-slide-page-animation&quot;</span>);
+<span class="doccomment">/// 当分页组件跳转到指定页面时抛出的 [`druid::Notification`]
+///
+/// 参数是跳转到的当前页面 ID
+</span><span class="kw">pub const </span>ON_PAGE: Selector&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt; = Selector::new(<span class="string">&quot;net.stevexmh.scl.on-page&quot;</span>);
+<span class="doccomment">/// 使分页组件跳转到指定页面时的 [`druid::Command`]
+///
+/// 参数是需要跳转到的页面 ID
+</span><span class="kw">pub const </span>PUSH_PAGE: Selector&lt;<span class="kw-2">&amp;</span>str&gt; = Selector::new(<span class="string">&quot;net.stevexmh.scl.push-page&quot;</span>);
+<span class="doccomment">/// 当分页组件即将离开指定页面时抛出的 [`druid::Notification`]
+///
+/// 参数是即将离开的页面 ID
+</span><span class="kw">pub const </span>POP_PAGE: Selector&lt;<span class="kw-2">&amp;</span>str&gt; = Selector::new(<span class="string">&quot;net.stevexmh.scl.pop-page&quot;</span>);
+<span class="doccomment">/// 使分页组件回到上一个或指定页面时的 [`druid::Command`]
+///
+/// 字符串为需要返回的页面，如果留空则回到上一个页面，如果非空则一直返回到该页面或回到第一页
+</span><span class="kw">pub const </span>QUERY_POP_PAGE: Selector&lt;<span class="kw-2">&amp;</span>str&gt; = Selector::new(<span class="string">&quot;net.stevexmh.scl.query-pop-page&quot;</span>);
+<span class="doccomment">/// 使分页组件使用滑动动画而非缩放渐变动画的 [`druid::Command`]
+///
+/// 参数为是否使用滑动动画
+</span><span class="kw">pub const </span>SET_SLIDE_PAGE_ANIMATION: Selector&lt;bool&gt; =
+    Selector::new(<span class="string">&quot;net.stevexmh.scl.set-slide-page-animation&quot;</span>);
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">enum</span> <span class="ident">AnimationType</span> {
-    <span class="ident">PushZoom</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>),
-    <span class="ident">PopZoom</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>),
-    <span class="ident">PushSlide</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>),
-    <span class="ident">PopSlide</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>),
-    <span class="comment">// Used when first started</span>
-    <span class="ident">PushMoveUp</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>),
+<span class="attribute">#[derive(Debug)]
+</span><span class="kw">enum </span>AnimationType {
+    PushZoom(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str),
+    PopZoom(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str),
+    PushSlide(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str),
+    PopSlide(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str),
+    <span class="comment">// Used when first started
+    </span>PushMoveUp(<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str),
 }
 
-<span class="doccomment">/// 一个分页组件，提供类似 WinUI 3 的缩放/滑动切换动画来切换所选页面</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 且看不到的页面会被释放，不会占用过多内存</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 每个页面必须提供一个静态的页面 ID [`str`]，作为唯一标识以进行跳转等操作</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 默认情况下，第一个被注册的页面将会作为首页被显示出来</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 之后通过发送 [`PUSH_PAGE`] 或 [`QUERY_POP_PAGE`] 来跳转/退出指定页面</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 推荐配合 [`crate::widgets::WindowWidget`] 使用，配合其返回按钮的 [`crate::widgets::BACK_PAGE_CLICKED`] 通知来更好地返回页面</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">PageSwitcher</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">page_anime_timer</span>: <span class="ident">u64</span>,
-    <span class="ident">active_page</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>,
-    <span class="ident">page_chain</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span>,
-    <span class="ident">page_anime_queue</span>: <span class="ident">VecDeque</span><span class="op">&lt;</span><span class="ident">AnimationType</span><span class="op">&gt;</span>,
-    <span class="ident">inner_builder</span>: <span class="ident">InnerBuilder</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-    <span class="ident">inner</span>: <span class="ident">Inner</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-    <span class="ident">slide_page_animation</span>: <span class="ident">bool</span>,
-    <span class="ident">skip_first_anime_frame</span>: <span class="ident">u8</span>,
+<span class="doccomment">/// 一个分页组件，提供类似 WinUI 3 的缩放/滑动切换动画来切换所选页面
+///
+/// 且看不到的页面会被释放，不会占用过多内存
+///
+/// 每个页面必须提供一个静态的页面 ID [`str`]，作为唯一标识以进行跳转等操作
+///
+/// 默认情况下，第一个被注册的页面将会作为首页被显示出来
+///
+/// 之后通过发送 [`PUSH_PAGE`] 或 [`QUERY_POP_PAGE`] 来跳转/退出指定页面
+///
+/// 推荐配合 [`crate::widgets::WindowWidget`] 使用，配合其返回按钮的 [`crate::widgets::BACK_PAGE_CLICKED`] 通知来更好地返回页面
+</span><span class="kw">pub struct </span>PageSwitcher&lt;T&gt; {
+    page_anime_timer: u64,
+    active_page: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str,
+    page_chain: Vec&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt;,
+    page_anime_queue: VecDeque&lt;AnimationType&gt;,
+    inner_builder: InnerBuilder&lt;T&gt;,
+    inner: Inner&lt;T&gt;,
+    slide_page_animation: bool,
+    skip_first_anime_frame: u8,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">PageSwitcher</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// 创建一个空白的分页组件</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident">PageSwitcher::default</span>()
+<span class="kw">impl</span>&lt;T&gt; PageSwitcher&lt;T&gt; {
+    <span class="doccomment">/// 创建一个空白的分页组件
+    </span><span class="kw">pub fn </span>new() -&gt; <span class="self">Self </span>{
+        PageSwitcher::default()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">PageSwitcher</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">page_anime_timer</span>: <span class="number">0</span>,
-            <span class="ident">active_page</span>: <span class="string">&quot;&quot;</span>,
-            <span class="ident">page_anime_queue</span>: <span class="ident">VecDeque::with_capacity</span>(<span class="number">16</span>),
-            <span class="ident">page_chain</span>: <span class="ident">Vec::with_capacity</span>(<span class="number">8</span>),
-            <span class="ident">inner_builder</span>: <span class="ident">HashMap::with_capacity</span>(<span class="number">1</span>),
-            <span class="ident">inner</span>: <span class="ident">HashMap::with_capacity</span>(<span class="number">1</span>),
-            <span class="ident">slide_page_animation</span>: <span class="bool-val">false</span>,
-            <span class="ident">skip_first_anime_frame</span>: <span class="number">0</span>,
+<span class="kw">impl</span>&lt;T&gt; Default <span class="kw">for </span>PageSwitcher&lt;T&gt; {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            page_anime_timer: <span class="number">0</span>,
+            active_page: <span class="string">&quot;&quot;</span>,
+            page_anime_queue: VecDeque::with_capacity(<span class="number">16</span>),
+            page_chain: Vec::with_capacity(<span class="number">8</span>),
+            inner_builder: HashMap::with_capacity(<span class="number">1</span>),
+            inner: HashMap::with_capacity(<span class="number">1</span>),
+            slide_page_animation: <span class="bool-val">false</span>,
+            skip_first_anime_frame: <span class="number">0</span>,
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Data</span><span class="op">&gt;</span> <span class="ident">PageSwitcher</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">clean_unused_page</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">retain</span>(<span class="op">|</span><span class="ident">k</span>, <span class="kw">_</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">page_chain</span>.<span class="ident">contains</span>(<span class="ident">k</span>));
+<span class="kw">impl</span>&lt;T: Data&gt; PageSwitcher&lt;T&gt; {
+    <span class="kw">fn </span>clean_unused_page(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="self">self</span>.inner.retain(|k, <span class="kw">_</span>| <span class="self">self</span>.page_chain.contains(k));
     }
 
-    <span class="kw">fn</span> <span class="ident">load_page</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">key</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>) {
-        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">contains_key</span>(<span class="ident">key</span>) {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">page_builder</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner_builder</span>.<span class="ident">get</span>(<span class="ident">key</span>) {
-                <span class="kw">let</span> <span class="ident">w</span> <span class="op">=</span> <span class="ident">WidgetPod::new</span>(<span class="ident">page_builder</span>()).<span class="ident">boxed</span>();
-                <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">insert</span>(<span class="ident">key</span>, <span class="ident">w</span>);
+    <span class="kw">fn </span>load_page(<span class="kw-2">&amp;mut </span><span class="self">self</span>, key: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str) {
+        <span class="kw">if </span>!<span class="self">self</span>.inner.contains_key(key) {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(page_builder) = <span class="self">self</span>.inner_builder.get(key) {
+                <span class="kw">let </span>w = WidgetPod::new(page_builder()).boxed();
+                <span class="self">self</span>.inner.insert(key, w);
             }
         }
     }
 
-    <span class="doccomment">/// 增加一个页面，需要一个页面 ID 和一个生成该页面组件的回调函数</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_page</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">key</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>,
-        <span class="ident">page_widget</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Fn</span>() -&gt; <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// 增加一个页面，需要一个页面 ID 和一个生成该页面组件的回调函数
+    </span><span class="kw">pub fn </span>add_page(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        key: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str,
+        page_widget: Box&lt;<span class="kw">dyn </span>Fn() -&gt; Box&lt;<span class="kw">dyn </span>Widget&lt;T&gt; + <span class="lifetime">&#39;static</span>&gt;&gt;,
     ) {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">page_chain</span>.<span class="ident">is_empty</span>() <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">inner_builder</span>.<span class="ident">is_empty</span>() {
-            <span class="self">self</span>.<span class="ident">page_anime_queue</span>
-                .<span class="ident">push_back</span>(<span class="ident">AnimationType::PushMoveUp</span>(<span class="ident">key</span>));
-            <span class="self">self</span>.<span class="ident">load_page</span>(<span class="ident">key</span>);
+        <span class="kw">if </span><span class="self">self</span>.page_chain.is_empty() &amp;&amp; <span class="self">self</span>.inner_builder.is_empty() {
+            <span class="self">self</span>.page_anime_queue
+                .push_back(AnimationType::PushMoveUp(key));
+            <span class="self">self</span>.load_page(key);
         }
-        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">debug_assertions</span>)]</span>
-        {
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">inner_builder</span>.<span class="ident">contains_key</span>(<span class="ident">key</span>) {
-                <span class="macro">panic!</span>(<span class="string">&quot;Page {} has already registered&quot;</span>, <span class="ident">key</span>);
+        <span class="attribute">#[cfg(debug_assertions)]
+        </span>{
+            <span class="kw">if </span><span class="self">self</span>.inner_builder.contains_key(key) {
+                <span class="macro">panic!</span>(<span class="string">&quot;Page {} has already registered&quot;</span>, key);
             }
         }
-        <span class="self">self</span>.<span class="ident">inner_builder</span>.<span class="ident">insert</span>(<span class="ident">key</span>, <span class="ident">page_widget</span>);
+        <span class="self">self</span>.inner_builder.insert(key, page_widget);
     }
 
-    <span class="doccomment">/// 以 Builder 模式增加一个页面，需要一个页面 ID 和一个生成该页面组件的回调函数</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_page</span>(
-        <span class="kw-2">mut</span> <span class="self">self</span>,
-        <span class="ident">key</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>,
-        <span class="ident">page_widget</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Fn</span>() -&gt; <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">add_page</span>(<span class="ident">key</span>, <span class="ident">page_widget</span>);
-        <span class="self">self</span>
-    }
+    <span class="doccomment">/// 以 Builder 模式增加一个页面，需要一个页面 ID 和一个生成该页面组件的回调函数
+    </span><span class="kw">pub fn </span>with_page(
+        <span class="kw-2">mut </span><span class="self">self</span>,
+        key: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str,
+        page_widget: Box&lt;<span class="kw">dyn </span>Fn() -&gt; Box&lt;<span class="kw">dyn </span>Widget&lt;T&gt; + <span class="lifetime">&#39;static</span>&gt;&gt;,
+    ) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.add_page(key, page_widget);
+        <span class="self">self
+    </span>}
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Data</span><span class="op">&gt;</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">PageSwitcher</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">event</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::EventCtx</span>,
-        <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Event</span>,
-        <span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="ident">T</span>,
-        <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>,
+<span class="kw">impl</span>&lt;T: Data&gt; Widget&lt;T&gt; <span class="kw">for </span>PageSwitcher&lt;T&gt; {
+    <span class="kw">fn </span>event(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        ctx: <span class="kw-2">&amp;mut </span>druid::EventCtx,
+        event: <span class="kw-2">&amp;</span>druid::Event,
+        data: <span class="kw-2">&amp;mut </span>T,
+        env: <span class="kw-2">&amp;</span>druid::Env,
     ) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Event::AnimFrame</span>(<span class="ident">i</span>) <span class="op">=</span> <span class="ident">event</span> {
-            <span class="kw">let</span> <span class="ident">anime_queue_is_empty</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">page_anime_queue</span>.<span class="ident">is_empty</span>();
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">anime_queue_is_empty</span> {
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">skip_first_anime_frame</span> <span class="op">==</span> <span class="number">0</span> {
-                    <span class="kw">if</span> <span class="self">self</span>.<span class="ident">page_anime_timer</span> <span class="op">==</span> <span class="number">0</span> {
-                        <span class="self">self</span>.<span class="ident">page_anime_timer</span> <span class="op">+</span><span class="op">=</span> <span class="ident">i</span>;
-                        <span class="kw">let</span> <span class="ident">preload_page</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">page_anime_queue</span>.<span class="ident">front</span>() {
-                            <span class="prelude-val">Some</span>(<span class="ident">AnimationType::PushZoom</span>(<span class="ident">page</span>))
-                            <span class="op">|</span> <span class="prelude-val">Some</span>(<span class="ident">AnimationType::PushMoveUp</span>(<span class="ident">page</span>)) =&gt; <span class="kw-2">*</span><span class="ident">page</span>,
-                            <span class="kw">_</span> =&gt; <span class="string">&quot;&quot;</span>,
+        <span class="kw">if let </span>Event::AnimFrame(i) = event {
+            <span class="kw">let </span>anime_queue_is_empty = <span class="self">self</span>.page_anime_queue.is_empty();
+            <span class="kw">if </span>!anime_queue_is_empty {
+                <span class="kw">if </span><span class="self">self</span>.skip_first_anime_frame == <span class="number">0 </span>{
+                    <span class="kw">if </span><span class="self">self</span>.page_anime_timer == <span class="number">0 </span>{
+                        <span class="self">self</span>.page_anime_timer += i;
+                        <span class="kw">let </span>preload_page = <span class="kw">match </span><span class="self">self</span>.page_anime_queue.front() {
+                            <span class="prelude-val">Some</span>(AnimationType::PushZoom(page))
+                            | <span class="prelude-val">Some</span>(AnimationType::PushMoveUp(page)) =&gt; <span class="kw-2">*</span>page,
+                            <span class="kw">_ </span>=&gt; <span class="string">&quot;&quot;</span>,
                         };
-                        <span class="kw">if</span> <span class="op">!</span><span class="ident">preload_page</span>.<span class="ident">is_empty</span>() {
-                            <span class="self">self</span>.<span class="ident">load_page</span>(<span class="ident">preload_page</span>);
-                            <span class="ident">ctx</span>.<span class="ident">children_changed</span>();
+                        <span class="kw">if </span>!preload_page.is_empty() {
+                            <span class="self">self</span>.load_page(preload_page);
+                            ctx.children_changed();
                         }
-                    } <span class="kw">else</span> {
-                        <span class="self">self</span>.<span class="ident">page_anime_timer</span> <span class="op">+</span><span class="op">=</span> <span class="ident">i</span>;
-                        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">page_anime_timer</span> <span class="op">&gt;</span> <span class="ident">ANIMATION_TIME</span> {
-                            <span class="self">self</span>.<span class="ident">page_anime_timer</span> <span class="op">=</span> <span class="number">0</span>;
-                            <span class="kw">match</span> <span class="self">self</span>.<span class="ident">page_anime_queue</span>.<span class="ident">pop_front</span>() {
-                                <span class="prelude-val">Some</span>(<span class="ident">AnimationType::PushZoom</span>(<span class="ident">page</span>))
-                                <span class="op">|</span> <span class="prelude-val">Some</span>(<span class="ident">AnimationType::PushSlide</span>(<span class="ident">page</span>))
-                                <span class="op">|</span> <span class="prelude-val">Some</span>(<span class="ident">AnimationType::PushMoveUp</span>(<span class="ident">page</span>)) =&gt; {
-                                    <span class="self">self</span>.<span class="ident">load_page</span>(<span class="ident">page</span>);
-                                    <span class="ident">ctx</span>.<span class="ident">children_changed</span>();
-                                    <span class="ident">ctx</span>.<span class="ident">request_update</span>();
-                                    <span class="self">self</span>.<span class="ident">active_page</span> <span class="op">=</span> <span class="ident">page</span>;
-                                    <span class="ident">ctx</span>.<span class="ident">submit_notification</span>(<span class="ident">ON_PAGE</span>.<span class="ident">with</span>(<span class="ident">page</span>).<span class="ident">to</span>(<span class="ident">Target::Global</span>));
-                                    <span class="self">self</span>.<span class="ident">page_chain</span>.<span class="ident">push</span>(<span class="ident">page</span>);
+                    } <span class="kw">else </span>{
+                        <span class="self">self</span>.page_anime_timer += i;
+                        <span class="kw">if </span><span class="self">self</span>.page_anime_timer &gt; ANIMATION_TIME {
+                            <span class="self">self</span>.page_anime_timer = <span class="number">0</span>;
+                            <span class="kw">match </span><span class="self">self</span>.page_anime_queue.pop_front() {
+                                <span class="prelude-val">Some</span>(AnimationType::PushZoom(page))
+                                | <span class="prelude-val">Some</span>(AnimationType::PushSlide(page))
+                                | <span class="prelude-val">Some</span>(AnimationType::PushMoveUp(page)) =&gt; {
+                                    <span class="self">self</span>.load_page(page);
+                                    ctx.children_changed();
+                                    ctx.request_update();
+                                    <span class="self">self</span>.active_page = page;
+                                    ctx.submit_notification(ON_PAGE.with(page).to(Target::Global));
+                                    <span class="self">self</span>.page_chain.push(page);
                                 }
-                                <span class="prelude-val">Some</span>(<span class="ident">AnimationType::PopZoom</span>(<span class="ident">page</span>))
-                                <span class="op">|</span> <span class="prelude-val">Some</span>(<span class="ident">AnimationType::PopSlide</span>(<span class="ident">page</span>)) =&gt; {
-                                    <span class="kw">if</span> <span class="op">!</span><span class="ident">page</span>.<span class="ident">is_empty</span>() <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">page_chain</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">page</span>) {
-                                        <span class="ident">ctx</span>.<span class="ident">submit_notification</span>(<span class="ident">POP_PAGE</span>.<span class="ident">with</span>(<span class="self">self</span>.<span class="ident">active_page</span>));
-                                        <span class="self">self</span>.<span class="ident">active_page</span> <span class="op">=</span> <span class="ident">page</span>;
-                                        <span class="ident">ctx</span>.<span class="ident">submit_notification</span>(
-                                            <span class="ident">ON_PAGE</span>.<span class="ident">with</span>(<span class="ident">page</span>).<span class="ident">to</span>(<span class="ident">Target::Global</span>),
+                                <span class="prelude-val">Some</span>(AnimationType::PopZoom(page))
+                                | <span class="prelude-val">Some</span>(AnimationType::PopSlide(page)) =&gt; {
+                                    <span class="kw">if </span>!page.is_empty() &amp;&amp; <span class="self">self</span>.page_chain.contains(<span class="kw-2">&amp;</span>page) {
+                                        ctx.submit_notification(POP_PAGE.with(<span class="self">self</span>.active_page));
+                                        <span class="self">self</span>.active_page = page;
+                                        ctx.submit_notification(
+                                            ON_PAGE.with(page).to(Target::Global),
                                         );
-                                        <span class="kw">while</span> <span class="self">self</span>.<span class="ident">page_chain</span>.<span class="ident">last</span>().<span class="ident">unwrap</span>() <span class="op">!</span><span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">page</span> {
-                                            <span class="self">self</span>.<span class="ident">page_chain</span>.<span class="ident">pop</span>();
+                                        <span class="kw">while </span><span class="self">self</span>.page_chain.last().unwrap() != <span class="kw-2">&amp;</span>page {
+                                            <span class="self">self</span>.page_chain.pop();
                                         }
-                                        <span class="self">self</span>.<span class="ident">clean_unused_page</span>();
-                                        <span class="ident">ctx</span>.<span class="ident">children_changed</span>();
-                                        <span class="ident">ctx</span>.<span class="ident">request_update</span>();
+                                        <span class="self">self</span>.clean_unused_page();
+                                        ctx.children_changed();
+                                        ctx.request_update();
                                     }
                                 }
-                                <span class="kw">_</span> =&gt; {}
+                                <span class="kw">_ </span>=&gt; {}
                             }
                         }
                     }
-                } <span class="kw">else</span> {
-                    <span class="self">self</span>.<span class="ident">skip_first_anime_frame</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
+                } <span class="kw">else </span>{
+                    <span class="self">self</span>.skip_first_anime_frame -= <span class="number">1</span>;
                 }
-                <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
-                <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
+                ctx.request_paint();
+                ctx.request_anim_frame();
             }
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Event::Command</span>(<span class="ident">cmd</span>) <span class="op">=</span> <span class="ident">event</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="ident">page</span>) <span class="op">=</span> <span class="ident">cmd</span>.<span class="ident">get</span>(<span class="ident">PUSH_PAGE</span>) {
-                <span class="self">self</span>.<span class="ident">load_page</span>(<span class="ident">page</span>);
-                <span class="ident">ctx</span>.<span class="ident">children_changed</span>();
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">contains_key</span>(<span class="ident">page</span>) {
-                    <span class="kw">if</span> <span class="self">self</span>.<span class="ident">slide_page_animation</span> {
-                        <span class="self">self</span>.<span class="ident">page_anime_queue</span>
-                            .<span class="ident">push_back</span>(<span class="ident">AnimationType::PushSlide</span>(<span class="ident">page</span>));
-                    } <span class="kw">else</span> {
-                        <span class="self">self</span>.<span class="ident">page_anime_queue</span>
-                            .<span class="ident">push_back</span>(<span class="ident">AnimationType::PushZoom</span>(<span class="ident">page</span>));
+        } <span class="kw">else if let </span>Event::Command(cmd) = event {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>page) = cmd.get(PUSH_PAGE) {
+                <span class="self">self</span>.load_page(page);
+                ctx.children_changed();
+                <span class="kw">if </span><span class="self">self</span>.inner.contains_key(page) {
+                    <span class="kw">if </span><span class="self">self</span>.slide_page_animation {
+                        <span class="self">self</span>.page_anime_queue
+                            .push_back(AnimationType::PushSlide(page));
+                    } <span class="kw">else </span>{
+                        <span class="self">self</span>.page_anime_queue
+                            .push_back(AnimationType::PushZoom(page));
                     }
-                    <span class="ident">ctx</span>.<span class="ident">request_update</span>();
-                    <span class="ident">ctx</span>.<span class="ident">request_layout</span>();
-                    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>)]</span>
-                    {
-                        <span class="self">self</span>.<span class="ident">skip_first_anime_frame</span> <span class="op">=</span> <span class="number">12</span>;
+                    ctx.request_update();
+                    ctx.request_layout();
+                    <span class="attribute">#[cfg(target_os = <span class="string">&quot;macos&quot;</span>)]
+                    </span>{
+                        <span class="self">self</span>.skip_first_anime_frame = <span class="number">12</span>;
                     }
-                    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>))]</span>
-                    {
-                        <span class="self">self</span>.<span class="ident">skip_first_anime_frame</span> <span class="op">=</span> <span class="number">1</span>;
+                    <span class="attribute">#[cfg(not(target_os = <span class="string">&quot;macos&quot;</span>))]
+                    </span>{
+                        <span class="self">self</span>.skip_first_anime_frame = <span class="number">1</span>;
                     }
-                    <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
-                } <span class="kw">else</span> {
-                    <span class="macro">panic!</span>(<span class="string">&quot;Can&#39;t find inner page called {}&quot;</span>, <span class="ident">page</span>);
+                    ctx.request_anim_frame();
+                } <span class="kw">else </span>{
+                    <span class="macro">panic!</span>(<span class="string">&quot;Can&#39;t find inner page called {}&quot;</span>, page);
                 }
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">to_page</span>) <span class="op">=</span> <span class="ident">cmd</span>.<span class="ident">get</span>(<span class="ident">QUERY_POP_PAGE</span>) {
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">page_anime_queue</span>.<span class="ident">is_empty</span>() {
-                    <span class="kw">if</span> <span class="ident">to_page</span> <span class="op">==</span> <span class="self">self</span>.<span class="ident">page_chain</span>.<span class="ident">last</span>().<span class="ident">unwrap</span>() {
-                    } <span class="kw">else</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">to_page</span>.<span class="ident">is_empty</span>() {
-                        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">page_chain</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="number">1</span> {
-                            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">slide_page_animation</span> {
-                                <span class="self">self</span>.<span class="ident">page_anime_queue</span>
-                                    .<span class="ident">push_back</span>(<span class="ident">AnimationType::PopSlide</span>(<span class="ident">to_page</span>));
-                            } <span class="kw">else</span> {
-                                <span class="self">self</span>.<span class="ident">page_anime_queue</span>
-                                    .<span class="ident">push_back</span>(<span class="ident">AnimationType::PopZoom</span>(<span class="ident">to_page</span>));
+            } <span class="kw">else if let </span><span class="prelude-val">Some</span>(to_page) = cmd.get(QUERY_POP_PAGE) {
+                <span class="kw">if </span><span class="self">self</span>.page_anime_queue.is_empty() {
+                    <span class="kw">if </span>to_page == <span class="self">self</span>.page_chain.last().unwrap() {
+                    } <span class="kw">else if </span>!to_page.is_empty() {
+                        <span class="kw">if </span><span class="self">self</span>.page_chain.len() &gt; <span class="number">1 </span>{
+                            <span class="kw">if </span><span class="self">self</span>.slide_page_animation {
+                                <span class="self">self</span>.page_anime_queue
+                                    .push_back(AnimationType::PopSlide(to_page));
+                            } <span class="kw">else </span>{
+                                <span class="self">self</span>.page_anime_queue
+                                    .push_back(AnimationType::PopZoom(to_page));
                             }
-                            <span class="self">self</span>.<span class="ident">skip_first_anime_frame</span> <span class="op">=</span> <span class="number">1</span>;
-                            <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
-                        } <span class="kw">else</span> {
+                            <span class="self">self</span>.skip_first_anime_frame = <span class="number">1</span>;
+                            ctx.request_anim_frame();
+                        } <span class="kw">else </span>{
                             <span class="macro">println!</span>(<span class="string">&quot;WARNING: Back page invoked when the page is only one!&quot;</span>)
                         }
-                    } <span class="kw">else</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">page_chain</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="number">1</span> {
-                        <span class="kw">let</span> <span class="ident">to_page</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">page_chain</span>[<span class="self">self</span>.<span class="ident">page_chain</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">2</span>];
-                        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">slide_page_animation</span> {
-                            <span class="self">self</span>.<span class="ident">page_anime_queue</span>
-                                .<span class="ident">push_back</span>(<span class="ident">AnimationType::PopSlide</span>(<span class="ident">to_page</span>));
-                        } <span class="kw">else</span> {
-                            <span class="self">self</span>.<span class="ident">page_anime_queue</span>
-                                .<span class="ident">push_back</span>(<span class="ident">AnimationType::PopZoom</span>(<span class="ident">to_page</span>));
+                    } <span class="kw">else if </span><span class="self">self</span>.page_chain.len() &gt; <span class="number">1 </span>{
+                        <span class="kw">let </span>to_page = <span class="self">self</span>.page_chain[<span class="self">self</span>.page_chain.len() - <span class="number">2</span>];
+                        <span class="kw">if </span><span class="self">self</span>.slide_page_animation {
+                            <span class="self">self</span>.page_anime_queue
+                                .push_back(AnimationType::PopSlide(to_page));
+                        } <span class="kw">else </span>{
+                            <span class="self">self</span>.page_anime_queue
+                                .push_back(AnimationType::PopZoom(to_page));
                         }
-                        <span class="self">self</span>.<span class="ident">skip_first_anime_frame</span> <span class="op">=</span> <span class="number">1</span>;
-                        <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
-                    } <span class="kw">else</span> {
+                        <span class="self">self</span>.skip_first_anime_frame = <span class="number">1</span>;
+                        ctx.request_anim_frame();
+                    } <span class="kw">else </span>{
                         <span class="macro">println!</span>(<span class="string">&quot;WARNING: Back page invoked when the page is only one!&quot;</span>)
                     }
                 }
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="ident">t</span>) <span class="op">=</span> <span class="ident">cmd</span>.<span class="ident">get</span>(<span class="ident">SET_SLIDE_PAGE_ANIMATION</span>) {
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">slide_page_animation</span> <span class="op">!</span><span class="op">=</span> <span class="ident">t</span> {
-                    <span class="self">self</span>.<span class="ident">slide_page_animation</span> <span class="op">=</span> <span class="ident">t</span>;
-                    <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+            } <span class="kw">else if let </span><span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>t) = cmd.get(SET_SLIDE_PAGE_ANIMATION) {
+                <span class="kw">if </span><span class="self">self</span>.slide_page_animation != t {
+                    <span class="self">self</span>.slide_page_animation = t;
+                    ctx.request_paint();
                 }
             }
         }
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">last_page</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">page_chain</span>.<span class="ident">last</span>() {
-            <span class="kw">if</span> <span class="ident">last_page</span> <span class="op">==</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">active_page</span> {
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">inner</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">get_mut</span>(<span class="self">self</span>.<span class="ident">active_page</span>) {
-                    <span class="kw">if</span> <span class="ident">inner</span>.<span class="ident">is_initialized</span>() <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">page_anime_queue</span>.<span class="ident">is_empty</span>() {
-                        <span class="ident">inner</span>.<span class="ident">event</span>(<span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>);
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(last_page) = <span class="self">self</span>.page_chain.last() {
+            <span class="kw">if </span>last_page == <span class="kw-2">&amp;</span><span class="self">self</span>.active_page {
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(inner) = <span class="self">self</span>.inner.get_mut(<span class="self">self</span>.active_page) {
+                    <span class="kw">if </span>inner.is_initialized() &amp;&amp; <span class="self">self</span>.page_anime_queue.is_empty() {
+                        inner.event(ctx, event, data, env);
                     }
                 }
             }
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">lifecycle</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::LifeCycleCtx</span>,
-        <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">druid::LifeCycle</span>,
-        <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>,
-        <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>,
+    <span class="kw">fn </span>lifecycle(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        ctx: <span class="kw-2">&amp;mut </span>druid::LifeCycleCtx,
+        event: <span class="kw-2">&amp;</span>druid::LifeCycle,
+        data: <span class="kw-2">&amp;</span>T,
+        env: <span class="kw-2">&amp;</span>druid::Env,
     ) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">LifeCycle::WidgetAdded</span> <span class="op">=</span> <span class="ident">event</span> {
-            <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
+        <span class="kw">if let </span>LifeCycle::WidgetAdded = event {
+            ctx.request_anim_frame();
         }
-        <span class="kw">for</span> (<span class="kw">_</span>, <span class="ident">inner</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">iter_mut</span>() {
-            <span class="ident">inner</span>.<span class="ident">lifecycle</span>(<span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>);
-        }
-    }
-
-    <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::UpdateCtx</span>, <span class="ident">_old_data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>) {
-        <span class="kw">for</span> (<span class="kw">_</span>, <span class="ident">inner</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">iter_mut</span>() {
-            <span class="ident">inner</span>.<span class="ident">update</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>);
+        <span class="kw">for </span>(<span class="kw">_</span>, inner) <span class="kw">in </span><span class="self">self</span>.inner.iter_mut() {
+            inner.lifecycle(ctx, event, data, env);
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">layout</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::LayoutCtx</span>,
-        <span class="ident">bc</span>: <span class="kw-2">&amp;</span><span class="ident">druid::BoxConstraints</span>,
-        <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>,
-        <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>,
-    ) -&gt; <span class="ident">druid::Size</span> {
-        <span class="ident">bc</span>.<span class="ident">debug_check</span>(<span class="string">&quot;PageSwitcher&quot;</span>);
-        <span class="kw">for</span> (<span class="kw">_</span>, <span class="ident">inner</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">iter_mut</span>() {
-            <span class="ident">inner</span>.<span class="ident">layout</span>(<span class="ident">ctx</span>, <span class="ident">bc</span>, <span class="ident">data</span>, <span class="ident">env</span>);
+    <span class="kw">fn </span>update(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>druid::UpdateCtx, _old_data: <span class="kw-2">&amp;</span>T, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>druid::Env) {
+        <span class="kw">for </span>(<span class="kw">_</span>, inner) <span class="kw">in </span><span class="self">self</span>.inner.iter_mut() {
+            inner.update(ctx, data, env);
         }
-        <span class="ident">bc</span>.<span class="ident">max</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">paint</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::PaintCtx</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>) {
-        <span class="kw">let</span> <span class="ident">page_mask</span> <span class="op">=</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">druid::theme::WINDOW_BACKGROUND_COLOR</span>);
-        <span class="kw">let</span> <span class="ident">anime_timer</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">page_anime_timer</span>.<span class="ident">min</span>(<span class="ident">ANIMATION_TIME</span>);
-        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">size</span>();
-        <span class="kw">let</span> <span class="ident">transparent_rect</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">region</span>().<span class="ident">bounding_box</span>();
-        <span class="kw">let</span> <span class="ident">transparent_size</span> <span class="op">=</span> <span class="ident">transparent_rect</span>.<span class="ident">size</span>();
-        <span class="kw">const</span> <span class="ident">SCALE_LEVEL</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="number">0.15</span>;
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">page_anime_queue</span>.<span class="ident">front</span>() {
-            <span class="prelude-val">Some</span>(<span class="ident">AnimationType::PushZoom</span>(<span class="ident">page</span>)) =&gt; {
-                <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> (<span class="ident">anime_timer</span> <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">/</span> <span class="ident">ANIMATION_TIME</span> <span class="kw">as</span> <span class="ident">f64</span>;
-                <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">scl_gui_animation::tween::ease_out_expo</span>(<span class="ident">x</span>);
-                <span class="kw">if</span> <span class="ident">s</span> <span class="op">&lt;</span> <span class="number">0.5</span> {
-                    <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">s</span> <span class="op">*</span> <span class="number">2.</span>;
-                    <span class="comment">// 要退出的页面</span>
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">inner</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">get_mut</span>(<span class="self">self</span>.<span class="ident">active_page</span>) {
-                        <span class="ident">ctx</span>.<span class="ident">transform</span>(
-                            <span class="ident">Affine::scale</span>(<span class="number">1.</span> <span class="op">+</span> <span class="ident">s</span> <span class="op">*</span> <span class="ident">SCALE_LEVEL</span>)
-                                <span class="op">*</span> <span class="ident">Affine::translate</span>((
-                                    <span class="ident">size</span>.<span class="ident">width</span> <span class="op">*</span> <span class="ident">s</span> <span class="op">*</span> <span class="op">-</span><span class="ident">SCALE_LEVEL</span> <span class="op">/</span> <span class="number">2.</span>,
-                                    <span class="ident">size</span>.<span class="ident">height</span> <span class="op">*</span> <span class="ident">s</span> <span class="op">*</span> <span class="op">-</span><span class="ident">SCALE_LEVEL</span> <span class="op">/</span> <span class="number">2.</span>,
+    <span class="kw">fn </span>layout(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        ctx: <span class="kw-2">&amp;mut </span>druid::LayoutCtx,
+        bc: <span class="kw-2">&amp;</span>druid::BoxConstraints,
+        data: <span class="kw-2">&amp;</span>T,
+        env: <span class="kw-2">&amp;</span>druid::Env,
+    ) -&gt; druid::Size {
+        bc.debug_check(<span class="string">&quot;PageSwitcher&quot;</span>);
+        <span class="kw">for </span>(<span class="kw">_</span>, inner) <span class="kw">in </span><span class="self">self</span>.inner.iter_mut() {
+            inner.layout(ctx, bc, data, env);
+        }
+        bc.max()
+    }
+
+    <span class="kw">fn </span>paint(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>druid::PaintCtx, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>druid::Env) {
+        <span class="kw">let </span>page_mask = env.get(druid::theme::WINDOW_BACKGROUND_COLOR);
+        <span class="kw">let </span>anime_timer = <span class="self">self</span>.page_anime_timer.min(ANIMATION_TIME);
+        <span class="kw">let </span>size = ctx.size();
+        <span class="kw">let </span>transparent_rect = ctx.region().bounding_box();
+        <span class="kw">let </span>transparent_size = transparent_rect.size();
+        <span class="kw">const </span>SCALE_LEVEL: f64 = <span class="number">0.15</span>;
+        <span class="kw">match </span><span class="self">self</span>.page_anime_queue.front() {
+            <span class="prelude-val">Some</span>(AnimationType::PushZoom(page)) =&gt; {
+                <span class="kw">let </span>x = (anime_timer <span class="kw">as </span>f64) / ANIMATION_TIME <span class="kw">as </span>f64;
+                <span class="kw">let </span>s = scl_gui_animation::tween::ease_out_expo(x);
+                <span class="kw">if </span>s &lt; <span class="number">0.5 </span>{
+                    <span class="kw">let </span>s = s * <span class="number">2.</span>;
+                    <span class="comment">// 要退出的页面
+                    </span><span class="kw">if let </span><span class="prelude-val">Some</span>(inner) = <span class="self">self</span>.inner.get_mut(<span class="self">self</span>.active_page) {
+                        ctx.transform(
+                            Affine::scale(<span class="number">1. </span>+ s * SCALE_LEVEL)
+                                * Affine::translate((
+                                    size.width * s * -SCALE_LEVEL / <span class="number">2.</span>,
+                                    size.height * s * -SCALE_LEVEL / <span class="number">2.</span>,
                                 )),
                         );
-                        <span class="comment">// ctx.apply_global_transparency(1. - s);</span>
-                        <span class="ident">inner</span>.<span class="ident">paint</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>);
-                        <span class="ident">ctx</span>.<span class="ident">fill</span>(
-                            <span class="ident">transparent_rect</span>.<span class="ident">to_owned</span>(),
-                            <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">page_mask</span>.<span class="ident">with_alpha</span>(<span class="ident">s</span>)),
+                        <span class="comment">// ctx.apply_global_transparency(1. - s);
+                        </span>inner.paint(ctx, data, env);
+                        ctx.fill(
+                            transparent_rect.to_owned(),
+                            <span class="kw-2">&amp;</span>PaintBrush::Color(page_mask.with_alpha(s)),
                         );
                     }
-                } <span class="kw">else</span> {
-                    <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> (<span class="ident">s</span> <span class="op">-</span> <span class="number">0.5</span>) <span class="op">*</span> <span class="number">2.</span>;
-                    <span class="comment">// 要进入的页面</span>
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">inner</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">get_mut</span>(<span class="ident">page</span>) {
-                        <span class="ident">ctx</span>.<span class="ident">transform</span>(
-                            <span class="ident">Affine::scale</span>((<span class="number">1.</span> <span class="op">-</span> <span class="ident">SCALE_LEVEL</span>) <span class="op">+</span> <span class="ident">s</span> <span class="op">*</span> <span class="ident">SCALE_LEVEL</span>)
-                                <span class="op">*</span> <span class="ident">Affine::translate</span>((
-                                    <span class="ident">size</span>.<span class="ident">width</span> <span class="op">*</span> (<span class="number">1.</span> <span class="op">-</span> <span class="ident">s</span>) <span class="op">*</span> <span class="ident">SCALE_LEVEL</span> <span class="op">/</span> <span class="number">2.</span>,
-                                    <span class="ident">size</span>.<span class="ident">height</span> <span class="op">*</span> (<span class="number">1.</span> <span class="op">-</span> <span class="ident">s</span>) <span class="op">*</span> <span class="ident">SCALE_LEVEL</span> <span class="op">/</span> <span class="number">2.</span>,
+                } <span class="kw">else </span>{
+                    <span class="kw">let </span>s = (s - <span class="number">0.5</span>) * <span class="number">2.</span>;
+                    <span class="comment">// 要进入的页面
+                    </span><span class="kw">if let </span><span class="prelude-val">Some</span>(inner) = <span class="self">self</span>.inner.get_mut(page) {
+                        ctx.transform(
+                            Affine::scale((<span class="number">1. </span>- SCALE_LEVEL) + s * SCALE_LEVEL)
+                                * Affine::translate((
+                                    size.width * (<span class="number">1. </span>- s) * SCALE_LEVEL / <span class="number">2.</span>,
+                                    size.height * (<span class="number">1. </span>- s) * SCALE_LEVEL / <span class="number">2.</span>,
                                 )),
                         );
-                        <span class="comment">// ctx.apply_global_transparency(s);</span>
-                        <span class="ident">inner</span>.<span class="ident">paint</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>);
-                        <span class="ident">ctx</span>.<span class="ident">fill</span>(
-                            <span class="ident">transparent_rect</span>.<span class="ident">to_owned</span>(),
-                            <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">page_mask</span>.<span class="ident">with_alpha</span>(<span class="number">1.</span> <span class="op">-</span> <span class="ident">s</span>)),
+                        <span class="comment">// ctx.apply_global_transparency(s);
+                        </span>inner.paint(ctx, data, env);
+                        ctx.fill(
+                            transparent_rect.to_owned(),
+                            <span class="kw-2">&amp;</span>PaintBrush::Color(page_mask.with_alpha(<span class="number">1. </span>- s)),
                         );
                     }
                 }
             }
-            <span class="prelude-val">Some</span>(<span class="ident">AnimationType::PopZoom</span>(<span class="ident">page</span>)) =&gt; {
-                <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> (<span class="ident">anime_timer</span> <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">/</span> <span class="ident">ANIMATION_TIME</span> <span class="kw">as</span> <span class="ident">f64</span>;
-                <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">scl_gui_animation::tween::ease_out_expo</span>(<span class="ident">x</span>);
-                <span class="kw">if</span> <span class="ident">s</span> <span class="op">&lt;</span> <span class="number">0.5</span> {
-                    <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">s</span> <span class="op">*</span> <span class="number">2.</span>;
-                    <span class="comment">// 要退出的页面</span>
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">inner</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">get_mut</span>(<span class="self">self</span>.<span class="ident">active_page</span>) {
-                        <span class="ident">ctx</span>.<span class="ident">transform</span>(
-                            <span class="ident">Affine::scale</span>(<span class="number">1.</span> <span class="op">-</span> <span class="ident">s</span> <span class="op">*</span> <span class="ident">SCALE_LEVEL</span>)
-                                <span class="op">*</span> <span class="ident">Affine::translate</span>((
-                                    <span class="ident">size</span>.<span class="ident">width</span> <span class="op">*</span> <span class="ident">s</span> <span class="op">*</span> <span class="ident">SCALE_LEVEL</span> <span class="op">/</span> <span class="number">2.</span>,
-                                    <span class="ident">size</span>.<span class="ident">height</span> <span class="op">*</span> <span class="ident">s</span> <span class="op">*</span> <span class="ident">SCALE_LEVEL</span> <span class="op">/</span> <span class="number">2.</span>,
+            <span class="prelude-val">Some</span>(AnimationType::PopZoom(page)) =&gt; {
+                <span class="kw">let </span>x = (anime_timer <span class="kw">as </span>f64) / ANIMATION_TIME <span class="kw">as </span>f64;
+                <span class="kw">let </span>s = scl_gui_animation::tween::ease_out_expo(x);
+                <span class="kw">if </span>s &lt; <span class="number">0.5 </span>{
+                    <span class="kw">let </span>s = s * <span class="number">2.</span>;
+                    <span class="comment">// 要退出的页面
+                    </span><span class="kw">if let </span><span class="prelude-val">Some</span>(inner) = <span class="self">self</span>.inner.get_mut(<span class="self">self</span>.active_page) {
+                        ctx.transform(
+                            Affine::scale(<span class="number">1. </span>- s * SCALE_LEVEL)
+                                * Affine::translate((
+                                    size.width * s * SCALE_LEVEL / <span class="number">2.</span>,
+                                    size.height * s * SCALE_LEVEL / <span class="number">2.</span>,
                                 )),
                         );
-                        <span class="comment">// ctx.apply_global_transparency(1. - s);</span>
-                        <span class="ident">inner</span>.<span class="ident">paint</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>);
-                        <span class="ident">ctx</span>.<span class="ident">fill</span>(
-                            <span class="ident">transparent_rect</span>.<span class="ident">to_owned</span>(),
-                            <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">page_mask</span>.<span class="ident">with_alpha</span>(<span class="ident">s</span>)),
+                        <span class="comment">// ctx.apply_global_transparency(1. - s);
+                        </span>inner.paint(ctx, data, env);
+                        ctx.fill(
+                            transparent_rect.to_owned(),
+                            <span class="kw-2">&amp;</span>PaintBrush::Color(page_mask.with_alpha(s)),
                         );
                     }
-                } <span class="kw">else</span> {
-                    <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> (<span class="ident">s</span> <span class="op">-</span> <span class="number">0.5</span>) <span class="op">*</span> <span class="number">2.</span>;
-                    <span class="comment">// 要进入的页面</span>
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">inner</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">get_mut</span>(<span class="ident">page</span>) {
-                        <span class="ident">ctx</span>.<span class="ident">transform</span>(
-                            <span class="ident">Affine::scale</span>(<span class="number">1.</span> <span class="op">+</span> (<span class="number">1.</span> <span class="op">-</span> <span class="ident">s</span>) <span class="op">*</span> <span class="ident">SCALE_LEVEL</span>)
-                                <span class="op">*</span> <span class="ident">Affine::translate</span>((
-                                    <span class="ident">transparent_size</span>.<span class="ident">width</span> <span class="op">*</span> (<span class="number">1.</span> <span class="op">-</span> <span class="ident">s</span>) <span class="op">*</span> <span class="op">-</span><span class="ident">SCALE_LEVEL</span> <span class="op">/</span> <span class="number">2.</span>,
-                                    <span class="ident">transparent_size</span>.<span class="ident">height</span> <span class="op">*</span> (<span class="number">1.</span> <span class="op">-</span> <span class="ident">s</span>) <span class="op">*</span> <span class="op">-</span><span class="ident">SCALE_LEVEL</span> <span class="op">/</span> <span class="number">2.</span>,
+                } <span class="kw">else </span>{
+                    <span class="kw">let </span>s = (s - <span class="number">0.5</span>) * <span class="number">2.</span>;
+                    <span class="comment">// 要进入的页面
+                    </span><span class="kw">if let </span><span class="prelude-val">Some</span>(inner) = <span class="self">self</span>.inner.get_mut(page) {
+                        ctx.transform(
+                            Affine::scale(<span class="number">1. </span>+ (<span class="number">1. </span>- s) * SCALE_LEVEL)
+                                * Affine::translate((
+                                    transparent_size.width * (<span class="number">1. </span>- s) * -SCALE_LEVEL / <span class="number">2.</span>,
+                                    transparent_size.height * (<span class="number">1. </span>- s) * -SCALE_LEVEL / <span class="number">2.</span>,
                                 )),
                         );
-                        <span class="comment">// ctx.apply_global_transparency(s);</span>
-                        <span class="ident">inner</span>.<span class="ident">paint</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>);
-                        <span class="ident">ctx</span>.<span class="ident">fill</span>(
-                            <span class="ident">transparent_rect</span>.<span class="ident">to_owned</span>(),
-                            <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">page_mask</span>.<span class="ident">with_alpha</span>(<span class="number">1.</span> <span class="op">-</span> <span class="ident">s</span>)),
+                        <span class="comment">// ctx.apply_global_transparency(s);
+                        </span>inner.paint(ctx, data, env);
+                        ctx.fill(
+                            transparent_rect.to_owned(),
+                            <span class="kw-2">&amp;</span>PaintBrush::Color(page_mask.with_alpha(<span class="number">1. </span>- s)),
                         );
                     }
                 }
             }
-            <span class="prelude-val">Some</span>(<span class="ident">AnimationType::PushSlide</span>(<span class="ident">page</span>)) =&gt; {
-                <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> (<span class="ident">anime_timer</span> <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">/</span> <span class="ident">ANIMATION_TIME</span> <span class="kw">as</span> <span class="ident">f64</span>;
-                <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">scl_gui_animation::tween::ease_out_expo</span>(<span class="ident">x</span>);
-                <span class="kw">if</span> <span class="ident">s</span> <span class="op">&lt;</span> <span class="number">0.5</span> {
-                    <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">s</span> <span class="op">*</span> <span class="op">-</span><span class="number">2.</span>;
-                    <span class="comment">// 要退出的页面</span>
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">inner</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">get_mut</span>(<span class="self">self</span>.<span class="ident">active_page</span>) {
-                        <span class="ident">ctx</span>.<span class="ident">transform</span>(<span class="ident">Affine::translate</span>((<span class="ident">size</span>.<span class="ident">width</span> <span class="op">*</span> <span class="ident">s</span>, <span class="number">0.</span>)));
-                        <span class="comment">// ctx.apply_global_transparency(1. - s);</span>
-                        <span class="ident">inner</span>.<span class="ident">paint</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>);
-                        <span class="comment">// ctx.fill(</span>
-                        <span class="comment">//     transparent_rect.to_owned(),</span>
-                        <span class="comment">//     &amp;PaintBrush::Color(page_mask.with_alpha(s)),</span>
-                        <span class="comment">// );</span>
-                    }
-                } <span class="kw">else</span> {
-                    <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> (<span class="ident">s</span> <span class="op">-</span> <span class="number">0.5</span>) <span class="op">*</span> <span class="number">2.</span>;
-                    <span class="comment">// 要进入的页面</span>
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">inner</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">get_mut</span>(<span class="ident">page</span>) {
-                        <span class="ident">ctx</span>.<span class="ident">transform</span>(<span class="ident">Affine::translate</span>((<span class="ident">size</span>.<span class="ident">width</span> <span class="op">*</span> (<span class="number">1.</span> <span class="op">-</span> <span class="ident">s</span>), <span class="number">0.</span>)));
-                        <span class="comment">// ctx.apply_global_transparency(s);</span>
-                        <span class="ident">inner</span>.<span class="ident">paint</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>);
-                        <span class="comment">// ctx.fill(</span>
-                        <span class="comment">//     transparent_rect.to_owned(),</span>
-                        <span class="comment">//     &amp;PaintBrush::Color(page_mask.with_alpha(1. - s)),</span>
-                        <span class="comment">// );</span>
-                    }
+            <span class="prelude-val">Some</span>(AnimationType::PushSlide(page)) =&gt; {
+                <span class="kw">let </span>x = (anime_timer <span class="kw">as </span>f64) / ANIMATION_TIME <span class="kw">as </span>f64;
+                <span class="kw">let </span>s = scl_gui_animation::tween::ease_out_expo(x);
+                <span class="kw">if </span>s &lt; <span class="number">0.5 </span>{
+                    <span class="kw">let </span>s = s * -<span class="number">2.</span>;
+                    <span class="comment">// 要退出的页面
+                    </span><span class="kw">if let </span><span class="prelude-val">Some</span>(inner) = <span class="self">self</span>.inner.get_mut(<span class="self">self</span>.active_page) {
+                        ctx.transform(Affine::translate((size.width * s, <span class="number">0.</span>)));
+                        <span class="comment">// ctx.apply_global_transparency(1. - s);
+                        </span>inner.paint(ctx, data, env);
+                        <span class="comment">// ctx.fill(
+                        //     transparent_rect.to_owned(),
+                        //     &amp;PaintBrush::Color(page_mask.with_alpha(s)),
+                        // );
+                    </span>}
+                } <span class="kw">else </span>{
+                    <span class="kw">let </span>s = (s - <span class="number">0.5</span>) * <span class="number">2.</span>;
+                    <span class="comment">// 要进入的页面
+                    </span><span class="kw">if let </span><span class="prelude-val">Some</span>(inner) = <span class="self">self</span>.inner.get_mut(page) {
+                        ctx.transform(Affine::translate((size.width * (<span class="number">1. </span>- s), <span class="number">0.</span>)));
+                        <span class="comment">// ctx.apply_global_transparency(s);
+                        </span>inner.paint(ctx, data, env);
+                        <span class="comment">// ctx.fill(
+                        //     transparent_rect.to_owned(),
+                        //     &amp;PaintBrush::Color(page_mask.with_alpha(1. - s)),
+                        // );
+                    </span>}
                 }
             }
-            <span class="prelude-val">Some</span>(<span class="ident">AnimationType::PopSlide</span>(<span class="ident">page</span>)) =&gt; {
-                <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> (<span class="ident">anime_timer</span> <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">/</span> <span class="ident">ANIMATION_TIME</span> <span class="kw">as</span> <span class="ident">f64</span>;
-                <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">scl_gui_animation::tween::ease_out_expo</span>(<span class="ident">x</span>);
-                <span class="kw">if</span> <span class="ident">s</span> <span class="op">&lt;</span> <span class="number">0.5</span> {
-                    <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">s</span> <span class="op">*</span> <span class="number">2.</span>;
-                    <span class="comment">// 要退出的页面</span>
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">inner</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">get_mut</span>(<span class="self">self</span>.<span class="ident">active_page</span>) {
-                        <span class="ident">ctx</span>.<span class="ident">transform</span>(<span class="ident">Affine::translate</span>((<span class="ident">size</span>.<span class="ident">width</span> <span class="op">*</span> <span class="ident">s</span>, <span class="number">0.</span>)));
-                        <span class="comment">// ctx.apply_global_transparency(1. - s);</span>
-                        <span class="ident">inner</span>.<span class="ident">paint</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>);
+            <span class="prelude-val">Some</span>(AnimationType::PopSlide(page)) =&gt; {
+                <span class="kw">let </span>x = (anime_timer <span class="kw">as </span>f64) / ANIMATION_TIME <span class="kw">as </span>f64;
+                <span class="kw">let </span>s = scl_gui_animation::tween::ease_out_expo(x);
+                <span class="kw">if </span>s &lt; <span class="number">0.5 </span>{
+                    <span class="kw">let </span>s = s * <span class="number">2.</span>;
+                    <span class="comment">// 要退出的页面
+                    </span><span class="kw">if let </span><span class="prelude-val">Some</span>(inner) = <span class="self">self</span>.inner.get_mut(<span class="self">self</span>.active_page) {
+                        ctx.transform(Affine::translate((size.width * s, <span class="number">0.</span>)));
+                        <span class="comment">// ctx.apply_global_transparency(1. - s);
+                        </span>inner.paint(ctx, data, env);
                     }
-                } <span class="kw">else</span> {
-                    <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> (<span class="ident">s</span> <span class="op">-</span> <span class="number">0.5</span>) <span class="op">*</span> <span class="number">2.</span>;
-                    <span class="comment">// 要进入的页面</span>
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">inner</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">get_mut</span>(<span class="ident">page</span>) {
-                        <span class="ident">ctx</span>.<span class="ident">transform</span>(<span class="ident">Affine::translate</span>((<span class="ident">size</span>.<span class="ident">width</span> <span class="op">*</span> (<span class="ident">s</span> <span class="op">-</span> <span class="number">1.</span>), <span class="number">0.</span>)));
-                        <span class="comment">// ctx.apply_global_transparency(s);</span>
-                        <span class="ident">inner</span>.<span class="ident">paint</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>);
-                        <span class="comment">// ctx.fill(</span>
-                        <span class="comment">//     transparent_rect.to_owned(),</span>
-                        <span class="comment">//     &amp;PaintBrush::Color(page_mask.with_alpha(1. - s)),</span>
-                        <span class="comment">// );</span>
-                    }
+                } <span class="kw">else </span>{
+                    <span class="kw">let </span>s = (s - <span class="number">0.5</span>) * <span class="number">2.</span>;
+                    <span class="comment">// 要进入的页面
+                    </span><span class="kw">if let </span><span class="prelude-val">Some</span>(inner) = <span class="self">self</span>.inner.get_mut(page) {
+                        ctx.transform(Affine::translate((size.width * (s - <span class="number">1.</span>), <span class="number">0.</span>)));
+                        <span class="comment">// ctx.apply_global_transparency(s);
+                        </span>inner.paint(ctx, data, env);
+                        <span class="comment">// ctx.fill(
+                        //     transparent_rect.to_owned(),
+                        //     &amp;PaintBrush::Color(page_mask.with_alpha(1. - s)),
+                        // );
+                    </span>}
                 }
             }
-            <span class="prelude-val">Some</span>(<span class="ident">AnimationType::PushMoveUp</span>(<span class="ident">page</span>)) =&gt; {
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">inner</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">get_mut</span>(<span class="ident">page</span>) {
-                    <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> ((<span class="ident">anime_timer</span>) <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">/</span> <span class="ident">ANIMATION_TIME</span> <span class="kw">as</span> <span class="ident">f64</span>;
-                    <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="number">1.</span> <span class="op">-</span> <span class="ident">scl_gui_animation::tween::ease_out_expo</span>(<span class="ident">x</span>);
-                    <span class="ident">ctx</span>.<span class="ident">transform</span>(<span class="ident">Affine::translate</span>((<span class="number">0.</span>, <span class="ident">s</span> <span class="op">*</span> <span class="ident">size</span>.<span class="ident">height</span>.<span class="ident">min</span>(<span class="number">100.</span>))));
-                    <span class="comment">// ctx.apply_global_transparency(1. - s);</span>
-                    <span class="ident">inner</span>.<span class="ident">paint</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>);
-                    <span class="ident">ctx</span>.<span class="ident">fill</span>(
-                        <span class="ident">transparent_rect</span>.<span class="ident">to_owned</span>(),
-                        <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">page_mask</span>.<span class="ident">with_alpha</span>(<span class="ident">s</span>)),
+            <span class="prelude-val">Some</span>(AnimationType::PushMoveUp(page)) =&gt; {
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(inner) = <span class="self">self</span>.inner.get_mut(page) {
+                    <span class="kw">let </span>x = ((anime_timer) <span class="kw">as </span>f64) / ANIMATION_TIME <span class="kw">as </span>f64;
+                    <span class="kw">let </span>s = <span class="number">1. </span>- scl_gui_animation::tween::ease_out_expo(x);
+                    ctx.transform(Affine::translate((<span class="number">0.</span>, s * size.height.min(<span class="number">100.</span>))));
+                    <span class="comment">// ctx.apply_global_transparency(1. - s);
+                    </span>inner.paint(ctx, data, env);
+                    ctx.fill(
+                        transparent_rect.to_owned(),
+                        <span class="kw-2">&amp;</span>PaintBrush::Color(page_mask.with_alpha(s)),
                     );
                 }
             }
-            <span class="prelude-val">None</span> =&gt; {
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">inner</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">get_mut</span>(<span class="self">self</span>.<span class="ident">active_page</span>) {
-                    <span class="ident">inner</span>.<span class="ident">paint</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>);
+            <span class="prelude-val">None </span>=&gt; {
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(inner) = <span class="self">self</span>.inner.get_mut(<span class="self">self</span>.active_page) {
+                    inner.paint(ctx, data, env);
                 }
             }
         }
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

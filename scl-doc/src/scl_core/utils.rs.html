@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/utils.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>utils.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../scl_core/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/utils.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>utils.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../scl_core/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -333,340 +333,340 @@
 <span id="333">333</span>
 <span id="334">334</span>
 <span id="335">335</span>
-</pre><pre class="rust"><code><span class="doccomment">//! 一些启动/安装游戏时会用到的实用模块</span>
+</pre><pre class="rust"><code><span class="doccomment">//! 一些启动/安装游戏时会用到的实用模块
 
-<span class="kw">use</span> <span class="ident">std::fmt::Display</span>;
+</span><span class="kw">use </span>std::fmt::Display;
 
-<span class="kw">use</span> <span class="ident">inner_future::io</span>::{<span class="ident">AsyncRead</span>, <span class="ident">AsyncReadExt</span>};
-<span class="kw">use</span> <span class="ident">sha1_smol</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span>inner_future::io::{AsyncRead, AsyncReadExt};
+<span class="kw">use </span>sha1_smol::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::prelude::<span class="kw-2">*</span>;
 
-<span class="doccomment">/// 根据当前构建目标判定的当前操作系统类型</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 用于版本元数据的参数和依赖库的条件判断</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TARGET_OS</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>;
-<span class="doccomment">/// 根据当前构建目标判定的当前操作系统类型</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 用于版本元数据的参数和依赖库的条件判断</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TARGET_OS</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;osx&quot;</span>;
-<span class="doccomment">/// 根据当前构建目标判定的当前操作系统类型</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 用于版本元数据的参数和依赖库的条件判断</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TARGET_OS</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>;
+<span class="doccomment">/// 根据当前构建目标判定的当前操作系统类型
+///
+/// 用于版本元数据的参数和依赖库的条件判断
+</span><span class="attribute">#[cfg(target_os = <span class="string">&quot;windows&quot;</span>)]
+</span><span class="kw">pub const </span>TARGET_OS: <span class="kw-2">&amp;</span>str = <span class="string">&quot;windows&quot;</span>;
+<span class="doccomment">/// 根据当前构建目标判定的当前操作系统类型
+///
+/// 用于版本元数据的参数和依赖库的条件判断
+</span><span class="attribute">#[cfg(target_os = <span class="string">&quot;macos&quot;</span>)]
+</span><span class="kw">pub const </span>TARGET_OS: <span class="kw-2">&amp;</span>str = <span class="string">&quot;osx&quot;</span>;
+<span class="doccomment">/// 根据当前构建目标判定的当前操作系统类型
+///
+/// 用于版本元数据的参数和依赖库的条件判断
+</span><span class="attribute">#[cfg(target_os = <span class="string">&quot;linux&quot;</span>)]
+</span><span class="kw">pub const </span>TARGET_OS: <span class="kw-2">&amp;</span>str = <span class="string">&quot;linux&quot;</span>;
 
-<span class="doccomment">/// 根据当前构建目标判定的当前操作系统架构类型</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 用于版本元数据的参数和依赖库的条件判断</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TARGET_ARCH</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;x86&quot;</span>;
-<span class="doccomment">/// 根据当前构建目标判定的当前操作系统架构类型</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 用于版本元数据的参数和依赖库的条件判断</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TARGET_ARCH</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>;
-<span class="doccomment">/// 根据当前构建目标判定的当前操作系统架构类型</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 用于版本元数据的参数和依赖库的条件判断</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;arm&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NATIVE_ARCH</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;arm&quot;</span>;
-<span class="doccomment">/// 根据当前构建目标判定的当前操作系统架构类型</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 用于版本元数据的参数和依赖库的条件判断</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;aarch64&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TARGET_ARCH</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;aarch64&quot;</span>;
+<span class="doccomment">/// 根据当前构建目标判定的当前操作系统架构类型
+///
+/// 用于版本元数据的参数和依赖库的条件判断
+</span><span class="attribute">#[cfg(target_arch = <span class="string">&quot;x86&quot;</span>)]
+</span><span class="kw">pub const </span>TARGET_ARCH: <span class="kw-2">&amp;</span>str = <span class="string">&quot;x86&quot;</span>;
+<span class="doccomment">/// 根据当前构建目标判定的当前操作系统架构类型
+///
+/// 用于版本元数据的参数和依赖库的条件判断
+</span><span class="attribute">#[cfg(target_arch = <span class="string">&quot;x86_64&quot;</span>)]
+</span><span class="kw">pub const </span>TARGET_ARCH: <span class="kw-2">&amp;</span>str = <span class="string">&quot;x86_64&quot;</span>;
+<span class="doccomment">/// 根据当前构建目标判定的当前操作系统架构类型
+///
+/// 用于版本元数据的参数和依赖库的条件判断
+</span><span class="attribute">#[cfg(target_arch = <span class="string">&quot;arm&quot;</span>)]
+</span><span class="kw">pub const </span>NATIVE_ARCH: <span class="kw-2">&amp;</span>str = <span class="string">&quot;arm&quot;</span>;
+<span class="doccomment">/// 根据当前构建目标判定的当前操作系统架构类型
+///
+/// 用于版本元数据的参数和依赖库的条件判断
+</span><span class="attribute">#[cfg(target_arch = <span class="string">&quot;aarch64&quot;</span>)]
+</span><span class="kw">pub const </span>TARGET_ARCH: <span class="kw-2">&amp;</span>str = <span class="string">&quot;aarch64&quot;</span>;
 
-<span class="doccomment">/// 根据当前构建目标判定的当前操作系统的操作位数</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 用于版本元数据的参数和依赖库的条件判断</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NATIVE_ARCH</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;32&quot;</span>;
-<span class="doccomment">/// 根据当前构建目标判定的当前操作系统的操作位数</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 用于版本元数据的参数和依赖库的条件判断</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NATIVE_ARCH</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;64&quot;</span>;
-<span class="doccomment">/// 根据当前构建目标判定的当前操作系统的操作位数</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 用于版本元数据的参数和依赖库的条件判断</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;arm&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NATIVE_ARCH</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;64&quot;</span>;
-<span class="doccomment">/// 根据当前构建目标判定的当前操作系统的操作位数</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 用于版本元数据的参数和依赖库的条件判断</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;aarch64&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NATIVE_ARCH</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;64&quot;</span>;
+<span class="doccomment">/// 根据当前构建目标判定的当前操作系统的操作位数
+///
+/// 用于版本元数据的参数和依赖库的条件判断
+</span><span class="attribute">#[cfg(target_arch = <span class="string">&quot;x86&quot;</span>)]
+</span><span class="kw">pub const </span>NATIVE_ARCH: <span class="kw-2">&amp;</span>str = <span class="string">&quot;32&quot;</span>;
+<span class="doccomment">/// 根据当前构建目标判定的当前操作系统的操作位数
+///
+/// 用于版本元数据的参数和依赖库的条件判断
+</span><span class="attribute">#[cfg(target_arch = <span class="string">&quot;x86_64&quot;</span>)]
+</span><span class="kw">pub const </span>NATIVE_ARCH: <span class="kw-2">&amp;</span>str = <span class="string">&quot;64&quot;</span>;
+<span class="doccomment">/// 根据当前构建目标判定的当前操作系统的操作位数
+///
+/// 用于版本元数据的参数和依赖库的条件判断
+</span><span class="attribute">#[cfg(target_arch = <span class="string">&quot;arm&quot;</span>)]
+</span><span class="kw">pub const </span>NATIVE_ARCH: <span class="kw-2">&amp;</span>str = <span class="string">&quot;64&quot;</span>;
+<span class="doccomment">/// 根据当前构建目标判定的当前操作系统的操作位数
+///
+/// 用于版本元数据的参数和依赖库的条件判断
+</span><span class="attribute">#[cfg(target_arch = <span class="string">&quot;aarch64&quot;</span>)]
+</span><span class="kw">pub const </span>NATIVE_ARCH: <span class="kw-2">&amp;</span>str = <span class="string">&quot;64&quot;</span>;
 
-<span class="doccomment">/// 根据当前构建目标判定的类路径的分隔符</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 用于启动参数的 `classpath` 部分的拼接</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CLASSPATH_SEPARATOR</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;;&quot;</span>;
-<span class="doccomment">/// 根据当前构建目标判定的类路径的分隔符</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 用于启动参数的 `classpath` 部分的拼接</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>))]</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CLASSPATH_SEPARATOR</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;:&quot;</span>;
+<span class="doccomment">/// 根据当前构建目标判定的类路径的分隔符
+///
+/// 用于启动参数的 `classpath` 部分的拼接
+</span><span class="attribute">#[cfg(target_os = <span class="string">&quot;windows&quot;</span>)]
+</span><span class="kw">pub const </span>CLASSPATH_SEPARATOR: <span class="kw-2">&amp;</span>str = <span class="string">&quot;;&quot;</span>;
+<span class="doccomment">/// 根据当前构建目标判定的类路径的分隔符
+///
+/// 用于启动参数的 `classpath` 部分的拼接
+</span><span class="attribute">#[cfg(not(target_os = <span class="string">&quot;windows&quot;</span>))]
+</span><span class="kw">pub const </span>CLASSPATH_SEPARATOR: <span class="kw-2">&amp;</span>str = <span class="string">&quot;:&quot;</span>;
 
-<span class="doccomment">/// 一个内存页面位移值，仅 MacOS 用，用于自动内存计算</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">static</span> <span class="ident">PAGESHIFT</span>: <span class="ident">once_cell::sync::Lazy</span><span class="op">&lt;</span><span class="ident">libc::c_int</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">once_cell::sync::Lazy::new</span>(<span class="op">|</span><span class="op">|</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pagesize</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">getpagesize</span>() };
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pageshift</span> <span class="op">=</span> <span class="number">0</span>;
-    <span class="kw">while</span> <span class="ident">pagesize</span> <span class="op">&gt;</span> <span class="number">1</span> {
-        <span class="ident">pageshift</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-        <span class="ident">pagesize</span> <span class="op">&gt;</span><span class="op">&gt;</span><span class="op">=</span> <span class="number">1</span>;
+<span class="doccomment">/// 一个内存页面位移值，仅 MacOS 用，用于自动内存计算
+</span><span class="attribute">#[cfg(target_os = <span class="string">&quot;macos&quot;</span>)]
+</span><span class="kw">pub static </span>PAGESHIFT: once_cell::sync::Lazy&lt;libc::c_int&gt; = once_cell::sync::Lazy::new(|| {
+    <span class="kw">let </span><span class="kw-2">mut </span>pagesize = <span class="kw">unsafe </span>{ getpagesize() };
+    <span class="kw">let </span><span class="kw-2">mut </span>pageshift = <span class="number">0</span>;
+    <span class="kw">while </span>pagesize &gt; <span class="number">1 </span>{
+        pageshift += <span class="number">1</span>;
+        pagesize &gt;&gt;= <span class="number">1</span>;
     }
-    <span class="ident">pageshift</span> <span class="op">-</span> <span class="number">10</span> <span class="comment">// LOG1024</span>
-});
+    pageshift - <span class="number">10 </span><span class="comment">// LOG1024
+</span>});
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>)]</span>
-<span class="attribute">#[<span class="ident">link</span>(<span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;c&quot;</span>)]</span>
-<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">fn</span> <span class="ident">getpagesize</span>() -&gt; <span class="ident">libc::c_int</span>;
+<span class="attribute">#[cfg(target_os = <span class="string">&quot;macos&quot;</span>)]
+#[link(name = <span class="string">&quot;c&quot;</span>)]
+</span><span class="kw">extern </span><span class="string">&quot;C&quot; </span>{
+    <span class="kw">fn </span>getpagesize() -&gt; libc::c_int;
 }
 
-<span class="doccomment">/// 异步计算一个数据的 SHA1 摘要值</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 返回一个十六进制的小写摘要字符串</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_data_sha1</span>(<span class="ident">data</span>: <span class="kw-2">&amp;mut</span> (<span class="kw">impl</span> <span class="ident">AsyncRead</span> <span class="op">+</span> <span class="ident">Unpin</span>)) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> [<span class="number">0u8</span>; <span class="number">16</span>];
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">sha</span> <span class="op">=</span> <span class="ident">Sha1::default</span>();
-    <span class="kw">loop</span> {
-        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">read</span>(<span class="kw-2">&amp;mut</span> <span class="ident">buf</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="ident">size</span> <span class="op">&gt;</span> <span class="number">0</span> {
-            <span class="ident">sha</span>.<span class="ident">update</span>(<span class="kw-2">&amp;</span><span class="ident">buf</span>[..<span class="ident">size</span>]);
-        } <span class="kw">else</span> {
+<span class="doccomment">/// 异步计算一个数据的 SHA1 摘要值
+///
+/// 返回一个十六进制的小写摘要字符串
+</span><span class="kw">pub async fn </span>get_data_sha1(data: <span class="kw-2">&amp;mut </span>(<span class="kw">impl </span>AsyncRead + Unpin)) -&gt; DynResult&lt;String&gt; {
+    <span class="kw">let </span><span class="kw-2">mut </span>buf = [<span class="number">0u8</span>; <span class="number">16</span>];
+    <span class="kw">let </span><span class="kw-2">mut </span>sha = Sha1::default();
+    <span class="kw">loop </span>{
+        <span class="kw">let </span>size = data.read(<span class="kw-2">&amp;mut </span>buf).<span class="kw">await</span><span class="question-mark">?</span>;
+        <span class="kw">if </span>size &gt; <span class="number">0 </span>{
+            sha.update(<span class="kw-2">&amp;</span>buf[..size]);
+        } <span class="kw">else </span>{
             <span class="kw">break</span>;
         }
     }
-    <span class="prelude-val">Ok</span>(<span class="ident">sha</span>.<span class="ident">hexdigest</span>())
+    <span class="prelude-val">Ok</span>(sha.hexdigest())
 }
 
-<span class="doccomment">/// 返回一个相对路径的绝对路径格式</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 因为标准库的 [`std::fs::canonicalize`] 不支持不存在的路径的解析，所以做了这个</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 用于启动参数的路径绝对化</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_full_path</span>(<span class="ident">p</span>: <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">std::path::Path</span><span class="op">&gt;</span>) -&gt; <span class="ident">String</span> {
-    <span class="kw">use</span> <span class="ident">path_absolutize</span>::<span class="kw-2">*</span>;
-    <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">p</span>.<span class="ident">as_ref</span>();
-    <span class="kw">match</span> <span class="ident">p</span>.<span class="ident">absolutize</span>() {
-        <span class="prelude-val">Ok</span>(<span class="ident">p</span>) =&gt; {
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">windows</span>)]</span>
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">p</span>) <span class="op">=</span> <span class="ident">p</span>.<span class="ident">to_string_lossy</span>().<span class="ident">strip_prefix</span>(<span class="string">&quot;\\\\?\\&quot;</span>) {
-                <span class="ident">p</span>.<span class="ident">to_string</span>()
-            } <span class="kw">else</span> {
-                <span class="ident">p</span>.<span class="ident">to_string_lossy</span>().<span class="ident">to_string</span>()
+<span class="doccomment">/// 返回一个相对路径的绝对路径格式
+///
+/// 因为标准库的 [`std::fs::canonicalize`] 不支持不存在的路径的解析，所以做了这个
+///
+/// 用于启动参数的路径绝对化
+</span><span class="kw">pub fn </span>get_full_path(p: <span class="kw">impl </span>AsRef&lt;std::path::Path&gt;) -&gt; String {
+    <span class="kw">use </span>path_absolutize::<span class="kw-2">*</span>;
+    <span class="kw">let </span>p = p.as_ref();
+    <span class="kw">match </span>p.absolutize() {
+        <span class="prelude-val">Ok</span>(p) =&gt; {
+            <span class="attribute">#[cfg(windows)]
+            </span><span class="kw">if let </span><span class="prelude-val">Some</span>(p) = p.to_string_lossy().strip_prefix(<span class="string">&quot;\\\\?\\&quot;</span>) {
+                p.to_string()
+            } <span class="kw">else </span>{
+                p.to_string_lossy().to_string()
             }
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">windows</span>))]</span>
-            <span class="ident">p</span>.<span class="ident">to_string_lossy</span>().<span class="ident">to_string</span>()
+            <span class="attribute">#[cfg(not(windows))]
+            </span>p.to_string_lossy().to_string()
         }
-        <span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; {
+        <span class="prelude-val">Err</span>(e) =&gt; {
             <span class="macro">println!</span>(
                 <span class="string">&quot;Warning: Can&#39;t convert path {} to full path: {}&quot;</span>,
-                <span class="ident">p</span>.<span class="ident">to_string_lossy</span>(),
-                <span class="ident">e</span>
+                p.to_string_lossy(),
+                e
             );
-            <span class="ident">p</span>.<span class="ident">to_string_lossy</span>().<span class="ident">to_string</span>()
+            p.to_string_lossy().to_string()
         }
     }
 }
 
-<span class="doccomment">/// 系统架构枚举</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 目前根据 SCL 自身会支持的平台增加此处的枚举值</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 用于启动参数的条件判断组合</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Arch</span> {
-    <span class="doccomment">/// 一个 `x86` 平台</span>
-    <span class="ident">X86</span>,
-    <span class="doccomment">/// 一个 `x86_64`/`amd64` 平台</span>
-    <span class="ident">X64</span>,
-    <span class="doccomment">/// 一个 `arm64`/`aarch64` 平台</span>
-    <span class="ident">ARM64</span>,
+<span class="doccomment">/// 系统架构枚举
+///
+/// 目前根据 SCL 自身会支持的平台增加此处的枚举值
+///
+/// 用于启动参数的条件判断组合
+</span><span class="attribute">#[derive(Clone, Copy)]
+</span><span class="kw">pub enum </span>Arch {
+    <span class="doccomment">/// 一个 `x86` 平台
+    </span>X86,
+    <span class="doccomment">/// 一个 `x86_64`/`amd64` 平台
+    </span>X64,
+    <span class="doccomment">/// 一个 `arm64`/`aarch64` 平台
+    </span>ARM64,
 }
 
-<span class="kw">impl</span> <span class="ident">Display</span> <span class="kw">for</span> <span class="ident">Arch</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">std::fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">std::fmt::Result</span> {
-        <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="self">self</span>.<span class="ident">as_ref</span>())
+<span class="kw">impl </span>Display <span class="kw">for </span>Arch {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; std::fmt::Result {
+        f.write_str(<span class="self">self</span>.as_ref())
     }
 }
 
-<span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Arch</span> {
-    <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Arch::X86</span> =&gt; <span class="string">&quot;x86&quot;</span>,
-            <span class="ident">Arch::X64</span> =&gt; <span class="string">&quot;x86_64&quot;</span>,
-            <span class="ident">Arch::ARM64</span> =&gt; <span class="string">&quot;aarch64&quot;</span>,
+<span class="kw">impl </span>AsRef&lt;str&gt; <span class="kw">for </span>Arch {
+    <span class="kw">fn </span>as_ref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>str {
+        <span class="kw">match </span><span class="self">self </span>{
+            Arch::X86 =&gt; <span class="string">&quot;x86&quot;</span>,
+            Arch::X64 =&gt; <span class="string">&quot;x86_64&quot;</span>,
+            Arch::ARM64 =&gt; <span class="string">&quot;aarch64&quot;</span>,
         }
     }
 }
 
-<span class="doccomment">/// 一个延迟获取的当前系统的架构</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 这个会获取到系统自身的架构，而非软件自身的编译目标架构</span>
-<span class="kw">pub</span> <span class="kw">static</span> <span class="ident">NATIVE_ARCH_LAZY</span>: <span class="ident">once_cell::sync::Lazy</span><span class="op">&lt;</span><span class="ident">Arch</span><span class="op">&gt;</span> <span class="op">=</span>
-    <span class="ident">once_cell::sync::Lazy::new</span>(<span class="ident">get_system_arch</span>);
+<span class="doccomment">/// 一个延迟获取的当前系统的架构
+///
+/// 这个会获取到系统自身的架构，而非软件自身的编译目标架构
+</span><span class="kw">pub static </span>NATIVE_ARCH_LAZY: once_cell::sync::Lazy&lt;Arch&gt; =
+    once_cell::sync::Lazy::new(get_system_arch);
 
-<span class="kw">fn</span> <span class="ident">get_system_arch</span>() -&gt; <span class="ident">Arch</span> {
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">windows</span>)]</span>
-    <span class="kw">unsafe</span> {
-        <span class="kw">use</span> <span class="ident">windows::Win32::System::SystemInformation</span>::<span class="kw-2">*</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">info</span>: <span class="ident">SYSTEM_INFO</span> <span class="op">=</span> <span class="ident">Default::default</span>();
-        <span class="ident">GetNativeSystemInfo</span>(<span class="kw-2">&amp;mut</span> <span class="ident">info</span>);
-        <span class="kw">match</span> <span class="ident">info</span>.<span class="ident">Anonymous</span>.<span class="ident">Anonymous</span>.<span class="ident">wProcessorArchitecture</span>.<span class="number">0</span> {
-            <span class="number">0</span> =&gt; <span class="ident">Arch::X86</span>,
-            <span class="number">12</span> =&gt; <span class="ident">Arch::ARM64</span>,
-            <span class="number">9</span> =&gt; <span class="ident">Arch::X64</span>,
-            <span class="kw">_</span> =&gt; <span class="macro">unreachable!</span>(),
+<span class="kw">fn </span>get_system_arch() -&gt; Arch {
+    <span class="attribute">#[cfg(windows)]
+    </span><span class="kw">unsafe </span>{
+        <span class="kw">use </span>windows::Win32::System::SystemInformation::<span class="kw-2">*</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>info: SYSTEM_INFO = Default::default();
+        GetNativeSystemInfo(<span class="kw-2">&amp;mut </span>info);
+        <span class="kw">match </span>info.Anonymous.Anonymous.wProcessorArchitecture.<span class="number">0 </span>{
+            <span class="number">0 </span>=&gt; Arch::X86,
+            <span class="number">12 </span>=&gt; Arch::ARM64,
+            <span class="number">9 </span>=&gt; Arch::X64,
+            <span class="kw">_ </span>=&gt; <span class="macro">unreachable!</span>(),
         }
     }
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>, <span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86&quot;</span>))]</span>
-    <span class="kw">return</span> <span class="ident">Arch::X86</span>;
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>, <span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>))]</span>
-    <span class="kw">return</span> <span class="ident">Arch::X64</span>;
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>, <span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;aarch64&quot;</span>))]</span>
-    <span class="kw">return</span> <span class="ident">Arch::ARM64</span>;
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>, <span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>))]</span>
-    <span class="kw">return</span> <span class="ident">Arch::X64</span>;
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>, <span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;aarch64&quot;</span>))]</span>
-    <span class="kw">return</span> <span class="ident">Arch::ARM64</span>;
+    <span class="attribute">#[cfg(all(target_os = <span class="string">&quot;linux&quot;</span>, target_arch = <span class="string">&quot;x86&quot;</span>))]
+    </span><span class="kw">return </span>Arch::X86;
+    <span class="attribute">#[cfg(all(target_os = <span class="string">&quot;linux&quot;</span>, target_arch = <span class="string">&quot;x86_64&quot;</span>))]
+    </span><span class="kw">return </span>Arch::X64;
+    <span class="attribute">#[cfg(all(target_os = <span class="string">&quot;linux&quot;</span>, target_arch = <span class="string">&quot;aarch64&quot;</span>))]
+    </span><span class="kw">return </span>Arch::ARM64;
+    <span class="attribute">#[cfg(all(target_os = <span class="string">&quot;macos&quot;</span>, target_arch = <span class="string">&quot;x86_64&quot;</span>))]
+    </span><span class="kw">return </span>Arch::X64;
+    <span class="attribute">#[cfg(all(target_os = <span class="string">&quot;macos&quot;</span>, target_arch = <span class="string">&quot;aarch64&quot;</span>))]
+    </span><span class="kw">return </span>Arch::ARM64;
 }
 
-<span class="doccomment">/// 内存状态对象，单位为 MB</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">MemoryStatus</span> {
-    <span class="doccomment">/// 机器的内存总量，单位为 MB</span>
-    <span class="kw">pub</span> <span class="ident">max</span>: <span class="ident">u64</span>,
-    <span class="doccomment">/// 机器的可用内存总量，单位为 MB</span>
-    <span class="kw">pub</span> <span class="ident">free</span>: <span class="ident">u64</span>,
+<span class="doccomment">/// 内存状态对象，单位为 MB
+</span><span class="kw">pub struct </span>MemoryStatus {
+    <span class="doccomment">/// 机器的内存总量，单位为 MB
+    </span><span class="kw">pub </span>max: u64,
+    <span class="doccomment">/// 机器的可用内存总量，单位为 MB
+    </span><span class="kw">pub </span>free: u64,
 }
 
-<span class="doccomment">/// 获取一个可执行程序所对应的运行架构，仅 MacOS 可用。</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 这用于判定 MacOS 上 Java 运行时的架构类型</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 对于 MacOS 的可执行文件格式描述，请参阅 &quot;OS X ABI Mach-O File Format Reference&quot;</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>))]</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_exec_arch</span>(<span class="ident">_file_path</span>: <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">std::path::Path</span><span class="op">&gt;</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">Arch</span><span class="op">&gt;</span> {
+<span class="doccomment">/// 获取一个可执行程序所对应的运行架构，仅 MacOS 可用。
+///
+/// 这用于判定 MacOS 上 Java 运行时的架构类型
+///
+/// 对于 MacOS 的可执行文件格式描述，请参阅 &quot;OS X ABI Mach-O File Format Reference&quot;
+</span><span class="attribute">#[cfg(not(target_os = <span class="string">&quot;macos&quot;</span>))]
+</span><span class="kw">pub async fn </span>get_exec_arch(_file_path: <span class="kw">impl </span>AsRef&lt;std::path::Path&gt;) -&gt; DynResult&lt;Arch&gt; {
     <span class="macro">unimplemented!</span>(<span class="string">&quot;此函数仅 MacOS 可用&quot;</span>)
 }
 
-<span class="doccomment">/// 获取一个可执行程序所对应的运行架构，仅 MacOS 可用。</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 这用于判定 MacOS 上 Java 运行时的架构类型</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 对于 MacOS 的可执行文件格式描述，请参阅 &quot;OS X ABI Mach-O File Format Reference&quot;</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_exec_arch</span>(<span class="ident">file_path</span>: <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">std::path::Path</span><span class="op">&gt;</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">Arch</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">inner_future::fs::OpenOptions::new</span>()
-        .<span class="ident">read</span>(<span class="bool-val">true</span>)
-        .<span class="ident">open</span>(<span class="ident">file_path</span>.<span class="ident">as_ref</span>())
+<span class="doccomment">/// 获取一个可执行程序所对应的运行架构，仅 MacOS 可用。
+///
+/// 这用于判定 MacOS 上 Java 运行时的架构类型
+///
+/// 对于 MacOS 的可执行文件格式描述，请参阅 &quot;OS X ABI Mach-O File Format Reference&quot;
+</span><span class="attribute">#[cfg(target_os = <span class="string">&quot;macos&quot;</span>)]
+</span><span class="kw">pub async fn </span>get_exec_arch(file_path: <span class="kw">impl </span>AsRef&lt;std::path::Path&gt;) -&gt; DynResult&lt;Arch&gt; {
+    <span class="kw">let </span><span class="kw-2">mut </span>file = inner_future::fs::OpenOptions::new()
+        .read(<span class="bool-val">true</span>)
+        .open(file_path.as_ref())
         .<span class="kw">await</span><span class="question-mark">?</span>;
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> [<span class="number">0u8</span>; <span class="number">8</span>];
+    <span class="kw">let </span><span class="kw-2">mut </span>buf = [<span class="number">0u8</span>; <span class="number">8</span>];
 
-    <span class="ident">file</span>.<span class="ident">read_exact</span>(<span class="kw-2">&amp;mut</span> <span class="ident">buf</span>).<span class="kw">await</span><span class="question-mark">?</span>;
+    file.read_exact(<span class="kw-2">&amp;mut </span>buf).<span class="kw">await</span><span class="question-mark">?</span>;
 
-    <span class="comment">// Mach-O Magic Number</span>
-    <span class="comment">// CF FA ED FE</span>
-    <span class="kw">if</span> <span class="op">!</span>(<span class="ident">buf</span>[<span class="number">0</span>] <span class="op">==</span> <span class="number">0xCF</span> <span class="op">&amp;&amp;</span> <span class="ident">buf</span>[<span class="number">1</span>] <span class="op">==</span> <span class="number">0xFA</span> <span class="op">&amp;&amp;</span> <span class="ident">buf</span>[<span class="number">2</span>] <span class="op">==</span> <span class="number">0xED</span> <span class="op">&amp;&amp;</span> <span class="ident">buf</span>[<span class="number">3</span>] <span class="op">==</span> <span class="number">0xFE</span>) {
+    <span class="comment">// Mach-O Magic Number
+    // CF FA ED FE
+    </span><span class="kw">if </span>!(buf[<span class="number">0</span>] == <span class="number">0xCF </span>&amp;&amp; buf[<span class="number">1</span>] == <span class="number">0xFA </span>&amp;&amp; buf[<span class="number">2</span>] == <span class="number">0xED </span>&amp;&amp; buf[<span class="number">3</span>] == <span class="number">0xFE</span>) {
         <span class="macro">anyhow::bail!</span>(<span class="string">&quot;文件不是一个合法的 Mach-O 可执行文件&quot;</span>);
     }
 
-    <span class="comment">// CPU Arch Type</span>
-    <span class="kw">match</span> (<span class="ident">buf</span>[<span class="number">4</span>], <span class="ident">buf</span>[<span class="number">7</span>]) {
-        (<span class="number">7</span>, <span class="number">0</span>) =&gt; <span class="prelude-val">Ok</span>(<span class="ident">Arch::X86</span>),    <span class="comment">// X86 I386</span>
-        (<span class="number">7</span>, <span class="number">1</span>) =&gt; <span class="prelude-val">Ok</span>(<span class="ident">Arch::X64</span>),    <span class="comment">// X86_64</span>
-        (<span class="number">12</span>, <span class="number">1</span>) =&gt; <span class="prelude-val">Ok</span>(<span class="ident">Arch::ARM64</span>), <span class="comment">// ARM64</span>
-        (<span class="kw">_</span>, <span class="kw">_</span>) =&gt; <span class="macro">anyhow::bail!</span>(<span class="string">&quot;不支持判定此架构&quot;</span>),
+    <span class="comment">// CPU Arch Type
+    </span><span class="kw">match </span>(buf[<span class="number">4</span>], buf[<span class="number">7</span>]) {
+        (<span class="number">7</span>, <span class="number">0</span>) =&gt; <span class="prelude-val">Ok</span>(Arch::X86),    <span class="comment">// X86 I386
+        </span>(<span class="number">7</span>, <span class="number">1</span>) =&gt; <span class="prelude-val">Ok</span>(Arch::X64),    <span class="comment">// X86_64
+        </span>(<span class="number">12</span>, <span class="number">1</span>) =&gt; <span class="prelude-val">Ok</span>(Arch::ARM64), <span class="comment">// ARM64
+        </span>(<span class="kw">_</span>, <span class="kw">_</span>) =&gt; <span class="macro">anyhow::bail!</span>(<span class="string">&quot;不支持判定此架构&quot;</span>),
     }
 }
 
-<span class="doccomment">/// 获取当前内存使用状态，单位为 MB</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_mem_status</span>() -&gt; <span class="ident">MemoryStatus</span> {
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>)]</span>
-    <span class="kw">unsafe</span> {
-        <span class="kw">use</span> <span class="ident">windows::Win32::System::SystemInformation::MEMORYSTATUSEX</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ms</span> <span class="op">=</span> <span class="ident">MEMORYSTATUSEX</span> {
-            <span class="ident">dwLength</span>: <span class="ident">std::mem::size_of</span>::<span class="op">&lt;</span><span class="ident">MEMORYSTATUSEX</span><span class="op">&gt;</span>() <span class="kw">as</span> <span class="kw">_</span>,
-            ..<span class="ident">Default::default</span>()
+<span class="doccomment">/// 获取当前内存使用状态，单位为 MB
+</span><span class="kw">pub fn </span>get_mem_status() -&gt; MemoryStatus {
+    <span class="attribute">#[cfg(target_os = <span class="string">&quot;windows&quot;</span>)]
+    </span><span class="kw">unsafe </span>{
+        <span class="kw">use </span>windows::Win32::System::SystemInformation::MEMORYSTATUSEX;
+        <span class="kw">let </span><span class="kw-2">mut </span>ms = MEMORYSTATUSEX {
+            dwLength: std::mem::size_of::&lt;MEMORYSTATUSEX&gt;() <span class="kw">as _</span>,
+            ..Default::default()
         };
-        <span class="ident">windows::Win32::System::SystemInformation::GlobalMemoryStatusEx</span>(<span class="kw-2">&amp;mut</span> <span class="ident">ms</span>).<span class="ident">unwrap</span>();
-        <span class="ident">MemoryStatus</span> {
-            <span class="ident">max</span>: <span class="ident">ms</span>.<span class="ident">ullTotalPhys</span> <span class="op">/</span> <span class="number">1024</span> <span class="op">/</span> <span class="number">1024</span>,
-            <span class="ident">free</span>: <span class="ident">ms</span>.<span class="ident">ullAvailPhys</span> <span class="op">/</span> <span class="number">1024</span> <span class="op">/</span> <span class="number">1024</span>,
+        windows::Win32::System::SystemInformation::GlobalMemoryStatusEx(<span class="kw-2">&amp;mut </span>ms).unwrap();
+        MemoryStatus {
+            max: ms.ullTotalPhys / <span class="number">1024 </span>/ <span class="number">1024</span>,
+            free: ms.ullAvailPhys / <span class="number">1024 </span>/ <span class="number">1024</span>,
         }
     }
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>)]</span>
-    {
-        <span class="kw">let</span> <span class="ident">stat</span> <span class="op">=</span> <span class="ident">std::fs::read_to_string</span>(<span class="string">&quot;/proc/meminfo&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">max</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">free</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-        <span class="kw">for</span> <span class="ident">line</span> <span class="kw">in</span> <span class="ident">stat</span>.<span class="ident">lines</span>() {
-            <span class="comment">// 原单位是 kB</span>
-            <span class="kw">if</span> <span class="ident">line</span>.<span class="ident">starts_with</span>(<span class="string">&quot;MemTotal:&quot;</span>) {
-                <span class="ident">max</span> <span class="op">=</span> <span class="ident">line</span>[<span class="number">10</span>..<span class="ident">line</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">3</span>]
-                    .<span class="ident">trim</span>()
-                    .<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span>()
-                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="prelude-val">Some</span>(<span class="ident">x</span> <span class="op">/</span> <span class="number">1024</span>))
-                    .<span class="ident">unwrap_or_default</span>();
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">line</span>.<span class="ident">starts_with</span>(<span class="string">&quot;MemFree:&quot;</span>) {
-                <span class="ident">free</span> <span class="op">=</span> <span class="ident">line</span>[<span class="number">9</span>..<span class="ident">line</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">3</span>]
-                    .<span class="ident">trim</span>()
-                    .<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span>()
-                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="prelude-val">Some</span>(<span class="ident">x</span> <span class="op">/</span> <span class="number">1024</span>))
-                    .<span class="ident">unwrap_or_default</span>();
+    <span class="attribute">#[cfg(target_os = <span class="string">&quot;linux&quot;</span>)]
+    </span>{
+        <span class="kw">let </span>stat = std::fs::read_to_string(<span class="string">&quot;/proc/meminfo&quot;</span>).unwrap();
+        <span class="kw">let </span><span class="kw-2">mut </span>max = <span class="prelude-val">None</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>free = <span class="prelude-val">None</span>;
+        <span class="kw">for </span>line <span class="kw">in </span>stat.lines() {
+            <span class="comment">// 原单位是 kB
+            </span><span class="kw">if </span>line.starts_with(<span class="string">&quot;MemTotal:&quot;</span>) {
+                max = line[<span class="number">10</span>..line.len() - <span class="number">3</span>]
+                    .trim()
+                    .parse::&lt;u64&gt;()
+                    .map(|x| <span class="prelude-val">Some</span>(x / <span class="number">1024</span>))
+                    .unwrap_or_default();
+            } <span class="kw">else if </span>line.starts_with(<span class="string">&quot;MemFree:&quot;</span>) {
+                free = line[<span class="number">9</span>..line.len() - <span class="number">3</span>]
+                    .trim()
+                    .parse::&lt;u64&gt;()
+                    .map(|x| <span class="prelude-val">Some</span>(x / <span class="number">1024</span>))
+                    .unwrap_or_default();
             }
-            <span class="kw">if</span> <span class="ident">max</span>.<span class="ident">is_some</span>() <span class="op">&amp;&amp;</span> <span class="ident">free</span>.<span class="ident">is_some</span>() {
+            <span class="kw">if </span>max.is_some() &amp;&amp; free.is_some() {
                 <span class="kw">break</span>;
             }
         }
-        <span class="ident">MemoryStatus</span> {
-            <span class="ident">max</span>: <span class="ident">max</span>.<span class="ident">unwrap_or</span>(<span class="number">2048</span>),
-            <span class="ident">free</span>: <span class="ident">free</span>.<span class="ident">unwrap_or</span>(<span class="number">2048</span>),
+        MemoryStatus {
+            max: max.unwrap_or(<span class="number">2048</span>),
+            free: free.unwrap_or(<span class="number">2048</span>),
         }
     }
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>)]</span>
-    {
-        <span class="kw">unsafe</span> {
-            <span class="kw">let</span> <span class="ident">total</span> <span class="op">=</span> <span class="ident">libc::sysconf</span>(<span class="ident">libc::_SC_PHYS_PAGES</span>);
-            <span class="kw">if</span> <span class="ident">total</span> <span class="op">==</span> <span class="op">-</span><span class="number">1</span> {
-                <span class="kw">return</span> <span class="ident">MemoryStatus</span> {
-                    <span class="ident">max</span>: <span class="number">2048</span>,
-                    <span class="ident">free</span>: <span class="number">2048</span>,
+    <span class="attribute">#[cfg(target_os = <span class="string">&quot;macos&quot;</span>)]
+    </span>{
+        <span class="kw">unsafe </span>{
+            <span class="kw">let </span>total = libc::sysconf(libc::_SC_PHYS_PAGES);
+            <span class="kw">if </span>total == -<span class="number">1 </span>{
+                <span class="kw">return </span>MemoryStatus {
+                    max: <span class="number">2048</span>,
+                    free: <span class="number">2048</span>,
                 };
             }
 
-            <span class="kw">let</span> <span class="ident">host_port</span> <span class="op">=</span> <span class="ident">libc::mach_host_self</span>();
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">stat</span> <span class="op">=</span> <span class="ident">std::mem::MaybeUninit</span>::<span class="op">&lt;</span><span class="ident">libc::vm_statistics64</span><span class="op">&gt;</span><span class="ident">::zeroed</span>();
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">stat_count</span> <span class="op">=</span> <span class="ident">libc::HOST_VM_INFO64_COUNT</span>;
+            <span class="kw">let </span>host_port = libc::mach_host_self();
+            <span class="kw">let </span><span class="kw-2">mut </span>stat = std::mem::MaybeUninit::&lt;libc::vm_statistics64&gt;::zeroed();
+            <span class="kw">let </span><span class="kw-2">mut </span>stat_count = libc::HOST_VM_INFO64_COUNT;
 
-            <span class="kw">if</span> <span class="ident">libc::host_statistics64</span>(
-                <span class="ident">host_port</span>,
-                <span class="ident">libc::HOST_VM_INFO64</span>,
-                <span class="ident">stat</span>.<span class="ident">as_mut_ptr</span>() <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="ident">i32</span>,
-                <span class="kw-2">&amp;mut</span> <span class="ident">stat_count</span>,
-            ) <span class="op">!</span><span class="op">=</span> <span class="ident">libc::KERN_SUCCESS</span>
+            <span class="kw">if </span>libc::host_statistics64(
+                host_port,
+                libc::HOST_VM_INFO64,
+                stat.as_mut_ptr() <span class="kw">as </span><span class="kw-2">*mut </span>i32,
+                <span class="kw-2">&amp;mut </span>stat_count,
+            ) != libc::KERN_SUCCESS
             {
-                <span class="kw">return</span> <span class="ident">MemoryStatus</span> {
-                    <span class="ident">max</span>: <span class="number">2048</span>,
-                    <span class="ident">free</span>: <span class="number">2048</span>,
+                <span class="kw">return </span>MemoryStatus {
+                    max: <span class="number">2048</span>,
+                    free: <span class="number">2048</span>,
                 };
             }
 
-            <span class="kw">let</span> <span class="ident">stat</span> <span class="op">=</span> <span class="ident">stat</span>.<span class="ident">assume_init</span>();
+            <span class="kw">let </span>stat = stat.assume_init();
 
-            <span class="ident">MemoryStatus</span> {
-                <span class="ident">max</span>: ((<span class="ident">total</span> <span class="kw">as</span> <span class="ident">u64</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="kw-2">*</span><span class="ident">PAGESHIFT</span>) <span class="op">/</span> <span class="number">1024</span>,
-                <span class="ident">free</span>: (((<span class="ident">stat</span>.<span class="ident">inactive_count</span> <span class="op">+</span> <span class="ident">stat</span>.<span class="ident">free_count</span>) <span class="kw">as</span> <span class="ident">u64</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="kw-2">*</span><span class="ident">PAGESHIFT</span>) <span class="op">/</span> <span class="number">1024</span>,
+            MemoryStatus {
+                max: ((total <span class="kw">as </span>u64) &lt;&lt; <span class="kw-2">*</span>PAGESHIFT) / <span class="number">1024</span>,
+                free: (((stat.inactive_count + stat.free_count) <span class="kw">as </span>u64) &lt;&lt; <span class="kw-2">*</span>PAGESHIFT) / <span class="number">1024</span>,
             }
         }
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

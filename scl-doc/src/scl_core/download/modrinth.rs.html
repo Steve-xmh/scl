@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/download/modrinth.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>modrinth.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_core/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/download/modrinth.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>modrinth.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_core/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -170,177 +170,177 @@
 <span id="170">170</span>
 <span id="171">171</span>
 <span id="172">172</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Modrinth 的模组检索和下载</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Modrinth 的模组检索和下载
 
-<span class="kw">use</span> <span class="ident">image::DynamicImage</span>;
+</span><span class="kw">use </span>image::DynamicImage;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::prelude::<span class="kw-2">*</span>;
 
-<span class="doccomment">/// 一个模组搜索结果的信息</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ModResult</span> {
-    <span class="doccomment">/// 这个不是真正的模组 ID，而是服务器中记录的数字 ID</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">deserialize_with</span> <span class="op">=</span> <span class="string">&quot;deserialize_null_default&quot;</span>)]</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">mod_id</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 用于短链接的模组名，大部分应该都是模组 ID</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">deserialize_with</span> <span class="op">=</span> <span class="string">&quot;deserialize_null_default&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">slug</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 模组的图标链接，有可能为空</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">deserialize_with</span> <span class="op">=</span> <span class="string">&quot;deserialize_null_default&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">icon_url</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 模组的标题或名称</span>
-    <span class="kw">pub</span> <span class="ident">title</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 模组的简介</span>
-    <span class="kw">pub</span> <span class="ident">description</span>: <span class="ident">String</span>,
+<span class="doccomment">/// 一个模组搜索结果的信息
+</span><span class="attribute">#[derive(Debug, Deserialize)]
+</span><span class="kw">pub struct </span>ModResult {
+    <span class="doccomment">/// 这个不是真正的模组 ID，而是服务器中记录的数字 ID
+    </span><span class="attribute">#[serde(deserialize_with = <span class="string">&quot;deserialize_null_default&quot;</span>)]
+    #[serde(default)]
+    </span><span class="kw">pub </span>mod_id: String,
+    <span class="doccomment">/// 用于短链接的模组名，大部分应该都是模组 ID
+    </span><span class="attribute">#[serde(deserialize_with = <span class="string">&quot;deserialize_null_default&quot;</span>)]
+    </span><span class="kw">pub </span>slug: String,
+    <span class="doccomment">/// 模组的图标链接，有可能为空
+    </span><span class="attribute">#[serde(deserialize_with = <span class="string">&quot;deserialize_null_default&quot;</span>)]
+    </span><span class="kw">pub </span>icon_url: String,
+    <span class="doccomment">/// 模组的标题或名称
+    </span><span class="kw">pub </span>title: String,
+    <span class="doccomment">/// 模组的简介
+    </span><span class="kw">pub </span>description: String,
 }
 
-<span class="doccomment">/// 一个模组文件信息</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ModFile</span> {
-    <span class="doccomment">/// 此模组文件的下载链接</span>
-    <span class="kw">pub</span> <span class="ident">url</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 此模组文件的文件名称</span>
-    <span class="kw">pub</span> <span class="ident">filename</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 是否是主要的推荐下载项目</span>
-    <span class="kw">pub</span> <span class="ident">primary</span>: <span class="ident">bool</span>,
+<span class="doccomment">/// 一个模组文件信息
+</span><span class="attribute">#[derive(Debug, Deserialize)]
+</span><span class="kw">pub struct </span>ModFile {
+    <span class="doccomment">/// 此模组文件的下载链接
+    </span><span class="kw">pub </span>url: String,
+    <span class="doccomment">/// 此模组文件的文件名称
+    </span><span class="kw">pub </span>filename: String,
+    <span class="doccomment">/// 是否是主要的推荐下载项目
+    </span><span class="kw">pub </span>primary: bool,
 }
 
-<span class="doccomment">/// 一个模组文件的信息</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ModVersion</span> {
-    <span class="doccomment">/// 文件列表</span>
-    <span class="kw">pub</span> <span class="ident">files</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ModFile</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// 模组文件支持的游戏版本</span>
-    <span class="kw">pub</span> <span class="ident">game_versions</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// 模组文件所需的模组加载器，通常是 `Forge` 或者 `Fabric`</span>
-    <span class="kw">pub</span> <span class="ident">loaders</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+<span class="doccomment">/// 一个模组文件的信息
+</span><span class="attribute">#[derive(Debug, Deserialize)]
+</span><span class="kw">pub struct </span>ModVersion {
+    <span class="doccomment">/// 文件列表
+    </span><span class="kw">pub </span>files: Vec&lt;ModFile&gt;,
+    <span class="doccomment">/// 模组文件支持的游戏版本
+    </span><span class="kw">pub </span>game_versions: Vec&lt;String&gt;,
+    <span class="doccomment">/// 模组文件所需的模组加载器，通常是 `Forge` 或者 `Fabric`
+    </span><span class="kw">pub </span>loaders: Vec&lt;String&gt;,
 }
 
-<span class="kw">fn</span> <span class="ident">deserialize_null_default</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span>, <span class="ident">D</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">deserializer</span>: <span class="ident">D</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">D::Error</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">Default</span> <span class="op">+</span> <span class="ident">Deserialize</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>,
-    <span class="ident">D</span>: <span class="ident">Deserializer</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>,
+<span class="kw">fn </span>deserialize_null_default&lt;<span class="lifetime">&#39;de</span>, D, T&gt;(deserializer: D) -&gt; <span class="prelude-ty">Result</span>&lt;T, D::Error&gt;
+<span class="kw">where
+    </span>T: Default + Deserialize&lt;<span class="lifetime">&#39;de</span>&gt;,
+    D: Deserializer&lt;<span class="lifetime">&#39;de</span>&gt;,
 {
-    <span class="kw">let</span> <span class="ident">opt</span> <span class="op">=</span> <span class="ident">Option::deserialize</span>(<span class="ident">deserializer</span>)<span class="question-mark">?</span>;
-    <span class="prelude-val">Ok</span>(<span class="ident">opt</span>.<span class="ident">unwrap_or_default</span>())
+    <span class="kw">let </span>opt = Option::deserialize(deserializer)<span class="question-mark">?</span>;
+    <span class="prelude-val">Ok</span>(opt.unwrap_or_default())
 }
 
-<span class="doccomment">/// 模组的搜索结果响应数据</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ModSearchResult</span> {
-    <span class="doccomment">/// 搜索命中的模组列表</span>
-    <span class="kw">pub</span> <span class="ident">hits</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ModResult</span><span class="op">&gt;</span>,
+<span class="doccomment">/// 模组的搜索结果响应数据
+</span><span class="attribute">#[derive(Debug, Deserialize)]
+</span><span class="kw">pub struct </span>ModSearchResult {
+    <span class="doccomment">/// 搜索命中的模组列表
+    </span><span class="kw">pub </span>hits: Vec&lt;ModResult&gt;,
 }
 
-<span class="doccomment">/// 搜索参数，将其传入到 [`self::search_mods`] 方法以搜索模组</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SearchParams</span> {
-    <span class="doccomment">/// 搜索关键词</span>
-    <span class="kw">pub</span> <span class="ident">search_filter</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 搜索结果的页码</span>
-    <span class="kw">pub</span> <span class="ident">index</span>: <span class="ident">u64</span>,
-    <span class="doccomment">/// 搜索结果的单页项目数量，最大为 100</span>
-    <span class="kw">pub</span> <span class="ident">page_size</span>: <span class="ident">u64</span>,
+<span class="doccomment">/// 搜索参数，将其传入到 [`self::search_mods`] 方法以搜索模组
+</span><span class="attribute">#[derive(Default)]
+</span><span class="kw">pub struct </span>SearchParams {
+    <span class="doccomment">/// 搜索关键词
+    </span><span class="kw">pub </span>search_filter: String,
+    <span class="doccomment">/// 搜索结果的页码
+    </span><span class="kw">pub </span>index: u64,
+    <span class="doccomment">/// 搜索结果的单页项目数量，最大为 100
+    </span><span class="kw">pub </span>page_size: u64,
 }
 
-<span class="doccomment">/// 根据模组 ID 获取可以下载的模组文件</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_mod_files</span>(<span class="ident">modid</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ModVersion</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="ident"><span class="kw">crate</span>::http::get</span>(<span class="macro">format!</span>(
+<span class="doccomment">/// 根据模组 ID 获取可以下载的模组文件
+</span><span class="kw">pub async fn </span>get_mod_files(modid: <span class="kw-2">&amp;</span>str) -&gt; DynResult&lt;Vec&lt;ModVersion&gt;&gt; {
+    <span class="kw">crate</span>::http::get(<span class="macro">format!</span>(
         <span class="string">&quot;https://api.modrinth.com/api/v1/mod/{}/version&quot;</span>,
-        <span class="ident">modid</span>
+        modid
     ))
-    .<span class="ident">recv_json</span>()
-    .<span class="kw">await</span>
-    .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))
+    .recv_json()
+    .<span class="kw">await
+    </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))
 }
 
-<span class="doccomment">/// 根据模组 ID 获取模组信息</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_mod_info</span>(<span class="ident">modid</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">ModResult</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">r</span>: <span class="ident">ModResult</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::http::get</span>(<span class="macro">format!</span>(<span class="string">&quot;https://api.modrinth.com/api/v1/mod/{}&quot;</span>, <span class="ident">modid</span>))
-        .<span class="ident">recv_json</span>()
-        .<span class="kw">await</span>
-        .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>;
-    <span class="prelude-val">Ok</span>(<span class="ident">r</span>)
+<span class="doccomment">/// 根据模组 ID 获取模组信息
+</span><span class="kw">pub async fn </span>get_mod_info(modid: <span class="kw-2">&amp;</span>str) -&gt; DynResult&lt;ModResult&gt; {
+    <span class="kw">let </span>r: ModResult = <span class="kw">crate</span>::http::get(<span class="macro">format!</span>(<span class="string">&quot;https://api.modrinth.com/api/v1/mod/{}&quot;</span>, modid))
+        .recv_json()
+        .<span class="kw">await
+        </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?</span>;
+    <span class="prelude-val">Ok</span>(r)
 }
 
-<span class="doccomment">/// 根据模组 ID 获取模组图标</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 如果图标不存在则返回一个 1x1 的透明像素图片</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_mod_icon</span>(<span class="ident">modid</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">DynamicImage</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">info</span> <span class="op">=</span> <span class="ident">get_mod_info</span>(<span class="ident">modid</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-    <span class="kw">if</span> <span class="ident">info</span>.<span class="ident">icon_url</span>.<span class="ident">is_empty</span>() {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">img</span> <span class="op">=</span> <span class="ident">image::RgbaImage::new</span>(<span class="number">1</span>, <span class="number">1</span>);
-        <span class="ident">img</span>.<span class="ident">put_pixel</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="ident">image::Rgba</span>([<span class="number">0xFF</span>, <span class="number">0xFF</span>, <span class="number">0xFF</span>, <span class="number">0</span>]));
-        <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">image::DynamicImage::ImageRgba8</span>(<span class="ident">img</span>));
+<span class="doccomment">/// 根据模组 ID 获取模组图标
+///
+/// 如果图标不存在则返回一个 1x1 的透明像素图片
+</span><span class="kw">pub async fn </span>get_mod_icon(modid: <span class="kw-2">&amp;</span>str) -&gt; DynResult&lt;DynamicImage&gt; {
+    <span class="kw">let </span>info = get_mod_info(modid).<span class="kw">await</span><span class="question-mark">?</span>;
+    <span class="kw">if </span>info.icon_url.is_empty() {
+        <span class="kw">let </span><span class="kw-2">mut </span>img = image::RgbaImage::new(<span class="number">1</span>, <span class="number">1</span>);
+        img.put_pixel(<span class="number">0</span>, <span class="number">0</span>, image::Rgba([<span class="number">0xFF</span>, <span class="number">0xFF</span>, <span class="number">0xFF</span>, <span class="number">0</span>]));
+        <span class="kw">return </span><span class="prelude-val">Ok</span>(image::DynamicImage::ImageRgba8(img));
     }
-    <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::http::get</span>(<span class="kw-2">&amp;</span><span class="ident">info</span>.<span class="ident">icon_url</span>)
-        .<span class="ident">recv_bytes</span>()
-        .<span class="kw">await</span>
-        .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>;
-    <span class="comment">// Modrinth 允许的图片格式有： .bmp .gif .jpeg .png .svg .svgz .webp .rgb</span>
-    <span class="kw">if</span> <span class="ident">info</span>.<span class="ident">icon_url</span>.<span class="ident">ends_with</span>(<span class="string">&quot;.webp&quot;</span>) {
-        <span class="comment">// 使用 webp 读取</span>
-        <span class="kw">let</span> <span class="ident">img</span> <span class="op">=</span> <span class="ident">webp::Decoder::new</span>(<span class="kw-2">&amp;</span><span class="ident">data</span>)
-            .<span class="ident">decode</span>()
-            .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;can&#39;t load webp file&quot;</span>))<span class="question-mark">?</span>;
-        <span class="kw">match</span> <span class="ident">img</span>.<span class="ident">len</span>() <span class="op">/</span> (<span class="ident">img</span>.<span class="ident">width</span>() <span class="kw">as</span> <span class="ident">usize</span> <span class="op">*</span> <span class="ident">img</span>.<span class="ident">height</span>() <span class="kw">as</span> <span class="ident">usize</span>) {
-            <span class="number">3</span> =&gt; {
-                <span class="comment">// rgb</span>
-                <span class="kw">let</span> <span class="ident">img</span> <span class="op">=</span> <span class="ident">image::ImageBuffer::from_raw</span>(<span class="ident">img</span>.<span class="ident">width</span>(), <span class="ident">img</span>.<span class="ident">height</span>(), <span class="ident">img</span>.<span class="ident">to_owned</span>())
-                    .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;can&#39;t load rgb webp file&quot;</span>))<span class="question-mark">?</span>;
-                <span class="prelude-val">Ok</span>(<span class="ident">image::DynamicImage::ImageRgb8</span>(<span class="ident">img</span>))
+    <span class="kw">let </span>data = <span class="kw">crate</span>::http::get(<span class="kw-2">&amp;</span>info.icon_url)
+        .recv_bytes()
+        .<span class="kw">await
+        </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?</span>;
+    <span class="comment">// Modrinth 允许的图片格式有： .bmp .gif .jpeg .png .svg .svgz .webp .rgb
+    </span><span class="kw">if </span>info.icon_url.ends_with(<span class="string">&quot;.webp&quot;</span>) {
+        <span class="comment">// 使用 webp 读取
+        </span><span class="kw">let </span>img = webp::Decoder::new(<span class="kw-2">&amp;</span>data)
+            .decode()
+            .ok_or_else(|| <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;can&#39;t load webp file&quot;</span>))<span class="question-mark">?</span>;
+        <span class="kw">match </span>img.len() / (img.width() <span class="kw">as </span>usize * img.height() <span class="kw">as </span>usize) {
+            <span class="number">3 </span>=&gt; {
+                <span class="comment">// rgb
+                </span><span class="kw">let </span>img = image::ImageBuffer::from_raw(img.width(), img.height(), img.to_owned())
+                    .ok_or_else(|| <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;can&#39;t load rgb webp file&quot;</span>))<span class="question-mark">?</span>;
+                <span class="prelude-val">Ok</span>(image::DynamicImage::ImageRgb8(img))
             }
-            <span class="number">4</span> =&gt; {
-                <span class="comment">// rgba</span>
-                <span class="kw">let</span> <span class="ident">img</span> <span class="op">=</span> <span class="ident">image::ImageBuffer::from_raw</span>(<span class="ident">img</span>.<span class="ident">width</span>(), <span class="ident">img</span>.<span class="ident">height</span>(), <span class="ident">img</span>.<span class="ident">to_owned</span>())
-                    .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;can&#39;t load rgba webp file&quot;</span>))<span class="question-mark">?</span>;
-                <span class="prelude-val">Ok</span>(<span class="ident">image::DynamicImage::ImageRgba8</span>(<span class="ident">img</span>))
+            <span class="number">4 </span>=&gt; {
+                <span class="comment">// rgba
+                </span><span class="kw">let </span>img = image::ImageBuffer::from_raw(img.width(), img.height(), img.to_owned())
+                    .ok_or_else(|| <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;can&#39;t load rgba webp file&quot;</span>))<span class="question-mark">?</span>;
+                <span class="prelude-val">Ok</span>(image::DynamicImage::ImageRgba8(img))
             }
-            <span class="kw">_</span> =&gt; <span class="macro">anyhow::bail!</span>(<span class="string">&quot;unknown webp data struct&quot;</span>),
+            <span class="kw">_ </span>=&gt; <span class="macro">anyhow::bail!</span>(<span class="string">&quot;unknown webp data struct&quot;</span>),
         }
-    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">info</span>.<span class="ident">icon_url</span>.<span class="ident">ends_with</span>(<span class="string">&quot;.svg&quot;</span>) <span class="op">|</span><span class="op">|</span> <span class="ident">info</span>.<span class="ident">icon_url</span>.<span class="ident">ends_with</span>(<span class="string">&quot;.svgz&quot;</span>) {
-        <span class="comment">// 因为 resvg 版本冲突，故不处理</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">img</span> <span class="op">=</span> <span class="ident">image::RgbaImage::new</span>(<span class="number">1</span>, <span class="number">1</span>);
-        <span class="ident">img</span>.<span class="ident">put_pixel</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="ident">image::Rgba</span>([<span class="number">0xFF</span>, <span class="number">0xFF</span>, <span class="number">0xFF</span>, <span class="number">0</span>]));
-        <span class="prelude-val">Ok</span>(<span class="ident">image::DynamicImage::ImageRgba8</span>(<span class="ident">img</span>))
-    } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">img</span>) <span class="op">=</span> <span class="ident">image::load_from_memory_with_format</span>(
-        <span class="kw-2">&amp;</span><span class="ident">data</span>,
-        <span class="ident">image::ImageFormat::from_path</span>(<span class="kw-2">&amp;</span><span class="ident">info</span>.<span class="ident">icon_url</span>).<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>,
+    } <span class="kw">else if </span>info.icon_url.ends_with(<span class="string">&quot;.svg&quot;</span>) || info.icon_url.ends_with(<span class="string">&quot;.svgz&quot;</span>) {
+        <span class="comment">// 因为 resvg 版本冲突，故不处理
+        </span><span class="kw">let </span><span class="kw-2">mut </span>img = image::RgbaImage::new(<span class="number">1</span>, <span class="number">1</span>);
+        img.put_pixel(<span class="number">0</span>, <span class="number">0</span>, image::Rgba([<span class="number">0xFF</span>, <span class="number">0xFF</span>, <span class="number">0xFF</span>, <span class="number">0</span>]));
+        <span class="prelude-val">Ok</span>(image::DynamicImage::ImageRgba8(img))
+    } <span class="kw">else if let </span><span class="prelude-val">Ok</span>(img) = image::load_from_memory_with_format(
+        <span class="kw-2">&amp;</span>data,
+        image::ImageFormat::from_path(<span class="kw-2">&amp;</span>info.icon_url).map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?</span>,
     ) {
-        <span class="prelude-val">Ok</span>(<span class="ident">img</span>)
-    } <span class="kw">else</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">img</span> <span class="op">=</span> <span class="ident">image::RgbaImage::new</span>(<span class="number">1</span>, <span class="number">1</span>);
-        <span class="ident">img</span>.<span class="ident">put_pixel</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="ident">image::Rgba</span>([<span class="number">0xFF</span>, <span class="number">0xFF</span>, <span class="number">0xFF</span>, <span class="number">0</span>]));
-        <span class="prelude-val">Ok</span>(<span class="ident">image::DynamicImage::ImageRgba8</span>(<span class="ident">img</span>))
+        <span class="prelude-val">Ok</span>(img)
+    } <span class="kw">else </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>img = image::RgbaImage::new(<span class="number">1</span>, <span class="number">1</span>);
+        img.put_pixel(<span class="number">0</span>, <span class="number">0</span>, image::Rgba([<span class="number">0xFF</span>, <span class="number">0xFF</span>, <span class="number">0xFF</span>, <span class="number">0</span>]));
+        <span class="prelude-val">Ok</span>(image::DynamicImage::ImageRgba8(img))
     }
 }
 
-<span class="doccomment">/// 根据搜索参数搜索模组</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">search_mods</span>(
-    <span class="ident">SearchParams</span> {
-        <span class="ident">search_filter</span>,
-        <span class="ident">index</span>,
-        <span class="ident">page_size</span>,
-    }: <span class="ident">SearchParams</span>,
-) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ModResult</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">search_filter</span> <span class="op">=</span> <span class="ident">urlencoding::encode</span>(<span class="kw-2">&amp;</span><span class="ident">search_filter</span>);
-    <span class="kw">let</span> <span class="ident">r</span>: <span class="ident">ModSearchResult</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::http::get</span>(<span class="macro">format!</span>(
+<span class="doccomment">/// 根据搜索参数搜索模组
+</span><span class="kw">pub async fn </span>search_mods(
+    SearchParams {
+        search_filter,
+        index,
+        page_size,
+    }: SearchParams,
+) -&gt; DynResult&lt;Vec&lt;ModResult&gt;&gt; {
+    <span class="kw">let </span>search_filter = urlencoding::encode(<span class="kw-2">&amp;</span>search_filter);
+    <span class="kw">let </span>r: ModSearchResult = <span class="kw">crate</span>::http::get(<span class="macro">format!</span>(
         <span class="string">&quot;https://api.modrinth.com/api/v1/mod?offset={}&amp;limit={}&amp;query={}&quot;</span>,
-        (<span class="ident">index</span> <span class="op">-</span> <span class="number">1</span>) <span class="op">*</span> <span class="ident">page_size</span>,
-        <span class="ident">page_size</span>,
-        <span class="ident">search_filter</span>
+        (index - <span class="number">1</span>) * page_size,
+        page_size,
+        search_filter
     ))
-    .<span class="ident">recv_json</span>()
-    .<span class="kw">await</span>
-    .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>;
-    <span class="prelude-val">Ok</span>(<span class="ident">r</span>.<span class="ident">hits</span>
-        .<span class="ident">into_iter</span>()
-        .<span class="ident">map</span>(<span class="op">|</span><span class="kw-2">mut</span> <span class="ident">a</span><span class="op">|</span> {
-            <span class="ident">a</span>.<span class="ident">mod_id</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">mod_id</span>.<span class="ident">trim_start_matches</span>(<span class="string">&quot;local-&quot;</span>).<span class="ident">to_owned</span>();
-            <span class="ident">a</span>
+    .recv_json()
+    .<span class="kw">await
+    </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?</span>;
+    <span class="prelude-val">Ok</span>(r.hits
+        .into_iter()
+        .map(|<span class="kw-2">mut </span>a| {
+            a.mod_id = a.mod_id.trim_start_matches(<span class="string">&quot;local-&quot;</span>).to_owned();
+            a
         })
-        .<span class="ident">collect</span>())
+        .collect())
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/download/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_core/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/download/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_core/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -337,339 +337,339 @@
 <span id="337">337</span>
 <span id="338">338</span>
 <span id="339">339</span>
-</pre><pre class="rust"><code><span class="doccomment">//! 游戏资源下载模块，所有的游戏/模组/模组中文名称等数据的获取和安装都在这里</span>
+</pre><pre class="rust"><code><span class="doccomment">//! 游戏资源下载模块，所有的游戏/模组/模组中文名称等数据的获取和安装都在这里
 
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">authlib</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">curseforge</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">fabric</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">forge</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">mcmod</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">modrinth</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">optifine</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">structs</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">vanilla</span>;
+</span><span class="kw">pub mod </span>authlib;
+<span class="kw">pub mod </span>curseforge;
+<span class="kw">pub mod </span>fabric;
+<span class="kw">pub mod </span>forge;
+<span class="kw">pub mod </span>mcmod;
+<span class="kw">pub mod </span>modrinth;
+<span class="kw">pub mod </span>optifine;
+<span class="kw">pub mod </span>structs;
+<span class="kw">pub mod </span>vanilla;
 
-<span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">fmt::Display</span>, <span class="ident">path::Path</span>, <span class="ident">str::FromStr</span>};
+<span class="kw">use </span>std::{fmt::Display, path::Path, str::FromStr};
 
-<span class="kw">use</span> <span class="ident">anyhow::Context</span>;
-<span class="kw">use</span> <span class="ident">async_trait::async_trait</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">authlib::AuthlibDownloadExt</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">fabric::FabricDownloadExt</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">forge::ForgeDownloadExt</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">optifine::OptifineDownloadExt</span>;
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">vanilla::VanillaDownloadExt</span>;
+<span class="kw">use </span>anyhow::Context;
+<span class="kw">use </span>async_trait::async_trait;
+<span class="kw">pub use </span>authlib::AuthlibDownloadExt;
+<span class="kw">pub use </span>fabric::FabricDownloadExt;
+<span class="kw">pub use </span>forge::ForgeDownloadExt;
+<span class="kw">pub use </span>optifine::OptifineDownloadExt;
+<span class="kw">use </span>serde::{Deserialize, Serialize};
+<span class="kw">pub use </span>vanilla::VanillaDownloadExt;
 
-<span class="kw">use</span> <span class="ident"><span class="self">self</span>::structs::VersionInfo</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">path</span>::<span class="kw-2">*</span>, <span class="ident">prelude</span>::<span class="kw-2">*</span>, <span class="ident">progress</span>::<span class="kw-2">*</span>};
+<span class="kw">use </span><span class="self">self</span>::structs::VersionInfo;
+<span class="kw">use crate</span>::{path::<span class="kw-2">*</span>, prelude::<span class="kw-2">*</span>, progress::<span class="kw-2">*</span>};
 
-<span class="doccomment">/// 游戏的下载来源，支持和 BMCLAPI 同格式的自定义镜像源</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 通常国内的镜像源速度是比官方快的，但是更新不如官方的及时</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Deserialize</span>, <span class="ident">Serialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">DownloadSource</span> {
-    <span class="doccomment">/// 全部使用原始来源下载</span>
-    <span class="ident">Default</span>,
-    <span class="doccomment">/// 全部使用 BMCLAPI 提供的镜像源下载</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 为了支持镜像源，在这里鼓励大家前去支持一下：&lt;https://afdian.net/a/bangbang93&gt;</span>
-    <span class="ident">BMCLAPI</span>,
-    <span class="doccomment">/// 全部使用 MCBBS 提供的镜像源下载</span>
-    <span class="ident">MCBBS</span>,
-    <span class="doccomment">/// 使用符合 BMCLAPI 镜像链接格式的自定义镜像源下载</span>
-    <span class="ident">Custom</span>(<span class="ident">url::Url</span>),
+<span class="doccomment">/// 游戏的下载来源，支持和 BMCLAPI 同格式的自定义镜像源
+///
+/// 通常国内的镜像源速度是比官方快的，但是更新不如官方的及时
+</span><span class="attribute">#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq)]
+</span><span class="kw">pub enum </span>DownloadSource {
+    <span class="doccomment">/// 全部使用原始来源下载
+    </span>Default,
+    <span class="doccomment">/// 全部使用 BMCLAPI 提供的镜像源下载
+    ///
+    /// 为了支持镜像源，在这里鼓励大家前去支持一下：&lt;https://afdian.net/a/bangbang93&gt;
+    </span>BMCLAPI,
+    <span class="doccomment">/// 全部使用 MCBBS 提供的镜像源下载
+    </span>MCBBS,
+    <span class="doccomment">/// 使用符合 BMCLAPI 镜像链接格式的自定义镜像源下载
+    </span>Custom(url::Url),
 }
 
-<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">DownloadSource</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::Default</span>
+<span class="kw">impl </span>Default <span class="kw">for </span>DownloadSource {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::Default
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Display</span> <span class="kw">for</span> <span class="ident">DownloadSource</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">std::fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">std::fmt::Result</span> {
+<span class="kw">impl </span>Display <span class="kw">for </span>DownloadSource {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; std::fmt::Result {
         <span class="macro">write!</span>(
-            <span class="ident">f</span>,
+            f,
             <span class="string">&quot;{}&quot;</span>,
-            <span class="kw">match</span> <span class="self">self</span> {
-                <span class="ident">DownloadSource::Default</span> =&gt; <span class="string">&quot;默认（官方）下载源&quot;</span>,
-                <span class="ident">DownloadSource::BMCLAPI</span> =&gt; <span class="string">&quot;BMCLAPI 下载源&quot;</span>,
-                <span class="ident">DownloadSource::MCBBS</span> =&gt; <span class="string">&quot;MCBBS 下载源&quot;</span>,
-                <span class="ident">DownloadSource::Custom</span>(<span class="kw">_</span>) =&gt; <span class="string">&quot;自定义&quot;</span>,
+            <span class="kw">match </span><span class="self">self </span>{
+                DownloadSource::Default =&gt; <span class="string">&quot;默认（官方）下载源&quot;</span>,
+                DownloadSource::BMCLAPI =&gt; <span class="string">&quot;BMCLAPI 下载源&quot;</span>,
+                DownloadSource::MCBBS =&gt; <span class="string">&quot;MCBBS 下载源&quot;</span>,
+                DownloadSource::Custom(<span class="kw">_</span>) =&gt; <span class="string">&quot;自定义&quot;</span>,
             }
         )
     }
 }
 
-<span class="kw">impl</span> <span class="ident">FromStr</span> <span class="kw">for</span> <span class="ident">DownloadSource</span> {
-    <span class="kw">type</span> <span class="prelude-val">Err</span> <span class="op">=</span> ();
+<span class="kw">impl </span>FromStr <span class="kw">for </span>DownloadSource {
+    <span class="kw">type </span><span class="prelude-val">Err </span>= ();
 
-    <span class="kw">fn</span> <span class="ident">from_str</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident"><span class="self">Self</span>::Err</span><span class="op">&gt;</span> {
-        <span class="kw">match</span> <span class="ident">s</span> {
-            <span class="string">&quot;Offical&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Default</span>),
-            <span class="string">&quot;BMCLAPI&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::BMCLAPI</span>),
-            <span class="string">&quot;MCBBS&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::MCBBS</span>),
-            <span class="ident">s</span> =&gt; {
-                <span class="kw">let</span> <span class="ident">url</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">url::Url</span><span class="op">&gt;</span>();
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">url</span>) <span class="op">=</span> <span class="ident">url</span> {
-                    <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Custom</span>(<span class="ident">url</span>))
-                } <span class="kw">else</span> {
-                    <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Default</span>)
+    <span class="kw">fn </span>from_str(s: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, <span class="self">Self</span>::Err&gt; {
+        <span class="kw">match </span>s {
+            <span class="string">&quot;Offical&quot; </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::Default),
+            <span class="string">&quot;BMCLAPI&quot; </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::BMCLAPI),
+            <span class="string">&quot;MCBBS&quot; </span>=&gt; <span class="prelude-val">Ok</span>(<span class="self">Self</span>::MCBBS),
+            s =&gt; {
+                <span class="kw">let </span>url = s.parse::&lt;url::Url&gt;();
+                <span class="kw">if let </span><span class="prelude-val">Ok</span>(url) = url {
+                    <span class="prelude-val">Ok</span>(<span class="self">Self</span>::Custom(url))
+                } <span class="kw">else </span>{
+                    <span class="prelude-val">Ok</span>(<span class="self">Self</span>::Default)
                 }
             }
         }
     }
 }
 
-<span class="doccomment">/// 下载结构，用于存储下载所需的信息，并通过附带的扩展特质下载需要的东西</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Downloader</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// 使用的下载源</span>
-    <span class="kw">pub</span> <span class="ident">source</span>: <span class="ident">DownloadSource</span>,
-    <span class="doccomment">/// 当前的 Minecraft 游戏目录路径</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">minecraft_path</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 当前的 Minecraft 依赖库目录路径</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">minecraft_library_path</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 当前的 Minecraft 版本文件夹目录路径</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">minecraft_version_path</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 当前的 Minecraft 资源文件夹目录路径</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">minecraft_assets_path</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 是否使用版本独立方式安装</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 这个会影响 Optifine 以模组形式的安装路径</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// （会被安装在 版本/mods 文件夹里还是 .minecraft/mods 文件夹里）</span>
-    <span class="kw">pub</span> <span class="ident">game_independent</span>: <span class="ident">bool</span>,
-    <span class="doccomment">/// 是否验证已存在的文件是否正确</span>
-    <span class="kw">pub</span> <span class="ident">verify_data</span>: <span class="ident">bool</span>,
-    <span class="doccomment">/// 任意的 Java 运行时执行文件目录</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 在安装 Forge 时会使用</span>
-    <span class="kw">pub</span> <span class="ident">java_path</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 下载并发量</span>
-    <span class="ident">parallel_amount</span>: <span class="ident">usize</span>,
-    <span class="doccomment">/// 下载并发锁</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">parallel_lock</span>: <span class="ident">inner_future::lock::Semaphore</span>,
-    <span class="doccomment">/// 下载的进度报告对象</span>
-    <span class="kw">pub</span> <span class="ident">reporter</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>,
+<span class="doccomment">/// 下载结构，用于存储下载所需的信息，并通过附带的扩展特质下载需要的东西
+</span><span class="attribute">#[derive(Debug)]
+</span><span class="kw">pub struct </span>Downloader&lt;R&gt; {
+    <span class="doccomment">/// 使用的下载源
+    </span><span class="kw">pub </span>source: DownloadSource,
+    <span class="doccomment">/// 当前的 Minecraft 游戏目录路径
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) minecraft_path: String,
+    <span class="doccomment">/// 当前的 Minecraft 依赖库目录路径
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) minecraft_library_path: String,
+    <span class="doccomment">/// 当前的 Minecraft 版本文件夹目录路径
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) minecraft_version_path: String,
+    <span class="doccomment">/// 当前的 Minecraft 资源文件夹目录路径
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) minecraft_assets_path: String,
+    <span class="doccomment">/// 是否使用版本独立方式安装
+    ///
+    /// 这个会影响 Optifine 以模组形式的安装路径
+    ///
+    /// （会被安装在 版本/mods 文件夹里还是 .minecraft/mods 文件夹里）
+    </span><span class="kw">pub </span>game_independent: bool,
+    <span class="doccomment">/// 是否验证已存在的文件是否正确
+    </span><span class="kw">pub </span>verify_data: bool,
+    <span class="doccomment">/// 任意的 Java 运行时执行文件目录
+    ///
+    /// 在安装 Forge 时会使用
+    </span><span class="kw">pub </span>java_path: String,
+    <span class="doccomment">/// 下载并发量
+    </span>parallel_amount: usize,
+    <span class="doccomment">/// 下载并发锁
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) parallel_lock: inner_future::lock::Semaphore,
+    <span class="doccomment">/// 下载的进度报告对象
+    </span><span class="kw">pub </span>reporter: <span class="prelude-ty">Option</span>&lt;R&gt;,
 }
 
-<span class="comment">// let l = self.parallel_amount.acquire().await;</span>
+<span class="comment">// let l = self.parallel_amount.acquire().await;
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="ident">Downloader</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// 设置安装的目录，传入一个 `.minecraft` 文件夹路径作为参数</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 游戏将会被安装到此处</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_minecraft_path</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">dot_minecraft_path</span>: <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span>) {
-        <span class="kw">let</span> <span class="ident">dot_minecraft_path</span> <span class="op">=</span> <span class="ident">dot_minecraft_path</span>.<span class="ident">as_ref</span>().<span class="ident">to_path_buf</span>();
-        <span class="self">self</span>.<span class="ident">minecraft_path</span> <span class="op">=</span> <span class="ident">dot_minecraft_path</span>.<span class="ident">to_string_lossy</span>().<span class="ident">to_string</span>();
-        <span class="self">self</span>.<span class="ident">minecraft_library_path</span> <span class="op">=</span> <span class="ident">dot_minecraft_path</span>
-            .<span class="ident">join</span>(<span class="string">&quot;libraries&quot;</span>)
-            .<span class="ident">to_string_lossy</span>()
-            .<span class="ident">to_string</span>();
-        <span class="self">self</span>.<span class="ident">minecraft_version_path</span> <span class="op">=</span> <span class="ident">dot_minecraft_path</span>
-            .<span class="ident">join</span>(<span class="string">&quot;versions&quot;</span>)
-            .<span class="ident">to_string_lossy</span>()
-            .<span class="ident">to_string</span>();
-        <span class="self">self</span>.<span class="ident">minecraft_assets_path</span> <span class="op">=</span> <span class="ident">dot_minecraft_path</span>
-            .<span class="ident">join</span>(<span class="string">&quot;assets&quot;</span>)
-            .<span class="ident">to_string_lossy</span>()
-            .<span class="ident">to_string</span>();
+</span><span class="kw">impl</span>&lt;R&gt; Downloader&lt;R&gt; {
+    <span class="doccomment">/// 设置安装的目录，传入一个 `.minecraft` 文件夹路径作为参数
+    ///
+    /// 游戏将会被安装到此处
+    </span><span class="kw">pub fn </span>set_minecraft_path(<span class="kw-2">&amp;mut </span><span class="self">self</span>, dot_minecraft_path: <span class="kw">impl </span>AsRef&lt;Path&gt;) {
+        <span class="kw">let </span>dot_minecraft_path = dot_minecraft_path.as_ref().to_path_buf();
+        <span class="self">self</span>.minecraft_path = dot_minecraft_path.to_string_lossy().to_string();
+        <span class="self">self</span>.minecraft_library_path = dot_minecraft_path
+            .join(<span class="string">&quot;libraries&quot;</span>)
+            .to_string_lossy()
+            .to_string();
+        <span class="self">self</span>.minecraft_version_path = dot_minecraft_path
+            .join(<span class="string">&quot;versions&quot;</span>)
+            .to_string_lossy()
+            .to_string();
+        <span class="self">self</span>.minecraft_assets_path = dot_minecraft_path
+            .join(<span class="string">&quot;assets&quot;</span>)
+            .to_string_lossy()
+            .to_string();
     }
 
-    <span class="doccomment">/// Builder 模式的 [`Downloader::set_minecraft_path`]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_minecraft_path</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">dot_minecraft_path</span>: <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">set_minecraft_path</span>(<span class="ident">dot_minecraft_path</span>);
-        <span class="self">self</span>
-    }
+    <span class="doccomment">/// Builder 模式的 [`Downloader::set_minecraft_path`]
+    </span><span class="kw">pub fn </span>with_minecraft_path(<span class="kw-2">mut </span><span class="self">self</span>, dot_minecraft_path: <span class="kw">impl </span>AsRef&lt;Path&gt;) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.set_minecraft_path(dot_minecraft_path);
+        <span class="self">self
+    </span>}
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Reporter</span><span class="op">&gt;</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">Downloader</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">source</span>: <span class="self">self</span>.<span class="ident">source</span>.<span class="ident">clone</span>(),
-            <span class="ident">minecraft_path</span>: <span class="self">self</span>.<span class="ident">minecraft_path</span>.<span class="ident">clone</span>(),
-            <span class="ident">minecraft_library_path</span>: <span class="self">self</span>.<span class="ident">minecraft_library_path</span>.<span class="ident">clone</span>(),
-            <span class="ident">minecraft_version_path</span>: <span class="self">self</span>.<span class="ident">minecraft_version_path</span>.<span class="ident">clone</span>(),
-            <span class="ident">minecraft_assets_path</span>: <span class="self">self</span>.<span class="ident">minecraft_assets_path</span>.<span class="ident">clone</span>(),
-            <span class="ident">game_independent</span>: <span class="self">self</span>.<span class="ident">game_independent</span>,
-            <span class="ident">verify_data</span>: <span class="self">self</span>.<span class="ident">verify_data</span>,
-            <span class="ident">java_path</span>: <span class="self">self</span>.<span class="ident">java_path</span>.<span class="ident">clone</span>(),
-            <span class="ident">parallel_lock</span>: <span class="kw">if</span> <span class="self">self</span>.<span class="ident">parallel_amount</span> <span class="op">==</span> <span class="number">0</span> {
-                <span class="ident">inner_future::lock::Semaphore::new</span>(<span class="ident">usize::MAX</span>)
-            } <span class="kw">else</span> {
-                <span class="ident">inner_future::lock::Semaphore::new</span>(<span class="self">self</span>.<span class="ident">parallel_amount</span>)
+<span class="kw">impl</span>&lt;R: Reporter&gt; Clone <span class="kw">for </span>Downloader&lt;R&gt; {
+    <span class="kw">fn </span>clone(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            source: <span class="self">self</span>.source.clone(),
+            minecraft_path: <span class="self">self</span>.minecraft_path.clone(),
+            minecraft_library_path: <span class="self">self</span>.minecraft_library_path.clone(),
+            minecraft_version_path: <span class="self">self</span>.minecraft_version_path.clone(),
+            minecraft_assets_path: <span class="self">self</span>.minecraft_assets_path.clone(),
+            game_independent: <span class="self">self</span>.game_independent,
+            verify_data: <span class="self">self</span>.verify_data,
+            java_path: <span class="self">self</span>.java_path.clone(),
+            parallel_lock: <span class="kw">if </span><span class="self">self</span>.parallel_amount == <span class="number">0 </span>{
+                inner_future::lock::Semaphore::new(usize::MAX)
+            } <span class="kw">else </span>{
+                inner_future::lock::Semaphore::new(<span class="self">self</span>.parallel_amount)
             },
-            <span class="ident">reporter</span>: <span class="self">self</span>.<span class="ident">reporter</span>.<span class="ident">clone</span>(),
-            <span class="ident">parallel_amount</span>: <span class="self">self</span>.<span class="ident">parallel_amount</span>,
+            reporter: <span class="self">self</span>.reporter.clone(),
+            parallel_amount: <span class="self">self</span>.parallel_amount,
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Reporter</span><span class="op">&gt;</span> <span class="ident">Downloader</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// 设置一个进度报告对象，下载进度将会被上报给这个对象</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_reporter</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">reporter</span>: <span class="ident">R</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">reporter</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">reporter</span>);
-        <span class="self">self</span>
-    }
-    <span class="doccomment">/// 设置一个下载源</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_source</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">source</span>: <span class="ident">DownloadSource</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">source</span> <span class="op">=</span> <span class="ident">source</span>;
-        <span class="self">self</span>
-    }
-    <span class="doccomment">/// 设置一个 Java 运行时，安装 Forge 和 Optifine 时需要用到</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_java</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">java_path</span>: <span class="ident">String</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">java_path</span> <span class="op">=</span> <span class="ident">java_path</span>;
-        <span class="self">self</span>
-    }
-    <span class="doccomment">/// 设置是否使用版本独立方式安装</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 这个会影响 Optifine 以模组形式的安装路径</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// （会被安装在 版本/mods 文件夹里还是 .minecraft/mods 文件夹里）</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_game_independent</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">game_independent</span>: <span class="ident">bool</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">game_independent</span> <span class="op">=</span> <span class="ident">game_independent</span>;
-        <span class="self">self</span>
-    }
-    <span class="doccomment">/// 设置下载时的并发量，如果为 0 则不限制</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_parallel_amount</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">limit</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">parallel_amount</span> <span class="op">=</span> <span class="ident">limit</span>;
-        <span class="kw">if</span> <span class="ident">limit</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="self">self</span>.<span class="ident">parallel_lock</span> <span class="op">=</span> <span class="ident">inner_future::lock::Semaphore::new</span>(<span class="ident">usize::MAX</span>);
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">parallel_lock</span> <span class="op">=</span> <span class="ident">inner_future::lock::Semaphore::new</span>(<span class="ident">limit</span>);
+<span class="kw">impl</span>&lt;R: Reporter&gt; Downloader&lt;R&gt; {
+    <span class="doccomment">/// 设置一个进度报告对象，下载进度将会被上报给这个对象
+    </span><span class="attribute">#[must_use]
+    </span><span class="kw">pub fn </span>with_reporter(<span class="kw-2">mut </span><span class="self">self</span>, reporter: R) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.reporter = <span class="prelude-val">Some</span>(reporter);
+        <span class="self">self
+    </span>}
+    <span class="doccomment">/// 设置一个下载源
+    </span><span class="attribute">#[must_use]
+    </span><span class="kw">pub fn </span>with_source(<span class="kw-2">mut </span><span class="self">self</span>, source: DownloadSource) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.source = source;
+        <span class="self">self
+    </span>}
+    <span class="doccomment">/// 设置一个 Java 运行时，安装 Forge 和 Optifine 时需要用到
+    </span><span class="attribute">#[must_use]
+    </span><span class="kw">pub fn </span>with_java(<span class="kw-2">mut </span><span class="self">self</span>, java_path: String) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.java_path = java_path;
+        <span class="self">self
+    </span>}
+    <span class="doccomment">/// 设置是否使用版本独立方式安装
+    ///
+    /// 这个会影响 Optifine 以模组形式的安装路径
+    ///
+    /// （会被安装在 版本/mods 文件夹里还是 .minecraft/mods 文件夹里）
+    </span><span class="attribute">#[must_use]
+    </span><span class="kw">pub fn </span>with_game_independent(<span class="kw-2">mut </span><span class="self">self</span>, game_independent: bool) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.game_independent = game_independent;
+        <span class="self">self
+    </span>}
+    <span class="doccomment">/// 设置下载时的并发量，如果为 0 则不限制
+    </span><span class="attribute">#[must_use]
+    </span><span class="kw">pub fn </span>with_parallel_amount(<span class="kw-2">mut </span><span class="self">self</span>, limit: usize) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.parallel_amount = limit;
+        <span class="kw">if </span>limit == <span class="number">0 </span>{
+            <span class="self">self</span>.parallel_lock = inner_future::lock::Semaphore::new(usize::MAX);
+        } <span class="kw">else </span>{
+            <span class="self">self</span>.parallel_lock = inner_future::lock::Semaphore::new(limit);
         }
-        <span class="self">self</span>
-    }
-    <span class="doccomment">/// 是否强制校验已下载的文件以确认是否需要重新下载</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 如不强制则仅检测文件是否存在</span>
-    <span class="attribute">#[<span class="ident">must_use</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_verify_data</span>(<span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">verify_data</span> <span class="op">=</span> <span class="bool-val">true</span>;
-        <span class="self">self</span>
-    }
+        <span class="self">self
+    </span>}
+    <span class="doccomment">/// 是否强制校验已下载的文件以确认是否需要重新下载
+    ///
+    /// 如不强制则仅检测文件是否存在
+    </span><span class="attribute">#[must_use]
+    </span><span class="kw">pub fn </span>with_verify_data(<span class="kw-2">mut </span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.verify_data = <span class="bool-val">true</span>;
+        <span class="self">self
+    </span>}
 }
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Reporter</span><span class="op">&gt;</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">Downloader</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">source</span>: <span class="ident">DownloadSource::Default</span>,
-            <span class="ident">minecraft_path</span>: <span class="ident">MINECRAFT_PATH</span>.<span class="ident">to_owned</span>(),
-            <span class="ident">minecraft_library_path</span>: <span class="ident">MINECRAFT_LIBRARIES_PATH</span>.<span class="ident">to_owned</span>(),
-            <span class="ident">minecraft_version_path</span>: <span class="ident">MINECRAFT_VERSIONS_PATH</span>.<span class="ident">to_owned</span>(),
-            <span class="ident">minecraft_assets_path</span>: <span class="ident">MINECRAFT_ASSETS_PATH</span>.<span class="ident">to_owned</span>(),
-            <span class="ident">game_independent</span>: <span class="bool-val">false</span>,
-            <span class="ident">verify_data</span>: <span class="bool-val">false</span>,
-            <span class="ident">java_path</span>: {
-                <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">windows</span>)]</span>
-                {
-                    <span class="string">&quot;javaw.exe&quot;</span>.<span class="ident">into</span>()
+<span class="kw">impl</span>&lt;R: Reporter&gt; Default <span class="kw">for </span>Downloader&lt;R&gt; {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            source: DownloadSource::Default,
+            minecraft_path: MINECRAFT_PATH.to_owned(),
+            minecraft_library_path: MINECRAFT_LIBRARIES_PATH.to_owned(),
+            minecraft_version_path: MINECRAFT_VERSIONS_PATH.to_owned(),
+            minecraft_assets_path: MINECRAFT_ASSETS_PATH.to_owned(),
+            game_independent: <span class="bool-val">false</span>,
+            verify_data: <span class="bool-val">false</span>,
+            java_path: {
+                <span class="attribute">#[cfg(windows)]
+                </span>{
+                    <span class="string">&quot;javaw.exe&quot;</span>.into()
                 }
-                <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">windows</span>))]</span>
-                {
-                    <span class="string">&quot;java&quot;</span>.<span class="ident">into</span>()
+                <span class="attribute">#[cfg(not(windows))]
+                </span>{
+                    <span class="string">&quot;java&quot;</span>.into()
                 }
             },
-            <span class="ident">reporter</span>: <span class="prelude-val">None</span>,
-            <span class="ident">parallel_amount</span>: <span class="number">64</span>,
-            <span class="ident">parallel_lock</span>: <span class="ident">inner_future::lock::Semaphore::new</span>(<span class="number">64</span>),
+            reporter: <span class="prelude-val">None</span>,
+            parallel_amount: <span class="number">64</span>,
+            parallel_lock: inner_future::lock::Semaphore::new(<span class="number">64</span>),
         }
     }
 }
 
-<span class="doccomment">/// 一个游戏安装特质，如果你并不需要单独安装其它部件，则可以单独引入这个特质来安装游戏</span>
-<span class="attribute">#[<span class="ident">async_trait</span>]</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">GameDownload</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>: <span class="ident">FabricDownloadExt</span> <span class="op">+</span> <span class="ident">ForgeDownloadExt</span> <span class="op">+</span> <span class="ident">VanillaDownloadExt</span> {
-    <span class="doccomment">/// 根据参数安装一个游戏，允许安装模组加载器</span>
-    <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">download_game</span>(
+<span class="doccomment">/// 一个游戏安装特质，如果你并不需要单独安装其它部件，则可以单独引入这个特质来安装游戏
+</span><span class="attribute">#[async_trait]
+</span><span class="kw">pub trait </span>GameDownload&lt;<span class="lifetime">&#39;a</span>&gt;: FabricDownloadExt + ForgeDownloadExt + VanillaDownloadExt {
+    <span class="doccomment">/// 根据参数安装一个游戏，允许安装模组加载器
+    </span><span class="kw">async fn </span>download_game(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">version_name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">vanilla</span>: <span class="ident">VersionInfo</span>,
-        <span class="ident">fabric</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">forge</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">optifine</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-    ) -&gt; <span class="ident">DynResult</span>;
+        version_name: <span class="kw-2">&amp;</span>str,
+        vanilla: VersionInfo,
+        fabric: <span class="kw-2">&amp;</span>str,
+        forge: <span class="kw-2">&amp;</span>str,
+        optifine: <span class="kw-2">&amp;</span>str,
+    ) -&gt; DynResult;
 }
 
-<span class="attribute">#[<span class="ident">async_trait</span>]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Reporter</span><span class="op">&gt;</span> <span class="ident">GameDownload</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Downloader</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
-    <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">download_game</span>(
+<span class="attribute">#[async_trait]
+</span><span class="kw">impl</span>&lt;R: Reporter&gt; GameDownload&lt;<span class="lifetime">&#39;_</span>&gt; <span class="kw">for </span>Downloader&lt;R&gt; {
+    <span class="kw">async fn </span>download_game(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">version_name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">vanilla</span>: <span class="ident">VersionInfo</span>,
-        <span class="ident">fabric</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">forge</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">optifine</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-    ) -&gt; <span class="ident">DynResult</span> {
-        <span class="self">self</span>.<span class="ident">reporter</span>
-            .<span class="ident">set_message</span>(<span class="macro">format!</span>(<span class="string">&quot;正在下载游戏 {}&quot;</span>, <span class="ident">version_name</span>));
+        version_name: <span class="kw-2">&amp;</span>str,
+        vanilla: VersionInfo,
+        fabric: <span class="kw-2">&amp;</span>str,
+        forge: <span class="kw-2">&amp;</span>str,
+        optifine: <span class="kw-2">&amp;</span>str,
+    ) -&gt; DynResult {
+        <span class="self">self</span>.reporter
+            .set_message(<span class="macro">format!</span>(<span class="string">&quot;正在下载游戏 {}&quot;</span>, version_name));
 
-        <span class="kw">let</span> <span class="ident">launcher_profiles_path</span> <span class="op">=</span>
-            <span class="ident">std::path::Path::new</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">minecraft_path</span>).<span class="ident">join</span>(<span class="string">&quot;launcher_profiles.json&quot;</span>);
+        <span class="kw">let </span>launcher_profiles_path =
+            std::path::Path::new(<span class="kw-2">&amp;</span><span class="self">self</span>.minecraft_path).join(<span class="string">&quot;launcher_profiles.json&quot;</span>);
 
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">launcher_profiles_path</span>.<span class="ident">exists</span>() {
-            <span class="ident">inner_future::fs::create_dir_all</span>(<span class="ident">launcher_profiles_path</span>.<span class="ident">parent</span>().<span class="ident">unwrap</span>()).<span class="kw">await</span><span class="question-mark">?</span>;
-            <span class="ident">inner_future::fs::write</span>(<span class="ident">launcher_profiles_path</span>, <span class="string">r##&quot;{&quot;profiles&quot;:{},&quot;selectedProfile&quot;:null,&quot;authenticationDatabase&quot;:{},&quot;selectedUser&quot;:{&quot;account&quot;:&quot;00000111112222233333444445555566&quot;,&quot;profile&quot;:&quot;66666555554444433333222221111100&quot;}}&quot;##</span>).<span class="kw">await</span><span class="question-mark">?</span>;
+        <span class="kw">if </span>!launcher_profiles_path.exists() {
+            inner_future::fs::create_dir_all(launcher_profiles_path.parent().unwrap()).<span class="kw">await</span><span class="question-mark">?</span>;
+            inner_future::fs::write(launcher_profiles_path, <span class="string">r##&quot;{&quot;profiles&quot;:{},&quot;selectedProfile&quot;:null,&quot;authenticationDatabase&quot;:{},&quot;selectedUser&quot;:{&quot;account&quot;:&quot;00000111112222233333444445555566&quot;,&quot;profile&quot;:&quot;66666555554444433333222221111100&quot;}}&quot;##</span>).<span class="kw">await</span><span class="question-mark">?</span>;
         }
 
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">fabric</span>.<span class="ident">is_empty</span>() {
-            <span class="ident"><span class="kw">crate</span>::prelude::inner_future::future::try_zip</span>(
-                <span class="self">self</span>.<span class="ident">install_vanilla</span>(<span class="ident">version_name</span>, <span class="kw-2">&amp;</span><span class="ident">vanilla</span>),
-                <span class="self">self</span>.<span class="ident">download_fabric_pre</span>(<span class="ident">version_name</span>, <span class="kw-2">&amp;</span><span class="ident">vanilla</span>.<span class="ident">id</span>, <span class="ident">fabric</span>),
+        <span class="kw">if </span>!fabric.is_empty() {
+            <span class="kw">crate</span>::prelude::inner_future::future::try_zip(
+                <span class="self">self</span>.install_vanilla(version_name, <span class="kw-2">&amp;</span>vanilla),
+                <span class="self">self</span>.download_fabric_pre(version_name, <span class="kw-2">&amp;</span>vanilla.id, fabric),
             )
             .<span class="kw">await</span><span class="question-mark">?</span>;
-            <span class="self">self</span>.<span class="ident">download_fabric_post</span>(<span class="ident">version_name</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">forge</span>.<span class="ident">is_empty</span>() {
-            <span class="self">self</span>.<span class="ident">install_vanilla</span>(<span class="kw-2">&amp;</span><span class="ident">vanilla</span>.<span class="ident">id</span>, <span class="kw-2">&amp;</span><span class="ident">vanilla</span>).<span class="kw">await</span><span class="question-mark">?</span>; <span class="comment">// Forge 安装需要原版，如果安装器没有解析到则会从官方源下载，速度很慢</span>
-            <span class="ident"><span class="kw">crate</span>::prelude::inner_future::future::try_zip</span>(
-                <span class="self">self</span>.<span class="ident">install_vanilla</span>(<span class="ident">version_name</span>, <span class="kw-2">&amp;</span><span class="ident">vanilla</span>),
-                <span class="self">self</span>.<span class="ident">install_forge_pre</span>(<span class="ident">version_name</span>, <span class="kw-2">&amp;</span><span class="ident">vanilla</span>.<span class="ident">id</span>, <span class="ident">forge</span>),
+            <span class="self">self</span>.download_fabric_post(version_name).<span class="kw">await</span><span class="question-mark">?</span>;
+        } <span class="kw">else if </span>!forge.is_empty() {
+            <span class="self">self</span>.install_vanilla(<span class="kw-2">&amp;</span>vanilla.id, <span class="kw-2">&amp;</span>vanilla).<span class="kw">await</span><span class="question-mark">?</span>; <span class="comment">// Forge 安装需要原版，如果安装器没有解析到则会从官方源下载，速度很慢
+            </span><span class="kw">crate</span>::prelude::inner_future::future::try_zip(
+                <span class="self">self</span>.install_vanilla(version_name, <span class="kw-2">&amp;</span>vanilla),
+                <span class="self">self</span>.install_forge_pre(version_name, <span class="kw-2">&amp;</span>vanilla.id, forge),
             )
             .<span class="kw">await</span><span class="question-mark">?</span>;
-            <span class="self">self</span>.<span class="ident">install_forge_post</span>(<span class="ident">version_name</span>, <span class="kw-2">&amp;</span><span class="ident">vanilla</span>.<span class="ident">id</span>, <span class="ident">forge</span>)
+            <span class="self">self</span>.install_forge_post(version_name, <span class="kw-2">&amp;</span>vanilla.id, forge)
                 .<span class="kw">await</span><span class="question-mark">?</span>;
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">install_vanilla</span>(<span class="ident">version_name</span>, <span class="kw-2">&amp;</span><span class="ident">vanilla</span>).<span class="kw">await</span><span class="question-mark">?</span>;
+        } <span class="kw">else </span>{
+            <span class="self">self</span>.install_vanilla(version_name, <span class="kw-2">&amp;</span>vanilla).<span class="kw">await</span><span class="question-mark">?</span>;
         }
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">optifine</span>.<span class="ident">is_empty</span>() {
-            <span class="kw">if</span> <span class="ident">forge</span>.<span class="ident">is_empty</span>() <span class="op">&amp;&amp;</span> <span class="ident">fabric</span>.<span class="ident">is_empty</span>() {
-                <span class="self">self</span>.<span class="ident">install_vanilla</span>(<span class="kw-2">&amp;</span><span class="ident">vanilla</span>.<span class="ident">id</span>, <span class="kw-2">&amp;</span><span class="ident">vanilla</span>).<span class="kw">await</span><span class="question-mark">?</span>; <span class="comment">// Optifine 安装需要原版，如果安装器没有解析到则会从官方源下载，速度很慢</span>
-            }
-            <span class="kw">let</span> (<span class="ident">optifine_type</span>, <span class="ident">optifine_patch</span>) <span class="op">=</span>
-                <span class="ident">optifine</span>.<span class="ident">split_at</span>(<span class="ident">optifine</span>.<span class="ident">find</span>(<span class="string">&#39; &#39;</span>).<span class="ident">context</span>(<span class="string">&quot;Optifine 版本字符串不合法！&quot;</span>)<span class="question-mark">?</span>);
-            <span class="self">self</span>.<span class="ident">install_optifine</span>(
-                <span class="ident">version_name</span>,
-                <span class="kw-2">&amp;</span><span class="ident">vanilla</span>.<span class="ident">id</span>,
-                <span class="ident">optifine_type</span>,
-                <span class="kw-2">&amp;</span><span class="ident">optifine_patch</span>[<span class="number">1</span>..],
-                <span class="op">!</span><span class="ident">forge</span>.<span class="ident">is_empty</span>() <span class="op">|</span><span class="op">|</span> <span class="op">!</span><span class="ident">fabric</span>.<span class="ident">is_empty</span>(),
+        <span class="kw">if </span>!optifine.is_empty() {
+            <span class="kw">if </span>forge.is_empty() &amp;&amp; fabric.is_empty() {
+                <span class="self">self</span>.install_vanilla(<span class="kw-2">&amp;</span>vanilla.id, <span class="kw-2">&amp;</span>vanilla).<span class="kw">await</span><span class="question-mark">?</span>; <span class="comment">// Optifine 安装需要原版，如果安装器没有解析到则会从官方源下载，速度很慢
+            </span>}
+            <span class="kw">let </span>(optifine_type, optifine_patch) =
+                optifine.split_at(optifine.find(<span class="string">&#39; &#39;</span>).context(<span class="string">&quot;Optifine 版本字符串不合法！&quot;</span>)<span class="question-mark">?</span>);
+            <span class="self">self</span>.install_optifine(
+                version_name,
+                <span class="kw-2">&amp;</span>vanilla.id,
+                optifine_type,
+                <span class="kw-2">&amp;</span>optifine_patch[<span class="number">1</span>..],
+                !forge.is_empty() || !fabric.is_empty(),
             )
             .<span class="kw">await</span><span class="question-mark">?</span>;
         }
 
-        <span class="comment">// 这俩都需要安装器，而安装后会生成一个新的版本元数据</span>
-        <span class="comment">// 因此需要最后扫描一遍生成出来的版本元数据依赖，再进行一次下载</span>
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">optifine</span>.<span class="ident">is_empty</span>() <span class="op">|</span><span class="op">|</span> <span class="op">!</span><span class="ident">forge</span>.<span class="ident">is_empty</span>() {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">version_info</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::version::structs::VersionInfo</span> {
-                <span class="ident">version_base</span>: <span class="self">self</span>.<span class="ident">minecraft_version_path</span>.<span class="ident">to_owned</span>(),
-                <span class="ident">version</span>: <span class="ident">version_name</span>.<span class="ident">to_owned</span>(),
-                ..<span class="ident">Default::default</span>()
+        <span class="comment">// 这俩都需要安装器，而安装后会生成一个新的版本元数据
+        // 因此需要最后扫描一遍生成出来的版本元数据依赖，再进行一次下载
+        </span><span class="kw">if </span>!optifine.is_empty() || !forge.is_empty() {
+            <span class="kw">let </span><span class="kw-2">mut </span>version_info = <span class="kw">crate</span>::version::structs::VersionInfo {
+                version_base: <span class="self">self</span>.minecraft_version_path.to_owned(),
+                version: version_name.to_owned(),
+                ..Default::default()
             };
 
-            <span class="kw">if</span> <span class="ident">version_info</span>
-                .<span class="ident">load</span>()
-                .<span class="kw">await</span>
-                .<span class="ident">context</span>(<span class="string">&quot;无法读取安装完成后的版本元数据！&quot;</span>)
-                .<span class="ident">is_ok</span>()
+            <span class="kw">if </span>version_info
+                .load()
+                .<span class="kw">await
+                </span>.context(<span class="string">&quot;无法读取安装完成后的版本元数据！&quot;</span>)
+                .is_ok()
             {
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">meta</span>) <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">version_info</span>.<span class="ident">meta</span> {
-                    <span class="ident">meta</span>.<span class="ident">fix_libraries</span>();
-                    <span class="self">self</span>.<span class="ident">download_libraries</span>(<span class="kw-2">&amp;</span><span class="ident">meta</span>.<span class="ident">libraries</span>).<span class="kw">await</span><span class="question-mark">?</span>;
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(meta) = <span class="kw-2">&amp;mut </span>version_info.meta {
+                    meta.fix_libraries();
+                    <span class="self">self</span>.download_libraries(<span class="kw-2">&amp;</span>meta.libraries).<span class="kw">await</span><span class="question-mark">?</span>;
                 }
             }
         }
@@ -677,4 +677,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

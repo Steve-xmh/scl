@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/auth/microsoft.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>microsoft.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_core/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/auth/microsoft.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>microsoft.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_core/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -279,13 +279,13 @@
 <span id="279">279</span>
 <span id="280">280</span>
 <span id="281">281</span>
-</pre><pre class="rust"><code><span class="doccomment">//! 用于处理微软登录的小型服务器</span>
+</pre><pre class="rust"><code><span class="doccomment">//! 用于处理微软登录的小型服务器
 
-<span class="kw">use</span> <span class="ident">serde::Deserialize</span>;
+</span><span class="kw">use </span>serde::Deserialize;
 
-<span class="kw">use</span> <span class="kw">crate</span>::{
-    <span class="ident">auth</span>::{<span class="ident">parse_head_skin</span>, <span class="ident">structs::AuthMethod</span>},
-    <span class="ident">prelude</span>::<span class="kw-2">*</span>,
+<span class="kw">use crate</span>::{
+    auth::{parse_head_skin, structs::AuthMethod},
+    prelude::<span class="kw-2">*</span>,
 };
 
 <span class="doccomment">/**
@@ -294,271 +294,271 @@
     通过捕获从此链接跳转过来的
     `https://login.live.com/oauth20_desktop.srf?code=[ANYCODE]&amp;lc=1033`
     链接并传入 [`start_auth`] 来获取登录令牌
-*/</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MICROSOFT_URL</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;https://login.live.com/oauth20_authorize.srf?client_id=00000000402b5328&amp;response_type=code&amp;scope=service%3A%3Auser.auth.xboxlive.com%3A%3AMBI_SSL&amp;redirect_uri=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf&quot;</span>;
+*/
+</span><span class="kw">pub const </span>MICROSOFT_URL: <span class="kw-2">&amp;</span>str = <span class="string">&quot;https://login.live.com/oauth20_authorize.srf?client_id=00000000402b5328&amp;response_type=code&amp;scope=service%3A%3Auser.auth.xboxlive.com%3A%3AMBI_SSL&amp;redirect_uri=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf&quot;</span>;
 
 <span class="doccomment">/**
   微软的登录令牌 API 接口
   用来请求或续期登录令牌
-*/</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MICROSOFT_TOKEN_URL</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;https://login.live.com/oauth20_token.srf&quot;</span>;
+*/
+</span><span class="kw">pub const </span>MICROSOFT_TOKEN_URL: <span class="kw-2">&amp;</span>str = <span class="string">&quot;https://login.live.com/oauth20_token.srf&quot;</span>;
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Deserialize</span>, <span class="ident">Default</span>)]</span>
-<span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
-<span class="kw">struct</span> <span class="ident">OAuth20TokenResponse</span> {
-    <span class="comment">// token_type: String,</span>
-    <span class="comment">// expires_in: usize,</span>
-    <span class="comment">// scope: String,</span>
-    <span class="kw">pub</span> <span class="ident">error</span>: <span class="ident">String</span>,
-    <span class="kw">pub</span> <span class="ident">access_token</span>: <span class="ident">String</span>,
-    <span class="kw">pub</span> <span class="ident">refresh_token</span>: <span class="ident">String</span>,
-    <span class="comment">// user_id: String,</span>
-    <span class="comment">// foci: String,</span>
+<span class="attribute">#[derive(Debug, Clone, Deserialize, Default)]
+#[serde(default)]
+</span><span class="kw">struct </span>OAuth20TokenResponse {
+    <span class="comment">// token_type: String,
+    // expires_in: usize,
+    // scope: String,
+    </span><span class="kw">pub </span>error: String,
+    <span class="kw">pub </span>access_token: String,
+    <span class="kw">pub </span>refresh_token: String,
+    <span class="comment">// user_id: String,
+    // foci: String,
+</span>}
+
+<span class="attribute">#[derive(Debug, Clone, Deserialize)]
+</span><span class="kw">struct </span>XBoxAuthResponse {
+    <span class="attribute">#[serde(rename = <span class="string">&quot;Token&quot;</span>)]
+    </span><span class="kw">pub </span>token: String,
+    <span class="attribute">#[serde(rename = <span class="string">&quot;DisplayClaims&quot;</span>)]
+    </span><span class="kw">pub </span>display_claims: XBoxAuthResponse1,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">struct</span> <span class="ident">XBoxAuthResponse</span> {
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;Token&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">token</span>: <span class="ident">String</span>,
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;DisplayClaims&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">display_claims</span>: <span class="ident">XBoxAuthResponse1</span>,
+<span class="attribute">#[derive(Debug, Clone, Deserialize)]
+</span><span class="kw">struct </span>XBoxAuthResponse1 {
+    <span class="kw">pub </span>xui: Vec&lt;XBoxAuthResponse2&gt;,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">struct</span> <span class="ident">XBoxAuthResponse1</span> {
-    <span class="kw">pub</span> <span class="ident">xui</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">XBoxAuthResponse2</span><span class="op">&gt;</span>,
+<span class="attribute">#[derive(Debug, Clone, Deserialize)]
+</span><span class="kw">struct </span>XBoxAuthResponse2 {
+    <span class="kw">pub </span>uhs: String,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">struct</span> <span class="ident">XBoxAuthResponse2</span> {
-    <span class="kw">pub</span> <span class="ident">uhs</span>: <span class="ident">String</span>,
+<span class="attribute">#[derive(Debug, Clone, Deserialize)]
+</span><span class="kw">struct </span>MinecraftStoreResponse {
+    items: Vec&lt;serde_json::Value&gt;,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">struct</span> <span class="ident">MinecraftStoreResponse</span> {
-    <span class="ident">items</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">serde_json::Value</span><span class="op">&gt;</span>,
+<span class="attribute">#[derive(Debug, Clone, Deserialize)]
+</span><span class="kw">struct </span>MinecraftXBoxLoginResponse {
+    <span class="comment">// pub username: String,
+    </span><span class="kw">pub </span>access_token: String,
+    <span class="comment">// pub token_type: String,
+</span>}
+
+<span class="attribute">#[derive(Debug, Clone, Deserialize, Default)]
+#[serde(default)]
+</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">struct </span>MinecraftXBoxProfileResponse {
+    <span class="kw">pub </span>id: String,
+    <span class="kw">pub </span>name: String,
+    <span class="kw">pub </span>error: String,
+    <span class="kw">pub </span>skins: Vec&lt;MinecraftXBoxProfileResponse1&gt;,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">struct</span> <span class="ident">MinecraftXBoxLoginResponse</span> {
-    <span class="comment">// pub username: String,</span>
-    <span class="kw">pub</span> <span class="ident">access_token</span>: <span class="ident">String</span>,
-    <span class="comment">// pub token_type: String,</span>
+<span class="attribute">#[derive(Debug, Clone, Deserialize)]
+</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">struct </span>MinecraftXBoxProfileResponse1 {
+    <span class="comment">// pub id: String,
+    </span><span class="kw">pub </span>state: String,
+    <span class="kw">pub </span>url: String,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Deserialize</span>, <span class="ident">Default</span>)]</span>
-<span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
-<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">struct</span> <span class="ident">MinecraftXBoxProfileResponse</span> {
-    <span class="kw">pub</span> <span class="ident">id</span>: <span class="ident">String</span>,
-    <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">String</span>,
-    <span class="kw">pub</span> <span class="ident">error</span>: <span class="ident">String</span>,
-    <span class="kw">pub</span> <span class="ident">skins</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">MinecraftXBoxProfileResponse1</span><span class="op">&gt;</span>,
+<span class="attribute">#[derive(Debug, Clone, Deserialize)]
+</span><span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">struct </span>XBoxPresenceRescord {
+    <span class="comment">// pub xuid: String,
+</span>}
+
+<span class="doccomment">/// 获取 XUID，用途不明，但是在新版本的 Minecraft 有发现需要使用这个 XUID 的地方
+</span><span class="kw">pub async fn </span>get_xuid(userhash: <span class="kw-2">&amp;</span>str, token: <span class="kw-2">&amp;</span>str) -&gt; DynResult&lt;String&gt; {
+    <span class="kw">let </span>res = <span class="kw">crate</span>::http::get(<span class="string">&quot;https://userpresence.xboxlive.com/users/me?level=user&quot;</span>)
+        .header(<span class="string">&quot;Authorization&quot;</span>, <span class="macro">format!</span>(<span class="string">&quot;XBL3.0 x={};{}&quot;</span>, userhash, token))
+        .header(<span class="string">&quot;x-xbl-contract-version&quot;</span>, <span class="string">&quot;3.2&quot;</span>)
+        .header(<span class="string">&quot;Accept&quot;</span>, <span class="string">&quot;application/json&quot;</span>)
+        .header(<span class="string">&quot;Accept-Language&quot;</span>, <span class="string">&quot;zh-CN&quot;</span>)
+        .header(<span class="string">&quot;Host&quot;</span>, <span class="string">&quot;userpresence.xboxlive.com&quot;</span>)
+        .recv_string()
+        .<span class="kw">await
+        </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?</span>;
+    <span class="prelude-val">Ok</span>(res)
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">struct</span> <span class="ident">MinecraftXBoxProfileResponse1</span> {
-    <span class="comment">// pub id: String,</span>
-    <span class="kw">pub</span> <span class="ident">state</span>: <span class="ident">String</span>,
-    <span class="kw">pub</span> <span class="ident">url</span>: <span class="ident">String</span>,
-}
-
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">pub</span>(<span class="kw">super</span>) <span class="kw">struct</span> <span class="ident">XBoxPresenceRescord</span> {
-    <span class="comment">// pub xuid: String,</span>
-}
-
-<span class="doccomment">/// 获取 XUID，用途不明，但是在新版本的 Minecraft 有发现需要使用这个 XUID 的地方</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_xuid</span>(<span class="ident">userhash</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">token</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::http::get</span>(<span class="string">&quot;https://userpresence.xboxlive.com/users/me?level=user&quot;</span>)
-        .<span class="ident">header</span>(<span class="string">&quot;Authorization&quot;</span>, <span class="macro">format!</span>(<span class="string">&quot;XBL3.0 x={};{}&quot;</span>, <span class="ident">userhash</span>, <span class="ident">token</span>))
-        .<span class="ident">header</span>(<span class="string">&quot;x-xbl-contract-version&quot;</span>, <span class="string">&quot;3.2&quot;</span>)
-        .<span class="ident">header</span>(<span class="string">&quot;Accept&quot;</span>, <span class="string">&quot;application/json&quot;</span>)
-        .<span class="ident">header</span>(<span class="string">&quot;Accept-Language&quot;</span>, <span class="string">&quot;zh-CN&quot;</span>)
-        .<span class="ident">header</span>(<span class="string">&quot;Host&quot;</span>, <span class="string">&quot;userpresence.xboxlive.com&quot;</span>)
-        .<span class="ident">recv_string</span>()
-        .<span class="kw">await</span>
-        .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>;
-    <span class="prelude-val">Ok</span>(<span class="ident">res</span>)
-}
-
-<span class="doccomment">/// 请求一个新令牌，或者续期一个令牌</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 如果请求一个新令牌，则 credit 为从登录页面里传来的 code 请求字符串</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 如果续期一个令牌，则 credit 为需要续期的旧令牌</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">request_token</span>(<span class="ident">credit</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">is_refresh</span>: <span class="ident">bool</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span>(<span class="ident">String</span>, <span class="ident">String</span>)<span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">body</span> <span class="op">=</span> <span class="macro">format!</span>(
+<span class="doccomment">/// 请求一个新令牌，或者续期一个令牌
+///
+/// 如果请求一个新令牌，则 credit 为从登录页面里传来的 code 请求字符串
+///
+/// 如果续期一个令牌，则 credit 为需要续期的旧令牌
+</span><span class="kw">pub async fn </span>request_token(credit: <span class="kw-2">&amp;</span>str, is_refresh: bool) -&gt; DynResult&lt;(String, String)&gt; {
+    <span class="kw">let </span>body = <span class="macro">format!</span>(
         <span class="string">&quot;client_id=00000000402b5328&amp;{}={}&amp;grant_type={}&amp;redirect_uri=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf&amp;scope=service%3A%3Auser.auth.xboxlive.com%3A%3AMBI_SSL&quot;</span>,
-        <span class="kw">if</span> <span class="ident">is_refresh</span> { <span class="string">&quot;refresh_token&quot;</span> } <span class="kw">else</span> { <span class="string">&quot;code&quot;</span> }, <span class="comment">// Grant Tag</span>
-        <span class="ident">credit</span>,
-        <span class="kw">if</span> <span class="ident">is_refresh</span> { <span class="string">&quot;refresh_token&quot;</span> } <span class="kw">else</span> { <span class="string">&quot;authorization_code&quot;</span> }, <span class="comment">// Grant Type</span>
-    );
-    <span class="kw">let</span> <span class="ident">res</span>: <span class="ident">OAuth20TokenResponse</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::http::post</span>(<span class="ident">MICROSOFT_TOKEN_URL</span>)
-        .<span class="ident">header</span>(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/x-www-form-urlencoded&quot;</span>)
-        .<span class="ident">body</span>(<span class="ident">body</span>.<span class="ident">as_bytes</span>())
-        .<span class="ident">recv_json</span>()
-        .<span class="kw">await</span>
-        .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>;
+        <span class="kw">if </span>is_refresh { <span class="string">&quot;refresh_token&quot; </span>} <span class="kw">else </span>{ <span class="string">&quot;code&quot; </span>}, <span class="comment">// Grant Tag
+        </span>credit,
+        <span class="kw">if </span>is_refresh { <span class="string">&quot;refresh_token&quot; </span>} <span class="kw">else </span>{ <span class="string">&quot;authorization_code&quot; </span>}, <span class="comment">// Grant Type
+    </span>);
+    <span class="kw">let </span>res: OAuth20TokenResponse = <span class="kw">crate</span>::http::post(MICROSOFT_TOKEN_URL)
+        .header(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/x-www-form-urlencoded&quot;</span>)
+        .body(body.as_bytes())
+        .recv_json()
+        .<span class="kw">await
+        </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?</span>;
     <span class="macro">anyhow::ensure!</span>(
-        <span class="ident">res</span>.<span class="ident">error</span>.<span class="ident">is_empty</span>(),
+        res.error.is_empty(),
         <span class="string">&quot;{}令牌失败: {}&quot;</span>,
-        <span class="kw">if</span> <span class="ident">is_refresh</span> { <span class="string">&quot;刷新&quot;</span> } <span class="kw">else</span> { <span class="string">&quot;请求&quot;</span> },
-        <span class="ident">res</span>.<span class="ident">error</span>
+        <span class="kw">if </span>is_refresh { <span class="string">&quot;刷新&quot; </span>} <span class="kw">else </span>{ <span class="string">&quot;请求&quot; </span>},
+        res.error
     );
-    <span class="prelude-val">Ok</span>((<span class="ident">res</span>.<span class="ident">access_token</span>, <span class="ident">res</span>.<span class="ident">refresh_token</span>))
+    <span class="prelude-val">Ok</span>((res.access_token, res.refresh_token))
 }
 
-<span class="doccomment">/// 根据微软登录传回的访问令牌 access_token 返回 user_hash 和 xsts_token</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 传递给 [`get_mojang_access_token`] 进行下一步验证</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_userhash_and_token</span>(<span class="ident">access_token</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span>(<span class="ident">String</span>, <span class="ident">String</span>)<span class="op">&gt;</span> {
-    <span class="comment">// println!(&quot;Getting xbox auth body&quot;);</span>
-    <span class="kw">let</span> <span class="ident">xbox_auth_body</span> <span class="op">=</span> <span class="macro">format!</span>(<span class="string">&quot;{{\&quot;Properties\&quot;:{{\&quot;AuthMethod\&quot;:\&quot;RPS\&quot;,\&quot;SiteName\&quot;:\&quot;user.auth.xboxlive.com\&quot;,\&quot;RpsTicket\&quot;:\&quot;{}\&quot;}},\&quot;RelyingParty\&quot;:\&quot;http://auth.xboxlive.com\&quot;,\&quot;TokenType\&quot;:\&quot;JWT\&quot;}}&quot;</span>, <span class="ident">access_token</span>);
-    <span class="kw">let</span> <span class="ident">xbox_auth_resp</span>: <span class="ident">XBoxAuthResponse</span> <span class="op">=</span>
-        <span class="ident"><span class="kw">crate</span>::http::post</span>(<span class="string">&quot;https://user.auth.xboxlive.com/user/authenticate&quot;</span>)
-            .<span class="ident">header</span>(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>)
-            .<span class="ident">header</span>(<span class="string">&quot;Accept&quot;</span>, <span class="string">&quot;application/json&quot;</span>)
-            .<span class="ident">body</span>(<span class="ident">xbox_auth_body</span>.<span class="ident">as_bytes</span>())
-            .<span class="kw">await</span>
-            .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>
-            .<span class="ident">body_json</span>()
-            .<span class="kw">await</span>
-            .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">token</span> <span class="op">=</span> <span class="ident">xbox_auth_resp</span>.<span class="ident">token</span>.<span class="ident">to_owned</span>();
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">uhs</span>) <span class="op">=</span> <span class="ident">xbox_auth_resp</span>.<span class="ident">display_claims</span>.<span class="ident">xui</span>.<span class="ident">first</span>() {
-        <span class="kw">let</span> <span class="ident">uhs</span> <span class="op">=</span> <span class="ident">uhs</span>.<span class="ident">uhs</span>.<span class="ident">to_owned</span>();
-        <span class="kw">let</span> <span class="ident">xsts_body</span> <span class="op">=</span> <span class="macro">format!</span>(<span class="string">&quot;{{\&quot;Properties\&quot;:{{\&quot;SandboxId\&quot;:\&quot;RETAIL\&quot;,\&quot;UserTokens\&quot;:[\&quot;{}\&quot;]}},\&quot;RelyingParty\&quot;:\&quot;rp://api.minecraftservices.com/\&quot;,\&quot;TokenType\&quot;:\&quot;JWT\&quot;}}&quot;</span>, <span class="ident">token</span>);
+<span class="doccomment">/// 根据微软登录传回的访问令牌 access_token 返回 user_hash 和 xsts_token
+///
+/// 传递给 [`get_mojang_access_token`] 进行下一步验证
+</span><span class="kw">pub async fn </span>get_userhash_and_token(access_token: <span class="kw-2">&amp;</span>str) -&gt; DynResult&lt;(String, String)&gt; {
+    <span class="comment">// println!(&quot;Getting xbox auth body&quot;);
+    </span><span class="kw">let </span>xbox_auth_body = <span class="macro">format!</span>(<span class="string">&quot;{{\&quot;Properties\&quot;:{{\&quot;AuthMethod\&quot;:\&quot;RPS\&quot;,\&quot;SiteName\&quot;:\&quot;user.auth.xboxlive.com\&quot;,\&quot;RpsTicket\&quot;:\&quot;{}\&quot;}},\&quot;RelyingParty\&quot;:\&quot;http://auth.xboxlive.com\&quot;,\&quot;TokenType\&quot;:\&quot;JWT\&quot;}}&quot;</span>, access_token);
+    <span class="kw">let </span>xbox_auth_resp: XBoxAuthResponse =
+        <span class="kw">crate</span>::http::post(<span class="string">&quot;https://user.auth.xboxlive.com/user/authenticate&quot;</span>)
+            .header(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>)
+            .header(<span class="string">&quot;Accept&quot;</span>, <span class="string">&quot;application/json&quot;</span>)
+            .body(xbox_auth_body.as_bytes())
+            .<span class="kw">await
+            </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?
+            </span>.body_json()
+            .<span class="kw">await
+            </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?</span>;
+    <span class="kw">let </span>token = xbox_auth_resp.token.to_owned();
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(uhs) = xbox_auth_resp.display_claims.xui.first() {
+        <span class="kw">let </span>uhs = uhs.uhs.to_owned();
+        <span class="kw">let </span>xsts_body = <span class="macro">format!</span>(<span class="string">&quot;{{\&quot;Properties\&quot;:{{\&quot;SandboxId\&quot;:\&quot;RETAIL\&quot;,\&quot;UserTokens\&quot;:[\&quot;{}\&quot;]}},\&quot;RelyingParty\&quot;:\&quot;rp://api.minecraftservices.com/\&quot;,\&quot;TokenType\&quot;:\&quot;JWT\&quot;}}&quot;</span>, token);
         <span class="macro">println!</span>(<span class="string">&quot;Getting xbox xsts token&quot;</span>);
-        <span class="kw">let</span> <span class="ident">xsts_resp</span>: <span class="ident">XBoxAuthResponse</span> <span class="op">=</span>
-            <span class="ident"><span class="kw">crate</span>::http::post</span>(<span class="string">&quot;https://xsts.auth.xboxlive.com/xsts/authorize&quot;</span>)
-                .<span class="ident">header</span>(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>)
-                .<span class="ident">header</span>(<span class="string">&quot;Accept&quot;</span>, <span class="string">&quot;application/json&quot;</span>)
-                .<span class="ident">body</span>(<span class="ident">xsts_body</span>.<span class="ident">as_bytes</span>())
-                .<span class="kw">await</span>
-                .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>
-                .<span class="ident">body_json</span>()
-                .<span class="kw">await</span>
-                .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">xsts_token</span> <span class="op">=</span> <span class="ident">xsts_resp</span>.<span class="ident">token</span>;
-        <span class="prelude-val">Ok</span>((<span class="ident">uhs</span>, <span class="ident">xsts_token</span>))
-    } <span class="kw">else</span> {
+        <span class="kw">let </span>xsts_resp: XBoxAuthResponse =
+            <span class="kw">crate</span>::http::post(<span class="string">&quot;https://xsts.auth.xboxlive.com/xsts/authorize&quot;</span>)
+                .header(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>)
+                .header(<span class="string">&quot;Accept&quot;</span>, <span class="string">&quot;application/json&quot;</span>)
+                .body(xsts_body.as_bytes())
+                .<span class="kw">await
+                </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?
+                </span>.body_json()
+                .<span class="kw">await
+                </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?</span>;
+        <span class="kw">let </span>xsts_token = xsts_resp.token;
+        <span class="prelude-val">Ok</span>((uhs, xsts_token))
+    } <span class="kw">else </span>{
         <span class="macro">anyhow::bail!</span>(<span class="string">&quot;获取 UserHash 失败&quot;</span>)
     }
 }
 
-<span class="doccomment">/// 通过 [`get_userhash_and_token`] 返回的 `userhash` 和 `xsts_token` 获取 Mojang 的访问令牌</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 在拥有 Minecraft 游戏的情况下，此令牌可用于正版启动游戏</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_mojang_access_token</span>(<span class="ident">uhs</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">xsts_token</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
-    <span class="kw">if</span> <span class="op">!</span><span class="ident">uhs</span>.<span class="ident">is_empty</span>() <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">xsts_token</span>.<span class="ident">is_empty</span>() {
-        <span class="comment">// println!(&quot;Getting mojang access token&quot;);</span>
-        <span class="kw">let</span> <span class="ident">minecraft_xbox_body</span> <span class="op">=</span>
-            <span class="macro">format!</span>(<span class="string">&quot;{{\&quot;identityToken\&quot;:\&quot;XBL3.0 x={};{}\&quot;}}&quot;</span>, <span class="ident">uhs</span>, <span class="ident">xsts_token</span>);
-        <span class="kw">let</span> <span class="ident">minecraft_xbox_resp</span>: <span class="ident">MinecraftXBoxLoginResponse</span> <span class="op">=</span>
-            <span class="ident"><span class="kw">crate</span>::http::post</span>(<span class="string">&quot;https://api.minecraftservices.com/authentication/login_with_xbox&quot;</span>)
-                .<span class="ident">header</span>(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>)
-                .<span class="ident">header</span>(<span class="string">&quot;Accept&quot;</span>, <span class="string">&quot;application/json&quot;</span>)
-                .<span class="ident">body</span>(<span class="ident">minecraft_xbox_body</span>.<span class="ident">as_bytes</span>())
-                .<span class="kw">await</span>
-                .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>
-                .<span class="ident">body_json</span>()
-                .<span class="kw">await</span>
-                .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>;
-        <span class="comment">// println!(&quot;Getting minecraft access token&quot;);</span>
-        <span class="kw">let</span> <span class="ident">access_token</span> <span class="op">=</span> <span class="ident">minecraft_xbox_resp</span>.<span class="ident">access_token</span>;
-        <span class="prelude-val">Ok</span>(<span class="ident">access_token</span>)
-    } <span class="kw">else</span> {
-        <span class="prelude-val">Ok</span>(<span class="string">&quot;&quot;</span>.<span class="ident">into</span>())
+<span class="doccomment">/// 通过 [`get_userhash_and_token`] 返回的 `userhash` 和 `xsts_token` 获取 Mojang 的访问令牌
+///
+/// 在拥有 Minecraft 游戏的情况下，此令牌可用于正版启动游戏
+</span><span class="kw">pub async fn </span>get_mojang_access_token(uhs: <span class="kw-2">&amp;</span>str, xsts_token: <span class="kw-2">&amp;</span>str) -&gt; DynResult&lt;String&gt; {
+    <span class="kw">if </span>!uhs.is_empty() &amp;&amp; !xsts_token.is_empty() {
+        <span class="comment">// println!(&quot;Getting mojang access token&quot;);
+        </span><span class="kw">let </span>minecraft_xbox_body =
+            <span class="macro">format!</span>(<span class="string">&quot;{{\&quot;identityToken\&quot;:\&quot;XBL3.0 x={};{}\&quot;}}&quot;</span>, uhs, xsts_token);
+        <span class="kw">let </span>minecraft_xbox_resp: MinecraftXBoxLoginResponse =
+            <span class="kw">crate</span>::http::post(<span class="string">&quot;https://api.minecraftservices.com/authentication/login_with_xbox&quot;</span>)
+                .header(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>)
+                .header(<span class="string">&quot;Accept&quot;</span>, <span class="string">&quot;application/json&quot;</span>)
+                .body(minecraft_xbox_body.as_bytes())
+                .<span class="kw">await
+                </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?
+                </span>.body_json()
+                .<span class="kw">await
+                </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?</span>;
+        <span class="comment">// println!(&quot;Getting minecraft access token&quot;);
+        </span><span class="kw">let </span>access_token = minecraft_xbox_resp.access_token;
+        <span class="prelude-val">Ok</span>(access_token)
+    } <span class="kw">else </span>{
+        <span class="prelude-val">Ok</span>(<span class="string">&quot;&quot;</span>.into())
     }
 }
 
-<span class="doccomment">/// 刷新登录令牌，如刷新成功则可将更新后的用户继续用于正版启动</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">refresh_auth</span>(<span class="ident">method</span>: <span class="kw-2">&amp;mut</span> <span class="ident">AuthMethod</span>) -&gt; <span class="ident">DynResult</span> {
-    <span class="kw">match</span> <span class="ident">method</span> {
-        <span class="ident">AuthMethod::Microsoft</span> {
-            <span class="ident">access_token</span>,
-            <span class="ident">refresh_token</span>,
+<span class="doccomment">/// 刷新登录令牌，如刷新成功则可将更新后的用户继续用于正版启动
+</span><span class="kw">pub async fn </span>refresh_auth(method: <span class="kw-2">&amp;mut </span>AuthMethod) -&gt; DynResult {
+    <span class="kw">match </span>method {
+        AuthMethod::Microsoft {
+            access_token,
+            refresh_token,
             ..
         } =&gt; {
-            <span class="kw">let</span> (<span class="ident">new_access_token</span>, <span class="ident">new_refresh_token</span>) <span class="op">=</span>
-                <span class="ident">request_token</span>(<span class="ident">refresh_token</span>.<span class="ident">as_str</span>(), <span class="bool-val">true</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-            <span class="kw">let</span> (<span class="ident">uhs</span>, <span class="ident">xsts_token</span>) <span class="op">=</span> <span class="ident">get_userhash_and_token</span>(<span class="kw-2">&amp;</span><span class="ident">new_access_token</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">new_access_token</span> <span class="op">=</span> <span class="ident">get_mojang_access_token</span>(<span class="kw-2">&amp;</span><span class="ident">uhs</span>, <span class="kw-2">&amp;</span><span class="ident">xsts_token</span>).<span class="kw">await</span><span class="question-mark">?</span>;
+            <span class="kw">let </span>(new_access_token, new_refresh_token) =
+                request_token(refresh_token.as_str(), <span class="bool-val">true</span>).<span class="kw">await</span><span class="question-mark">?</span>;
+            <span class="kw">let </span>(uhs, xsts_token) = get_userhash_and_token(<span class="kw-2">&amp;</span>new_access_token).<span class="kw">await</span><span class="question-mark">?</span>;
+            <span class="kw">let </span>new_access_token = get_mojang_access_token(<span class="kw-2">&amp;</span>uhs, <span class="kw-2">&amp;</span>xsts_token).<span class="kw">await</span><span class="question-mark">?</span>;
             <span class="macro">anyhow::ensure!</span>(
-                <span class="op">!</span><span class="ident">new_access_token</span>.<span class="ident">is_empty</span>(),
+                !new_access_token.is_empty(),
                 <span class="string">&quot;刷新令牌失败: {}&quot;</span>,
-                <span class="ident">new_access_token</span>
+                new_access_token
             );
-            <span class="kw-2">*</span><span class="ident">access_token</span> <span class="op">=</span> <span class="ident">new_access_token</span>.<span class="ident">into</span>();
-            <span class="kw-2">*</span><span class="ident">refresh_token</span> <span class="op">=</span> <span class="ident">new_refresh_token</span>.<span class="ident">into</span>();
+            <span class="kw-2">*</span>access_token = new_access_token.into();
+            <span class="kw-2">*</span>refresh_token = new_refresh_token.into();
         }
-        <span class="kw">_</span> =&gt; {
+        <span class="kw">_ </span>=&gt; {
             <span class="macro">anyhow::bail!</span>(<span class="string">&quot;不支持的方法&quot;</span>);
         }
     }
     <span class="prelude-val">Ok</span>(())
 }
 
-<span class="doccomment">/// 执行微软登录，需要形如 `https://login.live.com/oauth20_desktop.srf?code=[ANYCODE]&amp;lc=1033` 的链接作为参数</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">start_auth</span>(<span class="ident">_ctx</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">impl</span> <span class="ident">Reporter</span><span class="op">&gt;</span>, <span class="ident">url</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">AuthMethod</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">url</span> <span class="op">=</span> <span class="ident">url</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">url::Url</span><span class="op">&gt;</span>()<span class="question-mark">?</span>;
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="kw">_</span>, <span class="ident">code</span>)) <span class="op">=</span> <span class="ident">url</span>.<span class="ident">query_pairs</span>().<span class="ident">find</span>(<span class="op">|</span><span class="ident">a</span><span class="op">|</span> <span class="ident">a</span>.<span class="number">0</span> <span class="op">==</span> <span class="string">&quot;code&quot;</span>) {
-        <span class="kw">let</span> (<span class="ident">access_token</span>, <span class="ident">refresh_token</span>) <span class="op">=</span> <span class="ident">request_token</span>(<span class="kw-2">&amp;</span><span class="ident">code</span>, <span class="bool-val">false</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-        <span class="kw">let</span> (<span class="ident">uhs</span>, <span class="ident">xsts_token</span>) <span class="op">=</span> <span class="ident">get_userhash_and_token</span>(<span class="kw-2">&amp;</span><span class="ident">access_token</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">xuid</span> <span class="op">=</span> <span class="ident">get_xuid</span>(<span class="kw-2">&amp;</span><span class="ident">uhs</span>, <span class="kw-2">&amp;</span><span class="ident">xsts_token</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">access_token</span> <span class="op">=</span> <span class="ident">get_mojang_access_token</span>(<span class="kw-2">&amp;</span><span class="ident">uhs</span>, <span class="kw-2">&amp;</span><span class="ident">xsts_token</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="ident">access_token</span>.<span class="ident">is_empty</span>() {
-            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;获取令牌失败&quot;</span>));
-        } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="ident">mcstore_resp</span>: <span class="ident">MinecraftStoreResponse</span> <span class="op">=</span>
-                <span class="ident"><span class="kw">crate</span>::http::get</span>(<span class="string">&quot;https://api.minecraftservices.com/entitlements/mcstore&quot;</span>)
-                    .<span class="ident">header</span>(<span class="string">&quot;Authorization&quot;</span>, <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;Bearer {}&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">access_token</span>))
-                    .<span class="kw">await</span>
-                    .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>
-                    .<span class="ident">body_json</span>()
-                    .<span class="kw">await</span>
-                    .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>;
-            <span class="kw">if</span> <span class="ident">mcstore_resp</span>.<span class="ident">items</span>.<span class="ident">is_empty</span>() {
+<span class="doccomment">/// 执行微软登录，需要形如 `https://login.live.com/oauth20_desktop.srf?code=[ANYCODE]&amp;lc=1033` 的链接作为参数
+</span><span class="kw">pub async fn </span>start_auth(_ctx: <span class="prelude-ty">Option</span>&lt;<span class="kw">impl </span>Reporter&gt;, url: <span class="kw-2">&amp;</span>str) -&gt; DynResult&lt;AuthMethod&gt; {
+    <span class="kw">let </span>url = url.parse::&lt;url::Url&gt;()<span class="question-mark">?</span>;
+    <span class="kw">if let </span><span class="prelude-val">Some</span>((<span class="kw">_</span>, code)) = url.query_pairs().find(|a| a.<span class="number">0 </span>== <span class="string">&quot;code&quot;</span>) {
+        <span class="kw">let </span>(access_token, refresh_token) = request_token(<span class="kw-2">&amp;</span>code, <span class="bool-val">false</span>).<span class="kw">await</span><span class="question-mark">?</span>;
+        <span class="kw">let </span>(uhs, xsts_token) = get_userhash_and_token(<span class="kw-2">&amp;</span>access_token).<span class="kw">await</span><span class="question-mark">?</span>;
+        <span class="kw">let </span>xuid = get_xuid(<span class="kw-2">&amp;</span>uhs, <span class="kw-2">&amp;</span>xsts_token).<span class="kw">await</span><span class="question-mark">?</span>;
+        <span class="kw">let </span>access_token = get_mojang_access_token(<span class="kw-2">&amp;</span>uhs, <span class="kw-2">&amp;</span>xsts_token).<span class="kw">await</span><span class="question-mark">?</span>;
+        <span class="kw">if </span>access_token.is_empty() {
+            <span class="kw">return </span><span class="prelude-val">Err</span>(<span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;获取令牌失败&quot;</span>));
+        } <span class="kw">else </span>{
+            <span class="kw">let </span>mcstore_resp: MinecraftStoreResponse =
+                <span class="kw">crate</span>::http::get(<span class="string">&quot;https://api.minecraftservices.com/entitlements/mcstore&quot;</span>)
+                    .header(<span class="string">&quot;Authorization&quot;</span>, <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;Bearer {}&quot;</span>, <span class="kw-2">&amp;</span>access_token))
+                    .<span class="kw">await
+                    </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?
+                    </span>.body_json()
+                    .<span class="kw">await
+                    </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?</span>;
+            <span class="kw">if </span>mcstore_resp.items.is_empty() {
                 <span class="macro">anyhow::bail!</span>(
-                    <span class="string">&quot;没有在已购项目中找到 Minecraft！请检查你的账户是否已购买 Minecraft！&quot;</span>
-                );
+                    <span class="string">&quot;没有在已购项目中找到 Minecraft！请检查你的账户是否已购买 Minecraft！&quot;
+                </span>);
             }
-            <span class="kw">let</span> <span class="ident">profile_resp</span>: <span class="ident">MinecraftXBoxProfileResponse</span> <span class="op">=</span>
-                <span class="ident"><span class="kw">crate</span>::http::get</span>(<span class="string">&quot;https://api.minecraftservices.com/minecraft/profile&quot;</span>)
-                    .<span class="ident">header</span>(<span class="string">&quot;Authorization&quot;</span>, <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;Bearer {}&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">access_token</span>))
-                    .<span class="kw">await</span>
-                    .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>
-                    .<span class="ident">body_json</span>()
-                    .<span class="kw">await</span>
-                    .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>;
-            <span class="kw">if</span> <span class="ident">profile_resp</span>.<span class="ident">error</span>.<span class="ident">is_empty</span>() {
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">skin</span>) <span class="op">=</span> <span class="ident">profile_resp</span>.<span class="ident">skins</span>.<span class="ident">iter</span>().<span class="ident">find</span>(<span class="op">|</span><span class="ident">a</span><span class="op">|</span> <span class="ident">a</span>.<span class="ident">state</span> <span class="op">==</span> <span class="string">&quot;ACTIVE&quot;</span>) {
-                    <span class="kw">let</span> <span class="ident">skin_data</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::http::get</span>(<span class="kw-2">&amp;</span><span class="ident">skin</span>.<span class="ident">url</span>)
-                        .<span class="kw">await</span>
-                        .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>
-                        .<span class="ident">body_bytes</span>()
-                        .<span class="kw">await</span>
-                        .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>;
-                    <span class="kw">let</span> (<span class="ident">head_skin</span>, <span class="ident">hat_skin</span>) <span class="op">=</span> <span class="ident">parse_head_skin</span>(<span class="ident">skin_data</span>)<span class="question-mark">?</span>;
+            <span class="kw">let </span>profile_resp: MinecraftXBoxProfileResponse =
+                <span class="kw">crate</span>::http::get(<span class="string">&quot;https://api.minecraftservices.com/minecraft/profile&quot;</span>)
+                    .header(<span class="string">&quot;Authorization&quot;</span>, <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;Bearer {}&quot;</span>, <span class="kw-2">&amp;</span>access_token))
+                    .<span class="kw">await
+                    </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?
+                    </span>.body_json()
+                    .<span class="kw">await
+                    </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?</span>;
+            <span class="kw">if </span>profile_resp.error.is_empty() {
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(skin) = profile_resp.skins.iter().find(|a| a.state == <span class="string">&quot;ACTIVE&quot;</span>) {
+                    <span class="kw">let </span>skin_data = <span class="kw">crate</span>::http::get(<span class="kw-2">&amp;</span>skin.url)
+                        .<span class="kw">await
+                        </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?
+                        </span>.body_bytes()
+                        .<span class="kw">await
+                        </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?</span>;
+                    <span class="kw">let </span>(head_skin, hat_skin) = parse_head_skin(skin_data)<span class="question-mark">?</span>;
                     <span class="macro">println!</span>(<span class="string">&quot;Successfully authed!&quot;</span>);
-                    <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">AuthMethod::Microsoft</span> {
-                        <span class="ident">access_token</span>: <span class="ident">access_token</span>.<span class="ident">into</span>(),
-                        <span class="ident">refresh_token</span>: <span class="ident">refresh_token</span>.<span class="ident">into</span>(),
-                        <span class="ident">xuid</span>,
-                        <span class="ident">head_skin</span>,
-                        <span class="ident">hat_skin</span>,
-                        <span class="ident">player_name</span>: <span class="ident">profile_resp</span>.<span class="ident">name</span>,
-                        <span class="ident">uuid</span>: <span class="ident">profile_resp</span>.<span class="ident">id</span>,
+                    <span class="kw">return </span><span class="prelude-val">Ok</span>(AuthMethod::Microsoft {
+                        access_token: access_token.into(),
+                        refresh_token: refresh_token.into(),
+                        xuid,
+                        head_skin,
+                        hat_skin,
+                        player_name: profile_resp.name,
+                        uuid: profile_resp.id,
                     });
                 }
-            } <span class="kw">else</span> {
+            } <span class="kw">else </span>{
                 <span class="macro">anyhow::bail!</span>(
-                    <span class="string">&quot;没有在账户中找到 Minecraft 账户信息！请检查你的账户是否已购买 Minecraft！&quot;</span>
-                );
+                    <span class="string">&quot;没有在账户中找到 Minecraft 账户信息！请检查你的账户是否已购买 Minecraft！&quot;
+                </span>);
             }
         }
     }
     <span class="macro">anyhow::bail!</span>(<span class="string">&quot;链接不合法&quot;</span>);
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

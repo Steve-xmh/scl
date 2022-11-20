@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/window.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>window.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/window.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>window.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -573,580 +573,580 @@
 <span id="573">573</span>
 <span id="574">574</span>
 <span id="575">575</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">druid</span>::{<span class="ident">commands::CONFIGURE_WINDOW</span>, <span class="ident">kurbo::BezPath</span>, <span class="ident">piet</span>::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>druid::{commands::CONFIGURE_WINDOW, kurbo::BezPath, piet::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">theme::color</span> <span class="kw">as</span> <span class="ident">theme</span>, <span class="ident">utils::color::get_contrast_yiq</span>};
+<span class="kw">use crate</span>::{theme::color <span class="kw">as </span>theme, utils::color::get_contrast_yiq};
 
-<span class="doccomment">/// 请求关闭窗口的 [`druid::Notification`]</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">QUERY_CLOSE_WINDOW</span>: <span class="ident">Selector</span> <span class="op">=</span> <span class="ident">Selector::new</span>(<span class="string">&quot;net.stevexmh.scl.query-close-window&quot;</span>);
+<span class="doccomment">/// 请求关闭窗口的 [`druid::Notification`]
+</span><span class="kw">pub const </span>QUERY_CLOSE_WINDOW: Selector = Selector::new(<span class="string">&quot;net.stevexmh.scl.query-close-window&quot;</span>);
 
-<span class="doccomment">/// 窗口的返回按钮被点击时抛出的 [`druid::Notification`]</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">BACK_PAGE_CLICKED</span>: <span class="ident">Selector</span> <span class="op">=</span> <span class="ident">Selector::new</span>(<span class="string">&quot;net.stevexmh.scl.back-page-clicked&quot;</span>);
+<span class="doccomment">/// 窗口的返回按钮被点击时抛出的 [`druid::Notification`]
+</span><span class="kw">pub const </span>BACK_PAGE_CLICKED: Selector = Selector::new(<span class="string">&quot;net.stevexmh.scl.back-page-clicked&quot;</span>);
 
-<span class="doccomment">/// 请求设置窗口图片背景的 [`druid::Command`]</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SET_BACKGROUND_IMAGE</span>: <span class="ident">Selector</span><span class="op">&lt;</span><span class="ident">druid::ImageBuf</span><span class="op">&gt;</span> <span class="op">=</span>
-    <span class="ident">Selector::new</span>(<span class="string">&quot;net.stevexmh.scl.set-bg-img&quot;</span>);
+<span class="doccomment">/// 请求设置窗口图片背景的 [`druid::Command`]
+</span><span class="kw">pub const </span>SET_BACKGROUND_IMAGE: Selector&lt;druid::ImageBuf&gt; =
+    Selector::new(<span class="string">&quot;net.stevexmh.scl.set-bg-img&quot;</span>);
 
-<span class="doccomment">/// 请求清除窗口图片背景的 [`druid::Command`]</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CLEAR_BACKGROUND_IMAGE</span>: <span class="ident">Selector</span> <span class="op">=</span> <span class="ident">Selector::new</span>(<span class="string">&quot;net.stevexmh.scl.clear-bg-img&quot;</span>);
+<span class="doccomment">/// 请求清除窗口图片背景的 [`druid::Command`]
+</span><span class="kw">pub const </span>CLEAR_BACKGROUND_IMAGE: Selector = Selector::new(<span class="string">&quot;net.stevexmh.scl.clear-bg-img&quot;</span>);
 
-<span class="doccomment">/// 请求启用窗口返回按钮的 [`druid::Command`] ，参数为是否启用/禁用</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ENABLE_BACK_PAGE</span>: <span class="ident">Selector</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Selector::new</span>(<span class="string">&quot;net.stevexmh.scl.enable-back-page&quot;</span>);
+<span class="doccomment">/// 请求启用窗口返回按钮的 [`druid::Command`] ，参数为是否启用/禁用
+</span><span class="kw">pub const </span>ENABLE_BACK_PAGE: Selector&lt;bool&gt; = Selector::new(<span class="string">&quot;net.stevexmh.scl.enable-back-page&quot;</span>);
 
-<span class="doccomment">/// 一个用于小型窗口的仿 Windows 窗口组件，推荐创建含有此组件的窗口时将 [`druid::WindowDesc`] 中</span>
-<span class="doccomment">/// [`druid::WindowDesc::show_titlebar`] 设置为 `false`，效果最佳。</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 一旦使用了这个组件，任何关闭窗口的通知都将被捕获且失效，需要自行另外接收</span>
-<span class="doccomment">/// [`QUERY_CLOSE_WINDOW`] 通知以自行确认是否关闭。</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 如果要使用返回按钮，先使用 [`ENABLE_BACK_PAGE`] 启用后再接收 [`BACK_PAGE_CLICKED`]</span>
-<span class="doccomment">/// 通知以处理操作，推荐配合 [`crate::widgets::PageSwitcher`] 效果最佳。</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">WindowWidget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">title</span>: <span class="ident">String</span>,
+<span class="doccomment">/// 一个用于小型窗口的仿 Windows 窗口组件，推荐创建含有此组件的窗口时将 [`druid::WindowDesc`] 中
+/// [`druid::WindowDesc::show_titlebar`] 设置为 `false`，效果最佳。
+///
+/// 一旦使用了这个组件，任何关闭窗口的通知都将被捕获且失效，需要自行另外接收
+/// [`QUERY_CLOSE_WINDOW`] 通知以自行确认是否关闭。
+///
+/// 如果要使用返回按钮，先使用 [`ENABLE_BACK_PAGE`] 启用后再接收 [`BACK_PAGE_CLICKED`]
+/// 通知以处理操作，推荐配合 [`crate::widgets::PageSwitcher`] 效果最佳。
+</span><span class="kw">pub struct </span>WindowWidget&lt;T&gt; {
+    title: String,
 
-    <span class="ident">show_back_btn</span>: <span class="ident">bool</span>,
-    <span class="ident">inner</span>: <span class="ident">WidgetPod</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="ident">hovering</span>: <span class="ident">u8</span>, <span class="comment">// 0: nothing, 1: close btn, 2: min btn, 3: title bar</span>
-    <span class="ident">down_hovering</span>: <span class="ident">u8</span>,
+    show_back_btn: bool,
+    inner: WidgetPod&lt;T, Box&lt;<span class="kw">dyn </span>Widget&lt;T&gt;&gt;&gt;,
+    hovering: u8, <span class="comment">// 0: nothing, 1: close btn, 2: min btn, 3: title bar
+    </span>down_hovering: u8,
 
-    <span class="comment">// Background Image</span>
-    <span class="ident">background_image</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">druid::piet::PietImage</span><span class="op">&gt;</span>,
-    <span class="ident">background_image_data</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">druid::ImageBuf</span><span class="op">&gt;</span>,
+    <span class="comment">// Background Image
+    </span>background_image: <span class="prelude-ty">Option</span>&lt;druid::piet::PietImage&gt;,
+    background_image_data: <span class="prelude-ty">Option</span>&lt;druid::ImageBuf&gt;,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Data</span><span class="op">&gt;</span> <span class="ident">WindowWidget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// 创建一个带标题的窗口，并将要显示的组件包裹在内</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">title</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>, <span class="ident">inner</span>: <span class="kw">impl</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">title</span>: <span class="ident">title</span>.<span class="ident">into</span>(),
+<span class="kw">impl</span>&lt;T: Data&gt; WindowWidget&lt;T&gt; {
+    <span class="doccomment">/// 创建一个带标题的窗口，并将要显示的组件包裹在内
+    </span><span class="kw">pub fn </span>new(title: <span class="kw">impl </span>Into&lt;String&gt;, inner: <span class="kw">impl </span>Widget&lt;T&gt; + <span class="lifetime">&#39;static</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            title: title.into(),
 
-            <span class="ident">show_back_btn</span>: <span class="bool-val">false</span>,
-            <span class="ident">inner</span>: <span class="ident">WidgetPod::new</span>(<span class="ident">Box::new</span>(<span class="ident">inner</span>)),
-            <span class="ident">hovering</span>: <span class="number">0</span>,
-            <span class="ident">down_hovering</span>: <span class="ident">u8::MAX</span>,
-            <span class="ident">background_image</span>: <span class="prelude-val">None</span>,
-            <span class="ident">background_image_data</span>: <span class="prelude-val">None</span>,
+            show_back_btn: <span class="bool-val">false</span>,
+            inner: WidgetPod::new(Box::new(inner)),
+            hovering: <span class="number">0</span>,
+            down_hovering: u8::MAX,
+            background_image: <span class="prelude-val">None</span>,
+            background_image_data: <span class="prelude-val">None</span>,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">paint_no_shadow</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">PaintCtx</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>, <span class="ident">window_rect</span>: <span class="kw-2">&amp;</span><span class="ident">Rect</span>) {
-        <span class="kw">let</span> <span class="ident">hovering</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">hovering</span>;
-        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_variables</span>)]</span>
-        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">window_rect</span>.<span class="ident">size</span>();
+    <span class="kw">fn </span>paint_no_shadow(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>PaintCtx, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env, window_rect: <span class="kw-2">&amp;</span>Rect) {
+        <span class="kw">let </span>hovering = <span class="self">self</span>.hovering;
+        <span class="attribute">#[allow(unused_variables)]
+        </span><span class="kw">let </span>size = window_rect.size();
 
-        <span class="kw">let</span> <span class="ident">title_bar_color</span> <span class="op">=</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">theme::main::TITLE_BAR</span>);
-        <span class="kw">let</span> <span class="ident">title_bar_text_color</span> <span class="op">=</span> <span class="ident">get_contrast_yiq</span>(<span class="ident">title_bar_color</span>.<span class="ident">to_owned</span>()).<span class="ident">with_alpha</span>(<span class="number">1.</span>);
-        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_variables</span>, <span class="ident">clippy::redundant_clone</span>)]</span>
-        <span class="kw">let</span> <span class="ident">title_bar_hover_color</span> <span class="op">=</span> <span class="ident">title_bar_text_color</span>.<span class="ident">to_owned</span>().<span class="ident">with_alpha</span>(<span class="number">0.2</span>);
+        <span class="kw">let </span>title_bar_color = env.get(theme::main::TITLE_BAR);
+        <span class="kw">let </span>title_bar_text_color = get_contrast_yiq(title_bar_color.to_owned()).with_alpha(<span class="number">1.</span>);
+        <span class="attribute">#[allow(unused_variables, clippy::redundant_clone)]
+        </span><span class="kw">let </span>title_bar_hover_color = title_bar_text_color.to_owned().with_alpha(<span class="number">0.2</span>);
 
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">img_buf</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">background_image_data</span>.<span class="ident">take</span>() {
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">background_image</span>.<span class="ident">is_none</span>() {
-                <span class="self">self</span>.<span class="ident">background_image</span> <span class="op">=</span> <span class="prelude-val">Some</span>(
-                    <span class="ident">ctx</span>.<span class="ident">make_image</span>(
-                        <span class="ident">img_buf</span>.<span class="ident">width</span>(),
-                        <span class="ident">img_buf</span>.<span class="ident">height</span>(),
-                        <span class="ident">img_buf</span>.<span class="ident">raw_pixels</span>(),
-                        <span class="ident">img_buf</span>.<span class="ident">format</span>(),
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(img_buf) = <span class="kw-2">&amp;</span><span class="self">self</span>.background_image_data.take() {
+            <span class="kw">if </span><span class="self">self</span>.background_image.is_none() {
+                <span class="self">self</span>.background_image = <span class="prelude-val">Some</span>(
+                    ctx.make_image(
+                        img_buf.width(),
+                        img_buf.height(),
+                        img_buf.raw_pixels(),
+                        img_buf.format(),
                     )
-                    .<span class="ident">unwrap</span>(),
+                    .unwrap(),
                 );
             }
-        } <span class="kw">else</span> {
-            <span class="ident">ctx</span>.<span class="ident">fill</span>(
-                <span class="ident">window_rect</span>,
-                <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">druid::theme::WINDOW_BACKGROUND_COLOR</span>)),
+        } <span class="kw">else </span>{
+            ctx.fill(
+                window_rect,
+                <span class="kw-2">&amp;</span>PaintBrush::Color(env.get(druid::theme::WINDOW_BACKGROUND_COLOR)),
             );
         }
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">title_rect</span> <span class="op">=</span> <span class="ident">window_rect</span>.<span class="ident">to_owned</span>();
-        <span class="ident">title_rect</span>.<span class="ident">y1</span> <span class="op">=</span> <span class="ident">title_rect</span>.<span class="ident">y0</span> <span class="op">+</span> <span class="ident">TITLE_HEIGHT</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>title_rect = window_rect.to_owned();
+        title_rect.y1 = title_rect.y0 + TITLE_HEIGHT;
 
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">img</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">background_image</span> {
-            <span class="ident">ctx</span>.<span class="ident">draw_image</span>(
-                <span class="ident">img</span>,
-                <span class="ident">window_rect</span>.<span class="ident">to_owned</span>(),
-                <span class="ident">druid::piet::InterpolationMode::Bilinear</span>,
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(img) = <span class="kw-2">&amp;</span><span class="self">self</span>.background_image {
+            ctx.draw_image(
+                img,
+                window_rect.to_owned(),
+                druid::piet::InterpolationMode::Bilinear,
             );
-        } <span class="kw">else</span> {
-            <span class="ident">ctx</span>.<span class="ident">fill</span>(
-                <span class="ident">window_rect</span>,
-                <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(
-                    <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">druid::theme::WINDOW_BACKGROUND_COLOR</span>)
-                        .<span class="ident">with_alpha</span>(<span class="number">0.25</span>),
+        } <span class="kw">else </span>{
+            ctx.fill(
+                window_rect,
+                <span class="kw-2">&amp;</span>PaintBrush::Color(
+                    env.get(druid::theme::WINDOW_BACKGROUND_COLOR)
+                        .with_alpha(<span class="number">0.25</span>),
                 ),
             );
         }
 
-        <span class="comment">// Title Bar</span>
-        <span class="ident">ctx</span>.<span class="ident">with_save</span>(<span class="op">|</span><span class="ident">ctx</span><span class="op">|</span> {
-            <span class="ident">ctx</span>.<span class="ident">clip</span>(<span class="ident">window_rect</span>);
+        <span class="comment">// Title Bar
+        </span>ctx.with_save(|ctx| {
+            ctx.clip(window_rect);
 
-            <span class="ident">ctx</span>.<span class="ident">fill</span>(<span class="ident">title_rect</span>, <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">title_bar_color</span>.<span class="ident">to_owned</span>()));
+            ctx.fill(title_rect, <span class="kw-2">&amp;</span>PaintBrush::Color(title_bar_color.to_owned()));
 
-            <span class="ident">ctx</span>.<span class="ident">transform</span>(<span class="ident">Affine::translate</span>((<span class="ident">title_rect</span>.<span class="ident">x0</span>, <span class="ident">title_rect</span>.<span class="ident">y0</span>)));
-            <span class="comment">// Close Button</span>
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>))]</span>
-            <span class="kw">let</span> <span class="ident">label_layout</span> <span class="op">=</span> {
-                <span class="kw">if</span> <span class="ident">hovering</span> <span class="op">==</span> <span class="number">1</span> {
-                    <span class="ident">ctx</span>.<span class="ident">fill</span>(
-                        <span class="ident">Rect::new</span>(
-                            <span class="ident">size</span>.<span class="ident">width</span> <span class="op">-</span> <span class="ident">CONTROL_BUTTON_WIDTH</span>,
+            ctx.transform(Affine::translate((title_rect.x0, title_rect.y0)));
+            <span class="comment">// Close Button
+            </span><span class="attribute">#[cfg(any(target_os = <span class="string">&quot;windows&quot;</span>, target_os = <span class="string">&quot;linux&quot;</span>))]
+            </span><span class="kw">let </span>label_layout = {
+                <span class="kw">if </span>hovering == <span class="number">1 </span>{
+                    ctx.fill(
+                        Rect::new(
+                            size.width - CONTROL_BUTTON_WIDTH,
                             <span class="number">0.</span>,
-                            <span class="ident">size</span>.<span class="ident">width</span>,
-                            <span class="ident">TITLE_HEIGHT</span>,
+                            size.width,
+                            TITLE_HEIGHT,
                         ),
-                        <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">Color::RED</span>),
+                        <span class="kw-2">&amp;</span>PaintBrush::Color(Color::RED),
                     );
                 }
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">BezPath::new</span>();
-                <span class="ident">path</span>.<span class="ident">move_to</span>((
-                    <span class="ident">size</span>.<span class="ident">width</span> <span class="op">-</span> <span class="ident">CONTROL_BUTTON_WIDTH</span> <span class="op">*</span> <span class="number">0.5</span> <span class="op">-</span> <span class="number">5.</span>,
-                    <span class="ident">TITLE_HEIGHT</span> <span class="op">*</span> <span class="number">0.5</span> <span class="op">-</span> <span class="number">5.</span>,
+                <span class="kw">let </span><span class="kw-2">mut </span>path = BezPath::new();
+                path.move_to((
+                    size.width - CONTROL_BUTTON_WIDTH * <span class="number">0.5 </span>- <span class="number">5.</span>,
+                    TITLE_HEIGHT * <span class="number">0.5 </span>- <span class="number">5.</span>,
                 ));
-                <span class="ident">path</span>.<span class="ident">line_to</span>((
-                    <span class="ident">size</span>.<span class="ident">width</span> <span class="op">-</span> <span class="ident">CONTROL_BUTTON_WIDTH</span> <span class="op">*</span> <span class="number">0.5</span> <span class="op">+</span> <span class="number">5.</span>,
-                    <span class="ident">TITLE_HEIGHT</span> <span class="op">*</span> <span class="number">0.5</span> <span class="op">+</span> <span class="number">5.</span>,
+                path.line_to((
+                    size.width - CONTROL_BUTTON_WIDTH * <span class="number">0.5 </span>+ <span class="number">5.</span>,
+                    TITLE_HEIGHT * <span class="number">0.5 </span>+ <span class="number">5.</span>,
                 ));
-                <span class="ident">path</span>.<span class="ident">move_to</span>((
-                    <span class="ident">size</span>.<span class="ident">width</span> <span class="op">-</span> <span class="ident">CONTROL_BUTTON_WIDTH</span> <span class="op">*</span> <span class="number">0.5</span> <span class="op">+</span> <span class="number">5.</span>,
-                    <span class="ident">TITLE_HEIGHT</span> <span class="op">*</span> <span class="number">0.5</span> <span class="op">-</span> <span class="number">5.</span>,
+                path.move_to((
+                    size.width - CONTROL_BUTTON_WIDTH * <span class="number">0.5 </span>+ <span class="number">5.</span>,
+                    TITLE_HEIGHT * <span class="number">0.5 </span>- <span class="number">5.</span>,
                 ));
-                <span class="ident">path</span>.<span class="ident">line_to</span>((
-                    <span class="ident">size</span>.<span class="ident">width</span> <span class="op">-</span> <span class="ident">CONTROL_BUTTON_WIDTH</span> <span class="op">*</span> <span class="number">0.5</span> <span class="op">-</span> <span class="number">5.</span>,
-                    <span class="ident">TITLE_HEIGHT</span> <span class="op">*</span> <span class="number">0.5</span> <span class="op">+</span> <span class="number">5.</span>,
+                path.line_to((
+                    size.width - CONTROL_BUTTON_WIDTH * <span class="number">0.5 </span>- <span class="number">5.</span>,
+                    TITLE_HEIGHT * <span class="number">0.5 </span>+ <span class="number">5.</span>,
                 ));
-                <span class="kw">if</span> <span class="ident">hovering</span> <span class="op">==</span> <span class="number">1</span> {
-                    <span class="ident">ctx</span>.<span class="ident">stroke</span>(<span class="ident">path</span>, <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">Color::WHITE</span>), <span class="number">1.</span>);
-                } <span class="kw">else</span> {
-                    <span class="ident">ctx</span>.<span class="ident">stroke</span>(
-                        <span class="ident">path</span>,
-                        <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">title_bar_text_color</span>.<span class="ident">to_owned</span>()),
+                <span class="kw">if </span>hovering == <span class="number">1 </span>{
+                    ctx.stroke(path, <span class="kw-2">&amp;</span>PaintBrush::Color(Color::WHITE), <span class="number">1.</span>);
+                } <span class="kw">else </span>{
+                    ctx.stroke(
+                        path,
+                        <span class="kw-2">&amp;</span>PaintBrush::Color(title_bar_text_color.to_owned()),
                         <span class="number">1.</span>,
                     );
                 }
-                <span class="comment">// Minisize Button</span>
-                <span class="kw">if</span> <span class="ident">hovering</span> <span class="op">==</span> <span class="number">2</span> {
-                    <span class="ident">ctx</span>.<span class="ident">fill</span>(
-                        <span class="ident">Rect::new</span>(
-                            <span class="ident">size</span>.<span class="ident">width</span> <span class="op">-</span> <span class="ident">CONTROL_BUTTON_WIDTH</span> <span class="op">*</span> <span class="number">2.</span>,
+                <span class="comment">// Minisize Button
+                </span><span class="kw">if </span>hovering == <span class="number">2 </span>{
+                    ctx.fill(
+                        Rect::new(
+                            size.width - CONTROL_BUTTON_WIDTH * <span class="number">2.</span>,
                             <span class="number">0.</span>,
-                            <span class="ident">size</span>.<span class="ident">width</span> <span class="op">-</span> <span class="ident">CONTROL_BUTTON_WIDTH</span>,
-                            <span class="ident">TITLE_HEIGHT</span>,
+                            size.width - CONTROL_BUTTON_WIDTH,
+                            TITLE_HEIGHT,
                         ),
-                        <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">title_bar_hover_color</span>.<span class="ident">to_owned</span>()),
+                        <span class="kw-2">&amp;</span>PaintBrush::Color(title_bar_hover_color.to_owned()),
                     );
                 }
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">BezPath::new</span>();
-                <span class="ident">path</span>.<span class="ident">move_to</span>((
-                    <span class="ident">size</span>.<span class="ident">width</span> <span class="op">-</span> <span class="ident">CONTROL_BUTTON_WIDTH</span> <span class="op">*</span> <span class="number">1.5</span> <span class="op">-</span> <span class="number">5.</span>,
-                    <span class="ident">TITLE_HEIGHT</span> <span class="op">*</span> <span class="number">0.5</span> <span class="op">-</span> <span class="number">0.5</span>,
+                <span class="kw">let </span><span class="kw-2">mut </span>path = BezPath::new();
+                path.move_to((
+                    size.width - CONTROL_BUTTON_WIDTH * <span class="number">1.5 </span>- <span class="number">5.</span>,
+                    TITLE_HEIGHT * <span class="number">0.5 </span>- <span class="number">0.5</span>,
                 ));
-                <span class="ident">path</span>.<span class="ident">line_to</span>((
-                    <span class="ident">size</span>.<span class="ident">width</span> <span class="op">-</span> <span class="ident">CONTROL_BUTTON_WIDTH</span> <span class="op">*</span> <span class="number">1.5</span> <span class="op">+</span> <span class="number">5.</span>,
-                    <span class="ident">TITLE_HEIGHT</span> <span class="op">*</span> <span class="number">0.5</span> <span class="op">-</span> <span class="number">0.5</span>,
+                path.line_to((
+                    size.width - CONTROL_BUTTON_WIDTH * <span class="number">1.5 </span>+ <span class="number">5.</span>,
+                    TITLE_HEIGHT * <span class="number">0.5 </span>- <span class="number">0.5</span>,
                 ));
-                <span class="ident">ctx</span>.<span class="ident">stroke</span>(
-                    <span class="ident">path</span>,
-                    <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">title_bar_text_color</span>.<span class="ident">to_owned</span>()),
+                ctx.stroke(
+                    path,
+                    <span class="kw-2">&amp;</span>PaintBrush::Color(title_bar_text_color.to_owned()),
                     <span class="number">1.</span>,
                 );
-                <span class="comment">// Title</span>
-                <span class="kw">let</span> <span class="ident">text</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">text</span>();
-                <span class="kw">let</span> <span class="ident">laybel_font</span> <span class="op">=</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">theme::typography::CAPTION</span>);
-                <span class="ident">text</span>.<span class="ident">new_text_layout</span>(<span class="self">self</span>.<span class="ident">title</span>.<span class="ident">to_owned</span>())
-                    .<span class="ident">alignment</span>(<span class="ident">TextAlignment::Start</span>)
-                    .<span class="ident">font</span>(<span class="ident">laybel_font</span>.<span class="ident">family</span>, <span class="ident">laybel_font</span>.<span class="ident">size</span>)
-                    .<span class="ident">text_color</span>(<span class="ident">title_bar_text_color</span>.<span class="ident">to_owned</span>())
-                    .<span class="ident">build</span>()
-                    .<span class="ident">unwrap</span>()
+                <span class="comment">// Title
+                </span><span class="kw">let </span>text = ctx.text();
+                <span class="kw">let </span>laybel_font = env.get(theme::typography::CAPTION);
+                text.new_text_layout(<span class="self">self</span>.title.to_owned())
+                    .alignment(TextAlignment::Start)
+                    .font(laybel_font.family, laybel_font.size)
+                    .text_color(title_bar_text_color.to_owned())
+                    .build()
+                    .unwrap()
             };
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>, <span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>))]</span>
-            <span class="comment">// Back button</span>
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">show_back_btn</span> {
-                <span class="kw">if</span> <span class="ident">hovering</span> <span class="op">==</span> <span class="number">4</span> {
-                    <span class="ident">ctx</span>.<span class="ident">fill</span>(
-                        <span class="ident">Rect::new</span>(<span class="number">0.</span>, <span class="number">0.</span>, <span class="ident">CONTROL_BUTTON_WIDTH</span>, <span class="ident">TITLE_HEIGHT</span>),
-                        <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">title_bar_hover_color</span>.<span class="ident">to_owned</span>()),
+            <span class="attribute">#[cfg(any(target_os = <span class="string">&quot;windows&quot;</span>, target_os = <span class="string">&quot;linux&quot;</span>))]
+            </span><span class="comment">// Back button
+            </span><span class="kw">if </span><span class="self">self</span>.show_back_btn {
+                <span class="kw">if </span>hovering == <span class="number">4 </span>{
+                    ctx.fill(
+                        Rect::new(<span class="number">0.</span>, <span class="number">0.</span>, CONTROL_BUTTON_WIDTH, TITLE_HEIGHT),
+                        <span class="kw-2">&amp;</span>PaintBrush::Color(title_bar_hover_color.to_owned()),
                     );
                 }
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">BezPath::new</span>();
-                <span class="ident">path</span>.<span class="ident">move_to</span>((<span class="ident">CONTROL_BUTTON_WIDTH</span> <span class="op">*</span> <span class="number">0.5</span> <span class="op">+</span> <span class="number">5.25</span>, <span class="ident">TITLE_HEIGHT</span> <span class="op">*</span> <span class="number">0.5</span> <span class="op">-</span> <span class="number">0.5</span>));
-                <span class="ident">path</span>.<span class="ident">line_to</span>((<span class="ident">CONTROL_BUTTON_WIDTH</span> <span class="op">*</span> <span class="number">0.5</span> <span class="op">-</span> <span class="number">5.25</span>, <span class="ident">TITLE_HEIGHT</span> <span class="op">*</span> <span class="number">0.5</span> <span class="op">-</span> <span class="number">0.5</span>));
-                <span class="ident">path</span>.<span class="ident">move_to</span>((
-                    <span class="ident">CONTROL_BUTTON_WIDTH</span> <span class="op">*</span> <span class="number">0.5</span> <span class="op">-</span> <span class="number">0.5</span>,
-                    <span class="ident">TITLE_HEIGHT</span> <span class="op">*</span> <span class="number">0.5</span> <span class="op">+</span> <span class="number">5.</span> <span class="op">-</span> <span class="number">0.5</span>,
+                <span class="kw">let </span><span class="kw-2">mut </span>path = BezPath::new();
+                path.move_to((CONTROL_BUTTON_WIDTH * <span class="number">0.5 </span>+ <span class="number">5.25</span>, TITLE_HEIGHT * <span class="number">0.5 </span>- <span class="number">0.5</span>));
+                path.line_to((CONTROL_BUTTON_WIDTH * <span class="number">0.5 </span>- <span class="number">5.25</span>, TITLE_HEIGHT * <span class="number">0.5 </span>- <span class="number">0.5</span>));
+                path.move_to((
+                    CONTROL_BUTTON_WIDTH * <span class="number">0.5 </span>- <span class="number">0.5</span>,
+                    TITLE_HEIGHT * <span class="number">0.5 </span>+ <span class="number">5. </span>- <span class="number">0.5</span>,
                 ));
-                <span class="ident">path</span>.<span class="ident">line_to</span>((<span class="ident">CONTROL_BUTTON_WIDTH</span> <span class="op">*</span> <span class="number">0.5</span> <span class="op">-</span> <span class="number">5.25</span>, <span class="ident">TITLE_HEIGHT</span> <span class="op">*</span> <span class="number">0.5</span> <span class="op">-</span> <span class="number">0.5</span>));
-                <span class="ident">path</span>.<span class="ident">line_to</span>((<span class="ident">CONTROL_BUTTON_WIDTH</span> <span class="op">*</span> <span class="number">0.5</span> <span class="op">-</span> <span class="number">0.5</span>, <span class="ident">TITLE_HEIGHT</span> <span class="op">*</span> <span class="number">0.5</span> <span class="op">-</span> <span class="number">5.</span>));
-                <span class="ident">ctx</span>.<span class="ident">stroke</span>(<span class="ident">path</span>, <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">title_bar_text_color</span>), <span class="number">1.</span>);
-                <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">windows</span>, <span class="ident">unix</span>))]</span>
-                <span class="ident">ctx</span>.<span class="ident">draw_text</span>(
-                    <span class="kw-2">&amp;</span><span class="ident">label_layout</span>,
-                    (<span class="number">42.</span>, (<span class="ident">TITLE_HEIGHT</span> <span class="op">-</span> <span class="ident">label_layout</span>.<span class="ident">size</span>().<span class="ident">height</span>) <span class="op">/</span> <span class="number">2.</span>),
+                path.line_to((CONTROL_BUTTON_WIDTH * <span class="number">0.5 </span>- <span class="number">5.25</span>, TITLE_HEIGHT * <span class="number">0.5 </span>- <span class="number">0.5</span>));
+                path.line_to((CONTROL_BUTTON_WIDTH * <span class="number">0.5 </span>- <span class="number">0.5</span>, TITLE_HEIGHT * <span class="number">0.5 </span>- <span class="number">5.</span>));
+                ctx.stroke(path, <span class="kw-2">&amp;</span>PaintBrush::Color(title_bar_text_color), <span class="number">1.</span>);
+                <span class="attribute">#[cfg(any(windows, unix))]
+                </span>ctx.draw_text(
+                    <span class="kw-2">&amp;</span>label_layout,
+                    (<span class="number">42.</span>, (TITLE_HEIGHT - label_layout.size().height) / <span class="number">2.</span>),
                 );
-            } <span class="kw">else</span> {
-                <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">windows</span>, <span class="ident">unix</span>))]</span>
-                <span class="ident">ctx</span>.<span class="ident">draw_text</span>(
-                    <span class="kw-2">&amp;</span><span class="ident">label_layout</span>,
-                    (<span class="number">10.</span>, (<span class="ident">TITLE_HEIGHT</span> <span class="op">-</span> <span class="ident">label_layout</span>.<span class="ident">size</span>().<span class="ident">height</span>) <span class="op">/</span> <span class="number">2.</span>),
+            } <span class="kw">else </span>{
+                <span class="attribute">#[cfg(any(windows, unix))]
+                </span>ctx.draw_text(
+                    <span class="kw-2">&amp;</span>label_layout,
+                    (<span class="number">10.</span>, (TITLE_HEIGHT - label_layout.size().height) / <span class="number">2.</span>),
                 );
             }
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>)]</span>
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">show_back_btn</span> {
-                <span class="kw">use</span> <span class="ident">druid::kurbo::Circle</span>;
-                <span class="comment">// if hovering == 4 {</span>
-                <span class="comment">//     ctx.fill(</span>
-                <span class="comment">//         Rect::new(</span>
-                <span class="comment">//             size.width - CONTROL_BUTTON_WIDTH,</span>
-                <span class="comment">//             0.,</span>
-                <span class="comment">//             size.width,</span>
-                <span class="comment">//             TITLE_HEIGHT,</span>
-                <span class="comment">//         ),</span>
-                <span class="comment">//         &amp;PaintBrush::Color(title_bar_hover_color.to_owned()),</span>
-                <span class="comment">//     );</span>
-                <span class="comment">// }</span>
+            <span class="attribute">#[cfg(target_os = <span class="string">&quot;macos&quot;</span>)]
+            </span><span class="kw">if </span><span class="self">self</span>.show_back_btn {
+                <span class="kw">use </span>druid::kurbo::Circle;
+                <span class="comment">// if hovering == 4 {
+                //     ctx.fill(
+                //         Rect::new(
+                //             size.width - CONTROL_BUTTON_WIDTH,
+                //             0.,
+                //             size.width,
+                //             TITLE_HEIGHT,
+                //         ),
+                //         &amp;PaintBrush::Color(title_bar_hover_color.to_owned()),
+                //     );
+                // }
 
-                <span class="kw">let</span> <span class="ident">button_center_x</span> <span class="op">=</span> <span class="number">34.</span>;
-                <span class="kw">let</span> <span class="ident">button_center_y</span> <span class="op">=</span> <span class="number">14.</span>;
+                </span><span class="kw">let </span>button_center_x = <span class="number">34.</span>;
+                <span class="kw">let </span>button_center_y = <span class="number">14.</span>;
 
-                <span class="ident">ctx</span>.<span class="ident">fill</span>(
-                    <span class="ident">Circle::new</span>((<span class="ident">button_center_x</span>, <span class="ident">button_center_y</span>), <span class="number">6.</span>),
-                    <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">Color::Rgba32</span>(<span class="number">0xE3E3E3FF</span>)),
+                ctx.fill(
+                    Circle::new((button_center_x, button_center_y), <span class="number">6.</span>),
+                    <span class="kw-2">&amp;</span>PaintBrush::Color(Color::Rgba32(<span class="number">0xE3E3E3FF</span>)),
                 );
-                <span class="ident">ctx</span>.<span class="ident">stroke</span>(
-                    <span class="ident">Circle::new</span>((<span class="ident">button_center_x</span>, <span class="ident">button_center_y</span>), <span class="number">5.75</span>),
-                    <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">Color::BLACK</span>.<span class="ident">with_alpha</span>(<span class="number">0.12</span>)),
+                ctx.stroke(
+                    Circle::new((button_center_x, button_center_y), <span class="number">5.75</span>),
+                    <span class="kw-2">&amp;</span>PaintBrush::Color(Color::BLACK.with_alpha(<span class="number">0.12</span>)),
                     <span class="number">0.5</span>,
                 );
 
-                <span class="kw">if</span> <span class="ident">hovering</span> <span class="op">==</span> <span class="number">4</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">BezPath::new</span>();
-                    <span class="ident">path</span>.<span class="ident">move_to</span>((<span class="ident">button_center_x</span> <span class="op">-</span> <span class="number">6.</span> <span class="op">+</span> <span class="number">7.</span>, <span class="ident">button_center_y</span> <span class="op">-</span> <span class="number">6.</span> <span class="op">+</span> <span class="number">3.5</span>));
-                    <span class="ident">path</span>.<span class="ident">line_to</span>((<span class="ident">button_center_x</span> <span class="op">-</span> <span class="number">6.</span> <span class="op">+</span> <span class="number">4.5</span>, <span class="ident">button_center_y</span> <span class="op">-</span> <span class="number">6.</span> <span class="op">+</span> <span class="number">6.</span>));
-                    <span class="ident">path</span>.<span class="ident">line_to</span>((<span class="ident">button_center_x</span> <span class="op">-</span> <span class="number">6.</span> <span class="op">+</span> <span class="number">7.</span>, <span class="ident">button_center_y</span> <span class="op">-</span> <span class="number">6.</span> <span class="op">+</span> <span class="number">8.5</span>));
-                    <span class="ident">ctx</span>.<span class="ident">stroke</span>(<span class="ident">path</span>, <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">Color::BLACK</span>.<span class="ident">with_alpha</span>(<span class="number">0.5</span>)), <span class="number">1.</span>);
+                <span class="kw">if </span>hovering == <span class="number">4 </span>{
+                    <span class="kw">let </span><span class="kw-2">mut </span>path = BezPath::new();
+                    path.move_to((button_center_x - <span class="number">6. </span>+ <span class="number">7.</span>, button_center_y - <span class="number">6. </span>+ <span class="number">3.5</span>));
+                    path.line_to((button_center_x - <span class="number">6. </span>+ <span class="number">4.5</span>, button_center_y - <span class="number">6. </span>+ <span class="number">6.</span>));
+                    path.line_to((button_center_x - <span class="number">6. </span>+ <span class="number">7.</span>, button_center_y - <span class="number">6. </span>+ <span class="number">8.5</span>));
+                    ctx.stroke(path, <span class="kw-2">&amp;</span>PaintBrush::Color(Color::BLACK.with_alpha(<span class="number">0.5</span>)), <span class="number">1.</span>);
                 }
 
-                <span class="comment">// let mut path = BezPath::new();</span>
-                <span class="comment">// path.move_to((</span>
-                <span class="comment">//     size.width - CONTROL_BUTTON_WIDTH + CONTROL_BUTTON_WIDTH * 0.5 + 5.25,</span>
-                <span class="comment">//     TITLE_HEIGHT * 0.5 - 0.5,</span>
-                <span class="comment">// ));</span>
-                <span class="comment">// path.line_to((</span>
-                <span class="comment">//     size.width - CONTROL_BUTTON_WIDTH + CONTROL_BUTTON_WIDTH * 0.5 - 5.25,</span>
-                <span class="comment">//     TITLE_HEIGHT * 0.5 - 0.5,</span>
-                <span class="comment">// ));</span>
-                <span class="comment">// path.move_to((</span>
-                <span class="comment">//     size.width - CONTROL_BUTTON_WIDTH + CONTROL_BUTTON_WIDTH * 0.5 - 0.5,</span>
-                <span class="comment">//     TITLE_HEIGHT * 0.5 + 5. - 0.5,</span>
-                <span class="comment">// ));</span>
-                <span class="comment">// path.line_to((</span>
-                <span class="comment">//     size.width - CONTROL_BUTTON_WIDTH + CONTROL_BUTTON_WIDTH * 0.5 - 5.25,</span>
-                <span class="comment">//     TITLE_HEIGHT * 0.5 - 0.5,</span>
-                <span class="comment">// ));</span>
-                <span class="comment">// path.line_to((</span>
-                <span class="comment">//     size.width - CONTROL_BUTTON_WIDTH + CONTROL_BUTTON_WIDTH * 0.5 - 0.5,</span>
-                <span class="comment">//     TITLE_HEIGHT * 0.5 - 5.,</span>
-                <span class="comment">// ));</span>
-                <span class="comment">// ctx.stroke(path, &amp;PaintBrush::Color(title_bar_text_color), 1.);</span>
-            }
+                <span class="comment">// let mut path = BezPath::new();
+                // path.move_to((
+                //     size.width - CONTROL_BUTTON_WIDTH + CONTROL_BUTTON_WIDTH * 0.5 + 5.25,
+                //     TITLE_HEIGHT * 0.5 - 0.5,
+                // ));
+                // path.line_to((
+                //     size.width - CONTROL_BUTTON_WIDTH + CONTROL_BUTTON_WIDTH * 0.5 - 5.25,
+                //     TITLE_HEIGHT * 0.5 - 0.5,
+                // ));
+                // path.move_to((
+                //     size.width - CONTROL_BUTTON_WIDTH + CONTROL_BUTTON_WIDTH * 0.5 - 0.5,
+                //     TITLE_HEIGHT * 0.5 + 5. - 0.5,
+                // ));
+                // path.line_to((
+                //     size.width - CONTROL_BUTTON_WIDTH + CONTROL_BUTTON_WIDTH * 0.5 - 5.25,
+                //     TITLE_HEIGHT * 0.5 - 0.5,
+                // ));
+                // path.line_to((
+                //     size.width - CONTROL_BUTTON_WIDTH + CONTROL_BUTTON_WIDTH * 0.5 - 0.5,
+                //     TITLE_HEIGHT * 0.5 - 5.,
+                // ));
+                // ctx.stroke(path, &amp;PaintBrush::Color(title_bar_text_color), 1.);
+            </span>}
         });
 
-        <span class="comment">// Child</span>
-        <span class="ident">ctx</span>.<span class="ident">with_save</span>(<span class="op">|</span><span class="ident">ctx</span><span class="op">|</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">inner_rect</span> <span class="op">=</span> <span class="ident">window_rect</span>.<span class="ident">to_owned</span>();
-            <span class="ident">inner_rect</span>.<span class="ident">y0</span> <span class="op">+</span><span class="op">=</span> <span class="ident">TITLE_HEIGHT</span>;
-            <span class="ident">ctx</span>.<span class="ident">clip</span>(<span class="ident">inner_rect</span>);
-            <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">paint</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>)
+        <span class="comment">// Child
+        </span>ctx.with_save(|ctx| {
+            <span class="kw">let </span><span class="kw-2">mut </span>inner_rect = window_rect.to_owned();
+            inner_rect.y0 += TITLE_HEIGHT;
+            ctx.clip(inner_rect);
+            <span class="self">self</span>.inner.paint(ctx, data, env)
         })
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>))]</span>
-<span class="kw">const</span> <span class="ident">CONTROL_BUTTON_WIDTH</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="number">32f64</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>))]</span>
-<span class="kw">const</span> <span class="ident">TITLE_HEIGHT</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="number">32f64</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>)]</span>
-<span class="kw">const</span> <span class="ident">TITLE_HEIGHT</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="number">28f64</span>;
+<span class="attribute">#[cfg(not(target_os = <span class="string">&quot;macos&quot;</span>))]
+</span><span class="kw">const </span>CONTROL_BUTTON_WIDTH: f64 = <span class="number">32f64</span>;
+<span class="attribute">#[cfg(not(target_os = <span class="string">&quot;macos&quot;</span>))]
+</span><span class="kw">const </span>TITLE_HEIGHT: f64 = <span class="number">32f64</span>;
+<span class="attribute">#[cfg(target_os = <span class="string">&quot;macos&quot;</span>)]
+</span><span class="kw">const </span>TITLE_HEIGHT: f64 = <span class="number">28f64</span>;
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Data</span><span class="op">&gt;</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">WindowWidget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">event</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EventCtx</span>, <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">Event</span>, <span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Event::MouseMove</span>(<span class="ident">m</span>) <span class="op">=</span> <span class="ident">event</span> {
-            <span class="kw">let</span> <span class="ident">width</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">size</span>().<span class="ident">width</span>;
-            <span class="kw">let</span> <span class="ident">old_hovering</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">hovering</span>;
-            <span class="kw">let</span> <span class="ident">m_pos_x</span> <span class="op">=</span> <span class="ident">m</span>.<span class="ident">pos</span>.<span class="ident">x</span>;
-            <span class="kw">let</span> <span class="ident">m_pos_y</span> <span class="op">=</span> <span class="ident">m</span>.<span class="ident">pos</span>.<span class="ident">y</span>;
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>))]</span>
-            {
-                <span class="self">self</span>.<span class="ident">hovering</span> <span class="op">=</span> <span class="kw">if</span> <span class="op">!</span>(<span class="number">0.</span> ..<span class="op">=</span><span class="ident">TITLE_HEIGHT</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">m_pos_y</span>)
-                    <span class="op">|</span><span class="op">|</span> <span class="ident">m_pos_x</span> <span class="op">&lt;</span> <span class="number">0.</span>
-                    <span class="op">|</span><span class="op">|</span> <span class="ident">m_pos_x</span> <span class="op">&gt;</span> <span class="ident">width</span>
+<span class="kw">impl</span>&lt;T: Data&gt; Widget&lt;T&gt; <span class="kw">for </span>WindowWidget&lt;T&gt; {
+    <span class="kw">fn </span>event(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>EventCtx, event: <span class="kw-2">&amp;</span>Event, data: <span class="kw-2">&amp;mut </span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">if let </span>Event::MouseMove(m) = event {
+            <span class="kw">let </span>width = ctx.size().width;
+            <span class="kw">let </span>old_hovering = <span class="self">self</span>.hovering;
+            <span class="kw">let </span>m_pos_x = m.pos.x;
+            <span class="kw">let </span>m_pos_y = m.pos.y;
+            <span class="attribute">#[cfg(not(target_os = <span class="string">&quot;macos&quot;</span>))]
+            </span>{
+                <span class="self">self</span>.hovering = <span class="kw">if </span>!(<span class="number">0. </span>..=TITLE_HEIGHT).contains(<span class="kw-2">&amp;</span>m_pos_y)
+                    || m_pos_x &lt; <span class="number">0.
+                    </span>|| m_pos_x &gt; width
                 {
-                    <span class="number">0</span>
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">m_pos_x</span> <span class="op">&gt;</span> <span class="ident">width</span> <span class="op">-</span> <span class="ident">CONTROL_BUTTON_WIDTH</span> {
-                    <span class="number">1</span>
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">m_pos_x</span> <span class="op">&gt;</span> <span class="ident">width</span> <span class="op">-</span> <span class="ident">CONTROL_BUTTON_WIDTH</span> <span class="op">*</span> <span class="number">2.</span> {
-                    <span class="number">2</span>
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">show_back_btn</span> <span class="op">&amp;&amp;</span> <span class="ident">m_pos_x</span> <span class="op">&lt;</span> <span class="ident">CONTROL_BUTTON_WIDTH</span> {
-                    <span class="number">4</span>
-                } <span class="kw">else</span> {
-                    <span class="number">3</span>
-                };
+                    <span class="number">0
+                </span>} <span class="kw">else if </span>m_pos_x &gt; width - CONTROL_BUTTON_WIDTH {
+                    <span class="number">1
+                </span>} <span class="kw">else if </span>m_pos_x &gt; width - CONTROL_BUTTON_WIDTH * <span class="number">2. </span>{
+                    <span class="number">2
+                </span>} <span class="kw">else if </span><span class="self">self</span>.show_back_btn &amp;&amp; m_pos_x &lt; CONTROL_BUTTON_WIDTH {
+                    <span class="number">4
+                </span>} <span class="kw">else </span>{
+                    <span class="number">3
+                </span>};
             }
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>)]</span>
-            {
-                <span class="kw">let</span> <span class="ident">button_center_x</span> <span class="op">=</span> <span class="number">34.</span>;
-                <span class="kw">let</span> <span class="ident">button_center_y</span> <span class="op">=</span> <span class="number">14.</span>;
-                <span class="self">self</span>.<span class="ident">hovering</span> <span class="op">=</span>
-                    <span class="kw">if</span> <span class="op">!</span>(<span class="number">0.</span> ..<span class="op">=</span><span class="ident">TITLE_HEIGHT</span>).<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">m_pos_y</span>) <span class="op">|</span><span class="op">|</span> <span class="ident">m_pos_x</span> <span class="op">&lt;</span> <span class="number">0.</span> <span class="op">|</span><span class="op">|</span> <span class="ident">m_pos_x</span> <span class="op">&gt;</span> <span class="ident">width</span> {
-                        <span class="number">0</span>
-                    } <span class="kw">else</span> <span class="kw">if</span> (<span class="ident">button_center_x</span> <span class="op">-</span> <span class="ident">m_pos_x</span>).<span class="ident">powi</span>(<span class="number">2</span>)
-                        <span class="op">+</span> (<span class="ident">button_center_y</span> <span class="op">-</span> <span class="ident">m_pos_y</span>).<span class="ident">powi</span>(<span class="number">2</span>)
-                        <span class="op">&lt;</span><span class="op">=</span> <span class="number">64.</span>
-                    {
-                        <span class="number">4</span>
-                    } <span class="kw">else</span> {
-                        <span class="number">3</span>
+            <span class="attribute">#[cfg(target_os = <span class="string">&quot;macos&quot;</span>)]
+            </span>{
+                <span class="kw">let </span>button_center_x = <span class="number">34.</span>;
+                <span class="kw">let </span>button_center_y = <span class="number">14.</span>;
+                <span class="self">self</span>.hovering =
+                    <span class="kw">if </span>!(<span class="number">0. </span>..=TITLE_HEIGHT).contains(<span class="kw-2">&amp;</span>m_pos_y) || m_pos_x &lt; <span class="number">0. </span>|| m_pos_x &gt; width {
+                        <span class="number">0
+                    </span>} <span class="kw">else if </span>(button_center_x - m_pos_x).powi(<span class="number">2</span>)
+                        + (button_center_y - m_pos_y).powi(<span class="number">2</span>)
+                        &lt;= <span class="number">64.
+                    </span>{
+                        <span class="number">4
+                    </span>} <span class="kw">else </span>{
+                        <span class="number">3
+                    </span>}
+            }
+            <span class="kw">if </span>old_hovering != <span class="self">self</span>.hovering {
+                ctx.request_paint();
+                ctx.request_anim_frame();
+            }
+            ctx.window().handle_titlebar(<span class="self">self</span>.hovering == <span class="number">3</span>);
+        } <span class="kw">else if let </span>Event::MouseDown(_m) = event {
+            <span class="self">self</span>.down_hovering = <span class="self">self</span>.hovering;
+            <span class="kw">let </span>should_active = <span class="self">self</span>.hovering == <span class="number">1 </span>|| <span class="self">self</span>.hovering == <span class="number">2</span>;
+            ctx.set_active(should_active);
+            <span class="kw">if </span>should_active {
+                ctx.set_focus(ctx.widget_id());
+                ctx.set_handled();
+            }
+        } <span class="kw">else if let </span>Event::MouseUp(_m) = event {
+            <span class="kw">if </span><span class="self">self</span>.down_hovering == <span class="self">self</span>.hovering {
+                <span class="kw">match </span><span class="self">self</span>.hovering {
+                    <span class="number">1 </span>=&gt; {
+                        ctx.submit_notification(QUERY_CLOSE_WINDOW);
+                        ctx.set_handled();
                     }
-            }
-            <span class="kw">if</span> <span class="ident">old_hovering</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">hovering</span> {
-                <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
-                <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
-            }
-            <span class="ident">ctx</span>.<span class="ident">window</span>().<span class="ident">handle_titlebar</span>(<span class="self">self</span>.<span class="ident">hovering</span> <span class="op">==</span> <span class="number">3</span>);
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Event::MouseDown</span>(<span class="ident">_m</span>) <span class="op">=</span> <span class="ident">event</span> {
-            <span class="self">self</span>.<span class="ident">down_hovering</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">hovering</span>;
-            <span class="kw">let</span> <span class="ident">should_active</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">hovering</span> <span class="op">==</span> <span class="number">1</span> <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">hovering</span> <span class="op">==</span> <span class="number">2</span>;
-            <span class="ident">ctx</span>.<span class="ident">set_active</span>(<span class="ident">should_active</span>);
-            <span class="kw">if</span> <span class="ident">should_active</span> {
-                <span class="ident">ctx</span>.<span class="ident">set_focus</span>(<span class="ident">ctx</span>.<span class="ident">widget_id</span>());
-                <span class="ident">ctx</span>.<span class="ident">set_handled</span>();
-            }
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Event::MouseUp</span>(<span class="ident">_m</span>) <span class="op">=</span> <span class="ident">event</span> {
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">down_hovering</span> <span class="op">==</span> <span class="self">self</span>.<span class="ident">hovering</span> {
-                <span class="kw">match</span> <span class="self">self</span>.<span class="ident">hovering</span> {
-                    <span class="number">1</span> =&gt; {
-                        <span class="ident">ctx</span>.<span class="ident">submit_notification</span>(<span class="ident">QUERY_CLOSE_WINDOW</span>);
-                        <span class="ident">ctx</span>.<span class="ident">set_handled</span>();
-                    }
-                    <span class="number">2</span> =&gt; {
-                        <span class="ident">ctx</span>.<span class="ident">submit_command</span>(<span class="ident">CONFIGURE_WINDOW</span>.<span class="ident">with</span>(
-                            <span class="ident">WindowConfig::default</span>().<span class="ident">set_window_state</span>(<span class="ident">WindowState::Minimized</span>),
+                    <span class="number">2 </span>=&gt; {
+                        ctx.submit_command(CONFIGURE_WINDOW.with(
+                            WindowConfig::default().set_window_state(WindowState::Minimized),
                         ));
-                        <span class="ident">ctx</span>.<span class="ident">set_handled</span>();
+                        ctx.set_handled();
                     }
-                    <span class="number">4</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">show_back_btn</span> =&gt; {
-                        <span class="ident">ctx</span>.<span class="ident">submit_notification</span>(<span class="ident">BACK_PAGE_CLICKED</span>);
-                        <span class="ident">ctx</span>.<span class="ident">set_handled</span>();
+                    <span class="number">4 </span><span class="kw">if </span><span class="self">self</span>.show_back_btn =&gt; {
+                        ctx.submit_notification(BACK_PAGE_CLICKED);
+                        ctx.set_handled();
                     }
-                    <span class="kw">_</span> =&gt; <span class="ident">ctx</span>.<span class="ident">set_active</span>(<span class="bool-val">false</span>),
+                    <span class="kw">_ </span>=&gt; ctx.set_active(<span class="bool-val">false</span>),
                 }
             }
-            <span class="self">self</span>.<span class="ident">down_hovering</span> <span class="op">=</span> <span class="ident">u8::MAX</span>;
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Event::WindowSize</span>(<span class="kw">_</span>) <span class="op">=</span> <span class="ident">event</span> {
-            <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Event::WindowCloseRequested</span> <span class="op">=</span> <span class="ident">event</span> {
-            <span class="ident">ctx</span>.<span class="ident">submit_notification</span>(<span class="ident">QUERY_CLOSE_WINDOW</span>);
-            <span class="ident">ctx</span>.<span class="ident">set_handled</span>();
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Event::WindowConnected</span> <span class="op">=</span> <span class="ident">event</span> {
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>)]</span>
-            <span class="kw">if</span> <span class="kw">let</span> <span class="ident">RawWindowHandle::Win32</span>(<span class="ident">handle</span>) <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">window</span>().<span class="ident">raw_window_handle</span>() {
-                <span class="kw">unsafe</span> {
-                    <span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">ffi::OsStr</span>, <span class="ident">os::windows::ffi::OsStrExt</span>};
+            <span class="self">self</span>.down_hovering = u8::MAX;
+        } <span class="kw">else if let </span>Event::WindowSize(<span class="kw">_</span>) = event {
+            ctx.request_paint();
+        } <span class="kw">else if let </span>Event::WindowCloseRequested = event {
+            ctx.submit_notification(QUERY_CLOSE_WINDOW);
+            ctx.set_handled();
+        } <span class="kw">else if let </span>Event::WindowConnected = event {
+            <span class="attribute">#[cfg(target_os = <span class="string">&quot;windows&quot;</span>)]
+            </span><span class="kw">if let </span>RawWindowHandle::Win32(handle) = ctx.window().raw_window_handle() {
+                <span class="kw">unsafe </span>{
+                    <span class="kw">use </span>std::{ffi::OsStr, os::windows::ffi::OsStrExt};
 
-                    <span class="kw">use</span> <span class="ident">raw_window_handle_5::Win32WindowHandle</span>;
-                    <span class="kw">use</span> <span class="ident">winapi</span>::{
-                        <span class="ident">shared</span>::{
-                            <span class="ident">minwindef</span>::{<span class="ident">LPARAM</span>, <span class="kw-2">*</span>},
-                            <span class="ident">windef</span>::<span class="kw-2">*</span>,
+                    <span class="kw">use </span>raw_window_handle_5::Win32WindowHandle;
+                    <span class="kw">use </span>winapi::{
+                        shared::{
+                            minwindef::{LPARAM, <span class="kw-2">*</span>},
+                            windef::<span class="kw-2">*</span>,
                         },
-                        <span class="ident">um::winuser</span>::{<span class="ident">LoadImageW</span>, <span class="ident">SendMessageW</span>, <span class="ident">IMAGE_ICON</span>, <span class="ident">WM_SETICON</span>},
+                        um::winuser::{LoadImageW, SendMessageW, IMAGE_ICON, WM_SETICON},
                     };
-                    <span class="kw">let</span> <span class="ident">small_icon</span> <span class="op">=</span> <span class="ident">LoadImageW</span>(
-                        <span class="ident">handle</span>.<span class="ident">hinstance</span> <span class="kw">as</span> <span class="kw">_</span>,
-                        <span class="ident">OsStr::new</span>(<span class="string">&quot;ICON&quot;</span>)
-                            .<span class="ident">encode_wide</span>()
-                            .<span class="ident">chain</span>(<span class="prelude-val">Some</span>(<span class="number">0</span>))
-                            .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span><span class="op">&gt;</span>()
-                            .<span class="ident">as_ptr</span>(),
-                        <span class="ident">IMAGE_ICON</span>,
+                    <span class="kw">let </span>small_icon = LoadImageW(
+                        handle.hinstance <span class="kw">as _</span>,
+                        OsStr::new(<span class="string">&quot;ICON&quot;</span>)
+                            .encode_wide()
+                            .chain(<span class="prelude-val">Some</span>(<span class="number">0</span>))
+                            .collect::&lt;Vec&lt;u16&gt;&gt;()
+                            .as_ptr(),
+                        IMAGE_ICON,
                         <span class="number">16</span>,
                         <span class="number">16</span>,
                         <span class="number">0</span>,
                     );
-                    <span class="kw">let</span> <span class="ident">big_icon</span> <span class="op">=</span> <span class="ident">LoadImageW</span>(
-                        <span class="ident">handle</span>.<span class="ident">hinstance</span> <span class="kw">as</span> <span class="kw">_</span>,
-                        <span class="ident">OsStr::new</span>(<span class="string">&quot;ICON&quot;</span>)
-                            .<span class="ident">encode_wide</span>()
-                            .<span class="ident">chain</span>(<span class="prelude-val">Some</span>(<span class="number">0</span>))
-                            .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span><span class="op">&gt;</span>()
-                            .<span class="ident">as_ptr</span>(),
-                        <span class="ident">IMAGE_ICON</span>,
+                    <span class="kw">let </span>big_icon = LoadImageW(
+                        handle.hinstance <span class="kw">as _</span>,
+                        OsStr::new(<span class="string">&quot;ICON&quot;</span>)
+                            .encode_wide()
+                            .chain(<span class="prelude-val">Some</span>(<span class="number">0</span>))
+                            .collect::&lt;Vec&lt;u16&gt;&gt;()
+                            .as_ptr(),
+                        IMAGE_ICON,
                         <span class="number">32</span>,
                         <span class="number">32</span>,
                         <span class="number">0</span>,
                     );
-                    <span class="ident">SendMessageW</span>(<span class="ident">handle</span>.<span class="ident">hwnd</span> <span class="kw">as</span> <span class="kw">_</span>, <span class="ident">WM_SETICON</span>, <span class="number">0</span>, <span class="ident">small_icon</span> <span class="kw">as</span> <span class="ident">LPARAM</span>);
-                    <span class="ident">SendMessageW</span>(<span class="ident">handle</span>.<span class="ident">hwnd</span> <span class="kw">as</span> <span class="kw">_</span>, <span class="ident">WM_SETICON</span>, <span class="number">1</span>, <span class="ident">big_icon</span> <span class="kw">as</span> <span class="ident">LPARAM</span>);
-                    <span class="kw">struct</span> <span class="ident">WinHandle</span> {
-                        <span class="ident">handle</span>: <span class="ident">HWND</span>,
-                        <span class="ident">instance</span>: <span class="ident">HINSTANCE</span>,
+                    SendMessageW(handle.hwnd <span class="kw">as _</span>, WM_SETICON, <span class="number">0</span>, small_icon <span class="kw">as </span>LPARAM);
+                    SendMessageW(handle.hwnd <span class="kw">as _</span>, WM_SETICON, <span class="number">1</span>, big_icon <span class="kw">as </span>LPARAM);
+                    <span class="kw">struct </span>WinHandle {
+                        handle: HWND,
+                        instance: HINSTANCE,
                     }
-                    <span class="kw">unsafe</span> <span class="kw">impl</span> <span class="ident">HasRawWindowHandle</span> <span class="kw">for</span> <span class="ident">WinHandle</span> {
-                        <span class="kw">fn</span> <span class="ident">raw_window_handle</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">RawWindowHandle</span> {
-                            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">handle</span> <span class="op">=</span> <span class="ident">Win32WindowHandle::empty</span>();
-                            <span class="ident">handle</span>.<span class="ident">hwnd</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">handle</span> <span class="kw">as</span> <span class="kw">_</span>;
-                            <span class="ident">handle</span>.<span class="ident">hinstance</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">instance</span> <span class="kw">as</span> <span class="kw">_</span>;
-                            <span class="ident">RawWindowHandle::Win32</span>(<span class="ident">handle</span>)
+                    <span class="kw">unsafe impl </span>HasRawWindowHandle <span class="kw">for </span>WinHandle {
+                        <span class="kw">fn </span>raw_window_handle(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; RawWindowHandle {
+                            <span class="kw">let </span><span class="kw-2">mut </span>handle = Win32WindowHandle::empty();
+                            handle.hwnd = <span class="self">self</span>.handle <span class="kw">as _</span>;
+                            handle.hinstance = <span class="self">self</span>.instance <span class="kw">as _</span>;
+                            RawWindowHandle::Win32(handle)
                         }
                     }
-                    <span class="ident">window_shadows::set_shadow</span>(
-                        <span class="ident">WinHandle</span> {
-                            <span class="ident">handle</span>: <span class="ident">handle</span>.<span class="ident">hwnd</span> <span class="kw">as</span> <span class="kw">_</span>,
-                            <span class="ident">instance</span>: <span class="ident">handle</span>.<span class="ident">hinstance</span> <span class="kw">as</span> <span class="kw">_</span>,
+                    window_shadows::set_shadow(
+                        WinHandle {
+                            handle: handle.hwnd <span class="kw">as _</span>,
+                            instance: handle.hinstance <span class="kw">as _</span>,
                         },
                         <span class="bool-val">true</span>,
                     )
-                    .<span class="ident">unwrap_or_default</span>();
+                    .unwrap_or_default();
                 }
             }
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>)]</span>
-            <span class="kw">if</span> <span class="kw">let</span> <span class="ident">RawWindowHandle::AppKit</span>(<span class="ident">handle</span>) <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">window</span>().<span class="ident">raw_window_handle</span>() {
-                <span class="kw">unsafe</span> {
-                    <span class="kw">use</span> <span class="ident">cocoa</span>::{
-                        <span class="ident">appkit</span>::{<span class="ident">NSControl</span>, <span class="ident">NSWindow</span>, <span class="ident">NSWindowStyleMask</span>},
-                        <span class="ident">base</span>::{<span class="ident">id</span>, <span class="ident">NO</span>, <span class="ident">YES</span>},
+            <span class="attribute">#[cfg(target_os = <span class="string">&quot;macos&quot;</span>)]
+            </span><span class="kw">if let </span>RawWindowHandle::AppKit(handle) = ctx.window().raw_window_handle() {
+                <span class="kw">unsafe </span>{
+                    <span class="kw">use </span>cocoa::{
+                        appkit::{NSControl, NSWindow, NSWindowStyleMask},
+                        base::{id, NO, YES},
                     };
-                    <span class="kw">use</span> <span class="ident">objc</span>::<span class="kw-2">*</span>;
-                    <span class="kw">let</span> <span class="ident">nsv</span> <span class="op">=</span> <span class="ident">objc::rc::StrongPtr::new</span>(<span class="ident">handle</span>.<span class="ident">ns_view</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="kw">_</span>);
-                    <span class="kw">let</span> <span class="ident">win</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="kw-2">*</span><span class="ident">nsv</span>, <span class="ident">window</span>];
-                    <span class="kw">if</span> <span class="op">!</span><span class="ident">win</span>.<span class="ident">is_null</span>() {
-                        <span class="ident">win</span>.<span class="ident">setTitlebarAppearsTransparent_</span>(<span class="ident">cocoa::base::YES</span>);
-                        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">mask</span> <span class="op">=</span> <span class="ident">win</span>.<span class="ident">styleMask</span>();
-                        <span class="ident">mask</span> <span class="op">|</span><span class="op">=</span> <span class="ident">NSWindowStyleMask::NSFullSizeContentViewWindowMask</span>;
-                        <span class="ident">win</span>.<span class="ident">setStyleMask_</span>(<span class="ident">mask</span>);
-                        <span class="ident">win</span>.<span class="ident">setTitleVisibility_</span>(
-                            <span class="ident">cocoa::appkit::NSWindowTitleVisibility::NSWindowTitleHidden</span>,
+                    <span class="kw">use </span>objc::<span class="kw-2">*</span>;
+                    <span class="kw">let </span>nsv = objc::rc::StrongPtr::new(handle.ns_view <span class="kw">as </span><span class="kw-2">*mut </span><span class="kw">_</span>);
+                    <span class="kw">let </span>win: id = <span class="macro">msg_send!</span>[<span class="kw-2">*</span>nsv, window];
+                    <span class="kw">if </span>!win.is_null() {
+                        win.setTitlebarAppearsTransparent_(cocoa::base::YES);
+                        <span class="kw">let </span><span class="kw-2">mut </span>mask = win.styleMask();
+                        mask |= NSWindowStyleMask::NSFullSizeContentViewWindowMask;
+                        win.setStyleMask_(mask);
+                        win.setTitleVisibility_(
+                            cocoa::appkit::NSWindowTitleVisibility::NSWindowTitleHidden,
                         );
-                        <span class="kw">let</span> <span class="ident">btn</span> <span class="op">=</span> <span class="ident">win</span>.<span class="ident">standardWindowButton_</span>(
-                            <span class="ident">cocoa::appkit::NSWindowButton::NSWindowFullScreenButton</span>,
-                        );
-
-                        <span class="ident">btn</span>.<span class="ident">setEnabled_</span>(<span class="ident">NO</span>);
-                        <span class="kw">let</span> <span class="kw">_</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="ident">btn</span>, <span class="ident">setHidden</span>: <span class="ident">YES</span>];
-
-                        <span class="kw">let</span> <span class="ident">btn</span> <span class="op">=</span> <span class="ident">win</span>.<span class="ident">standardWindowButton_</span>(
-                            <span class="ident">cocoa::appkit::NSWindowButton::NSWindowMiniaturizeButton</span>,
+                        <span class="kw">let </span>btn = win.standardWindowButton_(
+                            cocoa::appkit::NSWindowButton::NSWindowFullScreenButton,
                         );
 
-                        <span class="ident">btn</span>.<span class="ident">setEnabled_</span>(<span class="ident">NO</span>);
-                        <span class="kw">let</span> <span class="kw">_</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="ident">btn</span>, <span class="ident">setHidden</span>: <span class="ident">YES</span>];
+                        btn.setEnabled_(NO);
+                        <span class="kw">let _</span>: id = <span class="macro">msg_send!</span>[btn, setHidden: YES];
 
-                        <span class="kw">let</span> <span class="ident">btn</span> <span class="op">=</span> <span class="ident">win</span>.<span class="ident">standardWindowButton_</span>(
-                            <span class="ident">cocoa::appkit::NSWindowButton::NSWindowZoomButton</span>,
+                        <span class="kw">let </span>btn = win.standardWindowButton_(
+                            cocoa::appkit::NSWindowButton::NSWindowMiniaturizeButton,
                         );
 
-                        <span class="ident">btn</span>.<span class="ident">setEnabled_</span>(<span class="ident">NO</span>);
-                        <span class="kw">let</span> <span class="kw">_</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="ident">btn</span>, <span class="ident">setHidden</span>: <span class="ident">YES</span>];
+                        btn.setEnabled_(NO);
+                        <span class="kw">let _</span>: id = <span class="macro">msg_send!</span>[btn, setHidden: YES];
 
-                        <span class="kw">let</span> <span class="ident">color</span> <span class="op">=</span>
-                            <span class="ident">get_contrast_yiq</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">druid::theme::WINDOW_BACKGROUND_COLOR</span>));
-                        <span class="kw">let</span> (<span class="ident">r</span>, <span class="ident">g</span>, <span class="ident">b</span>, <span class="ident">a</span>) <span class="op">=</span> <span class="ident">color</span>.<span class="ident">as_rgba</span>();
-                        <span class="kw">let</span> <span class="ident">color</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="macro">class!</span>(<span class="ident">NSColor</span>), <span class="ident">colorWithSRGBRed</span>: <span class="number">1.</span> <span class="op">-</span> <span class="ident">r</span> <span class="ident">green</span>: <span class="number">1.</span> <span class="op">-</span> <span class="ident">g</span> <span class="ident">blue</span>: <span class="number">1.</span> <span class="op">-</span> <span class="ident">b</span> <span class="ident">alpha</span>: <span class="ident">a</span>];
+                        <span class="kw">let </span>btn = win.standardWindowButton_(
+                            cocoa::appkit::NSWindowButton::NSWindowZoomButton,
+                        );
 
-                        <span class="ident">win</span>.<span class="ident">setBackgroundColor_</span>(<span class="ident">color</span>);
+                        btn.setEnabled_(NO);
+                        <span class="kw">let _</span>: id = <span class="macro">msg_send!</span>[btn, setHidden: YES];
+
+                        <span class="kw">let </span>color =
+                            get_contrast_yiq(env.get(druid::theme::WINDOW_BACKGROUND_COLOR));
+                        <span class="kw">let </span>(r, g, b, a) = color.as_rgba();
+                        <span class="kw">let </span>color: id = <span class="macro">msg_send!</span>[<span class="macro">class!</span>(NSColor), colorWithSRGBRed: <span class="number">1. </span>- r green: <span class="number">1. </span>- g blue: <span class="number">1. </span>- b alpha: a];
+
+                        win.setBackgroundColor_(color);
                     }
                 }
             }
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Event::Command</span>(<span class="ident">cmd</span>) <span class="op">=</span> <span class="ident">event</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">img_buf</span>) <span class="op">=</span> <span class="ident">cmd</span>.<span class="ident">get</span>(<span class="ident">SET_BACKGROUND_IMAGE</span>) {
-                <span class="self">self</span>.<span class="ident">background_image</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-                <span class="self">self</span>.<span class="ident">background_image_data</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">img_buf</span>.<span class="ident">to_owned</span>());
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">enable</span>) <span class="op">=</span> <span class="ident">cmd</span>.<span class="ident">get</span>(<span class="ident">ENABLE_BACK_PAGE</span>) {
-                <span class="self">self</span>.<span class="ident">show_back_btn</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">enable</span>;
-                <span class="ident">ctx</span>.<span class="ident">request_update</span>();
-                <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
-                <span class="ident">ctx</span>.<span class="ident">request_layout</span>();
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">cmd</span>.<span class="ident">get</span>(<span class="ident">CLEAR_BACKGROUND_IMAGE</span>).<span class="ident">is_some</span>() {
-                <span class="self">self</span>.<span class="ident">background_image</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-                <span class="self">self</span>.<span class="ident">background_image_data</span> <span class="op">=</span> <span class="prelude-val">None</span>;
+        } <span class="kw">else if let </span>Event::Command(cmd) = event {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(img_buf) = cmd.get(SET_BACKGROUND_IMAGE) {
+                <span class="self">self</span>.background_image = <span class="prelude-val">None</span>;
+                <span class="self">self</span>.background_image_data = <span class="prelude-val">Some</span>(img_buf.to_owned());
+            } <span class="kw">else if let </span><span class="prelude-val">Some</span>(enable) = cmd.get(ENABLE_BACK_PAGE) {
+                <span class="self">self</span>.show_back_btn = <span class="kw-2">*</span>enable;
+                ctx.request_update();
+                ctx.request_paint();
+                ctx.request_layout();
+            } <span class="kw">else if </span>cmd.get(CLEAR_BACKGROUND_IMAGE).is_some() {
+                <span class="self">self</span>.background_image = <span class="prelude-val">None</span>;
+                <span class="self">self</span>.background_image_data = <span class="prelude-val">None</span>;
             }
         }
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">event</span>(<span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>)
+        <span class="self">self</span>.inner.event(ctx, event, data, env)
     }
 
-    <span class="kw">fn</span> <span class="ident">layout</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LayoutCtx</span>, <span class="ident">bc</span>: <span class="kw-2">&amp;</span><span class="ident">BoxConstraints</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) -&gt; <span class="ident">Size</span> {
-        <span class="ident">bc</span>.<span class="ident">debug_check</span>(<span class="string">&quot;Window&quot;</span>);
-        <span class="kw">let</span> <span class="ident">wbc</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">bc</span>;
-        <span class="kw">let</span> <span class="ident">child_bc</span> <span class="op">=</span> <span class="ident">wbc</span>.<span class="ident">shrink</span>((<span class="number">0.</span>, <span class="ident">TITLE_HEIGHT</span>));
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">layout</span>(<span class="ident">ctx</span>, <span class="kw-2">&amp;</span><span class="ident">child_bc</span>, <span class="ident">data</span>, <span class="ident">env</span>);
-        <span class="self">self</span>.<span class="ident">inner</span>
-            .<span class="ident">set_origin</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>, (<span class="number">0.</span>, <span class="ident">TITLE_HEIGHT</span>).<span class="ident">into</span>());
-        <span class="ident">size</span>.<span class="ident">height</span> <span class="op">+</span><span class="op">=</span> <span class="ident">TITLE_HEIGHT</span>;
-        <span class="ident">bc</span>.<span class="ident">constrain</span>(<span class="ident">size</span>)
+    <span class="kw">fn </span>layout(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>LayoutCtx, bc: <span class="kw-2">&amp;</span>BoxConstraints, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) -&gt; Size {
+        bc.debug_check(<span class="string">&quot;Window&quot;</span>);
+        <span class="kw">let </span>wbc = <span class="kw-2">*</span>bc;
+        <span class="kw">let </span>child_bc = wbc.shrink((<span class="number">0.</span>, TITLE_HEIGHT));
+        <span class="kw">let </span><span class="kw-2">mut </span>size = <span class="self">self</span>.inner.layout(ctx, <span class="kw-2">&amp;</span>child_bc, data, env);
+        <span class="self">self</span>.inner
+            .set_origin(ctx, data, env, (<span class="number">0.</span>, TITLE_HEIGHT).into());
+        size.height += TITLE_HEIGHT;
+        bc.constrain(size)
     }
 
-    <span class="kw">fn</span> <span class="ident">lifecycle</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LifeCycleCtx</span>, <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">LifeCycle</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">lifecycle</span>(<span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>)
+    <span class="kw">fn </span>lifecycle(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>LifeCycleCtx, event: <span class="kw-2">&amp;</span>LifeCycle, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="self">self</span>.inner.lifecycle(ctx, event, data, env)
     }
 
-    <span class="kw">fn</span> <span class="ident">paint</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">PaintCtx</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="self">self</span>.<span class="ident">paint_no_shadow</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>, <span class="kw-2">&amp;</span><span class="ident">ctx</span>.<span class="ident">size</span>().<span class="ident">to_rect</span>().<span class="ident">round</span>())
+    <span class="kw">fn </span>paint(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>PaintCtx, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="self">self</span>.paint_no_shadow(ctx, data, env, <span class="kw-2">&amp;</span>ctx.size().to_rect().round())
     }
 
-    <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">UpdateCtx</span>, <span class="ident">_old_data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">update</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>);
-        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>)]</span>
-        <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">env_key_changed</span>(<span class="kw-2">&amp;</span><span class="ident">druid::theme::WINDOW_BACKGROUND_COLOR</span>) {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="ident">RawWindowHandle::AppKit</span>(<span class="ident">handle</span>) <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">window</span>().<span class="ident">raw_window_handle</span>() {
-                <span class="kw">unsafe</span> {
-                    <span class="kw">use</span> <span class="ident">cocoa</span>::{<span class="ident">appkit::NSWindow</span>, <span class="ident">base::id</span>};
-                    <span class="kw">use</span> <span class="ident">objc</span>::<span class="kw-2">*</span>;
-                    <span class="kw">let</span> <span class="ident">nsv</span> <span class="op">=</span> <span class="ident">objc::rc::StrongPtr::new</span>(<span class="ident">handle</span>.<span class="ident">ns_view</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="kw">_</span>);
-                    <span class="kw">let</span> <span class="ident">win</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="kw-2">*</span><span class="ident">nsv</span>, <span class="ident">window</span>];
-                    <span class="kw">if</span> <span class="op">!</span><span class="ident">win</span>.<span class="ident">is_null</span>() {
-                        <span class="kw">let</span> <span class="ident">color</span> <span class="op">=</span>
-                            <span class="ident">get_contrast_yiq</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">druid::theme::WINDOW_BACKGROUND_COLOR</span>));
-                        <span class="kw">let</span> (<span class="ident">r</span>, <span class="ident">g</span>, <span class="ident">b</span>, <span class="ident">a</span>) <span class="op">=</span> <span class="ident">color</span>.<span class="ident">as_rgba</span>();
-                        <span class="kw">let</span> <span class="ident">color</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="macro">class!</span>(<span class="ident">NSColor</span>), <span class="ident">colorWithSRGBRed</span>: <span class="number">1.</span> <span class="op">-</span> <span class="ident">r</span> <span class="ident">green</span>: <span class="number">1.</span> <span class="op">-</span> <span class="ident">g</span> <span class="ident">blue</span>: <span class="number">1.</span> <span class="op">-</span> <span class="ident">b</span> <span class="ident">alpha</span>: <span class="ident">a</span>];
+    <span class="kw">fn </span>update(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>UpdateCtx, _old_data: <span class="kw-2">&amp;</span>T, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="self">self</span>.inner.update(ctx, data, env);
+        <span class="attribute">#[cfg(target_os = <span class="string">&quot;macos&quot;</span>)]
+        </span><span class="kw">if </span>ctx.env_key_changed(<span class="kw-2">&amp;</span>druid::theme::WINDOW_BACKGROUND_COLOR) {
+            <span class="kw">if let </span>RawWindowHandle::AppKit(handle) = ctx.window().raw_window_handle() {
+                <span class="kw">unsafe </span>{
+                    <span class="kw">use </span>cocoa::{appkit::NSWindow, base::id};
+                    <span class="kw">use </span>objc::<span class="kw-2">*</span>;
+                    <span class="kw">let </span>nsv = objc::rc::StrongPtr::new(handle.ns_view <span class="kw">as </span><span class="kw-2">*mut </span><span class="kw">_</span>);
+                    <span class="kw">let </span>win: id = <span class="macro">msg_send!</span>[<span class="kw-2">*</span>nsv, window];
+                    <span class="kw">if </span>!win.is_null() {
+                        <span class="kw">let </span>color =
+                            get_contrast_yiq(env.get(druid::theme::WINDOW_BACKGROUND_COLOR));
+                        <span class="kw">let </span>(r, g, b, a) = color.as_rgba();
+                        <span class="kw">let </span>color: id = <span class="macro">msg_send!</span>[<span class="macro">class!</span>(NSColor), colorWithSRGBRed: <span class="number">1. </span>- r green: <span class="number">1. </span>- g blue: <span class="number">1. </span>- b alpha: a];
 
-                        <span class="comment">// let nsa: id = msg_send![class!(NSAppearance), currentDrawingAppearance];</span>
-                        <span class="comment">// let name: id = msg_send![nsa, name];</span>
-                        <span class="comment">// let name = NSString::UTF8String(name);</span>
-                        <span class="comment">// let name = std::ffi::CStr::from_ptr(name);</span>
-                        <span class="comment">// let name = name.to_str().unwrap_or_default().to_string();</span>
+                        <span class="comment">// let nsa: id = msg_send![class!(NSAppearance), currentDrawingAppearance];
+                        // let name: id = msg_send![nsa, name];
+                        // let name = NSString::UTF8String(name);
+                        // let name = std::ffi::CStr::from_ptr(name);
+                        // let name = name.to_str().unwrap_or_default().to_string();
 
-                        <span class="comment">// struct MacWindowHandle {</span>
-                        <span class="comment">//     nsw: *mut libc::c_void,</span>
-                        <span class="comment">//     nsv: *mut libc::c_void</span>
-                        <span class="comment">// }</span>
+                        // struct MacWindowHandle {
+                        //     nsw: *mut libc::c_void,
+                        //     nsv: *mut libc::c_void
+                        // }
 
-                        <span class="comment">// unsafe impl raw_window_handle_5::HasRawWindowHandle for MacWindowHandle {</span>
-                        <span class="comment">//     fn raw_window_handle(&amp;self) -&gt; raw_window_handle_5::RawWindowHandle {</span>
-                        <span class="comment">//         let mut h = raw_window_handle_5::AppKitWindowHandle::empty();</span>
-                        <span class="comment">//         h.ns_view = self.nsv;</span>
-                        <span class="comment">//         h.ns_window = self.nsw;</span>
-                        <span class="comment">//         raw_window_handle_5::RawWindowHandle::AppKit(h)</span>
-                        <span class="comment">//     }</span>
-                        <span class="comment">// }</span>
+                        // unsafe impl raw_window_handle_5::HasRawWindowHandle for MacWindowHandle {
+                        //     fn raw_window_handle(&amp;self) -&gt; raw_window_handle_5::RawWindowHandle {
+                        //         let mut h = raw_window_handle_5::AppKitWindowHandle::empty();
+                        //         h.ns_view = self.nsv;
+                        //         h.ns_window = self.nsw;
+                        //         raw_window_handle_5::RawWindowHandle::AppKit(h)
+                        //     }
+                        // }
 
-                        <span class="comment">// let _ = window_vibrancy::apply_vibrancy(MacWindowHandle {</span>
-                        <span class="comment">//     nsv: handle.ns_view,</span>
-                        <span class="comment">//     nsw: win as *mut _,</span>
-                        <span class="comment">// }, window_vibrancy::NSVisualEffectMaterial::Sidebar);</span>
+                        // let _ = window_vibrancy::apply_vibrancy(MacWindowHandle {
+                        //     nsv: handle.ns_view,
+                        //     nsw: win as *mut _,
+                        // }, window_vibrancy::NSVisualEffectMaterial::Sidebar);
 
-                        <span class="comment">// if &amp;name == &quot;darkAqra&quot; {}</span>
+                        // if &amp;name == &quot;darkAqra&quot; {}
 
-                        <span class="ident">win</span>.<span class="ident">setBackgroundColor_</span>(<span class="ident">color</span>);
+                        </span>win.setBackgroundColor_(color);
                     }
                 }
             }
         }
-        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>)]</span>
-        <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">env_key_changed</span>(<span class="kw-2">&amp;</span><span class="ident">druid::theme::WINDOW_BACKGROUND_COLOR</span>) {
-            <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+        <span class="attribute">#[cfg(target_os = <span class="string">&quot;windows&quot;</span>)]
+        </span><span class="kw">if </span>ctx.env_key_changed(<span class="kw-2">&amp;</span>druid::theme::WINDOW_BACKGROUND_COLOR) {
+            ctx.request_paint();
         }
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

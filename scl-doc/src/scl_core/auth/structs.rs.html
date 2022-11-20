@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/auth/structs.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>structs.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_core/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/auth/structs.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>structs.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_core/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -179,186 +179,186 @@
 <span id="179">179</span>
 <span id="180">180</span>
 <span id="181">181</span>
-</pre><pre class="rust"><code><span class="doccomment">//! 登录验证数据结构</span>
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
+</pre><pre class="rust"><code><span class="doccomment">//! 登录验证数据结构
+</span><span class="kw">use </span>serde::{Deserialize, Serialize};
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::password::Password</span>;
+<span class="kw">use </span><span class="kw">crate</span>::password::Password;
 
 <span class="doccomment">/**
    账户类型枚举，需要提供一个账户种类方可启动游戏
-*/</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>, <span class="ident">Serialize</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">AuthMethod</span> {
-    <span class="doccomment">/// 离线账户登录</span>
-    <span class="ident">Offline</span> {
-        <span class="doccomment">/// 离线玩家的名称</span>
-        <span class="ident">player_name</span>: <span class="ident">String</span>,
-        <span class="doccomment">/// 离线玩家的统一标识，如果玩家是从其它启动器迁移到使用本启动模块的启动器的，需要提供这个以确保存档物品信息能够正确读取</span>
-        <span class="ident">uuid</span>: <span class="ident">String</span>,
+*/
+</span><span class="attribute">#[derive(Debug, Deserialize, Serialize, Clone, PartialEq, Eq)]
+</span><span class="kw">pub enum </span>AuthMethod {
+    <span class="doccomment">/// 离线账户登录
+    </span>Offline {
+        <span class="doccomment">/// 离线玩家的名称
+        </span>player_name: String,
+        <span class="doccomment">/// 离线玩家的统一标识，如果玩家是从其它启动器迁移到使用本启动模块的启动器的，需要提供这个以确保存档物品信息能够正确读取
+        </span>uuid: String,
     },
-    <span class="doccomment">/// Mojang (Yggdrasil) 账户登录</span>
-    <span class="ident">Mojang</span> {
-        <span class="doccomment">/// 登录令牌，将会作为启动参数的一部分传入游戏实例</span>
-        <span class="ident">access_token</span>: <span class="ident">Password</span>,
-        <span class="doccomment">/// 正版玩家的统一标识</span>
-        <span class="ident">uuid</span>: <span class="ident">String</span>,
-        <span class="doccomment">/// 正版玩家的名称</span>
-        <span class="ident">player_name</span>: <span class="ident">String</span>,
-        <span class="doccomment">/// 正版玩家的头部皮肤位图信息，格式为 RGBA，大小为 8x8，用于展示头像</span>
-        <span class="ident">head_skin</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
-        <span class="doccomment">/// 正版玩家的头发皮肤位图信息，格式为 RGBA，大小为 8x8，用于展示头像</span>
-        <span class="ident">hat_skin</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Mojang (Yggdrasil) 账户登录
+    </span>Mojang {
+        <span class="doccomment">/// 登录令牌，将会作为启动参数的一部分传入游戏实例
+        </span>access_token: Password,
+        <span class="doccomment">/// 正版玩家的统一标识
+        </span>uuid: String,
+        <span class="doccomment">/// 正版玩家的名称
+        </span>player_name: String,
+        <span class="doccomment">/// 正版玩家的头部皮肤位图信息，格式为 RGBA，大小为 8x8，用于展示头像
+        </span>head_skin: Vec&lt;u8&gt;,
+        <span class="doccomment">/// 正版玩家的头发皮肤位图信息，格式为 RGBA，大小为 8x8，用于展示头像
+        </span>hat_skin: Vec&lt;u8&gt;,
     },
-    <span class="doccomment">/// 微软账户</span>
-    <span class="ident">Microsoft</span> {
-        <span class="doccomment">/// 登录令牌，将会作为启动参数的一部分传入游戏实例</span>
-        <span class="ident">access_token</span>: <span class="ident">Password</span>,
-        <span class="doccomment">/// 刷新令牌，校验/更新登录令牌时实现携带这个作为参数</span>
-        <span class="ident">refresh_token</span>: <span class="ident">Password</span>,
-        <span class="doccomment">/// 正版玩家的统一标识</span>
-        <span class="ident">uuid</span>: <span class="ident">String</span>,
-        <span class="doccomment">/// 正版玩家的 XBox 用户 ID，用途不明，但是在新版本的 Minecraft 有发现需要使用这个 XUID 的地方</span>
-        <span class="ident">xuid</span>: <span class="ident">String</span>,
-        <span class="doccomment">/// 正版玩家的名称</span>
-        <span class="ident">player_name</span>: <span class="ident">String</span>,
-        <span class="doccomment">/// 正版玩家的头部皮肤位图信息，格式为 RGBA，大小为 8x8，用于展示头像</span>
-        <span class="ident">head_skin</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
-        <span class="doccomment">/// 正版玩家的头发皮肤位图信息，格式为 RGBA，大小为 8x8，用于展示头像</span>
-        <span class="ident">hat_skin</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// 微软账户
+    </span>Microsoft {
+        <span class="doccomment">/// 登录令牌，将会作为启动参数的一部分传入游戏实例
+        </span>access_token: Password,
+        <span class="doccomment">/// 刷新令牌，校验/更新登录令牌时实现携带这个作为参数
+        </span>refresh_token: Password,
+        <span class="doccomment">/// 正版玩家的统一标识
+        </span>uuid: String,
+        <span class="doccomment">/// 正版玩家的 XBox 用户 ID，用途不明，但是在新版本的 Minecraft 有发现需要使用这个 XUID 的地方
+        </span>xuid: String,
+        <span class="doccomment">/// 正版玩家的名称
+        </span>player_name: String,
+        <span class="doccomment">/// 正版玩家的头部皮肤位图信息，格式为 RGBA，大小为 8x8，用于展示头像
+        </span>head_skin: Vec&lt;u8&gt;,
+        <span class="doccomment">/// 正版玩家的头发皮肤位图信息，格式为 RGBA，大小为 8x8，用于展示头像
+        </span>hat_skin: Vec&lt;u8&gt;,
     },
-    <span class="doccomment">/// 外置登录（Authlib-Injector）</span>
-    <span class="ident">AuthlibInjector</span> {
-        <span class="doccomment">/// 第三方登录 API 提供方的 API 链接，登录的请求将通过这个 API 发送</span>
-        <span class="ident">api_location</span>: <span class="ident">String</span>,
-        <span class="doccomment">/// 第三方登录 API 提供方的服务器名称，用于 GUI 显示</span>
-        <span class="ident">server_name</span>: <span class="ident">String</span>,
-        <span class="doccomment">/// 第三方登录 API 提供方的网页主页，用于 GUI 显示跳转</span>
-        <span class="ident">server_homepage</span>: <span class="ident">String</span>,
-        <span class="doccomment">/// 第三方登录 API 提供方的元数据，需要在启动时携带这个作为参数</span>
-        <span class="ident">server_meta</span>: <span class="ident">String</span>,
-        <span class="doccomment">/// 第三方登录令牌，将会作为启动参数的一部分传入游戏实例</span>
-        <span class="ident">access_token</span>: <span class="ident">Password</span>,
-        <span class="doccomment">/// 第三方正版玩家的统一标识</span>
-        <span class="ident">uuid</span>: <span class="ident">String</span>,
-        <span class="doccomment">/// 第三方正版玩家的名称</span>
-        <span class="ident">player_name</span>: <span class="ident">String</span>,
-        <span class="doccomment">/// 第三方正版玩家的头部皮肤位图信息，格式为 RGBA，大小为 8x8，用于展示头像</span>
-        <span class="ident">head_skin</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
-        <span class="doccomment">/// 第三方正版玩家的头发皮肤位图信息，格式为 RGBA，大小为 8x8，用于展示头像</span>
-        <span class="ident">hat_skin</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// 外置登录（Authlib-Injector）
+    </span>AuthlibInjector {
+        <span class="doccomment">/// 第三方登录 API 提供方的 API 链接，登录的请求将通过这个 API 发送
+        </span>api_location: String,
+        <span class="doccomment">/// 第三方登录 API 提供方的服务器名称，用于 GUI 显示
+        </span>server_name: String,
+        <span class="doccomment">/// 第三方登录 API 提供方的网页主页，用于 GUI 显示跳转
+        </span>server_homepage: String,
+        <span class="doccomment">/// 第三方登录 API 提供方的元数据，需要在启动时携带这个作为参数
+        </span>server_meta: String,
+        <span class="doccomment">/// 第三方登录令牌，将会作为启动参数的一部分传入游戏实例
+        </span>access_token: Password,
+        <span class="doccomment">/// 第三方正版玩家的统一标识
+        </span>uuid: String,
+        <span class="doccomment">/// 第三方正版玩家的名称
+        </span>player_name: String,
+        <span class="doccomment">/// 第三方正版玩家的头部皮肤位图信息，格式为 RGBA，大小为 8x8，用于展示头像
+        </span>head_skin: Vec&lt;u8&gt;,
+        <span class="doccomment">/// 第三方正版玩家的头发皮肤位图信息，格式为 RGBA，大小为 8x8，用于展示头像
+        </span>hat_skin: Vec&lt;u8&gt;,
     },
 }
 
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod</span> <span class="ident">mojang</span> {
-    <span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod </span>mojang {
+    <span class="kw">use </span>serde::{Deserialize, Serialize};
 
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>, <span class="ident">Serialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename_all</span> <span class="op">=</span> <span class="string">&quot;camelCase&quot;</span>)]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">AuthenticateBody</span> {
-        <span class="kw">pub</span> <span class="ident">agent</span>: <span class="ident">AuthenticateAgent</span>,
-        <span class="kw">pub</span> <span class="ident">username</span>: <span class="ident">String</span>,
-        <span class="kw">pub</span> <span class="ident">password</span>: <span class="ident">String</span>,
-        <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;String::is_empty&quot;</span>)]</span>
-        <span class="kw">pub</span> <span class="ident">client_token</span>: <span class="ident">String</span>,
-        <span class="kw">pub</span> <span class="ident">request_user</span>: <span class="ident">bool</span>,
+    <span class="attribute">#[derive(Debug, Deserialize, Serialize, PartialEq, Eq)]
+    #[serde(rename_all = <span class="string">&quot;camelCase&quot;</span>)]
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>AuthenticateBody {
+        <span class="kw">pub </span>agent: AuthenticateAgent,
+        <span class="kw">pub </span>username: String,
+        <span class="kw">pub </span>password: String,
+        <span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;String::is_empty&quot;</span>)]
+        </span><span class="kw">pub </span>client_token: String,
+        <span class="kw">pub </span>request_user: bool,
     }
 
-    <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">AuthenticateBody</span> {
-        <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-            <span class="self">Self</span> {
-                <span class="ident">request_user</span>: <span class="bool-val">true</span>,
-                <span class="ident">username</span>: <span class="string">&quot;&quot;</span>.<span class="ident">into</span>(),
-                <span class="ident">password</span>: <span class="string">&quot;&quot;</span>.<span class="ident">into</span>(),
-                <span class="ident">client_token</span>: <span class="string">&quot;&quot;</span>.<span class="ident">into</span>(),
-                <span class="ident">agent</span>: <span class="ident">Default::default</span>(),
+    <span class="kw">impl </span>Default <span class="kw">for </span>AuthenticateBody {
+        <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+            <span class="self">Self </span>{
+                request_user: <span class="bool-val">true</span>,
+                username: <span class="string">&quot;&quot;</span>.into(),
+                password: <span class="string">&quot;&quot;</span>.into(),
+                client_token: <span class="string">&quot;&quot;</span>.into(),
+                agent: Default::default(),
             }
         }
     }
 
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>, <span class="ident">Serialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">AuthenticateAgent</span> {
-        <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">String</span>,
-        <span class="kw">pub</span> <span class="ident">version</span>: <span class="ident">usize</span>,
+    <span class="attribute">#[derive(Debug, Deserialize, Serialize, PartialEq, Eq)]
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>AuthenticateAgent {
+        <span class="kw">pub </span>name: String,
+        <span class="kw">pub </span>version: usize,
     }
 
-    <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">AuthenticateAgent</span> {
-        <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-            <span class="self">Self</span> {
-                <span class="ident">name</span>: <span class="string">&quot;Minecraft&quot;</span>.<span class="ident">into</span>(),
-                <span class="ident">version</span>: <span class="number">1</span>,
+    <span class="kw">impl </span>Default <span class="kw">for </span>AuthenticateAgent {
+        <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+            <span class="self">Self </span>{
+                name: <span class="string">&quot;Minecraft&quot;</span>.into(),
+                version: <span class="number">1</span>,
             }
         }
     }
 
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename_all</span> <span class="op">=</span> <span class="string">&quot;camelCase&quot;</span>)]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">AuthenticateResponse</span> {
-        <span class="kw">pub</span> <span class="ident">access_token</span>: <span class="ident">String</span>,
-        <span class="kw">pub</span> <span class="ident">client_token</span>: <span class="ident">String</span>,
-        <span class="kw">pub</span> <span class="ident">available_profiles</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">AvaliableProfile</span><span class="op">&gt;</span>,
-        <span class="kw">pub</span> <span class="ident">selected_profile</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">AvaliableProfile</span><span class="op">&gt;</span>,
+    <span class="attribute">#[derive(Debug, Deserialize, PartialEq, Eq)]
+    #[serde(rename_all = <span class="string">&quot;camelCase&quot;</span>)]
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>AuthenticateResponse {
+        <span class="kw">pub </span>access_token: String,
+        <span class="kw">pub </span>client_token: String,
+        <span class="kw">pub </span>available_profiles: Vec&lt;AvaliableProfile&gt;,
+        <span class="kw">pub </span>selected_profile: <span class="prelude-ty">Option</span>&lt;AvaliableProfile&gt;,
     }
 
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename_all</span> <span class="op">=</span> <span class="string">&quot;camelCase&quot;</span>)]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">ValidateResponse</span> {
-        <span class="kw">pub</span> <span class="ident">access_token</span>: <span class="ident">String</span>,
-        <span class="kw">pub</span> <span class="ident">client_token</span>: <span class="ident">String</span>,
+    <span class="attribute">#[derive(Debug, Serialize, PartialEq, Eq)]
+    #[serde(rename_all = <span class="string">&quot;camelCase&quot;</span>)]
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>ValidateResponse {
+        <span class="kw">pub </span>access_token: String,
+        <span class="kw">pub </span>client_token: String,
     }
 
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>, <span class="ident">Serialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">AvaliableProfile</span> {
-        <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">String</span>,
-        <span class="kw">pub</span> <span class="ident">id</span>: <span class="ident">String</span>,
+    <span class="attribute">#[derive(Debug, Deserialize, Serialize, PartialEq, Eq)]
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>AvaliableProfile {
+        <span class="kw">pub </span>name: String,
+        <span class="kw">pub </span>id: String,
     }
 
-    <span class="doccomment">/// 来自 Mojang 或第三方正版登录传回的错误响应</span>
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename_all</span> <span class="op">=</span> <span class="string">&quot;camelCase&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ErrorResponse</span> {
-        <span class="doccomment">/// 错误的字符串 ID</span>
-        <span class="kw">pub</span> <span class="ident">error</span>: <span class="ident">String</span>,
-        <span class="doccomment">/// 错误的字符串信息，可以展示给用户以确认错误原因</span>
-        <span class="kw">pub</span> <span class="ident">error_message</span>: <span class="ident">String</span>,
-        <span class="doccomment">/// 错误的形成原因，大多数情况这里是空的</span>
-        <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
-        <span class="kw">pub</span> <span class="ident">cause</span>: <span class="ident">String</span>,
+    <span class="doccomment">/// 来自 Mojang 或第三方正版登录传回的错误响应
+    </span><span class="attribute">#[derive(Debug, Deserialize, PartialEq, Eq, Clone, Default)]
+    #[serde(rename_all = <span class="string">&quot;camelCase&quot;</span>)]
+    </span><span class="kw">pub struct </span>ErrorResponse {
+        <span class="doccomment">/// 错误的字符串 ID
+        </span><span class="kw">pub </span>error: String,
+        <span class="doccomment">/// 错误的字符串信息，可以展示给用户以确认错误原因
+        </span><span class="kw">pub </span>error_message: String,
+        <span class="doccomment">/// 错误的形成原因，大多数情况这里是空的
+        </span><span class="attribute">#[serde(default)]
+        </span><span class="kw">pub </span>cause: String,
     }
 
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Clone</span>)]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">ProfileResponse</span> {
-        <span class="kw">pub</span> <span class="ident">id</span>: <span class="ident">String</span>,
-        <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">String</span>,
-        <span class="kw">pub</span> <span class="ident">properties</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ProfilePropertie</span><span class="op">&gt;</span>,
+    <span class="attribute">#[derive(Debug, Deserialize, PartialEq, Eq, Clone)]
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>ProfileResponse {
+        <span class="kw">pub </span>id: String,
+        <span class="kw">pub </span>name: String,
+        <span class="kw">pub </span>properties: Vec&lt;ProfilePropertie&gt;,
     }
 
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Clone</span>)]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">ProfilePropertie</span> {
-        <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">String</span>,
-        <span class="kw">pub</span> <span class="ident">value</span>: <span class="ident">String</span>,
+    <span class="attribute">#[derive(Debug, Deserialize, PartialEq, Eq, Clone)]
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>ProfilePropertie {
+        <span class="kw">pub </span>name: String,
+        <span class="kw">pub </span>value: String,
     }
 
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Clone</span>)]</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename_all</span> <span class="op">=</span> <span class="string">&quot;camelCase&quot;</span>)]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">ProfileTexture</span> {
-        <span class="kw">pub</span> <span class="ident">timestamp</span>: <span class="ident">u64</span>,
-        <span class="kw">pub</span> <span class="ident">profile_id</span>: <span class="ident">String</span>,
-        <span class="kw">pub</span> <span class="ident">profile_name</span>: <span class="ident">String</span>,
-        <span class="kw">pub</span> <span class="ident">textures</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">TextureData</span><span class="op">&gt;</span>,
+    <span class="attribute">#[derive(Debug, Deserialize, PartialEq, Eq, Clone)]
+    #[serde(rename_all = <span class="string">&quot;camelCase&quot;</span>)]
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>ProfileTexture {
+        <span class="kw">pub </span>timestamp: u64,
+        <span class="kw">pub </span>profile_id: String,
+        <span class="kw">pub </span>profile_name: String,
+        <span class="kw">pub </span>textures: <span class="prelude-ty">Option</span>&lt;TextureData&gt;,
     }
 
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Clone</span>)]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">TextureData</span> {
-        <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;SKIN&quot;</span>)]</span>
-        <span class="kw">pub</span> <span class="ident">skin</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SkinData</span><span class="op">&gt;</span>,
-        <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;CAPE&quot;</span>)]</span>
-        <span class="kw">pub</span> <span class="ident">cape</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SkinData</span><span class="op">&gt;</span>,
+    <span class="attribute">#[derive(Debug, Deserialize, PartialEq, Eq, Clone)]
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>TextureData {
+        <span class="attribute">#[serde(rename = <span class="string">&quot;SKIN&quot;</span>)]
+        </span><span class="kw">pub </span>skin: <span class="prelude-ty">Option</span>&lt;SkinData&gt;,
+        <span class="attribute">#[serde(rename = <span class="string">&quot;CAPE&quot;</span>)]
+        </span><span class="kw">pub </span>cape: <span class="prelude-ty">Option</span>&lt;SkinData&gt;,
     }
 
-    <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Clone</span>)]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">SkinData</span> {
-        <span class="kw">pub</span> <span class="ident">url</span>: <span class="ident">String</span>,
+    <span class="attribute">#[derive(Debug, Deserialize, PartialEq, Eq, Clone)]
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>SkinData {
+        <span class="kw">pub </span>url: String,
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

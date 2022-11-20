@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/menu_item.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>menu_item.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/menu_item.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>menu_item.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -348,226 +348,226 @@
 <span id="348">348</span>
 <span id="349">349</span>
 <span id="350">350</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">druid</span>::{
-    <span class="ident">kurbo</span>::{<span class="ident">BezPath</span>, <span class="ident">RoundedRect</span>},
-    <span class="ident">piet</span>::{<span class="ident">PaintBrush</span>, <span class="ident">PietTextLayout</span>, <span class="ident">StrokeStyle</span>, <span class="ident">Text</span>, <span class="ident">TextLayoutBuilder</span>},
-    <span class="ident">widget</span>::{<span class="ident">Label</span>, <span class="ident">LabelText</span>},
-    <span class="ident">Color</span>, <span class="ident">Data</span>, <span class="ident">RenderContext</span>, <span class="ident">Widget</span>, <span class="ident">WidgetPod</span>,
+</pre><pre class="rust"><code><span class="kw">use </span>druid::{
+    kurbo::{BezPath, RoundedRect},
+    piet::{PaintBrush, PietTextLayout, StrokeStyle, Text, TextLayoutBuilder},
+    widget::{Label, LabelText},
+    Color, Data, RenderContext, Widget, WidgetPod,
 };
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::widgets::label</span>;
+<span class="kw">use </span><span class="kw">crate</span>::widgets::label;
 
-<span class="doccomment">/// 一个左侧显示内容，右侧显示勾选框或文本内容的组件</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 如果数据源是 [`bool`] 类型的话，组件右侧会变成勾选框，且在没有被禁用的情况下可以开关并更新数据</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 如果数据源是 [`String`] 类型的话，组件右侧会变成普通文本并显示数据的文本</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">MenuItem</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span> {
-    <span class="ident">title</span>: <span class="ident">WidgetPod</span><span class="op">&lt;</span><span class="ident">D</span>, <span class="ident">Label</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="ident">desc_text</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PietTextLayout</span><span class="op">&gt;</span>,
+<span class="doccomment">/// 一个左侧显示内容，右侧显示勾选框或文本内容的组件
+///
+/// 如果数据源是 [`bool`] 类型的话，组件右侧会变成勾选框，且在没有被禁用的情况下可以开关并更新数据
+///
+/// 如果数据源是 [`String`] 类型的话，组件右侧会变成普通文本并显示数据的文本
+</span><span class="kw">pub struct </span>MenuItem&lt;D&gt; {
+    title: WidgetPod&lt;D, Label&lt;D&gt;&gt;,
+    desc_text: <span class="prelude-ty">Option</span>&lt;PietTextLayout&gt;,
 }
 
-<span class="kw">const</span> <span class="ident">LEFT_RIGHT_PADDING</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="number">5.</span>;
+<span class="kw">const </span>LEFT_RIGHT_PADDING: f64 = <span class="number">5.</span>;
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">D</span>: <span class="ident">Data</span><span class="op">&gt;</span> <span class="ident">MenuItem</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// 以左侧标签文本为参数创建此组件</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">title</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">LabelText</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">MenuItem</span> {
-            <span class="ident">title</span>: <span class="ident">WidgetPod::new</span>(<span class="ident">label::new</span>(<span class="ident">title</span>)),
-            <span class="ident">desc_text</span>: <span class="prelude-val">None</span>,
+<span class="kw">impl</span>&lt;D: Data&gt; MenuItem&lt;D&gt; {
+    <span class="doccomment">/// 以左侧标签文本为参数创建此组件
+    </span><span class="kw">pub fn </span>new(title: <span class="kw">impl </span>Into&lt;LabelText&lt;D&gt;&gt;) -&gt; <span class="self">Self </span>{
+        MenuItem {
+            title: WidgetPod::new(label::new(title)),
+            desc_text: <span class="prelude-val">None</span>,
         }
     }
 }
 
-<span class="doccomment">/// 默认实现：右侧是一个箭头</span>
-<span class="kw">impl</span> <span class="ident">Widget</span><span class="op">&lt;</span>()<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">MenuItem</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">event</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">_ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::EventCtx</span>,
-        <span class="ident">_event</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Event</span>,
-        <span class="ident">_data</span>: <span class="kw-2">&amp;mut</span> (),
-        <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>,
+<span class="doccomment">/// 默认实现：右侧是一个箭头
+</span><span class="kw">impl </span>Widget&lt;()&gt; <span class="kw">for </span>MenuItem&lt;()&gt; {
+    <span class="kw">fn </span>event(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        _ctx: <span class="kw-2">&amp;mut </span>druid::EventCtx,
+        _event: <span class="kw-2">&amp;</span>druid::Event,
+        _data: <span class="kw-2">&amp;mut </span>(),
+        _env: <span class="kw-2">&amp;</span>druid::Env,
     ) {
         <span class="macro">todo!</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">lifecycle</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">_ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::LifeCycleCtx</span>,
-        <span class="ident">_event</span>: <span class="kw-2">&amp;</span><span class="ident">druid::LifeCycle</span>,
-        <span class="ident">_data</span>: <span class="kw-2">&amp;</span>(),
-        <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>,
+    <span class="kw">fn </span>lifecycle(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        _ctx: <span class="kw-2">&amp;mut </span>druid::LifeCycleCtx,
+        _event: <span class="kw-2">&amp;</span>druid::LifeCycle,
+        _data: <span class="kw-2">&amp;</span>(),
+        _env: <span class="kw-2">&amp;</span>druid::Env,
     ) {
         <span class="macro">todo!</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">update</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">_ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::UpdateCtx</span>,
-        <span class="ident">_old_data</span>: <span class="kw-2">&amp;</span>(),
-        <span class="ident">_data</span>: <span class="kw-2">&amp;</span>(),
-        <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>,
+    <span class="kw">fn </span>update(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        _ctx: <span class="kw-2">&amp;mut </span>druid::UpdateCtx,
+        _old_data: <span class="kw-2">&amp;</span>(),
+        _data: <span class="kw-2">&amp;</span>(),
+        _env: <span class="kw-2">&amp;</span>druid::Env,
     ) {
         <span class="macro">todo!</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">layout</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">_ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::LayoutCtx</span>,
-        <span class="ident">_bc</span>: <span class="kw-2">&amp;</span><span class="ident">druid::BoxConstraints</span>,
-        <span class="ident">_data</span>: <span class="kw-2">&amp;</span>(),
-        <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>,
-    ) -&gt; <span class="ident">druid::Size</span> {
+    <span class="kw">fn </span>layout(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        _ctx: <span class="kw-2">&amp;mut </span>druid::LayoutCtx,
+        _bc: <span class="kw-2">&amp;</span>druid::BoxConstraints,
+        _data: <span class="kw-2">&amp;</span>(),
+        _env: <span class="kw-2">&amp;</span>druid::Env,
+    ) -&gt; druid::Size {
         <span class="macro">todo!</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">paint</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">_ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::PaintCtx</span>, <span class="ident">_data</span>: <span class="kw-2">&amp;</span>(), <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>) {
+    <span class="kw">fn </span>paint(<span class="kw-2">&amp;mut </span><span class="self">self</span>, _ctx: <span class="kw-2">&amp;mut </span>druid::PaintCtx, _data: <span class="kw-2">&amp;</span>(), _env: <span class="kw-2">&amp;</span>druid::Env) {
         <span class="macro">todo!</span>()
     }
 }
 
-<span class="doccomment">/// 如果传入的是布尔值，则右侧显示为勾选框</span>
-<span class="kw">impl</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">MenuItem</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">event</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::EventCtx</span>,
-        <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Event</span>,
-        <span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="ident">bool</span>,
-        <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>,
+<span class="doccomment">/// 如果传入的是布尔值，则右侧显示为勾选框
+</span><span class="kw">impl </span>Widget&lt;bool&gt; <span class="kw">for </span>MenuItem&lt;bool&gt; {
+    <span class="kw">fn </span>event(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        ctx: <span class="kw-2">&amp;mut </span>druid::EventCtx,
+        event: <span class="kw-2">&amp;</span>druid::Event,
+        data: <span class="kw-2">&amp;mut </span>bool,
+        env: <span class="kw-2">&amp;</span>druid::Env,
     ) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">druid::Event::MouseDown</span>(<span class="ident">e</span>) <span class="op">=</span> <span class="ident">event</span> {
-            <span class="kw">if</span> <span class="ident">e</span>.<span class="ident">buttons</span>.<span class="ident">contains</span>(<span class="ident">druid::MouseButton::Left</span>) <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">ctx</span>.<span class="ident">is_disabled</span>() {
-                <span class="kw-2">*</span><span class="ident">data</span> <span class="op">=</span> <span class="op">!</span><span class="kw-2">*</span><span class="ident">data</span>;
-                <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+        <span class="kw">if let </span>druid::Event::MouseDown(e) = event {
+            <span class="kw">if </span>e.buttons.contains(druid::MouseButton::Left) &amp;&amp; !ctx.is_disabled() {
+                <span class="kw-2">*</span>data = !<span class="kw-2">*</span>data;
+                ctx.request_paint();
             }
         }
-        <span class="self">self</span>.<span class="ident">title</span>.<span class="ident">event</span>(<span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>);
+        <span class="self">self</span>.title.event(ctx, event, data, env);
     }
 
-    <span class="kw">fn</span> <span class="ident">lifecycle</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::LifeCycleCtx</span>,
-        <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">druid::LifeCycle</span>,
-        <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">bool</span>,
-        <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>,
+    <span class="kw">fn </span>lifecycle(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        ctx: <span class="kw-2">&amp;mut </span>druid::LifeCycleCtx,
+        event: <span class="kw-2">&amp;</span>druid::LifeCycle,
+        data: <span class="kw-2">&amp;</span>bool,
+        env: <span class="kw-2">&amp;</span>druid::Env,
     ) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">druid::LifeCycle::HotChanged</span>(<span class="kw">_</span>) <span class="op">=</span> <span class="ident">event</span> {
-            <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+        <span class="kw">if let </span>druid::LifeCycle::HotChanged(<span class="kw">_</span>) = event {
+            ctx.request_paint();
         }
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">druid::LifeCycle::FocusChanged</span>(<span class="kw">_</span>) <span class="op">=</span> <span class="ident">event</span> {
-            <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+        <span class="kw">if let </span>druid::LifeCycle::FocusChanged(<span class="kw">_</span>) = event {
+            ctx.request_paint();
         }
-        <span class="self">self</span>.<span class="ident">title</span>.<span class="ident">lifecycle</span>(<span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>);
+        <span class="self">self</span>.title.lifecycle(ctx, event, data, env);
     }
 
-    <span class="kw">fn</span> <span class="ident">update</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::UpdateCtx</span>,
-        <span class="ident">_old_data</span>: <span class="kw-2">&amp;</span><span class="ident">bool</span>,
-        <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">bool</span>,
-        <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>,
+    <span class="kw">fn </span>update(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        ctx: <span class="kw-2">&amp;mut </span>druid::UpdateCtx,
+        _old_data: <span class="kw-2">&amp;</span>bool,
+        data: <span class="kw-2">&amp;</span>bool,
+        env: <span class="kw-2">&amp;</span>druid::Env,
     ) {
-        <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">env_key_changed</span>(<span class="kw-2">&amp;</span><span class="ident"><span class="kw">crate</span>::theme::color::base::LOW</span>)
-            <span class="op">|</span><span class="op">|</span> <span class="ident">ctx</span>.<span class="ident">env_key_changed</span>(<span class="kw-2">&amp;</span><span class="ident"><span class="kw">crate</span>::theme::color::list::LIST_LOW</span>)
+        <span class="kw">if </span>ctx.env_key_changed(<span class="kw-2">&amp;</span><span class="kw">crate</span>::theme::color::base::LOW)
+            || ctx.env_key_changed(<span class="kw-2">&amp;</span><span class="kw">crate</span>::theme::color::list::LIST_LOW)
         {
-            <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+            ctx.request_paint();
         }
-        <span class="self">self</span>.<span class="ident">title</span>.<span class="ident">update</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>);
+        <span class="self">self</span>.title.update(ctx, data, env);
     }
 
-    <span class="kw">fn</span> <span class="ident">layout</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::LayoutCtx</span>,
-        <span class="ident">bc</span>: <span class="kw-2">&amp;</span><span class="ident">druid::BoxConstraints</span>,
-        <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">bool</span>,
-        <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>,
-    ) -&gt; <span class="ident">druid::Size</span> {
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">title</span>.<span class="ident">layout</span>(<span class="ident">ctx</span>, <span class="ident">bc</span>, <span class="ident">data</span>, <span class="ident">env</span>);
-        <span class="self">self</span>.<span class="ident">title</span>
-            .<span class="ident">set_origin</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>, (<span class="number">8.</span> <span class="op">+</span> <span class="ident">LEFT_RIGHT_PADDING</span>, <span class="number">7.</span>).<span class="ident">into</span>());
-        <span class="ident">bc</span>.<span class="ident">constrain</span>((<span class="number">100.</span>, <span class="number">32.</span>))
+    <span class="kw">fn </span>layout(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        ctx: <span class="kw-2">&amp;mut </span>druid::LayoutCtx,
+        bc: <span class="kw-2">&amp;</span>druid::BoxConstraints,
+        data: <span class="kw-2">&amp;</span>bool,
+        env: <span class="kw-2">&amp;</span>druid::Env,
+    ) -&gt; druid::Size {
+        <span class="kw">let _ </span>= <span class="self">self</span>.title.layout(ctx, bc, data, env);
+        <span class="self">self</span>.title
+            .set_origin(ctx, data, env, (<span class="number">8. </span>+ LEFT_RIGHT_PADDING, <span class="number">7.</span>).into());
+        bc.constrain((<span class="number">100.</span>, <span class="number">32.</span>))
     }
 
-    <span class="kw">fn</span> <span class="ident">paint</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::PaintCtx</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">bool</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>) {
-        <span class="kw">let</span> <span class="ident">is_active</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">is_active</span>();
-        <span class="kw">let</span> <span class="ident">is_disabled</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">is_disabled</span>();
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">size</span>().<span class="ident">to_rect</span>();
+    <span class="kw">fn </span>paint(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>druid::PaintCtx, data: <span class="kw-2">&amp;</span>bool, env: <span class="kw-2">&amp;</span>druid::Env) {
+        <span class="kw">let </span>is_active = ctx.is_active();
+        <span class="kw">let </span>is_disabled = ctx.is_disabled();
+        <span class="kw">let </span>r = ctx.size().to_rect();
 
-        <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_hot</span>() <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">is_disabled</span> {
-            <span class="ident">ctx</span>.<span class="ident">fill</span>(
-                <span class="kw-2">&amp;</span><span class="ident">r</span>,
-                <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="kw">if</span> <span class="ident">is_active</span> {
-                    <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::base::LOW</span>)
-                } <span class="kw">else</span> {
-                    <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::list::LIST_LOW</span>)
+        <span class="kw">if </span>ctx.is_hot() &amp;&amp; !is_disabled {
+            ctx.fill(
+                <span class="kw-2">&amp;</span>r,
+                <span class="kw-2">&amp;</span>PaintBrush::Color(<span class="kw">if </span>is_active {
+                    env.get(<span class="kw">crate</span>::theme::color::base::LOW)
+                } <span class="kw">else </span>{
+                    env.get(<span class="kw">crate</span>::theme::color::list::LIST_LOW)
                 }),
             );
         }
 
-        <span class="self">self</span>.<span class="ident">title</span>.<span class="ident">paint</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>);
+        <span class="self">self</span>.title.paint(ctx, data, env);
 
-        <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">data</span> {
-            <span class="kw">let</span> <span class="ident">rr</span> <span class="op">=</span> <span class="ident">RoundedRect::from_origin_size</span>(
-                (<span class="ident">r</span>.<span class="ident">width</span>() <span class="op">-</span> <span class="number">32.</span> <span class="op">-</span> <span class="ident">LEFT_RIGHT_PADDING</span> <span class="op">+</span> <span class="number">6.5</span>, <span class="number">6.5</span>),
+        <span class="kw">if </span><span class="kw-2">*</span>data {
+            <span class="kw">let </span>rr = RoundedRect::from_origin_size(
+                (r.width() - <span class="number">32. </span>- LEFT_RIGHT_PADDING + <span class="number">6.5</span>, <span class="number">6.5</span>),
                 (<span class="number">19.</span>, <span class="number">19.</span>),
                 <span class="number">3.5</span>,
             );
-            <span class="comment">// ctx.is_disabled() 21.69%</span>
-            <span class="ident">ctx</span>.<span class="ident">stroke</span>(
-                <span class="kw-2">&amp;</span><span class="ident">rr</span>,
-                <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::main::SECONDARY</span>)),
+            <span class="comment">// ctx.is_disabled() 21.69%
+            </span>ctx.stroke(
+                <span class="kw-2">&amp;</span>rr,
+                <span class="kw-2">&amp;</span>PaintBrush::Color(env.get(<span class="kw">crate</span>::theme::color::main::SECONDARY)),
                 <span class="number">1.</span>,
             );
-            <span class="kw">let</span> <span class="ident">rr</span> <span class="op">=</span> <span class="ident">RoundedRect::from_origin_size</span>(
-                (<span class="ident">r</span>.<span class="ident">width</span>() <span class="op">-</span> <span class="number">32.</span> <span class="op">-</span> <span class="ident">LEFT_RIGHT_PADDING</span> <span class="op">+</span> <span class="number">7.</span>, <span class="number">7.</span>),
+            <span class="kw">let </span>rr = RoundedRect::from_origin_size(
+                (r.width() - <span class="number">32. </span>- LEFT_RIGHT_PADDING + <span class="number">7.</span>, <span class="number">7.</span>),
                 (<span class="number">18.</span>, <span class="number">18.</span>),
                 <span class="number">3.</span>,
             );
-            <span class="ident">ctx</span>.<span class="ident">fill</span>(
-                <span class="kw-2">&amp;</span><span class="ident">rr</span>,
-                <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::main::PRIMARY</span>)),
+            ctx.fill(
+                <span class="kw-2">&amp;</span>rr,
+                <span class="kw-2">&amp;</span>PaintBrush::Color(env.get(<span class="kw">crate</span>::theme::color::main::PRIMARY)),
             );
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">check_path</span> <span class="op">=</span> <span class="ident">BezPath::new</span>();
-            <span class="ident">check_path</span>.<span class="ident">move_to</span>((<span class="ident">r</span>.<span class="ident">width</span>() <span class="op">-</span> <span class="number">32.</span> <span class="op">-</span> <span class="ident">LEFT_RIGHT_PADDING</span> <span class="op">+</span> <span class="number">11.5</span>, <span class="number">16.5</span>));
-            <span class="ident">check_path</span>.<span class="ident">line_to</span>((<span class="ident">r</span>.<span class="ident">width</span>() <span class="op">-</span> <span class="number">32.</span> <span class="op">-</span> <span class="ident">LEFT_RIGHT_PADDING</span> <span class="op">+</span> <span class="number">14.5</span>, <span class="number">19.5</span>));
-            <span class="ident">check_path</span>.<span class="ident">line_to</span>((<span class="ident">r</span>.<span class="ident">width</span>() <span class="op">-</span> <span class="number">32.</span> <span class="op">-</span> <span class="ident">LEFT_RIGHT_PADDING</span> <span class="op">+</span> <span class="number">20.5</span>, <span class="number">13.5</span>));
-            <span class="ident">ctx</span>.<span class="ident">stroke_styled</span>(
-                <span class="kw-2">&amp;</span><span class="ident">check_path</span>,
-                <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">Color::WHITE</span>),
+            <span class="kw">let </span><span class="kw-2">mut </span>check_path = BezPath::new();
+            check_path.move_to((r.width() - <span class="number">32. </span>- LEFT_RIGHT_PADDING + <span class="number">11.5</span>, <span class="number">16.5</span>));
+            check_path.line_to((r.width() - <span class="number">32. </span>- LEFT_RIGHT_PADDING + <span class="number">14.5</span>, <span class="number">19.5</span>));
+            check_path.line_to((r.width() - <span class="number">32. </span>- LEFT_RIGHT_PADDING + <span class="number">20.5</span>, <span class="number">13.5</span>));
+            ctx.stroke_styled(
+                <span class="kw-2">&amp;</span>check_path,
+                <span class="kw-2">&amp;</span>PaintBrush::Color(Color::WHITE),
                 <span class="number">1.</span>,
-                <span class="kw-2">&amp;</span><span class="ident">StrokeStyle</span> {
-                    <span class="ident">line_join</span>: <span class="ident">druid::piet::LineJoin::Round</span>,
-                    <span class="ident">line_cap</span>: <span class="ident">druid::piet::LineCap::Round</span>,
-                    ..<span class="ident">Default::default</span>()
+                <span class="kw-2">&amp;</span>StrokeStyle {
+                    line_join: druid::piet::LineJoin::Round,
+                    line_cap: druid::piet::LineCap::Round,
+                    ..Default::default()
                 },
             );
-        } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="ident">srr</span> <span class="op">=</span> <span class="ident">RoundedRect::from_origin_size</span>(
-                (<span class="ident">r</span>.<span class="ident">width</span>() <span class="op">-</span> <span class="number">32.</span> <span class="op">-</span> <span class="ident">LEFT_RIGHT_PADDING</span> <span class="op">+</span> <span class="number">6.5</span>, <span class="number">6.5</span>),
+        } <span class="kw">else </span>{
+            <span class="kw">let </span>srr = RoundedRect::from_origin_size(
+                (r.width() - <span class="number">32. </span>- LEFT_RIGHT_PADDING + <span class="number">6.5</span>, <span class="number">6.5</span>),
                 (<span class="number">19.</span>, <span class="number">19.</span>),
                 <span class="number">3.</span>,
             );
-            <span class="kw">let</span> <span class="ident">frr</span> <span class="op">=</span> <span class="ident">RoundedRect::from_origin_size</span>(
-                (<span class="ident">r</span>.<span class="ident">width</span>() <span class="op">-</span> <span class="number">32.</span> <span class="op">-</span> <span class="ident">LEFT_RIGHT_PADDING</span> <span class="op">+</span> <span class="number">7.</span>, <span class="number">7.</span>),
+            <span class="kw">let </span>frr = RoundedRect::from_origin_size(
+                (r.width() - <span class="number">32. </span>- LEFT_RIGHT_PADDING + <span class="number">7.</span>, <span class="number">7.</span>),
                 (<span class="number">18.</span>, <span class="number">18.</span>),
                 <span class="number">3.</span>,
             );
-            <span class="kw">if</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::main::IS_DARK</span>) {
-                <span class="ident">ctx</span>.<span class="ident">stroke</span>(
-                    <span class="kw-2">&amp;</span><span class="ident">srr</span>,
-                    <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">Color::WHITE</span>.<span class="ident">with_alpha</span>(<span class="number">0.5442</span>)),
+            <span class="kw">if </span>env.get(<span class="kw">crate</span>::theme::color::main::IS_DARK) {
+                ctx.stroke(
+                    <span class="kw-2">&amp;</span>srr,
+                    <span class="kw-2">&amp;</span>PaintBrush::Color(Color::WHITE.with_alpha(<span class="number">0.5442</span>)),
                     <span class="number">1.</span>,
                 );
-                <span class="ident">ctx</span>.<span class="ident">stroke</span>(<span class="kw-2">&amp;</span><span class="ident">frr</span>, <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">Color::BLACK</span>.<span class="ident">with_alpha</span>(<span class="number">0.1</span>)), <span class="number">1.</span>);
-            } <span class="kw">else</span> {
-                <span class="ident">ctx</span>.<span class="ident">stroke</span>(
-                    <span class="kw-2">&amp;</span><span class="ident">srr</span>,
-                    <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">Color::BLACK</span>.<span class="ident">with_alpha</span>(<span class="number">0.4458</span>)),
+                ctx.stroke(<span class="kw-2">&amp;</span>frr, <span class="kw-2">&amp;</span>PaintBrush::Color(Color::BLACK.with_alpha(<span class="number">0.1</span>)), <span class="number">1.</span>);
+            } <span class="kw">else </span>{
+                ctx.stroke(
+                    <span class="kw-2">&amp;</span>srr,
+                    <span class="kw-2">&amp;</span>PaintBrush::Color(Color::BLACK.with_alpha(<span class="number">0.4458</span>)),
                     <span class="number">1.</span>,
                 );
-                <span class="ident">ctx</span>.<span class="ident">stroke</span>(
-                    <span class="kw-2">&amp;</span><span class="ident">frr</span>,
-                    <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">Color::BLACK</span>.<span class="ident">with_alpha</span>(<span class="number">0.4458</span>)),
+                ctx.stroke(
+                    <span class="kw-2">&amp;</span>frr,
+                    <span class="kw-2">&amp;</span>PaintBrush::Color(Color::BLACK.with_alpha(<span class="number">0.4458</span>)),
                     <span class="number">1.</span>,
                 );
             }
@@ -575,128 +575,128 @@
     }
 }
 
-<span class="doccomment">/// 如果传入的是字符串，则右侧显示其为副标签</span>
-<span class="kw">impl</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">MenuItem</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">event</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::EventCtx</span>,
-        <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Event</span>,
-        <span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="ident">String</span>,
-        <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>,
+<span class="doccomment">/// 如果传入的是字符串，则右侧显示其为副标签
+</span><span class="kw">impl </span>Widget&lt;String&gt; <span class="kw">for </span>MenuItem&lt;String&gt; {
+    <span class="kw">fn </span>event(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        ctx: <span class="kw-2">&amp;mut </span>druid::EventCtx,
+        event: <span class="kw-2">&amp;</span>druid::Event,
+        data: <span class="kw-2">&amp;mut </span>String,
+        env: <span class="kw-2">&amp;</span>druid::Env,
     ) {
-        <span class="self">self</span>.<span class="ident">title</span>.<span class="ident">event</span>(<span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>);
+        <span class="self">self</span>.title.event(ctx, event, data, env);
     }
 
-    <span class="kw">fn</span> <span class="ident">lifecycle</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::LifeCycleCtx</span>,
-        <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">druid::LifeCycle</span>,
-        <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">String</span>,
-        <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>,
+    <span class="kw">fn </span>lifecycle(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        ctx: <span class="kw-2">&amp;mut </span>druid::LifeCycleCtx,
+        event: <span class="kw-2">&amp;</span>druid::LifeCycle,
+        data: <span class="kw-2">&amp;</span>String,
+        env: <span class="kw-2">&amp;</span>druid::Env,
     ) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">druid::LifeCycle::HotChanged</span>(<span class="kw">_</span>) <span class="op">=</span> <span class="ident">event</span> {
-            <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+        <span class="kw">if let </span>druid::LifeCycle::HotChanged(<span class="kw">_</span>) = event {
+            ctx.request_paint();
         }
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">druid::LifeCycle::FocusChanged</span>(<span class="kw">_</span>) <span class="op">=</span> <span class="ident">event</span> {
-            <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+        <span class="kw">if let </span>druid::LifeCycle::FocusChanged(<span class="kw">_</span>) = event {
+            ctx.request_paint();
         }
-        <span class="self">self</span>.<span class="ident">title</span>.<span class="ident">lifecycle</span>(<span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>);
+        <span class="self">self</span>.title.lifecycle(ctx, event, data, env);
     }
 
-    <span class="kw">fn</span> <span class="ident">update</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::UpdateCtx</span>,
-        <span class="ident">old_data</span>: <span class="kw-2">&amp;</span><span class="ident">String</span>,
-        <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">String</span>,
-        <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>,
+    <span class="kw">fn </span>update(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        ctx: <span class="kw-2">&amp;mut </span>druid::UpdateCtx,
+        old_data: <span class="kw-2">&amp;</span>String,
+        data: <span class="kw-2">&amp;</span>String,
+        env: <span class="kw-2">&amp;</span>druid::Env,
     ) {
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">old_data</span>.<span class="ident">same</span>(<span class="ident">data</span>) {
-            <span class="self">self</span>.<span class="ident">desc_text</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-            <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+        <span class="kw">if </span>!old_data.same(data) {
+            <span class="self">self</span>.desc_text = <span class="prelude-val">None</span>;
+            ctx.request_paint();
         }
-        <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">env_key_changed</span>(<span class="kw-2">&amp;</span><span class="ident"><span class="kw">crate</span>::theme::color::base::MEDIUM</span>)
-            <span class="op">|</span><span class="op">|</span> <span class="ident">ctx</span>.<span class="ident">env_key_changed</span>(<span class="kw-2">&amp;</span><span class="ident"><span class="kw">crate</span>::theme::color::typography::BODY</span>)
+        <span class="kw">if </span>ctx.env_key_changed(<span class="kw-2">&amp;</span><span class="kw">crate</span>::theme::color::base::MEDIUM)
+            || ctx.env_key_changed(<span class="kw-2">&amp;</span><span class="kw">crate</span>::theme::color::typography::BODY)
         {
-            <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+            ctx.request_paint();
         }
-        <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">env_key_changed</span>(<span class="kw-2">&amp;</span><span class="ident"><span class="kw">crate</span>::theme::color::base::LOW</span>)
-            <span class="op">|</span><span class="op">|</span> <span class="ident">ctx</span>.<span class="ident">env_key_changed</span>(<span class="kw-2">&amp;</span><span class="ident"><span class="kw">crate</span>::theme::color::list::LIST_LOW</span>)
+        <span class="kw">if </span>ctx.env_key_changed(<span class="kw-2">&amp;</span><span class="kw">crate</span>::theme::color::base::LOW)
+            || ctx.env_key_changed(<span class="kw-2">&amp;</span><span class="kw">crate</span>::theme::color::list::LIST_LOW)
         {
-            <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+            ctx.request_paint();
         }
-        <span class="self">self</span>.<span class="ident">title</span>.<span class="ident">update</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>);
+        <span class="self">self</span>.title.update(ctx, data, env);
     }
 
-    <span class="kw">fn</span> <span class="ident">layout</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::LayoutCtx</span>,
-        <span class="ident">bc</span>: <span class="kw-2">&amp;</span><span class="ident">druid::BoxConstraints</span>,
-        <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">String</span>,
-        <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>,
-    ) -&gt; <span class="ident">druid::Size</span> {
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">title</span>.<span class="ident">layout</span>(<span class="ident">ctx</span>, <span class="ident">bc</span>, <span class="ident">data</span>, <span class="ident">env</span>);
-        <span class="self">self</span>.<span class="ident">title</span>
-            .<span class="ident">set_origin</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>, (<span class="number">8.</span> <span class="op">+</span> <span class="ident">LEFT_RIGHT_PADDING</span>, <span class="number">7.</span>).<span class="ident">into</span>());
-        <span class="self">self</span>.<span class="ident">desc_text</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-        <span class="ident">bc</span>.<span class="ident">constrain</span>((<span class="number">100.</span>, <span class="number">32.</span>))
+    <span class="kw">fn </span>layout(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        ctx: <span class="kw-2">&amp;mut </span>druid::LayoutCtx,
+        bc: <span class="kw-2">&amp;</span>druid::BoxConstraints,
+        data: <span class="kw-2">&amp;</span>String,
+        env: <span class="kw-2">&amp;</span>druid::Env,
+    ) -&gt; druid::Size {
+        <span class="kw">let _ </span>= <span class="self">self</span>.title.layout(ctx, bc, data, env);
+        <span class="self">self</span>.title
+            .set_origin(ctx, data, env, (<span class="number">8. </span>+ LEFT_RIGHT_PADDING, <span class="number">7.</span>).into());
+        <span class="self">self</span>.desc_text = <span class="prelude-val">None</span>;
+        bc.constrain((<span class="number">100.</span>, <span class="number">32.</span>))
     }
 
-    <span class="kw">fn</span> <span class="ident">paint</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::PaintCtx</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">String</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>) {
-        <span class="kw">let</span> <span class="ident">is_active</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">is_active</span>();
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">size</span>().<span class="ident">to_rect</span>();
+    <span class="kw">fn </span>paint(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>druid::PaintCtx, data: <span class="kw-2">&amp;</span>String, env: <span class="kw-2">&amp;</span>druid::Env) {
+        <span class="kw">let </span>is_active = ctx.is_active();
+        <span class="kw">let </span>r = ctx.size().to_rect();
 
-        <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_hot</span>() {
-            <span class="ident">ctx</span>.<span class="ident">fill</span>(
-                <span class="kw-2">&amp;</span><span class="ident">r</span>,
-                <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="kw">if</span> <span class="ident">is_active</span> {
-                    <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::base::LOW</span>)
-                } <span class="kw">else</span> {
-                    <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::list::LIST_LOW</span>)
+        <span class="kw">if </span>ctx.is_hot() {
+            ctx.fill(
+                <span class="kw-2">&amp;</span>r,
+                <span class="kw-2">&amp;</span>PaintBrush::Color(<span class="kw">if </span>is_active {
+                    env.get(<span class="kw">crate</span>::theme::color::base::LOW)
+                } <span class="kw">else </span>{
+                    env.get(<span class="kw">crate</span>::theme::color::list::LIST_LOW)
                 }),
             );
         }
 
-        <span class="self">self</span>.<span class="ident">title</span>.<span class="ident">paint</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>);
+        <span class="self">self</span>.title.paint(ctx, data, env);
 
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">desc_text</span>.<span class="ident">is_none</span>() {
-            <span class="kw">let</span> <span class="ident">font</span> <span class="op">=</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::typography::BODY</span>);
-            <span class="self">self</span>.<span class="ident">desc_text</span> <span class="op">=</span> <span class="prelude-val">Some</span>(
-                <span class="ident">ctx</span>.<span class="ident">text</span>()
-                    .<span class="ident">new_text_layout</span>(<span class="ident">data</span>.<span class="ident">to_owned</span>())
-                    .<span class="ident">alignment</span>(<span class="ident">druid::TextAlignment::End</span>)
-                    .<span class="ident">max_width</span>(<span class="ident">r</span>.<span class="ident">width</span>() <span class="op">-</span> <span class="number">16.</span>)
-                    .<span class="ident">font</span>(<span class="ident">font</span>.<span class="ident">family</span>, <span class="number">13.</span>)
-                    .<span class="ident">text_color</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::base::MEDIUM</span>))
-                    .<span class="ident">build</span>()
-                    .<span class="ident">unwrap</span>(),
+        <span class="kw">if </span><span class="self">self</span>.desc_text.is_none() {
+            <span class="kw">let </span>font = env.get(<span class="kw">crate</span>::theme::color::typography::BODY);
+            <span class="self">self</span>.desc_text = <span class="prelude-val">Some</span>(
+                ctx.text()
+                    .new_text_layout(data.to_owned())
+                    .alignment(druid::TextAlignment::End)
+                    .max_width(r.width() - <span class="number">16.</span>)
+                    .font(font.family, <span class="number">13.</span>)
+                    .text_color(env.get(<span class="kw">crate</span>::theme::color::base::MEDIUM))
+                    .build()
+                    .unwrap(),
             );
         }
 
-        <span class="kw">if</span> <span class="ident">data</span>.<span class="ident">is_empty</span>() {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">check_path</span> <span class="op">=</span> <span class="ident">BezPath::new</span>();
-            <span class="ident">check_path</span>.<span class="ident">move_to</span>((<span class="ident">r</span>.<span class="ident">width</span>() <span class="op">-</span> <span class="number">32.</span> <span class="op">-</span> <span class="ident">LEFT_RIGHT_PADDING</span> <span class="op">+</span> <span class="number">14.</span>, <span class="number">13.</span>));
-            <span class="ident">check_path</span>.<span class="ident">line_to</span>((<span class="ident">r</span>.<span class="ident">width</span>() <span class="op">-</span> <span class="number">32.</span> <span class="op">-</span> <span class="ident">LEFT_RIGHT_PADDING</span> <span class="op">+</span> <span class="number">17.5</span>, <span class="number">16.5</span>));
-            <span class="ident">check_path</span>.<span class="ident">line_to</span>((<span class="ident">r</span>.<span class="ident">width</span>() <span class="op">-</span> <span class="number">32.</span> <span class="op">-</span> <span class="ident">LEFT_RIGHT_PADDING</span> <span class="op">+</span> <span class="number">14.</span>, <span class="number">20.</span>));
-            <span class="ident">ctx</span>.<span class="ident">stroke_styled</span>(
-                <span class="kw-2">&amp;</span><span class="ident">check_path</span>,
-                <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">Color::WHITE</span>),
+        <span class="kw">if </span>data.is_empty() {
+            <span class="kw">let </span><span class="kw-2">mut </span>check_path = BezPath::new();
+            check_path.move_to((r.width() - <span class="number">32. </span>- LEFT_RIGHT_PADDING + <span class="number">14.</span>, <span class="number">13.</span>));
+            check_path.line_to((r.width() - <span class="number">32. </span>- LEFT_RIGHT_PADDING + <span class="number">17.5</span>, <span class="number">16.5</span>));
+            check_path.line_to((r.width() - <span class="number">32. </span>- LEFT_RIGHT_PADDING + <span class="number">14.</span>, <span class="number">20.</span>));
+            ctx.stroke_styled(
+                <span class="kw-2">&amp;</span>check_path,
+                <span class="kw-2">&amp;</span>PaintBrush::Color(Color::WHITE),
                 <span class="number">1.</span>,
-                <span class="kw-2">&amp;</span><span class="ident">StrokeStyle</span> {
-                    <span class="ident">line_join</span>: <span class="ident">druid::piet::LineJoin::Round</span>,
-                    <span class="ident">line_cap</span>: <span class="ident">druid::piet::LineCap::Round</span>,
-                    ..<span class="ident">Default::default</span>()
+                <span class="kw-2">&amp;</span>StrokeStyle {
+                    line_join: druid::piet::LineJoin::Round,
+                    line_cap: druid::piet::LineCap::Round,
+                    ..Default::default()
                 },
             );
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">desc_text</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">desc_text</span> {
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">windows</span>)]</span>
-            <span class="ident">ctx</span>.<span class="ident">draw_text</span>(<span class="ident">desc_text</span>, (<span class="number">0.</span>, <span class="number">7.</span>));
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">windows</span>))]</span>
-            {
-                <span class="kw">use</span> <span class="ident">druid::piet::TextLayout</span>;
-                <span class="ident">ctx</span>.<span class="ident">draw_text</span>(<span class="ident">desc_text</span>, (<span class="ident">r</span>.<span class="ident">width</span>() <span class="op">-</span> <span class="number">14.</span> <span class="op">-</span> <span class="ident">desc_text</span>.<span class="ident">size</span>().<span class="ident">width</span>, <span class="number">7.</span>))
+        } <span class="kw">else if let </span><span class="prelude-val">Some</span>(desc_text) = <span class="kw-2">&amp;</span><span class="self">self</span>.desc_text {
+            <span class="attribute">#[cfg(windows)]
+            </span>ctx.draw_text(desc_text, (<span class="number">0.</span>, <span class="number">7.</span>));
+            <span class="attribute">#[cfg(not(windows))]
+            </span>{
+                <span class="kw">use </span>druid::piet::TextLayout;
+                ctx.draw_text(desc_text, (r.width() - <span class="number">14. </span>- desc_text.size().width, <span class="number">7.</span>))
             }
         }
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

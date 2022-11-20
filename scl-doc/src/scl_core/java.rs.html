@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/java.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>java.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../scl_core/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/java.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>java.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../scl_core/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -401,408 +401,408 @@
 <span id="401">401</span>
 <span id="402">402</span>
 <span id="403">403</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Java 的搜索，版本检测</span>
-<span class="kw">use</span> <span class="ident">std::path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>};
+</pre><pre class="rust"><code><span class="doccomment">//! Java 的搜索，版本检测
+</span><span class="kw">use </span>std::path::{Path, PathBuf};
 
-<span class="kw">use</span> <span class="ident">inner_future::stream::StreamExt</span>;
+<span class="kw">use </span>inner_future::stream::StreamExt;
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">prelude</span>::<span class="kw-2">*</span>, <span class="ident">utils::Arch</span>};
+<span class="kw">use crate</span>::{prelude::<span class="kw-2">*</span>, utils::Arch};
 
-<span class="doccomment">/// 一个 Java 运行时类型</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">JavaRuntime</span> {
-    <span class="ident">java_path</span>: <span class="ident">String</span>,
-    <span class="ident">java_version</span>: <span class="ident">String</span>,
-    <span class="ident">java_main_version</span>: <span class="ident">u8</span>,
-    <span class="ident">java_64bit</span>: <span class="ident">bool</span>,
-    <span class="ident">java_arch</span>: <span class="ident">Arch</span>,
+<span class="doccomment">/// 一个 Java 运行时类型
+</span><span class="kw">pub struct </span>JavaRuntime {
+    java_path: String,
+    java_version: String,
+    java_main_version: u8,
+    java_64bit: bool,
+    java_arch: Arch,
 }
 
-<span class="kw">impl</span> <span class="ident">JavaRuntime</span> {
-    <span class="doccomment">/// 通过一个指向 Java 可执行文件的路径来创建 [`JavaRuntime`]</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 在此会尝试运行这个文件并获取相关的版本信息，确认无误后返回</span>
-    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">from_java_path</span>(<span class="ident">java_path</span>: <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">std::ffi::OsStr</span><span class="op">&gt;</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">output</span> <span class="op">=</span> <span class="ident">query_java_version_output</span>(<span class="kw-2">&amp;</span><span class="ident">java_path</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">version</span> <span class="op">=</span> <span class="ident">query_java_version</span>(<span class="kw-2">&amp;</span><span class="ident">output</span>);
-        <span class="kw">let</span> <span class="ident">java_main_version</span> <span class="op">=</span> <span class="ident">get_java_version</span>(<span class="ident">version</span>);
-        <span class="kw">let</span> <span class="ident">java_64bit</span> <span class="op">=</span> <span class="ident">query_java_is_64bit</span>(<span class="kw-2">&amp;</span><span class="ident">output</span>);
-        <span class="kw">let</span> <span class="ident">java_arch</span> <span class="op">=</span> {
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>)]</span>
-            {
-                <span class="ident"><span class="kw">crate</span>::utils::get_exec_arch</span>(<span class="ident">std::path::PathBuf::from</span>(<span class="ident">java_path</span>.<span class="ident">as_ref</span>())).<span class="kw">await</span><span class="question-mark">?</span>
-            }
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>)]</span>
-            {
-                <span class="comment">// TODO: 这里要给 ARM 架构做支持</span>
-                <span class="kw">if</span> <span class="ident">java_64bit</span> {
-                    <span class="ident">Arch::X64</span>
-                } <span class="kw">else</span> {
-                    <span class="ident">Arch::X86</span>
+<span class="kw">impl </span>JavaRuntime {
+    <span class="doccomment">/// 通过一个指向 Java 可执行文件的路径来创建 [`JavaRuntime`]
+    ///
+    /// 在此会尝试运行这个文件并获取相关的版本信息，确认无误后返回
+    </span><span class="kw">pub async fn </span>from_java_path(java_path: <span class="kw">impl </span>AsRef&lt;std::ffi::OsStr&gt;) -&gt; DynResult&lt;<span class="self">Self</span>&gt; {
+        <span class="kw">let </span>output = query_java_version_output(<span class="kw-2">&amp;</span>java_path).<span class="kw">await</span><span class="question-mark">?</span>;
+        <span class="kw">let </span>version = query_java_version(<span class="kw-2">&amp;</span>output);
+        <span class="kw">let </span>java_main_version = get_java_version(version);
+        <span class="kw">let </span>java_64bit = query_java_is_64bit(<span class="kw-2">&amp;</span>output);
+        <span class="kw">let </span>java_arch = {
+            <span class="attribute">#[cfg(target_os = <span class="string">&quot;macos&quot;</span>)]
+            </span>{
+                <span class="kw">crate</span>::utils::get_exec_arch(std::path::PathBuf::from(java_path.as_ref())).<span class="kw">await</span><span class="question-mark">?
+            </span>}
+            <span class="attribute">#[cfg(target_os = <span class="string">&quot;windows&quot;</span>)]
+            </span>{
+                <span class="comment">// TODO: 这里要给 ARM 架构做支持
+                </span><span class="kw">if </span>java_64bit {
+                    Arch::X64
+                } <span class="kw">else </span>{
+                    Arch::X86
                 }
             }
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>)]</span>
-            {
-                <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;i686&quot;</span>)]</span>
-                {
-                    <span class="ident">Arch::X86</span>
+            <span class="attribute">#[cfg(target_os = <span class="string">&quot;linux&quot;</span>)]
+            </span>{
+                <span class="attribute">#[cfg(target_arch = <span class="string">&quot;i686&quot;</span>)]
+                </span>{
+                    Arch::X86
                 }
-                <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>)]</span>
-                {
-                    <span class="ident">Arch::X64</span>
+                <span class="attribute">#[cfg(target_arch = <span class="string">&quot;x86_64&quot;</span>)]
+                </span>{
+                    Arch::X64
                 }
-                <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;aarch64&quot;</span>)]</span>
-                {
-                    <span class="ident">Arch::ARM64</span>
+                <span class="attribute">#[cfg(target_arch = <span class="string">&quot;aarch64&quot;</span>)]
+                </span>{
+                    Arch::ARM64
                 }
             }
         };
-        <span class="prelude-val">Ok</span>(<span class="self">Self</span> {
-            <span class="ident">java_path</span>: <span class="ident">java_path</span>.<span class="ident">as_ref</span>().<span class="ident">to_string_lossy</span>().<span class="ident">to_string</span>(),
-            <span class="ident">java_64bit</span>,
-            <span class="ident">java_version</span>: <span class="ident">version</span>.<span class="ident">to_owned</span>(),
-            <span class="ident">java_main_version</span>,
-            <span class="ident">java_arch</span>,
+        <span class="prelude-val">Ok</span>(<span class="self">Self </span>{
+            java_path: java_path.as_ref().to_string_lossy().to_string(),
+            java_64bit,
+            java_version: version.to_owned(),
+            java_main_version,
+            java_arch,
         })
     }
 
-    <span class="doccomment">/// 获取此 Java 运行时的可执行文件路径</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">path</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">java_path</span>
+    <span class="doccomment">/// 获取此 Java 运行时的可执行文件路径
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>path(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>str {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.java_path
     }
 
-    <span class="doccomment">/// 获取此 Java 运行时的版本号</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">version</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">java_version</span>
+    <span class="doccomment">/// 获取此 Java 运行时的版本号
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>version(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>str {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.java_version
     }
 
-    <span class="doccomment">/// 获取此 Java 运行时的运行架构是否是针对 64 位平台的</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_64bit</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">java_64bit</span>
+    <span class="doccomment">/// 获取此 Java 运行时的运行架构是否是针对 64 位平台的
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>is_64bit(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.java_64bit
     }
 
-    <span class="doccomment">/// 获取此 Java 运行时的主 Java 版本号</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">main_version</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u8</span> {
-        <span class="self">self</span>.<span class="ident">java_main_version</span>
+    <span class="doccomment">/// 获取此 Java 运行时的主 Java 版本号
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>main_version(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u8 {
+        <span class="self">self</span>.java_main_version
     }
 
-    <span class="doccomment">/// 获取此 Java 运行时的运行架构</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">arch</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Arch</span> {
-        <span class="self">self</span>.<span class="ident">java_arch</span>
+    <span class="doccomment">/// 获取此 Java 运行时的运行架构
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>arch(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Arch {
+        <span class="self">self</span>.java_arch
     }
 }
 
-<span class="doccomment">/// 执行 Java 并使用 -version 获取其版本输出</span>
-<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">query_java_version_output</span>(<span class="ident">java_path</span>: <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">std::ffi::OsStr</span><span class="op">&gt;</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> {
-        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">windows</span>)]</span>
-        {
-            <span class="kw">use</span> <span class="ident">inner_future::process::windows::CommandExt</span>;
-            <span class="ident">inner_future::process::Command::new</span>(<span class="ident">java_path</span>)
-                .<span class="ident">arg</span>(<span class="string">&quot;-version&quot;</span>)
-                .<span class="ident">stdout</span>(<span class="ident">std::process::Stdio::piped</span>())
-                .<span class="ident">stderr</span>(<span class="ident">std::process::Stdio::piped</span>())
-                .<span class="ident">creation_flags</span>(<span class="number">0x00000200</span> <span class="op">|</span> <span class="number">0x08000000</span>)
-                .<span class="ident">spawn</span>()<span class="question-mark">?</span>
-        }
-        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">windows</span>))]</span>
-        {
-            <span class="ident">inner_future::process::Command::new</span>(<span class="ident">java_path</span>)
-                .<span class="ident">arg</span>(<span class="string">&quot;-version&quot;</span>)
-                .<span class="ident">stdout</span>(<span class="ident">std::process::Stdio::piped</span>())
-                .<span class="ident">stderr</span>(<span class="ident">std::process::Stdio::piped</span>())
-                .<span class="ident">spawn</span>()<span class="question-mark">?</span>
-        }
+<span class="doccomment">/// 执行 Java 并使用 -version 获取其版本输出
+</span><span class="kw">async fn </span>query_java_version_output(java_path: <span class="kw">impl </span>AsRef&lt;std::ffi::OsStr&gt;) -&gt; DynResult&lt;String&gt; {
+    <span class="kw">let </span>c = {
+        <span class="attribute">#[cfg(windows)]
+        </span>{
+            <span class="kw">use </span>inner_future::process::windows::CommandExt;
+            inner_future::process::Command::new(java_path)
+                .arg(<span class="string">&quot;-version&quot;</span>)
+                .stdout(std::process::Stdio::piped())
+                .stderr(std::process::Stdio::piped())
+                .creation_flags(<span class="number">0x00000200 </span>| <span class="number">0x08000000</span>)
+                .spawn()<span class="question-mark">?
+        </span>}
+        <span class="attribute">#[cfg(not(windows))]
+        </span>{
+            inner_future::process::Command::new(java_path)
+                .arg(<span class="string">&quot;-version&quot;</span>)
+                .stdout(std::process::Stdio::piped())
+                .stderr(std::process::Stdio::piped())
+                .spawn()<span class="question-mark">?
+        </span>}
     };
-    <span class="kw">let</span> <span class="ident">output</span> <span class="op">=</span> <span class="ident">c</span>.<span class="ident">output</span>().<span class="kw">await</span><span class="question-mark">?</span>;
-    <span class="prelude-val">Ok</span>(<span class="ident">String::from_utf8</span>(<span class="ident">output</span>.<span class="ident">stderr</span>)<span class="question-mark">?</span>)
+    <span class="kw">let </span>output = c.output().<span class="kw">await</span><span class="question-mark">?</span>;
+    <span class="prelude-val">Ok</span>(String::from_utf8(output.stderr)<span class="question-mark">?</span>)
 }
 
-<span class="doccomment">/// 根据 Java 的版本输出确认是否为 64 位版本</span>
-<span class="kw">fn</span> <span class="ident">query_java_is_64bit</span>(<span class="ident">java_output</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">bool</span> {
-    <span class="ident">java_output</span>.<span class="ident">contains</span>(<span class="string">&quot;64-Bit&quot;</span>)
+<span class="doccomment">/// 根据 Java 的版本输出确认是否为 64 位版本
+</span><span class="kw">fn </span>query_java_is_64bit(java_output: <span class="kw-2">&amp;</span>str) -&gt; bool {
+    java_output.contains(<span class="string">&quot;64-Bit&quot;</span>)
 }
 
-<span class="doccomment">/// 根据 Java 裁剪的版本号文本确认主版本号</span>
-<span class="doccomment">/// - `1.8.x` 将返回 `8`</span>
-<span class="doccomment">/// - `1.7.x` 将返回 `7`</span>
-<span class="doccomment">/// - `10+` 将返回其主版本数字</span>
-<span class="doccomment">/// - 其余返回 `0` 表示未知版本</span>
-<span class="kw">fn</span> <span class="ident">get_java_version</span>(<span class="ident">java_version_string</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">u8</span> {
-    <span class="kw">fn</span> <span class="ident">parser</span>(<span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">nom::IResult</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span> {
-        <span class="ident">nom::character::complete::digit1</span>(<span class="ident">input</span>)
+<span class="doccomment">/// 根据 Java 裁剪的版本号文本确认主版本号
+/// - `1.8.x` 将返回 `8`
+/// - `1.7.x` 将返回 `7`
+/// - `10+` 将返回其主版本数字
+/// - 其余返回 `0` 表示未知版本
+</span><span class="kw">fn </span>get_java_version(java_version_string: <span class="kw-2">&amp;</span>str) -&gt; u8 {
+    <span class="kw">fn </span>parser(input: <span class="kw-2">&amp;</span>str) -&gt; nom::IResult&lt;<span class="kw-2">&amp;</span>str, <span class="kw-2">&amp;</span>str&gt; {
+        nom::character::complete::digit1(input)
     }
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>((<span class="kw">_</span>, <span class="ident">r</span>)) <span class="op">=</span> <span class="ident">parser</span>(<span class="ident">java_version_string</span>) {
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">r</span>.<span class="ident">parse</span>().<span class="ident">unwrap</span>(); <span class="comment">// 应当不会出错的</span>
-        <span class="kw">if</span> <span class="ident">r</span> <span class="op">&gt;</span> <span class="number">1</span> {
-            <span class="ident">r</span>
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">java_version_string</span>.<span class="ident">contains</span>(<span class="string">&quot;1.8&quot;</span>) {
-            <span class="number">8</span>
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">java_version_string</span>.<span class="ident">contains</span>(<span class="string">&quot;1.7&quot;</span>) {
-            <span class="number">7</span>
-        } <span class="kw">else</span> {
-            <span class="number">0</span> <span class="comment">// 未知版本</span>
-        }
-    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">java_version_string</span>.<span class="ident">contains</span>(<span class="string">&quot;1.8&quot;</span>) {
-        <span class="number">8</span>
-    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">java_version_string</span>.<span class="ident">contains</span>(<span class="string">&quot;1.7&quot;</span>) {
-        <span class="number">7</span>
-    } <span class="kw">else</span> {
-        <span class="number">0</span> <span class="comment">// 未知版本</span>
-    }
+    <span class="kw">if let </span><span class="prelude-val">Ok</span>((<span class="kw">_</span>, r)) = parser(java_version_string) {
+        <span class="kw">let </span>r = r.parse().unwrap(); <span class="comment">// 应当不会出错的
+        </span><span class="kw">if </span>r &gt; <span class="number">1 </span>{
+            r
+        } <span class="kw">else if </span>java_version_string.contains(<span class="string">&quot;1.8&quot;</span>) {
+            <span class="number">8
+        </span>} <span class="kw">else if </span>java_version_string.contains(<span class="string">&quot;1.7&quot;</span>) {
+            <span class="number">7
+        </span>} <span class="kw">else </span>{
+            <span class="number">0 </span><span class="comment">// 未知版本
+        </span>}
+    } <span class="kw">else if </span>java_version_string.contains(<span class="string">&quot;1.8&quot;</span>) {
+        <span class="number">8
+    </span>} <span class="kw">else if </span>java_version_string.contains(<span class="string">&quot;1.7&quot;</span>) {
+        <span class="number">7
+    </span>} <span class="kw">else </span>{
+        <span class="number">0 </span><span class="comment">// 未知版本
+    </span>}
 }
 
-<span class="doccomment">/// 搜索可能存在 Java 的地方找到可用的 Java 运行时</span>
-<span class="doccomment">/// 返回的结果列表项均为 java.exe/javaw.exe 或 java 执行文件的目录</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">search_for_java</span>() -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
-    <span class="comment">// 从安装目录中搜索 Java</span>
-    <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">check_bin_java_directory</span>(<span class="ident">path</span>: <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span>, <span class="ident">result</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>) {
-        <span class="macro">println!</span>(<span class="string">&quot;Searching {}&quot;</span>, <span class="ident">path</span>.<span class="ident">as_ref</span>().<span class="ident">to_string_lossy</span>());
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="kw-2">mut</span> <span class="ident">d</span>) <span class="op">=</span> <span class="ident">inner_future::fs::read_dir</span>(<span class="ident">path</span>).<span class="kw">await</span> {
-            <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">d</span>)) <span class="op">=</span> <span class="ident">d</span>.<span class="ident">try_next</span>().<span class="kw">await</span> {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">path</span>();
-                <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>)]</span>
-                <span class="ident">path</span>.<span class="ident">push</span>(<span class="string">&quot;Contents/Home&quot;</span>);
-                <span class="ident">path</span>.<span class="ident">push</span>(<span class="string">&quot;bin&quot;</span>);
-                <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">windows</span>)]</span>
-                {
-                    <span class="ident">path</span>.<span class="ident">push</span>(<span class="string">&quot;java.exe&quot;</span>);
-                    <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">is_file</span>() {
-                        <span class="ident">result</span>.<span class="ident">push</span>(<span class="ident">d</span>.<span class="ident">path</span>().<span class="ident">to_string_lossy</span>().<span class="ident">to_string</span>());
+<span class="doccomment">/// 搜索可能存在 Java 的地方找到可用的 Java 运行时
+/// 返回的结果列表项均为 java.exe/javaw.exe 或 java 执行文件的目录
+</span><span class="kw">pub async fn </span>search_for_java() -&gt; Vec&lt;String&gt; {
+    <span class="comment">// 从安装目录中搜索 Java
+    </span><span class="kw">async fn </span>check_bin_java_directory(path: <span class="kw">impl </span>AsRef&lt;Path&gt;, result: <span class="kw-2">&amp;mut </span>Vec&lt;String&gt;) {
+        <span class="macro">println!</span>(<span class="string">&quot;Searching {}&quot;</span>, path.as_ref().to_string_lossy());
+        <span class="kw">if let </span><span class="prelude-val">Ok</span>(<span class="kw-2">mut </span>d) = inner_future::fs::read_dir(path).<span class="kw">await </span>{
+            <span class="kw">while let </span><span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(d)) = d.try_next().<span class="kw">await </span>{
+                <span class="kw">let </span><span class="kw-2">mut </span>path = d.path();
+                <span class="attribute">#[cfg(target_os = <span class="string">&quot;macos&quot;</span>)]
+                </span>path.push(<span class="string">&quot;Contents/Home&quot;</span>);
+                path.push(<span class="string">&quot;bin&quot;</span>);
+                <span class="attribute">#[cfg(windows)]
+                </span>{
+                    path.push(<span class="string">&quot;java.exe&quot;</span>);
+                    <span class="kw">if </span>path.is_file() {
+                        result.push(d.path().to_string_lossy().to_string());
                     }
                     {
-                        <span class="ident">path</span>.<span class="ident">pop</span>();
-                        <span class="ident">path</span>.<span class="ident">push</span>(<span class="string">&quot;javaw.exe&quot;</span>);
-                        <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">is_file</span>() {
-                            <span class="ident">result</span>.<span class="ident">push</span>(<span class="ident">path</span>.<span class="ident">to_string_lossy</span>().<span class="ident">to_string</span>());
+                        path.pop();
+                        path.push(<span class="string">&quot;javaw.exe&quot;</span>);
+                        <span class="kw">if </span>path.is_file() {
+                            result.push(path.to_string_lossy().to_string());
                         }
                     }
                 }
-                <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">windows</span>))]</span>
-                {
-                    <span class="ident">path</span>.<span class="ident">push</span>(<span class="string">&quot;java&quot;</span>);
-                    <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">is_file</span>() {
-                        <span class="ident">result</span>.<span class="ident">push</span>(<span class="ident">path</span>.<span class="ident">to_string_lossy</span>().<span class="ident">to_string</span>());
+                <span class="attribute">#[cfg(not(windows))]
+                </span>{
+                    path.push(<span class="string">&quot;java&quot;</span>);
+                    <span class="kw">if </span>path.is_file() {
+                        result.push(path.to_string_lossy().to_string());
                     }
                 }
             }
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">check_java</span>(<span class="ident">path</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span>, <span class="ident">result</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>) {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">path</span>: <span class="ident">PathBuf</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">into</span>();
-        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">windows</span>)]</span>
-        {
-            <span class="ident">path</span>.<span class="ident">push</span>(<span class="string">&quot;java.exe&quot;</span>);
-            <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">is_file</span>() {
-                <span class="ident">result</span>.<span class="ident">push</span>(<span class="ident">path</span>.<span class="ident">to_string_lossy</span>().<span class="ident">to_string</span>());
+    <span class="kw">fn </span>check_java(path: <span class="kw">impl </span>Into&lt;PathBuf&gt;, result: <span class="kw-2">&amp;mut </span>Vec&lt;String&gt;) {
+        <span class="kw">let </span><span class="kw-2">mut </span>path: PathBuf = path.into();
+        <span class="attribute">#[cfg(windows)]
+        </span>{
+            path.push(<span class="string">&quot;java.exe&quot;</span>);
+            <span class="kw">if </span>path.is_file() {
+                result.push(path.to_string_lossy().to_string());
             }
-            <span class="ident">path</span>.<span class="ident">pop</span>();
-            <span class="ident">path</span>.<span class="ident">push</span>(<span class="string">&quot;javaw.exe&quot;</span>);
-            <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">is_file</span>() {
-                <span class="ident">result</span>.<span class="ident">push</span>(<span class="ident">path</span>.<span class="ident">to_string_lossy</span>().<span class="ident">to_string</span>());
+            path.pop();
+            path.push(<span class="string">&quot;javaw.exe&quot;</span>);
+            <span class="kw">if </span>path.is_file() {
+                result.push(path.to_string_lossy().to_string());
             }
         }
-        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">windows</span>))]</span>
-        {
-            <span class="ident">path</span>.<span class="ident">push</span>(<span class="string">&quot;java&quot;</span>);
-            <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">is_file</span>() {
-                <span class="ident">result</span>.<span class="ident">push</span>(<span class="ident">path</span>.<span class="ident">to_string_lossy</span>().<span class="ident">to_string</span>());
+        <span class="attribute">#[cfg(not(windows))]
+        </span>{
+            path.push(<span class="string">&quot;java&quot;</span>);
+            <span class="kw">if </span>path.is_file() {
+                result.push(path.to_string_lossy().to_string());
             }
         }
     }
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">windows</span>)]</span>
-    {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">16</span>);
-        <span class="comment">// 从注册表中搜索 JavaHome</span>
-        <span class="kw">use</span> <span class="ident">winreg</span>::{<span class="ident">enums</span>::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
-        <span class="kw">fn</span> <span class="ident">search_local_machine_reg_value</span>(<span class="ident">key</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">result</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>) {
-            <span class="kw">let</span> <span class="ident">hklm</span> <span class="op">=</span> <span class="ident">RegKey::predef</span>(<span class="ident">HKEY_LOCAL_MACHINE</span>);
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">subkey</span>) <span class="op">=</span> <span class="ident">hklm</span>
-                .<span class="ident">open_subkey</span>(<span class="string">&quot;SOFTWARE\\JavaSoft&quot;</span>)
-                .<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">subkey</span><span class="op">|</span> <span class="ident">subkey</span>.<span class="ident">open_subkey</span>(<span class="ident">key</span>))
+    <span class="attribute">#[cfg(windows)]
+    </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>result = Vec::with_capacity(<span class="number">16</span>);
+        <span class="comment">// 从注册表中搜索 JavaHome
+        </span><span class="kw">use </span>winreg::{enums::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+        <span class="kw">fn </span>search_local_machine_reg_value(key: <span class="kw-2">&amp;</span>str, result: <span class="kw-2">&amp;mut </span>Vec&lt;String&gt;) {
+            <span class="kw">let </span>hklm = RegKey::predef(HKEY_LOCAL_MACHINE);
+            <span class="kw">if let </span><span class="prelude-val">Ok</span>(subkey) = hklm
+                .open_subkey(<span class="string">&quot;SOFTWARE\\JavaSoft&quot;</span>)
+                .and_then(|subkey| subkey.open_subkey(key))
             {
-                <span class="kw">for</span> <span class="ident">s</span> <span class="kw">in</span> <span class="ident">subkey</span>.<span class="ident">enum_keys</span>().<span class="ident">flatten</span>() {
-                    <span class="kw">let</span> <span class="ident">subkey</span> <span class="op">=</span> <span class="ident">subkey</span>.<span class="ident">open_subkey</span>(<span class="ident">s</span>);
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">subkey</span>) <span class="op">=</span> <span class="ident">subkey</span> {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">v</span>) <span class="op">=</span> <span class="ident">subkey</span>.<span class="ident">get_value</span>(<span class="string">&quot;JavaHome&quot;</span>) {
-                            <span class="ident">result</span>.<span class="ident">push</span>(<span class="ident">v</span>);
+                <span class="kw">for </span>s <span class="kw">in </span>subkey.enum_keys().flatten() {
+                    <span class="kw">let </span>subkey = subkey.open_subkey(s);
+                    <span class="kw">if let </span><span class="prelude-val">Ok</span>(subkey) = subkey {
+                        <span class="kw">if let </span><span class="prelude-val">Ok</span>(v) = subkey.get_value(<span class="string">&quot;JavaHome&quot;</span>) {
+                            result.push(v);
                         }
                     }
                 }
             }
         }
-        <span class="ident">search_local_machine_reg_value</span>(<span class="string">&quot;Java Runtime Environment&quot;</span>, <span class="kw-2">&amp;mut</span> <span class="ident">result</span>);
-        <span class="ident">search_local_machine_reg_value</span>(<span class="string">&quot;Java Development Kit&quot;</span>, <span class="kw-2">&amp;mut</span> <span class="ident">result</span>);
-        <span class="ident">search_local_machine_reg_value</span>(<span class="string">&quot;JRE&quot;</span>, <span class="kw-2">&amp;mut</span> <span class="ident">result</span>);
-        <span class="ident">search_local_machine_reg_value</span>(<span class="string">&quot;JDK&quot;</span>, <span class="kw-2">&amp;mut</span> <span class="ident">result</span>);
-        <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">list_java_directory</span>(<span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">result</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>) {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">std::path::PathBuf::from</span>(<span class="ident">path</span>);
-            <span class="ident">path</span>.<span class="ident">push</span>(<span class="string">&quot;Java&quot;</span>);
-            <span class="ident">check_bin_java_directory</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">result</span>).<span class="kw">await</span>;
-            <span class="ident">path</span>.<span class="ident">pop</span>();
-            <span class="ident">path</span>.<span class="ident">push</span>(<span class="string">&quot;BellSoft&quot;</span>);
-            <span class="ident">check_bin_java_directory</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">result</span>).<span class="kw">await</span>;
-            <span class="ident">path</span>.<span class="ident">pop</span>();
-            <span class="ident">path</span>.<span class="ident">push</span>(<span class="string">&quot;AdoptOpenJDK&quot;</span>);
-            <span class="ident">check_bin_java_directory</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">result</span>).<span class="kw">await</span>;
-            <span class="ident">path</span>.<span class="ident">pop</span>();
-            <span class="ident">path</span>.<span class="ident">push</span>(<span class="string">&quot;Zulu&quot;</span>);
-            <span class="ident">check_bin_java_directory</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">result</span>).<span class="kw">await</span>;
-            <span class="ident">path</span>.<span class="ident">pop</span>();
-            <span class="ident">path</span>.<span class="ident">push</span>(<span class="string">&quot;Microsoft&quot;</span>);
-            <span class="ident">check_bin_java_directory</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">result</span>).<span class="kw">await</span>;
-            <span class="ident">path</span>.<span class="ident">pop</span>();
-            <span class="ident">path</span>.<span class="ident">push</span>(<span class="string">&quot;Eclipse Foundation&quot;</span>);
-            <span class="ident">check_bin_java_directory</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">result</span>).<span class="kw">await</span>;
-            <span class="ident">path</span>.<span class="ident">pop</span>();
-            <span class="ident">path</span>.<span class="ident">push</span>(<span class="string">&quot;Semeru&quot;</span>);
-            <span class="ident">check_bin_java_directory</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>, <span class="ident">result</span>).<span class="kw">await</span>;
-            <span class="ident">path</span>.<span class="ident">pop</span>();
+        search_local_machine_reg_value(<span class="string">&quot;Java Runtime Environment&quot;</span>, <span class="kw-2">&amp;mut </span>result);
+        search_local_machine_reg_value(<span class="string">&quot;Java Development Kit&quot;</span>, <span class="kw-2">&amp;mut </span>result);
+        search_local_machine_reg_value(<span class="string">&quot;JRE&quot;</span>, <span class="kw-2">&amp;mut </span>result);
+        search_local_machine_reg_value(<span class="string">&quot;JDK&quot;</span>, <span class="kw-2">&amp;mut </span>result);
+        <span class="kw">async fn </span>list_java_directory(path: <span class="kw-2">&amp;</span>str, result: <span class="kw-2">&amp;mut </span>Vec&lt;String&gt;) {
+            <span class="kw">let </span><span class="kw-2">mut </span>path = std::path::PathBuf::from(path);
+            path.push(<span class="string">&quot;Java&quot;</span>);
+            check_bin_java_directory(<span class="kw-2">&amp;</span>path, result).<span class="kw">await</span>;
+            path.pop();
+            path.push(<span class="string">&quot;BellSoft&quot;</span>);
+            check_bin_java_directory(<span class="kw-2">&amp;</span>path, result).<span class="kw">await</span>;
+            path.pop();
+            path.push(<span class="string">&quot;AdoptOpenJDK&quot;</span>);
+            check_bin_java_directory(<span class="kw-2">&amp;</span>path, result).<span class="kw">await</span>;
+            path.pop();
+            path.push(<span class="string">&quot;Zulu&quot;</span>);
+            check_bin_java_directory(<span class="kw-2">&amp;</span>path, result).<span class="kw">await</span>;
+            path.pop();
+            path.push(<span class="string">&quot;Microsoft&quot;</span>);
+            check_bin_java_directory(<span class="kw-2">&amp;</span>path, result).<span class="kw">await</span>;
+            path.pop();
+            path.push(<span class="string">&quot;Eclipse Foundation&quot;</span>);
+            check_bin_java_directory(<span class="kw-2">&amp;</span>path, result).<span class="kw">await</span>;
+            path.pop();
+            path.push(<span class="string">&quot;Semeru&quot;</span>);
+            check_bin_java_directory(<span class="kw-2">&amp;</span>path, result).<span class="kw">await</span>;
+            path.pop();
         }
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">program_files</span>) <span class="op">=</span> <span class="ident">std::env::var</span>(<span class="string">&quot;ProgramFiles&quot;</span>)
-            .<span class="ident">or_else</span>::<span class="op">&lt;</span><span class="ident">std::env::VarError</span>, <span class="kw">_</span><span class="op">&gt;</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="prelude-val">Ok</span>(<span class="string">&quot;C:\\Program Files&quot;</span>.<span class="ident">into</span>()))
+        <span class="kw">if let </span><span class="prelude-val">Ok</span>(program_files) = std::env::var(<span class="string">&quot;ProgramFiles&quot;</span>)
+            .or_else::&lt;std::env::VarError, <span class="kw">_</span>&gt;(|<span class="kw">_</span>| <span class="prelude-val">Ok</span>(<span class="string">&quot;C:\\Program Files&quot;</span>.into()))
         {
-            <span class="ident">list_java_directory</span>(<span class="kw-2">&amp;</span><span class="ident">program_files</span>, <span class="kw-2">&amp;mut</span> <span class="ident">result</span>).<span class="kw">await</span>;
+            list_java_directory(<span class="kw-2">&amp;</span>program_files, <span class="kw-2">&amp;mut </span>result).<span class="kw">await</span>;
         }
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">program_files</span>) <span class="op">=</span> <span class="ident">std::env::var</span>(<span class="string">&quot;ProgramFiles(x86)&quot;</span>)
-            .<span class="ident">or_else</span>::<span class="op">&lt;</span><span class="ident">std::env::VarError</span>, <span class="kw">_</span><span class="op">&gt;</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="prelude-val">Ok</span>(<span class="string">&quot;C:\\Program Files (x86)&quot;</span>.<span class="ident">into</span>()))
+        <span class="kw">if let </span><span class="prelude-val">Ok</span>(program_files) = std::env::var(<span class="string">&quot;ProgramFiles(x86)&quot;</span>)
+            .or_else::&lt;std::env::VarError, <span class="kw">_</span>&gt;(|<span class="kw">_</span>| <span class="prelude-val">Ok</span>(<span class="string">&quot;C:\\Program Files (x86)&quot;</span>.into()))
         {
-            <span class="ident">list_java_directory</span>(<span class="kw-2">&amp;</span><span class="ident">program_files</span>, <span class="kw-2">&amp;mut</span> <span class="ident">result</span>).<span class="kw">await</span>;
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">minecraft_launcher_dir</span> <span class="op">=</span> <span class="ident">PathBuf::from</span>(<span class="ident">program_files</span>);
-            <span class="ident">minecraft_launcher_dir</span>
-                .<span class="ident">push</span>(<span class="string">&quot;Minecraft Launcher\\runtime\\jre-legacy\\windows-x64\\jre-legacy\\bin&quot;</span>);
-            <span class="ident">check_java</span>(<span class="kw-2">&amp;</span><span class="ident">minecraft_launcher_dir</span>, <span class="kw-2">&amp;mut</span> <span class="ident">result</span>);
-            <span class="ident">minecraft_launcher_dir</span>.<span class="ident">pop</span>();
-            <span class="ident">minecraft_launcher_dir</span>.<span class="ident">pop</span>();
-            <span class="ident">minecraft_launcher_dir</span>.<span class="ident">pop</span>();
-            <span class="ident">minecraft_launcher_dir</span>.<span class="ident">push</span>(<span class="string">&quot;windows-x86\\jre-legacy\\bin&quot;</span>);
-            <span class="ident">check_java</span>(<span class="kw-2">&amp;</span><span class="ident">minecraft_launcher_dir</span>, <span class="kw-2">&amp;mut</span> <span class="ident">result</span>);
-            <span class="ident">minecraft_launcher_dir</span>.<span class="ident">pop</span>();
-            <span class="ident">minecraft_launcher_dir</span>.<span class="ident">pop</span>();
-            <span class="ident">minecraft_launcher_dir</span>.<span class="ident">pop</span>();
-            <span class="ident">minecraft_launcher_dir</span>.<span class="ident">pop</span>();
-            <span class="ident">minecraft_launcher_dir</span>.<span class="ident">push</span>(<span class="string">&quot;java-runtime-alpha\\windows-x64\\java-runtime-alpha\\bin&quot;</span>);
-            <span class="ident">check_java</span>(<span class="kw-2">&amp;</span><span class="ident">minecraft_launcher_dir</span>, <span class="kw-2">&amp;mut</span> <span class="ident">result</span>);
-            <span class="ident">minecraft_launcher_dir</span>.<span class="ident">pop</span>();
-            <span class="ident">minecraft_launcher_dir</span>.<span class="ident">pop</span>();
-            <span class="ident">minecraft_launcher_dir</span>.<span class="ident">pop</span>();
-            <span class="ident">minecraft_launcher_dir</span>.<span class="ident">push</span>(<span class="string">&quot;windows-x86\\java-runtime-alpha\\bin&quot;</span>);
-            <span class="ident">check_java</span>(<span class="kw-2">&amp;</span><span class="ident">minecraft_launcher_dir</span>, <span class="kw-2">&amp;mut</span> <span class="ident">result</span>);
+            list_java_directory(<span class="kw-2">&amp;</span>program_files, <span class="kw-2">&amp;mut </span>result).<span class="kw">await</span>;
+            <span class="kw">let </span><span class="kw-2">mut </span>minecraft_launcher_dir = PathBuf::from(program_files);
+            minecraft_launcher_dir
+                .push(<span class="string">&quot;Minecraft Launcher\\runtime\\jre-legacy\\windows-x64\\jre-legacy\\bin&quot;</span>);
+            check_java(<span class="kw-2">&amp;</span>minecraft_launcher_dir, <span class="kw-2">&amp;mut </span>result);
+            minecraft_launcher_dir.pop();
+            minecraft_launcher_dir.pop();
+            minecraft_launcher_dir.pop();
+            minecraft_launcher_dir.push(<span class="string">&quot;windows-x86\\jre-legacy\\bin&quot;</span>);
+            check_java(<span class="kw-2">&amp;</span>minecraft_launcher_dir, <span class="kw-2">&amp;mut </span>result);
+            minecraft_launcher_dir.pop();
+            minecraft_launcher_dir.pop();
+            minecraft_launcher_dir.pop();
+            minecraft_launcher_dir.pop();
+            minecraft_launcher_dir.push(<span class="string">&quot;java-runtime-alpha\\windows-x64\\java-runtime-alpha\\bin&quot;</span>);
+            check_java(<span class="kw-2">&amp;</span>minecraft_launcher_dir, <span class="kw-2">&amp;mut </span>result);
+            minecraft_launcher_dir.pop();
+            minecraft_launcher_dir.pop();
+            minecraft_launcher_dir.pop();
+            minecraft_launcher_dir.push(<span class="string">&quot;windows-x86\\java-runtime-alpha\\bin&quot;</span>);
+            check_java(<span class="kw-2">&amp;</span>minecraft_launcher_dir, <span class="kw-2">&amp;mut </span>result);
         }
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">program_files</span>) <span class="op">=</span> <span class="ident">std::env::var</span>(<span class="string">&quot;ProgramFiles(ARM)&quot;</span>)
-            .<span class="ident">or_else</span>::<span class="op">&lt;</span><span class="ident">std::env::VarError</span>, <span class="kw">_</span><span class="op">&gt;</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="prelude-val">Ok</span>(<span class="string">&quot;C:\\Program Files (ARM)&quot;</span>.<span class="ident">into</span>()))
+        <span class="kw">if let </span><span class="prelude-val">Ok</span>(program_files) = std::env::var(<span class="string">&quot;ProgramFiles(ARM)&quot;</span>)
+            .or_else::&lt;std::env::VarError, <span class="kw">_</span>&gt;(|<span class="kw">_</span>| <span class="prelude-val">Ok</span>(<span class="string">&quot;C:\\Program Files (ARM)&quot;</span>.into()))
         {
-            <span class="ident">list_java_directory</span>(<span class="kw-2">&amp;</span><span class="ident">program_files</span>, <span class="kw-2">&amp;mut</span> <span class="ident">result</span>).<span class="kw">await</span>;
+            list_java_directory(<span class="kw-2">&amp;</span>program_files, <span class="kw-2">&amp;mut </span>result).<span class="kw">await</span>;
         }
-        <span class="comment">// 从环境变量中查询 java.exe</span>
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">paths</span>) <span class="op">=</span> <span class="ident">std::env::var</span>(<span class="string">&quot;PATH&quot;</span>) {
-            <span class="kw">for</span> <span class="ident">path</span> <span class="kw">in</span> <span class="ident">paths</span>.<span class="ident">split</span>(<span class="string">&#39;;&#39;</span>) {
-                <span class="ident">check_java</span>(<span class="ident">path</span>, <span class="kw-2">&amp;mut</span> <span class="ident">result</span>);
+        <span class="comment">// 从环境变量中查询 java.exe
+        </span><span class="kw">if let </span><span class="prelude-val">Ok</span>(paths) = std::env::var(<span class="string">&quot;PATH&quot;</span>) {
+            <span class="kw">for </span>path <span class="kw">in </span>paths.split(<span class="string">&#39;;&#39;</span>) {
+                check_java(path, <span class="kw-2">&amp;mut </span>result);
             }
         }
-        <span class="comment">// 从 JABBA 中查询 java.exe</span>
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">path</span>) <span class="op">=</span> <span class="ident">std::env::var</span>(<span class="string">&quot;JABBA_HOME&quot;</span>) {
-            <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">PathBuf::from</span>(<span class="ident">path</span>).<span class="ident">join</span>(<span class="string">&quot;jdk&quot;</span>);
-            <span class="ident">check_bin_java_directory</span>(<span class="ident">path</span>.<span class="ident">as_path</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">result</span>).<span class="kw">await</span>;
+        <span class="comment">// 从 JABBA 中查询 java.exe
+        </span><span class="kw">if let </span><span class="prelude-val">Ok</span>(path) = std::env::var(<span class="string">&quot;JABBA_HOME&quot;</span>) {
+            <span class="kw">let </span>path = PathBuf::from(path).join(<span class="string">&quot;jdk&quot;</span>);
+            check_bin_java_directory(path.as_path(), <span class="kw-2">&amp;mut </span>result).<span class="kw">await</span>;
         }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">result</span>
-            .<span class="ident">into_iter</span>()
-            .<span class="ident">map</span>(<span class="op">|</span><span class="kw-2">mut</span> <span class="ident">a</span><span class="op">|</span> {
-                <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">windows</span>)]</span>
-                {
-                    <span class="kw">if</span> <span class="op">!</span><span class="ident">a</span>.<span class="ident">ends_with</span>(<span class="string">&quot;java.exe&quot;</span>)
-                        <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">a</span>.<span class="ident">ends_with</span>(<span class="string">&quot;javaw.exe&quot;</span>)
-                        <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">a</span>.<span class="ident">ends_with</span>(<span class="string">&quot;java&quot;</span>)
-                        <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">a</span>.<span class="ident">ends_with</span>(<span class="string">&quot;javaw&quot;</span>)
+        <span class="kw">let </span><span class="kw-2">mut </span>result: Vec&lt;<span class="kw">_</span>&gt; = result
+            .into_iter()
+            .map(|<span class="kw-2">mut </span>a| {
+                <span class="attribute">#[cfg(windows)]
+                </span>{
+                    <span class="kw">if </span>!a.ends_with(<span class="string">&quot;java.exe&quot;</span>)
+                        &amp;&amp; !a.ends_with(<span class="string">&quot;javaw.exe&quot;</span>)
+                        &amp;&amp; !a.ends_with(<span class="string">&quot;java&quot;</span>)
+                        &amp;&amp; !a.ends_with(<span class="string">&quot;javaw&quot;</span>)
                     {
-                        <span class="kw">if</span> <span class="op">!</span><span class="ident">a</span>.<span class="ident">ends_with</span>(<span class="string">&#39;\\&#39;</span>) <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">a</span>.<span class="ident">ends_with</span>(<span class="string">&#39;/&#39;</span>) {
-                            <span class="ident">a</span>.<span class="ident">push</span>(<span class="string">&#39;\\&#39;</span>);
+                        <span class="kw">if </span>!a.ends_with(<span class="string">&#39;\\&#39;</span>) &amp;&amp; !a.ends_with(<span class="string">&#39;/&#39;</span>) {
+                            a.push(<span class="string">&#39;\\&#39;</span>);
                         }
-                        <span class="ident">a</span>.<span class="ident">push_str</span>(<span class="string">&quot;bin\\java.exe&quot;</span>);
+                        a.push_str(<span class="string">&quot;bin\\java.exe&quot;</span>);
                     }
                 }
-                <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">windows</span>))]</span>
-                {
-                    <span class="kw">if</span> <span class="op">!</span><span class="ident">a</span>.<span class="ident">ends_with</span>(<span class="string">&quot;java&quot;</span>) {
-                        <span class="kw">if</span> <span class="op">!</span><span class="ident">a</span>.<span class="ident">ends_with</span>(<span class="string">&#39;/&#39;</span>) {
-                            <span class="ident">a</span>.<span class="ident">push</span>(<span class="string">&#39;/&#39;</span>);
+                <span class="attribute">#[cfg(not(windows))]
+                </span>{
+                    <span class="kw">if </span>!a.ends_with(<span class="string">&quot;java&quot;</span>) {
+                        <span class="kw">if </span>!a.ends_with(<span class="string">&#39;/&#39;</span>) {
+                            a.push(<span class="string">&#39;/&#39;</span>);
                         }
-                        <span class="ident">a</span>.<span class="ident">push_str</span>(<span class="string">&quot;bin/java&quot;</span>);
+                        a.push_str(<span class="string">&quot;bin/java&quot;</span>);
                     }
                 }
-                <span class="ident">a</span>
+                a
             })
-            .<span class="ident">collect</span>();
-        <span class="ident">result</span>.<span class="ident">sort</span>();
-        <span class="ident">result</span>.<span class="ident">dedup</span>();
-        <span class="ident">result</span>
+            .collect();
+        result.sort();
+        result.dedup();
+        result
     }
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>)]</span>
-    {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">16</span>);
+    <span class="attribute">#[cfg(target_os = <span class="string">&quot;linux&quot;</span>)]
+    </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>result = Vec::with_capacity(<span class="number">16</span>);
 
-        <span class="comment">// 一些常见目录</span>
-        <span class="ident">check_bin_java_directory</span>(<span class="string">&quot;/usr/java/bin&quot;</span>, <span class="kw-2">&amp;mut</span> <span class="ident">result</span>).<span class="kw">await</span>;
-        <span class="ident">check_bin_java_directory</span>(<span class="string">&quot;/usr/lib/jvm/bin&quot;</span>, <span class="kw-2">&amp;mut</span> <span class="ident">result</span>).<span class="kw">await</span>;
-        <span class="ident">check_bin_java_directory</span>(<span class="string">&quot;/usr/lib32/jvm/bin&quot;</span>, <span class="kw-2">&amp;mut</span> <span class="ident">result</span>).<span class="kw">await</span>;
+        <span class="comment">// 一些常见目录
+        </span>check_bin_java_directory(<span class="string">&quot;/usr/java/bin&quot;</span>, <span class="kw-2">&amp;mut </span>result).<span class="kw">await</span>;
+        check_bin_java_directory(<span class="string">&quot;/usr/lib/jvm/bin&quot;</span>, <span class="kw-2">&amp;mut </span>result).<span class="kw">await</span>;
+        check_bin_java_directory(<span class="string">&quot;/usr/lib32/jvm/bin&quot;</span>, <span class="kw-2">&amp;mut </span>result).<span class="kw">await</span>;
 
-        <span class="comment">// 从环境变量中查询 java.exe</span>
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">paths</span>) <span class="op">=</span> <span class="ident">std::env::var</span>(<span class="string">&quot;PATH&quot;</span>) {
-            <span class="kw">for</span> <span class="ident">path</span> <span class="kw">in</span> <span class="ident">paths</span>.<span class="ident">split</span>(<span class="string">&#39;;&#39;</span>) {
-                <span class="ident">check_java</span>(<span class="ident">path</span>, <span class="kw-2">&amp;mut</span> <span class="ident">result</span>);
+        <span class="comment">// 从环境变量中查询 java.exe
+        </span><span class="kw">if let </span><span class="prelude-val">Ok</span>(paths) = std::env::var(<span class="string">&quot;PATH&quot;</span>) {
+            <span class="kw">for </span>path <span class="kw">in </span>paths.split(<span class="string">&#39;;&#39;</span>) {
+                check_java(path, <span class="kw-2">&amp;mut </span>result);
             }
         }
-        <span class="comment">// 从 JABBA 中查询 java.exe</span>
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">path</span>) <span class="op">=</span> <span class="ident">std::env::var</span>(<span class="string">&quot;JABBA_HOME&quot;</span>) {
-            <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">PathBuf::from</span>(<span class="ident">path</span>).<span class="ident">join</span>(<span class="string">&quot;jdk&quot;</span>);
-            <span class="ident">check_bin_java_directory</span>(<span class="ident">path</span>.<span class="ident">as_path</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">result</span>).<span class="kw">await</span>;
+        <span class="comment">// 从 JABBA 中查询 java.exe
+        </span><span class="kw">if let </span><span class="prelude-val">Ok</span>(path) = std::env::var(<span class="string">&quot;JABBA_HOME&quot;</span>) {
+            <span class="kw">let </span>path = PathBuf::from(path).join(<span class="string">&quot;jdk&quot;</span>);
+            check_bin_java_directory(path.as_path(), <span class="kw-2">&amp;mut </span>result).<span class="kw">await</span>;
         }
-        <span class="comment">// 主目录里的 .minecraft/runtime 文件夹</span>
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">mut</span> <span class="ident">home_path</span>) <span class="op">=</span> <span class="ident">dirs::home_dir</span>() {
-            <span class="ident">home_path</span>.<span class="ident">push</span>(<span class="string">&quot;.minecraft/runtime/jre-legacy/linux/jre-legacy/bin&quot;</span>);
-            <span class="ident">check_java</span>(<span class="kw-2">&amp;</span><span class="ident">home_path</span>, <span class="kw-2">&amp;mut</span> <span class="ident">result</span>);
-            <span class="ident">home_path</span>.<span class="ident">push</span>(<span class="string">&quot;../../../../java-runtime-alpha/linux/java-runtime-alpha/bin&quot;</span>);
-            <span class="ident">check_java</span>(<span class="kw-2">&amp;</span><span class="ident">home_path</span>, <span class="kw-2">&amp;mut</span> <span class="ident">result</span>);
+        <span class="comment">// 主目录里的 .minecraft/runtime 文件夹
+        </span><span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">mut </span>home_path) = dirs::home_dir() {
+            home_path.push(<span class="string">&quot;.minecraft/runtime/jre-legacy/linux/jre-legacy/bin&quot;</span>);
+            check_java(<span class="kw-2">&amp;</span>home_path, <span class="kw-2">&amp;mut </span>result);
+            home_path.push(<span class="string">&quot;../../../../java-runtime-alpha/linux/java-runtime-alpha/bin&quot;</span>);
+            check_java(<span class="kw-2">&amp;</span>home_path, <span class="kw-2">&amp;mut </span>result);
         }
 
-        <span class="ident">result</span>
+        result
     }
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>)]</span>
-    {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="number">16</span>);
+    <span class="attribute">#[cfg(target_os = <span class="string">&quot;macos&quot;</span>)]
+    </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>result = Vec::with_capacity(<span class="number">16</span>);
 
-        <span class="ident">check_bin_java_directory</span>(<span class="string">&quot;/Library/Java/JavaVirtualMachines&quot;</span>, <span class="kw-2">&amp;mut</span> <span class="ident">result</span>).<span class="kw">await</span>;
-        <span class="ident">check_bin_java_directory</span>(<span class="string">&quot;/System/Library/Java/JavaVirtualMachines&quot;</span>, <span class="kw-2">&amp;mut</span> <span class="ident">result</span>).<span class="kw">await</span>;
-        <span class="ident">check_java</span>(
+        check_bin_java_directory(<span class="string">&quot;/Library/Java/JavaVirtualMachines&quot;</span>, <span class="kw-2">&amp;mut </span>result).<span class="kw">await</span>;
+        check_bin_java_directory(<span class="string">&quot;/System/Library/Java/JavaVirtualMachines&quot;</span>, <span class="kw-2">&amp;mut </span>result).<span class="kw">await</span>;
+        check_java(
             <span class="string">&quot;/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin/java&quot;</span>,
-            <span class="kw-2">&amp;mut</span> <span class="ident">result</span>,
+            <span class="kw-2">&amp;mut </span>result,
         );
-        <span class="ident">check_java</span>(<span class="string">&quot;/Applications/Xcode.app/Contents/Applications/Application Loader.app/Contents/MacOS/itms/java/bin/java&quot;</span>, <span class="kw-2">&amp;mut</span> <span class="ident">result</span>);
+        check_java(<span class="string">&quot;/Applications/Xcode.app/Contents/Applications/Application Loader.app/Contents/MacOS/itms/java/bin/java&quot;</span>, <span class="kw-2">&amp;mut </span>result);
 
-        <span class="ident">result</span>
+        result
     }
 }
 
-<span class="doccomment">/// 根据 Java 的输出裁剪出版本号文本</span>
-<span class="kw">fn</span> <span class="ident">query_java_version</span>(<span class="ident">java_output</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span> {
-    <span class="kw">fn</span> <span class="ident">parser</span>(<span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">nom::IResult</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span> {
-        <span class="ident">nom::bytes::complete::take_until</span>(<span class="string">&quot;\&quot;&quot;</span>)(<span class="ident">input</span>)
+<span class="doccomment">/// 根据 Java 的输出裁剪出版本号文本
+</span><span class="kw">fn </span>query_java_version(java_output: <span class="kw-2">&amp;</span>str) -&gt; <span class="kw-2">&amp;</span>str {
+    <span class="kw">fn </span>parser(input: <span class="kw-2">&amp;</span>str) -&gt; nom::IResult&lt;<span class="kw-2">&amp;</span>str, <span class="kw-2">&amp;</span>str&gt; {
+        nom::bytes::complete::take_until(<span class="string">&quot;\&quot;&quot;</span>)(input)
     }
-    <span class="kw">let</span> <span class="ident">pat</span> <span class="op">=</span> <span class="string">&quot;version \&quot;&quot;</span>;
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">p</span>) <span class="op">=</span> <span class="ident">java_output</span>.<span class="ident">find</span>(<span class="ident">pat</span>) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>((<span class="kw">_</span>, <span class="ident">r</span>)) <span class="op">=</span> <span class="ident">parser</span>(<span class="kw-2">&amp;</span><span class="ident">java_output</span>[<span class="ident">p</span> <span class="op">+</span> <span class="ident">pat</span>.<span class="ident">len</span>()..]) {
-            <span class="ident">r</span>
-        } <span class="kw">else</span> {
-            <span class="string">&quot;&quot;</span>
-        }
-    } <span class="kw">else</span> {
-        <span class="string">&quot;&quot;</span>
-    }
+    <span class="kw">let </span>pat = <span class="string">&quot;version \&quot;&quot;</span>;
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(p) = java_output.find(pat) {
+        <span class="kw">if let </span><span class="prelude-val">Ok</span>((<span class="kw">_</span>, r)) = parser(<span class="kw-2">&amp;</span>java_output[p + pat.len()..]) {
+            r
+        } <span class="kw">else </span>{
+            <span class="string">&quot;&quot;
+        </span>}
+    } <span class="kw">else </span>{
+        <span class="string">&quot;&quot;
+    </span>}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

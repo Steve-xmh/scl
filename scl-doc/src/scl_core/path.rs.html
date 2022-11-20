@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/path.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>path.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../scl_core/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/path.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>path.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../scl_core/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -31,38 +31,38 @@
 <span id="31">31</span>
 <span id="32">32</span>
 <span id="33">33</span>
-</pre><pre class="rust"><code><span class="doccomment">//! 一些常用的路径，用于跨平台统一</span>
-<span class="kw">use</span> <span class="ident">once_cell::sync::Lazy</span>;
+</pre><pre class="rust"><code><span class="doccomment">//! 一些常用的路径，用于跨平台统一
+</span><span class="kw">use </span>once_cell::sync::Lazy;
 
-<span class="kw">type</span> <span class="ident">LazyString</span> <span class="op">=</span> <span class="ident">Lazy</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>;
+<span class="kw">type </span>LazyString = Lazy&lt;String&gt;;
 
-<span class="doccomment">/// 默认的 Minecraft 主目录</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 如果是 Windows 系统，这将指向当前工作目录的 `.minecraft` 文件夹</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 如果是 Linux 系统，这将尝试指向当前主目录（Home Directory）的 `.minecraft` 文件夹</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">static</span> <span class="ident">MINECRAFT_PATH</span>: <span class="ident">LazyString</span> <span class="op">=</span> <span class="ident">Lazy::new</span>(<span class="op">|</span><span class="op">|</span> {
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>))]</span>
-    {
-        <span class="string">&quot;.minecraft&quot;</span>.<span class="ident">into</span>()
+<span class="doccomment">/// 默认的 Minecraft 主目录
+///
+/// 如果是 Windows 系统，这将指向当前工作目录的 `.minecraft` 文件夹
+///
+/// 如果是 Linux 系统，这将尝试指向当前主目录（Home Directory）的 `.minecraft` 文件夹
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">static </span>MINECRAFT_PATH: LazyString = Lazy::new(|| {
+    <span class="attribute">#[cfg(not(target_os = <span class="string">&quot;linux&quot;</span>))]
+    </span>{
+        <span class="string">&quot;.minecraft&quot;</span>.into()
     }
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>)]</span>
-    {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">dir</span>) <span class="op">=</span> <span class="ident">dirs::home_dir</span>() {
-            <span class="ident">dir</span>.<span class="ident">join</span>(<span class="string">&quot;.minecraft&quot;</span>).<span class="ident">to_str</span>().<span class="ident">unwrap</span>().<span class="ident">to_string</span>()
-        } <span class="kw">else</span> {
-            <span class="string">&quot;~/.minecraft&quot;</span>.<span class="ident">into</span>()
+    <span class="attribute">#[cfg(target_os = <span class="string">&quot;linux&quot;</span>)]
+    </span>{
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(dir) = dirs::home_dir() {
+            dir.join(<span class="string">&quot;.minecraft&quot;</span>).to_str().unwrap().to_string()
+        } <span class="kw">else </span>{
+            <span class="string">&quot;~/.minecraft&quot;</span>.into()
         }
     }
 });
 
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">static</span> <span class="ident">MINECRAFT_ASSETS_PATH</span>: <span class="ident">LazyString</span> <span class="op">=</span>
-    <span class="ident">Lazy::new</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;{}/assets&quot;</span>, <span class="ident">MINECRAFT_PATH</span>.<span class="ident">as_str</span>()));
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">static </span>MINECRAFT_ASSETS_PATH: LazyString =
+    Lazy::new(|| <span class="macro">format!</span>(<span class="string">&quot;{}/assets&quot;</span>, MINECRAFT_PATH.as_str()));
 
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">static</span> <span class="ident">MINECRAFT_LIBRARIES_PATH</span>: <span class="ident">LazyString</span> <span class="op">=</span>
-    <span class="ident">Lazy::new</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;{}/libraries&quot;</span>, <span class="ident">MINECRAFT_PATH</span>.<span class="ident">as_str</span>()));
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">static </span>MINECRAFT_LIBRARIES_PATH: LazyString =
+    Lazy::new(|| <span class="macro">format!</span>(<span class="string">&quot;{}/libraries&quot;</span>, MINECRAFT_PATH.as_str()));
 
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">static</span> <span class="ident">MINECRAFT_VERSIONS_PATH</span>: <span class="ident">LazyString</span> <span class="op">=</span>
-    <span class="ident">Lazy::new</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;{}/versions&quot;</span>, <span class="ident">MINECRAFT_PATH</span>.<span class="ident">as_str</span>()));
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">static </span>MINECRAFT_VERSIONS_PATH: LazyString =
+    Lazy::new(|| <span class="macro">format!</span>(<span class="string">&quot;{}/versions&quot;</span>, MINECRAFT_PATH.as_str()));
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

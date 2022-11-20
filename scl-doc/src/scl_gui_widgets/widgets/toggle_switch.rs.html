@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/toggle_switch.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>toggle_switch.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/toggle_switch.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>toggle_switch.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -211,218 +211,218 @@
 <span id="211">211</span>
 <span id="212">212</span>
 <span id="213">213</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">druid</span>::{<span class="ident">piet</span>::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+</pre><pre class="rust"><code><span class="kw">use </span>druid::{piet::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
 
-<span class="doccomment">/// 一个仿 WinUI 3 的开关组件</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ToggleSwitch</span> {
-    <span class="ident">current_thumb_extension</span>: <span class="ident">f64</span>,
-    <span class="ident">current_thumb_radius</span>: <span class="ident">f64</span>,
-    <span class="ident">current_thumb_position</span>: <span class="ident">f64</span>,
-    <span class="ident">dragging_thumb_position</span>: <span class="ident">f64</span>,
+<span class="doccomment">/// 一个仿 WinUI 3 的开关组件
+</span><span class="kw">pub struct </span>ToggleSwitch {
+    current_thumb_extension: f64,
+    current_thumb_radius: f64,
+    current_thumb_position: f64,
+    dragging_thumb_position: f64,
 }
 
-<span class="kw">impl</span> <span class="ident">ToggleSwitch</span> {
-    <span class="doccomment">/// 创建一个开关组件</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::default</span>()
+<span class="kw">impl </span>ToggleSwitch {
+    <span class="doccomment">/// 创建一个开关组件
+    </span><span class="kw">pub fn </span>new() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::default()
     }
 
-    <span class="kw">fn</span> <span class="ident">is_hovering_thumb</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">f64</span>, <span class="ident">y</span>: <span class="ident">f64</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">let</span> <span class="ident">thumb_origin_pos</span> <span class="op">=</span> (<span class="number">4.</span> <span class="op">+</span> <span class="number">4.</span> <span class="op">+</span> <span class="number">6.</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">current_thumb_position</span>, <span class="number">6.</span> <span class="op">+</span> <span class="number">4.</span> <span class="op">+</span> <span class="number">6.</span>);
-        <span class="kw">let</span> <span class="ident">thumb_radius</span> <span class="op">=</span> <span class="number">6f64</span>;
-        <span class="kw">let</span> <span class="ident">distance</span> <span class="op">=</span> (<span class="ident">x</span> <span class="op">-</span> <span class="ident">thumb_origin_pos</span>.<span class="number">0</span>).<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">+</span> (<span class="ident">y</span> <span class="op">-</span> <span class="ident">thumb_origin_pos</span>.<span class="number">1</span>).<span class="ident">powi</span>(<span class="number">2</span>);
-        <span class="ident">distance</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">thumb_radius</span>.<span class="ident">powi</span>(<span class="number">2</span>)
+    <span class="kw">fn </span>is_hovering_thumb(<span class="kw-2">&amp;</span><span class="self">self</span>, x: f64, y: f64) -&gt; bool {
+        <span class="kw">let </span>thumb_origin_pos = (<span class="number">4. </span>+ <span class="number">4. </span>+ <span class="number">6. </span>+ <span class="self">self</span>.current_thumb_position, <span class="number">6. </span>+ <span class="number">4. </span>+ <span class="number">6.</span>);
+        <span class="kw">let </span>thumb_radius = <span class="number">6f64</span>;
+        <span class="kw">let </span>distance = (x - thumb_origin_pos.<span class="number">0</span>).powi(<span class="number">2</span>) + (y - thumb_origin_pos.<span class="number">1</span>).powi(<span class="number">2</span>);
+        distance &lt;= thumb_radius.powi(<span class="number">2</span>)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">ToggleSwitch</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">dragging_thumb_position</span>: <span class="ident">f64::NAN</span>,
-            <span class="ident">current_thumb_position</span>: <span class="number">0.</span>,
-            <span class="ident">current_thumb_radius</span>: <span class="number">0.</span>,
-            <span class="ident">current_thumb_extension</span>: <span class="number">0.</span>,
+<span class="kw">impl </span>Default <span class="kw">for </span>ToggleSwitch {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            dragging_thumb_position: f64::NAN,
+            current_thumb_position: <span class="number">0.</span>,
+            current_thumb_radius: <span class="number">0.</span>,
+            current_thumb_extension: <span class="number">0.</span>,
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ToggleSwitch</span> {
-    <span class="kw">fn</span> <span class="ident">event</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EventCtx</span>, <span class="ident">evt</span>: <span class="kw-2">&amp;</span><span class="ident">Event</span>, <span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="ident">bool</span>, <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">match</span> <span class="ident">evt</span> {
-            <span class="ident">Event::MouseDown</span>(<span class="ident">m</span>) =&gt; {
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">ctx</span>.<span class="ident">is_disabled</span>() {
-                    <span class="ident">ctx</span>.<span class="ident">set_active</span>(<span class="bool-val">true</span>);
-                    <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_hovering_thumb</span>(<span class="ident">m</span>.<span class="ident">pos</span>.<span class="ident">x</span>, <span class="ident">m</span>.<span class="ident">pos</span>.<span class="ident">y</span>) {
-                        <span class="self">self</span>.<span class="ident">dragging_thumb_position</span> <span class="op">=</span> <span class="ident">m</span>.<span class="ident">pos</span>.<span class="ident">x</span>;
-                        <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
+<span class="kw">impl </span>Widget&lt;bool&gt; <span class="kw">for </span>ToggleSwitch {
+    <span class="kw">fn </span>event(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>EventCtx, evt: <span class="kw-2">&amp;</span>Event, data: <span class="kw-2">&amp;mut </span>bool, _env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">match </span>evt {
+            Event::MouseDown(m) =&gt; {
+                <span class="kw">if </span>!ctx.is_disabled() {
+                    ctx.set_active(<span class="bool-val">true</span>);
+                    <span class="kw">if </span><span class="self">self</span>.is_hovering_thumb(m.pos.x, m.pos.y) {
+                        <span class="self">self</span>.dragging_thumb_position = m.pos.x;
+                        ctx.request_anim_frame();
                     }
                 }
             }
-            <span class="ident">Event::MouseUp</span>(<span class="ident">m</span>) =&gt; {
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">ctx</span>.<span class="ident">is_disabled</span>() {
-                    <span class="ident">ctx</span>.<span class="ident">set_active</span>(<span class="bool-val">false</span>);
-                    <span class="kw">let</span> <span class="ident">_last_data</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">data</span>;
-                    <span class="kw">if</span> <span class="self">self</span>.<span class="ident">dragging_thumb_position</span>.<span class="ident">is_nan</span>()
-                        <span class="op">|</span><span class="op">|</span> (<span class="self">self</span>.<span class="ident">dragging_thumb_position</span> <span class="op">-</span> <span class="ident">m</span>.<span class="ident">pos</span>.<span class="ident">x</span>).<span class="ident">abs</span>() <span class="op">&lt;</span> <span class="ident">f64::EPSILON</span>
+            Event::MouseUp(m) =&gt; {
+                <span class="kw">if </span>!ctx.is_disabled() {
+                    ctx.set_active(<span class="bool-val">false</span>);
+                    <span class="kw">let </span>_last_data = <span class="kw-2">*</span>data;
+                    <span class="kw">if </span><span class="self">self</span>.dragging_thumb_position.is_nan()
+                        || (<span class="self">self</span>.dragging_thumb_position - m.pos.x).abs() &lt; f64::EPSILON
                     {
-                        <span class="kw-2">*</span><span class="ident">data</span> <span class="op">=</span> <span class="op">!</span><span class="kw-2">*</span><span class="ident">data</span>;
-                    } <span class="kw">else</span> {
-                        <span class="kw-2">*</span><span class="ident">data</span> <span class="op">=</span>
-                            <span class="self">self</span>.<span class="ident">current_thumb_position</span> <span class="op">&gt;</span> <span class="number">10.</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">current_thumb_extension</span> <span class="op">/</span> <span class="number">2.</span>;
+                        <span class="kw-2">*</span>data = !<span class="kw-2">*</span>data;
+                    } <span class="kw">else </span>{
+                        <span class="kw-2">*</span>data =
+                            <span class="self">self</span>.current_thumb_position &gt; <span class="number">10. </span>- <span class="self">self</span>.current_thumb_extension / <span class="number">2.</span>;
                     }
-                    <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
-                    <span class="self">self</span>.<span class="ident">dragging_thumb_position</span> <span class="op">=</span> <span class="ident">f64::NAN</span>;
+                    ctx.request_anim_frame();
+                    <span class="self">self</span>.dragging_thumb_position = f64::NAN;
                 }
             }
-            <span class="ident">Event::MouseMove</span>(<span class="ident">m</span>) =&gt; {
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">ctx</span>.<span class="ident">is_disabled</span>() <span class="op">&amp;&amp;</span> <span class="ident">ctx</span>.<span class="ident">is_hot</span>() <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">dragging_thumb_position</span>.<span class="ident">is_nan</span>() {
-                    <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">data</span> {
-                        <span class="self">self</span>.<span class="ident">current_thumb_position</span> <span class="op">=</span> <span class="number">20.</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">current_thumb_extension</span> <span class="op">+</span> <span class="ident">m</span>.<span class="ident">pos</span>.<span class="ident">x</span>
-                            <span class="op">-</span> <span class="self">self</span>.<span class="ident">dragging_thumb_position</span>;
-                    } <span class="kw">else</span> {
-                        <span class="self">self</span>.<span class="ident">current_thumb_position</span> <span class="op">=</span> <span class="ident">m</span>.<span class="ident">pos</span>.<span class="ident">x</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">dragging_thumb_position</span>;
+            Event::MouseMove(m) =&gt; {
+                <span class="kw">if </span>!ctx.is_disabled() &amp;&amp; ctx.is_hot() &amp;&amp; !<span class="self">self</span>.dragging_thumb_position.is_nan() {
+                    <span class="kw">if </span><span class="kw-2">*</span>data {
+                        <span class="self">self</span>.current_thumb_position = <span class="number">20. </span>- <span class="self">self</span>.current_thumb_extension + m.pos.x
+                            - <span class="self">self</span>.dragging_thumb_position;
+                    } <span class="kw">else </span>{
+                        <span class="self">self</span>.current_thumb_position = m.pos.x - <span class="self">self</span>.dragging_thumb_position;
                     }
-                    <span class="self">self</span>.<span class="ident">current_thumb_position</span> <span class="op">=</span> <span class="self">self</span>
-                        .<span class="ident">current_thumb_position</span>
-                        .<span class="ident">max</span>(<span class="number">0.</span>)
-                        .<span class="ident">min</span>(<span class="number">20.</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">current_thumb_extension</span>);
+                    <span class="self">self</span>.current_thumb_position = <span class="self">self
+                        </span>.current_thumb_position
+                        .max(<span class="number">0.</span>)
+                        .min(<span class="number">20. </span>- <span class="self">self</span>.current_thumb_extension);
                 }
             }
-            <span class="ident">Event::AnimFrame</span>(<span class="kw">_</span>) =&gt; {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">should_animate</span> <span class="op">=</span> <span class="bool-val">false</span>;
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">dragging_thumb_position</span>.<span class="ident">is_nan</span>() {
-                    <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_active</span>() {
-                        <span class="kw">let</span> <span class="ident">target_position</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">data</span> {
-                            <span class="number">20.</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">current_thumb_extension</span>
-                        } <span class="kw">else</span> {
-                            <span class="number">0.</span>
-                        };
-                        <span class="self">self</span>.<span class="ident">current_thumb_position</span> <span class="op">+</span><span class="op">=</span>
-                            (<span class="ident">target_position</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">current_thumb_position</span>) <span class="op">/</span> <span class="number">4.</span>;
-                        <span class="ident">should_animate</span> <span class="op">|</span><span class="op">=</span>
-                            (<span class="ident">target_position</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">current_thumb_position</span>).<span class="ident">abs</span>() <span class="op">&gt;</span> <span class="ident">f64::EPSILON</span>;
-                        <span class="self">self</span>.<span class="ident">current_thumb_extension</span> <span class="op">+</span><span class="op">=</span> (<span class="number">3.</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">current_thumb_extension</span>) <span class="op">/</span> <span class="number">4.</span>;
-                        <span class="ident">should_animate</span> <span class="op">|</span><span class="op">=</span> (<span class="number">3.</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">current_thumb_extension</span>).<span class="ident">abs</span>() <span class="op">&gt;</span> <span class="ident">f64::EPSILON</span>;
-                    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_hot</span>() {
-                        <span class="self">self</span>.<span class="ident">current_thumb_radius</span> <span class="op">+</span><span class="op">=</span> (<span class="number">1.</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">current_thumb_radius</span>) <span class="op">/</span> <span class="number">4.</span>;
-                        <span class="ident">should_animate</span> <span class="op">|</span><span class="op">=</span> (<span class="number">1.</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">current_thumb_radius</span>).<span class="ident">abs</span>() <span class="op">&gt;</span> <span class="ident">f64::EPSILON</span>;
-                        <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
-                    } <span class="kw">else</span> {
-                        <span class="self">self</span>.<span class="ident">current_thumb_radius</span> <span class="op">-</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">current_thumb_radius</span> <span class="op">/</span> <span class="number">4.</span>;
-                        <span class="ident">should_animate</span> <span class="op">|</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">current_thumb_radius</span>.<span class="ident">abs</span>() <span class="op">&gt;</span> <span class="ident">f64::EPSILON</span>;
+            Event::AnimFrame(<span class="kw">_</span>) =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>should_animate = <span class="bool-val">false</span>;
+                <span class="kw">if </span><span class="self">self</span>.dragging_thumb_position.is_nan() {
+                    <span class="kw">if </span>ctx.is_active() {
+                        <span class="kw">let </span>target_position = <span class="kw">if </span><span class="kw-2">*</span>data {
+                            <span class="number">20. </span>- <span class="self">self</span>.current_thumb_extension
+                        } <span class="kw">else </span>{
+                            <span class="number">0.
+                        </span>};
+                        <span class="self">self</span>.current_thumb_position +=
+                            (target_position - <span class="self">self</span>.current_thumb_position) / <span class="number">4.</span>;
+                        should_animate |=
+                            (target_position - <span class="self">self</span>.current_thumb_position).abs() &gt; f64::EPSILON;
+                        <span class="self">self</span>.current_thumb_extension += (<span class="number">3. </span>- <span class="self">self</span>.current_thumb_extension) / <span class="number">4.</span>;
+                        should_animate |= (<span class="number">3. </span>- <span class="self">self</span>.current_thumb_extension).abs() &gt; f64::EPSILON;
+                    } <span class="kw">else if </span>ctx.is_hot() {
+                        <span class="self">self</span>.current_thumb_radius += (<span class="number">1. </span>- <span class="self">self</span>.current_thumb_radius) / <span class="number">4.</span>;
+                        should_animate |= (<span class="number">1. </span>- <span class="self">self</span>.current_thumb_radius).abs() &gt; f64::EPSILON;
+                        ctx.request_paint();
+                    } <span class="kw">else </span>{
+                        <span class="self">self</span>.current_thumb_radius -= <span class="self">self</span>.current_thumb_radius / <span class="number">4.</span>;
+                        should_animate |= <span class="self">self</span>.current_thumb_radius.abs() &gt; f64::EPSILON;
                     }
-                    <span class="kw">let</span> <span class="ident">target_position</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">data</span> {
-                        <span class="number">20.</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">current_thumb_extension</span>
-                    } <span class="kw">else</span> {
-                        <span class="number">0.</span>
-                    };
-                    <span class="self">self</span>.<span class="ident">current_thumb_position</span> <span class="op">+</span><span class="op">=</span>
-                        (<span class="ident">target_position</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">current_thumb_position</span>) <span class="op">/</span> <span class="number">4.</span>;
-                    <span class="ident">should_animate</span> <span class="op">|</span><span class="op">=</span>
-                        (<span class="ident">target_position</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">current_thumb_position</span>).<span class="ident">abs</span>() <span class="op">&gt;</span> <span class="ident">f64::EPSILON</span>;
-                    <span class="self">self</span>.<span class="ident">current_thumb_extension</span> <span class="op">-</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">current_thumb_extension</span> <span class="op">/</span> <span class="number">4.</span>;
-                    <span class="ident">should_animate</span> <span class="op">|</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">current_thumb_extension</span> <span class="op">&gt;</span> <span class="ident">f64::EPSILON</span>;
-                } <span class="kw">else</span> {
-                    <span class="self">self</span>.<span class="ident">current_thumb_extension</span> <span class="op">+</span><span class="op">=</span> (<span class="number">3.</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">current_thumb_extension</span>) <span class="op">/</span> <span class="number">4.</span>;
-                    <span class="ident">should_animate</span> <span class="op">|</span><span class="op">=</span> (<span class="number">3.</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">current_thumb_extension</span>).<span class="ident">abs</span>() <span class="op">&gt;</span> <span class="ident">f64::EPSILON</span>;
+                    <span class="kw">let </span>target_position = <span class="kw">if </span><span class="kw-2">*</span>data {
+                        <span class="number">20. </span>- <span class="self">self</span>.current_thumb_extension
+                    } <span class="kw">else </span>{
+                        <span class="number">0.
+                    </span>};
+                    <span class="self">self</span>.current_thumb_position +=
+                        (target_position - <span class="self">self</span>.current_thumb_position) / <span class="number">4.</span>;
+                    should_animate |=
+                        (target_position - <span class="self">self</span>.current_thumb_position).abs() &gt; f64::EPSILON;
+                    <span class="self">self</span>.current_thumb_extension -= <span class="self">self</span>.current_thumb_extension / <span class="number">4.</span>;
+                    should_animate |= <span class="self">self</span>.current_thumb_extension &gt; f64::EPSILON;
+                } <span class="kw">else </span>{
+                    <span class="self">self</span>.current_thumb_extension += (<span class="number">3. </span>- <span class="self">self</span>.current_thumb_extension) / <span class="number">4.</span>;
+                    should_animate |= (<span class="number">3. </span>- <span class="self">self</span>.current_thumb_extension).abs() &gt; f64::EPSILON;
                 }
-                <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
-                <span class="kw">if</span> <span class="ident">should_animate</span> {
-                    <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
+                ctx.request_paint();
+                <span class="kw">if </span>should_animate {
+                    ctx.request_anim_frame();
                 }
             }
-            <span class="kw">_</span> =&gt; {}
+            <span class="kw">_ </span>=&gt; {}
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">lifecycle</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LifeCycleCtx</span>, <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">LifeCycle</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">bool</span>, <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">LifeCycle::WidgetAdded</span> <span class="op">=</span> <span class="ident">event</span> {
-            <span class="self">self</span>.<span class="ident">current_thumb_position</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">data</span> {
-                <span class="number">20.</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">current_thumb_extension</span>
-            } <span class="kw">else</span> {
-                <span class="number">0.</span>
-            };
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="ident">LifeCycle::HotChanged</span>(<span class="kw">_</span>) <span class="op">=</span> <span class="ident">event</span> {
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">ctx</span>.<span class="ident">is_disabled</span>() {
-                <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
+    <span class="kw">fn </span>lifecycle(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>LifeCycleCtx, event: <span class="kw-2">&amp;</span>LifeCycle, data: <span class="kw-2">&amp;</span>bool, _env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">if let </span>LifeCycle::WidgetAdded = event {
+            <span class="self">self</span>.current_thumb_position = <span class="kw">if </span><span class="kw-2">*</span>data {
+                <span class="number">20. </span>- <span class="self">self</span>.current_thumb_extension
+            } <span class="kw">else </span>{
+                <span class="number">0.
+            </span>};
+        } <span class="kw">else if let </span>LifeCycle::HotChanged(<span class="kw">_</span>) = event {
+            <span class="kw">if </span>!ctx.is_disabled() {
+                ctx.request_anim_frame();
             }
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">UpdateCtx</span>, <span class="ident">_old_data</span>: <span class="kw-2">&amp;</span><span class="ident">bool</span>, <span class="ident">_data</span>: <span class="kw-2">&amp;</span><span class="ident">bool</span>, <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
+    <span class="kw">fn </span>update(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>UpdateCtx, _old_data: <span class="kw-2">&amp;</span>bool, _data: <span class="kw-2">&amp;</span>bool, _env: <span class="kw-2">&amp;</span>Env) {
+        ctx.request_anim_frame();
     }
 
-    <span class="kw">fn</span> <span class="ident">layout</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">_ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LayoutCtx</span>,
-        <span class="ident">bc</span>: <span class="kw-2">&amp;</span><span class="ident">BoxConstraints</span>,
-        <span class="ident">_data</span>: <span class="kw-2">&amp;</span><span class="ident">bool</span>,
-        <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>,
-    ) -&gt; <span class="ident">Size</span> {
-        <span class="ident">bc</span>.<span class="ident">debug_check</span>(<span class="string">&quot;ToggleSwitch&quot;</span>);
-        <span class="ident">bc</span>.<span class="ident">constrain</span>((<span class="number">48.</span>, <span class="number">32.</span>))
+    <span class="kw">fn </span>layout(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        _ctx: <span class="kw-2">&amp;mut </span>LayoutCtx,
+        bc: <span class="kw-2">&amp;</span>BoxConstraints,
+        _data: <span class="kw-2">&amp;</span>bool,
+        _env: <span class="kw-2">&amp;</span>Env,
+    ) -&gt; Size {
+        bc.debug_check(<span class="string">&quot;ToggleSwitch&quot;</span>);
+        bc.constrain((<span class="number">48.</span>, <span class="number">32.</span>))
     }
 
-    <span class="kw">fn</span> <span class="ident">paint</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">PaintCtx</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">bool</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">let</span> <span class="ident">disabled</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">is_disabled</span>();
-        <span class="kw">let</span> <span class="ident">outline</span> <span class="op">=</span> <span class="ident">Rect::from_origin_size</span>((<span class="number">4.</span> <span class="op">+</span> <span class="number">0.5</span>, <span class="number">6.</span> <span class="op">+</span> <span class="number">0.5</span>), (<span class="number">38.</span> <span class="op">+</span> <span class="number">1.</span>, <span class="number">18.</span> <span class="op">+</span> <span class="number">1.</span>));
-        <span class="kw">let</span> <span class="ident">outline</span> <span class="op">=</span> <span class="ident">outline</span>.<span class="ident">to_rounded_rect</span>(<span class="ident">outline</span>.<span class="ident">height</span>() <span class="op">/</span> <span class="number">2.</span>);
+    <span class="kw">fn </span>paint(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>PaintCtx, data: <span class="kw-2">&amp;</span>bool, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">let </span>disabled = ctx.is_disabled();
+        <span class="kw">let </span>outline = Rect::from_origin_size((<span class="number">4. </span>+ <span class="number">0.5</span>, <span class="number">6. </span>+ <span class="number">0.5</span>), (<span class="number">38. </span>+ <span class="number">1.</span>, <span class="number">18. </span>+ <span class="number">1.</span>));
+        <span class="kw">let </span>outline = outline.to_rounded_rect(outline.height() / <span class="number">2.</span>);
 
-        <span class="ident">ctx</span>.<span class="ident">fill</span>(
-            <span class="kw-2">&amp;</span><span class="ident">outline</span>,
-            <span class="kw-2">&amp;</span><span class="kw">if</span> <span class="ident">disabled</span> {
-                <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">data</span> {
-                    <span class="ident">PaintBrush::Color</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::base::LOW</span>))
-                } <span class="kw">else</span> {
-                    <span class="ident">PaintBrush::Color</span>(<span class="ident">Color::TRANSPARENT</span>)
+        ctx.fill(
+            <span class="kw-2">&amp;</span>outline,
+            <span class="kw-2">&amp;</span><span class="kw">if </span>disabled {
+                <span class="kw">if </span><span class="kw-2">*</span>data {
+                    PaintBrush::Color(env.get(<span class="kw">crate</span>::theme::color::base::LOW))
+                } <span class="kw">else </span>{
+                    PaintBrush::Color(Color::TRANSPARENT)
                 }
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">data</span> {
-                <span class="ident">PaintBrush::Color</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::main::PRIMARY</span>))
-            } <span class="kw">else</span> {
-                <span class="ident">PaintBrush::Color</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::base::LOW</span>))
+            } <span class="kw">else if </span><span class="kw-2">*</span>data {
+                PaintBrush::Color(env.get(<span class="kw">crate</span>::theme::color::main::PRIMARY))
+            } <span class="kw">else </span>{
+                PaintBrush::Color(env.get(<span class="kw">crate</span>::theme::color::base::LOW))
             },
         );
-        <span class="ident">ctx</span>.<span class="ident">stroke</span>(
-            <span class="kw-2">&amp;</span><span class="ident">outline</span>,
-            <span class="kw-2">&amp;</span><span class="kw">if</span> <span class="ident">disabled</span> {
-                <span class="ident">PaintBrush::Color</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::base::LOW</span>))
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">data</span> {
-                <span class="ident">PaintBrush::Color</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::main::PRIMARY</span>))
-            } <span class="kw">else</span> {
-                <span class="ident">PaintBrush::Color</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::base::MEDIUM</span>))
+        ctx.stroke(
+            <span class="kw-2">&amp;</span>outline,
+            <span class="kw-2">&amp;</span><span class="kw">if </span>disabled {
+                PaintBrush::Color(env.get(<span class="kw">crate</span>::theme::color::base::LOW))
+            } <span class="kw">else if </span><span class="kw-2">*</span>data {
+                PaintBrush::Color(env.get(<span class="kw">crate</span>::theme::color::main::PRIMARY))
+            } <span class="kw">else </span>{
+                PaintBrush::Color(env.get(<span class="kw">crate</span>::theme::color::base::MEDIUM))
             },
             <span class="number">1.</span>,
         );
-        <span class="kw">let</span> <span class="ident">thumb_outline</span> <span class="op">=</span> <span class="ident">Rect::from_origin_size</span>(
+        <span class="kw">let </span>thumb_outline = Rect::from_origin_size(
             (
-                <span class="number">4.</span> <span class="op">+</span> <span class="number">4.</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">current_thumb_position</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">current_thumb_radius</span> <span class="op">/</span> <span class="number">2.</span>,
-                <span class="number">6.</span> <span class="op">+</span> <span class="number">4.</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">current_thumb_radius</span> <span class="op">/</span> <span class="number">2.</span>,
+                <span class="number">4. </span>+ <span class="number">4. </span>+ <span class="self">self</span>.current_thumb_position - <span class="self">self</span>.current_thumb_radius / <span class="number">2.</span>,
+                <span class="number">6. </span>+ <span class="number">4. </span>- <span class="self">self</span>.current_thumb_radius / <span class="number">2.</span>,
             ),
             (
-                <span class="number">12.</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">current_thumb_radius</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">current_thumb_extension</span>,
-                <span class="number">12.</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">current_thumb_radius</span>,
+                <span class="number">12. </span>+ <span class="self">self</span>.current_thumb_radius + <span class="self">self</span>.current_thumb_extension,
+                <span class="number">12. </span>+ <span class="self">self</span>.current_thumb_radius,
             ),
         );
-        <span class="kw">let</span> <span class="ident">thumb_outline</span> <span class="op">=</span> <span class="ident">thumb_outline</span>.<span class="ident">to_rounded_rect</span>(<span class="ident">thumb_outline</span>.<span class="ident">height</span>() <span class="op">/</span> <span class="number">2.</span>);
-        <span class="ident">ctx</span>.<span class="ident">fill</span>(
-            <span class="kw-2">&amp;</span><span class="ident">thumb_outline</span>,
-            <span class="kw-2">&amp;</span><span class="kw">if</span> <span class="ident">disabled</span> {
-                <span class="ident">PaintBrush::Color</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::base::MEDIUM_LOW</span>))
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">data</span> {
-                <span class="ident">PaintBrush::Color</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::alt::HIGH</span>))
-            } <span class="kw">else</span> {
-                <span class="ident">PaintBrush::Color</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::chrome::ALT_LOW</span>))
+        <span class="kw">let </span>thumb_outline = thumb_outline.to_rounded_rect(thumb_outline.height() / <span class="number">2.</span>);
+        ctx.fill(
+            <span class="kw-2">&amp;</span>thumb_outline,
+            <span class="kw-2">&amp;</span><span class="kw">if </span>disabled {
+                PaintBrush::Color(env.get(<span class="kw">crate</span>::theme::color::base::MEDIUM_LOW))
+            } <span class="kw">else if </span><span class="kw-2">*</span>data {
+                PaintBrush::Color(env.get(<span class="kw">crate</span>::theme::color::alt::HIGH))
+            } <span class="kw">else </span>{
+                PaintBrush::Color(env.get(<span class="kw">crate</span>::theme::color::chrome::ALT_LOW))
             },
         );
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">disabled</span> {
-            <span class="ident">ctx</span>.<span class="ident">stroke</span>(
-                <span class="kw-2">&amp;</span><span class="ident">thumb_outline</span>,
-                <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::base::LOW</span>)),
+        <span class="kw">if </span>!disabled {
+            ctx.stroke(
+                <span class="kw-2">&amp;</span>thumb_outline,
+                <span class="kw-2">&amp;</span>PaintBrush::Color(env.get(<span class="kw">crate</span>::theme::color::base::LOW)),
                 <span class="number">1.</span>,
             );
         }
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

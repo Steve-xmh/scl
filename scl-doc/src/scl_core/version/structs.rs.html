@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/version/structs.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>structs.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_core/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/version/structs.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>structs.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_core/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -708,334 +708,334 @@
 <span id="708">708</span>
 <span id="709">709</span>
 <span id="710">710</span>
-</pre><pre class="rust"><code><span class="doccomment">//! 所有的启动器元数据结构都在这里</span>
+</pre><pre class="rust"><code><span class="doccomment">//! 所有的启动器元数据结构都在这里
 
-<span class="kw">use</span> <span class="ident">std</span>::{
-    <span class="ident">collections::BTreeMap</span> <span class="kw">as</span> <span class="ident">Map</span>,
-    <span class="ident">fmt</span>,
-    <span class="ident">marker::PhantomData</span>,
-    <span class="ident">path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>},
+</span><span class="kw">use </span>std::{
+    collections::BTreeMap <span class="kw">as </span>Map,
+    fmt,
+    marker::PhantomData,
+    path::{Path, PathBuf},
 };
 
-<span class="kw">use</span> <span class="ident">inner_future::stream::StreamExt</span>;
-<span class="kw">use</span> <span class="ident">serde</span>::{
-    <span class="ident">de</span>::{<span class="self">self</span>, <span class="ident">SeqAccess</span>, <span class="ident">Visitor</span>},
-    <span class="ident">Deserialize</span>, <span class="ident">Deserializer</span>, <span class="ident">Serialize</span>,
+<span class="kw">use </span>inner_future::stream::StreamExt;
+<span class="kw">use </span>serde::{
+    de::{<span class="self">self</span>, SeqAccess, Visitor},
+    Deserialize, Deserializer, Serialize,
 };
 
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::VersionType</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::{
-    <span class="ident">package::PackageName</span>,
-    <span class="ident">prelude</span>::<span class="kw-2">*</span>,
-    <span class="ident">semver::MinecraftVersion</span>,
-    <span class="ident">utils</span>::{<span class="ident">get_full_path</span>, <span class="ident">NATIVE_ARCH_LAZY</span>},
+<span class="kw">use </span><span class="kw">super</span>::VersionType;
+<span class="kw">use crate</span>::{
+    package::PackageName,
+    prelude::<span class="kw-2">*</span>,
+    semver::MinecraftVersion,
+    utils::{get_full_path, NATIVE_ARCH_LAZY},
 };
 
-<span class="doccomment">/// 一个针对系统的规则</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">OSRule</span> {
-    <span class="doccomment">/// 系统名称，通常是直接和 [`crate::utils::TARGET_OS`] 比对即可</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 系统版本号，依照平台而定</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">version</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 系统架构，通常是直接和 [`crate::utils::NATIVE_ARCH_LAZY`] 比对即可</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">arch</span>: <span class="ident">String</span>,
+<span class="doccomment">/// 一个针对系统的规则
+</span><span class="attribute">#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone)]
+</span><span class="kw">pub struct </span>OSRule {
+    <span class="doccomment">/// 系统名称，通常是直接和 [`crate::utils::TARGET_OS`] 比对即可
+    </span><span class="attribute">#[serde(default)]
+    </span><span class="kw">pub </span>name: String,
+    <span class="doccomment">/// 系统版本号，依照平台而定
+    </span><span class="attribute">#[serde(default)]
+    </span><span class="kw">pub </span>version: String,
+    <span class="doccomment">/// 系统架构，通常是直接和 [`crate::utils::NATIVE_ARCH_LAZY`] 比对即可
+    </span><span class="attribute">#[serde(default)]
+    </span><span class="kw">pub </span>arch: String,
 }
 
-<span class="doccomment">/// 一个规则</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ApplyRule</span> {
-    <span class="doccomment">/// 规则的类型，通常是 `allow` 或者 `disallow`</span>
-    <span class="kw">pub</span> <span class="ident">action</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 规则需要满足的操作系统类型</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Option::is_none&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">os</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">OSRule</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// 规则需要满足的一些特殊情况</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 但是 SCL 并没有使用这部分来做判断</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Option::is_none&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">features</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Map</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">bool</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="doccomment">/// 一个规则
+</span><span class="attribute">#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone)]
+</span><span class="kw">pub struct </span>ApplyRule {
+    <span class="doccomment">/// 规则的类型，通常是 `allow` 或者 `disallow`
+    </span><span class="kw">pub </span>action: String,
+    <span class="doccomment">/// 规则需要满足的操作系统类型
+    </span><span class="attribute">#[serde(default)]
+    #[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span><span class="kw">pub </span>os: <span class="prelude-ty">Option</span>&lt;OSRule&gt;,
+    <span class="doccomment">/// 规则需要满足的一些特殊情况
+    ///
+    /// 但是 SCL 并没有使用这部分来做判断
+    </span><span class="attribute">#[serde(default)]
+    #[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span><span class="kw">pub </span>features: <span class="prelude-ty">Option</span>&lt;Map&lt;String, bool&gt;&gt;,
 }
 
-<span class="doccomment">/// 一个用于检查规则是否满足条件的特质</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// [`ApplyRule`] 实现了这个特质</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Allowed</span> {
-    <span class="doccomment">/// 判断当前情况是否满足该规则</span>
-    <span class="kw">fn</span> <span class="ident">is_allowed</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span>;
+<span class="doccomment">/// 一个用于检查规则是否满足条件的特质
+///
+/// [`ApplyRule`] 实现了这个特质
+</span><span class="kw">pub trait </span>Allowed {
+    <span class="doccomment">/// 判断当前情况是否满足该规则
+    </span><span class="kw">fn </span>is_allowed(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool;
 }
 
-<span class="kw">impl</span> <span class="ident">Allowed</span> <span class="kw">for</span> [<span class="ident">ApplyRule</span>] {
-    <span class="kw">fn</span> <span class="ident">is_allowed</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_empty</span>() {
-            <span class="bool-val">true</span>
-        } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">should_push</span> <span class="op">=</span> <span class="bool-val">false</span>;
-            <span class="kw">for</span> <span class="ident">rule</span> <span class="kw">in</span> <span class="self">self</span> {
-                <span class="kw">if</span> <span class="ident">rule</span>.<span class="ident">action</span> <span class="op">==</span> <span class="string">&quot;disallow&quot;</span> {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">os</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">rule</span>.<span class="ident">os</span> {
-                        <span class="kw">if</span> <span class="op">!</span><span class="ident">os</span>.<span class="ident">name</span>.<span class="ident">is_empty</span>()
-                            <span class="op">&amp;&amp;</span> <span class="ident">os</span>.<span class="ident">name</span> <span class="op">!</span><span class="op">=</span> <span class="ident"><span class="kw">crate</span>::utils::TARGET_OS</span>
-                            <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">os</span>.<span class="ident">arch</span>.<span class="ident">is_empty</span>()
-                            <span class="op">&amp;&amp;</span> <span class="ident">os</span>.<span class="ident">arch</span> <span class="op">!</span><span class="op">=</span> <span class="ident">NATIVE_ARCH_LAZY</span>.<span class="ident">as_ref</span>()
+<span class="kw">impl </span>Allowed <span class="kw">for </span>[ApplyRule] {
+    <span class="kw">fn </span>is_allowed(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="kw">if </span><span class="self">self</span>.is_empty() {
+            <span class="bool-val">true
+        </span>} <span class="kw">else </span>{
+            <span class="kw">let </span><span class="kw-2">mut </span>should_push = <span class="bool-val">false</span>;
+            <span class="kw">for </span>rule <span class="kw">in </span><span class="self">self </span>{
+                <span class="kw">if </span>rule.action == <span class="string">&quot;disallow&quot; </span>{
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(os) = <span class="kw-2">&amp;</span>rule.os {
+                        <span class="kw">if </span>!os.name.is_empty()
+                            &amp;&amp; os.name != <span class="kw">crate</span>::utils::TARGET_OS
+                            &amp;&amp; !os.arch.is_empty()
+                            &amp;&amp; os.arch != NATIVE_ARCH_LAZY.as_ref()
                         {
                             <span class="kw">continue</span>;
-                        } <span class="kw">else</span> {
+                        } <span class="kw">else </span>{
                             <span class="kw">break</span>;
                         }
-                    } <span class="kw">else</span> {
+                    } <span class="kw">else </span>{
                         <span class="kw">continue</span>;
                     }
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">rule</span>.<span class="ident">action</span> <span class="op">==</span> <span class="string">&quot;allow&quot;</span> {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">os</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">rule</span>.<span class="ident">os</span> {
-                        <span class="kw">if</span> (<span class="op">!</span><span class="ident">os</span>.<span class="ident">name</span>.<span class="ident">is_empty</span>() <span class="op">&amp;&amp;</span> <span class="ident">os</span>.<span class="ident">name</span> <span class="op">!</span><span class="op">=</span> <span class="ident"><span class="kw">crate</span>::utils::TARGET_OS</span>)
-                            <span class="op">|</span><span class="op">|</span> (<span class="op">!</span><span class="ident">os</span>.<span class="ident">arch</span>.<span class="ident">is_empty</span>() <span class="op">&amp;&amp;</span> <span class="ident">os</span>.<span class="ident">arch</span> <span class="op">!</span><span class="op">=</span> <span class="ident">NATIVE_ARCH_LAZY</span>.<span class="ident">as_ref</span>())
+                } <span class="kw">else if </span>rule.action == <span class="string">&quot;allow&quot; </span>{
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(os) = <span class="kw-2">&amp;</span>rule.os {
+                        <span class="kw">if </span>(!os.name.is_empty() &amp;&amp; os.name != <span class="kw">crate</span>::utils::TARGET_OS)
+                            || (!os.arch.is_empty() &amp;&amp; os.arch != NATIVE_ARCH_LAZY.as_ref())
                         {
                             <span class="kw">continue</span>;
-                        } <span class="kw">else</span> {
-                            <span class="ident">should_push</span> <span class="op">=</span> <span class="bool-val">true</span>;
+                        } <span class="kw">else </span>{
+                            should_push = <span class="bool-val">true</span>;
                             <span class="kw">break</span>;
                         }
-                    } <span class="kw">else</span> {
-                        <span class="ident">should_push</span> <span class="op">=</span> <span class="bool-val">true</span>; <span class="comment">// 可能会有不允许的情况，继续寻找</span>
-                        <span class="kw">continue</span>;
+                    } <span class="kw">else </span>{
+                        should_push = <span class="bool-val">true</span>; <span class="comment">// 可能会有不允许的情况，继续寻找
+                        </span><span class="kw">continue</span>;
                     }
                 }
             }
-            <span class="ident">should_push</span>
+            should_push
         }
     }
 }
 
-<span class="doccomment">/// 特殊指派的参数</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SpecificalArgument</span> {
-    <span class="doccomment">/// 添加此参数需要满足的条件</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Vec::is_empty&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">rules</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ApplyRule</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// 需要添加的参数</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Vec::is_empty&quot;</span>)]</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">deserialize_with</span> <span class="op">=</span> <span class="string">&quot;string_or_seq&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">value</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+<span class="doccomment">/// 特殊指派的参数
+</span><span class="attribute">#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone)]
+</span><span class="kw">pub struct </span>SpecificalArgument {
+    <span class="doccomment">/// 添加此参数需要满足的条件
+    </span><span class="attribute">#[serde(default)]
+    #[serde(skip_serializing_if = <span class="string">&quot;Vec::is_empty&quot;</span>)]
+    </span><span class="kw">pub </span>rules: Vec&lt;ApplyRule&gt;,
+    <span class="doccomment">/// 需要添加的参数
+    </span><span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Vec::is_empty&quot;</span>)]
+    #[serde(deserialize_with = <span class="string">&quot;string_or_seq&quot;</span>)]
+    </span><span class="kw">pub </span>value: Vec&lt;String&gt;,
 }
 
-<span class="doccomment">/// 游戏启动的一个参数</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Clone</span>)]</span>
-<span class="attribute">#[<span class="ident">serde</span>(<span class="ident">untagged</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Argument</span> {
-    <span class="doccomment">/// 无条件的参数，必须附加</span>
-    <span class="ident">Common</span>(<span class="ident">String</span>),
-    <span class="doccomment">/// 有条件的参数，需要根据条件附加</span>
-    <span class="ident">Specify</span>(<span class="ident">SpecificalArgument</span>),
+<span class="doccomment">/// 游戏启动的一个参数
+</span><span class="attribute">#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone)]
+#[serde(untagged)]
+</span><span class="kw">pub enum </span>Argument {
+    <span class="doccomment">/// 无条件的参数，必须附加
+    </span>Common(String),
+    <span class="doccomment">/// 有条件的参数，需要根据条件附加
+    </span>Specify(SpecificalArgument),
 }
 
-<span class="attribute">#[<span class="ident">test</span>]</span>
-<span class="kw">fn</span> <span class="ident">argument_test</span>() {
-    <span class="kw">let</span> <span class="ident">text</span> <span class="op">=</span> <span class="ident">serde_json::from_str</span>::<span class="op">&lt;</span><span class="ident">Argument</span><span class="op">&gt;</span>(<span class="string">r#&quot;&quot;test&quot;&quot;#</span>).<span class="ident">unwrap</span>();
-    <span class="macro">assert_eq!</span>(<span class="ident">text</span>, <span class="ident">Argument::Common</span>(<span class="string">&quot;test&quot;</span>.<span class="ident">into</span>()));
-    <span class="kw">let</span> <span class="ident">specify</span> <span class="op">=</span> <span class="ident">serde_json::from_str</span>::<span class="op">&lt;</span><span class="ident">Argument</span><span class="op">&gt;</span>(<span class="string">r#&quot;{&quot;rules&quot;:[],&quot;value&quot;:&quot;test&quot;}&quot;#</span>).<span class="ident">unwrap</span>();
+<span class="attribute">#[test]
+</span><span class="kw">fn </span>argument_test() {
+    <span class="kw">let </span>text = serde_json::from_str::&lt;Argument&gt;(<span class="string">r#&quot;&quot;test&quot;&quot;#</span>).unwrap();
+    <span class="macro">assert_eq!</span>(text, Argument::Common(<span class="string">&quot;test&quot;</span>.into()));
+    <span class="kw">let </span>specify = serde_json::from_str::&lt;Argument&gt;(<span class="string">r#&quot;{&quot;rules&quot;:[],&quot;value&quot;:&quot;test&quot;}&quot;#</span>).unwrap();
     <span class="macro">assert_eq!</span>(
-        <span class="ident">specify</span>,
-        <span class="ident">Argument::Specify</span>(<span class="ident">SpecificalArgument</span> {
-            <span class="ident">rules</span>: <span class="macro">vec!</span>[],
-            <span class="ident">value</span>: <span class="macro">vec!</span>[<span class="string">&quot;test&quot;</span>.<span class="ident">into</span>()]
+        specify,
+        Argument::Specify(SpecificalArgument {
+            rules: <span class="macro">vec!</span>[],
+            value: <span class="macro">vec!</span>[<span class="string">&quot;test&quot;</span>.into()]
         })
     );
 }
 
-<span class="doccomment">/// 游戏启动参数</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-<span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Arguments</span> {
-    <span class="doccomment">/// 用于添加到主类参数后面的游戏参数</span>
-    <span class="kw">pub</span> <span class="ident">game</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Argument</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// 用于添加到 Class Path 前面的 JVM 参数</span>
-    <span class="kw">pub</span> <span class="ident">jvm</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Argument</span><span class="op">&gt;</span>,
+<span class="doccomment">/// 游戏启动参数
+</span><span class="attribute">#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone, Default)]
+#[serde(default)]
+</span><span class="kw">pub struct </span>Arguments {
+    <span class="doccomment">/// 用于添加到主类参数后面的游戏参数
+    </span><span class="kw">pub </span>game: Vec&lt;Argument&gt;,
+    <span class="doccomment">/// 用于添加到 Class Path 前面的 JVM 参数
+    </span><span class="kw">pub </span>jvm: Vec&lt;Argument&gt;,
 }
 
-<span class="doccomment">/// 素材索引信息</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">AssetIndex</span> {
-    <span class="doccomment">/// 素材的索引文件 ID，通常是当前的游戏版本号</span>
-    <span class="kw">pub</span> <span class="ident">id</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 素材的索引文件 SHA1 摘要</span>
-    <span class="kw">pub</span> <span class="ident">sha1</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 素材的索引文件大小，以字节为单位</span>
-    <span class="kw">pub</span> <span class="ident">size</span>: <span class="ident">u32</span>,
-    <span class="doccomment">/// 所有素材的总计大小，以字节为单位</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;totalSize&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">total_size</span>: <span class="ident">u32</span>,
-    <span class="doccomment">/// 素材的索引文件的下载链接</span>
-    <span class="kw">pub</span> <span class="ident">url</span>: <span class="ident">String</span>,
+<span class="doccomment">/// 素材索引信息
+</span><span class="attribute">#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone)]
+</span><span class="kw">pub struct </span>AssetIndex {
+    <span class="doccomment">/// 素材的索引文件 ID，通常是当前的游戏版本号
+    </span><span class="kw">pub </span>id: String,
+    <span class="doccomment">/// 素材的索引文件 SHA1 摘要
+    </span><span class="kw">pub </span>sha1: String,
+    <span class="doccomment">/// 素材的索引文件大小，以字节为单位
+    </span><span class="kw">pub </span>size: u32,
+    <span class="doccomment">/// 所有素材的总计大小，以字节为单位
+    </span><span class="attribute">#[serde(rename = <span class="string">&quot;totalSize&quot;</span>)]
+    </span><span class="kw">pub </span>total_size: u32,
+    <span class="doccomment">/// 素材的索引文件的下载链接
+    </span><span class="kw">pub </span>url: String,
 }
 
-<span class="doccomment">/// 一个下载项目结构</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">DownloadItem</span> {
-    <span class="doccomment">/// 如果提供，则是下载的安装路径</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">path</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 该下载项目的文件 SHA1 摘要值</span>
-    <span class="kw">pub</span> <span class="ident">sha1</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 该下载项目的文件大小，以字节为单位</span>
-    <span class="kw">pub</span> <span class="ident">size</span>: <span class="ident">usize</span>,
-    <span class="doccomment">/// 该下载项目的下载链接，如果不提供则应该都是 Maven 的仓库路径，开头加上镜像源链接下载即可</span>
-    <span class="kw">pub</span> <span class="ident">url</span>: <span class="ident">String</span>,
+<span class="doccomment">/// 一个下载项目结构
+</span><span class="attribute">#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone)]
+</span><span class="kw">pub struct </span>DownloadItem {
+    <span class="doccomment">/// 如果提供，则是下载的安装路径
+    </span><span class="attribute">#[serde(default)]
+    </span><span class="kw">pub </span>path: String,
+    <span class="doccomment">/// 该下载项目的文件 SHA1 摘要值
+    </span><span class="kw">pub </span>sha1: String,
+    <span class="doccomment">/// 该下载项目的文件大小，以字节为单位
+    </span><span class="kw">pub </span>size: usize,
+    <span class="doccomment">/// 该下载项目的下载链接，如果不提供则应该都是 Maven 的仓库路径，开头加上镜像源链接下载即可
+    </span><span class="kw">pub </span>url: String,
 }
 
-<span class="doccomment">/// 依赖库的下载信息结构</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LibraryDownload</span> {
-    <span class="doccomment">/// 需要下载的包，通常是 JAR 文件</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Option::is_none&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">artifact</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">DownloadItem</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// 旧版原生库的分类下载信息</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Option::is_none&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">classifiers</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Map</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">DownloadItem</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+<span class="doccomment">/// 依赖库的下载信息结构
+</span><span class="attribute">#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone)]
+</span><span class="kw">pub struct </span>LibraryDownload {
+    <span class="doccomment">/// 需要下载的包，通常是 JAR 文件
+    </span><span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span><span class="kw">pub </span>artifact: <span class="prelude-ty">Option</span>&lt;DownloadItem&gt;,
+    <span class="doccomment">/// 旧版原生库的分类下载信息
+    </span><span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span><span class="kw">pub </span>classifiers: <span class="prelude-ty">Option</span>&lt;Map&lt;String, DownloadItem&gt;&gt;,
 }
 
-<span class="doccomment">/// 一个依赖库结构</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 通过访问 [`Library::rules`] 并调用 [`Allowed::is_allowed`] 来确认此依赖是否需要被下载/添加</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Library</span> {
-    <span class="doccomment">/// 添加这个依赖库需要满足的规则</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Vec::is_empty&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">rules</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ApplyRule</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// 需要下载的依赖库项目</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Option::is_none&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">downloads</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">LibraryDownload</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// 旧版本的依赖下载链接，常见于一些模组加载器里</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Option::is_none&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">url</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// 旧版本的依赖原生库项目，新版本将直接把原生库放在了 [`Library::downloads`] 项目里直接作为 Class Path 的一部分导入了。</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Option::is_none&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">natives</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Map</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// 这个依赖库的名称，通常是包名和版本号</span>
-    <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">String</span>,
+<span class="doccomment">/// 一个依赖库结构
+///
+/// 通过访问 [`Library::rules`] 并调用 [`Allowed::is_allowed`] 来确认此依赖是否需要被下载/添加
+</span><span class="attribute">#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone)]
+</span><span class="kw">pub struct </span>Library {
+    <span class="doccomment">/// 添加这个依赖库需要满足的规则
+    </span><span class="attribute">#[serde(default)]
+    #[serde(skip_serializing_if = <span class="string">&quot;Vec::is_empty&quot;</span>)]
+    </span><span class="kw">pub </span>rules: Vec&lt;ApplyRule&gt;,
+    <span class="doccomment">/// 需要下载的依赖库项目
+    </span><span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span><span class="kw">pub </span>downloads: <span class="prelude-ty">Option</span>&lt;LibraryDownload&gt;,
+    <span class="doccomment">/// 旧版本的依赖下载链接，常见于一些模组加载器里
+    </span><span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span><span class="kw">pub </span>url: <span class="prelude-ty">Option</span>&lt;String&gt;,
+    <span class="doccomment">/// 旧版本的依赖原生库项目，新版本将直接把原生库放在了 [`Library::downloads`] 项目里直接作为 Class Path 的一部分导入了。
+    </span><span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span><span class="kw">pub </span>natives: <span class="prelude-ty">Option</span>&lt;Map&lt;String, String&gt;&gt;,
+    <span class="doccomment">/// 这个依赖库的名称，通常是包名和版本号
+    </span><span class="kw">pub </span>name: String,
 }
 
-<span class="doccomment">/// 日志配置文件的下载信息</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LoggingFile</span> {
-    <span class="doccomment">/// 日志配置的 ID</span>
-    <span class="kw">pub</span> <span class="ident">id</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 日志配置文件的 SHA1 摘要</span>
-    <span class="kw">pub</span> <span class="ident">sha1</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 日志配置文件的大小，以字节为单位</span>
-    <span class="kw">pub</span> <span class="ident">size</span>: <span class="ident">u32</span>,
-    <span class="doccomment">/// 日志配置文件的下载链接</span>
-    <span class="kw">pub</span> <span class="ident">url</span>: <span class="ident">String</span>,
+<span class="doccomment">/// 日志配置文件的下载信息
+</span><span class="attribute">#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone)]
+</span><span class="kw">pub struct </span>LoggingFile {
+    <span class="doccomment">/// 日志配置的 ID
+    </span><span class="kw">pub </span>id: String,
+    <span class="doccomment">/// 日志配置文件的 SHA1 摘要
+    </span><span class="kw">pub </span>sha1: String,
+    <span class="doccomment">/// 日志配置文件的大小，以字节为单位
+    </span><span class="kw">pub </span>size: u32,
+    <span class="doccomment">/// 日志配置文件的下载链接
+    </span><span class="kw">pub </span>url: String,
 }
 
-<span class="doccomment">/// 日志处理方式，通常是 Log4J 的相关配置</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 不过 SCL 并没有用这里的东西</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LoggingConfig</span> {
-    <span class="doccomment">/// 日志相关参数</span>
-    <span class="kw">pub</span> <span class="ident">argument</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 日志输出类型</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;type&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">logger_type</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 日志配置文件的下载结构</span>
-    <span class="kw">pub</span> <span class="ident">file</span>: <span class="ident">LoggingFile</span>,
+<span class="doccomment">/// 日志处理方式，通常是 Log4J 的相关配置
+///
+/// 不过 SCL 并没有用这里的东西
+</span><span class="attribute">#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone)]
+</span><span class="kw">pub struct </span>LoggingConfig {
+    <span class="doccomment">/// 日志相关参数
+    </span><span class="kw">pub </span>argument: String,
+    <span class="doccomment">/// 日志输出类型
+    </span><span class="attribute">#[serde(rename = <span class="string">&quot;type&quot;</span>)]
+    </span><span class="kw">pub </span>logger_type: String,
+    <span class="doccomment">/// 日志配置文件的下载结构
+    </span><span class="kw">pub </span>file: LoggingFile,
 }
 
-<span class="doccomment">/// SCL 的独立版本设置，此处的信息会</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-<span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SCLLaunchConfig</span> {
-    <span class="doccomment">/// 最大内存，单位 MB，如不提供则为自动</span>
-    <span class="kw">pub</span> <span class="ident">max_mem</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// Java 运行时路径</span>
-    <span class="kw">pub</span> <span class="ident">java_path</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 是否使用版本独立</span>
-    <span class="kw">pub</span> <span class="ident">game_independent</span>: <span class="ident">bool</span>,
-    <span class="doccomment">/// 是否使用命令行启动（仅 Windows 可用）</span>
-    <span class="kw">pub</span> <span class="ident">use_terminal_launch</span>: <span class="ident">bool</span>,
-    <span class="doccomment">/// 设定游戏窗口标题</span>
-    <span class="kw">pub</span> <span class="ident">window_title</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 额外的 JVM 参数，将会附加到 Class Path 前面</span>
-    <span class="kw">pub</span> <span class="ident">jvm_args</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 额外的游戏参数，将会附加到参数末尾</span>
-    <span class="kw">pub</span> <span class="ident">game_args</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 包装器执行文件路径，对于某些 Linux 用户有用，用于指定 Java 前的执行文件</span>
-    <span class="kw">pub</span> <span class="ident">wrapper_path</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 包装器执行文件参数，将会附加到包装器执行文件后</span>
-    <span class="kw">pub</span> <span class="ident">wrapper_args</span>: <span class="ident">String</span>,
+<span class="doccomment">/// SCL 的独立版本设置，此处的信息会
+</span><span class="attribute">#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone, Default)]
+#[serde(default)]
+</span><span class="kw">pub struct </span>SCLLaunchConfig {
+    <span class="doccomment">/// 最大内存，单位 MB，如不提供则为自动
+    </span><span class="kw">pub </span>max_mem: <span class="prelude-ty">Option</span>&lt;usize&gt;,
+    <span class="doccomment">/// Java 运行时路径
+    </span><span class="kw">pub </span>java_path: String,
+    <span class="doccomment">/// 是否使用版本独立
+    </span><span class="kw">pub </span>game_independent: bool,
+    <span class="doccomment">/// 是否使用命令行启动（仅 Windows 可用）
+    </span><span class="kw">pub </span>use_terminal_launch: bool,
+    <span class="doccomment">/// 设定游戏窗口标题
+    </span><span class="kw">pub </span>window_title: String,
+    <span class="doccomment">/// 额外的 JVM 参数，将会附加到 Class Path 前面
+    </span><span class="kw">pub </span>jvm_args: String,
+    <span class="doccomment">/// 额外的游戏参数，将会附加到参数末尾
+    </span><span class="kw">pub </span>game_args: String,
+    <span class="doccomment">/// 包装器执行文件路径，对于某些 Linux 用户有用，用于指定 Java 前的执行文件
+    </span><span class="kw">pub </span>wrapper_path: String,
+    <span class="doccomment">/// 包装器执行文件参数，将会附加到包装器执行文件后
+    </span><span class="kw">pub </span>wrapper_args: String,
 }
 
-<span class="doccomment">/// 版本元数据里的日志方式</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Logging</span> {
-    <span class="doccomment">/// 针对客户端的日志处理方式</span>
-    <span class="kw">pub</span> <span class="ident">client</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">LoggingConfig</span><span class="op">&gt;</span>,
+<span class="doccomment">/// 版本元数据里的日志方式
+</span><span class="attribute">#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone)]
+</span><span class="kw">pub struct </span>Logging {
+    <span class="doccomment">/// 针对客户端的日志处理方式
+    </span><span class="kw">pub </span>client: <span class="prelude-ty">Option</span>&lt;LoggingConfig&gt;,
 }
 
-<span class="doccomment">/// 版本元数据</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Serialize</span>, <span class="ident">Deserialize</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">VersionMeta</span> {
-    <span class="doccomment">/// 继承某个版本</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;inheritsFrom&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">inherits_from</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 1.12 以前的继承版本</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;clientVersion&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">client_version</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 游戏启动参数</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Option::is_none&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">arguments</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Arguments</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// 游戏启动参数 旧版本</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;minecraftArguments&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">minecraft_arguments</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 资源索引元数据</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;assetIndex&quot;</span>)]</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Option::is_none&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">asset_index</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">AssetIndex</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// 该版本需要下载的主要游戏文件信息</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Option::is_none&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">downloads</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Map</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">DownloadItem</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// 该版本所需的依赖库列表</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">libraries</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Library</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// 该版本元数据的日志输出配置</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Option::is_none&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">logging</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Logging</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// 该版本元数据的主类</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename</span> <span class="op">=</span> <span class="string">&quot;mainClass&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">main_class</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 该版本元数据的主类列表，因为有可能存在多个主类 JAR</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip</span>)]</span>
-    <span class="kw">pub</span> <span class="ident">main_jars</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+<span class="doccomment">/// 版本元数据
+</span><span class="attribute">#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone)]
+</span><span class="kw">pub struct </span>VersionMeta {
+    <span class="doccomment">/// 继承某个版本
+    </span><span class="attribute">#[serde(default)]
+    #[serde(rename = <span class="string">&quot;inheritsFrom&quot;</span>)]
+    </span><span class="kw">pub </span>inherits_from: String,
+    <span class="doccomment">/// 1.12 以前的继承版本
+    </span><span class="attribute">#[serde(default)]
+    #[serde(rename = <span class="string">&quot;clientVersion&quot;</span>)]
+    </span><span class="kw">pub </span>client_version: String,
+    <span class="doccomment">/// 游戏启动参数
+    </span><span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span><span class="kw">pub </span>arguments: <span class="prelude-ty">Option</span>&lt;Arguments&gt;,
+    <span class="doccomment">/// 游戏启动参数 旧版本
+    </span><span class="attribute">#[serde(default)]
+    #[serde(rename = <span class="string">&quot;minecraftArguments&quot;</span>)]
+    </span><span class="kw">pub </span>minecraft_arguments: String,
+    <span class="doccomment">/// 资源索引元数据
+    </span><span class="attribute">#[serde(rename = <span class="string">&quot;assetIndex&quot;</span>)]
+    #[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span><span class="kw">pub </span>asset_index: <span class="prelude-ty">Option</span>&lt;AssetIndex&gt;,
+    <span class="doccomment">/// 该版本需要下载的主要游戏文件信息
+    </span><span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span><span class="kw">pub </span>downloads: <span class="prelude-ty">Option</span>&lt;Map&lt;String, DownloadItem&gt;&gt;,
+    <span class="doccomment">/// 该版本所需的依赖库列表
+    </span><span class="attribute">#[serde(default)]
+    </span><span class="kw">pub </span>libraries: Vec&lt;Library&gt;,
+    <span class="doccomment">/// 该版本元数据的日志输出配置
+    </span><span class="attribute">#[serde(skip_serializing_if = <span class="string">&quot;Option::is_none&quot;</span>)]
+    </span><span class="kw">pub </span>logging: <span class="prelude-ty">Option</span>&lt;Logging&gt;,
+    <span class="doccomment">/// 该版本元数据的主类
+    </span><span class="attribute">#[serde(rename = <span class="string">&quot;mainClass&quot;</span>)]
+    </span><span class="kw">pub </span>main_class: String,
+    <span class="doccomment">/// 该版本元数据的主类列表，因为有可能存在多个主类 JAR
+    </span><span class="attribute">#[serde(skip)]
+    </span><span class="kw">pub </span>main_jars: Vec&lt;String&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">VersionMeta</span> {
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">fix_libraries</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="kw">for</span> <span class="ident">library</span> <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">libraries</span> {
-            <span class="kw">if</span> <span class="ident">library</span>.<span class="ident">rules</span>.<span class="ident">is_allowed</span>()
-                <span class="op">&amp;&amp;</span> <span class="ident">library</span>.<span class="ident">downloads</span>.<span class="ident">is_none</span>()
-                <span class="op">&amp;&amp;</span> <span class="ident">library</span>.<span class="ident">natives</span>.<span class="ident">is_none</span>()
+<span class="kw">impl </span>VersionMeta {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>fix_libraries(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="kw">for </span>library <span class="kw">in </span><span class="kw-2">&amp;mut </span><span class="self">self</span>.libraries {
+            <span class="kw">if </span>library.rules.is_allowed()
+                &amp;&amp; library.downloads.is_none()
+                &amp;&amp; library.natives.is_none()
             {
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">p</span>) <span class="op">=</span> <span class="ident">library</span>.<span class="ident">name</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">PackageName</span><span class="op">&gt;</span>() {
-                    <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">p</span>.<span class="ident">to_maven_jar_path</span>(<span class="string">&quot;&quot;</span>);
-                    <span class="ident">library</span>.<span class="ident">downloads</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">LibraryDownload</span> {
-                        <span class="ident">artifact</span>: <span class="prelude-val">Some</span>(<span class="ident">DownloadItem</span> {
-                            <span class="ident">path</span>: <span class="ident">p</span>,
-                            <span class="ident">sha1</span>: <span class="string">&quot;&quot;</span>.<span class="ident">into</span>(),
-                            <span class="ident">size</span>: <span class="number">0</span>,
-                            <span class="ident">url</span>: <span class="string">&quot;&quot;</span>.<span class="ident">into</span>(),
+                <span class="kw">if let </span><span class="prelude-val">Ok</span>(p) = library.name.parse::&lt;PackageName&gt;() {
+                    <span class="kw">let </span>p = p.to_maven_jar_path(<span class="string">&quot;&quot;</span>);
+                    library.downloads = <span class="prelude-val">Some</span>(LibraryDownload {
+                        artifact: <span class="prelude-val">Some</span>(DownloadItem {
+                            path: p,
+                            sha1: <span class="string">&quot;&quot;</span>.into(),
+                            size: <span class="number">0</span>,
+                            url: <span class="string">&quot;&quot;</span>.into(),
                         }),
-                        <span class="ident">classifiers</span>: <span class="prelude-val">None</span>,
+                        classifiers: <span class="prelude-val">None</span>,
                     })
                 }
             }
@@ -1043,380 +1043,380 @@
     }
 }
 
-<span class="kw">impl</span> <span class="ident">std::ops::AddAssign</span> <span class="kw">for</span> <span class="ident">VersionMeta</span> {
-    <span class="kw">fn</span> <span class="ident">add_assign</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">data</span>: <span class="ident">VersionMeta</span>) {
-        <span class="self">self</span>.<span class="ident">main_class</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">main_class</span>.<span class="ident">to_owned</span>();
-        <span class="self">self</span>.<span class="ident">minecraft_arguments</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">minecraft_arguments</span>;
-        <span class="self">self</span>.<span class="ident">libraries</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">data</span>.<span class="ident">libraries</span>);
-        <span class="self">self</span>.<span class="ident">main_jars</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">data</span>.<span class="ident">main_jars</span>);
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">downloads</span>) <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">data</span>.<span class="ident">downloads</span>.<span class="ident">to_owned</span>() {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">self_downloads</span>) <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">downloads</span> {
-                <span class="ident">self_downloads</span>.<span class="ident">append</span>(<span class="ident">downloads</span>);
-            } <span class="kw">else</span> {
-                <span class="self">self</span>.<span class="ident">downloads</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">downloads</span>.<span class="ident">to_owned</span>());
+<span class="kw">impl </span>std::ops::AddAssign <span class="kw">for </span>VersionMeta {
+    <span class="kw">fn </span>add_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, data: VersionMeta) {
+        <span class="self">self</span>.main_class = data.main_class.to_owned();
+        <span class="self">self</span>.minecraft_arguments = data.minecraft_arguments;
+        <span class="self">self</span>.libraries.extend_from_slice(<span class="kw-2">&amp;</span>data.libraries);
+        <span class="self">self</span>.main_jars.extend_from_slice(<span class="kw-2">&amp;</span>data.main_jars);
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(downloads) = <span class="kw-2">&amp;mut </span>data.downloads.to_owned() {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(self_downloads) = <span class="kw-2">&amp;mut </span><span class="self">self</span>.downloads {
+                self_downloads.append(downloads);
+            } <span class="kw">else </span>{
+                <span class="self">self</span>.downloads = <span class="prelude-val">Some</span>(downloads.to_owned());
             }
         }
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">arguments</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">data</span>.<span class="ident">arguments</span> {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">self_arguments</span>) <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">arguments</span> {
-                <span class="kw">for</span> <span class="ident">a</span> <span class="kw">in</span> <span class="ident">arguments</span>.<span class="ident">jvm</span>.<span class="ident">iter</span>() {
-                    <span class="ident">self_arguments</span>.<span class="ident">jvm</span>.<span class="ident">push</span>(<span class="ident">a</span>.<span class="ident">to_owned</span>());
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(arguments) = <span class="kw-2">&amp;</span>data.arguments {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(self_arguments) = <span class="kw-2">&amp;mut </span><span class="self">self</span>.arguments {
+                <span class="kw">for </span>a <span class="kw">in </span>arguments.jvm.iter() {
+                    self_arguments.jvm.push(a.to_owned());
                 }
-                <span class="kw">for</span> <span class="ident">a</span> <span class="kw">in</span> <span class="ident">arguments</span>.<span class="ident">game</span>.<span class="ident">iter</span>() {
-                    <span class="ident">self_arguments</span>.<span class="ident">game</span>.<span class="ident">push</span>(<span class="ident">a</span>.<span class="ident">to_owned</span>());
+                <span class="kw">for </span>a <span class="kw">in </span>arguments.game.iter() {
+                    self_arguments.game.push(a.to_owned());
                 }
-            } <span class="kw">else</span> {
-                <span class="self">self</span>.<span class="ident">arguments</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">arguments</span>.<span class="ident">to_owned</span>())
+            } <span class="kw">else </span>{
+                <span class="self">self</span>.arguments = <span class="prelude-val">Some</span>(arguments.to_owned())
             }
         }
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">logging</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">data</span>.<span class="ident">logging</span> {
-            <span class="self">self</span>.<span class="ident">logging</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">logging</span>.<span class="ident">to_owned</span>());
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(logging) = <span class="kw-2">&amp;</span>data.logging {
+            <span class="self">self</span>.logging = <span class="prelude-val">Some</span>(logging.to_owned());
         }
     }
 }
 
-<span class="doccomment">/// 版本元数据结构</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 当提供了 [`VersionInfo::version_base`] 和 [`VersionInfo::version`]</span>
-<span class="doccomment">/// 两个字段的信息后可使用 [`VersionInfo::load`] 来读取其他数据</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">VersionInfo</span> {
-    <span class="doccomment">/// 版本文件夹主目录</span>
-    <span class="kw">pub</span> <span class="ident">version_base</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 版本名称</span>
-    <span class="kw">pub</span> <span class="ident">version</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 读取成功之后的元数据</span>
-    <span class="kw">pub</span> <span class="ident">meta</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">VersionMeta</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// 启动器配置</span>
-    <span class="kw">pub</span> <span class="ident">scl_launch_config</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SCLLaunchConfig</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// 猜测的版本类型</span>
-    <span class="kw">pub</span> <span class="ident">version_type</span>: <span class="ident">VersionType</span>,
-    <span class="doccomment">/// 猜测的原始 Minecraft 版本类型</span>
-    <span class="kw">pub</span> <span class="ident">minecraft_version</span>: <span class="ident">MinecraftVersion</span>,
-    <span class="doccomment">/// 猜测的所需最低 Java 版本，1.17 之后一般为 16+，其余的为 8+</span>
-    <span class="kw">pub</span> <span class="ident">required_java</span>: <span class="ident">u8</span>,
+<span class="doccomment">/// 版本元数据结构
+///
+/// 当提供了 [`VersionInfo::version_base`] 和 [`VersionInfo::version`]
+/// 两个字段的信息后可使用 [`VersionInfo::load`] 来读取其他数据
+</span><span class="attribute">#[derive(Debug, Clone, Default)]
+</span><span class="kw">pub struct </span>VersionInfo {
+    <span class="doccomment">/// 版本文件夹主目录
+    </span><span class="kw">pub </span>version_base: String,
+    <span class="doccomment">/// 版本名称
+    </span><span class="kw">pub </span>version: String,
+    <span class="doccomment">/// 读取成功之后的元数据
+    </span><span class="kw">pub </span>meta: <span class="prelude-ty">Option</span>&lt;VersionMeta&gt;,
+    <span class="doccomment">/// 启动器配置
+    </span><span class="kw">pub </span>scl_launch_config: <span class="prelude-ty">Option</span>&lt;SCLLaunchConfig&gt;,
+    <span class="doccomment">/// 猜测的版本类型
+    </span><span class="kw">pub </span>version_type: VersionType,
+    <span class="doccomment">/// 猜测的原始 Minecraft 版本类型
+    </span><span class="kw">pub </span>minecraft_version: MinecraftVersion,
+    <span class="doccomment">/// 猜测的所需最低 Java 版本，1.17 之后一般为 16+，其余的为 8+
+    </span><span class="kw">pub </span>required_java: u8,
 }
 
-<span class="kw">impl</span> <span class="ident">VersionInfo</span> {
-    <span class="doccomment">/// 根据 [`VersionInfo::version_base`] 和 [`VersionInfo::version`] 读取版本元数据信息</span>
-    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">load</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">DynResult</span> {
-        <span class="kw">let</span> <span class="ident">version_base_path</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">version_base</span>);
-        <span class="kw">if</span> <span class="ident">version_base_path</span>.<span class="ident">is_dir</span>() {
-            <span class="kw">let</span> <span class="ident">jar_path</span> <span class="op">=</span> <span class="ident">version_base_path</span>
-                .<span class="ident">join</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">version</span>)
-                .<span class="ident">join</span>(<span class="macro">format!</span>(<span class="string">&quot;{}.jar&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">version</span>));
-            <span class="kw">let</span> <span class="ident">meta_path</span> <span class="op">=</span> <span class="ident">version_base_path</span>
-                .<span class="ident">join</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">version</span>)
-                .<span class="ident">join</span>(<span class="macro">format!</span>(<span class="string">&quot;{}.json&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">version</span>));
-            <span class="kw">let</span> <span class="ident">scl_config_path</span> <span class="op">=</span> <span class="ident">version_base_path</span>.<span class="ident">join</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">version</span>).<span class="ident">join</span>(<span class="string">&quot;.scl.json&quot;</span>);
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">meta_path</span>.<span class="ident">is_file</span>() {
+<span class="kw">impl </span>VersionInfo {
+    <span class="doccomment">/// 根据 [`VersionInfo::version_base`] 和 [`VersionInfo::version`] 读取版本元数据信息
+    </span><span class="kw">pub async fn </span>load(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; DynResult {
+        <span class="kw">let </span>version_base_path = Path::new(<span class="kw-2">&amp;</span><span class="self">self</span>.version_base);
+        <span class="kw">if </span>version_base_path.is_dir() {
+            <span class="kw">let </span>jar_path = version_base_path
+                .join(<span class="kw-2">&amp;</span><span class="self">self</span>.version)
+                .join(<span class="macro">format!</span>(<span class="string">&quot;{}.jar&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.version));
+            <span class="kw">let </span>meta_path = version_base_path
+                .join(<span class="kw-2">&amp;</span><span class="self">self</span>.version)
+                .join(<span class="macro">format!</span>(<span class="string">&quot;{}.json&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.version));
+            <span class="kw">let </span>scl_config_path = version_base_path.join(<span class="kw-2">&amp;</span><span class="self">self</span>.version).join(<span class="string">&quot;.scl.json&quot;</span>);
+            <span class="kw">if </span>!meta_path.is_file() {
                 <span class="macro">anyhow::bail!</span>(
                     <span class="string">&quot;该版本 {} （游戏文件夹：{}） 缺失元数据文件&quot;</span>,
-                    <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">version</span>,
-                    <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">version_base</span>
+                    <span class="kw-2">&amp;</span><span class="self">self</span>.version,
+                    <span class="kw-2">&amp;</span><span class="self">self</span>.version_base
                 )
-            } <span class="kw">else</span> {
-                <span class="kw">if</span> <span class="ident">scl_config_path</span>.<span class="ident">is_file</span>() {
-                    <span class="comment">// 加载启动器设置</span>
-                    <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">inner_future::fs::read_to_string</span>(<span class="ident">scl_config_path</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-                    <span class="kw">let</span> <span class="ident">scl_config</span> <span class="op">=</span> <span class="ident">serde_json::from_str</span>(<span class="ident">data</span>.<span class="ident">trim_start_matches</span>(<span class="string">&#39;\u{feff}&#39;</span>))<span class="question-mark">?</span>; <span class="comment">// 去掉可能存在的 BOM</span>
-                    <span class="self">self</span>.<span class="ident">scl_launch_config</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">scl_config</span>);
+            } <span class="kw">else </span>{
+                <span class="kw">if </span>scl_config_path.is_file() {
+                    <span class="comment">// 加载启动器设置
+                    </span><span class="kw">let </span>data = inner_future::fs::read_to_string(scl_config_path).<span class="kw">await</span><span class="question-mark">?</span>;
+                    <span class="kw">let </span>scl_config = serde_json::from_str(data.trim_start_matches(<span class="string">&#39;\u{feff}&#39;</span>))<span class="question-mark">?</span>; <span class="comment">// 去掉可能存在的 BOM
+                    </span><span class="self">self</span>.scl_launch_config = <span class="prelude-val">Some</span>(scl_config);
                 }
-                <span class="comment">// 解析元文件，提取数据</span>
-                <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">inner_future::fs::read_to_string</span>(<span class="ident">meta_path</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">meta</span>: <span class="ident">VersionMeta</span> <span class="op">=</span>
-                    <span class="ident">serde_json::from_str</span>(<span class="ident">data</span>.<span class="ident">trim_start_matches</span>(<span class="string">&#39;\u{feff}&#39;</span>))<span class="question-mark">?</span>; <span class="comment">// 去掉可能存在的 BOM</span>
-                <span class="kw">if</span> <span class="ident">jar_path</span>.<span class="ident">is_file</span>() {
-                    <span class="ident">meta</span>.<span class="ident">main_jars</span>.<span class="ident">push</span>(<span class="ident">get_full_path</span>(<span class="ident">jar_path</span>));
+                <span class="comment">// 解析元文件，提取数据
+                </span><span class="kw">let </span>data = inner_future::fs::read_to_string(meta_path).<span class="kw">await</span><span class="question-mark">?</span>;
+                <span class="kw">let </span><span class="kw-2">mut </span>meta: VersionMeta =
+                    serde_json::from_str(data.trim_start_matches(<span class="string">&#39;\u{feff}&#39;</span>))<span class="question-mark">?</span>; <span class="comment">// 去掉可能存在的 BOM
+                </span><span class="kw">if </span>jar_path.is_file() {
+                    meta.main_jars.push(get_full_path(jar_path));
                 }
-                <span class="self">self</span>.<span class="ident">required_java</span> <span class="op">=</span> <span class="number">8</span>;
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">assets</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">meta</span>.<span class="ident">asset_index</span> {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>((<span class="kw">_</span>, <span class="ident">ver</span>)) <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::semver::parse_version</span>(<span class="kw-2">&amp;</span><span class="ident">assets</span>.<span class="ident">id</span>) {
-                        <span class="self">self</span>.<span class="ident">required_java</span> <span class="op">=</span> <span class="ident">ver</span>.<span class="ident">required_java_version</span>();
-                        <span class="self">self</span>.<span class="ident">minecraft_version</span> <span class="op">=</span> <span class="ident">ver</span>;
+                <span class="self">self</span>.required_java = <span class="number">8</span>;
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(assets) = <span class="kw-2">&amp;</span>meta.asset_index {
+                    <span class="kw">if let </span><span class="prelude-val">Ok</span>((<span class="kw">_</span>, ver)) = <span class="kw">crate</span>::semver::parse_version(<span class="kw-2">&amp;</span>assets.id) {
+                        <span class="self">self</span>.required_java = ver.required_java_version();
+                        <span class="self">self</span>.minecraft_version = ver;
                     }
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">meta</span>.<span class="ident">inherits_from</span>.<span class="ident">is_empty</span>() {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>((<span class="kw">_</span>, <span class="ident">ver</span>)) <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::semver::parse_version</span>(<span class="kw-2">&amp;</span><span class="ident">meta</span>.<span class="ident">inherits_from</span>) {
-                        <span class="self">self</span>.<span class="ident">required_java</span> <span class="op">=</span> <span class="ident">ver</span>.<span class="ident">required_java_version</span>();
-                        <span class="self">self</span>.<span class="ident">minecraft_version</span> <span class="op">=</span> <span class="ident">ver</span>;
+                } <span class="kw">else if </span>!meta.inherits_from.is_empty() {
+                    <span class="kw">if let </span><span class="prelude-val">Ok</span>((<span class="kw">_</span>, ver)) = <span class="kw">crate</span>::semver::parse_version(<span class="kw-2">&amp;</span>meta.inherits_from) {
+                        <span class="self">self</span>.required_java = ver.required_java_version();
+                        <span class="self">self</span>.minecraft_version = ver;
                     }
                 }
-                <span class="self">self</span>.<span class="ident">meta</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">meta</span>);
-                <span class="self">self</span>.<span class="ident">version_type</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">guess_version_type</span>();
+                <span class="self">self</span>.meta = <span class="prelude-val">Some</span>(meta);
+                <span class="self">self</span>.version_type = <span class="self">self</span>.guess_version_type();
                 <span class="prelude-val">Ok</span>(())
             }
-        } <span class="kw">else</span> {
-            <span class="macro">anyhow::bail!</span>(<span class="string">&quot;游戏文件夹 {} 不是正确的文件夹&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">version_base</span>)
+        } <span class="kw">else </span>{
+            <span class="macro">anyhow::bail!</span>(<span class="string">&quot;游戏文件夹 {} 不是正确的文件夹&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.version_base)
         }
     }
 
-    <span class="doccomment">/// 保存元数据和独立版本设置</span>
-    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">save</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">DynResult</span> {
-        <span class="kw">let</span> <span class="ident">version_base_path</span> <span class="op">=</span> <span class="ident">Path::new</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">version_base</span>);
-        <span class="kw">if</span> <span class="ident">version_base_path</span>.<span class="ident">is_dir</span>() {
-            <span class="kw">let</span> <span class="ident">meta_path</span> <span class="op">=</span> <span class="ident">version_base_path</span>
-                .<span class="ident">join</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">version</span>)
-                .<span class="ident">join</span>(<span class="macro">format!</span>(<span class="string">&quot;{}.json&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">version</span>));
-            <span class="kw">let</span> <span class="ident">scl_config_path</span> <span class="op">=</span> <span class="ident">version_base_path</span>.<span class="ident">join</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">version</span>).<span class="ident">join</span>(<span class="string">&quot;.scl.json&quot;</span>);
-            <span class="comment">// 这个不是刚需了</span>
-            <span class="comment">// if !jar_path.is_file() {</span>
-            <span class="comment">//     anyhow::bail!(&quot;版本 Jar 文件缺失&quot;)</span>
-            <span class="comment">// }</span>
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">meta_path</span>.<span class="ident">is_file</span>() {
+    <span class="doccomment">/// 保存元数据和独立版本设置
+    </span><span class="kw">pub async fn </span>save(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; DynResult {
+        <span class="kw">let </span>version_base_path = Path::new(<span class="kw-2">&amp;</span><span class="self">self</span>.version_base);
+        <span class="kw">if </span>version_base_path.is_dir() {
+            <span class="kw">let </span>meta_path = version_base_path
+                .join(<span class="kw-2">&amp;</span><span class="self">self</span>.version)
+                .join(<span class="macro">format!</span>(<span class="string">&quot;{}.json&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.version));
+            <span class="kw">let </span>scl_config_path = version_base_path.join(<span class="kw-2">&amp;</span><span class="self">self</span>.version).join(<span class="string">&quot;.scl.json&quot;</span>);
+            <span class="comment">// 这个不是刚需了
+            // if !jar_path.is_file() {
+            //     anyhow::bail!(&quot;版本 Jar 文件缺失&quot;)
+            // }
+            </span><span class="kw">if </span>!meta_path.is_file() {
                 <span class="macro">anyhow::bail!</span>(<span class="string">&quot;版本 JSON 元数据文件缺失&quot;</span>)
-            } <span class="kw">else</span> {
-                <span class="comment">// 解析元文件，提取数据</span>
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">meta</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">meta</span> {
-                    <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">std::fs::OpenOptions::new</span>()
-                        .<span class="ident">truncate</span>(<span class="bool-val">true</span>)
-                        .<span class="ident">write</span>(<span class="bool-val">true</span>)
-                        .<span class="ident">open</span>(<span class="ident">meta_path</span>);
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">file</span>) <span class="op">=</span> <span class="ident">file</span> {
-                        <span class="kw">match</span> <span class="ident">serde_json::to_writer</span>(<span class="ident">file</span>, <span class="ident">meta</span>) {
+            } <span class="kw">else </span>{
+                <span class="comment">// 解析元文件，提取数据
+                </span><span class="kw">if let </span><span class="prelude-val">Some</span>(meta) = <span class="kw-2">&amp;</span><span class="self">self</span>.meta {
+                    <span class="kw">let </span>file = std::fs::OpenOptions::new()
+                        .truncate(<span class="bool-val">true</span>)
+                        .write(<span class="bool-val">true</span>)
+                        .open(meta_path);
+                    <span class="kw">if let </span><span class="prelude-val">Ok</span>(file) = file {
+                        <span class="kw">match </span>serde_json::to_writer(file, meta) {
                             <span class="prelude-val">Ok</span>(<span class="kw">_</span>) =&gt; {}
-                            <span class="prelude-val">Err</span>(<span class="ident">err</span>) =&gt; {
-                                <span class="macro">anyhow::bail!</span>(<span class="string">&quot;元数据解析失败：{}&quot;</span>, <span class="ident">err</span>)
+                            <span class="prelude-val">Err</span>(err) =&gt; {
+                                <span class="macro">anyhow::bail!</span>(<span class="string">&quot;元数据解析失败：{}&quot;</span>, err)
                             }
                         }
-                    } <span class="kw">else</span> {
+                    } <span class="kw">else </span>{
                         <span class="macro">anyhow::bail!</span>(<span class="string">&quot;无法打开版本元数据文件&quot;</span>)
                     }
                 }
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">scl_config</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">scl_launch_config</span> {
-                    <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">std::fs::OpenOptions::new</span>()
-                        .<span class="ident">truncate</span>(<span class="bool-val">true</span>)
-                        .<span class="ident">create</span>(<span class="bool-val">true</span>)
-                        .<span class="ident">write</span>(<span class="bool-val">true</span>)
-                        .<span class="ident">open</span>(<span class="ident">scl_config_path</span>);
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">file</span>) <span class="op">=</span> <span class="ident">file</span> {
-                        <span class="kw">match</span> <span class="ident">serde_json::to_writer</span>(<span class="ident">file</span>, <span class="ident">scl_config</span>) {
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(scl_config) = <span class="kw-2">&amp;</span><span class="self">self</span>.scl_launch_config {
+                    <span class="kw">let </span>file = std::fs::OpenOptions::new()
+                        .truncate(<span class="bool-val">true</span>)
+                        .create(<span class="bool-val">true</span>)
+                        .write(<span class="bool-val">true</span>)
+                        .open(scl_config_path);
+                    <span class="kw">if let </span><span class="prelude-val">Ok</span>(file) = file {
+                        <span class="kw">match </span>serde_json::to_writer(file, scl_config) {
                             <span class="prelude-val">Ok</span>(<span class="kw">_</span>) =&gt; {}
-                            <span class="prelude-val">Err</span>(<span class="ident">err</span>) =&gt; {
-                                <span class="macro">anyhow::bail!</span>(<span class="string">&quot;SCL 配置文件写入失败：{}&quot;</span>, <span class="ident">err</span>)
+                            <span class="prelude-val">Err</span>(err) =&gt; {
+                                <span class="macro">anyhow::bail!</span>(<span class="string">&quot;SCL 配置文件写入失败：{}&quot;</span>, err)
                             }
                         }
-                    } <span class="kw">else</span> {
+                    } <span class="kw">else </span>{
                         <span class="macro">anyhow::bail!</span>(<span class="string">&quot;无法打开 SCL 配置文件&quot;</span>)
                     }
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">scl_config_path</span>.<span class="ident">is_file</span>() {
-                    <span class="ident">inner_future::fs::remove_file</span>(<span class="ident">scl_config_path</span>).<span class="kw">await</span><span class="question-mark">?</span>;
+                } <span class="kw">else if </span>scl_config_path.is_file() {
+                    inner_future::fs::remove_file(scl_config_path).<span class="kw">await</span><span class="question-mark">?</span>;
                 }
                 <span class="prelude-val">Ok</span>(())
             }
-        } <span class="kw">else</span> {
+        } <span class="kw">else </span>{
             <span class="macro">anyhow::bail!</span>(<span class="string">&quot;版本文件夹未找到&quot;</span>)
         }
     }
 
-    <span class="doccomment">/// 根据元数据猜测版本的种类</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">guess_version_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">VersionType</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">has_optifine</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">meta</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">meta</span> {
-            <span class="kw">for</span> <span class="ident">lib</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">meta</span>.<span class="ident">libraries</span> {
-                <span class="kw">if</span> <span class="ident">lib</span>.<span class="ident">name</span>.<span class="ident">starts_with</span>(<span class="string">&quot;net.fabricmc:&quot;</span>) {
-                    <span class="kw">return</span> <span class="ident">VersionType::Fabric</span>;
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">lib</span>.<span class="ident">name</span>.<span class="ident">starts_with</span>(<span class="string">&quot;net.minecraftforge:&quot;</span>) {
-                    <span class="kw">return</span> <span class="ident">VersionType::Forge</span>;
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">lib</span>.<span class="ident">name</span>.<span class="ident">starts_with</span>(<span class="string">&quot;optifine:&quot;</span>) {
-                    <span class="comment">// 我们要优先 Forge 和 Fabric</span>
-                    <span class="ident">has_optifine</span> <span class="op">=</span> <span class="bool-val">true</span>;
+    <span class="doccomment">/// 根据元数据猜测版本的种类
+    </span><span class="kw">pub fn </span>guess_version_type(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; VersionType {
+        <span class="kw">let </span><span class="kw-2">mut </span>has_optifine = <span class="bool-val">false</span>;
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(meta) = <span class="kw-2">&amp;</span><span class="self">self</span>.meta {
+            <span class="kw">for </span>lib <span class="kw">in </span><span class="kw-2">&amp;</span>meta.libraries {
+                <span class="kw">if </span>lib.name.starts_with(<span class="string">&quot;net.fabricmc:&quot;</span>) {
+                    <span class="kw">return </span>VersionType::Fabric;
+                } <span class="kw">else if </span>lib.name.starts_with(<span class="string">&quot;net.minecraftforge:&quot;</span>) {
+                    <span class="kw">return </span>VersionType::Forge;
+                } <span class="kw">else if </span>lib.name.starts_with(<span class="string">&quot;optifine:&quot;</span>) {
+                    <span class="comment">// 我们要优先 Forge 和 Fabric
+                    </span>has_optifine = <span class="bool-val">true</span>;
                 }
             }
-            <span class="kw">if</span> <span class="ident">has_optifine</span> {
-                <span class="ident">VersionType::Optifine</span>
-            } <span class="kw">else</span> {
-                <span class="ident">VersionType::Vanilla</span>
+            <span class="kw">if </span>has_optifine {
+                VersionType::Optifine
+            } <span class="kw">else </span>{
+                VersionType::Vanilla
             }
-        } <span class="kw">else</span> {
-            <span class="ident">VersionType::Unknown</span>
+        } <span class="kw">else </span>{
+            VersionType::Unknown
         }
     }
 
-    <span class="doccomment">/// 一个指向版本主目录的位置</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 如果没有开启版本独立，则会返回类似 `.minecraft` 的文件夹路径</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 如果开启版本独立，则会返回类似 `.minecraft/versions/版本名称` 的文件夹路径</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">version_path</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">PathBuf</span> {
-        <span class="kw">if</span> <span class="self">self</span>
-            .<span class="ident">scl_launch_config</span>
-            .<span class="ident">as_ref</span>()
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">game_independent</span>)
-            .<span class="ident">unwrap_or</span>(<span class="bool-val">false</span>)
+    <span class="doccomment">/// 一个指向版本主目录的位置
+    ///
+    /// 如果没有开启版本独立，则会返回类似 `.minecraft` 的文件夹路径
+    ///
+    /// 如果开启版本独立，则会返回类似 `.minecraft/versions/版本名称` 的文件夹路径
+    </span><span class="kw">pub fn </span>version_path(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; PathBuf {
+        <span class="kw">if </span><span class="self">self
+            </span>.scl_launch_config
+            .as_ref()
+            .map(|x| x.game_independent)
+            .unwrap_or(<span class="bool-val">false</span>)
         {
-            <span class="comment">// 版本独立</span>
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">PathBuf::new</span>();
-            <span class="ident">result</span>.<span class="ident">push</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">version_base</span>);
-            <span class="ident">result</span>.<span class="ident">push</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">version</span>);
-            <span class="ident">result</span>
-        } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">PathBuf::new</span>();
-            <span class="ident">result</span>.<span class="ident">push</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">version_base</span>);
-            <span class="ident">result</span>.<span class="ident">pop</span>();
-            <span class="ident">result</span>
+            <span class="comment">// 版本独立
+            </span><span class="kw">let </span><span class="kw-2">mut </span>result = PathBuf::new();
+            result.push(<span class="kw-2">&amp;</span><span class="self">self</span>.version_base);
+            result.push(<span class="kw-2">&amp;</span><span class="self">self</span>.version);
+            result
+        } <span class="kw">else </span>{
+            <span class="kw">let </span><span class="kw-2">mut </span>result = PathBuf::new();
+            result.push(<span class="kw-2">&amp;</span><span class="self">self</span>.version_base);
+            result.pop();
+            result
         }
     }
 
-    <span class="doccomment">/// 读取该版本下的所有模组信息</span>
-    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_mods</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident"><span class="kw">super</span>::mods::Mod</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">mods_path</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">version_path</span>().<span class="ident">join</span>(<span class="string">&quot;mods&quot;</span>);
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">mods_path</span>.<span class="ident">is_dir</span>() {
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="macro">vec!</span>[]);
+    <span class="doccomment">/// 读取该版本下的所有模组信息
+    </span><span class="kw">pub async fn </span>get_mods(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; DynResult&lt;Vec&lt;<span class="kw">super</span>::mods::Mod&gt;&gt; {
+        <span class="kw">let </span>mods_path = <span class="self">self</span>.version_path().join(<span class="string">&quot;mods&quot;</span>);
+        <span class="kw">if </span>!mods_path.is_dir() {
+            <span class="kw">return </span><span class="prelude-val">Ok</span>(<span class="macro">vec!</span>[]);
         }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">files</span> <span class="op">=</span> <span class="ident">inner_future::fs::read_dir</span>(<span class="ident">mods_path</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">results</span> <span class="op">=</span> <span class="macro">vec!</span>[];
-        <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">file</span>) <span class="op">=</span> <span class="ident">files</span>.<span class="ident">try_next</span>().<span class="kw">await</span><span class="question-mark">?</span> {
-            <span class="kw">if</span> <span class="ident">file</span>.<span class="ident">path</span>().<span class="ident">is_file</span>()
-                <span class="op">&amp;&amp;</span> <span class="ident">file</span>
-                    .<span class="ident">path</span>()
-                    .<span class="ident">file_name</span>()
-                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">to_string_lossy</span>().<span class="ident">ends_with</span>(<span class="string">&quot;.jar&quot;</span>))
-                    <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="bool-val">true</span>)
-                <span class="op">|</span><span class="op">|</span> <span class="ident">file</span>
-                    .<span class="ident">path</span>()
-                    .<span class="ident">file_name</span>()
-                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">to_string_lossy</span>().<span class="ident">ends_with</span>(<span class="string">&quot;.jar.disabled&quot;</span>))
-                    <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="bool-val">true</span>)
+        <span class="kw">let </span><span class="kw-2">mut </span>files = inner_future::fs::read_dir(mods_path).<span class="kw">await</span><span class="question-mark">?</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>results = <span class="macro">vec!</span>[];
+        <span class="kw">while let </span><span class="prelude-val">Some</span>(file) = files.try_next().<span class="kw">await</span><span class="question-mark">? </span>{
+            <span class="kw">if </span>file.path().is_file()
+                &amp;&amp; file
+                    .path()
+                    .file_name()
+                    .map(|x| x.to_string_lossy().ends_with(<span class="string">&quot;.jar&quot;</span>))
+                    == <span class="prelude-val">Some</span>(<span class="bool-val">true</span>)
+                || file
+                    .path()
+                    .file_name()
+                    .map(|x| x.to_string_lossy().ends_with(<span class="string">&quot;.jar.disabled&quot;</span>))
+                    == <span class="prelude-val">Some</span>(<span class="bool-val">true</span>)
             {
-                <span class="ident">results</span>.<span class="ident">push</span>(<span class="ident"><span class="kw">super</span>::mods::Mod::from_path</span>(<span class="ident">file</span>.<span class="ident">path</span>()).<span class="kw">await</span><span class="question-mark">?</span>);
+                results.push(<span class="kw">super</span>::mods::Mod::from_path(file.path()).<span class="kw">await</span><span class="question-mark">?</span>);
             }
         }
-        <span class="prelude-val">Ok</span>(<span class="ident">results</span>)
+        <span class="prelude-val">Ok</span>(results)
     }
 
-    <span class="doccomment">/// 根据版本实际情况获取最佳的最大内存用量，单位为 MB</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 代码参考自 &lt;https://github.com/Hex-Dragon/PCL2/blob/f1310f18fda13b79b7a6189f02df15cd8300b28d/Plain%20Craft%20Launcher%202/Pages/PageSetup/PageSetupLaunch.xaml.vb#L327&gt;</span>
-    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_automated_maxium_memory</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u64</span> {
-        <span class="kw">let</span> <span class="ident">mem_status</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::utils::get_mem_status</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">free</span> <span class="op">=</span> <span class="macro">dbg!</span>(<span class="ident">mem_status</span>.<span class="ident">free</span> <span class="kw">as</span> <span class="ident">i64</span>);
-        <span class="kw">let</span> <span class="ident">mods</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">get_mods</span>().<span class="kw">await</span>.<span class="ident">unwrap_or_default</span>();
-        <span class="kw">let</span> (<span class="ident">mem_min</span>, <span class="ident">mem_t1</span>, <span class="ident">mem_t2</span>, <span class="ident">mem_t3</span>) <span class="op">=</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">mods</span>.<span class="ident">is_empty</span>() {
+    <span class="doccomment">/// 根据版本实际情况获取最佳的最大内存用量，单位为 MB
+    ///
+    /// 代码参考自 &lt;https://github.com/Hex-Dragon/PCL2/blob/f1310f18fda13b79b7a6189f02df15cd8300b28d/Plain%20Craft%20Launcher%202/Pages/PageSetup/PageSetupLaunch.xaml.vb#L327&gt;
+    </span><span class="kw">pub async fn </span>get_automated_maxium_memory(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u64 {
+        <span class="kw">let </span>mem_status = <span class="kw">crate</span>::utils::get_mem_status();
+        <span class="kw">let </span><span class="kw-2">mut </span>free = <span class="macro">dbg!</span>(mem_status.free <span class="kw">as </span>i64);
+        <span class="kw">let </span>mods = <span class="self">self</span>.get_mods().<span class="kw">await</span>.unwrap_or_default();
+        <span class="kw">let </span>(mem_min, mem_t1, mem_t2, mem_t3) = <span class="kw">if </span>!mods.is_empty() {
             (
-                <span class="number">400</span> <span class="op">+</span> <span class="ident">mods</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">i64</span> <span class="op">*</span> <span class="number">7</span>,
-                <span class="number">1500</span> <span class="op">+</span> <span class="ident">mods</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">i64</span> <span class="op">*</span> <span class="number">10</span>,
-                <span class="number">3000</span> <span class="op">+</span> <span class="ident">mods</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">i64</span> <span class="op">*</span> <span class="number">17</span>,
-                <span class="number">6000</span> <span class="op">+</span> <span class="ident">mods</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">i64</span> <span class="op">*</span> <span class="number">34</span>,
+                <span class="number">400 </span>+ mods.len() <span class="kw">as </span>i64 * <span class="number">7</span>,
+                <span class="number">1500 </span>+ mods.len() <span class="kw">as </span>i64 * <span class="number">10</span>,
+                <span class="number">3000 </span>+ mods.len() <span class="kw">as </span>i64 * <span class="number">17</span>,
+                <span class="number">6000 </span>+ mods.len() <span class="kw">as </span>i64 * <span class="number">34</span>,
             )
-        } <span class="kw">else</span> {
+        } <span class="kw">else </span>{
             (<span class="number">300</span>, <span class="number">1500</span>, <span class="number">2500</span>, <span class="number">4000</span>)
         };
-        <span class="comment">// 预分配内存，阶段一，0 ~ T1，100%</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="ident">mem_delta</span> <span class="op">=</span> <span class="ident">mem_t1</span>;
-        <span class="ident">free</span> <span class="op">=</span> (<span class="ident">free</span> <span class="op">-</span> <span class="number">100</span>).<span class="ident">max</span>(<span class="number">0</span>);
-        <span class="ident">result</span> <span class="op">+</span><span class="op">=</span> <span class="ident">free</span>.<span class="ident">min</span>(<span class="ident">mem_delta</span>);
-        <span class="ident">free</span> <span class="op">-</span><span class="op">=</span> <span class="ident">mem_delta</span> <span class="op">+</span> <span class="number">100</span>;
-        <span class="kw">if</span> <span class="ident">free</span> <span class="op">&lt;</span> <span class="number">100</span> {
-            <span class="kw">return</span> <span class="ident">result</span>.<span class="ident">max</span>(<span class="ident">mem_min</span>) <span class="kw">as</span> <span class="kw">_</span>;
+        <span class="comment">// 预分配内存，阶段一，0 ~ T1，100%
+        </span><span class="kw">let </span><span class="kw-2">mut </span>result = <span class="number">0</span>;
+        <span class="kw">let </span>mem_delta = mem_t1;
+        free = (free - <span class="number">100</span>).max(<span class="number">0</span>);
+        result += free.min(mem_delta);
+        free -= mem_delta + <span class="number">100</span>;
+        <span class="kw">if </span>free &lt; <span class="number">100 </span>{
+            <span class="kw">return </span>result.max(mem_min) <span class="kw">as _</span>;
         }
-        <span class="comment">// 预分配内存，阶段二，T1 ~ T2，80%</span>
-        <span class="kw">let</span> <span class="ident">mem_delta</span> <span class="op">=</span> <span class="ident">mem_t2</span> <span class="op">-</span> <span class="ident">mem_t1</span>;
-        <span class="ident">free</span> <span class="op">=</span> (<span class="ident">free</span> <span class="op">-</span> <span class="number">100</span>).<span class="ident">max</span>(<span class="number">0</span>);
-        <span class="ident">result</span> <span class="op">+</span><span class="op">=</span> ((<span class="ident">free</span> <span class="kw">as</span> <span class="ident">f64</span> <span class="op">*</span> <span class="number">0.8</span>) <span class="kw">as</span> <span class="ident">i64</span>).<span class="ident">min</span>(<span class="ident">mem_delta</span>);
-        <span class="ident">free</span> <span class="op">-</span><span class="op">=</span> ((<span class="ident">mem_delta</span> <span class="kw">as</span> <span class="ident">f64</span> <span class="op">/</span> <span class="number">0.8</span>) <span class="kw">as</span> <span class="ident">i64</span>) <span class="op">+</span> <span class="number">100</span>;
-        <span class="kw">if</span> <span class="ident">free</span> <span class="op">&lt;</span> <span class="number">100</span> {
-            <span class="kw">return</span> <span class="ident">result</span>.<span class="ident">max</span>(<span class="ident">mem_min</span>) <span class="kw">as</span> <span class="kw">_</span>;
+        <span class="comment">// 预分配内存，阶段二，T1 ~ T2，80%
+        </span><span class="kw">let </span>mem_delta = mem_t2 - mem_t1;
+        free = (free - <span class="number">100</span>).max(<span class="number">0</span>);
+        result += ((free <span class="kw">as </span>f64 * <span class="number">0.8</span>) <span class="kw">as </span>i64).min(mem_delta);
+        free -= ((mem_delta <span class="kw">as </span>f64 / <span class="number">0.8</span>) <span class="kw">as </span>i64) + <span class="number">100</span>;
+        <span class="kw">if </span>free &lt; <span class="number">100 </span>{
+            <span class="kw">return </span>result.max(mem_min) <span class="kw">as _</span>;
         }
-        <span class="comment">// 预分配内存，阶段三，T2 ~ T3，60%</span>
-        <span class="kw">let</span> <span class="ident">mem_delta</span> <span class="op">=</span> <span class="ident">mem_t2</span> <span class="op">-</span> <span class="ident">mem_t1</span>;
-        <span class="ident">free</span> <span class="op">=</span> (<span class="ident">free</span> <span class="op">-</span> <span class="number">200</span>).<span class="ident">max</span>(<span class="number">0</span>);
-        <span class="ident">result</span> <span class="op">+</span><span class="op">=</span> ((<span class="ident">free</span> <span class="kw">as</span> <span class="ident">f64</span> <span class="op">*</span> <span class="number">0.6</span>) <span class="kw">as</span> <span class="ident">i64</span>).<span class="ident">min</span>(<span class="ident">mem_delta</span>);
-        <span class="ident">free</span> <span class="op">-</span><span class="op">=</span> ((<span class="ident">mem_delta</span> <span class="kw">as</span> <span class="ident">f64</span> <span class="op">/</span> <span class="number">0.6</span>) <span class="kw">as</span> <span class="ident">i64</span>) <span class="op">+</span> <span class="number">200</span>;
-        <span class="kw">if</span> <span class="ident">free</span> <span class="op">&lt;</span> <span class="number">100</span> {
-            <span class="kw">return</span> <span class="ident">result</span>.<span class="ident">max</span>(<span class="ident">mem_min</span>) <span class="kw">as</span> <span class="kw">_</span>;
+        <span class="comment">// 预分配内存，阶段三，T2 ~ T3，60%
+        </span><span class="kw">let </span>mem_delta = mem_t2 - mem_t1;
+        free = (free - <span class="number">200</span>).max(<span class="number">0</span>);
+        result += ((free <span class="kw">as </span>f64 * <span class="number">0.6</span>) <span class="kw">as </span>i64).min(mem_delta);
+        free -= ((mem_delta <span class="kw">as </span>f64 / <span class="number">0.6</span>) <span class="kw">as </span>i64) + <span class="number">200</span>;
+        <span class="kw">if </span>free &lt; <span class="number">100 </span>{
+            <span class="kw">return </span>result.max(mem_min) <span class="kw">as _</span>;
         }
-        <span class="comment">// 预分配内存，阶段四，T3 ~ T3 * 2，40%</span>
-        <span class="kw">let</span> <span class="ident">mem_delta</span> <span class="op">=</span> <span class="ident">mem_t3</span>;
-        <span class="ident">free</span> <span class="op">=</span> (<span class="ident">free</span> <span class="op">-</span> <span class="number">300</span>).<span class="ident">max</span>(<span class="number">0</span>);
-        <span class="ident">result</span> <span class="op">+</span><span class="op">=</span> ((<span class="ident">free</span> <span class="kw">as</span> <span class="ident">f64</span> <span class="op">*</span> <span class="number">0.4</span>) <span class="kw">as</span> <span class="ident">i64</span>).<span class="ident">min</span>(<span class="ident">mem_delta</span>);
-        <span class="ident">free</span> <span class="op">-</span><span class="op">=</span> ((<span class="ident">mem_delta</span> <span class="kw">as</span> <span class="ident">f64</span> <span class="op">/</span> <span class="number">0.4</span>) <span class="kw">as</span> <span class="ident">i64</span>) <span class="op">+</span> <span class="number">300</span>;
-        <span class="kw">if</span> <span class="ident">free</span> <span class="op">&lt;</span> <span class="number">100</span> {
-            <span class="kw">return</span> <span class="ident">result</span>.<span class="ident">max</span>(<span class="ident">mem_min</span>) <span class="kw">as</span> <span class="kw">_</span>;
+        <span class="comment">// 预分配内存，阶段四，T3 ~ T3 * 2，40%
+        </span><span class="kw">let </span>mem_delta = mem_t3;
+        free = (free - <span class="number">300</span>).max(<span class="number">0</span>);
+        result += ((free <span class="kw">as </span>f64 * <span class="number">0.4</span>) <span class="kw">as </span>i64).min(mem_delta);
+        free -= ((mem_delta <span class="kw">as </span>f64 / <span class="number">0.4</span>) <span class="kw">as </span>i64) + <span class="number">300</span>;
+        <span class="kw">if </span>free &lt; <span class="number">100 </span>{
+            <span class="kw">return </span>result.max(mem_min) <span class="kw">as _</span>;
         }
-        <span class="ident">result</span>.<span class="ident">max</span>(<span class="ident">mem_min</span>) <span class="kw">as</span> <span class="kw">_</span>
+        result.max(mem_min) <span class="kw">as _
+    </span>}
+
+    <span class="doccomment">/// 读取该版本下的所有世界存档信息
+    ///
+    /// 目前只是简单的扫一遍文件夹而已
+    ///
+    /// TODO: 做准确的解析过滤
+    </span><span class="kw">pub async fn </span>get_saves(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; DynResult&lt;Vec&lt;WorldSave&gt;&gt; {
+        <span class="kw">let </span>saves_path = <span class="self">self</span>.version_path().join(<span class="string">&quot;saves&quot;</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>result = Vec::new();
+        <span class="kw">let </span><span class="kw-2">mut </span>files = inner_future::fs::read_dir(<span class="kw-2">&amp;</span>saves_path).<span class="kw">await</span><span class="question-mark">?</span>;
+        <span class="kw">while let </span><span class="prelude-val">Some</span>(_file) = files.try_next().<span class="kw">await</span><span class="question-mark">? </span>{
+            result.push(WorldSave {})
+        }
+        <span class="prelude-val">Ok</span>(result)
     }
 
-    <span class="doccomment">/// 读取该版本下的所有世界存档信息</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 目前只是简单的扫一遍文件夹而已</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// TODO: 做准确的解析过滤</span>
-    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_saves</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">WorldSave</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">saves_path</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">version_path</span>().<span class="ident">join</span>(<span class="string">&quot;saves&quot;</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">files</span> <span class="op">=</span> <span class="ident">inner_future::fs::read_dir</span>(<span class="kw-2">&amp;</span><span class="ident">saves_path</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-        <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">_file</span>) <span class="op">=</span> <span class="ident">files</span>.<span class="ident">try_next</span>().<span class="kw">await</span><span class="question-mark">?</span> {
-            <span class="ident">result</span>.<span class="ident">push</span>(<span class="ident">WorldSave</span> {})
-        }
-        <span class="prelude-val">Ok</span>(<span class="ident">result</span>)
-    }
-
-    <span class="doccomment">/// 读取该版本下的所有资源包信息</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 目前只是简单的扫一遍文件夹而已</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// TODO: 做准确的解析过滤</span>
-    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_resources_packs</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ResourcesPack</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">resourcepacks_path</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">version_path</span>().<span class="ident">join</span>(<span class="string">&quot;resourcepacks&quot;</span>);
-        <span class="kw">let</span> <span class="ident">texturepacks_path</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">version_path</span>().<span class="ident">join</span>(<span class="string">&quot;texturepacks&quot;</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-        <span class="kw">if</span> <span class="ident">resourcepacks_path</span>.<span class="ident">is_dir</span>() {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">files</span> <span class="op">=</span> <span class="ident">inner_future::fs::read_dir</span>(<span class="kw-2">&amp;</span><span class="ident">resourcepacks_path</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-            <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">_file</span>) <span class="op">=</span> <span class="ident">files</span>.<span class="ident">try_next</span>().<span class="kw">await</span><span class="question-mark">?</span> {
-                <span class="ident">result</span>.<span class="ident">push</span>(<span class="ident">ResourcesPack</span> {})
+    <span class="doccomment">/// 读取该版本下的所有资源包信息
+    ///
+    /// 目前只是简单的扫一遍文件夹而已
+    ///
+    /// TODO: 做准确的解析过滤
+    </span><span class="kw">pub async fn </span>get_resources_packs(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; DynResult&lt;Vec&lt;ResourcesPack&gt;&gt; {
+        <span class="kw">let </span>resourcepacks_path = <span class="self">self</span>.version_path().join(<span class="string">&quot;resourcepacks&quot;</span>);
+        <span class="kw">let </span>texturepacks_path = <span class="self">self</span>.version_path().join(<span class="string">&quot;texturepacks&quot;</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>result = Vec::new();
+        <span class="kw">if </span>resourcepacks_path.is_dir() {
+            <span class="kw">let </span><span class="kw-2">mut </span>files = inner_future::fs::read_dir(<span class="kw-2">&amp;</span>resourcepacks_path).<span class="kw">await</span><span class="question-mark">?</span>;
+            <span class="kw">while let </span><span class="prelude-val">Some</span>(_file) = files.try_next().<span class="kw">await</span><span class="question-mark">? </span>{
+                result.push(ResourcesPack {})
             }
         }
-        <span class="kw">if</span> <span class="ident">texturepacks_path</span>.<span class="ident">is_dir</span>() {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">files</span> <span class="op">=</span> <span class="ident">inner_future::fs::read_dir</span>(<span class="kw-2">&amp;</span><span class="ident">texturepacks_path</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-            <span class="kw">while</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">_file</span>) <span class="op">=</span> <span class="ident">files</span>.<span class="ident">try_next</span>().<span class="kw">await</span><span class="question-mark">?</span> {
-                <span class="ident">result</span>.<span class="ident">push</span>(<span class="ident">ResourcesPack</span> {})
+        <span class="kw">if </span>texturepacks_path.is_dir() {
+            <span class="kw">let </span><span class="kw-2">mut </span>files = inner_future::fs::read_dir(<span class="kw-2">&amp;</span>texturepacks_path).<span class="kw">await</span><span class="question-mark">?</span>;
+            <span class="kw">while let </span><span class="prelude-val">Some</span>(_file) = files.try_next().<span class="kw">await</span><span class="question-mark">? </span>{
+                result.push(ResourcesPack {})
             }
         }
-        <span class="prelude-val">Ok</span>(<span class="ident">result</span>)
+        <span class="prelude-val">Ok</span>(result)
     }
 }
 
-<span class="doccomment">/// 一个世界存档的信息结构</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">WorldSave</span> {
-    <span class="comment">// TODO</span>
-}
+<span class="doccomment">/// 一个世界存档的信息结构
+</span><span class="attribute">#[derive(Debug)]
+</span><span class="kw">pub struct </span>WorldSave {
+    <span class="comment">// TODO
+</span>}
 
-<span class="doccomment">/// 一个资源包的信息结构</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ResourcesPack</span> {
-    <span class="comment">// TODO</span>
-}
+<span class="doccomment">/// 一个资源包的信息结构
+</span><span class="attribute">#[derive(Debug)]
+</span><span class="kw">pub struct </span>ResourcesPack {
+    <span class="comment">// TODO
+</span>}
 
-<span class="kw">fn</span> <span class="ident">string_or_seq</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span>, <span class="ident">D</span><span class="op">&gt;</span>(<span class="ident">deserializer</span>: <span class="ident">D</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>, <span class="ident">D::Error</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">D</span>: <span class="ident">Deserializer</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>,
+<span class="kw">fn </span>string_or_seq&lt;<span class="lifetime">&#39;de</span>, D&gt;(deserializer: D) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;String&gt;, D::Error&gt;
+<span class="kw">where
+    </span>D: Deserializer&lt;<span class="lifetime">&#39;de</span>&gt;,
 {
-    <span class="kw">struct</span> <span class="ident">StringOrVec</span>(<span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span>);
+    <span class="kw">struct </span>StringOrVec(PhantomData&lt;Vec&lt;String&gt;&gt;);
 
-    <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span> <span class="ident">Visitor</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">StringOrVec</span> {
-        <span class="kw">type</span> <span class="ident">Value</span> <span class="op">=</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>;
+    <span class="kw">impl</span>&lt;<span class="lifetime">&#39;de</span>&gt; Visitor&lt;<span class="lifetime">&#39;de</span>&gt; <span class="kw">for </span>StringOrVec {
+        <span class="kw">type </span>Value = Vec&lt;String&gt;;
 
-        <span class="kw">fn</span> <span class="ident">expecting</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">formatter</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
-            <span class="ident">formatter</span>.<span class="ident">write_str</span>(<span class="string">&quot;string or list of strings&quot;</span>)
+        <span class="kw">fn </span>expecting(<span class="kw-2">&amp;</span><span class="self">self</span>, formatter: <span class="kw-2">&amp;mut </span>fmt::Formatter) -&gt; fmt::Result {
+            formatter.write_str(<span class="string">&quot;string or list of strings&quot;</span>)
         }
 
-        <span class="kw">fn</span> <span class="ident">visit_str</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Value</span>, <span class="ident">E</span><span class="op">&gt;</span>
-        <span class="kw">where</span>
-            <span class="ident">E</span>: <span class="ident">de::Error</span>,
+        <span class="kw">fn </span>visit_str&lt;E&gt;(<span class="self">self</span>, value: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>::Value, E&gt;
+        <span class="kw">where
+            </span>E: de::Error,
         {
-            <span class="prelude-val">Ok</span>(<span class="macro">vec!</span>[<span class="ident">value</span>.<span class="ident">into</span>()])
+            <span class="prelude-val">Ok</span>(<span class="macro">vec!</span>[value.into()])
         }
 
-        <span class="kw">fn</span> <span class="ident">visit_seq</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="ident">seq</span>: <span class="ident">S</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Value</span>, <span class="ident">S::Error</span><span class="op">&gt;</span>
-        <span class="kw">where</span>
-            <span class="ident">S</span>: <span class="ident">SeqAccess</span><span class="op">&lt;</span><span class="lifetime">&#39;de</span><span class="op">&gt;</span>,
+        <span class="kw">fn </span>visit_seq&lt;S&gt;(<span class="self">self</span>, seq: S) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>::Value, S::Error&gt;
+        <span class="kw">where
+            </span>S: SeqAccess&lt;<span class="lifetime">&#39;de</span>&gt;,
         {
-            <span class="ident">Deserialize::deserialize</span>(<span class="ident">de::value::SeqAccessDeserializer::new</span>(<span class="ident">seq</span>))
+            Deserialize::deserialize(de::value::SeqAccessDeserializer::new(seq))
         }
     }
 
-    <span class="ident">deserializer</span>.<span class="ident">deserialize_any</span>(<span class="ident">StringOrVec</span>(<span class="ident">PhantomData</span>))
+    deserializer.deserialize_any(StringOrVec(PhantomData))
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

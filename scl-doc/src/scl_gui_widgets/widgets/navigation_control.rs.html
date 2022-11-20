@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/navigation_control.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>navigation_control.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/navigation_control.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>navigation_control.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -287,294 +287,294 @@
 <span id="287">287</span>
 <span id="288">288</span>
 <span id="289">289</span>
-</pre><pre class="rust"><code><span class="doccomment">//! 导航控件条，用于设置页面的分页</span>
+</pre><pre class="rust"><code><span class="doccomment">//! 导航控件条，用于设置页面的分页
 
-<span class="kw">use</span> <span class="ident">druid</span>::{
-    <span class="ident">piet</span>::{<span class="ident">Text</span>, <span class="ident">TextLayout</span>, <span class="ident">TextLayoutBuilder</span>},
-    <span class="ident">BoxConstraints</span>, <span class="ident">Env</span>, <span class="ident">Event</span>, <span class="ident">EventCtx</span>, <span class="ident">LayoutCtx</span>, <span class="ident">LifeCycle</span>, <span class="ident">LifeCycleCtx</span>, <span class="ident">PaintCtx</span>,
-    <span class="ident">RenderContext</span>, <span class="ident">Size</span>, <span class="ident">UpdateCtx</span>, <span class="ident">Widget</span>,
+</span><span class="kw">use </span>druid::{
+    piet::{Text, TextLayout, TextLayoutBuilder},
+    BoxConstraints, Env, Event, EventCtx, LayoutCtx, LifeCycle, LifeCycleCtx, PaintCtx,
+    RenderContext, Size, UpdateCtx, Widget,
 };
-<span class="kw">use</span> <span class="ident">scl_gui_animation::Spring</span>;
+<span class="kw">use </span>scl_gui_animation::Spring;
 
-<span class="kw">const</span> <span class="ident">FONT_SIZE</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="number">14.</span>;
-<span class="kw">const</span> <span class="ident">BUTTON_PADDING</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="number">12.</span>;
-<span class="kw">const</span> <span class="ident">NAV_HEIGHT</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="number">40.</span>;
+<span class="kw">const </span>FONT_SIZE: f64 = <span class="number">14.</span>;
+<span class="kw">const </span>BUTTON_PADDING: f64 = <span class="number">12.</span>;
+<span class="kw">const </span>NAV_HEIGHT: f64 = <span class="number">40.</span>;
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="kw">enum</span> <span class="ident">SpringState</span> {
-    <span class="ident">Init</span>,
-    <span class="ident">Static</span>,
-    <span class="ident">UpdateBoth</span>,
-    <span class="ident">UpdateStart</span>,
-    <span class="ident">UpdateEnd</span>,
+<span class="attribute">#[derive(Debug, PartialEq, Eq)]
+</span><span class="kw">enum </span>SpringState {
+    Init,
+    Static,
+    UpdateBoth,
+    UpdateStart,
+    UpdateEnd,
 }
 
-<span class="doccomment">/// 一个导航分页组件，提供了类似 WinUI 3 中的 [Pivot](https://docs.microsoft.com/en-us/windows/apps/design/controls/pivot) 组件</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 可以通过增加页面和传递对应 [`usize`] 值的数据源来切换页面索引，之后你可以使用 [`druid::widget::ViewSwitcher`] 来显示你需要的页面</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">NavigationControl</span> {
-    <span class="ident">pages</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    <span class="ident">pages_text</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">druid::piet::PietTextLayout</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="ident">hovering_page</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
-    <span class="ident">hover_bar_start_spring</span>: <span class="ident">Spring</span>,
-    <span class="ident">hover_bar_end_spring</span>: <span class="ident">Spring</span>,
-    <span class="ident">response_timer</span>: <span class="ident">druid::TimerToken</span>,
-    <span class="ident">spring_state</span>: <span class="ident">SpringState</span>,
+<span class="doccomment">/// 一个导航分页组件，提供了类似 WinUI 3 中的 [Pivot](https://docs.microsoft.com/en-us/windows/apps/design/controls/pivot) 组件
+///
+/// 可以通过增加页面和传递对应 [`usize`] 值的数据源来切换页面索引，之后你可以使用 [`druid::widget::ViewSwitcher`] 来显示你需要的页面
+</span><span class="kw">pub struct </span>NavigationControl {
+    pages: Vec&lt;String&gt;,
+    pages_text: Vec&lt;<span class="prelude-ty">Option</span>&lt;druid::piet::PietTextLayout&gt;&gt;,
+    hovering_page: <span class="prelude-ty">Option</span>&lt;usize&gt;,
+    hover_bar_start_spring: Spring,
+    hover_bar_end_spring: Spring,
+    response_timer: druid::TimerToken,
+    spring_state: SpringState,
 }
 
-<span class="kw">impl</span> <span class="ident">NavigationControl</span> {
-    <span class="doccomment">/// 创建一个没有任何页面的导航分页组件</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::default</span>()
+<span class="kw">impl </span>NavigationControl {
+    <span class="doccomment">/// 创建一个没有任何页面的导航分页组件
+    </span><span class="kw">pub fn </span>new() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::default()
     }
 
-    <span class="doccomment">/// 为这个导航组件增加一个页面，每页的索引值由添加顺序从 0 开始递增</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_page</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">page_name</span>: <span class="ident">String</span>) {
-        <span class="self">self</span>.<span class="ident">pages</span>.<span class="ident">push</span>(<span class="ident">page_name</span>);
-        <span class="self">self</span>.<span class="ident">pages_text</span>.<span class="ident">push</span>(<span class="prelude-val">None</span>);
+    <span class="doccomment">/// 为这个导航组件增加一个页面，每页的索引值由添加顺序从 0 开始递增
+    </span><span class="kw">pub fn </span>add_page(<span class="kw-2">&amp;mut </span><span class="self">self</span>, page_name: String) {
+        <span class="self">self</span>.pages.push(page_name);
+        <span class="self">self</span>.pages_text.push(<span class="prelude-val">None</span>);
     }
 
-    <span class="doccomment">/// 以 Builder 模式为这个导航组件增加一个页面，每页的索引值由添加顺序从 0 开始递增</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_page</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">page_name</span>: <span class="ident">String</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">add_page</span>(<span class="ident">page_name</span>);
-        <span class="self">self</span>
-    }
+    <span class="doccomment">/// 以 Builder 模式为这个导航组件增加一个页面，每页的索引值由添加顺序从 0 开始递增
+    </span><span class="kw">pub fn </span>with_page(<span class="kw-2">mut </span><span class="self">self</span>, page_name: String) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.add_page(page_name);
+        <span class="self">self
+    </span>}
 }
 
-<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">NavigationControl</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">pages</span>: <span class="ident">Vec::with_capacity</span>(<span class="number">8</span>),
-            <span class="ident">pages_text</span>: <span class="ident">Vec::with_capacity</span>(<span class="number">8</span>),
-            <span class="ident">hovering_page</span>: <span class="prelude-val">None</span>,
-            <span class="ident">hover_bar_start_spring</span>: <span class="ident">Spring::new</span>(<span class="number">0.</span>),
-            <span class="ident">hover_bar_end_spring</span>: <span class="ident">Spring::new</span>(<span class="number">0.</span>),
-            <span class="ident">response_timer</span>: <span class="ident">druid::TimerToken::INVALID</span>,
-            <span class="ident">spring_state</span>: <span class="ident">SpringState::Init</span>,
+<span class="kw">impl </span>Default <span class="kw">for </span>NavigationControl {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            pages: Vec::with_capacity(<span class="number">8</span>),
+            pages_text: Vec::with_capacity(<span class="number">8</span>),
+            hovering_page: <span class="prelude-val">None</span>,
+            hover_bar_start_spring: Spring::new(<span class="number">0.</span>),
+            hover_bar_end_spring: Spring::new(<span class="number">0.</span>),
+            response_timer: druid::TimerToken::INVALID,
+            spring_state: SpringState::Init,
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">NavigationControl</span> {
-    <span class="kw">fn</span> <span class="ident">event</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EventCtx</span>, <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">Event</span>, <span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="ident">usize</span>, <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">match</span> <span class="ident">event</span> {
-            <span class="ident">Event::MouseMove</span>(<span class="ident">m</span>) =&gt; {
-                <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_hot</span>() {
-                    <span class="comment">// 检测按钮距离，悬浮合适的按钮</span>
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pos_x</span> <span class="op">=</span> <span class="ident">m</span>.<span class="ident">pos</span>.<span class="ident">x</span>;
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">checked</span> <span class="op">=</span> <span class="bool-val">false</span>;
-                    <span class="kw">let</span> <span class="ident">last_page</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">hovering_page</span>;
-                    <span class="kw">for</span> (<span class="ident">index</span>, <span class="ident">btn</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">pages_text</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">btn</span>) <span class="op">=</span> <span class="ident">btn</span> {
-                            <span class="kw">let</span> <span class="ident">button_width</span> <span class="op">=</span> <span class="ident">btn</span>.<span class="ident">size</span>().<span class="ident">width</span> <span class="op">+</span> <span class="ident">BUTTON_PADDING</span> <span class="op">*</span> <span class="number">2.</span>;
-                            <span class="kw">if</span> <span class="ident">pos_x</span> <span class="op">&lt;</span> <span class="ident">button_width</span> {
-                                <span class="ident">checked</span> <span class="op">=</span> <span class="bool-val">true</span>;
-                                <span class="self">self</span>.<span class="ident">hovering_page</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">index</span>);
+<span class="kw">impl </span>Widget&lt;usize&gt; <span class="kw">for </span>NavigationControl {
+    <span class="kw">fn </span>event(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>EventCtx, event: <span class="kw-2">&amp;</span>Event, data: <span class="kw-2">&amp;mut </span>usize, _env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">match </span>event {
+            Event::MouseMove(m) =&gt; {
+                <span class="kw">if </span>ctx.is_hot() {
+                    <span class="comment">// 检测按钮距离，悬浮合适的按钮
+                    </span><span class="kw">let </span><span class="kw-2">mut </span>pos_x = m.pos.x;
+                    <span class="kw">let </span><span class="kw-2">mut </span>checked = <span class="bool-val">false</span>;
+                    <span class="kw">let </span>last_page = <span class="self">self</span>.hovering_page;
+                    <span class="kw">for </span>(index, btn) <span class="kw">in </span><span class="self">self</span>.pages_text.iter().enumerate() {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(btn) = btn {
+                            <span class="kw">let </span>button_width = btn.size().width + BUTTON_PADDING * <span class="number">2.</span>;
+                            <span class="kw">if </span>pos_x &lt; button_width {
+                                checked = <span class="bool-val">true</span>;
+                                <span class="self">self</span>.hovering_page = <span class="prelude-val">Some</span>(index);
                                 <span class="kw">break</span>;
                             }
-                            <span class="ident">pos_x</span> <span class="op">-</span><span class="op">=</span> <span class="ident">button_width</span>;
+                            pos_x -= button_width;
                         }
                     }
-                    <span class="kw">if</span> <span class="op">!</span><span class="ident">checked</span> {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">last_page_index</span>) <span class="op">=</span> <span class="ident">last_page</span> {
-                            <span class="self">self</span>.<span class="ident">pages_text</span>[<span class="ident">last_page_index</span>] <span class="op">=</span> <span class="prelude-val">None</span>;
+                    <span class="kw">if </span>!checked {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(last_page_index) = last_page {
+                            <span class="self">self</span>.pages_text[last_page_index] = <span class="prelude-val">None</span>;
                         }
-                        <span class="self">self</span>.<span class="ident">hovering_page</span> <span class="op">=</span> <span class="prelude-val">None</span>;
+                        <span class="self">self</span>.hovering_page = <span class="prelude-val">None</span>;
                     }
-                    <span class="kw">if</span> <span class="ident">last_page</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">hovering_page</span> {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">last_page_index</span>) <span class="op">=</span> <span class="ident">last_page</span> {
-                            <span class="self">self</span>.<span class="ident">pages_text</span>[<span class="ident">last_page_index</span>] <span class="op">=</span> <span class="prelude-val">None</span>;
+                    <span class="kw">if </span>last_page != <span class="self">self</span>.hovering_page {
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(last_page_index) = last_page {
+                            <span class="self">self</span>.pages_text[last_page_index] = <span class="prelude-val">None</span>;
                         }
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">last_page_index</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">hovering_page</span> {
-                            <span class="self">self</span>.<span class="ident">pages_text</span>[<span class="ident">last_page_index</span>] <span class="op">=</span> <span class="prelude-val">None</span>;
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(last_page_index) = <span class="self">self</span>.hovering_page {
+                            <span class="self">self</span>.pages_text[last_page_index] = <span class="prelude-val">None</span>;
                         }
-                        <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+                        ctx.request_paint();
                     }
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">page_index</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">hovering_page</span>.<span class="ident">take</span>() {
-                    <span class="self">self</span>.<span class="ident">pages_text</span>[<span class="ident">page_index</span>] <span class="op">=</span> <span class="prelude-val">None</span>;
-                    <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+                } <span class="kw">else if let </span><span class="prelude-val">Some</span>(page_index) = <span class="self">self</span>.hovering_page.take() {
+                    <span class="self">self</span>.pages_text[page_index] = <span class="prelude-val">None</span>;
+                    ctx.request_paint();
                 }
             }
-            <span class="ident">Event::MouseDown</span>(<span class="kw">_</span>) =&gt; {
-                <span class="ident">ctx</span>.<span class="ident">set_active</span>(<span class="bool-val">true</span>);
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">page_index</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">hovering_page</span> {
-                    <span class="self">self</span>.<span class="ident">pages_text</span>[<span class="ident">page_index</span>] <span class="op">=</span> <span class="prelude-val">None</span>;
-                    <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+            Event::MouseDown(<span class="kw">_</span>) =&gt; {
+                ctx.set_active(<span class="bool-val">true</span>);
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(page_index) = <span class="self">self</span>.hovering_page {
+                    <span class="self">self</span>.pages_text[page_index] = <span class="prelude-val">None</span>;
+                    ctx.request_paint();
                 }
             }
-            <span class="ident">Event::MouseUp</span>(<span class="kw">_</span>) =&gt; {
-                <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_active</span>() {
-                    <span class="ident">ctx</span>.<span class="ident">set_active</span>(<span class="bool-val">false</span>);
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">page_index</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">hovering_page</span> {
-                        <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">data</span> <span class="op">&gt;</span> <span class="ident">page_index</span> {
-                            <span class="self">self</span>.<span class="ident">spring_state</span> <span class="op">=</span> <span class="ident">SpringState::UpdateStart</span>;
-                        } <span class="kw">else</span> {
-                            <span class="self">self</span>.<span class="ident">spring_state</span> <span class="op">=</span> <span class="ident">SpringState::UpdateEnd</span>;
+            Event::MouseUp(<span class="kw">_</span>) =&gt; {
+                <span class="kw">if </span>ctx.is_active() {
+                    ctx.set_active(<span class="bool-val">false</span>);
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(page_index) = <span class="self">self</span>.hovering_page {
+                        <span class="kw">if </span><span class="kw-2">*</span>data &gt; page_index {
+                            <span class="self">self</span>.spring_state = SpringState::UpdateStart;
+                        } <span class="kw">else </span>{
+                            <span class="self">self</span>.spring_state = SpringState::UpdateEnd;
                         }
-                        <span class="kw-2">*</span><span class="ident">data</span> <span class="op">=</span> <span class="ident">page_index</span>;
-                        <span class="self">self</span>.<span class="ident">pages_text</span>[<span class="ident">page_index</span>] <span class="op">=</span> <span class="prelude-val">None</span>;
-                        <span class="self">self</span>.<span class="ident">response_timer</span> <span class="op">=</span>
-                            <span class="ident">ctx</span>.<span class="ident">request_timer</span>(<span class="ident">std::time::Duration::from_millis</span>(<span class="number">150</span>));
-                        <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
+                        <span class="kw-2">*</span>data = page_index;
+                        <span class="self">self</span>.pages_text[page_index] = <span class="prelude-val">None</span>;
+                        <span class="self">self</span>.response_timer =
+                            ctx.request_timer(std::time::Duration::from_millis(<span class="number">150</span>));
+                        ctx.request_anim_frame();
                     }
                 }
             }
-            <span class="ident">Event::Timer</span>(<span class="ident">t</span>) =&gt; {
-                <span class="kw">if</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">response_timer</span> <span class="op">==</span> <span class="ident">t</span> {
-                    <span class="self">self</span>.<span class="ident">spring_state</span> <span class="op">=</span> <span class="ident">SpringState::UpdateBoth</span>;
-                    <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
+            Event::Timer(t) =&gt; {
+                <span class="kw">if </span><span class="kw-2">&amp;</span><span class="self">self</span>.response_timer == t {
+                    <span class="self">self</span>.spring_state = SpringState::UpdateBoth;
+                    ctx.request_anim_frame();
                 }
             }
-            <span class="ident">Event::AnimFrame</span>(<span class="kw">_</span>) =&gt; {
-                <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">spring_state</span> <span class="op">!</span><span class="op">=</span> <span class="ident">SpringState::Static</span>
-                    <span class="op">|</span><span class="op">|</span> <span class="op">!</span>(<span class="self">self</span>.<span class="ident">hover_bar_end_spring</span>.<span class="ident">arrived</span>()
-                        <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">hover_bar_start_spring</span>.<span class="ident">arrived</span>())
+            Event::AnimFrame(<span class="kw">_</span>) =&gt; {
+                ctx.request_paint();
+                <span class="kw">if </span><span class="self">self</span>.spring_state != SpringState::Static
+                    || !(<span class="self">self</span>.hover_bar_end_spring.arrived()
+                        &amp;&amp; <span class="self">self</span>.hover_bar_start_spring.arrived())
                 {
-                    <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
+                    ctx.request_anim_frame();
                 }
             }
-            <span class="kw">_</span> =&gt; {}
+            <span class="kw">_ </span>=&gt; {}
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">lifecycle</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LifeCycleCtx</span>, <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">LifeCycle</span>, <span class="ident">_data</span>: <span class="kw-2">&amp;</span><span class="ident">usize</span>, <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">LifeCycle::HotChanged</span>(<span class="ident">is_hot</span>) <span class="op">=</span> <span class="ident">event</span> {
-            <span class="kw">if</span> <span class="op">!</span><span class="kw-2">*</span><span class="ident">is_hot</span> {
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">page_index</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">hovering_page</span>.<span class="ident">take</span>() {
-                    <span class="self">self</span>.<span class="ident">pages_text</span>[<span class="ident">page_index</span>] <span class="op">=</span> <span class="prelude-val">None</span>;
-                    <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+    <span class="kw">fn </span>lifecycle(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>LifeCycleCtx, event: <span class="kw-2">&amp;</span>LifeCycle, _data: <span class="kw-2">&amp;</span>usize, _env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">if let </span>LifeCycle::HotChanged(is_hot) = event {
+            <span class="kw">if </span>!<span class="kw-2">*</span>is_hot {
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(page_index) = <span class="self">self</span>.hovering_page.take() {
+                    <span class="self">self</span>.pages_text[page_index] = <span class="prelude-val">None</span>;
+                    ctx.request_paint();
                 }
             }
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">UpdateCtx</span>, <span class="ident">old_data</span>: <span class="kw-2">&amp;</span><span class="ident">usize</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">usize</span>, <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">env_key_changed</span>(<span class="kw-2">&amp;</span><span class="ident"><span class="kw">crate</span>::theme::color::base::HIGH</span>)
-            <span class="op">|</span><span class="op">|</span> <span class="ident">ctx</span>.<span class="ident">env_key_changed</span>(<span class="kw-2">&amp;</span><span class="ident"><span class="kw">crate</span>::theme::color::base::MEDIUM_HIGH</span>)
-            <span class="op">|</span><span class="op">|</span> <span class="ident">ctx</span>.<span class="ident">env_key_changed</span>(<span class="kw-2">&amp;</span><span class="ident"><span class="kw">crate</span>::theme::color::base::MEDIUM</span>)
+    <span class="kw">fn </span>update(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>UpdateCtx, old_data: <span class="kw-2">&amp;</span>usize, data: <span class="kw-2">&amp;</span>usize, _env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">if </span>ctx.env_key_changed(<span class="kw-2">&amp;</span><span class="kw">crate</span>::theme::color::base::HIGH)
+            || ctx.env_key_changed(<span class="kw-2">&amp;</span><span class="kw">crate</span>::theme::color::base::MEDIUM_HIGH)
+            || ctx.env_key_changed(<span class="kw-2">&amp;</span><span class="kw">crate</span>::theme::color::base::MEDIUM)
         {
-            <span class="kw">for</span> <span class="ident">text</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">pages_text</span>.<span class="ident">iter_mut</span>() {
-                <span class="kw-2">*</span><span class="ident">text</span> <span class="op">=</span> <span class="prelude-val">None</span>;
+            <span class="kw">for </span>text <span class="kw">in </span><span class="self">self</span>.pages_text.iter_mut() {
+                <span class="kw-2">*</span>text = <span class="prelude-val">None</span>;
             }
-            <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+            ctx.request_paint();
         }
-        <span class="kw">if</span> <span class="ident">old_data</span> <span class="op">!</span><span class="op">=</span> <span class="ident">data</span> {
-            <span class="self">self</span>.<span class="ident">pages_text</span>[<span class="kw-2">*</span><span class="ident">old_data</span>] <span class="op">=</span> <span class="prelude-val">None</span>;
-            <span class="self">self</span>.<span class="ident">pages_text</span>[<span class="kw-2">*</span><span class="ident">data</span>] <span class="op">=</span> <span class="prelude-val">None</span>;
-            <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+        <span class="kw">if </span>old_data != data {
+            <span class="self">self</span>.pages_text[<span class="kw-2">*</span>old_data] = <span class="prelude-val">None</span>;
+            <span class="self">self</span>.pages_text[<span class="kw-2">*</span>data] = <span class="prelude-val">None</span>;
+            ctx.request_paint();
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">layout</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">_ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LayoutCtx</span>,
-        <span class="ident">bc</span>: <span class="kw-2">&amp;</span><span class="ident">BoxConstraints</span>,
-        <span class="ident">_data</span>: <span class="kw-2">&amp;</span><span class="ident">usize</span>,
-        <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>,
-    ) -&gt; <span class="ident">Size</span> {
-        <span class="ident">bc</span>.<span class="ident">debug_check</span>(<span class="string">&quot;NavigationControl&quot;</span>);
-        <span class="ident">bc</span>.<span class="ident">constrain</span>((<span class="number">100.</span>, <span class="ident">NAV_HEIGHT</span>))
+    <span class="kw">fn </span>layout(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        _ctx: <span class="kw-2">&amp;mut </span>LayoutCtx,
+        bc: <span class="kw-2">&amp;</span>BoxConstraints,
+        _data: <span class="kw-2">&amp;</span>usize,
+        _env: <span class="kw-2">&amp;</span>Env,
+    ) -&gt; Size {
+        bc.debug_check(<span class="string">&quot;NavigationControl&quot;</span>);
+        bc.constrain((<span class="number">100.</span>, NAV_HEIGHT))
     }
 
-    <span class="kw">fn</span> <span class="ident">paint</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">PaintCtx</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">usize</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">let</span> <span class="ident">primary</span> <span class="op">=</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::main::PRIMARY</span>);
-        <span class="kw">let</span> <span class="ident">font</span> <span class="op">=</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::typography::BODY</span>);
-        <span class="kw">let</span> <span class="ident">hot_color</span> <span class="op">=</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::base::HIGH</span>);
-        <span class="kw">let</span> <span class="ident">active_color</span> <span class="op">=</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::base::MEDIUM_HIGH</span>);
-        <span class="kw">let</span> <span class="ident">normal_color</span> <span class="op">=</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::base::MEDIUM</span>);
-        <span class="kw">let</span> <span class="ident">is_active</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">is_active</span>();
-        <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">text</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">start_pos</span> <span class="op">=</span> <span class="number">0.</span>;
-        <span class="kw">for</span> (<span class="ident">index</span>, <span class="ident">text</span>) <span class="kw">in</span> <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">pages_text</span>.<span class="ident">iter_mut</span>().<span class="ident">enumerate</span>() {
-            <span class="kw">if</span> <span class="ident">text</span>.<span class="ident">is_none</span>() {
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">raw_text</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">pages</span>.<span class="ident">get</span>(<span class="ident">index</span>) {
-                    <span class="kw-2">*</span><span class="ident">text</span> <span class="op">=</span> <span class="prelude-val">Some</span>(
-                        <span class="ident">t</span>.<span class="ident">new_text_layout</span>(<span class="ident">raw_text</span>.<span class="ident">to_owned</span>())
-                            .<span class="ident">text_color</span>(<span class="kw">if</span> <span class="kw-2">*</span><span class="ident">data</span> <span class="op">==</span> <span class="ident">index</span> {
-                                <span class="ident">hot_color</span>.<span class="ident">to_owned</span>()
-                            } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">s</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">hovering_page</span> {
-                                <span class="kw">if</span> <span class="ident">s</span> <span class="op">==</span> <span class="ident">index</span> {
-                                    <span class="kw">if</span> <span class="ident">is_active</span> {
-                                        <span class="ident">active_color</span>.<span class="ident">to_owned</span>()
-                                    } <span class="kw">else</span> {
-                                        <span class="ident">hot_color</span>.<span class="ident">to_owned</span>()
+    <span class="kw">fn </span>paint(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>PaintCtx, data: <span class="kw-2">&amp;</span>usize, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">let </span>primary = env.get(<span class="kw">crate</span>::theme::color::main::PRIMARY);
+        <span class="kw">let </span>font = env.get(<span class="kw">crate</span>::theme::color::typography::BODY);
+        <span class="kw">let </span>hot_color = env.get(<span class="kw">crate</span>::theme::color::base::HIGH);
+        <span class="kw">let </span>active_color = env.get(<span class="kw">crate</span>::theme::color::base::MEDIUM_HIGH);
+        <span class="kw">let </span>normal_color = env.get(<span class="kw">crate</span>::theme::color::base::MEDIUM);
+        <span class="kw">let </span>is_active = ctx.is_active();
+        <span class="kw">let </span>t = ctx.text();
+        <span class="kw">let </span><span class="kw-2">mut </span>start_pos = <span class="number">0.</span>;
+        <span class="kw">for </span>(index, text) <span class="kw">in </span><span class="kw-2">&amp;mut </span><span class="self">self</span>.pages_text.iter_mut().enumerate() {
+            <span class="kw">if </span>text.is_none() {
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(raw_text) = <span class="self">self</span>.pages.get(index) {
+                    <span class="kw-2">*</span>text = <span class="prelude-val">Some</span>(
+                        t.new_text_layout(raw_text.to_owned())
+                            .text_color(<span class="kw">if </span><span class="kw-2">*</span>data == index {
+                                hot_color.to_owned()
+                            } <span class="kw">else if let </span><span class="prelude-val">Some</span>(s) = <span class="self">self</span>.hovering_page {
+                                <span class="kw">if </span>s == index {
+                                    <span class="kw">if </span>is_active {
+                                        active_color.to_owned()
+                                    } <span class="kw">else </span>{
+                                        hot_color.to_owned()
                                     }
-                                } <span class="kw">else</span> {
-                                    <span class="ident">normal_color</span>.<span class="ident">to_owned</span>()
+                                } <span class="kw">else </span>{
+                                    normal_color.to_owned()
                                 }
-                            } <span class="kw">else</span> {
-                                <span class="ident">normal_color</span>.<span class="ident">to_owned</span>()
+                            } <span class="kw">else </span>{
+                                normal_color.to_owned()
                             })
-                            .<span class="ident">font</span>(<span class="ident">font</span>.<span class="ident">family</span>.<span class="ident">to_owned</span>(), <span class="ident">FONT_SIZE</span>)
-                            .<span class="ident">build</span>()
-                            .<span class="ident">unwrap</span>(),
+                            .font(font.family.to_owned(), FONT_SIZE)
+                            .build()
+                            .unwrap(),
                     );
                 }
             }
         }
-        <span class="kw">for</span> (<span class="ident">index</span>, <span class="ident">text</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">pages_text</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">text</span>) <span class="op">=</span> <span class="ident">text</span> {
-                <span class="kw">let</span> <span class="ident">text_size</span> <span class="op">=</span> <span class="ident">text</span>.<span class="ident">size</span>();
-                <span class="kw">let</span> <span class="ident">button_width</span> <span class="op">=</span> <span class="ident">text_size</span>.<span class="ident">width</span> <span class="op">+</span> <span class="ident">BUTTON_PADDING</span> <span class="op">*</span> <span class="number">2.</span>;
+        <span class="kw">for </span>(index, text) <span class="kw">in </span><span class="self">self</span>.pages_text.iter().enumerate() {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(text) = text {
+                <span class="kw">let </span>text_size = text.size();
+                <span class="kw">let </span>button_width = text_size.width + BUTTON_PADDING * <span class="number">2.</span>;
 
-                <span class="kw">if</span> <span class="ident">index</span> <span class="op">==</span> <span class="kw-2">*</span><span class="ident">data</span> {
-                    <span class="kw">match</span> <span class="self">self</span>.<span class="ident">spring_state</span> {
-                        <span class="ident">SpringState::Static</span> =&gt; {}
-                        <span class="ident">SpringState::Init</span> =&gt; {
-                            <span class="self">self</span>.<span class="ident">hover_bar_start_spring</span> <span class="op">=</span>
-                                <span class="ident">Spring::new</span>(<span class="ident">start_pos</span> <span class="op">+</span> <span class="ident">BUTTON_PADDING</span>).<span class="ident">with_damper</span>(<span class="number">0.8</span>);
-                            <span class="self">self</span>.<span class="ident">hover_bar_end_spring</span> <span class="op">=</span>
-                                <span class="ident">Spring::new</span>(<span class="ident">start_pos</span> <span class="op">+</span> <span class="ident">BUTTON_PADDING</span> <span class="op">+</span> <span class="ident">text_size</span>.<span class="ident">width</span>)
-                                    .<span class="ident">with_damper</span>(<span class="number">0.8</span>);
-                            <span class="self">self</span>.<span class="ident">spring_state</span> <span class="op">=</span> <span class="ident">SpringState::Static</span>;
+                <span class="kw">if </span>index == <span class="kw-2">*</span>data {
+                    <span class="kw">match </span><span class="self">self</span>.spring_state {
+                        SpringState::Static =&gt; {}
+                        SpringState::Init =&gt; {
+                            <span class="self">self</span>.hover_bar_start_spring =
+                                Spring::new(start_pos + BUTTON_PADDING).with_damper(<span class="number">0.8</span>);
+                            <span class="self">self</span>.hover_bar_end_spring =
+                                Spring::new(start_pos + BUTTON_PADDING + text_size.width)
+                                    .with_damper(<span class="number">0.8</span>);
+                            <span class="self">self</span>.spring_state = SpringState::Static;
                         }
-                        <span class="ident">SpringState::UpdateBoth</span> =&gt; {
-                            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">hover_bar_start_spring</span>.<span class="ident">target</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">start_pos</span> <span class="op">+</span> <span class="ident">BUTTON_PADDING</span> {
-                                <span class="self">self</span>.<span class="ident">hover_bar_start_spring</span>
-                                    .<span class="ident">set_target</span>(<span class="ident">start_pos</span> <span class="op">+</span> <span class="ident">BUTTON_PADDING</span>);
+                        SpringState::UpdateBoth =&gt; {
+                            <span class="kw">if </span><span class="self">self</span>.hover_bar_start_spring.target() != start_pos + BUTTON_PADDING {
+                                <span class="self">self</span>.hover_bar_start_spring
+                                    .set_target(start_pos + BUTTON_PADDING);
                             }
-                            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">hover_bar_end_spring</span>.<span class="ident">target</span>()
-                                <span class="op">!</span><span class="op">=</span> <span class="ident">start_pos</span> <span class="op">+</span> <span class="ident">BUTTON_PADDING</span> <span class="op">+</span> <span class="ident">text_size</span>.<span class="ident">width</span>
+                            <span class="kw">if </span><span class="self">self</span>.hover_bar_end_spring.target()
+                                != start_pos + BUTTON_PADDING + text_size.width
                             {
-                                <span class="self">self</span>.<span class="ident">hover_bar_end_spring</span>
-                                    .<span class="ident">set_target</span>(<span class="ident">start_pos</span> <span class="op">+</span> <span class="ident">BUTTON_PADDING</span> <span class="op">+</span> <span class="ident">text_size</span>.<span class="ident">width</span>);
+                                <span class="self">self</span>.hover_bar_end_spring
+                                    .set_target(start_pos + BUTTON_PADDING + text_size.width);
                             }
-                            <span class="self">self</span>.<span class="ident">spring_state</span> <span class="op">=</span> <span class="ident">SpringState::Static</span>;
+                            <span class="self">self</span>.spring_state = SpringState::Static;
                         }
-                        <span class="ident">SpringState::UpdateStart</span> =&gt; {
-                            <span class="self">self</span>.<span class="ident">hover_bar_start_spring</span>
-                                .<span class="ident">set_target</span>(<span class="ident">start_pos</span> <span class="op">+</span> <span class="ident">BUTTON_PADDING</span>);
-                            <span class="self">self</span>.<span class="ident">spring_state</span> <span class="op">=</span> <span class="ident">SpringState::Static</span>;
+                        SpringState::UpdateStart =&gt; {
+                            <span class="self">self</span>.hover_bar_start_spring
+                                .set_target(start_pos + BUTTON_PADDING);
+                            <span class="self">self</span>.spring_state = SpringState::Static;
                         }
-                        <span class="ident">SpringState::UpdateEnd</span> =&gt; {
-                            <span class="self">self</span>.<span class="ident">hover_bar_end_spring</span>
-                                .<span class="ident">set_target</span>(<span class="ident">start_pos</span> <span class="op">+</span> <span class="ident">BUTTON_PADDING</span> <span class="op">+</span> <span class="ident">text_size</span>.<span class="ident">width</span>);
-                            <span class="self">self</span>.<span class="ident">spring_state</span> <span class="op">=</span> <span class="ident">SpringState::Static</span>;
+                        SpringState::UpdateEnd =&gt; {
+                            <span class="self">self</span>.hover_bar_end_spring
+                                .set_target(start_pos + BUTTON_PADDING + text_size.width);
+                            <span class="self">self</span>.spring_state = SpringState::Static;
                         }
                     }
                 }
 
-                <span class="ident">ctx</span>.<span class="ident">draw_text</span>(
-                    <span class="ident">text</span>,
+                ctx.draw_text(
+                    text,
                     (
-                        <span class="ident">start_pos</span> <span class="op">+</span> <span class="ident">BUTTON_PADDING</span>,
-                        (<span class="ident">NAV_HEIGHT</span> <span class="op">-</span> <span class="ident">text_size</span>.<span class="ident">height</span>) <span class="op">/</span> <span class="number">2.</span>,
+                        start_pos + BUTTON_PADDING,
+                        (NAV_HEIGHT - text_size.height) / <span class="number">2.</span>,
                     ),
                 );
-                <span class="ident">start_pos</span> <span class="op">+</span><span class="op">=</span> <span class="ident">button_width</span>;
+                start_pos += button_width;
             }
         }
-        <span class="comment">// 滑块条</span>
-        <span class="kw">let</span> <span class="ident">slider_rect</span> <span class="op">=</span> <span class="ident">druid::Rect::new</span>(
-            <span class="self">self</span>.<span class="ident">hover_bar_start_spring</span>.<span class="ident">position_rounded</span>(),
-            <span class="ident">NAV_HEIGHT</span> <span class="op">-</span> <span class="number">6.</span>,
-            <span class="self">self</span>.<span class="ident">hover_bar_end_spring</span>.<span class="ident">position_rounded</span>(),
-            <span class="ident">NAV_HEIGHT</span> <span class="op">-</span> <span class="number">4.</span>,
+        <span class="comment">// 滑块条
+        </span><span class="kw">let </span>slider_rect = druid::Rect::new(
+            <span class="self">self</span>.hover_bar_start_spring.position_rounded(),
+            NAV_HEIGHT - <span class="number">6.</span>,
+            <span class="self">self</span>.hover_bar_end_spring.position_rounded(),
+            NAV_HEIGHT - <span class="number">4.</span>,
         );
-        <span class="kw">let</span> <span class="ident">slider_rect</span> <span class="op">=</span> <span class="ident">slider_rect</span>.<span class="ident">to_rounded_rect</span>(<span class="number">2.</span>);
-        <span class="ident">ctx</span>.<span class="ident">fill</span>(<span class="ident">slider_rect</span>, <span class="kw-2">&amp;</span><span class="ident">primary</span>);
+        <span class="kw">let </span>slider_rect = slider_rect.to_rounded_rect(<span class="number">2.</span>);
+        ctx.fill(slider_rect, <span class="kw-2">&amp;</span>primary);
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

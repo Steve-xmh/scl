@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/client.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>client.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../scl_core/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/client.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>client.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../scl_core/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -740,654 +740,654 @@
 <span id="740">740</span>
 <span id="741">741</span>
 <span id="742">742</span>
-</pre><pre class="rust"><code><span class="doccomment">//! 客户端结构，用于启动游戏</span>
-<span class="kw">use</span> <span class="ident">std</span>::{
-    <span class="ident">collections::HashMap</span>,
-    <span class="ident">fmt</span>::{<span class="ident">Display</span>, <span class="ident">Formatter</span>, <span class="prelude-ty">Result</span>},
-    <span class="ident">path::Path</span>,
+</pre><pre class="rust"><code><span class="doccomment">//! 客户端结构，用于启动游戏
+</span><span class="kw">use </span>std::{
+    collections::HashMap,
+    fmt::{Display, Formatter, <span class="prelude-ty">Result</span>},
+    path::Path,
 };
 
-<span class="kw">use</span> <span class="ident">inner_future::process</span>::{<span class="ident">Child</span>, <span class="ident">Command</span>};
+<span class="kw">use </span>inner_future::process::{Child, Command};
 
-<span class="kw">use</span> <span class="kw">super</span>::{
-    <span class="ident">auth::structs::AuthMethod</span>,
-    <span class="ident">version::structs</span>::{<span class="ident">Argument</span>, <span class="ident">VersionInfo</span>},
+<span class="kw">use super</span>::{
+    auth::structs::AuthMethod,
+    version::structs::{Argument, VersionInfo},
 };
-<span class="kw">use</span> <span class="kw">crate</span>::{
-    <span class="ident">prelude</span>::<span class="kw-2">*</span>,
-    <span class="ident">utils</span>::{<span class="ident">get_full_path</span>, <span class="ident">CLASSPATH_SEPARATOR</span>, <span class="ident">NATIVE_ARCH_LAZY</span>, <span class="ident">TARGET_OS</span>},
-    <span class="ident">version::structs</span>::{<span class="ident">Allowed</span>, <span class="ident">VersionMeta</span>},
+<span class="kw">use crate</span>::{
+    prelude::<span class="kw-2">*</span>,
+    utils::{get_full_path, CLASSPATH_SEPARATOR, NATIVE_ARCH_LAZY, TARGET_OS},
+    version::structs::{Allowed, VersionMeta},
 };
 
-<span class="doccomment">/// 用于修复 CVE-2021-44228 远程代码执行漏洞</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 似乎只需要加 `-Dlog4j2.formatMsgNoLookups=true` 参数到 `classpath` 之前就可以解决问题了</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 一般用不到这个</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">LOG4J_PATCH</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="macro">include_bytes!</span>(<span class="string">&quot;../assets/log4j-patch-agent-1.0.jar&quot;</span>);
+<span class="doccomment">/// 用于修复 CVE-2021-44228 远程代码执行漏洞
+///
+/// 似乎只需要加 `-Dlog4j2.formatMsgNoLookups=true` 参数到 `classpath` 之前就可以解决问题了
+///
+/// 一般用不到这个
+</span><span class="kw">pub const </span>LOG4J_PATCH: <span class="kw-2">&amp;</span>[u8] = <span class="macro">include_bytes!</span>(<span class="string">&quot;../assets/log4j-patch-agent-1.0.jar&quot;</span>);
 
-<span class="doccomment">/// 一个客户端配置结构，开发者需要填充内部的一部分数据后传递给 [`Client::new`] 方可正确启动游戏</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ClientConfig</span> {
-    <span class="doccomment">/// 使用的玩家账户</span>
-    <span class="kw">pub</span> <span class="ident">auth</span>: <span class="ident">AuthMethod</span>,
-    <span class="doccomment">/// 启动的版本元数据信息</span>
-    <span class="kw">pub</span> <span class="ident">version_info</span>: <span class="ident">VersionInfo</span>,
-    <span class="doccomment">/// 启动的版本类型</span>
-    <span class="kw">pub</span> <span class="ident">version_type</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 自定义 JVM 参数，这将会附加在 Class Path 之前的位置</span>
-    <span class="kw">pub</span> <span class="ident">custom_java_args</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// 自定义游戏参数，这将会附加在参数的最后部分</span>
-    <span class="kw">pub</span> <span class="ident">custom_args</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// 需要使用的 Java 运行时文件路径</span>
-    <span class="kw">pub</span> <span class="ident">java_path</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 最高内存，以 MB 为单位</span>
-    <span class="kw">pub</span> <span class="ident">max_mem</span>: <span class="ident">u32</span>,
-    <span class="doccomment">/// 是否进行预先资源及依赖检查</span>
-    <span class="kw">pub</span> <span class="ident">recheck</span>: <span class="ident">bool</span>,
+<span class="doccomment">/// 一个客户端配置结构，开发者需要填充内部的一部分数据后传递给 [`Client::new`] 方可正确启动游戏
+</span><span class="attribute">#[derive(Debug, Clone)]
+</span><span class="kw">pub struct </span>ClientConfig {
+    <span class="doccomment">/// 使用的玩家账户
+    </span><span class="kw">pub </span>auth: AuthMethod,
+    <span class="doccomment">/// 启动的版本元数据信息
+    </span><span class="kw">pub </span>version_info: VersionInfo,
+    <span class="doccomment">/// 启动的版本类型
+    </span><span class="kw">pub </span>version_type: String,
+    <span class="doccomment">/// 自定义 JVM 参数，这将会附加在 Class Path 之前的位置
+    </span><span class="kw">pub </span>custom_java_args: Vec&lt;String&gt;,
+    <span class="doccomment">/// 自定义游戏参数，这将会附加在参数的最后部分
+    </span><span class="kw">pub </span>custom_args: Vec&lt;String&gt;,
+    <span class="doccomment">/// 需要使用的 Java 运行时文件路径
+    </span><span class="kw">pub </span>java_path: String,
+    <span class="doccomment">/// 最高内存，以 MB 为单位
+    </span><span class="kw">pub </span>max_mem: u32,
+    <span class="doccomment">/// 是否进行预先资源及依赖检查
+    </span><span class="kw">pub </span>recheck: bool,
 }
 
-<span class="doccomment">/// 一个客户端结构，通过 [`ClientConfig`] 提供的信息组合启动参数，运行游戏</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Client</span> {
-    <span class="doccomment">/// 客户端的实际指令对象</span>
-    <span class="kw">pub</span> <span class="ident">cmd</span>: <span class="ident">Command</span>,
-    <span class="doccomment">/// 是否使用批处理登录，仅 Windows 可用</span>
-    <span class="kw">pub</span> <span class="ident">terminal_launch</span>: <span class="ident">bool</span>,
-    <span class="doccomment">/// 当前游戏目录路径</span>
-    <span class="kw">pub</span> <span class="ident">game_dir</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 当前使用的 Java 运行时路径</span>
-    <span class="kw">pub</span> <span class="ident">java_path</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 当前启动参数的副本，包含 Java 自身</span>
-    <span class="kw">pub</span> <span class="ident">args</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// 正在运行的进程对象</span>
-    <span class="kw">pub</span> <span class="ident">process</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Child</span><span class="op">&gt;</span>,
+<span class="doccomment">/// 一个客户端结构，通过 [`ClientConfig`] 提供的信息组合启动参数，运行游戏
+</span><span class="kw">pub struct </span>Client {
+    <span class="doccomment">/// 客户端的实际指令对象
+    </span><span class="kw">pub </span>cmd: Command,
+    <span class="doccomment">/// 是否使用批处理登录，仅 Windows 可用
+    </span><span class="kw">pub </span>terminal_launch: bool,
+    <span class="doccomment">/// 当前游戏目录路径
+    </span><span class="kw">pub </span>game_dir: String,
+    <span class="doccomment">/// 当前使用的 Java 运行时路径
+    </span><span class="kw">pub </span>java_path: String,
+    <span class="doccomment">/// 当前启动参数的副本，包含 Java 自身
+    </span><span class="kw">pub </span>args: Vec&lt;String&gt;,
+    <span class="doccomment">/// 正在运行的进程对象
+    </span><span class="kw">pub </span>process: <span class="prelude-ty">Option</span>&lt;Child&gt;,
 }
 
-<span class="kw">fn</span> <span class="ident">get_game_directory</span>(<span class="ident">cfg</span>: <span class="kw-2">&amp;</span><span class="ident">ClientConfig</span>) -&gt; <span class="ident">String</span> {
-    <span class="kw">let</span> <span class="ident">version_base</span> <span class="op">=</span> <span class="ident">std::path::Path::new</span>(<span class="kw-2">&amp;</span><span class="ident">cfg</span>.<span class="ident">version_info</span>.<span class="ident">version_base</span>);
-    <span class="kw">let</span> <span class="ident">version_dir</span> <span class="op">=</span> <span class="ident">version_base</span>.<span class="ident">join</span>(<span class="kw-2">&amp;</span><span class="ident">cfg</span>.<span class="ident">version_info</span>.<span class="ident">version</span>);
-    <span class="kw">let</span> <span class="ident">version_dir</span> <span class="op">=</span> <span class="ident">get_full_path</span>(<span class="ident">version_dir</span>);
-    <span class="kw">let</span> <span class="ident">game_dir</span> <span class="op">=</span> <span class="ident">version_base</span>.<span class="ident">parent</span>().<span class="ident">unwrap</span>();
-    <span class="kw">let</span> <span class="ident">game_dir</span> <span class="op">=</span> <span class="ident">get_full_path</span>(<span class="ident">game_dir</span>);
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">_meta</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">cfg</span>.<span class="ident">version_info</span>.<span class="ident">meta</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">scl</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">cfg</span>.<span class="ident">version_info</span>.<span class="ident">scl_launch_config</span> {
-            <span class="kw">if</span> <span class="ident">scl</span>.<span class="ident">game_independent</span> {
-                <span class="ident">version_dir</span>
-            } <span class="kw">else</span> {
-                <span class="ident">game_dir</span>
+<span class="kw">fn </span>get_game_directory(cfg: <span class="kw-2">&amp;</span>ClientConfig) -&gt; String {
+    <span class="kw">let </span>version_base = std::path::Path::new(<span class="kw-2">&amp;</span>cfg.version_info.version_base);
+    <span class="kw">let </span>version_dir = version_base.join(<span class="kw-2">&amp;</span>cfg.version_info.version);
+    <span class="kw">let </span>version_dir = get_full_path(version_dir);
+    <span class="kw">let </span>game_dir = version_base.parent().unwrap();
+    <span class="kw">let </span>game_dir = get_full_path(game_dir);
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(_meta) = <span class="kw-2">&amp;</span>cfg.version_info.meta {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(scl) = <span class="kw-2">&amp;</span>cfg.version_info.scl_launch_config {
+            <span class="kw">if </span>scl.game_independent {
+                version_dir
+            } <span class="kw">else </span>{
+                game_dir
             }
-        } <span class="kw">else</span> {
-            <span class="ident">game_dir</span>
+        } <span class="kw">else </span>{
+            game_dir
         }
-    } <span class="kw">else</span> {
-        <span class="ident">game_dir</span>
+    } <span class="kw">else </span>{
+        game_dir
     }
 }
 
-<span class="kw">async</span> <span class="kw">fn</span> <span class="ident">parse_inheritsed_meta</span>(<span class="ident">cfg</span>: <span class="kw-2">&amp;</span><span class="ident">ClientConfig</span>) -&gt; <span class="ident">VersionMeta</span> {
-    <span class="kw">let</span> <span class="ident">meta</span> <span class="op">=</span> <span class="ident">cfg</span>.<span class="ident">version_info</span>.<span class="ident">meta</span>.<span class="ident">as_ref</span>().<span class="ident">unwrap</span>();
-    <span class="kw">let</span> <span class="ident">inherits_from</span> <span class="op">=</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">meta</span>.<span class="ident">inherits_from</span>.<span class="ident">is_empty</span>() {
-        <span class="ident">meta</span>.<span class="ident">inherits_from</span>.<span class="ident">as_str</span>()
-    } <span class="kw">else</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">meta</span>.<span class="ident">client_version</span>.<span class="ident">is_empty</span>() <span class="op">&amp;&amp;</span> <span class="ident">cfg</span>.<span class="ident">version_info</span>.<span class="ident">version</span> <span class="op">!</span><span class="op">=</span> <span class="ident">meta</span>.<span class="ident">client_version</span> {
-        <span class="ident">meta</span>.<span class="ident">client_version</span>.<span class="ident">as_str</span>()
-    } <span class="kw">else</span> {
-        <span class="string">&quot;&quot;</span>
-    };
-    <span class="kw">if</span> <span class="ident">inherits_from</span>.<span class="ident">is_empty</span>() {
-        <span class="ident">meta</span>.<span class="ident">to_owned</span>()
-    } <span class="kw">else</span> {
-        <span class="kw">let</span> <span class="ident">meta</span> <span class="op">=</span> <span class="ident">meta</span>.<span class="ident">to_owned</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">base_info</span> <span class="op">=</span> <span class="ident">VersionInfo</span> {
-            <span class="ident">version</span>: <span class="ident">inherits_from</span>.<span class="ident">to_owned</span>(),
-            <span class="ident">version_base</span>: <span class="ident">cfg</span>.<span class="ident">version_info</span>.<span class="ident">version_base</span>.<span class="ident">to_owned</span>(),
-            ..<span class="ident">Default::default</span>()
+<span class="kw">async fn </span>parse_inheritsed_meta(cfg: <span class="kw-2">&amp;</span>ClientConfig) -&gt; VersionMeta {
+    <span class="kw">let </span>meta = cfg.version_info.meta.as_ref().unwrap();
+    <span class="kw">let </span>inherits_from = <span class="kw">if </span>!meta.inherits_from.is_empty() {
+        meta.inherits_from.as_str()
+    } <span class="kw">else if </span>!meta.client_version.is_empty() &amp;&amp; cfg.version_info.version != meta.client_version {
+        meta.client_version.as_str()
+    } <span class="kw">else </span>{
+        <span class="string">&quot;&quot;
+    </span>};
+    <span class="kw">if </span>inherits_from.is_empty() {
+        meta.to_owned()
+    } <span class="kw">else </span>{
+        <span class="kw">let </span>meta = meta.to_owned();
+        <span class="kw">let </span><span class="kw-2">mut </span>base_info = VersionInfo {
+            version: inherits_from.to_owned(),
+            version_base: cfg.version_info.version_base.to_owned(),
+            ..Default::default()
         };
-        <span class="kw">if</span> <span class="ident">base_info</span>.<span class="ident">load</span>().<span class="kw">await</span>.<span class="ident">is_ok</span>() {
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">base</span>) <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">base_info</span>.<span class="ident">meta</span> {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">base</span> <span class="op">=</span> <span class="ident">base</span>.<span class="ident">to_owned</span>();
-                <span class="ident">base</span> <span class="op">+</span><span class="op">=</span> <span class="ident">meta</span>;
-                <span class="ident">base</span>
-            } <span class="kw">else</span> {
-                <span class="ident">meta</span>.<span class="ident">to_owned</span>()
+        <span class="kw">if </span>base_info.load().<span class="kw">await</span>.is_ok() {
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(base) = <span class="kw-2">&amp;mut </span>base_info.meta {
+                <span class="kw">let </span><span class="kw-2">mut </span>base = base.to_owned();
+                base += meta;
+                base
+            } <span class="kw">else </span>{
+                meta.to_owned()
             }
-        } <span class="kw">else</span> {
-            <span class="ident">meta</span>
+        } <span class="kw">else </span>{
+            meta
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Client</span> {
-    <span class="doccomment">/// 根据传入的启动客户端版本设定创建一个客户端</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 这将会检查元数据，并组合出启动参数，之后可以使用 [`Client::launch`] 启动游戏</span>
-    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="kw-2">mut</span> <span class="ident">cfg</span>: <span class="ident">ClientConfig</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="ident">cfg</span>.<span class="ident">version_info</span>.<span class="ident">meta</span>.<span class="ident">is_none</span>() {
+<span class="kw">impl </span>Client {
+    <span class="doccomment">/// 根据传入的启动客户端版本设定创建一个客户端
+    ///
+    /// 这将会检查元数据，并组合出启动参数，之后可以使用 [`Client::launch`] 启动游戏
+    </span><span class="kw">pub async fn </span>new(<span class="kw-2">mut </span>cfg: ClientConfig) -&gt; DynResult&lt;<span class="self">Self</span>&gt; {
+        <span class="kw">if </span>cfg.version_info.meta.is_none() {
             <span class="macro">anyhow::bail!</span>(<span class="string">&quot;version_info is empty&quot;</span>);
         }
-        <span class="comment">// let build_args_timer = std::time::Instant::now();</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">args</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="ident">::with_capacity</span>(<span class="number">64</span>);
+        <span class="comment">// let build_args_timer = std::time::Instant::now();
+        </span><span class="kw">let </span><span class="kw-2">mut </span>args = Vec::&lt;String&gt;::with_capacity(<span class="number">64</span>);
 
-        <span class="comment">// 检查 log4jc 是否被安装，否则将 LOG4J_PATCH 的数据复制到库文件夹里</span>
-        <span class="comment">// if !cfg.version_info.version_base.is_empty() {</span>
-        <span class="comment">//     let lib_path = std::path::Path::new(&amp;cfg.version_info.version_base);</span>
-        <span class="comment">//     let lib_path = lib_path</span>
-        <span class="comment">//         .parent()</span>
-        <span class="comment">//         .ok_or_else(|| anyhow::anyhow!(&quot;There&#39;s no parent from the library path&quot;))?</span>
-        <span class="comment">//         .join(&quot;libraries&quot;)</span>
-        <span class="comment">//         .join(&quot;org&quot;)</span>
-        <span class="comment">//         .join(&quot;glavo&quot;)</span>
-        <span class="comment">//         .join(&quot;1.0&quot;)</span>
-        <span class="comment">//         .join(&quot;log4j-patch&quot;);</span>
-        <span class="comment">//     if !lib_path.is_dir() {</span>
-        <span class="comment">//         inner_future::fs::create_dir_all(&amp;lib_path).await?;</span>
-        <span class="comment">//     }</span>
-        <span class="comment">//     let log4j_path = lib_path.join(&quot;log4j-patch-agent-1.0.jar&quot;);</span>
-        <span class="comment">//     if !log4j_path.is_file() {</span>
-        <span class="comment">//         inner_future::fs::OpenOptions::new()</span>
-        <span class="comment">//             .write(true)</span>
-        <span class="comment">//             .create(true)</span>
-        <span class="comment">//             .truncate(true)</span>
-        <span class="comment">//             .open(&amp;log4j_path)</span>
-        <span class="comment">//             .await?</span>
-        <span class="comment">//             .write_all(LOG4J_PATCH)</span>
-        <span class="comment">//             .await?;</span>
-        <span class="comment">//     }</span>
-        <span class="comment">// }</span>
+        <span class="comment">// 检查 log4jc 是否被安装，否则将 LOG4J_PATCH 的数据复制到库文件夹里
+        // if !cfg.version_info.version_base.is_empty() {
+        //     let lib_path = std::path::Path::new(&amp;cfg.version_info.version_base);
+        //     let lib_path = lib_path
+        //         .parent()
+        //         .ok_or_else(|| anyhow::anyhow!(&quot;There&#39;s no parent from the library path&quot;))?
+        //         .join(&quot;libraries&quot;)
+        //         .join(&quot;org&quot;)
+        //         .join(&quot;glavo&quot;)
+        //         .join(&quot;1.0&quot;)
+        //         .join(&quot;log4j-patch&quot;);
+        //     if !lib_path.is_dir() {
+        //         inner_future::fs::create_dir_all(&amp;lib_path).await?;
+        //     }
+        //     let log4j_path = lib_path.join(&quot;log4j-patch-agent-1.0.jar&quot;);
+        //     if !log4j_path.is_file() {
+        //         inner_future::fs::OpenOptions::new()
+        //             .write(true)
+        //             .create(true)
+        //             .truncate(true)
+        //             .open(&amp;log4j_path)
+        //             .await?
+        //             .write_all(LOG4J_PATCH)
+        //             .await?;
+        //     }
+        // }
 
-        <span class="comment">// 检查是否继承版本</span>
-        <span class="kw">let</span> <span class="ident">meta</span> <span class="op">=</span> <span class="ident">parse_inheritsed_meta</span>(<span class="kw-2">&amp;</span><span class="ident">cfg</span>).<span class="kw">await</span>;
+        // 检查是否继承版本
+        </span><span class="kw">let </span>meta = parse_inheritsed_meta(<span class="kw-2">&amp;</span>cfg).<span class="kw">await</span>;
 
-        <span class="ident">cfg</span>.<span class="ident">version_info</span>.<span class="ident">meta</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">meta</span>.<span class="ident">to_owned</span>());
+        cfg.version_info.meta = <span class="prelude-val">Some</span>(meta.to_owned());
 
-        <span class="comment">// 变量集，用来给参数中 ${VAR} 做文本替换</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">variables</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>, <span class="ident">String</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">HashMap::with_capacity</span>(<span class="number">19</span>);
-        <span class="ident">variables</span>.<span class="ident">insert</span>(<span class="string">&quot;${library_directory}&quot;</span>, {
-            <span class="comment">// crate::path::MINECRAFT_LIBRARIES_PATH.to_string()</span>
-            <span class="kw">let</span> <span class="ident">lib_path</span> <span class="op">=</span> <span class="ident">std::path::Path::new</span>(<span class="kw-2">&amp;</span><span class="ident">cfg</span>.<span class="ident">version_info</span>.<span class="ident">version_base</span>);
-            <span class="kw">let</span> <span class="ident">lib_path</span> <span class="op">=</span> <span class="ident">lib_path</span>
-                .<span class="ident">parent</span>()
-                .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;There&#39;s no parent from the library path&quot;</span>))<span class="question-mark">?</span>
-                .<span class="ident">join</span>(<span class="string">&quot;libraries&quot;</span>);
-            <span class="kw">let</span> <span class="ident">lib_path</span> <span class="op">=</span> <span class="ident">get_full_path</span>(<span class="ident">lib_path</span>);
-            <span class="ident">lib_path</span>.<span class="ident">replace</span>(<span class="op">|</span><span class="ident">a</span><span class="op">|</span> <span class="ident">a</span> <span class="op">==</span> <span class="string">&#39;/&#39;</span> <span class="op">|</span><span class="op">|</span> <span class="ident">a</span> <span class="op">==</span> <span class="string">&#39;\\&#39;</span>, <span class="string">&quot;/&quot;</span>)
+        <span class="comment">// 变量集，用来给参数中 ${VAR} 做文本替换
+        </span><span class="kw">let </span><span class="kw-2">mut </span>variables: HashMap&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str, String&gt; = HashMap::with_capacity(<span class="number">19</span>);
+        variables.insert(<span class="string">&quot;${library_directory}&quot;</span>, {
+            <span class="comment">// crate::path::MINECRAFT_LIBRARIES_PATH.to_string()
+            </span><span class="kw">let </span>lib_path = std::path::Path::new(<span class="kw-2">&amp;</span>cfg.version_info.version_base);
+            <span class="kw">let </span>lib_path = lib_path
+                .parent()
+                .ok_or_else(|| <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;There&#39;s no parent from the library path&quot;</span>))<span class="question-mark">?
+                </span>.join(<span class="string">&quot;libraries&quot;</span>);
+            <span class="kw">let </span>lib_path = get_full_path(lib_path);
+            lib_path.replace(|a| a == <span class="string">&#39;/&#39; </span>|| a == <span class="string">&#39;\\&#39;</span>, <span class="string">&quot;/&quot;</span>)
         });
-        <span class="ident">variables</span>.<span class="ident">insert</span>(<span class="string">&quot;${classpath}&quot;</span>, {
-            <span class="comment">// 类路径，所有的 jar 库</span>
-            <span class="comment">// 先添加 libraries 的库，然后添加自身</span>
-            <span class="kw">let</span> <span class="ident">lib_base_path</span> <span class="op">=</span> <span class="ident">variables</span>
-                .<span class="ident">get</span>(<span class="string">&quot;${library_directory}&quot;</span>)
-                .<span class="ident">unwrap</span>()
-                .<span class="ident">replace</span>(<span class="string">&#39;/&#39;</span>, <span class="kw-2">&amp;</span><span class="ident">std::path::MAIN_SEPARATOR</span>.<span class="ident">to_string</span>());
-            <span class="comment">// 使用 HashMap 以将模组加载器中的 Jar 进行覆盖</span>
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">lib_args</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">String</span><span class="op">&gt;</span> <span class="op">=</span>
-                <span class="ident">HashMap::with_capacity</span>(<span class="ident">meta</span>.<span class="ident">libraries</span>.<span class="ident">len</span>());
-            <span class="kw">for</span> <span class="ident">lib</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">meta</span>.<span class="ident">libraries</span> {
-                <span class="kw">let</span> <span class="ident">class_name</span> <span class="op">=</span> <span class="ident">lib</span>.<span class="ident">name</span>.<span class="ident">as_str</span>()
-                    [<span class="number">0</span>..<span class="ident">lib</span>.<span class="ident">name</span>.<span class="ident">rfind</span>(<span class="string">&#39;:&#39;</span>).<span class="ident">expect</span>(<span class="string">&quot;Can&#39;t parse class name&quot;</span>)]
-                    .<span class="ident">to_string</span>();
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">lib</span>.<span class="ident">rules</span>.<span class="ident">is_allowed</span>() {
+        variables.insert(<span class="string">&quot;${classpath}&quot;</span>, {
+            <span class="comment">// 类路径，所有的 jar 库
+            // 先添加 libraries 的库，然后添加自身
+            </span><span class="kw">let </span>lib_base_path = variables
+                .get(<span class="string">&quot;${library_directory}&quot;</span>)
+                .unwrap()
+                .replace(<span class="string">&#39;/&#39;</span>, <span class="kw-2">&amp;</span>std::path::MAIN_SEPARATOR.to_string());
+            <span class="comment">// 使用 HashMap 以将模组加载器中的 Jar 进行覆盖
+            </span><span class="kw">let </span><span class="kw-2">mut </span>lib_args: HashMap&lt;String, String&gt; =
+                HashMap::with_capacity(meta.libraries.len());
+            <span class="kw">for </span>lib <span class="kw">in </span><span class="kw-2">&amp;</span>meta.libraries {
+                <span class="kw">let </span>class_name = lib.name.as_str()
+                    [<span class="number">0</span>..lib.name.rfind(<span class="string">&#39;:&#39;</span>).expect(<span class="string">&quot;Can&#39;t parse class name&quot;</span>)]
+                    .to_string();
+                <span class="kw">if </span>!lib.rules.is_allowed() {
                     <span class="kw">continue</span>;
                 }
-                <span class="kw">let</span> <span class="ident">lib_path</span> <span class="op">=</span> {
-                    <span class="comment">// 处理 name</span>
-                    <span class="kw">let</span> <span class="ident">lib</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">lib</span>.<span class="ident">name</span>.<span class="ident">splitn</span>(<span class="number">3</span>, <span class="string">&#39;:&#39;</span>).<span class="ident">collect</span>();
-                    <span class="kw">let</span> (<span class="ident">package</span>, <span class="ident">name</span>, <span class="ident">version</span>) <span class="op">=</span> (<span class="ident">lib</span>[<span class="number">0</span>], <span class="ident">lib</span>[<span class="number">1</span>], <span class="ident">lib</span>[<span class="number">2</span>]);
-                    <span class="kw">let</span> <span class="ident">package_path</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">package</span>.<span class="ident">split</span>(<span class="string">&#39;.&#39;</span>).<span class="ident">collect</span>();
+                <span class="kw">let </span>lib_path = {
+                    <span class="comment">// 处理 name
+                    </span><span class="kw">let </span>lib: Vec&lt;<span class="kw-2">&amp;</span>str&gt; = lib.name.splitn(<span class="number">3</span>, <span class="string">&#39;:&#39;</span>).collect();
+                    <span class="kw">let </span>(package, name, version) = (lib[<span class="number">0</span>], lib[<span class="number">1</span>], lib[<span class="number">2</span>]);
+                    <span class="kw">let </span>package_path: Vec&lt;<span class="kw-2">&amp;</span>str&gt; = package.split(<span class="string">&#39;.&#39;</span>).collect();
                     <span class="macro">format!</span>(
                         <span class="string">&quot;{}{sep}{}{sep}{}{sep}{}{sep}{}-{}.jar&quot;</span>,
-                        <span class="ident">lib_base_path</span>,
-                        <span class="ident">package_path</span>.<span class="ident">join</span>(<span class="kw-2">&amp;</span><span class="ident">std::path::MAIN_SEPARATOR</span>.<span class="ident">to_string</span>()),
-                        <span class="ident">name</span>,
-                        <span class="ident">version</span>,
-                        <span class="ident">name</span>,
-                        <span class="ident">version</span>,
-                        <span class="ident">sep</span> <span class="op">=</span> <span class="ident">std::path::MAIN_SEPARATOR</span>,
+                        lib_base_path,
+                        package_path.join(<span class="kw-2">&amp;</span>std::path::MAIN_SEPARATOR.to_string()),
+                        name,
+                        version,
+                        name,
+                        version,
+                        sep = std::path::MAIN_SEPARATOR,
                     )
                 };
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">lib_path</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">ds</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">lib</span>.<span class="ident">downloads</span> {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">d</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">ds</span>.<span class="ident">artifact</span> {
-                        <span class="comment">// 使用 artifact.path</span>
-                        <span class="macro">format!</span>(
+                <span class="kw">let </span><span class="kw-2">mut </span>lib_path = <span class="kw">if let </span><span class="prelude-val">Some</span>(ds) = <span class="kw-2">&amp;</span>lib.downloads {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(d) = <span class="kw-2">&amp;</span>ds.artifact {
+                        <span class="comment">// 使用 artifact.path
+                        </span><span class="macro">format!</span>(
                             <span class="string">&quot;{}{sep}{}&quot;</span>,
-                            <span class="ident">lib_base_path</span>,
-                            <span class="ident">d</span>.<span class="ident">path</span>.<span class="ident">replace</span>(
-                                <span class="op">|</span><span class="ident">a</span><span class="op">|</span> <span class="ident">a</span> <span class="op">==</span> <span class="string">&#39;/&#39;</span> <span class="op">|</span><span class="op">|</span> <span class="ident">a</span> <span class="op">==</span> <span class="string">&#39;\\&#39;</span>,
-                                <span class="kw-2">&amp;</span><span class="ident">std::path::MAIN_SEPARATOR</span>.<span class="ident">to_string</span>()
+                            lib_base_path,
+                            d.path.replace(
+                                |a| a == <span class="string">&#39;/&#39; </span>|| a == <span class="string">&#39;\\&#39;</span>,
+                                <span class="kw-2">&amp;</span>std::path::MAIN_SEPARATOR.to_string()
                             ),
-                            <span class="ident">sep</span> <span class="op">=</span> <span class="ident">std::path::MAIN_SEPARATOR</span>
+                            sep = std::path::MAIN_SEPARATOR
                         )
-                    } <span class="kw">else</span> {
-                        <span class="ident">lib_path</span>
+                    } <span class="kw">else </span>{
+                        lib_path
                     }
-                } <span class="kw">else</span> {
-                    <span class="ident">lib_path</span>
+                } <span class="kw">else </span>{
+                    lib_path
                 };
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">n</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">lib</span>.<span class="ident">natives</span> {
-                    <span class="kw">if</span> <span class="bool-val">false</span> {
-                        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">native_key</span>) <span class="op">=</span> <span class="ident">n</span>.<span class="ident">get</span>(<span class="ident">TARGET_OS</span>) {
-                            <span class="kw">let</span> <span class="ident">native_key</span> <span class="op">=</span>
-                                <span class="ident">native_key</span>.<span class="ident">replace</span>(<span class="string">&quot;${arch}&quot;</span>, <span class="ident">NATIVE_ARCH_LAZY</span>.<span class="ident">as_ref</span>());
-                            <span class="kw">let</span> <span class="ident">classifier</span> <span class="op">=</span> <span class="ident">lib</span>
-                                .<span class="ident">downloads</span>
-                                .<span class="ident">as_ref</span>()
-                                .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> {
-                                    <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;No downloads struct for {}&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">native_key</span>)
-                                })<span class="question-mark">?</span>
-                                .<span class="ident">classifiers</span>
-                                .<span class="ident">as_ref</span>()
-                                .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> {
-                                    <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;No classifiers struct for {}&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">native_key</span>)
-                                })<span class="question-mark">?</span>
-                                .<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">native_key</span>)
-                                .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> {
-                                    <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;No classifier struct for {}&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">native_key</span>)
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(n) = <span class="kw-2">&amp;</span>lib.natives {
+                    <span class="kw">if </span><span class="bool-val">false </span>{
+                        <span class="kw">if let </span><span class="prelude-val">Some</span>(native_key) = n.get(TARGET_OS) {
+                            <span class="kw">let </span>native_key =
+                                native_key.replace(<span class="string">&quot;${arch}&quot;</span>, NATIVE_ARCH_LAZY.as_ref());
+                            <span class="kw">let </span>classifier = lib
+                                .downloads
+                                .as_ref()
+                                .ok_or_else(|| {
+                                    <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;No downloads struct for {}&quot;</span>, <span class="kw-2">&amp;</span>native_key)
+                                })<span class="question-mark">?
+                                </span>.classifiers
+                                .as_ref()
+                                .ok_or_else(|| {
+                                    <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;No classifiers struct for {}&quot;</span>, <span class="kw-2">&amp;</span>native_key)
+                                })<span class="question-mark">?
+                                </span>.get(<span class="kw-2">&amp;</span>native_key)
+                                .ok_or_else(|| {
+                                    <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;No classifier struct for {}&quot;</span>, <span class="kw-2">&amp;</span>native_key)
                                 })<span class="question-mark">?</span>;
-                            <span class="ident">lib_path</span> <span class="op">+</span><span class="op">=</span> <span class="ident">CLASSPATH_SEPARATOR</span>;
-                            <span class="ident">lib_path</span> <span class="op">+</span><span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">lib_base_path</span>;
-                            <span class="ident">lib_path</span>.<span class="ident">push</span>(<span class="ident">std::path::MAIN_SEPARATOR</span>);
-                            <span class="ident">lib_path</span> <span class="op">+</span><span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">classifier</span>.<span class="ident">path</span>.<span class="ident">replace</span>(
-                                <span class="op">|</span><span class="ident">a</span><span class="op">|</span> <span class="ident">a</span> <span class="op">==</span> <span class="string">&#39;/&#39;</span> <span class="op">|</span><span class="op">|</span> <span class="ident">a</span> <span class="op">==</span> <span class="string">&#39;\\&#39;</span>,
-                                <span class="kw-2">&amp;</span><span class="ident">std::path::MAIN_SEPARATOR</span>.<span class="ident">to_string</span>(),
+                            lib_path += CLASSPATH_SEPARATOR;
+                            lib_path += <span class="kw-2">&amp;</span>lib_base_path;
+                            lib_path.push(std::path::MAIN_SEPARATOR);
+                            lib_path += <span class="kw-2">&amp;</span>classifier.path.replace(
+                                |a| a == <span class="string">&#39;/&#39; </span>|| a == <span class="string">&#39;\\&#39;</span>,
+                                <span class="kw-2">&amp;</span>std::path::MAIN_SEPARATOR.to_string(),
                             );
-                            <span class="comment">// TODO: 解压原生库</span>
-                        }
+                            <span class="comment">// TODO: 解压原生库
+                        </span>}
                     }
-                    <span class="comment">// 可能有原生库要添加</span>
-                }
-                <span class="ident">lib_args</span>.<span class="ident">insert</span>(<span class="ident">class_name</span>, <span class="ident">lib_path</span>);
+                    <span class="comment">// 可能有原生库要添加
+                </span>}
+                lib_args.insert(class_name, lib_path);
             }
 
-            <span class="kw">let</span> <span class="ident">lib_args</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span>
-                <span class="kw">if</span> <span class="ident">meta</span>.<span class="ident">main_class</span> <span class="op">==</span> <span class="string">&quot;cpw.mods.bootstraplauncher.BootstrapLauncher&quot;</span> {
-                    <span class="comment">// 新版 Forge 不再需要引入版本文件夹下的 jar 文件了</span>
-                    <span class="ident">lib_args</span>.<span class="ident">into_iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="number">1</span>).<span class="ident">collect</span>()
-                } <span class="kw">else</span> {
-                    <span class="ident">lib_args</span>
-                        .<span class="ident">into_iter</span>()
-                        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="number">1</span>)
-                        .<span class="ident">chain</span>(<span class="ident">meta</span>.<span class="ident">main_jars</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">a</span><span class="op">|</span> {
-                            <span class="ident">a</span>.<span class="ident">replace</span>(
-                                <span class="op">|</span><span class="ident">a</span><span class="op">|</span> <span class="ident">a</span> <span class="op">==</span> <span class="string">&#39;/&#39;</span> <span class="op">|</span><span class="op">|</span> <span class="ident">a</span> <span class="op">==</span> <span class="string">&#39;\\&#39;</span>,
-                                <span class="kw-2">&amp;</span><span class="ident">std::path::MAIN_SEPARATOR</span>.<span class="ident">to_string</span>(),
+            <span class="kw">let </span>lib_args: Vec&lt;<span class="kw">_</span>&gt; =
+                <span class="kw">if </span>meta.main_class == <span class="string">&quot;cpw.mods.bootstraplauncher.BootstrapLauncher&quot; </span>{
+                    <span class="comment">// 新版 Forge 不再需要引入版本文件夹下的 jar 文件了
+                    </span>lib_args.into_iter().map(|x| x.<span class="number">1</span>).collect()
+                } <span class="kw">else </span>{
+                    lib_args
+                        .into_iter()
+                        .map(|x| x.<span class="number">1</span>)
+                        .chain(meta.main_jars.iter().map(|a| {
+                            a.replace(
+                                |a| a == <span class="string">&#39;/&#39; </span>|| a == <span class="string">&#39;\\&#39;</span>,
+                                <span class="kw-2">&amp;</span>std::path::MAIN_SEPARATOR.to_string(),
                             )
                         }))
-                        .<span class="ident">collect</span>()
+                        .collect()
                 };
 
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>)]</span>
-            {
-                <span class="ident">lib_args</span>.<span class="ident">join</span>(<span class="string">&quot;;&quot;</span>)
+            <span class="attribute">#[cfg(target_os = <span class="string">&quot;windows&quot;</span>)]
+            </span>{
+                lib_args.join(<span class="string">&quot;;&quot;</span>)
             }
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>)]</span>
-            {
-                <span class="ident">lib_args</span>.<span class="ident">join</span>(<span class="string">&quot;:&quot;</span>)
+            <span class="attribute">#[cfg(target_os = <span class="string">&quot;linux&quot;</span>)]
+            </span>{
+                lib_args.join(<span class="string">&quot;:&quot;</span>)
             }
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>)]</span>
-            {
-                <span class="ident">lib_args</span>.<span class="ident">join</span>(<span class="string">&quot;:&quot;</span>)
+            <span class="attribute">#[cfg(target_os = <span class="string">&quot;macos&quot;</span>)]
+            </span>{
+                lib_args.join(<span class="string">&quot;:&quot;</span>)
             }
         });
-        <span class="ident">variables</span>.<span class="ident">insert</span>(<span class="string">&quot;${max_memory}&quot;</span>, <span class="macro">format!</span>(<span class="string">&quot;-Xmx{}m&quot;</span>, <span class="ident">cfg</span>.<span class="ident">max_mem</span>));
-        <span class="ident">variables</span>.<span class="ident">insert</span>(
+        variables.insert(<span class="string">&quot;${max_memory}&quot;</span>, <span class="macro">format!</span>(<span class="string">&quot;-Xmx{}m&quot;</span>, cfg.max_mem));
+        variables.insert(
             <span class="string">&quot;${auth_player_name}&quot;</span>,
-            <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">cfg</span>.<span class="ident">auth</span> {
-                <span class="ident">AuthMethod::Offline</span> { <span class="ident">player_name</span>, .. } =&gt; <span class="ident">player_name</span>.<span class="ident">to_owned</span>(),
-                <span class="ident">AuthMethod::Mojang</span> { <span class="ident">player_name</span>, .. } =&gt; <span class="ident">player_name</span>.<span class="ident">to_owned</span>(),
-                <span class="ident">AuthMethod::Microsoft</span> { <span class="ident">player_name</span>, .. } =&gt; <span class="ident">player_name</span>.<span class="ident">to_owned</span>(),
-                <span class="ident">AuthMethod::AuthlibInjector</span> { <span class="ident">player_name</span>, .. } =&gt; <span class="ident">player_name</span>.<span class="ident">to_owned</span>(),
+            <span class="kw">match </span><span class="kw-2">&amp;</span>cfg.auth {
+                AuthMethod::Offline { player_name, .. } =&gt; player_name.to_owned(),
+                AuthMethod::Mojang { player_name, .. } =&gt; player_name.to_owned(),
+                AuthMethod::Microsoft { player_name, .. } =&gt; player_name.to_owned(),
+                AuthMethod::AuthlibInjector { player_name, .. } =&gt; player_name.to_owned(),
             },
         );
-        <span class="ident">variables</span>.<span class="ident">insert</span>(
+        variables.insert(
             <span class="string">&quot;${natives_directory}&quot;</span>,
-            <span class="ident">get_full_path</span>(<span class="ident">Path::new</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(
+            get_full_path(Path::new(<span class="kw-2">&amp;</span><span class="macro">format!</span>(
                 <span class="string">&quot;{}{sep}{ver}{sep}natives&quot;</span>,
-                <span class="ident">cfg</span>.<span class="ident">version_info</span>.<span class="ident">version_base</span>,
-                <span class="ident">ver</span> <span class="op">=</span> <span class="ident">cfg</span>.<span class="ident">version_info</span>.<span class="ident">version</span>,
-                <span class="ident">sep</span> <span class="op">=</span> <span class="ident">std::path::MAIN_SEPARATOR</span>,
+                cfg.version_info.version_base,
+                ver = cfg.version_info.version,
+                sep = std::path::MAIN_SEPARATOR,
             ))),
         );
-        <span class="ident">variables</span>.<span class="ident">insert</span>(<span class="string">&quot;${version_name}&quot;</span>, <span class="ident">cfg</span>.<span class="ident">version_info</span>.<span class="ident">version</span>.<span class="ident">to_owned</span>());
-        <span class="ident">variables</span>.<span class="ident">insert</span>(<span class="string">&quot;${classpath_separator}&quot;</span>, <span class="ident">CLASSPATH_SEPARATOR</span>.<span class="ident">to_owned</span>());
-        <span class="ident">variables</span>.<span class="ident">insert</span>(<span class="string">&quot;${game_directory}&quot;</span>, <span class="ident">get_game_directory</span>(<span class="kw-2">&amp;</span><span class="ident">cfg</span>));
-        <span class="ident">variables</span>.<span class="ident">insert</span>(<span class="string">&quot;${assets_root}&quot;</span>, {
-            <span class="kw">let</span> <span class="ident">assets_path</span> <span class="op">=</span> <span class="ident">std::path::Path::new</span>(<span class="kw-2">&amp;</span><span class="ident">cfg</span>.<span class="ident">version_info</span>.<span class="ident">version_base</span>);
-            <span class="kw">let</span> <span class="ident">assets_path</span> <span class="op">=</span> <span class="ident">assets_path</span>.<span class="ident">parent</span>().<span class="ident">unwrap</span>().<span class="ident">join</span>(<span class="string">&quot;assets&quot;</span>);
-            <span class="kw">if</span> <span class="ident">cfg</span>
-                .<span class="ident">version_info</span>
-                .<span class="ident">meta</span>
-                .<span class="ident">as_ref</span>()
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> {
-                    <span class="ident">x</span>.<span class="ident">asset_index</span>
-                        .<span class="ident">as_ref</span>()
-                        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="kw-2">&amp;</span><span class="ident">x</span>.<span class="ident">id</span> <span class="op">==</span> <span class="string">&quot;pre-1.6&quot;</span>)
-                        .<span class="ident">unwrap_or_default</span>()
+        variables.insert(<span class="string">&quot;${version_name}&quot;</span>, cfg.version_info.version.to_owned());
+        variables.insert(<span class="string">&quot;${classpath_separator}&quot;</span>, CLASSPATH_SEPARATOR.to_owned());
+        variables.insert(<span class="string">&quot;${game_directory}&quot;</span>, get_game_directory(<span class="kw-2">&amp;</span>cfg));
+        variables.insert(<span class="string">&quot;${assets_root}&quot;</span>, {
+            <span class="kw">let </span>assets_path = std::path::Path::new(<span class="kw-2">&amp;</span>cfg.version_info.version_base);
+            <span class="kw">let </span>assets_path = assets_path.parent().unwrap().join(<span class="string">&quot;assets&quot;</span>);
+            <span class="kw">if </span>cfg
+                .version_info
+                .meta
+                .as_ref()
+                .map(|x| {
+                    x.asset_index
+                        .as_ref()
+                        .map(|x| <span class="kw-2">&amp;</span>x.id == <span class="string">&quot;pre-1.6&quot;</span>)
+                        .unwrap_or_default()
                 })
-                .<span class="ident">unwrap_or_default</span>()
+                .unwrap_or_default()
             {
-                <span class="kw">let</span> <span class="ident">assets_path</span> <span class="op">=</span> <span class="ident">assets_path</span>.<span class="ident">join</span>(<span class="string">&quot;virtual&quot;</span>).<span class="ident">join</span>(<span class="string">&quot;pre-1.6&quot;</span>);
-                <span class="ident">get_full_path</span>(<span class="ident">assets_path</span>)
-            } <span class="kw">else</span> {
-                <span class="ident">get_full_path</span>(<span class="ident">assets_path</span>)
+                <span class="kw">let </span>assets_path = assets_path.join(<span class="string">&quot;virtual&quot;</span>).join(<span class="string">&quot;pre-1.6&quot;</span>);
+                get_full_path(assets_path)
+            } <span class="kw">else </span>{
+                get_full_path(assets_path)
             }
         });
-        <span class="ident">variables</span>.<span class="ident">insert</span>(
+        variables.insert(
             <span class="string">&quot;${game_assets}&quot;</span>,
-            <span class="ident">variables</span>.<span class="ident">get</span>(<span class="string">&quot;${assets_root}&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">to_owned</span>(),
+            variables.get(<span class="string">&quot;${assets_root}&quot;</span>).unwrap().to_owned(),
         );
-        <span class="ident">variables</span>.<span class="ident">insert</span>(
+        variables.insert(
             <span class="string">&quot;${assets_index_name}&quot;</span>,
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">asset_index</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">meta</span>.<span class="ident">asset_index</span> {
-                <span class="ident">asset_index</span>.<span class="ident">id</span>.<span class="ident">to_owned</span>()
-            } <span class="kw">else</span> {
-                <span class="ident">String::new</span>()
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(asset_index) = <span class="kw-2">&amp;</span>meta.asset_index {
+                asset_index.id.to_owned()
+            } <span class="kw">else </span>{
+                String::new()
             },
         );
-        <span class="ident">variables</span>.<span class="ident">insert</span>(<span class="string">&quot;${auth_session}&quot;</span>, <span class="string">&quot;token:0&quot;</span>.<span class="ident">into</span>());
-        <span class="ident">variables</span>.<span class="ident">insert</span>(<span class="string">&quot;${clientid}&quot;</span>, <span class="string">&quot;00000000402b5328&quot;</span>.<span class="ident">into</span>());
-        <span class="ident">variables</span>.<span class="ident">insert</span>(
+        variables.insert(<span class="string">&quot;${auth_session}&quot;</span>, <span class="string">&quot;token:0&quot;</span>.into());
+        variables.insert(<span class="string">&quot;${clientid}&quot;</span>, <span class="string">&quot;00000000402b5328&quot;</span>.into());
+        variables.insert(
             <span class="string">&quot;${auth_access_token}&quot;</span>,
-            <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">cfg</span>.<span class="ident">auth</span> {
-                <span class="ident">AuthMethod::Offline</span> { <span class="ident">uuid</span>, .. } =&gt; <span class="ident">uuid</span>.<span class="ident">to_owned</span>(),
-                <span class="ident">AuthMethod::Mojang</span> { <span class="ident">access_token</span>, .. } =&gt; <span class="ident">access_token</span>.<span class="ident">to_owned_string</span>(),
+            <span class="kw">match </span><span class="kw-2">&amp;</span>cfg.auth {
+                AuthMethod::Offline { uuid, .. } =&gt; uuid.to_owned(),
+                AuthMethod::Mojang { access_token, .. } =&gt; access_token.to_owned_string(),
 
-                <span class="ident">AuthMethod::Microsoft</span> { <span class="ident">access_token</span>, .. } =&gt; <span class="ident">access_token</span>.<span class="ident">to_owned_string</span>(),
-                <span class="ident">AuthMethod::AuthlibInjector</span> { <span class="ident">access_token</span>, .. } =&gt; <span class="ident">access_token</span>.<span class="ident">to_owned_string</span>(),
+                AuthMethod::Microsoft { access_token, .. } =&gt; access_token.to_owned_string(),
+                AuthMethod::AuthlibInjector { access_token, .. } =&gt; access_token.to_owned_string(),
             },
         );
-        <span class="ident">variables</span>.<span class="ident">insert</span>(
+        variables.insert(
             <span class="string">&quot;${auth_uuid}&quot;</span>,
-            <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">cfg</span>.<span class="ident">auth</span> {
-                <span class="ident">AuthMethod::Offline</span> { <span class="ident">uuid</span>, .. } =&gt; <span class="ident">uuid</span>.<span class="ident">to_owned</span>(),
-                <span class="ident">AuthMethod::Mojang</span> { <span class="ident">uuid</span>, .. } =&gt; <span class="ident">uuid</span>.<span class="ident">to_owned</span>(),
-                <span class="ident">AuthMethod::Microsoft</span> { <span class="ident">uuid</span>, .. } =&gt; <span class="ident">uuid</span>.<span class="ident">to_owned</span>(),
-                <span class="ident">AuthMethod::AuthlibInjector</span> { <span class="ident">uuid</span>, .. } =&gt; <span class="ident">uuid</span>.<span class="ident">to_owned</span>(),
+            <span class="kw">match </span><span class="kw-2">&amp;</span>cfg.auth {
+                AuthMethod::Offline { uuid, .. } =&gt; uuid.to_owned(),
+                AuthMethod::Mojang { uuid, .. } =&gt; uuid.to_owned(),
+                AuthMethod::Microsoft { uuid, .. } =&gt; uuid.to_owned(),
+                AuthMethod::AuthlibInjector { uuid, .. } =&gt; uuid.to_owned(),
             },
         );
-        <span class="ident">variables</span>.<span class="ident">insert</span>(
+        variables.insert(
             <span class="string">&quot;${user_type}&quot;</span>,
-            <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">cfg</span>.<span class="ident">auth</span> {
-                <span class="ident">AuthMethod::Offline</span> { .. } =&gt; <span class="string">&quot;Legacy&quot;</span>.<span class="ident">into</span>(),
-                <span class="ident">AuthMethod::Mojang</span> { .. } <span class="op">|</span> <span class="ident">AuthMethod::AuthlibInjector</span> { .. } =&gt; <span class="string">&quot;Mojang&quot;</span>.<span class="ident">into</span>(),
-                <span class="ident">AuthMethod::Microsoft</span> { <span class="ident">uuid</span>: <span class="kw">_</span>, .. } =&gt; <span class="string">&quot;Mojang&quot;</span>.<span class="ident">into</span>(),
+            <span class="kw">match </span><span class="kw-2">&amp;</span>cfg.auth {
+                AuthMethod::Offline { .. } =&gt; <span class="string">&quot;Legacy&quot;</span>.into(),
+                AuthMethod::Mojang { .. } | AuthMethod::AuthlibInjector { .. } =&gt; <span class="string">&quot;Mojang&quot;</span>.into(),
+                AuthMethod::Microsoft { uuid: <span class="kw">_</span>, .. } =&gt; <span class="string">&quot;Mojang&quot;</span>.into(),
             },
         );
-        <span class="ident">variables</span>.<span class="ident">insert</span>(<span class="string">&quot;${version_type}&quot;</span>, <span class="ident">cfg</span>.<span class="ident">version_type</span>.<span class="ident">to_owned</span>());
-        <span class="ident">variables</span>.<span class="ident">insert</span>(<span class="string">&quot;${user_properties}&quot;</span>, <span class="string">&quot;{}&quot;</span>.<span class="ident">into</span>());
-        <span class="ident">variables</span>.<span class="ident">insert</span>(<span class="string">&quot;${launcher_name}&quot;</span>, <span class="string">&quot;SharpCraftLauncher&quot;</span>.<span class="ident">into</span>());
-        <span class="ident">variables</span>.<span class="ident">insert</span>(<span class="string">&quot;${launcher_version}&quot;</span>, <span class="string">&quot;221&quot;</span>.<span class="ident">into</span>());
+        variables.insert(<span class="string">&quot;${version_type}&quot;</span>, cfg.version_type.to_owned());
+        variables.insert(<span class="string">&quot;${user_properties}&quot;</span>, <span class="string">&quot;{}&quot;</span>.into());
+        variables.insert(<span class="string">&quot;${launcher_name}&quot;</span>, <span class="string">&quot;SharpCraftLauncher&quot;</span>.into());
+        variables.insert(<span class="string">&quot;${launcher_version}&quot;</span>, <span class="string">&quot;221&quot;</span>.into());
 
-        <span class="kw">fn</span> <span class="ident">replace_each</span>(<span class="ident">variables</span>: <span class="kw-2">&amp;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>, <span class="ident">String</span><span class="op">&gt;</span>, <span class="ident">arg</span>: <span class="ident">String</span>) -&gt; <span class="ident">String</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">arg</span> <span class="op">=</span> <span class="ident">arg</span>;
-            <span class="kw">for</span> (<span class="ident">k</span>, <span class="ident">v</span>) <span class="kw">in</span> <span class="ident">variables</span> {
-                <span class="kw">if</span> <span class="ident">arg</span>.<span class="ident">contains</span>(<span class="kw-2">*</span><span class="ident">k</span>) {
-                    <span class="ident">arg</span> <span class="op">=</span> <span class="ident">arg</span>.<span class="ident">replace</span>(<span class="kw-2">*</span><span class="ident">k</span>, <span class="ident">v</span>);
+        <span class="kw">fn </span>replace_each(variables: <span class="kw-2">&amp;</span>HashMap&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str, String&gt;, arg: String) -&gt; String {
+            <span class="kw">let </span><span class="kw-2">mut </span>arg = arg;
+            <span class="kw">for </span>(k, v) <span class="kw">in </span>variables {
+                <span class="kw">if </span>arg.contains(<span class="kw-2">*</span>k) {
+                    arg = arg.replace(<span class="kw-2">*</span>k, v);
                 }
             }
-            <span class="ident">arg</span>
+            arg
         }
 
-        <span class="comment">// --- 组装参数</span>
-        <span class="comment">// -- JVM 参数</span>
-        <span class="comment">// JVM 参数</span>
-        <span class="comment">// Encoding</span>
-        <span class="ident">args</span>.<span class="ident">push</span>(<span class="string">&quot;-Dfile.encoding=UTF-8&quot;</span>.<span class="ident">into</span>());
+        <span class="comment">// --- 组装参数
+        // -- JVM 参数
+        // JVM 参数
+        // Encoding
+        </span>args.push(<span class="string">&quot;-Dfile.encoding=UTF-8&quot;</span>.into());
 
-        <span class="comment">// 禁用 JNDI</span>
-        <span class="ident">args</span>.<span class="ident">push</span>(<span class="string">&quot;-Dlog4j2.formatMsgNoLookups=true&quot;</span>.<span class="ident">into</span>());
+        <span class="comment">// 禁用 JNDI
+        </span>args.push(<span class="string">&quot;-Dlog4j2.formatMsgNoLookups=true&quot;</span>.into());
 
-        <span class="comment">// 注入 log4j-patch</span>
+        <span class="comment">// 注入 log4j-patch
 
-        <span class="comment">// args.push(format!(&quot;-javaagent:{}&quot;, {</span>
-        <span class="comment">//     let lib_path = std::path::Path::new(&amp;cfg.version_info.version_base);</span>
-        <span class="comment">//     let lib_path = lib_path</span>
-        <span class="comment">//         .parent()</span>
-        <span class="comment">//         .ok_or_else(|| anyhow::anyhow!(&quot;There&#39;s no parent from the library path&quot;))?</span>
-        <span class="comment">//         .join(&quot;libraries&quot;)</span>
-        <span class="comment">//         .join(&quot;org&quot;)</span>
-        <span class="comment">//         .join(&quot;glavo&quot;)</span>
-        <span class="comment">//         .join(&quot;1.0&quot;)</span>
-        <span class="comment">//         .join(&quot;log4j-patch&quot;)</span>
-        <span class="comment">//         .join(&quot;log4j-patch-agent-1.0.jar&quot;);</span>
-        <span class="comment">//     lib_path.to_string_lossy().to_string()</span>
-        <span class="comment">// }));</span>
+        // args.push(format!(&quot;-javaagent:{}&quot;, {
+        //     let lib_path = std::path::Path::new(&amp;cfg.version_info.version_base);
+        //     let lib_path = lib_path
+        //         .parent()
+        //         .ok_or_else(|| anyhow::anyhow!(&quot;There&#39;s no parent from the library path&quot;))?
+        //         .join(&quot;libraries&quot;)
+        //         .join(&quot;org&quot;)
+        //         .join(&quot;glavo&quot;)
+        //         .join(&quot;1.0&quot;)
+        //         .join(&quot;log4j-patch&quot;)
+        //         .join(&quot;log4j-patch-agent-1.0.jar&quot;);
+        //     lib_path.to_string_lossy().to_string()
+        // }));
 
-        <span class="comment">// 用户自定义JVM参数</span>
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">scl_config</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">cfg</span>.<span class="ident">version_info</span>.<span class="ident">scl_launch_config</span> {
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">scl_config</span>.<span class="ident">jvm_args</span>.<span class="ident">is_empty</span>() {
-                <span class="ident">args</span>.<span class="ident">push</span>(<span class="ident">scl_config</span>.<span class="ident">jvm_args</span>.<span class="ident">to_owned</span>());
+        // 用户自定义JVM参数
+        </span><span class="kw">if let </span><span class="prelude-val">Some</span>(scl_config) = <span class="kw-2">&amp;</span>cfg.version_info.scl_launch_config {
+            <span class="kw">if </span>!scl_config.jvm_args.is_empty() {
+                args.push(scl_config.jvm_args.to_owned());
             }
         }
 
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">AuthMethod::AuthlibInjector</span> {
-            <span class="ident">api_location</span>,
-            <span class="ident">server_meta</span>,
+        <span class="kw">if let </span>AuthMethod::AuthlibInjector {
+            api_location,
+            server_meta,
             ..
-        } <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">cfg</span>.<span class="ident">auth</span>
+        } = <span class="kw-2">&amp;</span>cfg.auth
         {
-            <span class="comment">// 注入 Authlib Injector</span>
-            <span class="kw">let</span> <span class="ident">authlib_injector_path</span> <span class="op">=</span> <span class="ident">get_full_path</span>(<span class="macro">format!</span>(
+            <span class="comment">// 注入 Authlib Injector
+            </span><span class="kw">let </span>authlib_injector_path = get_full_path(<span class="macro">format!</span>(
                 <span class="string">&quot;{}{sep}..{sep}authlib-injector.jar&quot;</span>,
-                <span class="ident">cfg</span>.<span class="ident">version_info</span>.<span class="ident">version_base</span>,
-                <span class="ident">sep</span> <span class="op">=</span> <span class="ident">std::path::MAIN_SEPARATOR</span>
+                cfg.version_info.version_base,
+                sep = std::path::MAIN_SEPARATOR
             ));
-            <span class="ident">args</span>.<span class="ident">push</span>(<span class="macro">format!</span>(
+            args.push(<span class="macro">format!</span>(
                 <span class="string">&quot;-javaagent:{}={}&quot;</span>,
-                <span class="ident">authlib_injector_path</span>, <span class="ident">api_location</span>
+                authlib_injector_path, api_location
             ));
-            <span class="ident">args</span>.<span class="ident">push</span>(<span class="macro">format!</span>(
+            args.push(<span class="macro">format!</span>(
                 <span class="string">&quot;-Dauthlibinjector.yggdrasil.prefetched={}&quot;</span>,
-                <span class="ident">server_meta</span>
+                server_meta
             ));
         }
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">max_mem</span>) <span class="op">=</span> <span class="ident">variables</span>.<span class="ident">get</span>(<span class="string">&quot;${max_memory}&quot;</span>) {
-            <span class="ident">args</span>.<span class="ident">push</span>(<span class="ident">max_mem</span>.<span class="ident">to_owned</span>());
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(max_mem) = variables.get(<span class="string">&quot;${max_memory}&quot;</span>) {
+            args.push(max_mem.to_owned());
         }
 
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">arguments</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">meta</span>.<span class="ident">arguments</span> {
-            <span class="kw">for</span> <span class="ident">arg</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">arguments</span>.<span class="ident">jvm</span> {
-                <span class="kw">match</span> <span class="ident">arg</span> {
-                    <span class="ident">Argument::Common</span>(<span class="ident">arg</span>) =&gt; <span class="ident">args</span>.<span class="ident">push</span>(<span class="ident">replace_each</span>(<span class="kw-2">&amp;</span><span class="ident">variables</span>, <span class="ident">arg</span>.<span class="ident">to_owned</span>())),
-                    <span class="ident">Argument::Specify</span>(<span class="ident">arg</span>) =&gt; {
-                        <span class="kw">if</span> <span class="ident">arg</span>.<span class="ident">rules</span>.<span class="ident">is_allowed</span>() {
-                            <span class="kw">for</span> <span class="ident">value</span> <span class="kw">in</span> <span class="ident">arg</span>.<span class="ident">value</span>.<span class="ident">iter</span>() {
-                                <span class="ident">args</span>.<span class="ident">push</span>(<span class="ident">value</span>.<span class="ident">to_owned</span>())
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(arguments) = <span class="kw-2">&amp;</span>meta.arguments {
+            <span class="kw">for </span>arg <span class="kw">in </span><span class="kw-2">&amp;</span>arguments.jvm {
+                <span class="kw">match </span>arg {
+                    Argument::Common(arg) =&gt; args.push(replace_each(<span class="kw-2">&amp;</span>variables, arg.to_owned())),
+                    Argument::Specify(arg) =&gt; {
+                        <span class="kw">if </span>arg.rules.is_allowed() {
+                            <span class="kw">for </span>value <span class="kw">in </span>arg.value.iter() {
+                                args.push(value.to_owned())
                             }
                         }
                     }
                 }
             }
-        } <span class="kw">else</span> {
-            <span class="comment">// 以前的 MC 元数据不包含 JVM 参数，所以咱还得手动加</span>
-            <span class="comment">// Native Library Path</span>
-            <span class="ident">args</span>.<span class="ident">push</span>(<span class="macro">format!</span>(
+        } <span class="kw">else </span>{
+            <span class="comment">// 以前的 MC 元数据不包含 JVM 参数，所以咱还得手动加
+            // Native Library Path
+            </span>args.push(<span class="macro">format!</span>(
                 <span class="string">&quot;-Djava.library.path={}&quot;</span>,
-                <span class="ident">variables</span>.<span class="ident">get</span>(<span class="string">&quot;${natives_directory}&quot;</span>).<span class="ident">unwrap</span>()
+                variables.get(<span class="string">&quot;${natives_directory}&quot;</span>).unwrap()
             ));
-            <span class="comment">// Launcher name &amp; version</span>
-            <span class="ident">args</span>.<span class="ident">push</span>(<span class="macro">format!</span>(
+            <span class="comment">// Launcher name &amp; version
+            </span>args.push(<span class="macro">format!</span>(
                 <span class="string">&quot;-Dminecraft.launcher.brand={}&quot;</span>,
-                <span class="ident">variables</span>.<span class="ident">get</span>(<span class="string">&quot;${launcher_name}&quot;</span>).<span class="ident">unwrap</span>()
+                variables.get(<span class="string">&quot;${launcher_name}&quot;</span>).unwrap()
             ));
-            <span class="ident">args</span>.<span class="ident">push</span>(<span class="macro">format!</span>(
+            args.push(<span class="macro">format!</span>(
                 <span class="string">&quot;-Dminecraft.launcher.version={}&quot;</span>,
-                <span class="ident">variables</span>.<span class="ident">get</span>(<span class="string">&quot;${launcher_version}&quot;</span>).<span class="ident">unwrap</span>()
+                variables.get(<span class="string">&quot;${launcher_version}&quot;</span>).unwrap()
             ));
-            <span class="comment">// Class Path</span>
-            <span class="ident">args</span>.<span class="ident">push</span>(<span class="string">&quot;-cp&quot;</span>.<span class="ident">into</span>());
-            <span class="ident">args</span>.<span class="ident">push</span>(<span class="ident">variables</span>.<span class="ident">get</span>(<span class="string">&quot;${classpath}&quot;</span>).<span class="ident">unwrap</span>().<span class="ident">to_owned</span>());
+            <span class="comment">// Class Path
+            </span>args.push(<span class="string">&quot;-cp&quot;</span>.into());
+            args.push(variables.get(<span class="string">&quot;${classpath}&quot;</span>).unwrap().to_owned());
         }
 
-        <span class="comment">// 游戏主类</span>
-        <span class="ident">args</span>.<span class="ident">push</span>(<span class="ident">meta</span>.<span class="ident">main_class</span>.<span class="ident">to_owned</span>());
+        <span class="comment">// 游戏主类
+        </span>args.push(meta.main_class.to_owned());
 
-        <span class="comment">// 游戏参数 旧版本 使用 minecraftArgument</span>
-        <span class="kw">let</span> <span class="ident">splited</span> <span class="op">=</span> <span class="ident">meta</span>.<span class="ident">minecraft_arguments</span>.<span class="ident">trim</span>().<span class="ident">split</span>(<span class="string">&#39; &#39;</span>);
-        <span class="kw">for</span> <span class="ident">arg</span> <span class="kw">in</span> <span class="ident">splited</span> {
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">arg</span>.<span class="ident">is_empty</span>() {
-                <span class="ident">args</span>.<span class="ident">push</span>(<span class="ident">replace_each</span>(<span class="kw-2">&amp;</span><span class="ident">variables</span>, <span class="ident">arg</span>.<span class="ident">to_owned</span>()));
+        <span class="comment">// 游戏参数 旧版本 使用 minecraftArgument
+        </span><span class="kw">let </span>splited = meta.minecraft_arguments.trim().split(<span class="string">&#39; &#39;</span>);
+        <span class="kw">for </span>arg <span class="kw">in </span>splited {
+            <span class="kw">if </span>!arg.is_empty() {
+                args.push(replace_each(<span class="kw-2">&amp;</span>variables, arg.to_owned()));
             }
         }
 
-        <span class="comment">// 游戏参数</span>
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">arguments</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">meta</span>.<span class="ident">arguments</span> {
-            <span class="kw">for</span> <span class="ident">arg</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">arguments</span>.<span class="ident">game</span> {
-                <span class="kw">match</span> <span class="ident">arg</span> {
-                    <span class="ident">Argument::Common</span>(<span class="ident">arg</span>) =&gt; {
-                        <span class="ident">args</span>.<span class="ident">push</span>(<span class="ident">replace_each</span>(<span class="kw-2">&amp;</span><span class="ident">variables</span>, <span class="ident">arg</span>.<span class="ident">to_owned</span>()));
+        <span class="comment">// 游戏参数
+        </span><span class="kw">if let </span><span class="prelude-val">Some</span>(arguments) = <span class="kw-2">&amp;</span>meta.arguments {
+            <span class="kw">for </span>arg <span class="kw">in </span><span class="kw-2">&amp;</span>arguments.game {
+                <span class="kw">match </span>arg {
+                    Argument::Common(arg) =&gt; {
+                        args.push(replace_each(<span class="kw-2">&amp;</span>variables, arg.to_owned()));
                     }
-                    <span class="ident">Argument::Specify</span>(<span class="kw">_</span>) =&gt; {
-                        <span class="comment">// TODO: 是否为试玩版，自定义窗口大小等自定义参数</span>
-                    }
+                    Argument::Specify(<span class="kw">_</span>) =&gt; {
+                        <span class="comment">// TODO: 是否为试玩版，自定义窗口大小等自定义参数
+                    </span>}
                 }
             }
         }
 
-        <span class="comment">// 用户自定义游戏参数</span>
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">scl_config</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">cfg</span>.<span class="ident">version_info</span>.<span class="ident">scl_launch_config</span> {
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">scl_config</span>.<span class="ident">game_args</span>.<span class="ident">is_empty</span>() {
-                <span class="ident">args</span>.<span class="ident">push</span>(<span class="ident">scl_config</span>.<span class="ident">game_args</span>.<span class="ident">to_owned</span>());
+        <span class="comment">// 用户自定义游戏参数
+        </span><span class="kw">if let </span><span class="prelude-val">Some</span>(scl_config) = <span class="kw-2">&amp;</span>cfg.version_info.scl_launch_config {
+            <span class="kw">if </span>!scl_config.game_args.is_empty() {
+                args.push(scl_config.game_args.to_owned());
             }
         }
 
-        <span class="kw">let</span> <span class="ident">java_path</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">scl_config</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">cfg</span>.<span class="ident">version_info</span>.<span class="ident">scl_launch_config</span> {
-            <span class="kw">if</span> <span class="ident">scl_config</span>.<span class="ident">java_path</span>.<span class="ident">is_empty</span>() {
-                <span class="ident">cfg</span>.<span class="ident">java_path</span>.<span class="ident">to_owned</span>()
-            } <span class="kw">else</span> {
-                <span class="ident">scl_config</span>.<span class="ident">java_path</span>.<span class="ident">to_owned</span>()
+        <span class="kw">let </span>java_path = <span class="kw">if let </span><span class="prelude-val">Some</span>(scl_config) = <span class="kw-2">&amp;</span>cfg.version_info.scl_launch_config {
+            <span class="kw">if </span>scl_config.java_path.is_empty() {
+                cfg.java_path.to_owned()
+            } <span class="kw">else </span>{
+                scl_config.java_path.to_owned()
             }
-        } <span class="kw">else</span> {
-            <span class="ident">cfg</span>.<span class="ident">java_path</span>.<span class="ident">to_owned</span>()
+        } <span class="kw">else </span>{
+            cfg.java_path.to_owned()
         };
 
-        <span class="kw">let</span> <span class="ident">wrapper_path</span> <span class="op">=</span> <span class="ident">cfg</span>
-            .<span class="ident">version_info</span>
-            .<span class="ident">scl_launch_config</span>
-            .<span class="ident">as_ref</span>()
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">wrapper_path</span>.<span class="ident">to_owned</span>())
-            .<span class="ident">unwrap_or_default</span>();
+        <span class="kw">let </span>wrapper_path = cfg
+            .version_info
+            .scl_launch_config
+            .as_ref()
+            .map(|x| x.wrapper_path.to_owned())
+            .unwrap_or_default();
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cmd</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">wrapper_path</span>.<span class="ident">is_empty</span>() {
-            <span class="ident">Command::new</span>(<span class="kw-2">&amp;</span><span class="ident">java_path</span>)
-        } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cmd</span> <span class="op">=</span> <span class="ident">Command::new</span>(<span class="kw-2">&amp;</span><span class="ident">wrapper_path</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>cmd = <span class="kw">if </span>wrapper_path.is_empty() {
+            Command::new(<span class="kw-2">&amp;</span>java_path)
+        } <span class="kw">else </span>{
+            <span class="kw">let </span><span class="kw-2">mut </span>cmd = Command::new(<span class="kw-2">&amp;</span>wrapper_path);
 
-            <span class="kw">let</span> <span class="ident">wrapper_args</span> <span class="op">=</span> <span class="ident">cfg</span>
-                .<span class="ident">version_info</span>
-                .<span class="ident">scl_launch_config</span>
-                .<span class="ident">as_ref</span>()
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">wrapper_args</span>.<span class="ident">to_owned</span>())
-                .<span class="ident">unwrap_or_default</span>();
+            <span class="kw">let </span>wrapper_args = cfg
+                .version_info
+                .scl_launch_config
+                .as_ref()
+                .map(|x| x.wrapper_args.to_owned())
+                .unwrap_or_default();
 
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">wrapper_args</span>.<span class="ident">is_empty</span>() {
-                <span class="ident">cmd</span>.<span class="ident">arg</span>(<span class="ident">wrapper_args</span>);
+            <span class="kw">if </span>!wrapper_args.is_empty() {
+                cmd.arg(wrapper_args);
             }
 
-            <span class="ident">cmd</span>.<span class="ident">arg</span>(<span class="kw-2">&amp;</span><span class="ident">java_path</span>);
-            <span class="ident">cmd</span>
+            cmd.arg(<span class="kw-2">&amp;</span>java_path);
+            cmd
         };
 
-        <span class="ident">cmd</span>.<span class="ident">args</span>(<span class="kw-2">&amp;</span><span class="ident">args</span>);
-        <span class="ident">cmd</span>.<span class="ident">current_dir</span>(<span class="ident">get_game_directory</span>(<span class="kw-2">&amp;</span><span class="ident">cfg</span>));
-        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>)]</span>
-        {
-            <span class="ident">cmd</span>.<span class="ident">env</span>(<span class="string">&quot;APPDATA&quot;</span>, <span class="ident">get_game_directory</span>(<span class="kw-2">&amp;</span><span class="ident">cfg</span>));
+        cmd.args(<span class="kw-2">&amp;</span>args);
+        cmd.current_dir(get_game_directory(<span class="kw-2">&amp;</span>cfg));
+        <span class="attribute">#[cfg(target_os = <span class="string">&quot;windows&quot;</span>)]
+        </span>{
+            cmd.env(<span class="string">&quot;APPDATA&quot;</span>, get_game_directory(<span class="kw-2">&amp;</span>cfg));
         }
-        <span class="ident">cmd</span>.<span class="ident">env</span>(<span class="string">&quot;FORMAT_MESSAGES_PATTERN_DISABLE_LOOKUPS&quot;</span>, <span class="string">&quot;true&quot;</span>);
+        cmd.env(<span class="string">&quot;FORMAT_MESSAGES_PATTERN_DISABLE_LOOKUPS&quot;</span>, <span class="string">&quot;true&quot;</span>);
 
-        <span class="ident">args</span>.<span class="ident">insert</span>(<span class="number">0</span>, <span class="ident">java_path</span>.<span class="ident">to_owned</span>());
+        args.insert(<span class="number">0</span>, java_path.to_owned());
 
-        <span class="kw">let</span> <span class="ident">terminal_launch</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">scl_config</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">cfg</span>.<span class="ident">version_info</span>.<span class="ident">scl_launch_config</span> {
-            <span class="ident">scl_config</span>.<span class="ident">use_terminal_launch</span>
-        } <span class="kw">else</span> {
-            <span class="bool-val">false</span>
-        };
+        <span class="kw">let </span>terminal_launch = <span class="kw">if let </span><span class="prelude-val">Some</span>(scl_config) = <span class="kw-2">&amp;</span>cfg.version_info.scl_launch_config {
+            scl_config.use_terminal_launch
+        } <span class="kw">else </span>{
+            <span class="bool-val">false
+        </span>};
 
-        <span class="macro">println!</span>(<span class="string">&quot;CMD: {:?}&quot;</span>, <span class="ident">cmd</span>);
+        <span class="macro">println!</span>(<span class="string">&quot;CMD: {:?}&quot;</span>, cmd);
 
-        <span class="prelude-val">Ok</span>(<span class="self">Self</span> {
-            <span class="ident">cmd</span>,
-            <span class="ident">terminal_launch</span>,
-            <span class="ident">game_dir</span>: <span class="ident">get_game_directory</span>(<span class="kw-2">&amp;</span><span class="ident">cfg</span>),
-            <span class="ident">java_path</span>,
-            <span class="ident">args</span>,
-            <span class="ident">process</span>: <span class="prelude-val">None</span>,
+        <span class="prelude-val">Ok</span>(<span class="self">Self </span>{
+            cmd,
+            terminal_launch,
+            game_dir: get_game_directory(<span class="kw-2">&amp;</span>cfg),
+            java_path,
+            args,
+            process: <span class="prelude-val">None</span>,
         })
     }
 
-    <span class="doccomment">/// 以 Builder 模式设置启动程序的标准输入方式</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 详情请参考 [`std::process::Command::stdin`]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">stdin</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">cfg</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">std::process::Stdio</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">set_stdin</span>(<span class="ident">cfg</span>);
-        <span class="self">self</span>
+    <span class="doccomment">/// 以 Builder 模式设置启动程序的标准输入方式
+    ///
+    /// 详情请参考 [`std::process::Command::stdin`]
+    </span><span class="kw">pub fn </span>stdin(<span class="kw-2">mut </span><span class="self">self</span>, cfg: <span class="kw">impl </span>Into&lt;std::process::Stdio&gt;) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.set_stdin(cfg);
+        <span class="self">self
+    </span>}
+
+    <span class="doccomment">/// 以 Builder 模式设置启动程序的标准输出方式
+    ///
+    /// 详情请参考 [`std::process::Command::stdout`]
+    </span><span class="kw">pub fn </span>stdout(<span class="kw-2">mut </span><span class="self">self</span>, cfg: <span class="kw">impl </span>Into&lt;std::process::Stdio&gt;) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.set_stdout(cfg);
+        <span class="self">self
+    </span>}
+
+    <span class="doccomment">/// 以 Builder 模式设置启动程序的标准错误输出方式
+    ///
+    /// 详情请参考 [`std::process::Command::stderr`]
+    </span><span class="kw">pub fn </span>stderr(<span class="kw-2">mut </span><span class="self">self</span>, cfg: <span class="kw">impl </span>Into&lt;std::process::Stdio&gt;) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.set_stderr(cfg);
+        <span class="self">self
+    </span>}
+
+    <span class="doccomment">/// 设置启动程序的标准输入方式
+    ///
+    /// 详情请参考 [`std::process::Command::stdin`]
+    </span><span class="kw">pub fn </span>set_stdin(<span class="kw-2">&amp;mut </span><span class="self">self</span>, cfg: <span class="kw">impl </span>Into&lt;std::process::Stdio&gt;) {
+        <span class="self">self</span>.cmd.stdin(cfg);
     }
 
-    <span class="doccomment">/// 以 Builder 模式设置启动程序的标准输出方式</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 详情请参考 [`std::process::Command::stdout`]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">stdout</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">cfg</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">std::process::Stdio</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">set_stdout</span>(<span class="ident">cfg</span>);
-        <span class="self">self</span>
+    <span class="doccomment">/// 设置启动程序的标准输出方式
+    ///
+    /// 详情请参考 [`std::process::Command::stdout`]
+    </span><span class="kw">pub fn </span>set_stdout(<span class="kw-2">&amp;mut </span><span class="self">self</span>, cfg: <span class="kw">impl </span>Into&lt;std::process::Stdio&gt;) {
+        <span class="self">self</span>.cmd.stdout(cfg);
     }
 
-    <span class="doccomment">/// 以 Builder 模式设置启动程序的标准错误输出方式</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 详情请参考 [`std::process::Command::stderr`]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">stderr</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">cfg</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">std::process::Stdio</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">set_stderr</span>(<span class="ident">cfg</span>);
-        <span class="self">self</span>
+    <span class="doccomment">/// 设置启动程序的标准错误输出方式
+    ///
+    /// 详情请参考 [`std::process::Command::stderr`]
+    </span><span class="kw">pub fn </span>set_stderr(<span class="kw-2">&amp;mut </span><span class="self">self</span>, cfg: <span class="kw">impl </span>Into&lt;std::process::Stdio&gt;) {
+        <span class="self">self</span>.cmd.stderr(cfg);
     }
 
-    <span class="doccomment">/// 设置启动程序的标准输入方式</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 详情请参考 [`std::process::Command::stdin`]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_stdin</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">cfg</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">std::process::Stdio</span><span class="op">&gt;</span>) {
-        <span class="self">self</span>.<span class="ident">cmd</span>.<span class="ident">stdin</span>(<span class="ident">cfg</span>);
+    <span class="doccomment">/// 拿出参数，参数数组的第一个成员为提供的 Java 执行文件
+    </span><span class="kw">pub fn </span>take_args(<span class="self">self</span>) -&gt; Vec&lt;String&gt; {
+        <span class="self">self</span>.args
     }
 
-    <span class="doccomment">/// 设置启动程序的标准输出方式</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 详情请参考 [`std::process::Command::stdout`]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_stdout</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">cfg</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">std::process::Stdio</span><span class="op">&gt;</span>) {
-        <span class="self">self</span>.<span class="ident">cmd</span>.<span class="ident">stdout</span>(<span class="ident">cfg</span>);
+    <span class="doccomment">/// 拿出 Command
+    </span><span class="kw">pub fn </span>take_cmd(<span class="self">self</span>) -&gt; Command {
+        <span class="self">self</span>.cmd
     }
 
-    <span class="doccomment">/// 设置启动程序的标准错误输出方式</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 详情请参考 [`std::process::Command::stderr`]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_stderr</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">cfg</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">std::process::Stdio</span><span class="op">&gt;</span>) {
-        <span class="self">self</span>.<span class="ident">cmd</span>.<span class="ident">stderr</span>(<span class="ident">cfg</span>);
-    }
-
-    <span class="doccomment">/// 拿出参数，参数数组的第一个成员为提供的 Java 执行文件</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">take_args</span>(<span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">args</span>
-    }
-
-    <span class="doccomment">/// 拿出 Command</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">take_cmd</span>(<span class="self">self</span>) -&gt; <span class="ident">Command</span> {
-        <span class="self">self</span>.<span class="ident">cmd</span>
-    }
-
-    <span class="doccomment">/// 启动游戏，并返回进程 ID</span>
-    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">launch</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> {
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>)]</span>
-            {
-                <span class="kw">use</span> <span class="ident">inner_future::process::windows::CommandExt</span>;
-                <span class="comment">// 写入到 bat 再启动</span>
-                <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="self">self</span>
-                    .<span class="ident">args</span>
-                    .<span class="ident">iter</span>()
-                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">a</span><span class="op">|</span> {
-                        <span class="kw">if</span> <span class="ident">a</span>.<span class="ident">contains</span>(<span class="string">&#39; &#39;</span>) {
-                            <span class="macro">format!</span>(<span class="string">&quot;\&quot;{}\&quot;&quot;</span>, <span class="ident">a</span>)
-                        } <span class="kw">else</span> {
-                            <span class="ident">a</span>.<span class="ident">to_owned</span>()
+    <span class="doccomment">/// 启动游戏，并返回进程 ID
+    </span><span class="kw">pub async fn </span>launch(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; DynResult&lt;u32&gt; {
+        <span class="kw">let </span>c = {
+            <span class="attribute">#[cfg(target_os = <span class="string">&quot;windows&quot;</span>)]
+            </span>{
+                <span class="kw">use </span>inner_future::process::windows::CommandExt;
+                <span class="comment">// 写入到 bat 再启动
+                </span><span class="kw">let </span>args = <span class="self">self
+                    </span>.args
+                    .iter()
+                    .map(|a| {
+                        <span class="kw">if </span>a.contains(<span class="string">&#39; &#39;</span>) {
+                            <span class="macro">format!</span>(<span class="string">&quot;\&quot;{}\&quot;&quot;</span>, a)
+                        } <span class="kw">else </span>{
+                            a.to_owned()
                         }
                     })
-                    .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-                <span class="kw">let</span> <span class="ident">batdata</span> <span class="op">=</span> <span class="macro">format!</span>(
+                    .collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
+                <span class="kw">let </span>batdata = <span class="macro">format!</span>(
                     <span class="string">&quot;\
                     @chcp 65001\r\n\
                     @echo off\r\n\
@@ -1400,87 +1400,87 @@
                     cd /d %CURRENT%\r\n\
                     pause\r\n\
                 &quot;</span>,
-                    <span class="ident">gamedir</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">game_dir</span>,
-                    <span class="ident">args</span> <span class="op">=</span> <span class="ident">args</span>.<span class="ident">join</span>(<span class="string">&quot; &quot;</span>)
+                    gamedir = <span class="self">self</span>.game_dir,
+                    args = args.join(<span class="string">&quot; &quot;</span>)
                 );
-                <span class="kw">use</span> <span class="ident">futures::AsyncWriteExt</span>;
-                <span class="kw">use</span> <span class="ident">inner_future::fs::windows::OpenOptionsExt</span>;
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">inner_future::fs::OpenOptions::new</span>()
-                    .<span class="ident">create</span>(<span class="bool-val">true</span>)
-                    .<span class="ident">write</span>(<span class="bool-val">true</span>)
-                    .<span class="ident">attributes</span>(<span class="number">0x2</span>)
-                    .<span class="ident">open</span>(<span class="string">&quot;.scl.launch.bat&quot;</span>)
+                <span class="kw">use </span>futures::AsyncWriteExt;
+                <span class="kw">use </span>inner_future::fs::windows::OpenOptionsExt;
+                <span class="kw">let </span><span class="kw-2">mut </span>file = inner_future::fs::OpenOptions::new()
+                    .create(<span class="bool-val">true</span>)
+                    .write(<span class="bool-val">true</span>)
+                    .attributes(<span class="number">0x2</span>)
+                    .open(<span class="string">&quot;.scl.launch.bat&quot;</span>)
                     .<span class="kw">await</span><span class="question-mark">?</span>;
-                <span class="ident">file</span>.<span class="ident">write_all</span>(<span class="ident">batdata</span>.<span class="ident">as_bytes</span>()).<span class="kw">await</span><span class="question-mark">?</span>;
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">terminal_launch</span> {
-                    <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">file</span>.<span class="ident">sync_all</span>().<span class="kw">await</span>;
-                    <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">file</span>.<span class="ident">sync_data</span>().<span class="kw">await</span>;
-                    <span class="ident">drop</span>(<span class="ident">file</span>);
-                    <span class="ident">inner_future::process::Command::new</span>(<span class="string">&quot;.scl.launch.bat&quot;</span>)
-                        <span class="comment">// .stdout(Stdio::piped())</span>
-                        <span class="comment">// .stderr(Stdio::piped())</span>
-                        .<span class="ident">creation_flags</span>(<span class="number">0x08000000</span> <span class="op">|</span> <span class="number">0x00000400</span>)
-                        .<span class="ident">spawn</span>()<span class="question-mark">?</span>
-                } <span class="kw">else</span> {
-                    <span class="kw">match</span> <span class="self">self</span>
-                        .<span class="ident">cmd</span>
-                        <span class="comment">// .stdout(Stdio::piped())</span>
-                        <span class="comment">// .stderr(Stdio::piped())</span>
-                        .<span class="ident">creation_flags</span>(<span class="number">0x08000000</span>)
-                        .<span class="ident">spawn</span>()
+                file.write_all(batdata.as_bytes()).<span class="kw">await</span><span class="question-mark">?</span>;
+                <span class="kw">if </span><span class="self">self</span>.terminal_launch {
+                    <span class="kw">let _ </span>= file.sync_all().<span class="kw">await</span>;
+                    <span class="kw">let _ </span>= file.sync_data().<span class="kw">await</span>;
+                    drop(file);
+                    inner_future::process::Command::new(<span class="string">&quot;.scl.launch.bat&quot;</span>)
+                        <span class="comment">// .stdout(Stdio::piped())
+                        // .stderr(Stdio::piped())
+                        </span>.creation_flags(<span class="number">0x08000000 </span>| <span class="number">0x00000400</span>)
+                        .spawn()<span class="question-mark">?
+                </span>} <span class="kw">else </span>{
+                    <span class="kw">match </span><span class="self">self
+                        </span>.cmd
+                        <span class="comment">// .stdout(Stdio::piped())
+                        // .stderr(Stdio::piped())
+                        </span>.creation_flags(<span class="number">0x08000000</span>)
+                        .spawn()
                     {
-                        <span class="prelude-val">Ok</span>(<span class="ident">c</span>) =&gt; <span class="ident">c</span>,
-                        <span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; {
-                            <span class="kw">if</span> <span class="ident">e</span>.<span class="ident">kind</span>() <span class="op">==</span> <span class="ident">std::io::ErrorKind::NotFound</span> {
-                                <span class="macro">anyhow::bail!</span>(<span class="string">&quot;使用 Java {} 启动游戏时发生错误：找不到 Java 执行文件，请确认你的 Java 文件是否存在 {:?}&quot;</span>, <span class="self">self</span>.<span class="ident">java_path</span>, <span class="ident">e</span>)
-                            } <span class="kw">else</span> {
+                        <span class="prelude-val">Ok</span>(c) =&gt; c,
+                        <span class="prelude-val">Err</span>(e) =&gt; {
+                            <span class="kw">if </span>e.kind() == std::io::ErrorKind::NotFound {
+                                <span class="macro">anyhow::bail!</span>(<span class="string">&quot;使用 Java {} 启动游戏时发生错误：找不到 Java 执行文件，请确认你的 Java 文件是否存在 {:?}&quot;</span>, <span class="self">self</span>.java_path, e)
+                            } <span class="kw">else </span>{
                                 <span class="macro">anyhow::bail!</span>(
                                     <span class="string">&quot;使用 Java {} 启动游戏时发生错误 {:?}&quot;</span>,
-                                    <span class="self">self</span>.<span class="ident">java_path</span>,
-                                    <span class="ident">e</span>
+                                    <span class="self">self</span>.java_path,
+                                    e
                                 )
                             }
                         }
                     }
                 }
             }
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>))]</span>
-            {
-                <span class="kw">match</span> <span class="self">self</span>.<span class="ident">cmd</span>.<span class="ident">spawn</span>() {
-                    <span class="prelude-val">Ok</span>(<span class="ident">c</span>) =&gt; <span class="ident">c</span>,
-                    <span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; {
-                        <span class="kw">if</span> <span class="ident">e</span>.<span class="ident">kind</span>() <span class="op">==</span> <span class="ident">std::io::ErrorKind::NotFound</span> {
-                            <span class="macro">anyhow::bail!</span>(<span class="string">&quot;启动游戏时发生错误：找不到 Java 执行文件，请确认你的 Java 文件是否存在 {:?}&quot;</span>, <span class="ident">e</span>)
-                        } <span class="kw">else</span> {
-                            <span class="macro">anyhow::bail!</span>(<span class="string">&quot;启动游戏时发生错误 {:?}&quot;</span>, <span class="ident">e</span>)
+            <span class="attribute">#[cfg(not(target_os = <span class="string">&quot;windows&quot;</span>))]
+            </span>{
+                <span class="kw">match </span><span class="self">self</span>.cmd.spawn() {
+                    <span class="prelude-val">Ok</span>(c) =&gt; c,
+                    <span class="prelude-val">Err</span>(e) =&gt; {
+                        <span class="kw">if </span>e.kind() == std::io::ErrorKind::NotFound {
+                            <span class="macro">anyhow::bail!</span>(<span class="string">&quot;启动游戏时发生错误：找不到 Java 执行文件，请确认你的 Java 文件是否存在 {:?}&quot;</span>, e)
+                        } <span class="kw">else </span>{
+                            <span class="macro">anyhow::bail!</span>(<span class="string">&quot;启动游戏时发生错误 {:?}&quot;</span>, e)
                         }
                     }
                 }
             }
         };
-        <span class="kw">let</span> <span class="ident">pid</span> <span class="op">=</span> <span class="ident">c</span>.<span class="ident">id</span>();
-        <span class="self">self</span>.<span class="ident">process</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">c</span>);
-        <span class="prelude-val">Ok</span>(<span class="ident">pid</span>)
+        <span class="kw">let </span>pid = c.id();
+        <span class="self">self</span>.process = <span class="prelude-val">Some</span>(c);
+        <span class="prelude-val">Ok</span>(pid)
     }
 
-    <span class="doccomment">/// 如果游戏进程还在运行，则尝试停止游戏进程</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">stop</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">DynResult</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">mut</span> <span class="ident">p</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">process</span>.<span class="ident">take</span>() {
-            <span class="ident">p</span>.<span class="ident">kill</span>()<span class="question-mark">?</span>;
+    <span class="doccomment">/// 如果游戏进程还在运行，则尝试停止游戏进程
+    </span><span class="kw">pub fn </span>stop(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; DynResult {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">mut </span>p) = <span class="self">self</span>.process.take() {
+            p.kill()<span class="question-mark">?</span>;
         }
         <span class="prelude-val">Ok</span>(())
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Display</span> <span class="kw">for</span> <span class="ident">Client</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span> {
-        <span class="kw">let</span> <span class="ident">running</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">process</span>.<span class="ident">is_some</span>() {
-            <span class="string">&quot;running&quot;</span>
-        } <span class="kw">else</span> {
-            <span class="string">&quot;idle&quot;</span>
-        };
-        <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;[MCClient {} args={:?}]&quot;</span>, <span class="ident">running</span>, <span class="self">self</span>.<span class="ident">args</span>)
+<span class="kw">impl </span>Display <span class="kw">for </span>Client {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; <span class="prelude-ty">Result </span>{
+        <span class="kw">let </span>running = <span class="kw">if </span><span class="self">self</span>.process.is_some() {
+            <span class="string">&quot;running&quot;
+        </span>} <span class="kw">else </span>{
+            <span class="string">&quot;idle&quot;
+        </span>};
+        <span class="macro">write!</span>(f, <span class="string">&quot;[MCClient {} args={:?}]&quot;</span>, running, <span class="self">self</span>.args)
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/http.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>http.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../scl_core/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/http.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>http.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../scl_core/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -293,300 +293,300 @@
 <span id="293">293</span>
 <span id="294">294</span>
 <span id="295">295</span>
-</pre><pre class="rust"><code><span class="doccomment">//! HTTP 包装，虽然是内部使用但是你也可以使用这个来做点 HTTP 请求什么的</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! 或者在二次开发的时候更换成你喜欢的版本</span>
+</pre><pre class="rust"><code><span class="doccomment">//! HTTP 包装，虽然是内部使用但是你也可以使用这个来做点 HTTP 请求什么的
+//!
+//! 或者在二次开发的时候更换成你喜欢的版本
 
-<span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">convert::TryInto</span>, <span class="ident">sync::Arc</span>, <span class="ident">time::Duration</span>};
+</span><span class="kw">use </span>std::{convert::TryInto, sync::Arc, time::Duration};
 
-<span class="kw">use</span> <span class="ident">once_cell::sync::Lazy</span>;
-<span class="kw">use</span> <span class="ident">serde::de::DeserializeOwned</span>;
-<span class="kw">use</span> <span class="ident">surf</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span>once_cell::sync::Lazy;
+<span class="kw">use </span>serde::de::DeserializeOwned;
+<span class="kw">use </span>surf::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::prelude::<span class="kw-2">*</span>;
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
-<span class="kw">fn</span> <span class="ident">logger</span>(
-    <span class="ident">req</span>: <span class="ident">Request</span>,
-    <span class="ident">client</span>: <span class="ident">Client</span>,
-    <span class="ident">next</span>: <span class="ident">middleware::Next</span>,
-) -&gt; <span class="ident">futures::future::BoxFuture</span><span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Response</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="ident">Box::pin</span>(<span class="kw">async</span> <span class="kw">move</span> {
-        <span class="kw">let</span> <span class="ident">url</span> <span class="op">=</span> <span class="ident">req</span>.<span class="ident">url</span>().<span class="ident">to_string</span>();
-        <span class="kw">let</span> <span class="ident">should_log</span> <span class="op">=</span> <span class="ident">std::env::var</span>(<span class="string">&quot;SCL_HTTP_LOG&quot;</span>)
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="kw-2">&amp;</span><span class="ident">x</span> <span class="op">==</span> <span class="string">&quot;true&quot;</span>)
-            .<span class="ident">unwrap_or</span>(<span class="bool-val">false</span>);
-        <span class="kw">if</span> <span class="ident">should_log</span> {
-            <span class="macro">println!</span>(<span class="string">&quot;[SCL-Core-HTTP] 正在请求 {}&quot;</span>, <span class="ident">url</span>);
+<span class="attribute">#[allow(dead_code)]
+</span><span class="kw">fn </span>logger(
+    req: Request,
+    client: Client,
+    next: middleware::Next,
+) -&gt; futures::future::BoxFuture&lt;<span class="prelude-ty">Result</span>&lt;Response&gt;&gt; {
+    Box::pin(<span class="kw">async move </span>{
+        <span class="kw">let </span>url = req.url().to_string();
+        <span class="kw">let </span>should_log = std::env::var(<span class="string">&quot;SCL_HTTP_LOG&quot;</span>)
+            .map(|x| <span class="kw-2">&amp;</span>x == <span class="string">&quot;true&quot;</span>)
+            .unwrap_or(<span class="bool-val">false</span>);
+        <span class="kw">if </span>should_log {
+            <span class="macro">println!</span>(<span class="string">&quot;[SCL-Core-HTTP] 正在请求 {}&quot;</span>, url);
         }
-        <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">next</span>.<span class="ident">run</span>(<span class="ident">req</span>, <span class="ident">client</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">content_type</span>) <span class="op">=</span> <span class="ident">res</span>.<span class="ident">content_type</span>() {
-            <span class="kw">if</span> <span class="ident">should_log</span> {
+        <span class="kw">let </span>res = next.run(req, client).<span class="kw">await</span><span class="question-mark">?</span>;
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(content_type) = res.content_type() {
+            <span class="kw">if </span>should_log {
                 <span class="macro">println!</span>(
                     <span class="string">&quot;[SCL-Core-HTTP] 请求 {} 完成 状态码：{} 响应类型：{}&quot;</span>,
-                    <span class="ident">url</span>,
-                    <span class="ident">res</span>.<span class="ident">status</span>(),
-                    <span class="ident">content_type</span>
+                    url,
+                    res.status(),
+                    content_type
                 );
-                <span class="kw">if</span> <span class="ident">res</span>.<span class="ident">status</span>().<span class="ident">is_redirection</span>() {
+                <span class="kw">if </span>res.status().is_redirection() {
                     <span class="macro">println!</span>(
                         <span class="string">&quot;[SCL-Core-HTTP] 正在重定向至 {}&quot;</span>,
-                        <span class="ident">res</span>.<span class="ident">header</span>(<span class="string">&quot;Location&quot;</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">as_str</span>()).<span class="ident">unwrap_or</span>(<span class="string">&quot;&quot;</span>)
+                        res.header(<span class="string">&quot;Location&quot;</span>).map(|x| x.as_str()).unwrap_or(<span class="string">&quot;&quot;</span>)
                     );
                 }
             }
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">should_log</span> {
+        } <span class="kw">else if </span>should_log {
             <span class="macro">println!</span>(
                 <span class="string">&quot;[SCL-Core-HTTP] 请求 {} 完成 状态码：{} 响应类型：无&quot;</span>,
-                <span class="ident">url</span>,
-                <span class="ident">res</span>.<span class="ident">status</span>()
+                url,
+                res.status()
             );
-            <span class="kw">if</span> <span class="ident">res</span>.<span class="ident">status</span>().<span class="ident">is_redirection</span>() {
+            <span class="kw">if </span>res.status().is_redirection() {
                 <span class="macro">println!</span>(
                     <span class="string">&quot;[SCL-Core-HTTP] 正在重定向至 {}&quot;</span>,
-                    <span class="ident">res</span>.<span class="ident">header</span>(<span class="string">&quot;Location&quot;</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">as_str</span>()).<span class="ident">unwrap_or</span>(<span class="string">&quot;&quot;</span>)
+                    res.header(<span class="string">&quot;Location&quot;</span>).map(|x| x.as_str()).unwrap_or(<span class="string">&quot;&quot;</span>)
                 );
             }
         }
-        <span class="prelude-val">Ok</span>(<span class="ident">res</span>)
+        <span class="prelude-val">Ok</span>(res)
     })
 }
 
-<span class="kw">static</span> <span class="ident">GLOBAL_CLIENT</span>: <span class="ident">Lazy</span><span class="op">&lt;</span><span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">Client</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Lazy::new</span>(<span class="op">|</span><span class="op">|</span> {
-    <span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="ident">Config::new</span>()
-        .<span class="ident">add_header</span>(
+<span class="kw">static </span>GLOBAL_CLIENT: Lazy&lt;Arc&lt;Client&gt;&gt; = Lazy::new(|| {
+    <span class="kw">let </span>client = Config::new()
+        .add_header(
             <span class="string">&quot;User-Agent&quot;</span>,
             <span class="string">&quot;github.com/Steve-xmh/SharpCraftLauncher (stevexmh@qq.com)&quot;</span>,
         )
-        .<span class="ident">unwrap</span>()
-        .<span class="ident">set_timeout</span>(<span class="prelude-val">Some</span>(<span class="ident">Duration::from_secs</span>(<span class="number">30</span>)));
-    <span class="kw">let</span> <span class="ident">client</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="kw-2">mut</span> <span class="ident">proxy</span>) <span class="op">=</span> <span class="ident">std::env::var</span>(<span class="string">&quot;HTTP_PROXY&quot;</span>) {
-        <span class="kw">let</span> <span class="ident">proxy</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">proxy</span>.<span class="ident">ends_with</span>(<span class="string">&#39;/&#39;</span>) {
-            <span class="ident">proxy</span>
-        } <span class="kw">else</span> {
-            <span class="ident">proxy</span>.<span class="ident">push</span>(<span class="string">&#39;/&#39;</span>);
-            <span class="ident">proxy</span>
+        .unwrap()
+        .set_timeout(<span class="prelude-val">Some</span>(Duration::from_secs(<span class="number">30</span>)));
+    <span class="kw">let </span>client = <span class="kw">if let </span><span class="prelude-val">Ok</span>(<span class="kw-2">mut </span>proxy) = std::env::var(<span class="string">&quot;HTTP_PROXY&quot;</span>) {
+        <span class="kw">let </span>proxy = <span class="kw">if </span>proxy.ends_with(<span class="string">&#39;/&#39;</span>) {
+            proxy
+        } <span class="kw">else </span>{
+            proxy.push(<span class="string">&#39;/&#39;</span>);
+            proxy
         };
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">uri</span>) <span class="op">=</span> <span class="ident">url::Url::parse</span>(<span class="kw-2">&amp;</span><span class="ident">proxy</span>) {
-            <span class="macro">println!</span>(<span class="string">&quot;Using http proxy: {}&quot;</span>, <span class="ident">uri</span>);
-            <span class="ident">client</span>.<span class="ident">set_base_url</span>(<span class="ident">uri</span>)
-        } <span class="kw">else</span> {
-            <span class="ident">client</span>
+        <span class="kw">if let </span><span class="prelude-val">Ok</span>(uri) = url::Url::parse(<span class="kw-2">&amp;</span>proxy) {
+            <span class="macro">println!</span>(<span class="string">&quot;Using http proxy: {}&quot;</span>, uri);
+            client.set_base_url(uri)
+        } <span class="kw">else </span>{
+            client
         }
-    } <span class="kw">else</span> {
-        <span class="ident">client</span>
+    } <span class="kw">else </span>{
+        client
     };
-    <span class="kw">let</span> <span class="ident">client</span>: <span class="ident">Client</span> <span class="op">=</span> <span class="ident">client</span>.<span class="ident">try_into</span>().<span class="ident">unwrap</span>();
-    <span class="ident">Arc::new</span>(<span class="ident">client</span>.<span class="ident">with</span>(<span class="ident">middleware::Redirect::default</span>()))
+    <span class="kw">let </span>client: Client = client.try_into().unwrap();
+    Arc::new(client.with(middleware::Redirect::default()))
 });
 
-<span class="doccomment">/// Future 重试调用函数，为下载文件失败重试而准备</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 主要是 surf 库不带重试功能，中间件写了也有大堆问题。。。</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">retry_future</span><span class="op">&lt;</span><span class="ident">O</span>, <span class="ident">F</span>: <span class="ident">std::future::Future</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="ident">O</span><span class="op">&gt;</span><span class="op">&gt;</span>(
-    <span class="ident">max_retries</span>: <span class="ident">usize</span>,
-    <span class="ident">future_builder</span>: <span class="kw">impl</span> <span class="ident">Fn</span>() -&gt; <span class="ident">F</span>,
-    <span class="ident">error_handler</span>: <span class="kw">impl</span> <span class="ident">Fn</span>(<span class="kw-2">&amp;</span><span class="ident">O</span>) -&gt; <span class="ident">bool</span>,
-) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">O</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">retries</span> <span class="op">=</span> <span class="number">0</span>;
-    <span class="kw">loop</span> {
-        <span class="ident">retries</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-        <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="ident">future_builder</span>();
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">f</span>.<span class="kw">await</span>;
-        <span class="kw">if</span> <span class="ident">error_handler</span>(<span class="kw-2">&amp;</span><span class="ident">r</span>) <span class="op">|</span><span class="op">|</span> <span class="ident">retries</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">max_retries</span> {
-            <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">r</span>);
+<span class="doccomment">/// Future 重试调用函数，为下载文件失败重试而准备
+///
+/// 主要是 surf 库不带重试功能，中间件写了也有大堆问题。。。
+</span><span class="kw">pub async fn </span>retry_future&lt;O, F: std::future::Future&lt;Output = O&gt;&gt;(
+    max_retries: usize,
+    future_builder: <span class="kw">impl </span>Fn() -&gt; F,
+    error_handler: <span class="kw">impl </span>Fn(<span class="kw-2">&amp;</span>O) -&gt; bool,
+) -&gt; DynResult&lt;O&gt; {
+    <span class="kw">let </span><span class="kw-2">mut </span>retries = <span class="number">0</span>;
+    <span class="kw">loop </span>{
+        retries += <span class="number">1</span>;
+        <span class="kw">let </span>f = future_builder();
+        <span class="kw">let </span>r = f.<span class="kw">await</span>;
+        <span class="kw">if </span>error_handler(<span class="kw-2">&amp;</span>r) || retries &gt;= max_retries {
+            <span class="kw">return </span><span class="prelude-val">Ok</span>(r);
         }
     }
 }
 
-<span class="doccomment">/// 根据所给链接，依次尝试请求下载</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 启发自 PCL1 源代码</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// TODO: 如 size 参数为非零值，则将会使用分片下载</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">download</span>(
-    <span class="ident">uris</span>: <span class="kw-2">&amp;</span>[<span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">std::fmt::Debug</span>],
-    <span class="ident">dest_path</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-    <span class="ident">_size</span>: <span class="ident">usize</span>,
-) -&gt; <span class="ident">DynResult</span> {
-    <span class="kw">for</span> <span class="ident">uri</span> <span class="kw">in</span> <span class="ident">uris</span> {
-        <span class="comment">// 尝试重试两次，都失败的话就换下一个链接</span>
-        <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">retry_future</span>(<span class="number">5</span>, <span class="op">|</span><span class="op">|</span> <span class="ident">get</span>(<span class="ident">uri</span>), <span class="ident">surf::Result::is_ok</span>).<span class="kw">await</span>;
-        <span class="kw">match</span> <span class="ident">res</span> {
-            <span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(<span class="ident">res</span>)) =&gt; {
-                <span class="kw">if</span> <span class="ident">res</span>.<span class="ident">status</span>().<span class="ident">is_success</span>() {
-                    <span class="kw">let</span> <span class="ident">tmp_dest_path</span> <span class="op">=</span> <span class="macro">format!</span>(<span class="string">&quot;{}.tmp&quot;</span>, <span class="ident">dest_path</span>);
-                    <span class="kw">let</span> <span class="ident">tmp_file</span> <span class="op">=</span> <span class="ident">inner_future::fs::OpenOptions::new</span>()
-                        .<span class="ident">create</span>(<span class="bool-val">true</span>)
-                        .<span class="ident">write</span>(<span class="bool-val">true</span>)
-                        .<span class="ident">truncate</span>(<span class="bool-val">true</span>)
-                        .<span class="ident">open</span>(<span class="kw-2">&amp;</span><span class="ident">tmp_dest_path</span>)
+<span class="doccomment">/// 根据所给链接，依次尝试请求下载
+///
+/// 启发自 PCL1 源代码
+///
+/// TODO: 如 size 参数为非零值，则将会使用分片下载
+</span><span class="kw">pub async fn </span>download(
+    uris: <span class="kw-2">&amp;</span>[<span class="kw">impl </span>AsRef&lt;str&gt; + std::fmt::Debug],
+    dest_path: <span class="kw-2">&amp;</span>str,
+    _size: usize,
+) -&gt; DynResult {
+    <span class="kw">for </span>uri <span class="kw">in </span>uris {
+        <span class="comment">// 尝试重试两次，都失败的话就换下一个链接
+        </span><span class="kw">let </span>res = retry_future(<span class="number">5</span>, || get(uri), surf::Result::is_ok).<span class="kw">await</span>;
+        <span class="kw">match </span>res {
+            <span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(res)) =&gt; {
+                <span class="kw">if </span>res.status().is_success() {
+                    <span class="kw">let </span>tmp_dest_path = <span class="macro">format!</span>(<span class="string">&quot;{}.tmp&quot;</span>, dest_path);
+                    <span class="kw">let </span>tmp_file = inner_future::fs::OpenOptions::new()
+                        .create(<span class="bool-val">true</span>)
+                        .write(<span class="bool-val">true</span>)
+                        .truncate(<span class="bool-val">true</span>)
+                        .open(<span class="kw-2">&amp;</span>tmp_dest_path)
                         .<span class="kw">await</span><span class="question-mark">?</span>;
-                    <span class="kw">if</span> <span class="ident">inner_future::io::copy</span>(<span class="ident">res</span>, <span class="ident">tmp_file</span>).<span class="kw">await</span>.<span class="ident">is_ok</span>() {
-                        <span class="ident">inner_future::fs::rename</span>(<span class="ident">tmp_dest_path</span>, <span class="ident">dest_path</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-                        <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
+                    <span class="kw">if </span>inner_future::io::copy(res, tmp_file).<span class="kw">await</span>.is_ok() {
+                        inner_future::fs::rename(tmp_dest_path, dest_path).<span class="kw">await</span><span class="question-mark">?</span>;
+                        <span class="kw">return </span><span class="prelude-val">Ok</span>(());
                     }
-                } <span class="kw">else</span> {
-                    <span class="macro">println!</span>(<span class="string">&quot;Error {:?} 状态码错误 {}&quot;</span>, <span class="ident">uri</span>, <span class="ident">res</span>.<span class="ident">status</span>());
+                } <span class="kw">else </span>{
+                    <span class="macro">println!</span>(<span class="string">&quot;Error {:?} 状态码错误 {}&quot;</span>, uri, res.status());
                 }
             }
-            <span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(<span class="ident">e</span>)) =&gt; {
-                <span class="macro">println!</span>(<span class="string">&quot;Error {:?} {}&quot;</span>, <span class="ident">uri</span>, <span class="ident">e</span>)
+            <span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(e)) =&gt; {
+                <span class="macro">println!</span>(<span class="string">&quot;Error {:?} {}&quot;</span>, uri, e)
             }
-            <span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; {
-                <span class="macro">println!</span>(<span class="string">&quot;Error {:?} {}&quot;</span>, <span class="ident">uri</span>, <span class="ident">e</span>)
+            <span class="prelude-val">Err</span>(e) =&gt; {
+                <span class="macro">println!</span>(<span class="string">&quot;Error {:?} {}&quot;</span>, uri, e)
             }
         }
     }
     <span class="macro">anyhow::bail!</span>(
         <span class="string">&quot;轮询下载文件到 {} 失败，请检查你的网络连接，已尝试的链接 {:?}&quot;</span>,
-        <span class="ident">dest_path</span>,
-        <span class="ident">uris</span>
+        dest_path,
+        uris
     )
 }
 
-<span class="doccomment">/// 重试获取 JSON 对象</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 返回的数据结构需要实现 [`serde::de::DeserializeOwned`]</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">retry_get_json</span><span class="op">&lt;</span><span class="ident">D</span>: <span class="ident">DeserializeOwned</span><span class="op">&gt;</span>(<span class="ident">uri</span>: <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">retry_future</span>(<span class="number">5</span>, <span class="op">|</span><span class="op">|</span> <span class="ident">get</span>(<span class="ident">uri</span>.<span class="ident">as_ref</span>()).<span class="ident">recv_json</span>(), <span class="ident">surf::Result::is_ok</span>).<span class="kw">await</span>;
-    <span class="kw">let</span> <span class="ident">err</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">res</span> {
-        <span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(<span class="ident">body</span>)) =&gt; <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">body</span>),
-        <span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(<span class="ident">e</span>)) =&gt; {
-            <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">e</span>)
+<span class="doccomment">/// 重试获取 JSON 对象
+///
+/// 返回的数据结构需要实现 [`serde::de::DeserializeOwned`]
+</span><span class="kw">pub async fn </span>retry_get_json&lt;D: DeserializeOwned&gt;(uri: <span class="kw">impl </span>AsRef&lt;str&gt;) -&gt; DynResult&lt;D&gt; {
+    <span class="kw">let </span>res = retry_future(<span class="number">5</span>, || get(uri.as_ref()).recv_json(), surf::Result::is_ok).<span class="kw">await</span>;
+    <span class="kw">let </span>err = <span class="kw">match </span>res {
+        <span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(body)) =&gt; <span class="kw">return </span><span class="prelude-val">Ok</span>(body),
+        <span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(e)) =&gt; {
+            <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;{}&quot;</span>, e)
         }
-        <span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; <span class="ident">e</span>,
+        <span class="prelude-val">Err</span>(e) =&gt; e,
     };
     <span class="macro">anyhow::bail!</span>(
         <span class="string">&quot;轮询请求链接 {} 失败，请检查你的网络连接：{}&quot;</span>,
-        <span class="ident">uri</span>.<span class="ident">as_ref</span>(),
-        <span class="ident">err</span>
+        uri.as_ref(),
+        err
     )
 }
 
-<span class="doccomment">/// 重试获取数据</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">retry_get_bytes</span>(<span class="ident">uri</span>: <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">retry_future</span>(<span class="number">5</span>, <span class="op">|</span><span class="op">|</span> <span class="ident">get</span>(<span class="ident">uri</span>.<span class="ident">as_ref</span>()).<span class="ident">recv_bytes</span>(), <span class="ident">surf::Result::is_ok</span>).<span class="kw">await</span>;
-    <span class="kw">let</span> <span class="ident">err</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">res</span> {
-        <span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(<span class="ident">body</span>)) =&gt; <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">body</span>),
-        <span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(<span class="ident">e</span>)) =&gt; {
-            <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">e</span>)
+<span class="doccomment">/// 重试获取数据
+</span><span class="kw">pub async fn </span>retry_get_bytes(uri: <span class="kw">impl </span>AsRef&lt;str&gt;) -&gt; DynResult&lt;Vec&lt;u8&gt;&gt; {
+    <span class="kw">let </span>res = retry_future(<span class="number">5</span>, || get(uri.as_ref()).recv_bytes(), surf::Result::is_ok).<span class="kw">await</span>;
+    <span class="kw">let </span>err = <span class="kw">match </span>res {
+        <span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(body)) =&gt; <span class="kw">return </span><span class="prelude-val">Ok</span>(body),
+        <span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(e)) =&gt; {
+            <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;{}&quot;</span>, e)
         }
-        <span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; <span class="ident">e</span>,
+        <span class="prelude-val">Err</span>(e) =&gt; e,
     };
     <span class="macro">anyhow::bail!</span>(
         <span class="string">&quot;轮询请求链接 {} 失败，请检查你的网络连接：{}&quot;</span>,
-        <span class="ident">uri</span>.<span class="ident">as_ref</span>(),
-        <span class="ident">err</span>
+        uri.as_ref(),
+        err
     )
 }
 
-<span class="doccomment">/// 重试获取字符串</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">retry_get_string</span>(<span class="ident">uri</span>: <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">retry_future</span>(<span class="number">5</span>, <span class="op">|</span><span class="op">|</span> <span class="ident">get</span>(<span class="ident">uri</span>.<span class="ident">as_ref</span>()).<span class="ident">recv_string</span>(), <span class="ident">surf::Result::is_ok</span>).<span class="kw">await</span>;
-    <span class="kw">let</span> <span class="ident">err</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">res</span> {
-        <span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(<span class="ident">body</span>)) =&gt; <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">body</span>),
-        <span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(<span class="ident">e</span>)) =&gt; {
-            <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">e</span>)
+<span class="doccomment">/// 重试获取字符串
+</span><span class="kw">pub async fn </span>retry_get_string(uri: <span class="kw">impl </span>AsRef&lt;str&gt;) -&gt; DynResult&lt;String&gt; {
+    <span class="kw">let </span>res = retry_future(<span class="number">5</span>, || get(uri.as_ref()).recv_string(), surf::Result::is_ok).<span class="kw">await</span>;
+    <span class="kw">let </span>err = <span class="kw">match </span>res {
+        <span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(body)) =&gt; <span class="kw">return </span><span class="prelude-val">Ok</span>(body),
+        <span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(e)) =&gt; {
+            <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;{}&quot;</span>, e)
         }
-        <span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; <span class="ident">e</span>,
+        <span class="prelude-val">Err</span>(e) =&gt; e,
     };
     <span class="macro">anyhow::bail!</span>(
         <span class="string">&quot;轮询请求链接 {} 失败，请检查你的网络连接：{}&quot;</span>,
-        <span class="ident">uri</span>.<span class="ident">as_ref</span>(),
-        <span class="ident">err</span>
+        uri.as_ref(),
+        err
     )
 }
 
-<span class="doccomment">/// 重试获取响应，当取得成功时返回</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 你可能需要自行确认状态码是否成功</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">retry_get</span>(<span class="ident">uri</span>: <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">Response</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">retry_future</span>(<span class="number">5</span>, <span class="op">|</span><span class="op">|</span> <span class="ident">get</span>(<span class="ident">uri</span>.<span class="ident">as_ref</span>()), <span class="ident">surf::Result::is_ok</span>).<span class="kw">await</span>;
-    <span class="kw">let</span> <span class="ident">err</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">res</span> {
-        <span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(<span class="ident">body</span>)) =&gt; <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">body</span>),
-        <span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(<span class="ident">e</span>)) =&gt; {
+<span class="doccomment">/// 重试获取响应，当取得成功时返回
+///
+/// 你可能需要自行确认状态码是否成功
+</span><span class="kw">pub async fn </span>retry_get(uri: <span class="kw">impl </span>AsRef&lt;str&gt;) -&gt; DynResult&lt;Response&gt; {
+    <span class="kw">let </span>res = retry_future(<span class="number">5</span>, || get(uri.as_ref()), surf::Result::is_ok).<span class="kw">await</span>;
+    <span class="kw">let </span>err = <span class="kw">match </span>res {
+        <span class="prelude-val">Ok</span>(<span class="prelude-val">Ok</span>(body)) =&gt; <span class="kw">return </span><span class="prelude-val">Ok</span>(body),
+        <span class="prelude-val">Ok</span>(<span class="prelude-val">Err</span>(e)) =&gt; {
             <span class="macro">anyhow::anyhow!</span>(
                 <span class="string">&quot;{}: {}&quot;</span>,
-                <span class="ident">e</span>,
-                <span class="ident">e</span>.<span class="ident">backtrace</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">to_string</span>()).<span class="ident">unwrap_or_default</span>()
+                e,
+                e.backtrace().map(|x| x.to_string()).unwrap_or_default()
             )
         }
-        <span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; <span class="ident">e</span>,
+        <span class="prelude-val">Err</span>(e) =&gt; e,
     };
     <span class="macro">anyhow::bail!</span>(
         <span class="string">&quot;轮询请求链接 {} 失败，请检查你的网络连接：{}&quot;</span>,
-        <span class="ident">uri</span>.<span class="ident">as_ref</span>(),
-        <span class="ident">err</span>
+        uri.as_ref(),
+        err
     )
 }
 
-<span class="doccomment">/// 生成简单的 GET 请求</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get</span>(<span class="ident">uri</span>: <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span>) -&gt; <span class="ident">RequestBuilder</span> {
-    <span class="ident">GLOBAL_CLIENT</span>.<span class="ident">get</span>(<span class="ident">uri</span>)
+<span class="doccomment">/// 生成简单的 GET 请求
+</span><span class="kw">pub fn </span>get(uri: <span class="kw">impl </span>AsRef&lt;str&gt;) -&gt; RequestBuilder {
+    GLOBAL_CLIENT.get(uri)
 }
 
-<span class="doccomment">/// 生成简单的 POST 请求</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">post</span>(<span class="ident">uri</span>: <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span>) -&gt; <span class="ident">RequestBuilder</span> {
-    <span class="ident">GLOBAL_CLIENT</span>.<span class="ident">post</span>(<span class="ident">uri</span>)
+<span class="doccomment">/// 生成简单的 POST 请求
+</span><span class="kw">pub fn </span>post(uri: <span class="kw">impl </span>AsRef&lt;str&gt;) -&gt; RequestBuilder {
+    GLOBAL_CLIENT.post(uri)
 }
 
-<span class="doccomment">/// 针对 Mojang 验证 API 的响应结构</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">RequestResult</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// 返回的结构是成功的，此处为实际数据</span>
-    <span class="prelude-val">Ok</span>(<span class="ident">T</span>),
-    <span class="doccomment">/// 返回的结构是错误的，此处为错误信息结构</span>
-    <span class="prelude-val">Err</span>(<span class="ident"><span class="kw">crate</span>::auth::structs::mojang::ErrorResponse</span>),
+<span class="doccomment">/// 针对 Mojang 验证 API 的响应结构
+</span><span class="attribute">#[derive(Debug, Clone)]
+</span><span class="kw">pub enum </span>RequestResult&lt;T&gt; {
+    <span class="doccomment">/// 返回的结构是成功的，此处为实际数据
+    </span><span class="prelude-val">Ok</span>(T),
+    <span class="doccomment">/// 返回的结构是错误的，此处为错误信息结构
+    </span><span class="prelude-val">Err</span>(<span class="kw">crate</span>::auth::structs::mojang::ErrorResponse),
 }
 
-<span class="doccomment">/// 不会进行重试的 HTTP 请求模块</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">no_retry</span> {
-    <span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">de::DeserializeOwned</span>, <span class="ident">Serialize</span>};
-    <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">surf::get</span>;
+<span class="doccomment">/// 不会进行重试的 HTTP 请求模块
+</span><span class="kw">pub mod </span>no_retry {
+    <span class="kw">use </span>serde::{de::DeserializeOwned, Serialize};
+    <span class="kw">pub use </span>surf::get;
 
-    <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::RequestResult</span>;
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::prelude::DynResult</span>;
+    <span class="kw">use </span><span class="kw">super</span>::RequestResult;
+    <span class="kw">use </span><span class="kw">crate</span>::prelude::DynResult;
 
-    <span class="doccomment">/// 获取 JSON 对象</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 返回的数据结构需要实现 [`serde::de::DeserializeOwned`]</span>
-    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_data</span><span class="op">&lt;</span><span class="ident">D</span>: <span class="ident">DeserializeOwned</span><span class="op">&gt;</span>(<span class="ident">uri</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">RequestResult</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">surf::get</span>(<span class="ident">uri</span>)
-            .<span class="ident">recv_string</span>()
-            .<span class="kw">await</span>
-            .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;无法接收来自 {} 的响应：{:?}&quot;</span>, <span class="ident">uri</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">result</span>) <span class="op">=</span> <span class="ident">serde_json::from_str</span>(<span class="kw-2">&amp;</span><span class="ident">result</span>) {
-            <span class="prelude-val">Ok</span>(<span class="ident">RequestResult::Ok</span>(<span class="ident">result</span>))
-        } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">serde_json::from_str</span>(<span class="kw-2">&amp;</span><span class="ident">result</span>)<span class="question-mark">?</span>;
-            <span class="prelude-val">Ok</span>(<span class="ident">RequestResult::Err</span>(<span class="ident">result</span>))
+    <span class="doccomment">/// 获取 JSON 对象
+    ///
+    /// 返回的数据结构需要实现 [`serde::de::DeserializeOwned`]
+    </span><span class="kw">pub async fn </span>get_data&lt;D: DeserializeOwned&gt;(uri: <span class="kw-2">&amp;</span>str) -&gt; DynResult&lt;RequestResult&lt;D&gt;&gt; {
+        <span class="kw">let </span>result = surf::get(uri)
+            .recv_string()
+            .<span class="kw">await
+            </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;无法接收来自 {} 的响应：{:?}&quot;</span>, uri, e))<span class="question-mark">?</span>;
+        <span class="kw">if let </span><span class="prelude-val">Ok</span>(result) = serde_json::from_str(<span class="kw-2">&amp;</span>result) {
+            <span class="prelude-val">Ok</span>(RequestResult::Ok(result))
+        } <span class="kw">else </span>{
+            <span class="kw">let </span>result = serde_json::from_str(<span class="kw-2">&amp;</span>result)<span class="question-mark">?</span>;
+            <span class="prelude-val">Ok</span>(RequestResult::Err(result))
         }
     }
 
-    <span class="doccomment">/// 带请求体去获取 JSON 对象</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 传入的请求体需要实现 [`serde::ser::Serialize`] 和 [`std::fmt::Debug`]</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 返回的数据结构需要实现 [`serde::de::DeserializeOwned`]</span>
-    <span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">post_data</span><span class="op">&lt;</span><span class="ident">D</span>: <span class="ident">DeserializeOwned</span>, <span class="ident">S</span>: <span class="ident">Serialize</span> <span class="op">+</span> <span class="ident">std::fmt::Debug</span><span class="op">&gt;</span>(
-        <span class="ident">uri</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">body</span>: <span class="kw-2">&amp;</span><span class="ident">S</span>,
-    ) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">RequestResult</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">surf::post</span>(<span class="ident">uri</span>)
-            .<span class="ident">header</span>(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json; charset=utf-8&quot;</span>)
-            .<span class="ident">body_json</span>(<span class="ident">body</span>)
-            .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;无法解析请求主体给 {}：{:?}&quot;</span>, <span class="ident">uri</span>, <span class="ident">e</span>))<span class="question-mark">?</span>
-            .<span class="ident">recv_string</span>()
-            .<span class="kw">await</span>
-            .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;无法接收来自 {} 的响应：{:?}&quot;</span>, <span class="ident">uri</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">result</span>) <span class="op">=</span> <span class="ident">serde_json::from_str</span>(<span class="kw-2">&amp;</span><span class="ident">result</span>) {
-            <span class="prelude-val">Ok</span>(<span class="ident">RequestResult::Ok</span>(<span class="ident">result</span>))
-        } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">serde_json::from_str</span>(<span class="kw-2">&amp;</span><span class="ident">result</span>)<span class="question-mark">?</span>;
-            <span class="prelude-val">Ok</span>(<span class="ident">RequestResult::Err</span>(<span class="ident">result</span>))
+    <span class="doccomment">/// 带请求体去获取 JSON 对象
+    ///
+    /// 传入的请求体需要实现 [`serde::ser::Serialize`] 和 [`std::fmt::Debug`]
+    ///
+    /// 返回的数据结构需要实现 [`serde::de::DeserializeOwned`]
+    </span><span class="kw">pub async fn </span>post_data&lt;D: DeserializeOwned, S: Serialize + std::fmt::Debug&gt;(
+        uri: <span class="kw-2">&amp;</span>str,
+        body: <span class="kw-2">&amp;</span>S,
+    ) -&gt; DynResult&lt;RequestResult&lt;D&gt;&gt; {
+        <span class="kw">let </span>result = surf::post(uri)
+            .header(<span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json; charset=utf-8&quot;</span>)
+            .body_json(body)
+            .map_err(|e| <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;无法解析请求主体给 {}：{:?}&quot;</span>, uri, e))<span class="question-mark">?
+            </span>.recv_string()
+            .<span class="kw">await
+            </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(<span class="string">&quot;无法接收来自 {} 的响应：{:?}&quot;</span>, uri, e))<span class="question-mark">?</span>;
+        <span class="kw">if let </span><span class="prelude-val">Ok</span>(result) = serde_json::from_str(<span class="kw-2">&amp;</span>result) {
+            <span class="prelude-val">Ok</span>(RequestResult::Ok(result))
+        } <span class="kw">else </span>{
+            <span class="kw">let </span>result = serde_json::from_str(<span class="kw-2">&amp;</span>result)<span class="question-mark">?</span>;
+            <span class="prelude-val">Ok</span>(RequestResult::Err(result))
         }
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

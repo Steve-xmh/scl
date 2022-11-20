@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-webview/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../scl_webview/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../scl_webview/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../scl_webview/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-webview/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../scl_webview/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../scl_webview/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../scl_webview/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -758,765 +758,765 @@
 <span id="758">758</span>
 <span id="759">759</span>
 <span id="760">760</span>
-</pre><pre class="rust"><code><span class="attribute">#![<span class="ident">doc</span> <span class="op">=</span> <span class="string">&quot;../README.md&quot;</span>]</span>
-<span class="attribute">#![<span class="ident">forbid</span>(<span class="ident">missing_docs</span>)]</span>
+</pre><pre class="rust"><code><span class="attribute">#![doc = <span class="string">&quot;../README.md&quot;</span>]
+#![forbid(missing_docs)]
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">webview2::Controller</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">winapi</span>::{
-    <span class="ident">shared::minwindef</span>::<span class="kw-2">*</span>, <span class="ident">shared::windef</span>::<span class="kw-2">*</span>, <span class="ident">um::libloaderapi</span>::<span class="kw-2">*</span>, <span class="ident">um::winbase::MulDiv</span>,
-    <span class="ident">um::wingdi</span>::<span class="kw-2">*</span>, <span class="ident">um::winuser</span>::<span class="kw-2">*</span>,
+#[cfg(target_os = <span class="string">&quot;windows&quot;</span>)]
+</span><span class="kw">use </span>webview2::Controller;
+<span class="attribute">#[cfg(target_os = <span class="string">&quot;windows&quot;</span>)]
+</span><span class="kw">use </span>winapi::{
+    shared::minwindef::<span class="kw-2">*</span>, shared::windef::<span class="kw-2">*</span>, um::libloaderapi::<span class="kw-2">*</span>, um::winbase::MulDiv,
+    um::wingdi::<span class="kw-2">*</span>, um::winuser::<span class="kw-2">*</span>,
 };
 
-<span class="doccomment">/// 一个动态的 [`Result`]</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 是对 [`anyhow::Result`] 的包装</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">T</span> <span class="op">=</span> ()<span class="op">&gt;</span> <span class="op">=</span> <span class="ident">anyhow::Result</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>;
+<span class="doccomment">/// 一个动态的 [`Result`]
+///
+/// 是对 [`anyhow::Result`] 的包装
+</span><span class="kw">pub type </span>DynResult&lt;T = ()&gt; = anyhow::Result&lt;T&gt;;
 
-<span class="kw">type</span> <span class="ident">OnUrlChangeCallback</span> <span class="op">=</span> <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">bool</span>;
+<span class="kw">type </span>OnUrlChangeCallback = <span class="kw">fn</span>(<span class="kw-2">&amp;</span>str) -&gt; bool;
 
-<span class="doccomment">/// 检查当前环境是否安装且支持使用 WebView</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 除了 Windows 平台会检测 WebView2 是否存在，其余平台因为不安装对应库就不能运行所以默认返回 `true`</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 注：如果是 Windows 平台没有安装 WebView2，可以指引用户通过</span>
-<span class="doccomment">/// [MSEdge 安装包下载直链](https://go.microsoft.com/fwlink/?linkid=2069324&amp;Channel=Stable&amp;language=zh-cn)</span>
-<span class="doccomment">/// 或</span>
-<span class="doccomment">/// [WebView2 Runtime 安装包下载直链](https://go.microsoft.com/fwlink/p/?LinkId=2124703)</span>
-<span class="doccomment">/// 来安装对应的 WebView2 运行时</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_supported</span>() -&gt; <span class="ident">bool</span> {
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>)]</span>
-    {
-        <span class="ident">webview2::get_available_browser_version_string</span>(<span class="prelude-val">None</span>).<span class="ident">is_ok</span>()
+<span class="doccomment">/// 检查当前环境是否安装且支持使用 WebView
+///
+/// 除了 Windows 平台会检测 WebView2 是否存在，其余平台因为不安装对应库就不能运行所以默认返回 `true`
+///
+/// 注：如果是 Windows 平台没有安装 WebView2，可以指引用户通过
+/// [MSEdge 安装包下载直链](https://go.microsoft.com/fwlink/?linkid=2069324&amp;Channel=Stable&amp;language=zh-cn)
+/// 或
+/// [WebView2 Runtime 安装包下载直链](https://go.microsoft.com/fwlink/p/?LinkId=2124703)
+/// 来安装对应的 WebView2 运行时
+</span><span class="kw">pub fn </span>is_supported() -&gt; bool {
+    <span class="attribute">#[cfg(target_os = <span class="string">&quot;windows&quot;</span>)]
+    </span>{
+        webview2::get_available_browser_version_string(<span class="prelude-val">None</span>).is_ok()
     }
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>))]</span>
-    {
-        <span class="bool-val">true</span>
-    }
+    <span class="attribute">#[cfg(not(target_os = <span class="string">&quot;windows&quot;</span>))]
+    </span>{
+        <span class="bool-val">true
+    </span>}
 }
 
-<span class="doccomment">/// 一个可以显示单个浏览器窗口的对象</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 通过设置链接回调来获取对应的链接</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">WebView</span> {
-    <span class="ident">fixed_size</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">u32</span>, <span class="ident">u32</span>)<span class="op">&gt;</span>,
-    <span class="ident">title</span>: <span class="ident">String</span>,
-    <span class="ident">begin_url</span>: <span class="ident">String</span>,
-    <span class="ident">url_change_callback</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">OnUrlChangeCallback</span><span class="op">&gt;</span>,
+<span class="doccomment">/// 一个可以显示单个浏览器窗口的对象
+///
+/// 通过设置链接回调来获取对应的链接
+</span><span class="kw">pub struct </span>WebView {
+    fixed_size: <span class="prelude-ty">Option</span>&lt;(u32, u32)&gt;,
+    title: String,
+    begin_url: String,
+    url_change_callback: <span class="prelude-ty">Option</span>&lt;OnUrlChangeCallback&gt;,
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>)]</span>
-<span class="kw">fn</span> <span class="ident">set_dpi_aware</span>() {
-    <span class="kw">unsafe</span> {
-        <span class="comment">// Windows 10.</span>
-        <span class="kw">let</span> <span class="ident">user32</span> <span class="op">=</span> <span class="ident">LoadLibraryA</span>(<span class="string">b&quot;user32.dll\0&quot;</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*const</span> <span class="ident">i8</span>);
-        <span class="kw">let</span> <span class="ident">set_thread_dpi_awareness_context</span> <span class="op">=</span> <span class="ident">GetProcAddress</span>(
-            <span class="ident">user32</span>,
-            <span class="string">b&quot;SetThreadDpiAwarenessContext\0&quot;</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*const</span> <span class="ident">i8</span>,
+<span class="attribute">#[cfg(target_os = <span class="string">&quot;windows&quot;</span>)]
+</span><span class="kw">fn </span>set_dpi_aware() {
+    <span class="kw">unsafe </span>{
+        <span class="comment">// Windows 10.
+        </span><span class="kw">let </span>user32 = LoadLibraryA(<span class="string">b&quot;user32.dll\0&quot;</span>.as_ptr() <span class="kw">as </span><span class="kw-2">*const </span>i8);
+        <span class="kw">let </span>set_thread_dpi_awareness_context = GetProcAddress(
+            user32,
+            <span class="string">b&quot;SetThreadDpiAwarenessContext\0&quot;</span>.as_ptr() <span class="kw">as </span><span class="kw-2">*const </span>i8,
         );
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">set_thread_dpi_awareness_context</span>.<span class="ident">is_null</span>() {
-            <span class="kw">let</span> <span class="ident">set_thread_dpi_awareness_context</span>: <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span>(
-                <span class="ident">DPI_AWARENESS_CONTEXT</span>,
+        <span class="kw">if </span>!set_thread_dpi_awareness_context.is_null() {
+            <span class="kw">let </span>set_thread_dpi_awareness_context: <span class="kw">extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn</span>(
+                DPI_AWARENESS_CONTEXT,
             )
-                -&gt; <span class="ident">DPI_AWARENESS_CONTEXT</span> <span class="op">=</span> <span class="ident">std::mem::transmute</span>(<span class="ident">set_thread_dpi_awareness_context</span>);
-            <span class="ident">set_thread_dpi_awareness_context</span>(<span class="ident">DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2</span>);
+                -&gt; DPI_AWARENESS_CONTEXT = std::mem::transmute(set_thread_dpi_awareness_context);
+            set_thread_dpi_awareness_context(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
             <span class="kw">return</span>;
         }
-        <span class="comment">// Windows 7.</span>
-        <span class="ident">SetProcessDPIAware</span>();
+        <span class="comment">// Windows 7.
+        </span>SetProcessDPIAware();
     }
 }
 
-<span class="kw">fn</span> <span class="ident">utf_16_null_terminiated</span>(<span class="ident">x</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span> {
-    <span class="ident">x</span>.<span class="ident">encode_utf16</span>().<span class="ident">chain</span>(<span class="ident">std::iter::once</span>(<span class="number">0</span>)).<span class="ident">collect</span>()
+<span class="kw">fn </span>utf_16_null_terminiated(x: <span class="kw-2">&amp;</span>str) -&gt; Vec&lt;u16&gt; {
+    x.encode_utf16().chain(std::iter::once(<span class="number">0</span>)).collect()
 }
 
-<span class="kw">impl</span> <span class="ident">WebView</span> {
-    <span class="doccomment">/// 创建一个默认空白页面的 [`WebView`]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::default</span>()
+<span class="kw">impl </span>WebView {
+    <span class="doccomment">/// 创建一个默认空白页面的 [`WebView`]
+    </span><span class="kw">pub fn </span>new() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::default()
     }
 
-    <span class="doccomment">/// 固定窗口大小</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_fixed_size</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">s</span>: (<span class="ident">u32</span>, <span class="ident">u32</span>)) {
-        <span class="self">self</span>.<span class="ident">fixed_size</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">s</span>)
+    <span class="doccomment">/// 固定窗口大小
+    </span><span class="kw">pub fn </span>set_fixed_size(<span class="kw-2">&amp;mut </span><span class="self">self</span>, s: (u32, u32)) {
+        <span class="self">self</span>.fixed_size = <span class="prelude-val">Some</span>(s)
     }
 
-    <span class="doccomment">/// 固定窗口大小</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">fixed_size</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">s</span>: (<span class="ident">u32</span>, <span class="ident">u32</span>)) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">set_fixed_size</span>(<span class="ident">s</span>);
-        <span class="self">self</span>
+    <span class="doccomment">/// 固定窗口大小
+    </span><span class="kw">pub fn </span>fixed_size(<span class="kw-2">mut </span><span class="self">self</span>, s: (u32, u32)) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.set_fixed_size(s);
+        <span class="self">self
+    </span>}
+
+    <span class="doccomment">/// 设置一个链接变更回调函数，如果函数返回 `true` 则会关闭 WebView 并返回该链接
+    ///
+    /// 反之则继续运行 WebView
+    </span><span class="kw">pub fn </span>set_on_url_change(<span class="kw-2">&amp;mut </span><span class="self">self</span>, f: OnUrlChangeCallback) {
+        <span class="self">self</span>.url_change_callback = <span class="prelude-val">Some</span>(f)
     }
 
-    <span class="doccomment">/// 设置一个链接变更回调函数，如果函数返回 `true` 则会关闭 WebView 并返回该链接</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 反之则继续运行 WebView</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_on_url_change</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">f</span>: <span class="ident">OnUrlChangeCallback</span>) {
-        <span class="self">self</span>.<span class="ident">url_change_callback</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">f</span>)
+    <span class="doccomment">/// 设置第一个打开的链接
+    </span><span class="kw">pub fn </span>begin_url(<span class="kw-2">mut </span><span class="self">self</span>, url: String) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.set_begin_url(url);
+        <span class="self">self
+    </span>}
+
+    <span class="doccomment">/// 设置第一个打开的链接
+    </span><span class="kw">pub fn </span>set_begin_url(<span class="kw-2">&amp;mut </span><span class="self">self</span>, url: String) {
+        <span class="self">self</span>.begin_url = url
     }
 
-    <span class="doccomment">/// 设置第一个打开的链接</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">begin_url</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">url</span>: <span class="ident">String</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">set_begin_url</span>(<span class="ident">url</span>);
-        <span class="self">self</span>
+    <span class="doccomment">/// 设置一个链接变更回调函数，如果函数返回 `true` 则会关闭 WebView 并返回该链接
+    ///
+    /// 反之则继续运行 WebView
+    </span><span class="kw">pub fn </span>on_url_change(<span class="kw-2">mut </span><span class="self">self</span>, f: OnUrlChangeCallback) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.set_on_url_change(f);
+        <span class="self">self
+    </span>}
+
+    <span class="doccomment">/// 设置窗口标题
+    </span><span class="kw">pub fn </span>set_title(<span class="kw-2">&amp;mut </span><span class="self">self</span>, title: String) {
+        <span class="self">self</span>.title = title;
     }
 
-    <span class="doccomment">/// 设置第一个打开的链接</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_begin_url</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">url</span>: <span class="ident">String</span>) {
-        <span class="self">self</span>.<span class="ident">begin_url</span> <span class="op">=</span> <span class="ident">url</span>
-    }
+    <span class="doccomment">/// 设置窗口标题
+    </span><span class="kw">pub fn </span>title(<span class="kw-2">mut </span><span class="self">self</span>, title: String) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.set_title(title);
+        <span class="self">self
+    </span>}
 
-    <span class="doccomment">/// 设置一个链接变更回调函数，如果函数返回 `true` 则会关闭 WebView 并返回该链接</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 反之则继续运行 WebView</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">on_url_change</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">f</span>: <span class="ident">OnUrlChangeCallback</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">set_on_url_change</span>(<span class="ident">f</span>);
-        <span class="self">self</span>
-    }
-
-    <span class="doccomment">/// 设置窗口标题</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_title</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">title</span>: <span class="ident">String</span>) {
-        <span class="self">self</span>.<span class="ident">title</span> <span class="op">=</span> <span class="ident">title</span>;
-    }
-
-    <span class="doccomment">/// 设置窗口标题</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">title</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">title</span>: <span class="ident">String</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">set_title</span>(<span class="ident">title</span>);
-        <span class="self">self</span>
-    }
-
-    <span class="doccomment">/// 阻塞当前线程运行 WebView，当发生链接改变且已经设置回调函数时，将会返回退出时正在访问的链接</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 如果是用户关闭了窗口或发生其它情况，则返回空字符串</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">run</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
-        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>)]</span>
-        {
-            <span class="self">self</span>.<span class="ident">run_windows</span>()
+    <span class="doccomment">/// 阻塞当前线程运行 WebView，当发生链接改变且已经设置回调函数时，将会返回退出时正在访问的链接
+    ///
+    /// 如果是用户关闭了窗口或发生其它情况，则返回空字符串
+    </span><span class="kw">pub fn </span>run(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; DynResult&lt;String&gt; {
+        <span class="attribute">#[cfg(target_os = <span class="string">&quot;windows&quot;</span>)]
+        </span>{
+            <span class="self">self</span>.run_windows()
         }
-        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>)]</span>
-        {
-            <span class="self">self</span>.<span class="ident">run_linux</span>()
+        <span class="attribute">#[cfg(target_os = <span class="string">&quot;linux&quot;</span>)]
+        </span>{
+            <span class="self">self</span>.run_linux()
         }
-        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>)]</span>
-        {
-            <span class="self">self</span>.<span class="ident">run_macos</span>()
+        <span class="attribute">#[cfg(target_os = <span class="string">&quot;macos&quot;</span>)]
+        </span>{
+            <span class="self">self</span>.run_macos()
         }
     }
 
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;linux&quot;</span>)]</span>
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">run_linux</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
-        <span class="kw">use</span> <span class="ident">std::sync</span>::<span class="kw-2">*</span>;
+    <span class="attribute">#[cfg(target_os = <span class="string">&quot;linux&quot;</span>)]
+    #[inline(always)]
+    </span><span class="kw">fn </span>run_linux(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; DynResult&lt;String&gt; {
+        <span class="kw">use </span>std::sync::<span class="kw-2">*</span>;
 
-        <span class="kw">use</span> <span class="ident">::glib::idle_add_once</span>;
-        <span class="kw">use</span> <span class="ident">gtk</span>::{<span class="ident">prelude</span>::<span class="kw-2">*</span>, <span class="ident">WindowType</span>};
-        <span class="kw">use</span> <span class="ident">webkit2gtk</span>::{<span class="ident">traits</span>::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
+        <span class="kw">use </span>::glib::idle_add_once;
+        <span class="kw">use </span>gtk::{prelude::<span class="kw-2">*</span>, WindowType};
+        <span class="kw">use </span>webkit2gtk::{traits::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
 
-        <span class="kw">let</span> <span class="ident">title</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">title</span>.<span class="ident">to_owned</span>();
-        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">fixed_size</span>.<span class="ident">to_owned</span>();
-        <span class="kw">let</span> <span class="ident">begin_url</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">begin_url</span>.<span class="ident">to_owned</span>();
-        <span class="kw">let</span> <span class="ident">callback</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">url_change_callback</span>.<span class="ident">to_owned</span>();
+        <span class="kw">let </span>title = <span class="self">self</span>.title.to_owned();
+        <span class="kw">let </span>size = <span class="self">self</span>.fixed_size.to_owned();
+        <span class="kw">let </span>begin_url = <span class="self">self</span>.begin_url.to_owned();
+        <span class="kw">let </span>callback = <span class="self">self</span>.url_change_callback.to_owned();
 
-        <span class="comment">// Channel</span>
-        <span class="kw">let</span> <span class="ident">deleted</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">atomic::AtomicBool::new</span>(<span class="bool-val">false</span>));
-        <span class="kw">let</span> (<span class="ident">tx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">mpsc::channel</span>();
+        <span class="comment">// Channel
+        </span><span class="kw">let </span>deleted = Arc::new(atomic::AtomicBool::new(<span class="bool-val">false</span>));
+        <span class="kw">let </span>(tx, rx) = mpsc::channel();
 
-        <span class="ident">idle_add_once</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">gtk::is_initialized_main_thread</span>() {
-                <span class="ident">gtk::init</span>().<span class="ident">unwrap</span>();
+        idle_add_once(<span class="kw">move </span>|| {
+            <span class="kw">if </span>!gtk::is_initialized_main_thread() {
+                gtk::init().unwrap();
             }
 
-            <span class="kw">let</span> <span class="ident">win</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">gtk::Window::new</span>(<span class="ident">WindowType::Toplevel</span>));
-            <span class="kw">let</span> <span class="ident">loaded</span> <span class="op">=</span> <span class="ident">Arc::new</span>(<span class="ident">atomic::AtomicBool::new</span>(<span class="bool-val">false</span>));
+            <span class="kw">let </span>win = Arc::new(gtk::Window::new(WindowType::Toplevel));
+            <span class="kw">let </span>loaded = Arc::new(atomic::AtomicBool::new(<span class="bool-val">false</span>));
 
-            <span class="ident">win</span>.<span class="ident">set_resizable</span>(<span class="bool-val">false</span>);
-            <span class="ident">win</span>.<span class="ident">set_title</span>(<span class="kw-2">&amp;</span><span class="ident">title</span>);
+            win.set_resizable(<span class="bool-val">false</span>);
+            win.set_title(<span class="kw-2">&amp;</span>title);
 
-            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">width</span>, <span class="ident">height</span>)) <span class="op">=</span> <span class="ident">size</span> {
-                <span class="ident">win</span>.<span class="ident">set_size_request</span>(<span class="ident">width</span> <span class="kw">as</span> <span class="kw">_</span>, <span class="ident">height</span> <span class="kw">as</span> <span class="kw">_</span>);
-            } <span class="kw">else</span> {
-                <span class="ident">win</span>.<span class="ident">set_size_request</span>(<span class="number">640</span>, <span class="number">480</span>);
+            <span class="kw">if let </span><span class="prelude-val">Some</span>((width, height)) = size {
+                win.set_size_request(width <span class="kw">as _</span>, height <span class="kw">as _</span>);
+            } <span class="kw">else </span>{
+                win.set_size_request(<span class="number">640</span>, <span class="number">480</span>);
             }
 
-            <span class="kw">let</span> <span class="ident">w</span> <span class="op">=</span> <span class="ident">webkit2gtk::WebView::new</span>();
-            <span class="ident">w</span>.<span class="ident">load_uri</span>(<span class="kw-2">&amp;</span><span class="ident">begin_url</span>);
+            <span class="kw">let </span>w = webkit2gtk::WebView::new();
+            w.load_uri(<span class="kw-2">&amp;</span>begin_url);
 
-            <span class="kw">let</span> <span class="ident">_win</span> <span class="op">=</span> <span class="ident">win</span>.<span class="ident">clone</span>();
-            <span class="kw">let</span> <span class="ident">_tx</span> <span class="op">=</span> <span class="ident">tx</span>.<span class="ident">clone</span>();
-            <span class="kw">let</span> <span class="ident">_loaded</span> <span class="op">=</span> <span class="ident">loaded</span>.<span class="ident">clone</span>();
-            <span class="ident">w</span>.<span class="ident">connect_load_changed</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">w</span>, <span class="ident">load_event</span><span class="op">|</span> {
-                <span class="kw">if</span> <span class="ident">load_event</span> <span class="op">==</span> <span class="ident">LoadEvent::Finished</span> {
-                    <span class="kw">let</span> <span class="ident">url</span> <span class="op">=</span> <span class="ident">w</span>.<span class="ident">uri</span>().<span class="ident">unwrap</span>().<span class="ident">to_string</span>();
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">callback</span>) <span class="op">=</span> <span class="ident">callback</span> {
-                        <span class="kw">if</span> <span class="ident">callback</span>(<span class="kw-2">&amp;</span><span class="ident">url</span>) {
-                            <span class="ident">_loaded</span>.<span class="ident">store</span>(<span class="bool-val">true</span>, <span class="ident">atomic::Ordering::SeqCst</span>);
-                            <span class="ident">_win</span>.<span class="ident">close</span>();
-                            <span class="ident">_tx</span>.<span class="ident">send</span>(<span class="ident">url</span>).<span class="ident">unwrap</span>();
+            <span class="kw">let </span>_win = win.clone();
+            <span class="kw">let </span>_tx = tx.clone();
+            <span class="kw">let </span>_loaded = loaded.clone();
+            w.connect_load_changed(<span class="kw">move </span>|w, load_event| {
+                <span class="kw">if </span>load_event == LoadEvent::Finished {
+                    <span class="kw">let </span>url = w.uri().unwrap().to_string();
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(callback) = callback {
+                        <span class="kw">if </span>callback(<span class="kw-2">&amp;</span>url) {
+                            _loaded.store(<span class="bool-val">true</span>, atomic::Ordering::SeqCst);
+                            _win.close();
+                            _tx.send(url).unwrap();
                         }
                     }
                 }
             });
 
-            <span class="kw">let</span> <span class="ident">_deleted</span> <span class="op">=</span> <span class="ident">deleted</span>.<span class="ident">clone</span>();
-            <span class="ident">win</span>.<span class="ident">connect_destroy</span>(<span class="kw">move</span> <span class="op">|</span><span class="kw">_</span><span class="op">|</span> {
-                <span class="ident">_deleted</span>.<span class="ident">store</span>(<span class="bool-val">true</span>, <span class="ident">atomic::Ordering::SeqCst</span>);
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">loaded</span>.<span class="ident">load</span>(<span class="ident">atomic::Ordering::SeqCst</span>) {
-                    <span class="ident">tx</span>.<span class="ident">send</span>(<span class="string">&quot;&quot;</span>.<span class="ident">into</span>()).<span class="ident">unwrap</span>();
+            <span class="kw">let </span>_deleted = deleted.clone();
+            win.connect_destroy(<span class="kw">move </span>|<span class="kw">_</span>| {
+                _deleted.store(<span class="bool-val">true</span>, atomic::Ordering::SeqCst);
+                <span class="kw">if </span>!loaded.load(atomic::Ordering::SeqCst) {
+                    tx.send(<span class="string">&quot;&quot;</span>.into()).unwrap();
                 }
             });
 
-            <span class="ident">win</span>.<span class="ident">add</span>(<span class="kw-2">&amp;</span><span class="ident">w</span>);
-            <span class="ident">win</span>.<span class="ident">show_all</span>();
+            win.add(<span class="kw-2">&amp;</span>w);
+            win.show_all();
 
-            <span class="kw">loop</span> {
-                <span class="ident">gtk::main_iteration_do</span>(<span class="bool-val">false</span>);
-                <span class="kw">if</span> <span class="ident">deleted</span>.<span class="ident">load</span>(<span class="ident">atomic::Ordering::SeqCst</span>) {
+            <span class="kw">loop </span>{
+                gtk::main_iteration_do(<span class="bool-val">false</span>);
+                <span class="kw">if </span>deleted.load(atomic::Ordering::SeqCst) {
                     <span class="kw">break</span>;
                 }
             }
         });
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">rx</span>.<span class="ident">recv</span>().<span class="ident">unwrap</span>();
+        <span class="kw">let </span>result = rx.recv().unwrap();
 
-        <span class="prelude-val">Ok</span>(<span class="ident">result</span>)
+        <span class="prelude-val">Ok</span>(result)
     }
 
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;macos&quot;</span>)]</span>
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">run_macos</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
-        <span class="kw">use</span> <span class="ident">std::sync::mpsc::Sender</span>;
+    <span class="attribute">#[cfg(target_os = <span class="string">&quot;macos&quot;</span>)]
+    #[inline(always)]
+    </span><span class="kw">fn </span>run_macos(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; DynResult&lt;String&gt; {
+        <span class="kw">use </span>std::sync::mpsc::Sender;
 
-        <span class="kw">use</span> <span class="ident">cocoa</span>::{
-            <span class="ident">appkit</span>::{
-                <span class="ident">NSBackingStoreType::NSBackingStoreBuffered</span>, <span class="ident">NSView</span>, <span class="ident">NSViewHeightSizable</span>,
-                <span class="ident">NSViewWidthSizable</span>, <span class="ident">NSWindow</span>, <span class="ident">NSWindowStyleMask</span>,
+        <span class="kw">use </span>cocoa::{
+            appkit::{
+                NSBackingStoreType::NSBackingStoreBuffered, NSView, NSViewHeightSizable,
+                NSViewWidthSizable, NSWindow, NSWindowStyleMask,
             },
-            <span class="ident">base</span>::<span class="kw-2">*</span>,
-            <span class="ident">foundation</span>::{<span class="ident">NSAutoreleasePool</span>, <span class="ident">NSString</span>, <span class="ident">NSURL</span>},
+            base::<span class="kw-2">*</span>,
+            foundation::{NSAutoreleasePool, NSString, NSURL},
         };
-        <span class="kw">use</span> <span class="ident">core_graphics::geometry</span>::{<span class="ident">CGPoint</span>, <span class="ident">CGRect</span>, <span class="ident">CGSize</span>};
-        <span class="kw">use</span> <span class="ident">darwin_webkit</span>::{
-            <span class="ident">foundation::NSURLRequest</span>,
-            <span class="ident">webkit</span>::{<span class="ident">WKUserContentController</span>, <span class="ident">WKWebViewConfiguration</span>},
+        <span class="kw">use </span>core_graphics::geometry::{CGPoint, CGRect, CGSize};
+        <span class="kw">use </span>darwin_webkit::{
+            foundation::NSURLRequest,
+            webkit::{WKUserContentController, WKWebViewConfiguration},
         };
-        <span class="kw">use</span> <span class="ident">objc</span>::{
-            <span class="ident">declare::ClassDecl</span>,
-            <span class="ident">runtime</span>::{<span class="ident">Object</span>, <span class="ident">Sel</span>},
+        <span class="kw">use </span>objc::{
+            declare::ClassDecl,
+            runtime::{Object, Sel},
             <span class="kw-2">*</span>,
         };
-        <span class="kw">use</span> <span class="ident">once_cell::sync::Lazy</span>;
+        <span class="kw">use </span>once_cell::sync::Lazy;
 
-        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">fixed_size</span>.<span class="ident">unwrap_or</span>((<span class="number">600</span>, <span class="number">800</span>));
-        <span class="kw">let</span> <span class="ident">start_url</span> <span class="op">=</span> <span class="macro">dbg!</span>(<span class="self">self</span>.<span class="ident">begin_url</span>.<span class="ident">to_owned</span>());
-        <span class="kw">let</span> <span class="ident">title</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">title</span>.<span class="ident">to_owned</span>();
-        <span class="kw">let</span> <span class="ident">callback</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">url_change_callback</span>.<span class="ident">unwrap_or</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="bool-val">true</span>);
-        <span class="kw">let</span> (<span class="ident">sx</span>, <span class="ident">rx</span>) <span class="op">=</span> <span class="ident">std::sync::mpsc::channel</span>::<span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>();
-        <span class="kw">let</span> <span class="ident">sx</span> <span class="op">=</span> <span class="ident">Box::new</span>(<span class="ident">sx</span>);
-        <span class="kw">let</span> <span class="ident">sx</span> <span class="op">=</span> <span class="ident">Box::leak</span>(<span class="ident">sx</span>);
+        <span class="kw">let </span>size = <span class="self">self</span>.fixed_size.unwrap_or((<span class="number">600</span>, <span class="number">800</span>));
+        <span class="kw">let </span>start_url = <span class="macro">dbg!</span>(<span class="self">self</span>.begin_url.to_owned());
+        <span class="kw">let </span>title = <span class="self">self</span>.title.to_owned();
+        <span class="kw">let </span>callback = <span class="self">self</span>.url_change_callback.unwrap_or(|<span class="kw">_</span>| <span class="bool-val">true</span>);
+        <span class="kw">let </span>(sx, rx) = std::sync::mpsc::channel::&lt;String&gt;();
+        <span class="kw">let </span>sx = Box::new(sx);
+        <span class="kw">let </span>sx = Box::leak(sx);
 
-        <span class="kw">unsafe</span> {
-            <span class="ident">dispatch::Queue::main</span>().<span class="ident">exec_sync</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
-                <span class="kw">let</span> <span class="ident">rect</span> <span class="op">=</span> <span class="ident">CGRect::new</span>(
-                    <span class="kw-2">&amp;</span><span class="ident">CGPoint::new</span>(<span class="number">0.</span>, <span class="number">0.</span>),
-                    <span class="kw-2">&amp;</span><span class="ident">CGSize::new</span>(<span class="ident">size</span>.<span class="number">0</span> <span class="kw">as</span> <span class="kw">_</span>, <span class="ident">size</span>.<span class="number">1</span> <span class="kw">as</span> <span class="kw">_</span>),
+        <span class="kw">unsafe </span>{
+            dispatch::Queue::main().exec_sync(<span class="kw">move </span>|| {
+                <span class="kw">let </span>rect = CGRect::new(
+                    <span class="kw-2">&amp;</span>CGPoint::new(<span class="number">0.</span>, <span class="number">0.</span>),
+                    <span class="kw-2">&amp;</span>CGSize::new(size.<span class="number">0 </span><span class="kw">as _</span>, size.<span class="number">1 </span><span class="kw">as _</span>),
                 );
-                <span class="kw">let</span> <span class="ident">sx</span> <span class="op">=</span> <span class="macro">dbg!</span>(<span class="ident">sx</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="kw">_</span>) <span class="kw">as</span> <span class="ident">usize</span>;
+                <span class="kw">let </span>sx = <span class="macro">dbg!</span>(sx <span class="kw">as </span><span class="kw-2">*mut </span><span class="kw">_</span>) <span class="kw">as </span>usize;
 
-                <span class="comment">// === WebViewWindowControllerClass ===</span>
+                <span class="comment">// === WebViewWindowControllerClass ===
 
-                <span class="kw">struct</span> <span class="ident">WebViewWindowControllerClass</span>(<span class="kw-2">*const</span> <span class="ident">objc::runtime::Class</span>);
-                <span class="kw">unsafe</span> <span class="kw">impl</span> <span class="ident">Sync</span> <span class="kw">for</span> <span class="ident">WebViewWindowControllerClass</span> {}
-                <span class="kw">unsafe</span> <span class="kw">impl</span> <span class="ident">Send</span> <span class="kw">for</span> <span class="ident">WebViewWindowControllerClass</span> {}
+                </span><span class="kw">struct </span>WebViewWindowControllerClass(<span class="kw-2">*const </span>objc::runtime::Class);
+                <span class="kw">unsafe impl </span>Sync <span class="kw">for </span>WebViewWindowControllerClass {}
+                <span class="kw">unsafe impl </span>Send <span class="kw">for </span>WebViewWindowControllerClass {}
 
-                <span class="kw">static</span> <span class="ident">WEBVIEW_WINDOW_CONTROLLER</span>: <span class="ident">Lazy</span><span class="op">&lt;</span><span class="ident">WebViewWindowControllerClass</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Lazy::new</span>(<span class="op">|</span><span class="op">|</span> <span class="kw">unsafe</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">decl</span> <span class="op">=</span> <span class="ident">ClassDecl::new</span>(<span class="string">&quot;SCLWebViewWindowController&quot;</span>, <span class="macro">class!</span>(<span class="ident">NSWindowController</span>)).<span class="ident">unwrap</span>();
+                <span class="kw">static </span>WEBVIEW_WINDOW_CONTROLLER: Lazy&lt;WebViewWindowControllerClass&gt; = Lazy::new(|| <span class="kw">unsafe </span>{
+                    <span class="kw">let </span><span class="kw-2">mut </span>decl = ClassDecl::new(<span class="string">&quot;SCLWebViewWindowController&quot;</span>, <span class="macro">class!</span>(NSWindowController)).unwrap();
 
-                    <span class="ident">decl</span>.<span class="ident">add_ivar</span>::<span class="op">&lt;</span><span class="ident">id</span><span class="op">&gt;</span>(<span class="string">&quot;webview&quot;</span>);
-                    <span class="ident">decl</span>.<span class="ident">add_ivar</span>::<span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>(<span class="string">&quot;urlSender&quot;</span>);
+                    decl.add_ivar::&lt;id&gt;(<span class="string">&quot;webview&quot;</span>);
+                    decl.add_ivar::&lt;usize&gt;(<span class="string">&quot;urlSender&quot;</span>);
 
-                    <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">window_will_close</span>(<span class="ident">this</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Object</span>, <span class="kw">_</span>: <span class="ident">Sel</span>, <span class="kw">_</span>: <span class="ident">id</span>) {
-                        <span class="kw">unsafe</span> {
+                    <span class="kw">extern </span><span class="string">&quot;C&quot; </span><span class="kw">fn </span>window_will_close(this: <span class="kw-2">&amp;mut </span>Object, <span class="kw">_</span>: Sel, <span class="kw">_</span>: id) {
+                        <span class="kw">unsafe </span>{
                             <span class="macro">println!</span>(<span class="string">&quot;WindowWillClose&quot;</span>);
-                            <span class="kw">let</span> <span class="ident">url_sender</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">this</span>.<span class="ident">get_ivar</span>::<span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>(<span class="string">&quot;urlSender&quot;</span>);
-                            <span class="kw">if</span> <span class="ident">url_sender</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                                <span class="kw">let</span> <span class="ident">sx</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="kw-2">*</span>(<span class="ident">url_sender</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="ident">Sender</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>);
-                                <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="macro">dbg!</span>(<span class="ident">sx</span>.<span class="ident">send</span>(<span class="string">&quot;&quot;</span>.<span class="ident">into</span>()));
+                            <span class="kw">let </span>url_sender = <span class="kw-2">*</span>this.get_ivar::&lt;usize&gt;(<span class="string">&quot;urlSender&quot;</span>);
+                            <span class="kw">if </span>url_sender != <span class="number">0 </span>{
+                                <span class="kw">let </span>sx = <span class="kw-2">&amp;mut *</span>(url_sender <span class="kw">as </span><span class="kw-2">*mut </span>Sender&lt;String&gt;);
+                                <span class="kw">let _ </span>= <span class="macro">dbg!</span>(sx.send(<span class="string">&quot;&quot;</span>.into()));
 
-                                <span class="kw">let</span> <span class="ident">webview</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">this</span>.<span class="ident">get_ivar</span>::<span class="op">&lt;</span><span class="ident">id</span><span class="op">&gt;</span>(<span class="string">&quot;webview&quot;</span>);
-                                <span class="kw">if</span> <span class="op">!</span><span class="ident">webview</span>.<span class="ident">is_null</span>() {
-                                    (<span class="kw-2">*</span><span class="ident">webview</span>).<span class="ident">set_ivar</span>(<span class="string">&quot;urlSender&quot;</span>, <span class="number">0usize</span>);
+                                <span class="kw">let </span>webview = <span class="kw-2">*</span>this.get_ivar::&lt;id&gt;(<span class="string">&quot;webview&quot;</span>);
+                                <span class="kw">if </span>!webview.is_null() {
+                                    (<span class="kw-2">*</span>webview).set_ivar(<span class="string">&quot;urlSender&quot;</span>, <span class="number">0usize</span>);
                                 }
 
                                 <span class="macro">println!</span>(<span class="string">&quot;Dropping sender&quot;</span>);
-                                <span class="ident">drop</span>(<span class="ident">Box::from_raw</span>(<span class="ident">sx</span>));
+                                drop(Box::from_raw(sx));
                                 <span class="macro">println!</span>(<span class="string">&quot;Empty URL Sent&quot;</span>);
                             }
-                            <span class="kw">let</span> <span class="ident">webview</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">this</span>.<span class="ident">get_ivar</span>::<span class="op">&lt;</span><span class="ident">id</span><span class="op">&gt;</span>(<span class="string">&quot;webview&quot;</span>);
-                            <span class="kw">if</span> <span class="op">!</span><span class="ident">webview</span>.<span class="ident">is_null</span>() {
-                                <span class="kw">let</span> <span class="kw">_</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="ident">webview</span>, <span class="ident">release</span>];
+                            <span class="kw">let </span>webview = <span class="kw-2">*</span>this.get_ivar::&lt;id&gt;(<span class="string">&quot;webview&quot;</span>);
+                            <span class="kw">if </span>!webview.is_null() {
+                                <span class="kw">let _</span>: id = <span class="macro">msg_send!</span>[webview, release];
                             }
-                            <span class="kw">let</span> <span class="kw">_</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="ident">this</span>, <span class="ident">release</span>];
+                            <span class="kw">let _</span>: id = <span class="macro">msg_send!</span>[this, release];
                         }
                     }
 
-                    <span class="ident">decl</span>.<span class="ident">add_method</span>(<span class="macro">sel!</span>(<span class="ident">windowWillClose</span>:), <span class="ident">window_will_close</span> <span class="kw">as</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="kw-2">&amp;mut</span> <span class="ident">Object</span>, <span class="ident">Sel</span>, <span class="ident">id</span>),);
+                    decl.add_method(<span class="macro">sel!</span>(windowWillClose:), window_will_close <span class="kw">as extern </span><span class="string">&quot;C&quot; </span><span class="kw">fn</span>(<span class="kw-2">&amp;mut </span>Object, Sel, id),);
 
-                    <span class="ident">WebViewWindowControllerClass</span>(<span class="ident">decl</span>.<span class="ident">register</span>())
+                    WebViewWindowControllerClass(decl.register())
                 });
 
-                <span class="comment">// === SCLWebViewClass ===</span>
+                <span class="comment">// === SCLWebViewClass ===
 
-                <span class="kw">struct</span> <span class="ident">SCLWebViewClass</span>(<span class="kw-2">*const</span> <span class="ident">objc::runtime::Class</span>);
-                <span class="kw">unsafe</span> <span class="kw">impl</span> <span class="ident">Sync</span> <span class="kw">for</span> <span class="ident">SCLWebViewClass</span> {}
-                <span class="kw">unsafe</span> <span class="kw">impl</span> <span class="ident">Send</span> <span class="kw">for</span> <span class="ident">SCLWebViewClass</span> {}
+                </span><span class="kw">struct </span>SCLWebViewClass(<span class="kw-2">*const </span>objc::runtime::Class);
+                <span class="kw">unsafe impl </span>Sync <span class="kw">for </span>SCLWebViewClass {}
+                <span class="kw">unsafe impl </span>Send <span class="kw">for </span>SCLWebViewClass {}
 
-                <span class="kw">static</span> <span class="ident">SCL_WEBVIEW</span>: <span class="ident">Lazy</span><span class="op">&lt;</span><span class="ident">SCLWebViewClass</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Lazy::new</span>(<span class="op">|</span><span class="op">|</span> <span class="kw">unsafe</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">decl</span> <span class="op">=</span> <span class="ident">ClassDecl::new</span>(<span class="string">&quot;SCLWebView&quot;</span>, <span class="macro">class!</span>(<span class="ident">WKWebView</span>)).<span class="ident">unwrap</span>();
+                <span class="kw">static </span>SCL_WEBVIEW: Lazy&lt;SCLWebViewClass&gt; = Lazy::new(|| <span class="kw">unsafe </span>{
+                    <span class="kw">let </span><span class="kw-2">mut </span>decl = ClassDecl::new(<span class="string">&quot;SCLWebView&quot;</span>, <span class="macro">class!</span>(WKWebView)).unwrap();
 
-                    <span class="ident">decl</span>.<span class="ident">add_ivar</span>::<span class="op">&lt;</span><span class="kw-2">*const</span> <span class="ident">libc::c_void</span><span class="op">&gt;</span>(<span class="string">&quot;urlChangeCallback&quot;</span>);
-                    <span class="ident">decl</span>.<span class="ident">add_ivar</span>::<span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>(<span class="string">&quot;urlSender&quot;</span>);
+                    decl.add_ivar::&lt;<span class="kw-2">*const </span>libc::c_void&gt;(<span class="string">&quot;urlChangeCallback&quot;</span>);
+                    decl.add_ivar::&lt;usize&gt;(<span class="string">&quot;urlSender&quot;</span>);
 
-                    <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">observe_value</span>(<span class="ident">this</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Object</span>, <span class="kw">_</span>: <span class="ident">Sel</span>, <span class="ident">_key_path</span>: <span class="ident">id</span>, <span class="ident">_of_object</span>: <span class="ident">id</span>, <span class="ident">_changed</span>: <span class="ident">id</span>, <span class="ident">_context</span>: <span class="ident">id</span>) {
-                        <span class="kw">unsafe</span> {
-                            <span class="kw">let</span> <span class="ident">url</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="ident">this</span>, <span class="ident">URL</span>];
-                            <span class="kw">if</span> <span class="ident">url</span>.<span class="ident">is_null</span>() {
-                                <span class="comment">// 出错了</span>
-                                <span class="macro">println!</span>(<span class="string">&quot;WARNING: URL is null!&quot;</span>);
-                                <span class="kw">let</span> <span class="ident">win</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="ident">this</span>, <span class="ident">window</span>];
-                                <span class="kw">let</span> <span class="ident">win_ctl</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="ident">win</span>, <span class="ident">windowController</span>];
-                                <span class="kw">let</span> <span class="ident">url_sender</span> <span class="op">=</span> <span class="macro">dbg!</span>(<span class="kw-2">*</span>(<span class="kw-2">*</span><span class="ident">win_ctl</span>).<span class="ident">get_ivar</span>::<span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>(<span class="string">&quot;urlSender&quot;</span>));
-                                <span class="kw">if</span> <span class="ident">url_sender</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                                    <span class="kw">let</span> <span class="ident">sx</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="kw-2">*</span>(<span class="ident">url_sender</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="ident">Sender</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>);
-                                    <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="macro">dbg!</span>(<span class="ident">sx</span>.<span class="ident">send</span>(<span class="string">&quot;&quot;</span>.<span class="ident">into</span>()));
+                    <span class="kw">extern </span><span class="string">&quot;C&quot; </span><span class="kw">fn </span>observe_value(this: <span class="kw-2">&amp;mut </span>Object, <span class="kw">_</span>: Sel, _key_path: id, _of_object: id, _changed: id, _context: id) {
+                        <span class="kw">unsafe </span>{
+                            <span class="kw">let </span>url: id = <span class="macro">msg_send!</span>[this, URL];
+                            <span class="kw">if </span>url.is_null() {
+                                <span class="comment">// 出错了
+                                </span><span class="macro">println!</span>(<span class="string">&quot;WARNING: URL is null!&quot;</span>);
+                                <span class="kw">let </span>win: id = <span class="macro">msg_send!</span>[this, window];
+                                <span class="kw">let </span>win_ctl: id = <span class="macro">msg_send!</span>[win, windowController];
+                                <span class="kw">let </span>url_sender = <span class="macro">dbg!</span>(<span class="kw-2">*</span>(<span class="kw-2">*</span>win_ctl).get_ivar::&lt;usize&gt;(<span class="string">&quot;urlSender&quot;</span>));
+                                <span class="kw">if </span>url_sender != <span class="number">0 </span>{
+                                    <span class="kw">let </span>sx = <span class="kw-2">&amp;mut *</span>(url_sender <span class="kw">as </span><span class="kw-2">*mut </span>Sender&lt;String&gt;);
+                                    <span class="kw">let _ </span>= <span class="macro">dbg!</span>(sx.send(<span class="string">&quot;&quot;</span>.into()));
                                     <span class="macro">println!</span>(<span class="string">&quot;Dropping sender&quot;</span>);
-                                    <span class="ident">drop</span>(<span class="ident">Box::from_raw</span>(<span class="ident">sx</span>));
+                                    drop(Box::from_raw(sx));
                                     <span class="macro">println!</span>(<span class="string">&quot;Empty URL Sent&quot;</span>);
                                 }
-                                (<span class="kw-2">*</span><span class="ident">win_ctl</span>).<span class="ident">set_ivar</span>(<span class="string">&quot;urlSender&quot;</span>, <span class="number">0usize</span>);
-                                <span class="kw">let</span> <span class="kw">_</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="ident">this</span>, <span class="ident">release</span>];
-                                <span class="ident">win</span>.<span class="ident">close</span>();
+                                (<span class="kw-2">*</span>win_ctl).set_ivar(<span class="string">&quot;urlSender&quot;</span>, <span class="number">0usize</span>);
+                                <span class="kw">let _</span>: id = <span class="macro">msg_send!</span>[this, release];
+                                win.close();
                                 <span class="kw">return</span>;
                             }
-                            <span class="kw">let</span> <span class="ident">url</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="ident">url</span>, <span class="ident">absoluteString</span>];
-                            <span class="kw">let</span> <span class="ident">url</span> <span class="op">=</span> <span class="ident">NSString::UTF8String</span>(<span class="ident">url</span>);
-                            <span class="kw">let</span> <span class="ident">url</span> <span class="op">=</span> <span class="ident">std::ffi::CStr::from_ptr</span>(<span class="ident">url</span>);
-                            <span class="kw">let</span> <span class="ident">url</span> <span class="op">=</span> <span class="ident">url</span>.<span class="ident">to_str</span>().<span class="ident">unwrap_or_default</span>().<span class="ident">to_string</span>();
-                            <span class="macro">println!</span>(<span class="string">&quot;URL Has Changed: {}&quot;</span>, <span class="ident">url</span>);
-                            <span class="kw">let</span> <span class="ident">callback</span>: <span class="kw-2">*const</span> <span class="ident">libc::c_void</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">this</span>.<span class="ident">get_ivar</span>(<span class="string">&quot;urlChangeCallback&quot;</span>);
-                            <span class="kw">let</span> <span class="ident">callback</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">bool</span> <span class="op">=</span> <span class="ident">std::mem::transmute</span>(<span class="ident">callback</span>);
-                            <span class="kw">if</span> <span class="macro">dbg!</span>((<span class="ident">callback</span>)(<span class="ident">url</span>.<span class="ident">as_str</span>())) {
-                                <span class="kw">let</span> <span class="ident">url_sender</span> <span class="op">=</span> <span class="macro">dbg!</span>(<span class="kw-2">*</span><span class="ident">this</span>.<span class="ident">get_ivar</span>::<span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>(<span class="string">&quot;urlSender&quot;</span>));
-                                <span class="kw">if</span> <span class="ident">url_sender</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                                    <span class="kw">let</span> <span class="ident">sx</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="kw-2">*</span>(<span class="ident">url_sender</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="ident">Sender</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>);
-                                    <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="macro">dbg!</span>(<span class="ident">sx</span>.<span class="ident">send</span>(<span class="ident">url</span>));
+                            <span class="kw">let </span>url: id = <span class="macro">msg_send!</span>[url, absoluteString];
+                            <span class="kw">let </span>url = NSString::UTF8String(url);
+                            <span class="kw">let </span>url = std::ffi::CStr::from_ptr(url);
+                            <span class="kw">let </span>url = url.to_str().unwrap_or_default().to_string();
+                            <span class="macro">println!</span>(<span class="string">&quot;URL Has Changed: {}&quot;</span>, url);
+                            <span class="kw">let </span>callback: <span class="kw-2">*const </span>libc::c_void = <span class="kw-2">*</span>this.get_ivar(<span class="string">&quot;urlChangeCallback&quot;</span>);
+                            <span class="kw">let </span>callback: <span class="kw">fn</span>(<span class="kw-2">&amp;</span>str) -&gt; bool = std::mem::transmute(callback);
+                            <span class="kw">if </span><span class="macro">dbg!</span>((callback)(url.as_str())) {
+                                <span class="kw">let </span>url_sender = <span class="macro">dbg!</span>(<span class="kw-2">*</span>this.get_ivar::&lt;usize&gt;(<span class="string">&quot;urlSender&quot;</span>));
+                                <span class="kw">if </span>url_sender != <span class="number">0 </span>{
+                                    <span class="kw">let </span>sx = <span class="kw-2">&amp;mut *</span>(url_sender <span class="kw">as </span><span class="kw-2">*mut </span>Sender&lt;String&gt;);
+                                    <span class="kw">let _ </span>= <span class="macro">dbg!</span>(sx.send(url));
                                     <span class="macro">println!</span>(<span class="string">&quot;Dropping sender&quot;</span>);
-                                    <span class="ident">drop</span>(<span class="ident">Box::from_raw</span>(<span class="ident">sx</span>));
+                                    drop(Box::from_raw(sx));
                                     <span class="macro">println!</span>(<span class="string">&quot;URL Sent&quot;</span>);
                                 }
-                                <span class="kw">let</span> <span class="ident">win</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="ident">this</span>, <span class="ident">window</span>];
-                                <span class="kw">let</span> <span class="ident">win_ctl</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="ident">win</span>, <span class="ident">windowController</span>];
-                                (<span class="kw-2">*</span><span class="ident">win_ctl</span>).<span class="ident">set_ivar</span>(<span class="string">&quot;urlSender&quot;</span>, <span class="number">0usize</span>);
-                                <span class="kw">let</span> <span class="kw">_</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="ident">this</span>, <span class="ident">release</span>];
-                                <span class="ident">win</span>.<span class="ident">close</span>();
+                                <span class="kw">let </span>win: id = <span class="macro">msg_send!</span>[this, window];
+                                <span class="kw">let </span>win_ctl: id = <span class="macro">msg_send!</span>[win, windowController];
+                                (<span class="kw-2">*</span>win_ctl).set_ivar(<span class="string">&quot;urlSender&quot;</span>, <span class="number">0usize</span>);
+                                <span class="kw">let _</span>: id = <span class="macro">msg_send!</span>[this, release];
+                                win.close();
                             }
                         }
                     }
 
-                    <span class="ident">decl</span>.<span class="ident">add_method</span>(<span class="macro">sel!</span>(<span class="ident">observeValueForKeyPath</span>:<span class="ident">ofObject</span>:<span class="ident">change</span>:<span class="ident">context</span>:), <span class="ident">observe_value</span> <span class="kw">as</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(<span class="kw-2">&amp;mut</span> <span class="ident">Object</span>, <span class="ident">Sel</span>, <span class="ident">id</span>, <span class="ident">id</span>, <span class="ident">id</span> , <span class="ident">id</span>),);
+                    decl.add_method(<span class="macro">sel!</span>(observeValueForKeyPath:ofObject:change:context:), observe_value <span class="kw">as extern </span><span class="string">&quot;C&quot; </span><span class="kw">fn</span>(<span class="kw-2">&amp;mut </span>Object, Sel, id, id, id , id),);
 
-                    <span class="ident">SCLWebViewClass</span>(<span class="ident">decl</span>.<span class="ident">register</span>())
+                    SCLWebViewClass(decl.register())
                 });
 
-                <span class="comment">// === Setup ==</span>
+                <span class="comment">// === Setup ==
 
-                <span class="comment">// 创建窗口</span>
-                <span class="kw">let</span> <span class="ident">win_ctl_cls</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="ident">WEBVIEW_WINDOW_CONTROLLER</span>.<span class="number">0</span>, <span class="ident">alloc</span>];
-                (<span class="kw-2">*</span><span class="ident">win_ctl_cls</span>).<span class="ident">set_ivar</span>(<span class="string">&quot;urlSender&quot;</span>, <span class="ident">sx</span>);
-                <span class="kw">let</span> <span class="ident">win_cls</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="macro">class!</span>(<span class="ident">NSWindow</span>), <span class="ident">alloc</span>];
-                <span class="kw">let</span> <span class="ident">mask</span> <span class="op">=</span> <span class="ident">NSWindowStyleMask::NSTitledWindowMask</span> <span class="op">|</span> <span class="ident">NSWindowStyleMask::NSClosableWindowMask</span> <span class="op">|</span> <span class="ident">NSWindowStyleMask::NSFullSizeContentViewWindowMask</span>;
-                <span class="kw">let</span> <span class="ident">win</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="ident">win_cls</span>, <span class="ident">initWithContentRect</span>: <span class="ident">rect</span> <span class="ident">styleMask</span>: <span class="ident">mask</span>  <span class="ident">backing</span>: <span class="ident">NSBackingStoreBuffered</span> <span class="ident">defer</span>: <span class="ident">NO</span>];
-                <span class="comment">// 设置窗口标题</span>
-                <span class="kw">let</span> <span class="ident">title_string</span> <span class="op">=</span> <span class="ident">NSString::alloc</span>(<span class="ident">nil</span>)
-                    .<span class="ident">init_str</span>(<span class="kw-2">&amp;</span><span class="ident">title</span>);
-                <span class="ident">win</span>.<span class="ident">setTitle_</span>(<span class="ident">title_string</span>);
-                <span class="kw">let</span> <span class="ident">win_ctl</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="ident">win_ctl_cls</span>, <span class="ident">initWithWindow</span>: <span class="ident">win</span>];
-                <span class="comment">// 挂载关闭事件，否则不能退出模态状态</span>
-                <span class="kw">let</span> <span class="ident">ns_nc</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="macro">class!</span>(<span class="ident">NSNotificationCenter</span>), <span class="ident">defaultCenter</span>];
-                <span class="kw">let</span> <span class="ident">notif_string</span> <span class="op">=</span> <span class="ident">NSString::alloc</span>(<span class="ident">nil</span>)
-                    .<span class="ident">init_str</span>(<span class="string">&quot;NSWindowWillCloseNotification&quot;</span>)
-                    .<span class="ident">autorelease</span>();
-                <span class="kw">let</span> <span class="kw">_</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="ident">ns_nc</span>, <span class="ident">addObserver</span>:<span class="ident">win_ctl</span> <span class="ident">selector</span>:<span class="macro">sel!</span>(<span class="ident">windowWillClose</span>:) <span class="ident">name</span>:<span class="ident">notif_string</span> <span class="ident">object</span>:<span class="ident">nil</span>];
-                <span class="comment">// 准备 WKWebView 视图</span>
-                <span class="kw">let</span> <span class="ident">configuration</span> <span class="op">=</span> <span class="ident">WKWebViewConfiguration::init</span>(<span class="ident">WKWebViewConfiguration::alloc</span>(<span class="ident">nil</span>));
-                <span class="comment">// 我们不保留任何数据，以避免自动登录的问题</span>
-                <span class="kw">let</span> <span class="ident">non_persistent_data_store</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="macro">class!</span>(<span class="ident">WKWebsiteDataStore</span>), <span class="ident">nonPersistentDataStore</span>];
-                <span class="kw">let</span> <span class="kw">_</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="ident">configuration</span>, <span class="ident">setWebsiteDataStore</span>: <span class="ident">non_persistent_data_store</span>];
-                <span class="comment">// (*configuration).set_ivar(&quot;websiteDataStore&quot;, non_persistent_data_store);</span>
-                <span class="kw">let</span> <span class="ident">content_controller</span> <span class="op">=</span> <span class="ident">WKUserContentController::init</span>(<span class="ident">WKUserContentController::alloc</span>(<span class="ident">nil</span>));
-                <span class="ident">configuration</span>.<span class="ident">setUserContentController</span>(<span class="ident">content_controller</span>);
-                <span class="comment">// let frame = cocoa::appkit::NSWindow::frame(win);</span>
-                <span class="kw">let</span> <span class="ident">webview</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="ident">SCL_WEBVIEW</span>.<span class="number">0</span>, <span class="ident">alloc</span>];
-                <span class="kw">let</span> <span class="ident">webview</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="ident">webview</span>, <span class="ident">initWithFrame</span>:<span class="ident">rect</span> <span class="ident">configuration</span>:<span class="ident">configuration</span>];
-                <span class="comment">// 把回调函数导入到 WebView 内</span>
-                (<span class="kw-2">*</span><span class="ident">webview</span>).<span class="ident">set_ivar</span>(<span class="string">&quot;urlChangeCallback&quot;</span>, <span class="ident">callback</span> <span class="kw">as</span> <span class="kw-2">*const</span> <span class="ident">libc::c_void</span>);
-                (<span class="kw-2">*</span><span class="ident">webview</span>).<span class="ident">set_ivar</span>(<span class="string">&quot;urlSender&quot;</span>, <span class="ident">sx</span>);
-                <span class="comment">// 让视图和窗口一起缩放</span>
-                <span class="ident">NSView::setAutoresizingMask_</span>(<span class="ident">webview</span>, <span class="ident">NSViewWidthSizable</span> <span class="op">|</span> <span class="ident">NSViewHeightSizable</span>);
-                <span class="comment">// 创建请求并让 WebView 去请求跳转</span>
-                <span class="kw">let</span> <span class="ident">url</span> <span class="op">=</span> <span class="ident">NSString::alloc</span>(<span class="ident">nil</span>).<span class="ident">init_str</span>(<span class="ident">start_url</span>.<span class="ident">as_str</span>());
-                <span class="kw">let</span> <span class="ident">url</span> <span class="op">=</span> <span class="ident">NSURL::alloc</span>(<span class="ident">nil</span>).<span class="ident">initWithString_</span>(<span class="ident">url</span>);
-                <span class="kw">let</span> <span class="ident">req</span> <span class="op">=</span> <span class="ident">NSURLRequest::alloc</span>(<span class="ident">nil</span>).<span class="ident">initWithURL_</span>(<span class="ident">url</span>);
-                <span class="kw">let</span> <span class="kw">_</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="ident">webview</span>, <span class="ident">loadRequest</span>: <span class="ident">req</span>];
-                <span class="comment">// 挂载链接变化事件</span>
-                <span class="kw">let</span> <span class="ident">keypath_string</span> <span class="op">=</span> <span class="ident">NSString::alloc</span>(<span class="ident">nil</span>)
-                    .<span class="ident">init_str</span>(<span class="string">&quot;URL&quot;</span>)
-                    .<span class="ident">autorelease</span>();
-                <span class="kw">let</span> <span class="ident">change_string</span> <span class="op">=</span> <span class="ident">NSString::alloc</span>(<span class="ident">nil</span>)
-                    .<span class="ident">init_str</span>(<span class="string">&quot;NSKeyValueChangeNewKey&quot;</span>)
-                    .<span class="ident">autorelease</span>();
-                <span class="kw">let</span> <span class="kw">_</span>: <span class="ident">id</span> <span class="op">=</span> <span class="macro">msg_send!</span>[<span class="ident">webview</span>, <span class="ident">addObserver</span>: <span class="ident">webview</span> <span class="ident">forKeyPath</span>: <span class="ident">keypath_string</span> <span class="ident">options</span>: <span class="ident">change_string</span> <span class="ident">context</span>: <span class="ident">nil</span>];
-                <span class="comment">// 设置窗口的视图为 WKWebView</span>
-                <span class="ident">win</span>.<span class="ident">setContentView_</span>(<span class="ident">webview</span>);
-                <span class="ident">win</span>.<span class="ident">makeKeyAndOrderFront_</span>(<span class="ident">nil</span>);
-                <span class="ident">win</span>.<span class="ident">center</span>();
+                // 创建窗口
+                </span><span class="kw">let </span>win_ctl_cls: id = <span class="macro">msg_send!</span>[WEBVIEW_WINDOW_CONTROLLER.<span class="number">0</span>, alloc];
+                (<span class="kw-2">*</span>win_ctl_cls).set_ivar(<span class="string">&quot;urlSender&quot;</span>, sx);
+                <span class="kw">let </span>win_cls: id = <span class="macro">msg_send!</span>[<span class="macro">class!</span>(NSWindow), alloc];
+                <span class="kw">let </span>mask = NSWindowStyleMask::NSTitledWindowMask | NSWindowStyleMask::NSClosableWindowMask | NSWindowStyleMask::NSFullSizeContentViewWindowMask;
+                <span class="kw">let </span>win: id = <span class="macro">msg_send!</span>[win_cls, initWithContentRect: rect styleMask: mask  backing: NSBackingStoreBuffered defer: NO];
+                <span class="comment">// 设置窗口标题
+                </span><span class="kw">let </span>title_string = NSString::alloc(nil)
+                    .init_str(<span class="kw-2">&amp;</span>title);
+                win.setTitle_(title_string);
+                <span class="kw">let </span>win_ctl: id = <span class="macro">msg_send!</span>[win_ctl_cls, initWithWindow: win];
+                <span class="comment">// 挂载关闭事件，否则不能退出模态状态
+                </span><span class="kw">let </span>ns_nc: id = <span class="macro">msg_send!</span>[<span class="macro">class!</span>(NSNotificationCenter), defaultCenter];
+                <span class="kw">let </span>notif_string = NSString::alloc(nil)
+                    .init_str(<span class="string">&quot;NSWindowWillCloseNotification&quot;</span>)
+                    .autorelease();
+                <span class="kw">let _</span>: id = <span class="macro">msg_send!</span>[ns_nc, addObserver:win_ctl selector:<span class="macro">sel!</span>(windowWillClose:) name:notif_string object:nil];
+                <span class="comment">// 准备 WKWebView 视图
+                </span><span class="kw">let </span>configuration = WKWebViewConfiguration::init(WKWebViewConfiguration::alloc(nil));
+                <span class="comment">// 我们不保留任何数据，以避免自动登录的问题
+                </span><span class="kw">let </span>non_persistent_data_store: id = <span class="macro">msg_send!</span>[<span class="macro">class!</span>(WKWebsiteDataStore), nonPersistentDataStore];
+                <span class="kw">let _</span>: id = <span class="macro">msg_send!</span>[configuration, setWebsiteDataStore: non_persistent_data_store];
+                <span class="comment">// (*configuration).set_ivar(&quot;websiteDataStore&quot;, non_persistent_data_store);
+                </span><span class="kw">let </span>content_controller = WKUserContentController::init(WKUserContentController::alloc(nil));
+                configuration.setUserContentController(content_controller);
+                <span class="comment">// let frame = cocoa::appkit::NSWindow::frame(win);
+                </span><span class="kw">let </span>webview: id = <span class="macro">msg_send!</span>[SCL_WEBVIEW.<span class="number">0</span>, alloc];
+                <span class="kw">let </span>webview: id = <span class="macro">msg_send!</span>[webview, initWithFrame:rect configuration:configuration];
+                <span class="comment">// 把回调函数导入到 WebView 内
+                </span>(<span class="kw-2">*</span>webview).set_ivar(<span class="string">&quot;urlChangeCallback&quot;</span>, callback <span class="kw">as </span><span class="kw-2">*const </span>libc::c_void);
+                (<span class="kw-2">*</span>webview).set_ivar(<span class="string">&quot;urlSender&quot;</span>, sx);
+                <span class="comment">// 让视图和窗口一起缩放
+                </span>NSView::setAutoresizingMask_(webview, NSViewWidthSizable | NSViewHeightSizable);
+                <span class="comment">// 创建请求并让 WebView 去请求跳转
+                </span><span class="kw">let </span>url = NSString::alloc(nil).init_str(start_url.as_str());
+                <span class="kw">let </span>url = NSURL::alloc(nil).initWithString_(url);
+                <span class="kw">let </span>req = NSURLRequest::alloc(nil).initWithURL_(url);
+                <span class="kw">let _</span>: id = <span class="macro">msg_send!</span>[webview, loadRequest: req];
+                <span class="comment">// 挂载链接变化事件
+                </span><span class="kw">let </span>keypath_string = NSString::alloc(nil)
+                    .init_str(<span class="string">&quot;URL&quot;</span>)
+                    .autorelease();
+                <span class="kw">let </span>change_string = NSString::alloc(nil)
+                    .init_str(<span class="string">&quot;NSKeyValueChangeNewKey&quot;</span>)
+                    .autorelease();
+                <span class="kw">let _</span>: id = <span class="macro">msg_send!</span>[webview, addObserver: webview forKeyPath: keypath_string options: change_string context: nil];
+                <span class="comment">// 设置窗口的视图为 WKWebView
+                </span>win.setContentView_(webview);
+                win.makeKeyAndOrderFront_(nil);
+                win.center();
             });
             <span class="macro">println!</span>(<span class="string">&quot;Waiting for URL&quot;</span>);
-            <span class="kw">let</span> <span class="ident">url</span> <span class="op">=</span> <span class="ident">rx</span>.<span class="ident">recv</span>()<span class="question-mark">?</span>;
-            <span class="macro">println!</span>(<span class="string">&quot;Got URL: {}&quot;</span>, <span class="ident">url</span>);
-            <span class="prelude-val">Ok</span>(<span class="ident">url</span>)
+            <span class="kw">let </span>url = rx.recv()<span class="question-mark">?</span>;
+            <span class="macro">println!</span>(<span class="string">&quot;Got URL: {}&quot;</span>, url);
+            <span class="prelude-val">Ok</span>(url)
         }
     }
 
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>)]</span>
-    <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">run_windows</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
-        <span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">cell::RefCell</span>, <span class="ident">ffi::OsStr</span>, <span class="ident">os::windows::prelude::OsStrExt</span>, <span class="ident">rc::Rc</span>};
+    <span class="attribute">#[cfg(target_os = <span class="string">&quot;windows&quot;</span>)]
+    #[inline(always)]
+    </span><span class="kw">fn </span>run_windows(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; DynResult&lt;String&gt; {
+        <span class="kw">use </span>std::{cell::RefCell, ffi::OsStr, os::windows::prelude::OsStrExt, rc::Rc};
 
-        <span class="kw">use</span> <span class="ident">once_cell::sync::OnceCell</span>;
-        <span class="kw">use</span> <span class="ident">winapi</span>::{
-            <span class="ident">shared::ntdef::LPCWSTR</span>,
-            <span class="ident">um</span>::{
-                <span class="ident">processthreadsapi::OpenProcess</span>, <span class="ident">synchapi::WaitForSingleObject</span>, <span class="ident">winbase::INFINITE</span>,
-                <span class="ident">winnt::SYNCHRONIZE</span>,
+        <span class="kw">use </span>once_cell::sync::OnceCell;
+        <span class="kw">use </span>winapi::{
+            shared::ntdef::LPCWSTR,
+            um::{
+                processthreadsapi::OpenProcess, synchapi::WaitForSingleObject, winbase::INFINITE,
+                winnt::SYNCHRONIZE,
             },
         };
 
-        <span class="kw">let</span> <span class="ident">user_data_path</span> <span class="op">=</span> <span class="ident">std::env::current_exe</span>()<span class="question-mark">?</span>
-            .<span class="ident">parent</span>()
-            .<span class="ident">unwrap</span>()
-            .<span class="ident">join</span>(<span class="string">&quot;.SCL.WebView2&quot;</span>)
-            .<span class="ident">to_string_lossy</span>()
-            .<span class="ident">to_string</span>();
-        <span class="kw">let</span> <span class="ident">user_data_path</span> <span class="op">=</span> <span class="ident">std::path::Path::new</span>(<span class="kw-2">&amp;</span><span class="ident">user_data_path</span>);
-        <span class="ident">std::fs::remove_dir_all</span>(<span class="kw-2">&amp;</span><span class="ident">user_data_path</span>).<span class="ident">unwrap_or_default</span>();
-        <span class="kw">let</span> <span class="ident">final_url</span> <span class="op">=</span> <span class="ident">Rc::new</span>(<span class="ident">RefCell::new</span>(<span class="ident">String::new</span>()));
+        <span class="kw">let </span>user_data_path = std::env::current_exe()<span class="question-mark">?
+            </span>.parent()
+            .unwrap()
+            .join(<span class="string">&quot;.SCL.WebView2&quot;</span>)
+            .to_string_lossy()
+            .to_string();
+        <span class="kw">let </span>user_data_path = std::path::Path::new(<span class="kw-2">&amp;</span>user_data_path);
+        std::fs::remove_dir_all(<span class="kw-2">&amp;</span>user_data_path).unwrap_or_default();
+        <span class="kw">let </span>final_url = Rc::new(RefCell::new(String::new()));
 
-        <span class="kw">if</span> <span class="ident">webview2::get_available_browser_version_string</span>(<span class="prelude-val">None</span>).<span class="ident">is_ok</span>() {
-            <span class="kw">let</span> <span class="ident">controller</span> <span class="op">=</span> <span class="ident">Rc::new</span>(<span class="ident">OnceCell</span>::<span class="op">&lt;</span><span class="ident">Controller</span><span class="op">&gt;</span><span class="ident">::new</span>());
-            <span class="kw">let</span> <span class="ident">controller_clone</span> <span class="op">=</span> <span class="ident">controller</span>.<span class="ident">clone</span>();
+        <span class="kw">if </span>webview2::get_available_browser_version_string(<span class="prelude-val">None</span>).is_ok() {
+            <span class="kw">let </span>controller = Rc::new(OnceCell::&lt;Controller&gt;::new());
+            <span class="kw">let </span>controller_clone = controller.clone();
 
-            <span class="kw">let</span> <span class="ident">wnd_proc</span> <span class="op">=</span> <span class="kw">move</span> <span class="op">|</span><span class="ident">hwnd</span>, <span class="ident">msg</span>, <span class="ident">w_param</span>, <span class="ident">l_param</span><span class="op">|</span> <span class="kw">match</span> <span class="ident">msg</span> {
-                <span class="ident">WM_SIZE</span> =&gt; {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">c</span>) <span class="op">=</span> <span class="ident">controller</span>.<span class="ident">get</span>() {
-                        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">r</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">std::mem::zeroed</span>() };
-                        <span class="kw">unsafe</span> {
-                            <span class="ident">GetClientRect</span>(<span class="ident">hwnd</span>, <span class="kw-2">&amp;mut</span> <span class="ident">r</span>);
+            <span class="kw">let </span>wnd_proc = <span class="kw">move </span>|hwnd, msg, w_param, l_param| <span class="kw">match </span>msg {
+                WM_SIZE =&gt; {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(c) = controller.get() {
+                        <span class="kw">let </span><span class="kw-2">mut </span>r = <span class="kw">unsafe </span>{ std::mem::zeroed() };
+                        <span class="kw">unsafe </span>{
+                            GetClientRect(hwnd, <span class="kw-2">&amp;mut </span>r);
                         }
-                        <span class="ident">c</span>.<span class="ident">put_bounds</span>(<span class="ident">r</span>).<span class="ident">unwrap</span>();
+                        c.put_bounds(r).unwrap();
                     }
-                    <span class="number">0</span>
-                }
-                <span class="ident">WM_MOVE</span> =&gt; {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">c</span>) <span class="op">=</span> <span class="ident">controller</span>.<span class="ident">get</span>() {
-                        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">c</span>.<span class="ident">notify_parent_window_position_changed</span>();
+                    <span class="number">0
+                </span>}
+                WM_MOVE =&gt; {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(c) = controller.get() {
+                        <span class="kw">let _ </span>= c.notify_parent_window_position_changed();
                     }
-                    <span class="number">0</span>
-                }
-                <span class="comment">// Optimization: don&#39;t render the webview when the window is minimized.</span>
-                <span class="ident">WM_SYSCOMMAND</span> <span class="kw">if</span> <span class="ident">w_param</span> <span class="op">==</span> <span class="ident">SC_MINIMIZE</span> =&gt; {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">c</span>) <span class="op">=</span> <span class="ident">controller</span>.<span class="ident">get</span>() {
-                        <span class="ident">c</span>.<span class="ident">put_is_visible</span>(<span class="bool-val">false</span>).<span class="ident">unwrap</span>();
+                    <span class="number">0
+                </span>}
+                <span class="comment">// Optimization: don&#39;t render the webview when the window is minimized.
+                </span>WM_SYSCOMMAND <span class="kw">if </span>w_param == SC_MINIMIZE =&gt; {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(c) = controller.get() {
+                        c.put_is_visible(<span class="bool-val">false</span>).unwrap();
                     }
-                    <span class="kw">unsafe</span> { <span class="ident">DefWindowProcW</span>(<span class="ident">hwnd</span>, <span class="ident">msg</span>, <span class="ident">w_param</span>, <span class="ident">l_param</span>) }
+                    <span class="kw">unsafe </span>{ DefWindowProcW(hwnd, msg, w_param, l_param) }
                 }
-                <span class="ident">WM_SYSCOMMAND</span> <span class="kw">if</span> <span class="ident">w_param</span> <span class="op">==</span> <span class="ident">SC_RESTORE</span> =&gt; {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">c</span>) <span class="op">=</span> <span class="ident">controller</span>.<span class="ident">get</span>() {
-                        <span class="ident">c</span>.<span class="ident">put_is_visible</span>(<span class="bool-val">true</span>).<span class="ident">unwrap</span>();
+                WM_SYSCOMMAND <span class="kw">if </span>w_param == SC_RESTORE =&gt; {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(c) = controller.get() {
+                        c.put_is_visible(<span class="bool-val">true</span>).unwrap();
                     }
-                    <span class="kw">unsafe</span> { <span class="ident">DefWindowProcW</span>(<span class="ident">hwnd</span>, <span class="ident">msg</span>, <span class="ident">w_param</span>, <span class="ident">l_param</span>) }
+                    <span class="kw">unsafe </span>{ DefWindowProcW(hwnd, msg, w_param, l_param) }
                 }
-                <span class="comment">// High DPI support.</span>
-                <span class="ident">WM_DPICHANGED</span> =&gt; <span class="kw">unsafe</span> {
-                    <span class="kw">let</span> <span class="ident">rect</span> <span class="op">=</span> <span class="kw-2">*</span>(<span class="ident">l_param</span> <span class="kw">as</span> <span class="kw-2">*const</span> <span class="ident">RECT</span>);
-                    <span class="ident">SetWindowPos</span>(
-                        <span class="ident">hwnd</span>,
-                        <span class="ident">std::ptr::null_mut</span>(),
-                        <span class="ident">rect</span>.<span class="ident">left</span>,
-                        <span class="ident">rect</span>.<span class="ident">top</span>,
-                        <span class="ident">rect</span>.<span class="ident">right</span> <span class="op">-</span> <span class="ident">rect</span>.<span class="ident">left</span>,
-                        <span class="ident">rect</span>.<span class="ident">bottom</span> <span class="op">-</span> <span class="ident">rect</span>.<span class="ident">top</span>,
-                        <span class="ident">SWP_NOZORDER</span> <span class="op">|</span> <span class="ident">SWP_NOACTIVATE</span>,
+                <span class="comment">// High DPI support.
+                </span>WM_DPICHANGED =&gt; <span class="kw">unsafe </span>{
+                    <span class="kw">let </span>rect = <span class="kw-2">*</span>(l_param <span class="kw">as </span><span class="kw-2">*const </span>RECT);
+                    SetWindowPos(
+                        hwnd,
+                        std::ptr::null_mut(),
+                        rect.left,
+                        rect.top,
+                        rect.right - rect.left,
+                        rect.bottom - rect.top,
+                        SWP_NOZORDER | SWP_NOACTIVATE,
                     );
-                    <span class="number">0</span>
-                },
-                <span class="ident">WM_QUIT</span> <span class="op">|</span> <span class="ident">WM_DESTROY</span> =&gt; <span class="kw">unsafe</span> {
-                    <span class="ident">PostQuitMessage</span>(<span class="number">0</span>);
-                    <span class="number">0</span>
-                },
-                <span class="kw">_</span> =&gt; <span class="kw">unsafe</span> { <span class="ident">DefWindowProcW</span>(<span class="ident">hwnd</span>, <span class="ident">msg</span>, <span class="ident">w_param</span>, <span class="ident">l_param</span>) },
+                    <span class="number">0
+                </span>},
+                WM_QUIT | WM_DESTROY =&gt; <span class="kw">unsafe </span>{
+                    PostQuitMessage(<span class="number">0</span>);
+                    <span class="number">0
+                </span>},
+                <span class="kw">_ </span>=&gt; <span class="kw">unsafe </span>{ DefWindowProcW(hwnd, msg, w_param, l_param) },
             };
 
-            <span class="ident">set_dpi_aware</span>();
-            <span class="kw">let</span> <span class="ident">h_instance</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">GetModuleHandleW</span>(<span class="ident">std::ptr::null</span>()) };
-            <span class="kw">let</span> <span class="ident">class_name</span> <span class="op">=</span> <span class="ident">utf_16_null_terminiated</span>(<span class="string">&quot;SCL_WebView2&quot;</span>);
+            set_dpi_aware();
+            <span class="kw">let </span>h_instance = <span class="kw">unsafe </span>{ GetModuleHandleW(std::ptr::null()) };
+            <span class="kw">let </span>class_name = utf_16_null_terminiated(<span class="string">&quot;SCL_WebView2&quot;</span>);
 
-            <span class="kw">let</span> <span class="ident">class</span> <span class="op">=</span> <span class="ident">WNDCLASSW</span> {
-                <span class="ident">style</span>: <span class="ident">CS_HREDRAW</span> <span class="op">|</span> <span class="ident">CS_VREDRAW</span>,
-                <span class="ident">hCursor</span>: <span class="kw">unsafe</span> { <span class="ident">LoadCursorW</span>(<span class="ident">std::ptr::null_mut</span>(), <span class="ident">IDC_ARROW</span>) },
-                <span class="ident">lpfnWndProc</span>: <span class="prelude-val">Some</span>(<span class="kw">unsafe</span> { <span class="ident">wnd_proc_helper::as_global_wnd_proc</span>(<span class="ident">wnd_proc</span>) }),
-                <span class="ident">lpszClassName</span>: <span class="ident">class_name</span>.<span class="ident">as_ptr</span>(),
-                <span class="ident">hInstance</span>: <span class="ident">h_instance</span>,
-                <span class="ident">hbrBackground</span>: (<span class="ident">COLOR_WINDOW</span> <span class="op">+</span> <span class="number">1</span>) <span class="kw">as</span> <span class="ident">HBRUSH</span>,
-                ..<span class="kw">unsafe</span> { <span class="ident">std::mem::zeroed</span>() }
+            <span class="kw">let </span>class = WNDCLASSW {
+                style: CS_HREDRAW | CS_VREDRAW,
+                hCursor: <span class="kw">unsafe </span>{ LoadCursorW(std::ptr::null_mut(), IDC_ARROW) },
+                lpfnWndProc: <span class="prelude-val">Some</span>(<span class="kw">unsafe </span>{ wnd_proc_helper::as_global_wnd_proc(wnd_proc) }),
+                lpszClassName: class_name.as_ptr(),
+                hInstance: h_instance,
+                hbrBackground: (COLOR_WINDOW + <span class="number">1</span>) <span class="kw">as </span>HBRUSH,
+                ..<span class="kw">unsafe </span>{ std::mem::zeroed() }
             };
-            <span class="kw">unsafe</span> {
-                <span class="kw">if</span> <span class="ident">RegisterClassW</span>(<span class="kw-2">&amp;</span><span class="ident">class</span>) <span class="op">==</span> <span class="number">0</span> {
-                    <span class="macro">panic!</span>(<span class="string">&quot;RegisterClassW failed: {}&quot;</span>, <span class="ident">std::io::Error::last_os_error</span>());
+            <span class="kw">unsafe </span>{
+                <span class="kw">if </span>RegisterClassW(<span class="kw-2">&amp;</span>class) == <span class="number">0 </span>{
+                    <span class="macro">panic!</span>(<span class="string">&quot;RegisterClassW failed: {}&quot;</span>, std::io::Error::last_os_error());
                 }
             }
 
-            <span class="kw">let</span> <span class="ident">window_title</span> <span class="op">=</span> <span class="ident">utf_16_null_terminiated</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">title</span>);
-            <span class="kw">let</span> <span class="ident">hdc</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">GetDC</span>(<span class="ident">std::ptr::null_mut</span>()) };
-            <span class="kw">let</span> <span class="ident">dpi</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">GetDeviceCaps</span>(<span class="ident">hdc</span>, <span class="ident">LOGPIXELSX</span>) };
-            <span class="kw">unsafe</span> { <span class="ident">ReleaseDC</span>(<span class="ident">std::ptr::null_mut</span>(), <span class="ident">hdc</span>) };
-            <span class="kw">let</span> (<span class="ident">width</span>, <span class="ident">height</span>) <span class="op">=</span> <span class="kw">unsafe</span> {
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">s</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">fixed_size</span> {
+            <span class="kw">let </span>window_title = utf_16_null_terminiated(<span class="kw-2">&amp;</span><span class="self">self</span>.title);
+            <span class="kw">let </span>hdc = <span class="kw">unsafe </span>{ GetDC(std::ptr::null_mut()) };
+            <span class="kw">let </span>dpi = <span class="kw">unsafe </span>{ GetDeviceCaps(hdc, LOGPIXELSX) };
+            <span class="kw">unsafe </span>{ ReleaseDC(std::ptr::null_mut(), hdc) };
+            <span class="kw">let </span>(width, height) = <span class="kw">unsafe </span>{
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(s) = <span class="kw-2">&amp;</span><span class="self">self</span>.fixed_size {
                     (
-                        <span class="ident">MulDiv</span>(<span class="ident">s</span>.<span class="number">0</span> <span class="kw">as</span> <span class="ident">i32</span>, <span class="ident">dpi</span>, <span class="ident">USER_DEFAULT_SCREEN_DPI</span>),
-                        <span class="ident">MulDiv</span>(<span class="ident">s</span>.<span class="number">1</span> <span class="kw">as</span> <span class="ident">i32</span>, <span class="ident">dpi</span>, <span class="ident">USER_DEFAULT_SCREEN_DPI</span>),
+                        MulDiv(s.<span class="number">0 </span><span class="kw">as </span>i32, dpi, USER_DEFAULT_SCREEN_DPI),
+                        MulDiv(s.<span class="number">1 </span><span class="kw">as </span>i32, dpi, USER_DEFAULT_SCREEN_DPI),
                     )
-                } <span class="kw">else</span> {
+                } <span class="kw">else </span>{
                     (
-                        <span class="ident">MulDiv</span>(<span class="number">600</span>, <span class="ident">dpi</span>, <span class="ident">USER_DEFAULT_SCREEN_DPI</span>),
-                        <span class="ident">MulDiv</span>(<span class="number">480</span>, <span class="ident">dpi</span>, <span class="ident">USER_DEFAULT_SCREEN_DPI</span>),
+                        MulDiv(<span class="number">600</span>, dpi, USER_DEFAULT_SCREEN_DPI),
+                        MulDiv(<span class="number">480</span>, dpi, USER_DEFAULT_SCREEN_DPI),
                     )
                 }
             };
-            <span class="kw">let</span> <span class="ident">hwnd</span> <span class="op">=</span> <span class="kw">unsafe</span> {
-                <span class="ident">CreateWindowExW</span>(
-                    <span class="ident">WS_EX_DLGMODALFRAME</span>,
-                    <span class="ident">class_name</span>.<span class="ident">as_ptr</span>(),
-                    <span class="ident">window_title</span>.<span class="ident">as_ptr</span>(),
-                    <span class="ident">WS_CAPTION</span> <span class="op">|</span> <span class="ident">WS_SYSMENU</span> <span class="op">|</span> <span class="ident">WS_VISIBLE</span>,
-                    <span class="ident">CW_USEDEFAULT</span>,
-                    <span class="ident">CW_USEDEFAULT</span>,
-                    <span class="ident">width</span>,
-                    <span class="ident">height</span>,
-                    <span class="ident">HWND_DESKTOP</span>,
-                    <span class="ident">std::ptr::null_mut</span>(),
-                    <span class="ident">h_instance</span>,
-                    <span class="ident">std::ptr::null_mut</span>(),
+            <span class="kw">let </span>hwnd = <span class="kw">unsafe </span>{
+                CreateWindowExW(
+                    WS_EX_DLGMODALFRAME,
+                    class_name.as_ptr(),
+                    window_title.as_ptr(),
+                    WS_CAPTION | WS_SYSMENU | WS_VISIBLE,
+                    CW_USEDEFAULT,
+                    CW_USEDEFAULT,
+                    width,
+                    height,
+                    HWND_DESKTOP,
+                    std::ptr::null_mut(),
+                    h_instance,
+                    std::ptr::null_mut(),
                 )
             };
-            <span class="kw">if</span> <span class="ident">hwnd</span>.<span class="ident">is_null</span>() {
+            <span class="kw">if </span>hwnd.is_null() {
                 <span class="macro">panic!</span>(
                     <span class="string">&quot;CreateWindowExW failed: {}&quot;</span>,
-                    <span class="ident">std::io::Error::last_os_error</span>()
+                    std::io::Error::last_os_error()
                 );
             }
-            <span class="kw">unsafe</span> {
-                <span class="kw">let</span> <span class="ident">module</span> <span class="op">=</span> <span class="ident">GetModuleHandleW</span>(<span class="number">0usize</span> <span class="kw">as</span> <span class="ident">LPCWSTR</span>);
-                <span class="kw">let</span> <span class="ident">small_icon</span> <span class="op">=</span> <span class="ident">LoadImageW</span>(
-                    <span class="ident">module</span>,
-                    <span class="ident">OsStr::new</span>(<span class="string">&quot;SCL_ICON&quot;</span>)
-                        .<span class="ident">encode_wide</span>()
-                        .<span class="ident">chain</span>(<span class="prelude-val">Some</span>(<span class="number">0</span>))
-                        .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span><span class="op">&gt;</span>()
-                        .<span class="ident">as_ptr</span>(),
-                    <span class="ident">IMAGE_ICON</span>,
+            <span class="kw">unsafe </span>{
+                <span class="kw">let </span>module = GetModuleHandleW(<span class="number">0usize </span><span class="kw">as </span>LPCWSTR);
+                <span class="kw">let </span>small_icon = LoadImageW(
+                    module,
+                    OsStr::new(<span class="string">&quot;SCL_ICON&quot;</span>)
+                        .encode_wide()
+                        .chain(<span class="prelude-val">Some</span>(<span class="number">0</span>))
+                        .collect::&lt;Vec&lt;u16&gt;&gt;()
+                        .as_ptr(),
+                    IMAGE_ICON,
                     <span class="number">16</span>,
                     <span class="number">16</span>,
                     <span class="number">0</span>,
                 );
-                <span class="kw">let</span> <span class="ident">big_icon</span> <span class="op">=</span> <span class="ident">LoadImageW</span>(
-                    <span class="ident">module</span>,
-                    <span class="ident">OsStr::new</span>(<span class="string">&quot;SCL_ICON&quot;</span>)
-                        .<span class="ident">encode_wide</span>()
-                        .<span class="ident">chain</span>(<span class="prelude-val">Some</span>(<span class="number">0</span>))
-                        .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span><span class="op">&gt;</span>()
-                        .<span class="ident">as_ptr</span>(),
-                    <span class="ident">IMAGE_ICON</span>,
+                <span class="kw">let </span>big_icon = LoadImageW(
+                    module,
+                    OsStr::new(<span class="string">&quot;SCL_ICON&quot;</span>)
+                        .encode_wide()
+                        .chain(<span class="prelude-val">Some</span>(<span class="number">0</span>))
+                        .collect::&lt;Vec&lt;u16&gt;&gt;()
+                        .as_ptr(),
+                    IMAGE_ICON,
                     <span class="number">32</span>,
                     <span class="number">32</span>,
                     <span class="number">0</span>,
                 );
-                <span class="ident">SendMessageW</span>(<span class="ident">hwnd</span>, <span class="ident">WM_SETICON</span>, <span class="number">0</span>, <span class="ident">small_icon</span> <span class="kw">as</span> <span class="ident">LPARAM</span>);
-                <span class="ident">SendMessageW</span>(<span class="ident">hwnd</span>, <span class="ident">WM_SETICON</span>, <span class="number">1</span>, <span class="ident">big_icon</span> <span class="kw">as</span> <span class="ident">LPARAM</span>);
-                <span class="ident">ShowWindow</span>(<span class="ident">hwnd</span>, <span class="ident">SW_SHOW</span>);
-                <span class="ident">UpdateWindow</span>(<span class="ident">hwnd</span>);
+                SendMessageW(hwnd, WM_SETICON, <span class="number">0</span>, small_icon <span class="kw">as </span>LPARAM);
+                SendMessageW(hwnd, WM_SETICON, <span class="number">1</span>, big_icon <span class="kw">as </span>LPARAM);
+                ShowWindow(hwnd, SW_SHOW);
+                UpdateWindow(hwnd);
             }
 
-            <span class="kw">let</span> <span class="ident">begin_url</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">begin_url</span>.<span class="ident">to_owned</span>();
-            <span class="kw">let</span> <span class="ident">callback</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">url_change_callback</span>.<span class="ident">take</span>();
-            <span class="kw">let</span> <span class="ident">final_url</span> <span class="op">=</span> <span class="ident">final_url</span>.<span class="ident">to_owned</span>();
-            <span class="kw">let</span> <span class="ident">webview_pid</span> <span class="op">=</span> <span class="ident">Rc::new</span>(<span class="ident">RefCell::new</span>(<span class="number">0</span>));
-            <span class="kw">let</span> <span class="ident">c_webview_pid</span> <span class="op">=</span> <span class="ident">webview_pid</span>.<span class="ident">to_owned</span>();
+            <span class="kw">let </span>begin_url = <span class="self">self</span>.begin_url.to_owned();
+            <span class="kw">let </span>callback = <span class="self">self</span>.url_change_callback.take();
+            <span class="kw">let </span>final_url = final_url.to_owned();
+            <span class="kw">let </span>webview_pid = Rc::new(RefCell::new(<span class="number">0</span>));
+            <span class="kw">let </span>c_webview_pid = webview_pid.to_owned();
 
-            <span class="ident">webview2::Environment::builder</span>()
-                .<span class="ident">with_user_data_folder</span>(<span class="ident">user_data_path</span>)
-                .<span class="ident">build</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">env</span><span class="op">|</span> {
-                    <span class="kw">let</span> <span class="ident">env</span> <span class="op">=</span> <span class="ident">env</span><span class="question-mark">?</span>;
-                    <span class="ident">env</span>.<span class="ident">create_controller</span>(<span class="ident">hwnd</span>, <span class="kw">move</span> <span class="op">|</span><span class="ident">c</span><span class="op">|</span> {
-                        <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">c</span><span class="question-mark">?</span>;
-                        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">r</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">std::mem::zeroed</span>() };
-                        <span class="kw">unsafe</span> {
-                            <span class="ident">GetClientRect</span>(<span class="ident">hwnd</span>, <span class="kw-2">&amp;mut</span> <span class="ident">r</span>);
+            webview2::Environment::builder()
+                .with_user_data_folder(user_data_path)
+                .build(<span class="kw">move </span>|env| {
+                    <span class="kw">let </span>env = env<span class="question-mark">?</span>;
+                    env.create_controller(hwnd, <span class="kw">move </span>|c| {
+                        <span class="kw">let </span>c = c<span class="question-mark">?</span>;
+                        <span class="kw">let </span><span class="kw-2">mut </span>r = <span class="kw">unsafe </span>{ std::mem::zeroed() };
+                        <span class="kw">unsafe </span>{
+                            GetClientRect(hwnd, <span class="kw-2">&amp;mut </span>r);
                         }
-                        <span class="ident">c</span>.<span class="ident">put_bounds</span>(<span class="ident">r</span>)<span class="question-mark">?</span>;
-                        <span class="kw">let</span> <span class="ident">w</span> <span class="op">=</span> <span class="ident">c</span>.<span class="ident">get_webview</span>()<span class="question-mark">?</span>;
-                        <span class="kw-2">*</span><span class="ident">c_webview_pid</span>.<span class="ident">borrow_mut</span>() <span class="op">=</span> <span class="ident">w</span>.<span class="ident">get_browser_process_id</span>()<span class="question-mark">?</span>;
-                        <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">w</span>.<span class="ident">get_settings</span>()<span class="question-mark">?</span>;
-                        <span class="ident">s</span>.<span class="ident">put_are_default_context_menus_enabled</span>(<span class="bool-val">false</span>)<span class="question-mark">?</span>;
-                        <span class="ident">s</span>.<span class="ident">put_are_dev_tools_enabled</span>(<span class="bool-val">false</span>)<span class="question-mark">?</span>;
-                        <span class="ident">s</span>.<span class="ident">put_is_built_in_error_page_enabled</span>(<span class="bool-val">false</span>)<span class="question-mark">?</span>;
-                        <span class="ident">w</span>.<span class="ident">add_navigation_starting</span>(<span class="kw">move</span> <span class="op">|</span><span class="kw">_</span>, <span class="ident">s</span><span class="op">|</span> {
-                            <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">callback</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">callback</span> {
-                                <span class="comment">// println!(&quot;Navigation starting&quot;);</span>
-                                <span class="comment">// println!(&quot;{:?}&quot;, s);</span>
-                                <span class="kw">let</span> <span class="ident">uri</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">get_uri</span>().<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="string">&quot;&quot;</span>.<span class="ident">into</span>());
-                                <span class="kw">if</span> <span class="ident">callback</span>(<span class="kw-2">&amp;</span><span class="ident">uri</span>) {
-                                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">url</span> <span class="op">=</span> <span class="ident">final_url</span>.<span class="ident">borrow_mut</span>();
-                                    <span class="kw-2">*</span><span class="ident">url</span> <span class="op">=</span> <span class="ident">uri</span>;
-                                    <span class="kw">unsafe</span> {
-                                        <span class="ident">DestroyWindow</span>(<span class="ident">hwnd</span>);
+                        c.put_bounds(r)<span class="question-mark">?</span>;
+                        <span class="kw">let </span>w = c.get_webview()<span class="question-mark">?</span>;
+                        <span class="kw-2">*</span>c_webview_pid.borrow_mut() = w.get_browser_process_id()<span class="question-mark">?</span>;
+                        <span class="kw">let </span>s = w.get_settings()<span class="question-mark">?</span>;
+                        s.put_are_default_context_menus_enabled(<span class="bool-val">false</span>)<span class="question-mark">?</span>;
+                        s.put_are_dev_tools_enabled(<span class="bool-val">false</span>)<span class="question-mark">?</span>;
+                        s.put_is_built_in_error_page_enabled(<span class="bool-val">false</span>)<span class="question-mark">?</span>;
+                        w.add_navigation_starting(<span class="kw">move </span>|<span class="kw">_</span>, s| {
+                            <span class="kw">if let </span><span class="prelude-val">Some</span>(callback) = <span class="kw-2">&amp;</span>callback {
+                                <span class="comment">// println!(&quot;Navigation starting&quot;);
+                                // println!(&quot;{:?}&quot;, s);
+                                </span><span class="kw">let </span>uri = s.get_uri().unwrap_or_else(|<span class="kw">_</span>| <span class="string">&quot;&quot;</span>.into());
+                                <span class="kw">if </span>callback(<span class="kw-2">&amp;</span>uri) {
+                                    <span class="kw">let </span><span class="kw-2">mut </span>url = final_url.borrow_mut();
+                                    <span class="kw-2">*</span>url = uri;
+                                    <span class="kw">unsafe </span>{
+                                        DestroyWindow(hwnd);
                                     }
                                 }
                             }
                             <span class="prelude-val">Ok</span>(())
                         })<span class="question-mark">?</span>;
-                        <span class="ident">w</span>.<span class="ident">navigate</span>(<span class="kw-2">&amp;</span><span class="ident">begin_url</span>)<span class="question-mark">?</span>;
-                        <span class="comment">// println!(&quot;Navigated to {}&quot;, begin_url);</span>
-                        <span class="ident">controller_clone</span>.<span class="ident">set</span>(<span class="ident">c</span>).<span class="ident">unwrap</span>();
+                        w.navigate(<span class="kw-2">&amp;</span>begin_url)<span class="question-mark">?</span>;
+                        <span class="comment">// println!(&quot;Navigated to {}&quot;, begin_url);
+                        </span>controller_clone.set(c).unwrap();
                         <span class="prelude-val">Ok</span>(())
                     })<span class="question-mark">?</span>;
                     <span class="prelude-val">Ok</span>(())
                 })<span class="question-mark">?</span>;
 
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">msg</span>: <span class="ident">MSG</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">std::mem::zeroed</span>() };
-            <span class="kw">while</span> <span class="kw">unsafe</span> { <span class="ident">GetMessageW</span>(<span class="kw-2">&amp;mut</span> <span class="ident">msg</span>, <span class="ident">std::ptr::null_mut</span>(), <span class="number">0</span>, <span class="number">0</span>) } <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                <span class="kw">unsafe</span> {
-                    <span class="ident">TranslateMessage</span>(<span class="kw-2">&amp;</span><span class="ident">msg</span>);
-                    <span class="ident">DispatchMessageW</span>(<span class="kw-2">&amp;</span><span class="ident">msg</span>);
+            <span class="kw">let </span><span class="kw-2">mut </span>msg: MSG = <span class="kw">unsafe </span>{ std::mem::zeroed() };
+            <span class="kw">while unsafe </span>{ GetMessageW(<span class="kw-2">&amp;mut </span>msg, std::ptr::null_mut(), <span class="number">0</span>, <span class="number">0</span>) } != <span class="number">0 </span>{
+                <span class="kw">unsafe </span>{
+                    TranslateMessage(<span class="kw-2">&amp;</span>msg);
+                    DispatchMessageW(<span class="kw-2">&amp;</span>msg);
                 }
             }
-            <span class="kw">unsafe</span> {
-                <span class="kw">if</span> <span class="ident">UnregisterClassW</span>(<span class="ident">class</span>.<span class="ident">lpszClassName</span>, <span class="ident">h_instance</span>) <span class="op">==</span> <span class="number">0</span> {
+            <span class="kw">unsafe </span>{
+                <span class="kw">if </span>UnregisterClassW(class.lpszClassName, h_instance) == <span class="number">0 </span>{
                     <span class="macro">panic!</span>(
                         <span class="string">&quot;UnregisterClassW failed: {}&quot;</span>,
-                        <span class="ident">std::io::Error::last_os_error</span>()
+                        std::io::Error::last_os_error()
                     );
                 }
             }
-            <span class="kw">let</span> <span class="ident">pid</span> <span class="op">=</span> <span class="ident">webview_pid</span>.<span class="ident">borrow</span>().<span class="ident">to_owned</span>();
-            <span class="kw">let</span> <span class="ident">user_data_path</span> <span class="op">=</span> <span class="ident">user_data_path</span>.<span class="ident">to_owned</span>();
-            <span class="ident">std::thread::spawn</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
+            <span class="kw">let </span>pid = webview_pid.borrow().to_owned();
+            <span class="kw">let </span>user_data_path = user_data_path.to_owned();
+            std::thread::spawn(<span class="kw">move </span>|| {
                 <span class="macro">println!</span>(<span class="string">&quot;Waiting WebView exitting&quot;</span>);
-                <span class="kw">unsafe</span> {
-                    <span class="kw">let</span> <span class="ident">ph</span> <span class="op">=</span> <span class="ident">OpenProcess</span>(<span class="ident">SYNCHRONIZE</span>, <span class="number">0</span>, <span class="ident">pid</span>);
-                    <span class="ident">WaitForSingleObject</span>(<span class="ident">ph</span>, <span class="ident">INFINITE</span>);
+                <span class="kw">unsafe </span>{
+                    <span class="kw">let </span>ph = OpenProcess(SYNCHRONIZE, <span class="number">0</span>, pid);
+                    WaitForSingleObject(ph, INFINITE);
                 }
                 <span class="macro">println!</span>(<span class="string">&quot;Removing WebView userdata&quot;</span>);
-                <span class="kw">while</span> <span class="ident">user_data_path</span>.<span class="ident">is_dir</span>() {
-                    <span class="ident">std::thread::sleep</span>(<span class="ident">std::time::Duration::from_millis</span>(<span class="number">100</span>));
-                    <span class="ident">std::fs::remove_dir_all</span>(<span class="kw-2">&amp;</span><span class="ident">user_data_path</span>).<span class="ident">unwrap_or_default</span>();
+                <span class="kw">while </span>user_data_path.is_dir() {
+                    std::thread::sleep(std::time::Duration::from_millis(<span class="number">100</span>));
+                    std::fs::remove_dir_all(<span class="kw-2">&amp;</span>user_data_path).unwrap_or_default();
                 }
             });
         }
-        <span class="kw">let</span> <span class="ident">url</span> <span class="op">=</span> <span class="ident">final_url</span>.<span class="ident">borrow</span>().<span class="ident">to_owned</span>();
-        <span class="prelude-val">Ok</span>(<span class="ident">url</span>)
+        <span class="kw">let </span>url = final_url.borrow().to_owned();
+        <span class="prelude-val">Ok</span>(url)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">WebView</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">fixed_size</span>: <span class="prelude-val">None</span>,
-            <span class="ident">title</span>: <span class="string">&quot;SCL - WebView2&quot;</span>.<span class="ident">into</span>(),
-            <span class="ident">begin_url</span>: <span class="string">&quot;http://afdian.net/@SteveXMH&quot;</span>.<span class="ident">into</span>(),
-            <span class="ident">url_change_callback</span>: <span class="prelude-val">None</span>,
+<span class="kw">impl </span>Default <span class="kw">for </span>WebView {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            fixed_size: <span class="prelude-val">None</span>,
+            title: <span class="string">&quot;SCL - WebView2&quot;</span>.into(),
+            begin_url: <span class="string">&quot;http://afdian.net/@SteveXMH&quot;</span>.into(),
+            url_change_callback: <span class="prelude-val">None</span>,
         }
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_os</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>)]</span>
-<span class="kw">mod</span> <span class="ident">wnd_proc_helper</span> {
-    <span class="kw">use</span> <span class="ident">std::cell::UnsafeCell</span>;
+<span class="attribute">#[cfg(target_os = <span class="string">&quot;windows&quot;</span>)]
+</span><span class="kw">mod </span>wnd_proc_helper {
+    <span class="kw">use </span>std::cell::UnsafeCell;
 
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
+    <span class="kw">use super</span>::<span class="kw-2">*</span>;
 
-    <span class="kw">struct</span> <span class="ident">UnsafeSyncCell</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="ident">inner</span>: <span class="ident">UnsafeCell</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+    <span class="kw">struct </span>UnsafeSyncCell&lt;T&gt; {
+        inner: UnsafeCell&lt;T&gt;,
     }
 
-    <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">UnsafeSyncCell</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">t</span>: <span class="ident">T</span>) -&gt; <span class="ident">UnsafeSyncCell</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-            <span class="ident">UnsafeSyncCell</span> {
-                <span class="ident">inner</span>: <span class="ident">UnsafeCell::new</span>(<span class="ident">t</span>),
+    <span class="kw">impl</span>&lt;T&gt; UnsafeSyncCell&lt;T&gt; {
+        <span class="kw">const fn </span>new(t: T) -&gt; UnsafeSyncCell&lt;T&gt; {
+            UnsafeSyncCell {
+                inner: UnsafeCell::new(t),
             }
         }
     }
 
-    <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span><span class="op">&gt;</span> <span class="ident">UnsafeSyncCell</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">T</span> {
-            <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">get</span>().<span class="ident">read</span>()
+    <span class="kw">impl</span>&lt;T: Copy&gt; UnsafeSyncCell&lt;T&gt; {
+        <span class="kw">unsafe fn </span>get(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; T {
+            <span class="self">self</span>.inner.get().read()
         }
 
-        <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">set</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="ident">T</span>) {
-            <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">get</span>().<span class="ident">write</span>(<span class="ident">v</span>)
+        <span class="kw">unsafe fn </span>set(<span class="kw-2">&amp;</span><span class="self">self</span>, v: T) {
+            <span class="self">self</span>.inner.get().write(v)
         }
     }
 
-    <span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Copy</span><span class="op">&gt;</span> <span class="ident">Sync</span> <span class="kw">for</span> <span class="ident">UnsafeSyncCell</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {}
+    <span class="kw">unsafe impl</span>&lt;T: Copy&gt; Sync <span class="kw">for </span>UnsafeSyncCell&lt;T&gt; {}
 
-    <span class="kw">static</span> <span class="ident">GLOBAL_F</span>: <span class="ident">UnsafeSyncCell</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">UnsafeSyncCell::new</span>(<span class="number">0</span>);
+    <span class="kw">static </span>GLOBAL_F: UnsafeSyncCell&lt;usize&gt; = UnsafeSyncCell::new(<span class="number">0</span>);
 
-    <span class="doccomment">/// Use a closure as window procedure.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The closure will be boxed and stored in a global variable. It will be</span>
-    <span class="doccomment">/// released upon WM_DESTROY. (It doesn&#39;t get to handle WM_DESTROY.)</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_global_wnd_proc</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">HWND</span>, <span class="ident">UINT</span>, <span class="ident">WPARAM</span>, <span class="ident">LPARAM</span>) -&gt; <span class="ident">isize</span> <span class="op">+</span> <span class="lifetime">&#39;static</span><span class="op">&gt;</span>(
-        <span class="ident">f</span>: <span class="ident">F</span>,
-    ) -&gt; <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span>(<span class="ident">hwnd</span>: <span class="ident">HWND</span>, <span class="ident">msg</span>: <span class="ident">UINT</span>, <span class="ident">w_param</span>: <span class="ident">WPARAM</span>, <span class="ident">l_param</span>: <span class="ident">LPARAM</span>) -&gt; <span class="ident">isize</span>
+    <span class="doccomment">/// Use a closure as window procedure.
+    ///
+    /// The closure will be boxed and stored in a global variable. It will be
+    /// released upon WM_DESTROY. (It doesn&#39;t get to handle WM_DESTROY.)
+    </span><span class="kw">pub unsafe fn </span>as_global_wnd_proc&lt;F: Fn(HWND, UINT, WPARAM, LPARAM) -&gt; isize + <span class="lifetime">&#39;static</span>&gt;(
+        f: F,
+    ) -&gt; <span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn</span>(hwnd: HWND, msg: UINT, w_param: WPARAM, l_param: LPARAM) -&gt; isize
     {
-        <span class="kw">let</span> <span class="ident">f_ptr</span> <span class="op">=</span> <span class="ident">Box::into_raw</span>(<span class="ident">Box::new</span>(<span class="ident">f</span>));
-        <span class="ident">GLOBAL_F</span>.<span class="ident">set</span>(<span class="ident">f_ptr</span> <span class="kw">as</span> <span class="ident">usize</span>);
+        <span class="kw">let </span>f_ptr = Box::into_raw(Box::new(f));
+        GLOBAL_F.set(f_ptr <span class="kw">as </span>usize);
 
-        <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span> <span class="ident">wnd_proc</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">HWND</span>, <span class="ident">UINT</span>, <span class="ident">WPARAM</span>, <span class="ident">LPARAM</span>) -&gt; <span class="ident">isize</span> <span class="op">+</span> <span class="lifetime">&#39;static</span><span class="op">&gt;</span>(
-            <span class="ident">hwnd</span>: <span class="ident">HWND</span>,
-            <span class="ident">msg</span>: <span class="ident">UINT</span>,
-            <span class="ident">w_param</span>: <span class="ident">WPARAM</span>,
-            <span class="ident">l_param</span>: <span class="ident">LPARAM</span>,
-        ) -&gt; <span class="ident">isize</span> {
-            <span class="kw">let</span> <span class="ident">f_ptr</span> <span class="op">=</span> <span class="ident">GLOBAL_F</span>.<span class="ident">get</span>() <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="ident">F</span>;
+        <span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn </span>wnd_proc&lt;F: Fn(HWND, UINT, WPARAM, LPARAM) -&gt; isize + <span class="lifetime">&#39;static</span>&gt;(
+            hwnd: HWND,
+            msg: UINT,
+            w_param: WPARAM,
+            l_param: LPARAM,
+        ) -&gt; isize {
+            <span class="kw">let </span>f_ptr = GLOBAL_F.get() <span class="kw">as </span><span class="kw-2">*mut </span>F;
 
-            <span class="kw">if</span> <span class="ident">msg</span> <span class="op">==</span> <span class="ident">WM_DESTROY</span> {
-                <span class="ident">drop</span>(<span class="ident">Box::from_raw</span>(<span class="ident">f_ptr</span>));
-                <span class="ident">GLOBAL_F</span>.<span class="ident">set</span>(<span class="number">0</span>);
-                <span class="ident">PostQuitMessage</span>(<span class="number">0</span>);
-                <span class="kw">return</span> <span class="number">0</span>;
+            <span class="kw">if </span>msg == WM_DESTROY {
+                drop(Box::from_raw(f_ptr));
+                GLOBAL_F.set(<span class="number">0</span>);
+                PostQuitMessage(<span class="number">0</span>);
+                <span class="kw">return </span><span class="number">0</span>;
             }
 
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">f_ptr</span>.<span class="ident">is_null</span>() {
-                <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">f_ptr</span>;
+            <span class="kw">if </span>!f_ptr.is_null() {
+                <span class="kw">let </span>f = <span class="kw-2">&amp;*</span>f_ptr;
 
-                <span class="ident">f</span>(<span class="ident">hwnd</span>, <span class="ident">msg</span>, <span class="ident">w_param</span>, <span class="ident">l_param</span>)
-            } <span class="kw">else</span> {
-                <span class="ident">DefWindowProcW</span>(<span class="ident">hwnd</span>, <span class="ident">msg</span>, <span class="ident">w_param</span>, <span class="ident">l_param</span>)
+                f(hwnd, msg, w_param, l_param)
+            } <span class="kw">else </span>{
+                DefWindowProcW(hwnd, msg, w_param, l_param)
             }
         }
 
-        <span class="ident">wnd_proc</span>::<span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>
+        wnd_proc::&lt;F&gt;
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="scl_webview" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="scl_webview" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

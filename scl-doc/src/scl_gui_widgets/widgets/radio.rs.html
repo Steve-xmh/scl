@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/radio.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>radio.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/radio.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>radio.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -266,273 +266,273 @@
 <span id="266">266</span>
 <span id="267">267</span>
 <span id="268">268</span>
-</pre><pre class="rust"><code><span class="doccomment">//! 一个单选框组件，修改自 [`druid::widget::Radio`] [`druid::widget::RadioGroup`]</span>
+</pre><pre class="rust"><code><span class="doccomment">//! 一个单选框组件，修改自 [`druid::widget::Radio`] [`druid::widget::RadioGroup`]
 
-<span class="kw">use</span> <span class="ident">druid</span>::{
-    <span class="ident">debug_state::DebugState</span>,
-    <span class="ident">kurbo::Circle</span>,
-    <span class="ident">theme</span>,
-    <span class="ident">widget</span>::{<span class="ident">prelude</span>::<span class="kw-2">*</span>, <span class="ident">Axis</span>, <span class="ident">CrossAxisAlignment</span>, <span class="ident">Flex</span>, <span class="ident">Label</span>, <span class="ident">LabelText</span>},
-    <span class="ident">Data</span>,
+</span><span class="kw">use </span>druid::{
+    debug_state::DebugState,
+    kurbo::Circle,
+    theme,
+    widget::{prelude::<span class="kw-2">*</span>, Axis, CrossAxisAlignment, Flex, Label, LabelText},
+    Data,
 };
-<span class="kw">use</span> <span class="ident">tracing</span>::{<span class="ident">instrument</span>, <span class="ident">trace</span>};
+<span class="kw">use </span>tracing::{instrument, trace};
 
-<span class="kw">const</span> <span class="ident">DEFAULT_RADIO_RADIUS</span>: <span class="ident">f64</span> <span class="op">=</span> (<span class="number">20.0</span> <span class="op">-</span> <span class="number">1.</span>) <span class="op">/</span> <span class="number">2.</span>;
-<span class="kw">const</span> <span class="ident">INNER_CIRCLE_RADIUS</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="number">6.0</span>;
-<span class="doccomment">/// A group of radio buttons</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RadioGroup</span>;
+<span class="kw">const </span>DEFAULT_RADIO_RADIUS: f64 = (<span class="number">20.0 </span>- <span class="number">1.</span>) / <span class="number">2.</span>;
+<span class="kw">const </span>INNER_CIRCLE_RADIUS: f64 = <span class="number">6.0</span>;
+<span class="doccomment">/// A group of radio buttons
+</span><span class="attribute">#[derive(Debug, Clone)]
+</span><span class="kw">pub struct </span>RadioGroup;
 
-<span class="kw">impl</span> <span class="ident">RadioGroup</span> {
-    <span class="doccomment">/// Given a vector of `(label_text, enum_variant)` tuples, create a group of Radio buttons</span>
-    <span class="doccomment">/// along the vertical axis.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">column</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Data</span> <span class="op">+</span> <span class="ident">PartialEq</span><span class="op">&gt;</span>(
-        <span class="ident">variants</span>: <span class="kw">impl</span> <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (<span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">LabelText</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>, <span class="ident">T</span>)<span class="op">&gt;</span>,
-    ) -&gt; <span class="kw">impl</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="ident">RadioGroup::for_axis</span>(<span class="ident">Axis::Vertical</span>, <span class="ident">variants</span>)
+<span class="kw">impl </span>RadioGroup {
+    <span class="doccomment">/// Given a vector of `(label_text, enum_variant)` tuples, create a group of Radio buttons
+    /// along the vertical axis.
+    </span><span class="kw">pub fn </span>column&lt;T: Data + PartialEq&gt;(
+        variants: <span class="kw">impl </span>IntoIterator&lt;Item = (<span class="kw">impl </span>Into&lt;LabelText&lt;T&gt;&gt; + <span class="lifetime">&#39;static</span>, T)&gt;,
+    ) -&gt; <span class="kw">impl </span>Widget&lt;T&gt; {
+        RadioGroup::for_axis(Axis::Vertical, variants)
     }
 
-    <span class="doccomment">/// Given a vector of `(label_text, enum_variant)` tuples, create a group of Radio buttons</span>
-    <span class="doccomment">/// along the horizontal axis.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">row</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Data</span> <span class="op">+</span> <span class="ident">PartialEq</span><span class="op">&gt;</span>(
-        <span class="ident">variants</span>: <span class="kw">impl</span> <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (<span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">LabelText</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>, <span class="ident">T</span>)<span class="op">&gt;</span>,
-    ) -&gt; <span class="kw">impl</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="ident">RadioGroup::for_axis</span>(<span class="ident">Axis::Horizontal</span>, <span class="ident">variants</span>)
+    <span class="doccomment">/// Given a vector of `(label_text, enum_variant)` tuples, create a group of Radio buttons
+    /// along the horizontal axis.
+    </span><span class="kw">pub fn </span>row&lt;T: Data + PartialEq&gt;(
+        variants: <span class="kw">impl </span>IntoIterator&lt;Item = (<span class="kw">impl </span>Into&lt;LabelText&lt;T&gt;&gt; + <span class="lifetime">&#39;static</span>, T)&gt;,
+    ) -&gt; <span class="kw">impl </span>Widget&lt;T&gt; {
+        RadioGroup::for_axis(Axis::Horizontal, variants)
     }
 
-    <span class="doccomment">/// Given a vector of `(label_text, enum_variant)` tuples, create a group of Radio buttons</span>
-    <span class="doccomment">/// along the specified axis.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">for_axis</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Data</span> <span class="op">+</span> <span class="ident">PartialEq</span><span class="op">&gt;</span>(
-        <span class="ident">axis</span>: <span class="ident">Axis</span>,
-        <span class="ident">variants</span>: <span class="kw">impl</span> <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (<span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">LabelText</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>, <span class="ident">T</span>)<span class="op">&gt;</span>,
-    ) -&gt; <span class="kw">impl</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">col</span> <span class="op">=</span> <span class="ident">Flex::for_axis</span>(<span class="ident">axis</span>).<span class="ident">cross_axis_alignment</span>(<span class="ident">CrossAxisAlignment::Start</span>);
-        <span class="kw">for</span> (<span class="ident">label</span>, <span class="ident">variant</span>) <span class="kw">in</span> <span class="ident">variants</span>.<span class="ident">into_iter</span>() {
-            <span class="kw">let</span> <span class="ident">radio</span> <span class="op">=</span> <span class="ident">Radio::new</span>(<span class="ident">label</span>, <span class="ident">variant</span>);
-            <span class="ident">col</span>.<span class="ident">add_child</span>(<span class="ident">radio</span>);
+    <span class="doccomment">/// Given a vector of `(label_text, enum_variant)` tuples, create a group of Radio buttons
+    /// along the specified axis.
+    </span><span class="kw">pub fn </span>for_axis&lt;T: Data + PartialEq&gt;(
+        axis: Axis,
+        variants: <span class="kw">impl </span>IntoIterator&lt;Item = (<span class="kw">impl </span>Into&lt;LabelText&lt;T&gt;&gt; + <span class="lifetime">&#39;static</span>, T)&gt;,
+    ) -&gt; <span class="kw">impl </span>Widget&lt;T&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>col = Flex::for_axis(axis).cross_axis_alignment(CrossAxisAlignment::Start);
+        <span class="kw">for </span>(label, variant) <span class="kw">in </span>variants.into_iter() {
+            <span class="kw">let </span>radio = Radio::new(label, variant);
+            col.add_child(radio);
         }
-        <span class="ident">col</span>
+        col
     }
 }
 
-<span class="doccomment">/// A single radio button</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Radio</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">variant</span>: <span class="ident">T</span>,
-    <span class="ident">inner_circle_target_radius</span>: <span class="ident">f64</span>,
-    <span class="ident">inner_circle_current_radius</span>: <span class="ident">f64</span>,
-    <span class="ident">label_height</span>: <span class="ident">f64</span>,
-    <span class="ident">child_label</span>: <span class="ident">Label</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+<span class="doccomment">/// A single radio button
+</span><span class="kw">pub struct </span>Radio&lt;T&gt; {
+    variant: T,
+    inner_circle_target_radius: f64,
+    inner_circle_current_radius: f64,
+    label_height: f64,
+    child_label: Label&lt;T&gt;,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Data</span><span class="op">&gt;</span> <span class="ident">Radio</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Create a lone Radio button from label text and an enum variant</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">label</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">LabelText</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">variant</span>: <span class="ident">T</span>) -&gt; <span class="ident">Radio</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="ident">Radio</span> {
-            <span class="ident">variant</span>,
-            <span class="ident">label_height</span>: <span class="number">0.</span>,
-            <span class="ident">inner_circle_target_radius</span>: <span class="number">0.</span>,
-            <span class="ident">inner_circle_current_radius</span>: <span class="number">0.</span>,
-            <span class="ident">child_label</span>: <span class="ident"><span class="kw">crate</span>::widgets::label::new</span>(<span class="ident">label</span>),
+<span class="kw">impl</span>&lt;T: Data&gt; Radio&lt;T&gt; {
+    <span class="doccomment">/// Create a lone Radio button from label text and an enum variant
+    </span><span class="kw">pub fn </span>new(label: <span class="kw">impl </span>Into&lt;LabelText&lt;T&gt;&gt;, variant: T) -&gt; Radio&lt;T&gt; {
+        Radio {
+            variant,
+            label_height: <span class="number">0.</span>,
+            inner_circle_target_radius: <span class="number">0.</span>,
+            inner_circle_current_radius: <span class="number">0.</span>,
+            child_label: <span class="kw">crate</span>::widgets::label::new(label),
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Data</span> <span class="op">+</span> <span class="ident">PartialEq</span><span class="op">&gt;</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Radio</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">instrument</span>(<span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;Radio&quot;</span>, <span class="ident">level</span> <span class="op">=</span> <span class="string">&quot;trace&quot;</span>, <span class="ident">skip</span>(<span class="self">self</span>, <span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">_env</span>))]</span>
-    <span class="kw">fn</span> <span class="ident">event</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EventCtx</span>, <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">Event</span>, <span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="ident">T</span>, <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">match</span> <span class="ident">event</span> {
-            <span class="ident">Event::MouseDown</span>(<span class="kw">_</span>) =&gt; {
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">ctx</span>.<span class="ident">is_disabled</span>() {
-                    <span class="kw">if</span> <span class="ident">data</span> <span class="op">==</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">variant</span> {
-                        <span class="self">self</span>.<span class="ident">inner_circle_target_radius</span> <span class="op">=</span> <span class="ident">INNER_CIRCLE_RADIUS</span> <span class="op">-</span> <span class="number">1.</span>;
-                    } <span class="kw">else</span> {
-                        <span class="self">self</span>.<span class="ident">inner_circle_target_radius</span> <span class="op">=</span> <span class="ident">INNER_CIRCLE_RADIUS</span>;
+<span class="kw">impl</span>&lt;T: Data + PartialEq&gt; Widget&lt;T&gt; <span class="kw">for </span>Radio&lt;T&gt; {
+    <span class="attribute">#[instrument(name = <span class="string">&quot;Radio&quot;</span>, level = <span class="string">&quot;trace&quot;</span>, skip(<span class="self">self</span>, ctx, event, data, _env))]
+    </span><span class="kw">fn </span>event(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>EventCtx, event: <span class="kw-2">&amp;</span>Event, data: <span class="kw-2">&amp;mut </span>T, _env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">match </span>event {
+            Event::MouseDown(<span class="kw">_</span>) =&gt; {
+                <span class="kw">if </span>!ctx.is_disabled() {
+                    <span class="kw">if </span>data == <span class="kw-2">&amp;</span><span class="self">self</span>.variant {
+                        <span class="self">self</span>.inner_circle_target_radius = INNER_CIRCLE_RADIUS - <span class="number">1.</span>;
+                    } <span class="kw">else </span>{
+                        <span class="self">self</span>.inner_circle_target_radius = INNER_CIRCLE_RADIUS;
                     }
-                    <span class="ident">ctx</span>.<span class="ident">set_active</span>(<span class="bool-val">true</span>);
-                    <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
-                    <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
-                    <span class="macro">trace!</span>(<span class="string">&quot;Radio button {:?} pressed&quot;</span>, <span class="ident">ctx</span>.<span class="ident">widget_id</span>());
+                    ctx.set_active(<span class="bool-val">true</span>);
+                    ctx.request_anim_frame();
+                    ctx.request_paint();
+                    <span class="macro">trace!</span>(<span class="string">&quot;Radio button {:?} pressed&quot;</span>, ctx.widget_id());
                 }
             }
-            <span class="ident">Event::MouseUp</span>(<span class="kw">_</span>) =&gt; {
-                <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_active</span>() <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">ctx</span>.<span class="ident">is_disabled</span>() <span class="op">&amp;&amp;</span> <span class="ident">ctx</span>.<span class="ident">is_hot</span>() {
-                    <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_active</span>() {
-                        <span class="kw-2">*</span><span class="ident">data</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">variant</span>.<span class="ident">clone</span>();
+            Event::MouseUp(<span class="kw">_</span>) =&gt; {
+                <span class="kw">if </span>ctx.is_active() &amp;&amp; !ctx.is_disabled() &amp;&amp; ctx.is_hot() {
+                    <span class="kw">if </span>ctx.is_active() {
+                        <span class="kw-2">*</span>data = <span class="self">self</span>.variant.clone();
                     }
-                    <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_hot</span>() {
-                        <span class="self">self</span>.<span class="ident">inner_circle_target_radius</span> <span class="op">=</span> <span class="ident">INNER_CIRCLE_RADIUS</span>;
+                    <span class="kw">if </span>ctx.is_hot() {
+                        <span class="self">self</span>.inner_circle_target_radius = INNER_CIRCLE_RADIUS;
                     }
-                    <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
-                    <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
-                    <span class="macro">trace!</span>(<span class="string">&quot;Radio button {:?} released&quot;</span>, <span class="ident">ctx</span>.<span class="ident">widget_id</span>());
+                    ctx.request_anim_frame();
+                    ctx.request_paint();
+                    <span class="macro">trace!</span>(<span class="string">&quot;Radio button {:?} released&quot;</span>, ctx.widget_id());
                 }
-                <span class="ident">ctx</span>.<span class="ident">set_active</span>(<span class="bool-val">false</span>);
+                ctx.set_active(<span class="bool-val">false</span>);
             }
-            <span class="ident">Event::AnimFrame</span>(<span class="kw">_</span>) =&gt; {
-                <span class="self">self</span>.<span class="ident">inner_circle_current_radius</span> <span class="op">+</span><span class="op">=</span>
-                    (<span class="self">self</span>.<span class="ident">inner_circle_target_radius</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">inner_circle_current_radius</span>) <span class="op">/</span> <span class="number">3.</span>;
-                <span class="kw">if</span> (<span class="self">self</span>.<span class="ident">inner_circle_target_radius</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">inner_circle_current_radius</span>).<span class="ident">abs</span>()
-                    <span class="op">&gt;</span> <span class="ident">f64::EPSILON</span>
+            Event::AnimFrame(<span class="kw">_</span>) =&gt; {
+                <span class="self">self</span>.inner_circle_current_radius +=
+                    (<span class="self">self</span>.inner_circle_target_radius - <span class="self">self</span>.inner_circle_current_radius) / <span class="number">3.</span>;
+                <span class="kw">if </span>(<span class="self">self</span>.inner_circle_target_radius - <span class="self">self</span>.inner_circle_current_radius).abs()
+                    &gt; f64::EPSILON
                 {
-                    <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
+                    ctx.request_anim_frame();
                 }
-                <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+                ctx.request_paint();
             }
-            <span class="kw">_</span> =&gt; (),
+            <span class="kw">_ </span>=&gt; (),
         }
     }
 
-    <span class="attribute">#[<span class="ident">instrument</span>(<span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;Radio&quot;</span>, <span class="ident">level</span> <span class="op">=</span> <span class="string">&quot;trace&quot;</span>, <span class="ident">skip</span>(<span class="self">self</span>, <span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>))]</span>
-    <span class="kw">fn</span> <span class="ident">lifecycle</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LifeCycleCtx</span>, <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">LifeCycle</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="self">self</span>.<span class="ident">child_label</span>.<span class="ident">lifecycle</span>(<span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>);
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">LifeCycle::HotChanged</span>(<span class="kw">_</span>) <span class="op">|</span> <span class="ident">LifeCycle::DisabledChanged</span>(<span class="kw">_</span>) <span class="op">=</span> <span class="ident">event</span> {
-            <span class="kw">let</span> <span class="ident">target_radius</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">data</span> <span class="op">==</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">variant</span> {
-                <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_active</span>() {
-                    <span class="ident">INNER_CIRCLE_RADIUS</span> <span class="op">+</span> <span class="number">0.5</span>
-                } <span class="kw">else</span> {
-                    <span class="ident">INNER_CIRCLE_RADIUS</span>
+    <span class="attribute">#[instrument(name = <span class="string">&quot;Radio&quot;</span>, level = <span class="string">&quot;trace&quot;</span>, skip(<span class="self">self</span>, ctx, event, data, env))]
+    </span><span class="kw">fn </span>lifecycle(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>LifeCycleCtx, event: <span class="kw-2">&amp;</span>LifeCycle, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="self">self</span>.child_label.lifecycle(ctx, event, data, env);
+        <span class="kw">if let </span>LifeCycle::HotChanged(<span class="kw">_</span>) | LifeCycle::DisabledChanged(<span class="kw">_</span>) = event {
+            <span class="kw">let </span>target_radius = <span class="kw">if </span>data == <span class="kw-2">&amp;</span><span class="self">self</span>.variant {
+                <span class="kw">if </span>ctx.is_active() {
+                    INNER_CIRCLE_RADIUS + <span class="number">0.5
+                </span>} <span class="kw">else </span>{
+                    INNER_CIRCLE_RADIUS
                 }
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_active</span>() {
-                <span class="ident">INNER_CIRCLE_RADIUS</span>
-            } <span class="kw">else</span> {
-                <span class="number">0.</span>
-            };
-            <span class="kw">if</span> (<span class="self">self</span>.<span class="ident">inner_circle_target_radius</span> <span class="op">-</span> <span class="ident">target_radius</span>).<span class="ident">abs</span>() <span class="op">&gt;</span> <span class="ident">f64::EPSILON</span> {
-                <span class="self">self</span>.<span class="ident">inner_circle_target_radius</span> <span class="op">=</span> <span class="ident">target_radius</span>;
-                <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
+            } <span class="kw">else if </span>ctx.is_active() {
+                INNER_CIRCLE_RADIUS
+            } <span class="kw">else </span>{
+                <span class="number">0.
+            </span>};
+            <span class="kw">if </span>(<span class="self">self</span>.inner_circle_target_radius - target_radius).abs() &gt; f64::EPSILON {
+                <span class="self">self</span>.inner_circle_target_radius = target_radius;
+                ctx.request_anim_frame();
             }
-            <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="ident">LifeCycle::WidgetAdded</span> <span class="op">=</span> <span class="ident">event</span> {
-            <span class="self">self</span>.<span class="ident">inner_circle_target_radius</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">data</span> <span class="op">==</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">variant</span> {
-                <span class="ident">INNER_CIRCLE_RADIUS</span>
-            } <span class="kw">else</span> {
-                <span class="number">0.</span>
-            };
-            <span class="self">self</span>.<span class="ident">inner_circle_current_radius</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner_circle_target_radius</span>;
+            ctx.request_paint();
+        } <span class="kw">else if let </span>LifeCycle::WidgetAdded = event {
+            <span class="self">self</span>.inner_circle_target_radius = <span class="kw">if </span>data == <span class="kw-2">&amp;</span><span class="self">self</span>.variant {
+                INNER_CIRCLE_RADIUS
+            } <span class="kw">else </span>{
+                <span class="number">0.
+            </span>};
+            <span class="self">self</span>.inner_circle_current_radius = <span class="self">self</span>.inner_circle_target_radius;
         }
     }
 
-    <span class="attribute">#[<span class="ident">instrument</span>(<span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;Radio&quot;</span>, <span class="ident">level</span> <span class="op">=</span> <span class="string">&quot;trace&quot;</span>, <span class="ident">skip</span>(<span class="self">self</span>, <span class="ident">ctx</span>, <span class="ident">old_data</span>, <span class="ident">data</span>, <span class="ident">env</span>))]</span>
-    <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">UpdateCtx</span>, <span class="ident">old_data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="self">self</span>.<span class="ident">child_label</span>.<span class="ident">update</span>(<span class="ident">ctx</span>, <span class="ident">old_data</span>, <span class="ident">data</span>, <span class="ident">env</span>);
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">old_data</span>.<span class="ident">same</span>(<span class="ident">data</span>) {
-            <span class="kw">let</span> <span class="ident">target_radius</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">data</span> <span class="op">==</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">variant</span> {
-                <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_active</span>() {
-                    <span class="ident">INNER_CIRCLE_RADIUS</span> <span class="op">+</span> <span class="number">0.5</span>
-                } <span class="kw">else</span> {
-                    <span class="ident">INNER_CIRCLE_RADIUS</span>
+    <span class="attribute">#[instrument(name = <span class="string">&quot;Radio&quot;</span>, level = <span class="string">&quot;trace&quot;</span>, skip(<span class="self">self</span>, ctx, old_data, data, env))]
+    </span><span class="kw">fn </span>update(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>UpdateCtx, old_data: <span class="kw-2">&amp;</span>T, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="self">self</span>.child_label.update(ctx, old_data, data, env);
+        <span class="kw">if </span>!old_data.same(data) {
+            <span class="kw">let </span>target_radius = <span class="kw">if </span>data == <span class="kw-2">&amp;</span><span class="self">self</span>.variant {
+                <span class="kw">if </span>ctx.is_active() {
+                    INNER_CIRCLE_RADIUS + <span class="number">0.5
+                </span>} <span class="kw">else </span>{
+                    INNER_CIRCLE_RADIUS
                 }
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_active</span>() {
-                <span class="ident">INNER_CIRCLE_RADIUS</span>
-            } <span class="kw">else</span> {
-                <span class="number">0.</span>
-            };
-            <span class="kw">if</span> (<span class="self">self</span>.<span class="ident">inner_circle_target_radius</span> <span class="op">-</span> <span class="ident">target_radius</span>).<span class="ident">abs</span>() <span class="op">&gt;</span> <span class="ident">f64::EPSILON</span> {
-                <span class="self">self</span>.<span class="ident">inner_circle_target_radius</span> <span class="op">=</span> <span class="ident">target_radius</span>;
-                <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
+            } <span class="kw">else if </span>ctx.is_active() {
+                INNER_CIRCLE_RADIUS
+            } <span class="kw">else </span>{
+                <span class="number">0.
+            </span>};
+            <span class="kw">if </span>(<span class="self">self</span>.inner_circle_target_radius - target_radius).abs() &gt; f64::EPSILON {
+                <span class="self">self</span>.inner_circle_target_radius = target_radius;
+                ctx.request_anim_frame();
             }
-            <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+            ctx.request_paint();
         }
     }
 
-    <span class="attribute">#[<span class="ident">instrument</span>(<span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;Radio&quot;</span>, <span class="ident">level</span> <span class="op">=</span> <span class="string">&quot;trace&quot;</span>, <span class="ident">skip</span>(<span class="self">self</span>, <span class="ident">ctx</span>, <span class="ident">bc</span>, <span class="ident">data</span>, <span class="ident">env</span>))]</span>
-    <span class="kw">fn</span> <span class="ident">layout</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LayoutCtx</span>, <span class="ident">bc</span>: <span class="kw-2">&amp;</span><span class="ident">BoxConstraints</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) -&gt; <span class="ident">Size</span> {
-        <span class="ident">bc</span>.<span class="ident">debug_check</span>(<span class="string">&quot;Radio&quot;</span>);
-        <span class="kw">let</span> <span class="ident">radio_diam</span> <span class="op">=</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">theme::BASIC_WIDGET_HEIGHT</span>);
-        <span class="kw">let</span> <span class="ident">x_padding</span> <span class="op">=</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">theme::WIDGET_CONTROL_COMPONENT_PADDING</span>);
+    <span class="attribute">#[instrument(name = <span class="string">&quot;Radio&quot;</span>, level = <span class="string">&quot;trace&quot;</span>, skip(<span class="self">self</span>, ctx, bc, data, env))]
+    </span><span class="kw">fn </span>layout(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>LayoutCtx, bc: <span class="kw-2">&amp;</span>BoxConstraints, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) -&gt; Size {
+        bc.debug_check(<span class="string">&quot;Radio&quot;</span>);
+        <span class="kw">let </span>radio_diam = env.get(theme::BASIC_WIDGET_HEIGHT);
+        <span class="kw">let </span>x_padding = env.get(theme::WIDGET_CONTROL_COMPONENT_PADDING);
 
-        <span class="kw">let</span> <span class="ident">label_size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">child_label</span>.<span class="ident">layout</span>(
-            <span class="ident">ctx</span>,
-            <span class="kw-2">&amp;</span><span class="ident">bc</span>.<span class="ident">shrink</span>((
-                ((<span class="ident">DEFAULT_RADIO_RADIUS</span> <span class="op">+</span> <span class="ident">x_padding</span>) <span class="op">*</span> <span class="number">2.</span> <span class="op">+</span> <span class="ident">x_padding</span>).<span class="ident">max</span>(<span class="number">32.</span>),
+        <span class="kw">let </span>label_size = <span class="self">self</span>.child_label.layout(
+            ctx,
+            <span class="kw-2">&amp;</span>bc.shrink((
+                ((DEFAULT_RADIO_RADIUS + x_padding) * <span class="number">2. </span>+ x_padding).max(<span class="number">32.</span>),
                 <span class="number">0.</span>,
             )),
-            <span class="ident">data</span>,
-            <span class="ident">env</span>,
+            data,
+            env,
         );
 
-        <span class="self">self</span>.<span class="ident">label_height</span> <span class="op">=</span> <span class="ident">label_size</span>.<span class="ident">height</span>;
+        <span class="self">self</span>.label_height = label_size.height;
 
-        <span class="kw">let</span> <span class="ident">desired_size</span> <span class="op">=</span> <span class="ident">Size::new</span>(
-            <span class="ident">label_size</span>.<span class="ident">width</span> <span class="op">+</span> <span class="ident">radio_diam</span> <span class="op">+</span> <span class="ident">x_padding</span>,
-            <span class="ident">radio_diam</span>.<span class="ident">max</span>(<span class="ident">label_size</span>.<span class="ident">height</span>).<span class="ident">max</span>(<span class="number">32.</span>),
+        <span class="kw">let </span>desired_size = Size::new(
+            label_size.width + radio_diam + x_padding,
+            radio_diam.max(label_size.height).max(<span class="number">32.</span>),
         );
-        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">bc</span>.<span class="ident">constrain</span>(<span class="ident">desired_size</span>);
-        <span class="macro">trace!</span>(<span class="string">&quot;Computed size: {}&quot;</span>, <span class="ident">size</span>);
-        <span class="ident">size</span>
+        <span class="kw">let </span>size = bc.constrain(desired_size);
+        <span class="macro">trace!</span>(<span class="string">&quot;Computed size: {}&quot;</span>, size);
+        size
     }
 
-    <span class="attribute">#[<span class="ident">instrument</span>(<span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;Radio&quot;</span>, <span class="ident">level</span> <span class="op">=</span> <span class="string">&quot;trace&quot;</span>, <span class="ident">skip</span>(<span class="self">self</span>, <span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>))]</span>
-    <span class="kw">fn</span> <span class="ident">paint</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">PaintCtx</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">size</span>();
-        <span class="kw">let</span> <span class="ident">is_dark</span> <span class="op">=</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::main::IS_DARK</span>);
-        <span class="kw">let</span> <span class="ident">x_padding</span> <span class="op">=</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">theme::WIDGET_CONTROL_COMPONENT_PADDING</span>);
+    <span class="attribute">#[instrument(name = <span class="string">&quot;Radio&quot;</span>, level = <span class="string">&quot;trace&quot;</span>, skip(<span class="self">self</span>, ctx, data, env))]
+    </span><span class="kw">fn </span>paint(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>PaintCtx, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">let </span>size = ctx.size();
+        <span class="kw">let </span>is_dark = env.get(<span class="kw">crate</span>::theme::color::main::IS_DARK);
+        <span class="kw">let </span>x_padding = env.get(theme::WIDGET_CONTROL_COMPONENT_PADDING);
 
-        <span class="kw">let</span> <span class="ident">circle_x</span> <span class="op">=</span> (<span class="ident">size</span>.<span class="ident">height</span> <span class="op">/</span> <span class="number">2.</span>).<span class="ident">min</span>(<span class="ident">DEFAULT_RADIO_RADIUS</span>) <span class="op">+</span> <span class="ident">x_padding</span>;
-        <span class="kw">let</span> <span class="ident">circle_y</span> <span class="op">=</span> <span class="ident">size</span>.<span class="ident">height</span> <span class="op">/</span> <span class="number">2.</span>;
+        <span class="kw">let </span>circle_x = (size.height / <span class="number">2.</span>).min(DEFAULT_RADIO_RADIUS) + x_padding;
+        <span class="kw">let </span>circle_y = size.height / <span class="number">2.</span>;
 
-        <span class="kw">let</span> <span class="ident">circle</span> <span class="op">=</span> <span class="ident">Circle::new</span>((<span class="ident">circle_x</span>, <span class="ident">circle_y</span>), <span class="ident">DEFAULT_RADIO_RADIUS</span>);
+        <span class="kw">let </span>circle = Circle::new((circle_x, circle_y), DEFAULT_RADIO_RADIUS);
 
-        <span class="comment">// Paint the background</span>
+        <span class="comment">// Paint the background
 
-        <span class="kw">let</span> <span class="ident">is_matched</span> <span class="op">=</span> <span class="ident">data</span> <span class="op">==</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">variant</span>;
+        </span><span class="kw">let </span>is_matched = data == <span class="kw-2">&amp;</span><span class="self">self</span>.variant;
 
-        <span class="kw">let</span> <span class="ident">background_color</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">is_matched</span> {
-            <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::accent::ACCENT</span>)
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_active</span>() {
-            <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::base::MEDIUM_LOW</span>)
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_hot</span>() {
-            <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::base::LOW</span>)
-        } <span class="kw">else</span> {
-            <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::alt::LOW</span>)
+        <span class="kw">let </span>background_color = <span class="kw">if </span>is_matched {
+            env.get(<span class="kw">crate</span>::theme::color::accent::ACCENT)
+        } <span class="kw">else if </span>ctx.is_active() {
+            env.get(<span class="kw">crate</span>::theme::color::base::MEDIUM_LOW)
+        } <span class="kw">else if </span>ctx.is_hot() {
+            env.get(<span class="kw">crate</span>::theme::color::base::LOW)
+        } <span class="kw">else </span>{
+            env.get(<span class="kw">crate</span>::theme::color::alt::LOW)
         };
 
-        <span class="ident">ctx</span>.<span class="ident">fill</span>(<span class="ident">circle</span>, <span class="kw-2">&amp;</span><span class="ident">background_color</span>);
+        ctx.fill(circle, <span class="kw-2">&amp;</span>background_color);
 
-        <span class="kw">let</span> <span class="ident">border_color</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">is_dark</span> {
-            <span class="kw">if</span> <span class="ident">is_matched</span> {
-                <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::accent::ACCENT</span>)
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_active</span>() {
-                <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::base::MEDIUM</span>)
-            } <span class="kw">else</span> {
-                <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::base::LOW</span>)
+        <span class="kw">let </span>border_color = <span class="kw">if </span>is_dark {
+            <span class="kw">if </span>is_matched {
+                env.get(<span class="kw">crate</span>::theme::color::accent::ACCENT)
+            } <span class="kw">else if </span>ctx.is_active() {
+                env.get(<span class="kw">crate</span>::theme::color::base::MEDIUM)
+            } <span class="kw">else </span>{
+                env.get(<span class="kw">crate</span>::theme::color::base::LOW)
             }
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">is_matched</span> {
-            <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::accent::ACCENT</span>)
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_active</span>() {
-            <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::base::MEDIUM_HIGH</span>)
-        } <span class="kw">else</span> {
-            <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::base::MEDIUM_LOW</span>)
+        } <span class="kw">else if </span>is_matched {
+            env.get(<span class="kw">crate</span>::theme::color::accent::ACCENT)
+        } <span class="kw">else if </span>ctx.is_active() {
+            env.get(<span class="kw">crate</span>::theme::color::base::MEDIUM_HIGH)
+        } <span class="kw">else </span>{
+            env.get(<span class="kw">crate</span>::theme::color::base::MEDIUM_LOW)
         };
 
-        <span class="ident">ctx</span>.<span class="ident">stroke</span>(<span class="ident">circle</span>, <span class="kw-2">&amp;</span><span class="ident">border_color</span>, <span class="number">1.</span>);
+        ctx.stroke(circle, <span class="kw-2">&amp;</span>border_color, <span class="number">1.</span>);
 
-        <span class="kw">let</span> <span class="ident">inner_circle</span> <span class="op">=</span> <span class="ident">Circle::new</span>((<span class="ident">circle_x</span>, <span class="ident">circle_y</span>), <span class="self">self</span>.<span class="ident">inner_circle_current_radius</span>);
+        <span class="kw">let </span>inner_circle = Circle::new((circle_x, circle_y), <span class="self">self</span>.inner_circle_current_radius);
 
-        <span class="ident">ctx</span>.<span class="ident">fill</span>(<span class="ident">inner_circle</span>, <span class="kw-2">&amp;</span><span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::alt::HIGH</span>));
+        ctx.fill(inner_circle, <span class="kw-2">&amp;</span>env.get(<span class="kw">crate</span>::theme::color::alt::HIGH));
 
-        <span class="comment">// Paint the text label</span>
-        <span class="self">self</span>.<span class="ident">child_label</span>.<span class="ident">draw_at</span>(
-            <span class="ident">ctx</span>,
+        <span class="comment">// Paint the text label
+        </span><span class="self">self</span>.child_label.draw_at(
+            ctx,
             (
-                (<span class="ident">circle_x</span> <span class="op">+</span> <span class="ident">INNER_CIRCLE_RADIUS</span> <span class="op">+</span> <span class="ident">x_padding</span> <span class="op">*</span> <span class="number">2.</span>).<span class="ident">max</span>(<span class="number">32.</span>),
-                (<span class="ident">size</span>.<span class="ident">height</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">label_height</span>) <span class="op">/</span> <span class="number">2.</span>,
+                (circle_x + INNER_CIRCLE_RADIUS + x_padding * <span class="number">2.</span>).max(<span class="number">32.</span>),
+                (size.height - <span class="self">self</span>.label_height) / <span class="number">2.</span>,
             ),
         );
     }
 
-    <span class="kw">fn</span> <span class="ident">debug_state</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>) -&gt; <span class="ident">DebugState</span> {
-        <span class="kw">let</span> <span class="ident">value_text</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">data</span> <span class="op">==</span> <span class="self">self</span>.<span class="ident">variant</span> {
-            <span class="macro">format!</span>(<span class="string">&quot;[X] {}&quot;</span>, <span class="self">self</span>.<span class="ident">child_label</span>.<span class="ident">text</span>())
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">child_label</span>.<span class="ident">text</span>().<span class="ident">to_string</span>()
+    <span class="kw">fn </span>debug_state(<span class="kw-2">&amp;</span><span class="self">self</span>, data: <span class="kw-2">&amp;</span>T) -&gt; DebugState {
+        <span class="kw">let </span>value_text = <span class="kw">if </span><span class="kw-2">*</span>data == <span class="self">self</span>.variant {
+            <span class="macro">format!</span>(<span class="string">&quot;[X] {}&quot;</span>, <span class="self">self</span>.child_label.text())
+        } <span class="kw">else </span>{
+            <span class="self">self</span>.child_label.text().to_string()
         };
-        <span class="ident">DebugState</span> {
-            <span class="ident">display_name</span>: <span class="self">self</span>.<span class="ident">short_type_name</span>().<span class="ident">to_string</span>(),
-            <span class="ident">main_value</span>: <span class="ident">value_text</span>,
-            ..<span class="ident">Default::default</span>()
+        DebugState {
+            display_name: <span class="self">self</span>.short_type_name().to_string(),
+            main_value: value_text,
+            ..Default::default()
         }
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

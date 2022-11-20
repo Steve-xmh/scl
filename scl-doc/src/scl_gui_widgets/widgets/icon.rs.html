@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/icon.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>icon.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/icon.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>icon.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -115,122 +115,122 @@
 <span id="115">115</span>
 <span id="116">116</span>
 <span id="117">117</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">druid</span>::{
-    <span class="ident">kurbo</span>::{<span class="ident">BezPath</span>, <span class="ident">Shape</span>},
-    <span class="ident">piet</span>::{<span class="ident">PaintBrush</span>, <span class="ident">TextStorage</span>},
-    <span class="ident">Affine</span>, <span class="ident">ArcStr</span>, <span class="ident">Color</span>, <span class="ident">Data</span>, <span class="ident">Env</span>, <span class="ident">Key</span>, <span class="ident">LifeCycle</span>, <span class="ident">RenderContext</span>, <span class="ident">Widget</span>,
+</pre><pre class="rust"><code><span class="kw">use </span>druid::{
+    kurbo::{BezPath, Shape},
+    piet::{PaintBrush, TextStorage},
+    Affine, ArcStr, Color, Data, Env, Key, LifeCycle, RenderContext, Widget,
 };
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::theme::icons::IconKeyPair</span>;
+<span class="kw">use </span><span class="kw">crate</span>::theme::icons::IconKeyPair;
 
-<span class="doccomment">/// 一个图标组件，可以静态显示一个图标，也可以根据数据更新回调返回的图标键组 [`crate::theme::icons::IconKeyPair`] 显示矢量路径填充的图标</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Icon</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">callback</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="kw-2">&amp;</span><span class="ident">Env</span>) -&gt; <span class="ident">IconKeyPair</span><span class="op">&gt;</span>,
-    <span class="ident">icon_key</span>: <span class="ident">Key</span><span class="op">&lt;</span><span class="ident">ArcStr</span><span class="op">&gt;</span>,
-    <span class="ident">icon_color_key</span>: (<span class="ident">Key</span><span class="op">&lt;</span><span class="ident">Color</span><span class="op">&gt;</span>, <span class="ident">Key</span><span class="op">&lt;</span><span class="ident">Color</span><span class="op">&gt;</span>),
-    <span class="ident">icon_path</span>: <span class="ident">BezPath</span>,
-    <span class="ident">brush</span>: <span class="ident">PaintBrush</span>,
+<span class="doccomment">/// 一个图标组件，可以静态显示一个图标，也可以根据数据更新回调返回的图标键组 [`crate::theme::icons::IconKeyPair`] 显示矢量路径填充的图标
+</span><span class="kw">pub struct </span>Icon&lt;T&gt; {
+    callback: <span class="prelude-ty">Option</span>&lt;<span class="kw">fn</span>(<span class="kw-2">&amp;</span>T, <span class="kw-2">&amp;</span>Env) -&gt; IconKeyPair&gt;,
+    icon_key: Key&lt;ArcStr&gt;,
+    icon_color_key: (Key&lt;Color&gt;, Key&lt;Color&gt;),
+    icon_path: BezPath,
+    brush: PaintBrush,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Icon</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// 根据图标键组 [`crate::theme::icons::IconKeyPair`] 创建一个静态的图标组件</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">icon_key_pair</span>: <span class="ident">IconKeyPair</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">icon_key</span>: <span class="ident">icon_key_pair</span>.<span class="number">0</span>,
-            <span class="ident">icon_color_key</span>: (<span class="ident">icon_key_pair</span>.<span class="number">1</span>, <span class="ident">icon_key_pair</span>.<span class="number">2</span>),
-            <span class="ident">icon_path</span>: <span class="ident">BezPath::new</span>(),
-            <span class="ident">brush</span>: <span class="ident">PaintBrush::Color</span>(<span class="ident">Color::BLACK</span>),
-            <span class="ident">callback</span>: <span class="prelude-val">None</span>,
+<span class="kw">impl</span>&lt;T&gt; Icon&lt;T&gt; {
+    <span class="doccomment">/// 根据图标键组 [`crate::theme::icons::IconKeyPair`] 创建一个静态的图标组件
+    </span><span class="kw">pub fn </span>new(icon_key_pair: IconKeyPair) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            icon_key: icon_key_pair.<span class="number">0</span>,
+            icon_color_key: (icon_key_pair.<span class="number">1</span>, icon_key_pair.<span class="number">2</span>),
+            icon_path: BezPath::new(),
+            brush: PaintBrush::Color(Color::BLACK),
+            callback: <span class="prelude-val">None</span>,
         }
     }
 
-    <span class="doccomment">/// 根据数据更新回调返回的图标键组 [`crate::theme::icons::IconKeyPair`] 创建一个动态的图标组件</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">dynamic</span>(<span class="ident">callback</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="kw-2">&amp;</span><span class="ident">Env</span>) -&gt; <span class="ident">IconKeyPair</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">icon_key</span>: <span class="ident"><span class="kw">crate</span>::theme::icons::EMPTY</span>.<span class="number">0</span>,
-            <span class="ident">icon_color_key</span>: (<span class="ident"><span class="kw">crate</span>::theme::icons::EMPTY</span>.<span class="number">1</span>, <span class="ident"><span class="kw">crate</span>::theme::icons::EMPTY</span>.<span class="number">2</span>),
-            <span class="ident">icon_path</span>: <span class="ident">BezPath::new</span>(),
-            <span class="ident">brush</span>: <span class="ident">PaintBrush::Color</span>(<span class="ident">Color::BLACK</span>),
-            <span class="ident">callback</span>: <span class="prelude-val">Some</span>(<span class="ident">callback</span>),
+    <span class="doccomment">/// 根据数据更新回调返回的图标键组 [`crate::theme::icons::IconKeyPair`] 创建一个动态的图标组件
+    </span><span class="kw">pub fn </span>dynamic(callback: <span class="kw">fn</span>(<span class="kw-2">&amp;</span>T, <span class="kw-2">&amp;</span>Env) -&gt; IconKeyPair) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            icon_key: <span class="kw">crate</span>::theme::icons::EMPTY.<span class="number">0</span>,
+            icon_color_key: (<span class="kw">crate</span>::theme::icons::EMPTY.<span class="number">1</span>, <span class="kw">crate</span>::theme::icons::EMPTY.<span class="number">2</span>),
+            icon_path: BezPath::new(),
+            brush: PaintBrush::Color(Color::BLACK),
+            callback: <span class="prelude-val">Some</span>(callback),
         }
     }
 
-    <span class="doccomment">/// Use accent color as button color</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_brush</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="ident">PaintBrush</span>) {
-        <span class="self">self</span>.<span class="ident">brush</span> <span class="op">=</span> <span class="ident">value</span>;
+    <span class="doccomment">/// Use accent color as button color
+    </span><span class="kw">pub fn </span>set_brush(<span class="kw-2">&amp;mut </span><span class="self">self</span>, value: PaintBrush) {
+        <span class="self">self</span>.brush = value;
     }
 
-    <span class="doccomment">/// Builder style to use accent color as button color</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_brush</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">value</span>: <span class="ident">PaintBrush</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">set_brush</span>(<span class="ident">value</span>);
-        <span class="self">self</span>
-    }
+    <span class="doccomment">/// Builder style to use accent color as button color
+    </span><span class="kw">pub fn </span>with_brush(<span class="kw-2">mut </span><span class="self">self</span>, value: PaintBrush) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.set_brush(value);
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">reload_icon</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">callback</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">callback</span> {
-            <span class="kw">let</span> <span class="ident">key_pair</span> <span class="op">=</span> <span class="ident">callback</span>(<span class="ident">data</span>, <span class="ident">env</span>);
-            <span class="self">self</span>.<span class="ident">icon_key</span> <span class="op">=</span> <span class="ident">key_pair</span>.<span class="number">0</span>;
-            <span class="self">self</span>.<span class="ident">icon_color_key</span> <span class="op">=</span> (<span class="ident">key_pair</span>.<span class="number">1</span>, <span class="ident">key_pair</span>.<span class="number">2</span>)
+    <span class="kw">fn </span>reload_icon(<span class="kw-2">&amp;mut </span><span class="self">self</span>, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(callback) = <span class="self">self</span>.callback {
+            <span class="kw">let </span>key_pair = callback(data, env);
+            <span class="self">self</span>.icon_key = key_pair.<span class="number">0</span>;
+            <span class="self">self</span>.icon_color_key = (key_pair.<span class="number">1</span>, key_pair.<span class="number">2</span>)
         }
-        <span class="self">self</span>.<span class="ident">icon_path</span> <span class="op">=</span> <span class="ident">BezPath::from_svg</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">icon_key</span>).<span class="ident">as_str</span>()).<span class="ident">unwrap_or_default</span>();
-        <span class="kw">if</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::main::IS_DARK</span>) {
-            <span class="self">self</span>.<span class="ident">set_brush</span>(<span class="ident">PaintBrush::Color</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">icon_color_key</span>.<span class="number">0</span>)));
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">set_brush</span>(<span class="ident">PaintBrush::Color</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">icon_color_key</span>.<span class="number">1</span>)));
+        <span class="self">self</span>.icon_path = BezPath::from_svg(env.get(<span class="kw-2">&amp;</span><span class="self">self</span>.icon_key).as_str()).unwrap_or_default();
+        <span class="kw">if </span>env.get(<span class="kw">crate</span>::theme::color::main::IS_DARK) {
+            <span class="self">self</span>.set_brush(PaintBrush::Color(env.get(<span class="kw-2">&amp;</span><span class="self">self</span>.icon_color_key.<span class="number">0</span>)));
+        } <span class="kw">else </span>{
+            <span class="self">self</span>.set_brush(PaintBrush::Color(env.get(<span class="kw-2">&amp;</span><span class="self">self</span>.icon_color_key.<span class="number">1</span>)));
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Data</span><span class="op">&gt;</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Icon</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">event</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">_ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::EventCtx</span>,
-        <span class="ident">_event</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Event</span>,
-        <span class="ident">_data</span>: <span class="kw-2">&amp;mut</span> <span class="ident">T</span>,
-        <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>,
+<span class="kw">impl</span>&lt;T: Data&gt; Widget&lt;T&gt; <span class="kw">for </span>Icon&lt;T&gt; {
+    <span class="kw">fn </span>event(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        _ctx: <span class="kw-2">&amp;mut </span>druid::EventCtx,
+        _event: <span class="kw-2">&amp;</span>druid::Event,
+        _data: <span class="kw-2">&amp;mut </span>T,
+        _env: <span class="kw-2">&amp;</span>druid::Env,
     ) {
     }
 
-    <span class="kw">fn</span> <span class="ident">lifecycle</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">_ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::LifeCycleCtx</span>,
-        <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">druid::LifeCycle</span>,
-        <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>,
-        <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>,
+    <span class="kw">fn </span>lifecycle(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        _ctx: <span class="kw-2">&amp;mut </span>druid::LifeCycleCtx,
+        event: <span class="kw-2">&amp;</span>druid::LifeCycle,
+        data: <span class="kw-2">&amp;</span>T,
+        env: <span class="kw-2">&amp;</span>druid::Env,
     ) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">LifeCycle::WidgetAdded</span> <span class="op">=</span> <span class="ident">event</span> {
-            <span class="self">self</span>.<span class="ident">reload_icon</span>(<span class="ident">data</span>, <span class="ident">env</span>);
+        <span class="kw">if let </span>LifeCycle::WidgetAdded = event {
+            <span class="self">self</span>.reload_icon(data, env);
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::UpdateCtx</span>, <span class="ident">_old_data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>) {
-        <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">env_key_changed</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">icon_key</span>) {
-            <span class="self">self</span>.<span class="ident">reload_icon</span>(<span class="ident">data</span>, <span class="ident">env</span>);
+    <span class="kw">fn </span>update(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>druid::UpdateCtx, _old_data: <span class="kw-2">&amp;</span>T, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>druid::Env) {
+        <span class="kw">if </span>ctx.env_key_changed(<span class="kw-2">&amp;</span><span class="self">self</span>.icon_key) {
+            <span class="self">self</span>.reload_icon(data, env);
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">layout</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">_ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::LayoutCtx</span>,
-        <span class="ident">bc</span>: <span class="kw-2">&amp;</span><span class="ident">druid::BoxConstraints</span>,
-        <span class="ident">_data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>,
-        <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>,
-    ) -&gt; <span class="ident">druid::Size</span> {
-        <span class="ident">bc</span>.<span class="ident">debug_check</span>(<span class="string">&quot;Icon&quot;</span>);
-        <span class="ident">bc</span>.<span class="ident">constrain</span>((<span class="number">32.</span>, <span class="number">32.</span>))
+    <span class="kw">fn </span>layout(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        _ctx: <span class="kw-2">&amp;mut </span>druid::LayoutCtx,
+        bc: <span class="kw-2">&amp;</span>druid::BoxConstraints,
+        _data: <span class="kw-2">&amp;</span>T,
+        _env: <span class="kw-2">&amp;</span>druid::Env,
+    ) -&gt; druid::Size {
+        bc.debug_check(<span class="string">&quot;Icon&quot;</span>);
+        bc.constrain((<span class="number">32.</span>, <span class="number">32.</span>))
     }
 
-    <span class="kw">fn</span> <span class="ident">paint</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::PaintCtx</span>, <span class="ident">_data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>) {
-        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">size</span>();
-        <span class="ident">ctx</span>.<span class="ident">with_save</span>(<span class="op">|</span><span class="ident">ctx</span><span class="op">|</span> {
-            <span class="ident">ctx</span>.<span class="ident">transform</span>(<span class="ident">Affine::translate</span>(
-                ((<span class="ident">size</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">icon_path</span>.<span class="ident">bounding_box</span>().<span class="ident">size</span>()) <span class="op">/</span> <span class="number">2.</span>)
-                    .<span class="ident">to_vec2</span>()
-                    .<span class="ident">round</span>(),
+    <span class="kw">fn </span>paint(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>druid::PaintCtx, _data: <span class="kw-2">&amp;</span>T, _env: <span class="kw-2">&amp;</span>druid::Env) {
+        <span class="kw">let </span>size = ctx.size();
+        ctx.with_save(|ctx| {
+            ctx.transform(Affine::translate(
+                ((size - <span class="self">self</span>.icon_path.bounding_box().size()) / <span class="number">2.</span>)
+                    .to_vec2()
+                    .round(),
             ));
-            <span class="ident">ctx</span>.<span class="ident">fill_even_odd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">icon_path</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">brush</span>)
+            ctx.fill_even_odd(<span class="kw-2">&amp;</span><span class="self">self</span>.icon_path, <span class="kw-2">&amp;</span><span class="self">self</span>.brush)
         })
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

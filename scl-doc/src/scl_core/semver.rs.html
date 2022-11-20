@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/semver.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>semver.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../scl_core/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/semver.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>semver.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../scl_core/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -183,190 +183,190 @@
 <span id="183">183</span>
 <span id="184">184</span>
 <span id="185">185</span>
-</pre><pre class="rust"><code><span class="doccomment">//! 解析版本号</span>
-<span class="kw">use</span> <span class="ident">std</span>::{
-    <span class="ident">cmp::Ordering</span>,
-    <span class="ident">fmt</span>::{<span class="ident">Display</span>, <span class="ident">Formatter</span>},
-    <span class="ident">str::FromStr</span>,
+</pre><pre class="rust"><code><span class="doccomment">//! 解析版本号
+</span><span class="kw">use </span>std::{
+    cmp::Ordering,
+    fmt::{Display, Formatter},
+    str::FromStr,
 };
 
-<span class="kw">use</span> <span class="ident">nom</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span>nom::<span class="kw-2">*</span>;
 
-<span class="doccomment">/// 一个用于表达当前 Minecraft 版本号的枚举结构</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 用来根据版本判断使用不同的安装方式，还有相关的资源获取等</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">MinecraftVersion</span> {
-    <span class="doccomment">/// 正式版本的版本号</span>
-    <span class="ident">Release</span>(<span class="ident">u32</span>, <span class="ident">u32</span>, <span class="ident">u32</span>),
-    <span class="doccomment">/// 快照版本的版本号</span>
-    <span class="ident">Snapshot</span>(<span class="ident">u32</span>, <span class="ident">u32</span>, <span class="ident">char</span>),
-    <span class="doccomment">/// 一些特殊版本的版本号，有可能是 Beta 或者 Alpha 等远古版本或被特殊命名的版本</span>
-    <span class="ident">Custom</span>(<span class="ident">String</span>),
+<span class="doccomment">/// 一个用于表达当前 Minecraft 版本号的枚举结构
+///
+/// 用来根据版本判断使用不同的安装方式，还有相关的资源获取等
+</span><span class="attribute">#[derive(Debug, Clone, PartialEq, Eq, PartialOrd)]
+</span><span class="kw">pub enum </span>MinecraftVersion {
+    <span class="doccomment">/// 正式版本的版本号
+    </span>Release(u32, u32, u32),
+    <span class="doccomment">/// 快照版本的版本号
+    </span>Snapshot(u32, u32, char),
+    <span class="doccomment">/// 一些特殊版本的版本号，有可能是 Beta 或者 Alpha 等远古版本或被特殊命名的版本
+    </span>Custom(String),
 }
 
-<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">MinecraftVersion</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::Custom</span>(<span class="string">&quot;&quot;</span>.<span class="ident">into</span>())
+<span class="kw">impl </span>Default <span class="kw">for </span>MinecraftVersion {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::Custom(<span class="string">&quot;&quot;</span>.into())
     }
 }
 
-<span class="kw">impl</span> <span class="ident">FromStr</span> <span class="kw">for</span> <span class="ident">MinecraftVersion</span> {
-    <span class="kw">type</span> <span class="prelude-val">Err</span> <span class="op">=</span> ();
-    <span class="kw">fn</span> <span class="ident">from_str</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident"><span class="self">Self</span>::Err</span><span class="op">&gt;</span> {
-        <span class="ident">parse_version</span>(<span class="ident">s</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">a</span><span class="op">|</span> <span class="ident">a</span>.<span class="number">1</span>).<span class="ident">or</span>(<span class="prelude-val">Err</span>(()))
+<span class="kw">impl </span>FromStr <span class="kw">for </span>MinecraftVersion {
+    <span class="kw">type </span><span class="prelude-val">Err </span>= ();
+    <span class="kw">fn </span>from_str(s: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, <span class="self">Self</span>::Err&gt; {
+        parse_version(s).map(|a| a.<span class="number">1</span>).or(<span class="prelude-val">Err</span>(()))
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Display</span> <span class="kw">for</span> <span class="ident">MinecraftVersion</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">std::fmt::Result</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">MinecraftVersion::Release</span>(<span class="ident">a</span>, <span class="ident">b</span>, <span class="ident">c</span>) =&gt; {
-                <span class="kw">if</span> <span class="ident">c</span> <span class="op">==</span> <span class="kw-2">&amp;</span><span class="number">0</span> {
-                    <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}.{}&quot;</span>, <span class="ident">a</span>, <span class="ident">b</span>)
-                } <span class="kw">else</span> {
-                    <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}.{}.{}&quot;</span>, <span class="ident">a</span>, <span class="ident">b</span>, <span class="ident">c</span>)
+<span class="kw">impl </span>Display <span class="kw">for </span>MinecraftVersion {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; std::fmt::Result {
+        <span class="kw">match </span><span class="self">self </span>{
+            MinecraftVersion::Release(a, b, c) =&gt; {
+                <span class="kw">if </span>c == <span class="kw-2">&amp;</span><span class="number">0 </span>{
+                    <span class="macro">write!</span>(f, <span class="string">&quot;{}.{}&quot;</span>, a, b)
+                } <span class="kw">else </span>{
+                    <span class="macro">write!</span>(f, <span class="string">&quot;{}.{}.{}&quot;</span>, a, b, c)
                 }
             }
-            <span class="ident">MinecraftVersion::Snapshot</span>(<span class="ident">a</span>, <span class="ident">b</span>, <span class="ident">c</span>) =&gt; <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{:02}w{:02}{}&quot;</span>, <span class="ident">a</span>, <span class="ident">b</span>, <span class="ident">c</span>),
-            <span class="ident"><span class="self">Self</span>::Custom</span>(<span class="ident">c</span>) =&gt; <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">c</span>),
+            MinecraftVersion::Snapshot(a, b, c) =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;{:02}w{:02}{}&quot;</span>, a, b, c),
+            <span class="self">Self</span>::Custom(c) =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;{}&quot;</span>, c),
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">MinecraftVersion</span> {
-    <span class="doccomment">/// 检查该版本需要的最低 Java 版本  </span>
-    <span class="doccomment">/// 目前检测到 1.17+ 的正式版本都会返回 16，其余的返回 8</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">required_java_version</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u8</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident"><span class="self">Self</span>::Release</span>(<span class="ident">mayor</span>, <span class="ident">minor</span>, <span class="kw">_</span>) <span class="op">=</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="kw">if</span> <span class="ident">mayor</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">1</span> <span class="op">&amp;&amp;</span> <span class="ident">minor</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">17</span> {
-                <span class="number">16</span>
-            } <span class="kw">else</span> {
-                <span class="number">8</span>
-            }
-        } <span class="kw">else</span> {
-            <span class="number">8</span>
-        }
+<span class="kw">impl </span>MinecraftVersion {
+    <span class="doccomment">/// 检查该版本需要的最低 Java 版本  
+    /// 目前检测到 1.17+ 的正式版本都会返回 16，其余的返回 8
+    </span><span class="kw">pub fn </span>required_java_version(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u8 {
+        <span class="kw">if let </span><span class="self">Self</span>::Release(mayor, minor, <span class="kw">_</span>) = <span class="kw-2">*</span><span class="self">self </span>{
+            <span class="kw">if </span>mayor &gt;= <span class="number">1 </span>&amp;&amp; minor &gt;= <span class="number">17 </span>{
+                <span class="number">16
+            </span>} <span class="kw">else </span>{
+                <span class="number">8
+            </span>}
+        } <span class="kw">else </span>{
+            <span class="number">8
+        </span>}
     }
 
-    <span class="doccomment">/// 确认如果该版本需要安装 Forge，是否使用覆盖 minecraft.jar 的方式进行安装</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 一般在版本为 1.5.1 或者更早时为 `true`</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 如果为 `false` 则使用 Forge 安装器安装</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">should_forge_use_override_installiation</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident"><span class="self">Self</span>::Release</span>(<span class="ident">a</span>, <span class="ident">b</span>, <span class="ident">c</span>) <span class="op">=</span> <span class="self">self</span> {
-            <span class="kw">match</span> <span class="ident">a</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="number">1</span>) {
-                <span class="ident">Ordering::Greater</span> =&gt; <span class="bool-val">false</span>,
-                <span class="ident">Ordering::Equal</span> =&gt; <span class="kw">match</span> <span class="ident">b</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="number">1</span>) {
-                    <span class="ident">Ordering::Greater</span> =&gt; <span class="bool-val">false</span>,
-                    <span class="ident">Ordering::Equal</span> =&gt; <span class="kw-2">*</span><span class="ident">c</span> <span class="op">&lt;</span> <span class="number">2</span>,
-                    <span class="ident">Ordering::Less</span> =&gt; <span class="bool-val">true</span>,
+    <span class="doccomment">/// 确认如果该版本需要安装 Forge，是否使用覆盖 minecraft.jar 的方式进行安装
+    ///
+    /// 一般在版本为 1.5.1 或者更早时为 `true`
+    ///
+    /// 如果为 `false` 则使用 Forge 安装器安装
+    </span><span class="kw">pub fn </span>should_forge_use_override_installiation(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="kw">if let </span><span class="self">Self</span>::Release(a, b, c) = <span class="self">self </span>{
+            <span class="kw">match </span>a.cmp(<span class="kw-2">&amp;</span><span class="number">1</span>) {
+                Ordering::Greater =&gt; <span class="bool-val">false</span>,
+                Ordering::Equal =&gt; <span class="kw">match </span>b.cmp(<span class="kw-2">&amp;</span><span class="number">1</span>) {
+                    Ordering::Greater =&gt; <span class="bool-val">false</span>,
+                    Ordering::Equal =&gt; <span class="kw-2">*</span>c &lt; <span class="number">2</span>,
+                    Ordering::Less =&gt; <span class="bool-val">true</span>,
                 },
-                <span class="ident">Ordering::Less</span> =&gt; <span class="bool-val">true</span>,
+                Ordering::Less =&gt; <span class="bool-val">true</span>,
             }
-        } <span class="kw">else</span> {
-            <span class="bool-val">true</span>
-        }
+        } <span class="kw">else </span>{
+            <span class="bool-val">true
+        </span>}
     }
 
-    <span class="doccomment">/// 确认如果该版本需要安装 Forge，下载的文件名尾缀是否是 `client` 还是 `universal`</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 一般在版本为 1.2.5 或者更早时为 `true`</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// 如果为 `false` 则使用 `universal` 作为尾缀</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">should_forge_use_client_or_universal</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident"><span class="self">Self</span>::Release</span>(<span class="ident">a</span>, <span class="ident">b</span>, <span class="ident">c</span>) <span class="op">=</span> <span class="self">self</span> {
-            <span class="kw">match</span> <span class="ident">a</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="number">1</span>) {
-                <span class="ident">Ordering::Greater</span> =&gt; <span class="bool-val">false</span>,
-                <span class="ident">Ordering::Equal</span> =&gt; <span class="kw">match</span> <span class="ident">b</span>.<span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="number">2</span>) {
-                    <span class="ident">Ordering::Greater</span> =&gt; <span class="bool-val">false</span>,
-                    <span class="ident">Ordering::Equal</span> =&gt; <span class="kw-2">*</span><span class="ident">c</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">5</span>,
-                    <span class="ident">Ordering::Less</span> =&gt; <span class="bool-val">true</span>,
+    <span class="doccomment">/// 确认如果该版本需要安装 Forge，下载的文件名尾缀是否是 `client` 还是 `universal`
+    ///
+    /// 一般在版本为 1.2.5 或者更早时为 `true`
+    ///
+    /// 如果为 `false` 则使用 `universal` 作为尾缀
+    </span><span class="kw">pub fn </span>should_forge_use_client_or_universal(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="kw">if let </span><span class="self">Self</span>::Release(a, b, c) = <span class="self">self </span>{
+            <span class="kw">match </span>a.cmp(<span class="kw-2">&amp;</span><span class="number">1</span>) {
+                Ordering::Greater =&gt; <span class="bool-val">false</span>,
+                Ordering::Equal =&gt; <span class="kw">match </span>b.cmp(<span class="kw-2">&amp;</span><span class="number">2</span>) {
+                    Ordering::Greater =&gt; <span class="bool-val">false</span>,
+                    Ordering::Equal =&gt; <span class="kw-2">*</span>c &lt;= <span class="number">5</span>,
+                    Ordering::Less =&gt; <span class="bool-val">true</span>,
                 },
-                <span class="ident">Ordering::Less</span> =&gt; <span class="bool-val">true</span>,
+                Ordering::Less =&gt; <span class="bool-val">true</span>,
             }
-        } <span class="kw">else</span> {
-            <span class="bool-val">true</span>
-        }
+        } <span class="kw">else </span>{
+            <span class="bool-val">true
+        </span>}
     }
 }
 
-<span class="doccomment">/// 尝试解析版本字符串，并转换成 [`MinecraftVersion`] 枚举类型</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">parse_version</span>(<span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">IResult</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">MinecraftVersion</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> (<span class="ident">input</span>, <span class="ident">first_number</span>) <span class="op">=</span> <span class="ident">character::complete::digit1</span>(<span class="ident">input</span>)<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">first_number</span> <span class="op">=</span> <span class="ident">first_number</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>();
-    <span class="kw">let</span> (<span class="ident">input</span>, <span class="ident">s</span>) <span class="op">=</span> <span class="ident">character::complete::one_of</span>(<span class="string">&quot;.w&quot;</span>)(<span class="ident">input</span>)<span class="question-mark">?</span>;
-    <span class="kw">match</span> <span class="ident">s</span> {
-        <span class="string">&#39;.&#39;</span> =&gt; {
-            <span class="comment">// Release</span>
-            <span class="kw">let</span> (<span class="ident">input</span>, <span class="ident">second_number</span>) <span class="op">=</span> <span class="ident">character::complete::digit1</span>(<span class="ident">input</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">second_number</span> <span class="op">=</span> <span class="ident">second_number</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>();
-            <span class="kw">if</span> <span class="ident">input</span>.<span class="ident">is_empty</span>() {
-                <span class="kw">return</span> <span class="prelude-val">Ok</span>((
-                    <span class="ident">input</span>,
-                    <span class="ident">MinecraftVersion::Release</span>(<span class="ident">first_number</span>, <span class="ident">second_number</span>, <span class="number">0</span>),
+<span class="doccomment">/// 尝试解析版本字符串，并转换成 [`MinecraftVersion`] 枚举类型
+</span><span class="kw">pub fn </span>parse_version(input: <span class="kw-2">&amp;</span>str) -&gt; IResult&lt;<span class="kw-2">&amp;</span>str, MinecraftVersion&gt; {
+    <span class="kw">let </span>(input, first_number) = character::complete::digit1(input)<span class="question-mark">?</span>;
+    <span class="kw">let </span>first_number = first_number.parse::&lt;u32&gt;().unwrap();
+    <span class="kw">let </span>(input, s) = character::complete::one_of(<span class="string">&quot;.w&quot;</span>)(input)<span class="question-mark">?</span>;
+    <span class="kw">match </span>s {
+        <span class="string">&#39;.&#39; </span>=&gt; {
+            <span class="comment">// Release
+            </span><span class="kw">let </span>(input, second_number) = character::complete::digit1(input)<span class="question-mark">?</span>;
+            <span class="kw">let </span>second_number = second_number.parse::&lt;u32&gt;().unwrap();
+            <span class="kw">if </span>input.is_empty() {
+                <span class="kw">return </span><span class="prelude-val">Ok</span>((
+                    input,
+                    MinecraftVersion::Release(first_number, second_number, <span class="number">0</span>),
                 ));
             }
-            <span class="kw">let</span> (<span class="ident">input</span>, <span class="kw">_</span>) <span class="op">=</span> <span class="ident">character::complete::char</span>(<span class="string">&#39;.&#39;</span>)(<span class="ident">input</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> (<span class="ident">input</span>, <span class="ident">third_number</span>) <span class="op">=</span> <span class="ident">character::complete::digit1</span>(<span class="ident">input</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">third_number</span> <span class="op">=</span> <span class="ident">third_number</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>();
+            <span class="kw">let </span>(input, <span class="kw">_</span>) = character::complete::char(<span class="string">&#39;.&#39;</span>)(input)<span class="question-mark">?</span>;
+            <span class="kw">let </span>(input, third_number) = character::complete::digit1(input)<span class="question-mark">?</span>;
+            <span class="kw">let </span>third_number = third_number.parse::&lt;u32&gt;().unwrap();
             <span class="prelude-val">Ok</span>((
-                <span class="ident">input</span>,
-                <span class="ident">MinecraftVersion::Release</span>(<span class="ident">first_number</span>, <span class="ident">second_number</span>, <span class="ident">third_number</span>),
+                input,
+                MinecraftVersion::Release(first_number, second_number, third_number),
             ))
         }
-        <span class="string">&#39;w&#39;</span> =&gt; {
-            <span class="comment">// Snapshot</span>
-            <span class="kw">let</span> (<span class="ident">input</span>, <span class="ident">second_number</span>) <span class="op">=</span> <span class="ident">character::complete::digit1</span>(<span class="ident">input</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">second_number</span> <span class="op">=</span> <span class="ident">second_number</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>();
-            <span class="kw">let</span> (<span class="ident">input</span>, <span class="ident">tag_alpha</span>) <span class="op">=</span> <span class="ident">character::complete::anychar</span>(<span class="ident">input</span>)<span class="question-mark">?</span>;
+        <span class="string">&#39;w&#39; </span>=&gt; {
+            <span class="comment">// Snapshot
+            </span><span class="kw">let </span>(input, second_number) = character::complete::digit1(input)<span class="question-mark">?</span>;
+            <span class="kw">let </span>second_number = second_number.parse::&lt;u32&gt;().unwrap();
+            <span class="kw">let </span>(input, tag_alpha) = character::complete::anychar(input)<span class="question-mark">?</span>;
             <span class="prelude-val">Ok</span>((
-                <span class="ident">input</span>,
-                <span class="ident">MinecraftVersion::Snapshot</span>(<span class="ident">first_number</span>, <span class="ident">second_number</span>, <span class="ident">tag_alpha</span>),
+                input,
+                MinecraftVersion::Snapshot(first_number, second_number, tag_alpha),
             ))
         }
-        <span class="kw">_</span> =&gt; {
+        <span class="kw">_ </span>=&gt; {
             <span class="macro">panic!</span>(<span class="string">&quot;Version dot is not correct!&quot;</span>)
         }
     }
 }
 
-<span class="attribute">#[<span class="ident">test</span>]</span>
-<span class="kw">fn</span> <span class="ident">parse_version_test</span>() {
+<span class="attribute">#[test]
+</span><span class="kw">fn </span>parse_version_test() {
     <span class="macro">assert_eq!</span>(
-        <span class="ident">parse_version</span>(<span class="string">&quot;1.16.5&quot;</span>).<span class="ident">unwrap</span>().<span class="number">1</span>,
-        <span class="ident">MinecraftVersion::Release</span>(<span class="number">1</span>, <span class="number">16</span>, <span class="number">5</span>)
+        parse_version(<span class="string">&quot;1.16.5&quot;</span>).unwrap().<span class="number">1</span>,
+        MinecraftVersion::Release(<span class="number">1</span>, <span class="number">16</span>, <span class="number">5</span>)
     );
     <span class="macro">assert_eq!</span>(
-        <span class="ident">parse_version</span>(<span class="string">&quot;1.8&quot;</span>).<span class="ident">unwrap</span>().<span class="number">1</span>,
-        <span class="ident">MinecraftVersion::Release</span>(<span class="number">1</span>, <span class="number">8</span>, <span class="number">0</span>)
+        parse_version(<span class="string">&quot;1.8&quot;</span>).unwrap().<span class="number">1</span>,
+        MinecraftVersion::Release(<span class="number">1</span>, <span class="number">8</span>, <span class="number">0</span>)
     );
     <span class="macro">assert_eq!</span>(
-        <span class="ident">parse_version</span>(<span class="string">&quot;21w08b&quot;</span>).<span class="ident">unwrap</span>().<span class="number">1</span>,
-        <span class="ident">MinecraftVersion::Snapshot</span>(<span class="number">21</span>, <span class="number">8</span>, <span class="string">&#39;b&#39;</span>)
+        parse_version(<span class="string">&quot;21w08b&quot;</span>).unwrap().<span class="number">1</span>,
+        MinecraftVersion::Snapshot(<span class="number">21</span>, <span class="number">8</span>, <span class="string">&#39;b&#39;</span>)
     );
     <span class="macro">assert_eq!</span>(
-        <span class="string">&quot;1.16.5&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">MinecraftVersion</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
-        <span class="ident">MinecraftVersion::Release</span>(<span class="number">1</span>, <span class="number">16</span>, <span class="number">5</span>)
+        <span class="string">&quot;1.16.5&quot;</span>.parse::&lt;MinecraftVersion&gt;().unwrap(),
+        MinecraftVersion::Release(<span class="number">1</span>, <span class="number">16</span>, <span class="number">5</span>)
     );
     <span class="macro">assert_eq!</span>(
-        <span class="string">&quot;1.8&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">MinecraftVersion</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
-        <span class="ident">MinecraftVersion::Release</span>(<span class="number">1</span>, <span class="number">8</span>, <span class="number">0</span>)
+        <span class="string">&quot;1.8&quot;</span>.parse::&lt;MinecraftVersion&gt;().unwrap(),
+        MinecraftVersion::Release(<span class="number">1</span>, <span class="number">8</span>, <span class="number">0</span>)
     );
     <span class="macro">assert_eq!</span>(
-        <span class="string">&quot;21w08b&quot;</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">MinecraftVersion</span><span class="op">&gt;</span>().<span class="ident">unwrap</span>(),
-        <span class="ident">MinecraftVersion::Snapshot</span>(<span class="number">21</span>, <span class="number">8</span>, <span class="string">&#39;b&#39;</span>)
+        <span class="string">&quot;21w08b&quot;</span>.parse::&lt;MinecraftVersion&gt;().unwrap(),
+        MinecraftVersion::Snapshot(<span class="number">21</span>, <span class="number">8</span>, <span class="string">&#39;b&#39;</span>)
     );
-    <span class="macro">assert_eq!</span>(<span class="kw-2">&amp;</span><span class="ident">MinecraftVersion::Release</span>(<span class="number">1</span>, <span class="number">16</span>, <span class="number">5</span>).<span class="ident">to_string</span>(), <span class="string">&quot;1.16.5&quot;</span>);
-    <span class="macro">assert_eq!</span>(<span class="kw-2">&amp;</span><span class="ident">MinecraftVersion::Release</span>(<span class="number">1</span>, <span class="number">8</span>, <span class="number">0</span>).<span class="ident">to_string</span>(), <span class="string">&quot;1.8&quot;</span>);
+    <span class="macro">assert_eq!</span>(<span class="kw-2">&amp;</span>MinecraftVersion::Release(<span class="number">1</span>, <span class="number">16</span>, <span class="number">5</span>).to_string(), <span class="string">&quot;1.16.5&quot;</span>);
+    <span class="macro">assert_eq!</span>(<span class="kw-2">&amp;</span>MinecraftVersion::Release(<span class="number">1</span>, <span class="number">8</span>, <span class="number">0</span>).to_string(), <span class="string">&quot;1.8&quot;</span>);
     <span class="macro">assert_eq!</span>(
-        <span class="kw-2">&amp;</span><span class="ident">MinecraftVersion::Snapshot</span>(<span class="number">21</span>, <span class="number">8</span>, <span class="string">&#39;b&#39;</span>).<span class="ident">to_string</span>(),
-        <span class="string">&quot;21w08b&quot;</span>
-    );
-    <span class="macro">assert!</span>(<span class="ident">MinecraftVersion::Release</span>(<span class="number">1</span>, <span class="number">16</span>, <span class="number">5</span>).<span class="ident">required_java_version</span>() <span class="op">&gt;</span><span class="op">=</span> <span class="number">8</span>);
-    <span class="macro">assert!</span>(<span class="ident">MinecraftVersion::Release</span>(<span class="number">1</span>, <span class="number">17</span>, <span class="number">1</span>).<span class="ident">required_java_version</span>() <span class="op">&gt;</span><span class="op">=</span> <span class="number">16</span>);
-    <span class="macro">assert!</span>(<span class="ident">MinecraftVersion::Release</span>(<span class="number">1</span>, <span class="number">17</span>, <span class="number">0</span>).<span class="ident">required_java_version</span>() <span class="op">&gt;</span><span class="op">=</span> <span class="number">16</span>);
+        <span class="kw-2">&amp;</span>MinecraftVersion::Snapshot(<span class="number">21</span>, <span class="number">8</span>, <span class="string">&#39;b&#39;</span>).to_string(),
+        <span class="string">&quot;21w08b&quot;
+    </span>);
+    <span class="macro">assert!</span>(MinecraftVersion::Release(<span class="number">1</span>, <span class="number">16</span>, <span class="number">5</span>).required_java_version() &gt;= <span class="number">8</span>);
+    <span class="macro">assert!</span>(MinecraftVersion::Release(<span class="number">1</span>, <span class="number">17</span>, <span class="number">1</span>).required_java_version() &gt;= <span class="number">16</span>);
+    <span class="macro">assert!</span>(MinecraftVersion::Release(<span class="number">1</span>, <span class="number">17</span>, <span class="number">0</span>).required_java_version() &gt;= <span class="number">16</span>);
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/store.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>store.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/store.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>store.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -96,103 +96,103 @@
 <span id="96">96</span>
 <span id="97">97</span>
 <span id="98">98</span>
-</pre><pre class="rust"><code><span class="doccomment">//! 一个中间件组件，用于拦截数据流并进行处理</span>
+</pre><pre class="rust"><code><span class="doccomment">//! 一个中间件组件，用于拦截数据流并进行处理
 
-<span class="kw">use</span> <span class="ident">druid</span>::{<span class="ident">Data</span>, <span class="ident">Widget</span>, <span class="ident">WidgetPod</span>};
+</span><span class="kw">use </span>druid::{Data, Widget, WidgetPod};
 
-<span class="doccomment">/// 一个中间件组件，用于拦截数据流并进行处理</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 和 [`druid::Lens`] 不一样的地方是，它不强制你去设置数据，这允许你在无法转换数据的情况下保持子代数据不变或父代数据不变。</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Store</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">inner</span>: <span class="ident">WidgetPod</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="ident">pre_data_processor</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="ident">F</span>, <span class="kw-2">&amp;mut</span> <span class="ident">T</span>),
-    <span class="ident">post_data_processor</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="kw-2">&amp;mut</span> <span class="ident">F</span>),
-    <span class="ident">post_data</span>: <span class="ident">T</span>,
+<span class="doccomment">/// 一个中间件组件，用于拦截数据流并进行处理
+///
+/// 和 [`druid::Lens`] 不一样的地方是，它不强制你去设置数据，这允许你在无法转换数据的情况下保持子代数据不变或父代数据不变。
+</span><span class="kw">pub struct </span>Store&lt;F, T&gt; {
+    inner: WidgetPod&lt;T, Box&lt;<span class="kw">dyn </span>Widget&lt;T&gt;&gt;&gt;,
+    pre_data_processor: <span class="kw">fn</span>(<span class="kw-2">&amp;</span>F, <span class="kw-2">&amp;mut </span>T),
+    post_data_processor: <span class="kw">fn</span>(<span class="kw-2">&amp;</span>T, <span class="kw-2">&amp;mut </span>F),
+    post_data: T,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Data</span>, <span class="ident">T</span>: <span class="ident">Data</span><span class="op">&gt;</span> <span class="ident">Store</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// 创建一个中间件组件，需要提供将被传递数据的组件和相互转换的回调函数，并提供一个默认的转换后的值</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(
-        <span class="ident">inner</span>: <span class="kw">impl</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-        <span class="ident">pre_data_processor</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="ident">F</span>, <span class="kw-2">&amp;mut</span> <span class="ident">T</span>),
-        <span class="ident">post_data_processor</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="kw-2">&amp;mut</span> <span class="ident">F</span>),
-        <span class="ident">initial_post_data</span>: <span class="ident">T</span>,
-    ) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">inner</span>: <span class="ident">WidgetPod::new</span>(<span class="ident">inner</span>).<span class="ident">boxed</span>(),
-            <span class="ident">pre_data_processor</span>,
-            <span class="ident">post_data_processor</span>,
-            <span class="ident">post_data</span>: <span class="ident">initial_post_data</span>,
+<span class="kw">impl</span>&lt;F: Data, T: Data&gt; Store&lt;F, T&gt; {
+    <span class="doccomment">/// 创建一个中间件组件，需要提供将被传递数据的组件和相互转换的回调函数，并提供一个默认的转换后的值
+    </span><span class="kw">pub fn </span>new(
+        inner: <span class="kw">impl </span>Widget&lt;T&gt; + <span class="lifetime">&#39;static</span>,
+        pre_data_processor: <span class="kw">fn</span>(<span class="kw-2">&amp;</span>F, <span class="kw-2">&amp;mut </span>T),
+        post_data_processor: <span class="kw">fn</span>(<span class="kw-2">&amp;</span>T, <span class="kw-2">&amp;mut </span>F),
+        initial_post_data: T,
+    ) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            inner: WidgetPod::new(inner).boxed(),
+            pre_data_processor,
+            post_data_processor,
+            post_data: initial_post_data,
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Data</span>, <span class="ident">T</span>: <span class="ident">Data</span> <span class="op">+</span> <span class="ident">Default</span><span class="op">&gt;</span> <span class="ident">Store</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// 创建一个中间件组件，需要提供将被传递数据的组件和相互转换的回调函数，默认值会使用其转换后类型的 [`Default::default`] 默认值</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_default</span>(
-        <span class="ident">inner</span>: <span class="kw">impl</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
-        <span class="ident">pre_data_processor</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="ident">F</span>, <span class="kw-2">&amp;mut</span> <span class="ident">T</span>),
-        <span class="ident">post_data_processor</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="kw-2">&amp;mut</span> <span class="ident">F</span>),
-    ) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">inner</span>, <span class="ident">pre_data_processor</span>, <span class="ident">post_data_processor</span>, <span class="ident">T::default</span>())
+<span class="kw">impl</span>&lt;F: Data, T: Data + Default&gt; Store&lt;F, T&gt; {
+    <span class="doccomment">/// 创建一个中间件组件，需要提供将被传递数据的组件和相互转换的回调函数，默认值会使用其转换后类型的 [`Default::default`] 默认值
+    </span><span class="attribute">#[inline]
+    </span><span class="kw">pub fn </span>new_default(
+        inner: <span class="kw">impl </span>Widget&lt;T&gt; + <span class="lifetime">&#39;static</span>,
+        pre_data_processor: <span class="kw">fn</span>(<span class="kw-2">&amp;</span>F, <span class="kw-2">&amp;mut </span>T),
+        post_data_processor: <span class="kw">fn</span>(<span class="kw-2">&amp;</span>T, <span class="kw-2">&amp;mut </span>F),
+    ) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(inner, pre_data_processor, post_data_processor, T::default())
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Data</span>, <span class="ident">T</span>: <span class="ident">Data</span><span class="op">&gt;</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Store</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">event</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::EventCtx</span>,
-        <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Event</span>,
-        <span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="ident">F</span>,
-        <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>,
+<span class="kw">impl</span>&lt;F: Data, T: Data&gt; Widget&lt;F&gt; <span class="kw">for </span>Store&lt;F, T&gt; {
+    <span class="kw">fn </span>event(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        ctx: <span class="kw-2">&amp;mut </span>druid::EventCtx,
+        event: <span class="kw-2">&amp;</span>druid::Event,
+        data: <span class="kw-2">&amp;mut </span>F,
+        env: <span class="kw-2">&amp;</span>druid::Env,
     ) {
         <span class="macro">println!</span>(<span class="string">&quot;Event Called&quot;</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">post_data</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">post_data</span>.<span class="ident">to_owned</span>();
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">event</span>(<span class="ident">ctx</span>, <span class="ident">event</span>, <span class="kw-2">&amp;mut</span> <span class="ident">post_data</span>, <span class="ident">env</span>);
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">post_data</span>.<span class="ident">same</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">post_data</span>) {
-            <span class="self">self</span>.<span class="ident">post_data</span> <span class="op">=</span> <span class="ident">post_data</span>;
-            (<span class="self">self</span>.<span class="ident">post_data_processor</span>)(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">post_data</span>, <span class="ident">data</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>post_data = <span class="self">self</span>.post_data.to_owned();
+        <span class="self">self</span>.inner.event(ctx, event, <span class="kw-2">&amp;mut </span>post_data, env);
+        <span class="kw">if </span>!post_data.same(<span class="kw-2">&amp;</span><span class="self">self</span>.post_data) {
+            <span class="self">self</span>.post_data = post_data;
+            (<span class="self">self</span>.post_data_processor)(<span class="kw-2">&amp;</span><span class="self">self</span>.post_data, data);
             <span class="macro">println!</span>(<span class="string">&quot;Post Data Updated&quot;</span>);
-            <span class="ident">ctx</span>.<span class="ident">request_update</span>();
+            ctx.request_update();
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">lifecycle</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::LifeCycleCtx</span>,
-        <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">druid::LifeCycle</span>,
-        <span class="ident">_data</span>: <span class="kw-2">&amp;</span><span class="ident">F</span>,
-        <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>,
+    <span class="kw">fn </span>lifecycle(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        ctx: <span class="kw-2">&amp;mut </span>druid::LifeCycleCtx,
+        event: <span class="kw-2">&amp;</span>druid::LifeCycle,
+        _data: <span class="kw-2">&amp;</span>F,
+        env: <span class="kw-2">&amp;</span>druid::Env,
     ) {
         <span class="macro">println!</span>(<span class="string">&quot;Lifecycle Called&quot;</span>);
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">lifecycle</span>(<span class="ident">ctx</span>, <span class="ident">event</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">post_data</span>, <span class="ident">env</span>)
+        <span class="self">self</span>.inner.lifecycle(ctx, event, <span class="kw-2">&amp;</span><span class="self">self</span>.post_data, env)
     }
 
-    <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::UpdateCtx</span>, <span class="ident">_old_data</span>: <span class="kw-2">&amp;</span><span class="ident">F</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">F</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>) {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">post_data</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">post_data</span>.<span class="ident">to_owned</span>();
-        (<span class="self">self</span>.<span class="ident">pre_data_processor</span>)(<span class="ident">data</span>, <span class="kw-2">&amp;mut</span> <span class="ident">post_data</span>);
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">post_data</span>.<span class="ident">same</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">post_data</span>) {
+    <span class="kw">fn </span>update(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>druid::UpdateCtx, _old_data: <span class="kw-2">&amp;</span>F, data: <span class="kw-2">&amp;</span>F, env: <span class="kw-2">&amp;</span>druid::Env) {
+        <span class="kw">let </span><span class="kw-2">mut </span>post_data = <span class="self">self</span>.post_data.to_owned();
+        (<span class="self">self</span>.pre_data_processor)(data, <span class="kw-2">&amp;mut </span>post_data);
+        <span class="kw">if </span>!post_data.same(<span class="kw-2">&amp;</span><span class="self">self</span>.post_data) {
             <span class="macro">println!</span>(<span class="string">&quot;Update Called&quot;</span>);
-            <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">update</span>(<span class="ident">ctx</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">post_data</span>, <span class="ident">env</span>);
+            <span class="self">self</span>.inner.update(ctx, <span class="kw-2">&amp;</span><span class="self">self</span>.post_data, env);
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">layout</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::LayoutCtx</span>,
-        <span class="ident">bc</span>: <span class="kw-2">&amp;</span><span class="ident">druid::BoxConstraints</span>,
-        <span class="ident">_data</span>: <span class="kw-2">&amp;</span><span class="ident">F</span>,
-        <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>,
-    ) -&gt; <span class="ident">druid::Size</span> {
+    <span class="kw">fn </span>layout(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        ctx: <span class="kw-2">&amp;mut </span>druid::LayoutCtx,
+        bc: <span class="kw-2">&amp;</span>druid::BoxConstraints,
+        _data: <span class="kw-2">&amp;</span>F,
+        env: <span class="kw-2">&amp;</span>druid::Env,
+    ) -&gt; druid::Size {
         <span class="macro">println!</span>(<span class="string">&quot;Layout Called&quot;</span>);
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">layout</span>(<span class="ident">ctx</span>, <span class="ident">bc</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">post_data</span>, <span class="ident">env</span>)
+        <span class="self">self</span>.inner.layout(ctx, bc, <span class="kw-2">&amp;</span><span class="self">self</span>.post_data, env)
     }
 
-    <span class="kw">fn</span> <span class="ident">paint</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">druid::PaintCtx</span>, <span class="ident">_data</span>: <span class="kw-2">&amp;</span><span class="ident">F</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">druid::Env</span>) {
+    <span class="kw">fn </span>paint(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>druid::PaintCtx, _data: <span class="kw-2">&amp;</span>F, env: <span class="kw-2">&amp;</span>druid::Env) {
         <span class="macro">println!</span>(<span class="string">&quot;Paint Called&quot;</span>);
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">paint</span>(<span class="ident">ctx</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">post_data</span>, <span class="ident">env</span>)
+        <span class="self">self</span>.inner.paint(ctx, <span class="kw-2">&amp;</span><span class="self">self</span>.post_data, env)
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/progress_overlay.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>progress_overlay.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/progress_overlay.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>progress_overlay.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -368,375 +368,375 @@
 <span id="368">368</span>
 <span id="369">369</span>
 <span id="370">370</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::collections::BTreeMap</span>;
+</pre><pre class="rust"><code><span class="kw">use </span>std::collections::BTreeMap;
 
-<span class="kw">use</span> <span class="ident">druid</span>::{
-    <span class="ident">piet</span>::{<span class="ident">TextLayout</span>, <span class="kw-2">*</span>},
+<span class="kw">use </span>druid::{
+    piet::{TextLayout, <span class="kw-2">*</span>},
     <span class="kw-2">*</span>,
 };
-<span class="kw">use</span> <span class="ident">scl_gui_animation::Spring</span>;
+<span class="kw">use </span>scl_gui_animation::Spring;
 
-<span class="doccomment">/// 用于增加新进度的指令，需要传递一个独一无二的编号作为此进度的唯一编号</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NEW_PROGRESS</span>: <span class="ident">Selector</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Selector::new</span>(<span class="string">&quot;net.stevexmh.scl.progress.new&quot;</span>);
-<span class="doccomment">/// 用于删除进度的指令，需要传递此进度的唯一编号</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">REMOVE_PROGRESS</span>: <span class="ident">Selector</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Selector::new</span>(<span class="string">&quot;net.stevexmh.scl.progress.rm&quot;</span>);
-<span class="doccomment">/// 用于给进度设置主要信息，需要传递此进度的唯一编号</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SET_MESSAGE</span>: <span class="ident">Selector</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">String</span>)<span class="op">&gt;</span> <span class="op">=</span>
-    <span class="ident">Selector::new</span>(<span class="string">&quot;net.stevexmh.scl.progress.set-msg&quot;</span>);
-<span class="doccomment">/// 用于给进度设置次要信息，需要传递此进度的唯一编号和其需要展示的信息</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SET_SUB_MESSAGE</span>: <span class="ident">Selector</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">String</span>)<span class="op">&gt;</span> <span class="op">=</span>
-    <span class="ident">Selector::new</span>(<span class="string">&quot;net.stevexmh.scl.progress.set-sub-msg&quot;</span>);
-<span class="doccomment">/// 用于给进度设置最大进度值，需要传递此进度的唯一编号和其进度最大值</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SET_MAX_PROGRESS</span>: <span class="ident">Selector</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">f64</span>)<span class="op">&gt;</span> <span class="op">=</span>
-    <span class="ident">Selector::new</span>(<span class="string">&quot;net.stevexmh.scl.progress.set-max&quot;</span>);
-<span class="doccomment">/// 用于给进度增加/减少最大进度值，需要传递此进度的唯一编号和其进度最大值变化值</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ADD_MAX_PROGRESS</span>: <span class="ident">Selector</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">f64</span>)<span class="op">&gt;</span> <span class="op">=</span>
-    <span class="ident">Selector::new</span>(<span class="string">&quot;net.stevexmh.scl.progress.add-max&quot;</span>);
-<span class="doccomment">/// 用于给进度设置进度值，需要传递此进度的唯一编号和其进度值</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SET_PROGRESS</span>: <span class="ident">Selector</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">f64</span>)<span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Selector::new</span>(<span class="string">&quot;net.stevexmh.scl.progress.set&quot;</span>);
-<span class="doccomment">/// 用于给进度增加/减少进度值，需要传递此进度的唯一编号和其进度变化值</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ADD_PROGRESS</span>: <span class="ident">Selector</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">f64</span>)<span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Selector::new</span>(<span class="string">&quot;net.stevexmh.scl.progress.add&quot;</span>);
-<span class="doccomment">/// 用于给进度隐藏进度值，需要传递此进度的唯一编号</span>
-<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">HIDE_PROGRESS</span>: <span class="ident">Selector</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Selector::new</span>(<span class="string">&quot;net.stevexmh.scl.progress.hide&quot;</span>);
+<span class="doccomment">/// 用于增加新进度的指令，需要传递一个独一无二的编号作为此进度的唯一编号
+</span><span class="kw">pub const </span>NEW_PROGRESS: Selector&lt;usize&gt; = Selector::new(<span class="string">&quot;net.stevexmh.scl.progress.new&quot;</span>);
+<span class="doccomment">/// 用于删除进度的指令，需要传递此进度的唯一编号
+</span><span class="kw">pub const </span>REMOVE_PROGRESS: Selector&lt;usize&gt; = Selector::new(<span class="string">&quot;net.stevexmh.scl.progress.rm&quot;</span>);
+<span class="doccomment">/// 用于给进度设置主要信息，需要传递此进度的唯一编号
+</span><span class="kw">pub const </span>SET_MESSAGE: Selector&lt;(usize, String)&gt; =
+    Selector::new(<span class="string">&quot;net.stevexmh.scl.progress.set-msg&quot;</span>);
+<span class="doccomment">/// 用于给进度设置次要信息，需要传递此进度的唯一编号和其需要展示的信息
+</span><span class="kw">pub const </span>SET_SUB_MESSAGE: Selector&lt;(usize, String)&gt; =
+    Selector::new(<span class="string">&quot;net.stevexmh.scl.progress.set-sub-msg&quot;</span>);
+<span class="doccomment">/// 用于给进度设置最大进度值，需要传递此进度的唯一编号和其进度最大值
+</span><span class="kw">pub const </span>SET_MAX_PROGRESS: Selector&lt;(usize, f64)&gt; =
+    Selector::new(<span class="string">&quot;net.stevexmh.scl.progress.set-max&quot;</span>);
+<span class="doccomment">/// 用于给进度增加/减少最大进度值，需要传递此进度的唯一编号和其进度最大值变化值
+</span><span class="kw">pub const </span>ADD_MAX_PROGRESS: Selector&lt;(usize, f64)&gt; =
+    Selector::new(<span class="string">&quot;net.stevexmh.scl.progress.add-max&quot;</span>);
+<span class="doccomment">/// 用于给进度设置进度值，需要传递此进度的唯一编号和其进度值
+</span><span class="kw">pub const </span>SET_PROGRESS: Selector&lt;(usize, f64)&gt; = Selector::new(<span class="string">&quot;net.stevexmh.scl.progress.set&quot;</span>);
+<span class="doccomment">/// 用于给进度增加/减少进度值，需要传递此进度的唯一编号和其进度变化值
+</span><span class="kw">pub const </span>ADD_PROGRESS: Selector&lt;(usize, f64)&gt; = Selector::new(<span class="string">&quot;net.stevexmh.scl.progress.add&quot;</span>);
+<span class="doccomment">/// 用于给进度隐藏进度值，需要传递此进度的唯一编号
+</span><span class="kw">pub const </span>HIDE_PROGRESS: Selector&lt;usize&gt; = Selector::new(<span class="string">&quot;net.stevexmh.scl.progress.hide&quot;</span>);
 
-<span class="kw">struct</span> <span class="ident">ProgressState</span> {
-    <span class="ident">max_progress</span>: <span class="ident">f64</span>,
-    <span class="ident">progress</span>: <span class="ident">f64</span>,
-    <span class="ident">current_progress</span>: <span class="ident">f64</span>,
-    <span class="ident">indeterminate</span>: <span class="ident">bool</span>,
-    <span class="ident">msg</span>: <span class="ident">String</span>,
-    <span class="ident">msg_layout</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PietTextLayout</span><span class="op">&gt;</span>,
-    <span class="ident">sub_msg</span>: <span class="ident">String</span>,
-    <span class="ident">sub_msg_layout</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PietTextLayout</span><span class="op">&gt;</span>,
+<span class="kw">struct </span>ProgressState {
+    max_progress: f64,
+    progress: f64,
+    current_progress: f64,
+    indeterminate: bool,
+    msg: String,
+    msg_layout: <span class="prelude-ty">Option</span>&lt;PietTextLayout&gt;,
+    sub_msg: String,
+    sub_msg_layout: <span class="prelude-ty">Option</span>&lt;PietTextLayout&gt;,
 }
 
-<span class="doccomment">/// 一个进度显示组件，用于搭配 SCL Core 的进度报告功能显示正在处理的项目进度</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 在没有进度时会隐藏，当存在进度时将会占用一点位置来显示进度。</span>
-<span class="doccomment">/// 此时如果鼠标悬浮在这个区域则会放大进度组件以查看正在处理的所有进度。</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ProgressOverlay</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">progress_expanding</span>: <span class="ident">bool</span>,
-    <span class="ident">progress_height_spring</span>: <span class="ident">Spring</span>,
-    <span class="ident">progress_map</span>: <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">usize</span>, <span class="ident">ProgressState</span><span class="op">&gt;</span>,
+<span class="doccomment">/// 一个进度显示组件，用于搭配 SCL Core 的进度报告功能显示正在处理的项目进度
+///
+/// 在没有进度时会隐藏，当存在进度时将会占用一点位置来显示进度。
+/// 此时如果鼠标悬浮在这个区域则会放大进度组件以查看正在处理的所有进度。
+</span><span class="kw">pub struct </span>ProgressOverlay&lt;T&gt; {
+    progress_expanding: bool,
+    progress_height_spring: Spring,
+    progress_map: BTreeMap&lt;usize, ProgressState&gt;,
 
-    <span class="ident">inner</span>: <span class="ident">WidgetPod</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    inner: WidgetPod&lt;T, Box&lt;<span class="kw">dyn </span>Widget&lt;T&gt;&gt;&gt;,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">ProgressOverlay</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// 以一个将会显示进度的组件为参数创建此组件</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">inner</span>: <span class="kw">impl</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">progress_expanding</span>: <span class="bool-val">false</span>,
-            <span class="ident">progress_height_spring</span>: <span class="ident">Spring::new</span>(<span class="number">0.</span>),
-            <span class="ident">progress_map</span>: <span class="ident">BTreeMap::new</span>(),
-            <span class="ident">inner</span>: <span class="ident">WidgetPod::new</span>(<span class="ident">Box::new</span>(<span class="ident">inner</span>)),
+<span class="kw">impl</span>&lt;T&gt; ProgressOverlay&lt;T&gt; {
+    <span class="doccomment">/// 以一个将会显示进度的组件为参数创建此组件
+    </span><span class="kw">pub fn </span>new(inner: <span class="kw">impl </span>Widget&lt;T&gt; + <span class="lifetime">&#39;static</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            progress_expanding: <span class="bool-val">false</span>,
+            progress_height_spring: Spring::new(<span class="number">0.</span>),
+            progress_map: BTreeMap::new(),
+            inner: WidgetPod::new(Box::new(inner)),
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">should_display</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="op">!</span><span class="self">self</span>.<span class="ident">progress_map</span>.<span class="ident">is_empty</span>()
+    <span class="kw">fn </span>should_display(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        !<span class="self">self</span>.progress_map.is_empty()
     }
 
-    <span class="kw">fn</span> <span class="ident">should_update_progress</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">should_display</span>() {
-            <span class="kw">for</span> <span class="ident">p</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">progress_map</span>.<span class="ident">values</span>() {
-                <span class="kw">if</span> <span class="ident">p</span>.<span class="ident">current_progress</span> <span class="op">!</span><span class="op">=</span> <span class="ident">p</span>.<span class="ident">progress</span> {
-                    <span class="kw">return</span> <span class="bool-val">true</span>;
+    <span class="kw">fn </span>should_update_progress(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="kw">if </span><span class="self">self</span>.should_display() {
+            <span class="kw">for </span>p <span class="kw">in </span><span class="self">self</span>.progress_map.values() {
+                <span class="kw">if </span>p.current_progress != p.progress {
+                    <span class="kw">return </span><span class="bool-val">true</span>;
                 }
             }
         }
-        <span class="bool-val">false</span>
-    }
+        <span class="bool-val">false
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">paint_progress</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">PaintCtx</span>, <span class="ident">_data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="ident">ctx</span>.<span class="ident">with_save</span>(<span class="op">|</span><span class="ident">ctx</span><span class="op">|</span> {
-            <span class="comment">// Envs</span>
-            <span class="kw">let</span> <span class="ident">bg</span> <span class="op">=</span> <span class="ident">env</span>
-                .<span class="ident">get</span>(<span class="ident">druid::theme::WINDOW_BACKGROUND_COLOR</span>)
-                .<span class="ident">with_alpha</span>(<span class="number">1.</span>);
-            <span class="kw">let</span> <span class="ident">base_low</span> <span class="op">=</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::base::LOW</span>);
-            <span class="kw">let</span> <span class="ident">base_high</span> <span class="op">=</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::base::HIGH</span>);
-            <span class="kw">let</span> <span class="ident">accent_sec</span> <span class="op">=</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::main::SECONDARY</span>);
-            <span class="kw">let</span> <span class="ident">base_font</span> <span class="op">=</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::typography::BASE</span>).<span class="ident">family</span>;
+    <span class="kw">fn </span>paint_progress(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>PaintCtx, _data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) {
+        ctx.with_save(|ctx| {
+            <span class="comment">// Envs
+            </span><span class="kw">let </span>bg = env
+                .get(druid::theme::WINDOW_BACKGROUND_COLOR)
+                .with_alpha(<span class="number">1.</span>);
+            <span class="kw">let </span>base_low = env.get(<span class="kw">crate</span>::theme::color::base::LOW);
+            <span class="kw">let </span>base_high = env.get(<span class="kw">crate</span>::theme::color::base::HIGH);
+            <span class="kw">let </span>accent_sec = env.get(<span class="kw">crate</span>::theme::color::main::SECONDARY);
+            <span class="kw">let </span>base_font = env.get(<span class="kw">crate</span>::theme::color::typography::BASE).family;
 
-            <span class="kw">let</span> <span class="ident">linear_brush</span> <span class="op">=</span> <span class="ident">PaintBrush::Linear</span>(<span class="ident">LinearGradient::new</span>(
-                <span class="ident">UnitPoint::LEFT</span>,
-                <span class="ident">UnitPoint::RIGHT</span>,
-                (<span class="ident">bg</span>.<span class="ident">to_owned</span>().<span class="ident">with_alpha</span>(<span class="number">0.</span>), <span class="ident">bg</span>.<span class="ident">to_owned</span>()),
+            <span class="kw">let </span>linear_brush = PaintBrush::Linear(LinearGradient::new(
+                UnitPoint::LEFT,
+                UnitPoint::RIGHT,
+                (bg.to_owned().with_alpha(<span class="number">0.</span>), bg.to_owned()),
             ));
 
-            <span class="kw">let</span> <span class="ident">width</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">size</span>().<span class="ident">width</span>;
-            <span class="kw">let</span> <span class="ident">height</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">size</span>().<span class="ident">height</span>;
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">current_height</span> <span class="op">=</span> <span class="ident">height</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">progress_height_spring</span>.<span class="ident">position</span>();
-            <span class="kw">let</span> <span class="ident">rect</span> <span class="op">=</span> <span class="ident">Rect::new</span>(<span class="number">0.</span>, <span class="ident">current_height</span>, <span class="ident">width</span>, <span class="ident">height</span>);
-            <span class="ident">ctx</span>.<span class="ident">fill</span>(<span class="kw-2">&amp;</span><span class="ident">rect</span>, <span class="kw-2">&amp;</span><span class="ident">bg</span>);
-            <span class="kw">let</span> <span class="ident">rect</span> <span class="op">=</span> <span class="ident">Rect::new</span>(<span class="number">0.</span>, <span class="ident">current_height</span>, <span class="ident">width</span>, <span class="ident">current_height</span> <span class="op">+</span> <span class="number">1.</span>);
-            <span class="ident">ctx</span>.<span class="ident">fill</span>(<span class="kw-2">&amp;</span><span class="ident">rect</span>, <span class="kw-2">&amp;</span><span class="ident">base_low</span>);
+            <span class="kw">let </span>width = ctx.size().width;
+            <span class="kw">let </span>height = ctx.size().height;
+            <span class="kw">let </span><span class="kw-2">mut </span>current_height = height - <span class="self">self</span>.progress_height_spring.position();
+            <span class="kw">let </span>rect = Rect::new(<span class="number">0.</span>, current_height, width, height);
+            ctx.fill(<span class="kw-2">&amp;</span>rect, <span class="kw-2">&amp;</span>bg);
+            <span class="kw">let </span>rect = Rect::new(<span class="number">0.</span>, current_height, width, current_height + <span class="number">1.</span>);
+            ctx.fill(<span class="kw-2">&amp;</span>rect, <span class="kw-2">&amp;</span>base_low);
 
-            <span class="kw">for</span> (<span class="ident">i</span>, (<span class="kw">_</span>, <span class="ident">item</span>)) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">progress_map</span>.<span class="ident">iter_mut</span>().<span class="ident">enumerate</span>() {
-                <span class="kw">if</span> <span class="ident">item</span>.<span class="ident">progress</span>.<span class="ident">round</span>() <span class="op">==</span> <span class="ident">item</span>.<span class="ident">max_progress</span>.<span class="ident">round</span>()
-                    <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">msg</span>.<span class="ident">is_empty</span>()
-                    <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">sub_msg</span>.<span class="ident">is_empty</span>()
+            <span class="kw">for </span>(i, (<span class="kw">_</span>, item)) <span class="kw">in </span><span class="self">self</span>.progress_map.iter_mut().enumerate() {
+                <span class="kw">if </span>item.progress.round() == item.max_progress.round()
+                    &amp;&amp; item.msg.is_empty()
+                    &amp;&amp; item.sub_msg.is_empty()
                 {
                     <span class="kw">continue</span>;
                 }
-                <span class="ident">item</span>.<span class="ident">current_progress</span> <span class="op">=</span> <span class="ident">item</span>.<span class="ident">current_progress</span>
-                    <span class="op">+</span> ((<span class="ident">item</span>.<span class="ident">progress</span> <span class="op">/</span> <span class="ident">item</span>.<span class="ident">max_progress</span>) <span class="op">-</span> <span class="ident">item</span>.<span class="ident">current_progress</span>) <span class="op">/</span> <span class="number">7.</span>;
-                <span class="kw">let</span> <span class="ident">text</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">text</span>();
-                <span class="kw">if</span> <span class="ident">item</span>.<span class="ident">msg_layout</span>.<span class="ident">is_none</span>() {
-                    <span class="ident">item</span>.<span class="ident">msg_layout</span> <span class="op">=</span> <span class="ident">text</span>
-                        .<span class="ident">new_text_layout</span>(<span class="ident">item</span>.<span class="ident">msg</span>.<span class="ident">to_owned</span>())
-                        .<span class="ident">alignment</span>(<span class="ident">TextAlignment::Start</span>)
-                        .<span class="ident">text_color</span>(<span class="ident">base_high</span>.<span class="ident">to_owned</span>())
-                        .<span class="ident">font</span>(<span class="ident">base_font</span>.<span class="ident">to_owned</span>(), <span class="number">12.</span>)
-                        .<span class="ident">build</span>()
-                        .<span class="ident">ok</span>();
+                item.current_progress = item.current_progress
+                    + ((item.progress / item.max_progress) - item.current_progress) / <span class="number">7.</span>;
+                <span class="kw">let </span>text = ctx.text();
+                <span class="kw">if </span>item.msg_layout.is_none() {
+                    item.msg_layout = text
+                        .new_text_layout(item.msg.to_owned())
+                        .alignment(TextAlignment::Start)
+                        .text_color(base_high.to_owned())
+                        .font(base_font.to_owned(), <span class="number">12.</span>)
+                        .build()
+                        .ok();
                 }
-                <span class="kw">let</span> <span class="ident">layout_height</span> <span class="op">=</span> <span class="ident">item</span>
-                    .<span class="ident">msg_layout</span>
-                    .<span class="ident">as_ref</span>()
-                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">size</span>().<span class="ident">height</span>)
-                    .<span class="ident">unwrap_or</span>(<span class="number">0.</span>);
-                <span class="kw">if</span> <span class="ident">item</span>.<span class="ident">sub_msg_layout</span>.<span class="ident">is_none</span>() {
-                    <span class="ident">item</span>.<span class="ident">sub_msg_layout</span> <span class="op">=</span> <span class="ident">text</span>
-                        .<span class="ident">new_text_layout</span>(<span class="kw">if</span> <span class="ident">item</span>.<span class="ident">sub_msg</span>.<span class="ident">is_empty</span>() {
-                            <span class="kw">if</span> <span class="ident">item</span>.<span class="ident">progress</span>.<span class="ident">round</span>() <span class="op">!</span><span class="op">=</span> <span class="ident">item</span>.<span class="ident">max_progress</span>.<span class="ident">round</span>() {
-                                <span class="macro">format!</span>(<span class="string">&quot;{}/{}&quot;</span>, <span class="ident">item</span>.<span class="ident">progress</span>.<span class="ident">round</span>(), <span class="ident">item</span>.<span class="ident">max_progress</span>.<span class="ident">round</span>())
-                            } <span class="kw">else</span> {
-                                <span class="string">&quot;&quot;</span>.<span class="ident">into</span>()
+                <span class="kw">let </span>layout_height = item
+                    .msg_layout
+                    .as_ref()
+                    .map(|x| x.size().height)
+                    .unwrap_or(<span class="number">0.</span>);
+                <span class="kw">if </span>item.sub_msg_layout.is_none() {
+                    item.sub_msg_layout = text
+                        .new_text_layout(<span class="kw">if </span>item.sub_msg.is_empty() {
+                            <span class="kw">if </span>item.progress.round() != item.max_progress.round() {
+                                <span class="macro">format!</span>(<span class="string">&quot;{}/{}&quot;</span>, item.progress.round(), item.max_progress.round())
+                            } <span class="kw">else </span>{
+                                <span class="string">&quot;&quot;</span>.into()
                             }
-                        } <span class="kw">else</span> {
-                            <span class="ident">item</span>.<span class="ident">sub_msg</span>.<span class="ident">to_owned</span>()
+                        } <span class="kw">else </span>{
+                            item.sub_msg.to_owned()
                         })
-                        .<span class="ident">alignment</span>(<span class="ident">TextAlignment::Start</span>)
-                        .<span class="ident">text_color</span>(<span class="ident">base_high</span>.<span class="ident">to_owned</span>())
-                        .<span class="ident">font</span>(<span class="ident">base_font</span>.<span class="ident">to_owned</span>(), <span class="number">12.</span>)
-                        .<span class="ident">build</span>()
-                        .<span class="ident">ok</span>();
+                        .alignment(TextAlignment::Start)
+                        .text_color(base_high.to_owned())
+                        .font(base_font.to_owned(), <span class="number">12.</span>)
+                        .build()
+                        .ok();
                 }
-                <span class="kw">let</span> <span class="ident">right_layout_width</span> <span class="op">=</span> <span class="ident">item</span>
-                    .<span class="ident">sub_msg_layout</span>
-                    .<span class="ident">as_ref</span>()
-                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">size</span>().<span class="ident">width</span>)
-                    .<span class="ident">unwrap_or</span>(<span class="number">0.</span>);
-                <span class="ident">ctx</span>.<span class="ident">with_save</span>(<span class="op">|</span><span class="ident">ctx</span><span class="op">|</span> {
-                    <span class="ident">ctx</span>.<span class="ident">clip</span>(<span class="ident">Rect::new</span>(
+                <span class="kw">let </span>right_layout_width = item
+                    .sub_msg_layout
+                    .as_ref()
+                    .map(|x| x.size().width)
+                    .unwrap_or(<span class="number">0.</span>);
+                ctx.with_save(|ctx| {
+                    ctx.clip(Rect::new(
                         <span class="number">12.</span>,
-                        <span class="ident">current_height</span> <span class="op">+</span> <span class="number">12.</span>,
-                        <span class="ident">width</span> <span class="op">-</span> <span class="ident">right_layout_width</span> <span class="op">-</span> <span class="number">20.</span>,
-                        <span class="ident">current_height</span> <span class="op">+</span> <span class="number">12.</span> <span class="op">+</span> <span class="ident">layout_height</span>,
+                        current_height + <span class="number">12.</span>,
+                        width - right_layout_width - <span class="number">20.</span>,
+                        current_height + <span class="number">12. </span>+ layout_height,
                     ));
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">layout</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">msg_layout</span> {
-                        <span class="ident">ctx</span>.<span class="ident">draw_text</span>(<span class="ident">layout</span>, (<span class="number">12.</span>, <span class="ident">current_height</span> <span class="op">+</span> <span class="number">12.</span>));
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(layout) = <span class="kw-2">&amp;</span>item.msg_layout {
+                        ctx.draw_text(layout, (<span class="number">12.</span>, current_height + <span class="number">12.</span>));
                     }
                 });
-                <span class="ident">ctx</span>.<span class="ident">fill</span>(
-                    <span class="ident">Rect::new</span>(
-                        <span class="ident">width</span> <span class="op">-</span> <span class="ident">right_layout_width</span> <span class="op">-</span> <span class="number">20.</span>,
-                        <span class="ident">current_height</span> <span class="op">+</span> <span class="number">12.</span>,
-                        <span class="ident">width</span> <span class="op">-</span> <span class="ident">right_layout_width</span> <span class="op">-</span> <span class="number">30.</span>,
-                        <span class="ident">current_height</span> <span class="op">+</span> <span class="number">12.</span> <span class="op">+</span> <span class="ident">layout_height</span>,
+                ctx.fill(
+                    Rect::new(
+                        width - right_layout_width - <span class="number">20.</span>,
+                        current_height + <span class="number">12.</span>,
+                        width - right_layout_width - <span class="number">30.</span>,
+                        current_height + <span class="number">12. </span>+ layout_height,
                     ),
-                    <span class="kw-2">&amp;</span><span class="ident">linear_brush</span>,
+                    <span class="kw-2">&amp;</span>linear_brush,
                 );
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">layout</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">item</span>.<span class="ident">sub_msg_layout</span> {
-                    <span class="ident">ctx</span>.<span class="ident">draw_text</span>(
-                        <span class="ident">layout</span>,
-                        (<span class="ident">width</span> <span class="op">-</span> <span class="number">20.</span> <span class="op">-</span> <span class="ident">right_layout_width</span>, <span class="ident">current_height</span> <span class="op">+</span> <span class="number">12.</span>),
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(layout) = <span class="kw-2">&amp;</span>item.sub_msg_layout {
+                    ctx.draw_text(
+                        layout,
+                        (width - <span class="number">20. </span>- right_layout_width, current_height + <span class="number">12.</span>),
                     );
                 }
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">item</span>.<span class="ident">indeterminate</span> {
-                    <span class="kw">let</span> <span class="ident">progress_bar_rect</span> <span class="op">=</span>
-                        <span class="ident">Rect::from_origin_size</span>((<span class="number">10.</span>, <span class="ident">current_height</span> <span class="op">+</span> <span class="number">35.</span>), (<span class="ident">width</span> <span class="op">-</span> <span class="number">20.</span>, <span class="number">4.</span>));
-                    <span class="ident">ctx</span>.<span class="ident">fill</span>(
-                        <span class="kw-2">&amp;</span><span class="ident">progress_bar_rect</span>.<span class="ident">to_rounded_rect</span>(<span class="ident">progress_bar_rect</span>.<span class="ident">height</span>() <span class="op">/</span> <span class="number">2.</span>),
-                        <span class="kw-2">&amp;</span><span class="ident">base_low</span>,
+                <span class="kw">if </span>!item.indeterminate {
+                    <span class="kw">let </span>progress_bar_rect =
+                        Rect::from_origin_size((<span class="number">10.</span>, current_height + <span class="number">35.</span>), (width - <span class="number">20.</span>, <span class="number">4.</span>));
+                    ctx.fill(
+                        <span class="kw-2">&amp;</span>progress_bar_rect.to_rounded_rect(progress_bar_rect.height() / <span class="number">2.</span>),
+                        <span class="kw-2">&amp;</span>base_low,
                     );
-                    <span class="kw">let</span> <span class="ident">progress_bar_current_rect</span> <span class="op">=</span> <span class="ident">Rect::from_origin_size</span>(
-                        <span class="ident">progress_bar_rect</span>.<span class="ident">origin</span>(),
+                    <span class="kw">let </span>progress_bar_current_rect = Rect::from_origin_size(
+                        progress_bar_rect.origin(),
                         (
-                            <span class="ident">progress_bar_rect</span>.<span class="ident">width</span>() <span class="op">*</span> <span class="ident">item</span>.<span class="ident">current_progress</span>.<span class="ident">max</span>(<span class="number">0.</span>).<span class="ident">min</span>(<span class="number">1.</span>),
-                            <span class="ident">progress_bar_rect</span>.<span class="ident">height</span>(),
+                            progress_bar_rect.width() * item.current_progress.max(<span class="number">0.</span>).min(<span class="number">1.</span>),
+                            progress_bar_rect.height(),
                         ),
                     );
-                    <span class="ident">ctx</span>.<span class="ident">fill</span>(
-                        <span class="kw-2">&amp;</span><span class="ident">progress_bar_current_rect</span>.<span class="ident">to_rounded_rect</span>(<span class="ident">progress_bar_rect</span>.<span class="ident">height</span>() <span class="op">/</span> <span class="number">2.</span>),
-                        <span class="kw-2">&amp;</span><span class="ident">accent_sec</span>,
+                    ctx.fill(
+                        <span class="kw-2">&amp;</span>progress_bar_current_rect.to_rounded_rect(progress_bar_rect.height() / <span class="number">2.</span>),
+                        <span class="kw-2">&amp;</span>accent_sec,
                     );
                 }
-                <span class="kw">if</span> <span class="ident">i</span> <span class="op">&gt;</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">current_height</span> <span class="op">&gt;</span> <span class="ident">height</span> <span class="op">-</span> <span class="number">100.</span> {
-                    <span class="ident">ctx</span>.<span class="ident">fill</span>(
-                        <span class="ident">Rect::from_origin_size</span>((<span class="number">0.</span>, <span class="ident">current_height</span>), (<span class="ident">width</span>, <span class="number">50.</span>)),
-                        <span class="kw-2">&amp;</span><span class="ident">bg</span>.<span class="ident">with_alpha</span>((<span class="ident">current_height</span> <span class="op">-</span> (<span class="ident">height</span> <span class="op">-</span> <span class="number">100.</span>)) <span class="op">*</span> <span class="number">0.4</span> <span class="op">/</span> <span class="number">20.</span>),
+                <span class="kw">if </span>i &gt; <span class="number">0 </span>&amp;&amp; current_height &gt; height - <span class="number">100. </span>{
+                    ctx.fill(
+                        Rect::from_origin_size((<span class="number">0.</span>, current_height), (width, <span class="number">50.</span>)),
+                        <span class="kw-2">&amp;</span>bg.with_alpha((current_height - (height - <span class="number">100.</span>)) * <span class="number">0.4 </span>/ <span class="number">20.</span>),
                     );
                     <span class="kw">break</span>;
                 }
-                <span class="ident">current_height</span> <span class="op">+</span><span class="op">=</span> <span class="number">30.</span>;
-                <span class="kw">if</span> <span class="ident">item</span>.<span class="ident">progress</span> <span class="op">&gt;</span> <span class="number">0.</span> <span class="op">&amp;&amp;</span> <span class="ident">item</span>.<span class="ident">progress</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">1.</span> {
-                    <span class="ident">current_height</span> <span class="op">+</span><span class="op">=</span> <span class="number">20.</span>;
+                current_height += <span class="number">30.</span>;
+                <span class="kw">if </span>item.progress &gt; <span class="number">0. </span>&amp;&amp; item.progress &lt;= <span class="number">1. </span>{
+                    current_height += <span class="number">20.</span>;
                 }
             }
         })
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Data</span><span class="op">&gt;</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ProgressOverlay</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">event</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EventCtx</span>, <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">Event</span>, <span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">match</span> <span class="ident">event</span> {
-            <span class="ident">Event::MouseMove</span>(<span class="ident">m</span>) =&gt; {
-                <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">size</span>();
-                <span class="kw">let</span> <span class="ident">width</span> <span class="op">=</span> <span class="ident">size</span>.<span class="ident">width</span>;
-                <span class="kw">let</span> <span class="ident">height</span> <span class="op">=</span> <span class="ident">size</span>.<span class="ident">height</span>;
-                <span class="kw">let</span> <span class="ident">m_pos_x</span> <span class="op">=</span> <span class="ident">m</span>.<span class="ident">pos</span>.<span class="ident">x</span>;
-                <span class="kw">let</span> <span class="ident">m_pos_y</span> <span class="op">=</span> <span class="ident">m</span>.<span class="ident">pos</span>.<span class="ident">y</span>;
-                <span class="kw">let</span> <span class="ident">old_progress_expanding</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">progress_expanding</span>;
-                <span class="self">self</span>.<span class="ident">progress_expanding</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">should_display</span>()
-                    <span class="op">&amp;&amp;</span> <span class="ident">m_pos_y</span> <span class="op">&gt;</span> <span class="ident">height</span> <span class="op">-</span> <span class="number">50.</span>
-                    <span class="op">&amp;&amp;</span> <span class="ident">m_pos_y</span> <span class="op">&lt;</span> <span class="ident">height</span>
-                    <span class="op">&amp;&amp;</span> <span class="ident">m_pos_x</span> <span class="op">&gt;</span> <span class="number">0.</span>
-                    <span class="op">&amp;&amp;</span> <span class="ident">m_pos_x</span> <span class="op">&lt;</span> <span class="ident">width</span>;
-                <span class="kw">if</span> <span class="ident">old_progress_expanding</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">progress_expanding</span> {
-                    <span class="self">self</span>.<span class="ident">progress_height_spring</span>
-                        .<span class="ident">set_target</span>(<span class="kw">if</span> <span class="self">self</span>.<span class="ident">progress_expanding</span> {
-                            <span class="ident">height</span>
-                        } <span class="kw">else</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">should_display</span>() {
-                            <span class="number">50.</span>
-                        } <span class="kw">else</span> {
-                            <span class="number">0.</span>
-                        });
-                    <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
+<span class="kw">impl</span>&lt;T: Data&gt; Widget&lt;T&gt; <span class="kw">for </span>ProgressOverlay&lt;T&gt; {
+    <span class="kw">fn </span>event(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>EventCtx, event: <span class="kw-2">&amp;</span>Event, data: <span class="kw-2">&amp;mut </span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">match </span>event {
+            Event::MouseMove(m) =&gt; {
+                <span class="kw">let </span>size = ctx.size();
+                <span class="kw">let </span>width = size.width;
+                <span class="kw">let </span>height = size.height;
+                <span class="kw">let </span>m_pos_x = m.pos.x;
+                <span class="kw">let </span>m_pos_y = m.pos.y;
+                <span class="kw">let </span>old_progress_expanding = <span class="self">self</span>.progress_expanding;
+                <span class="self">self</span>.progress_expanding = <span class="self">self</span>.should_display()
+                    &amp;&amp; m_pos_y &gt; height - <span class="number">50.
+                    </span>&amp;&amp; m_pos_y &lt; height
+                    &amp;&amp; m_pos_x &gt; <span class="number">0.
+                    </span>&amp;&amp; m_pos_x &lt; width;
+                <span class="kw">if </span>old_progress_expanding != <span class="self">self</span>.progress_expanding {
+                    <span class="self">self</span>.progress_height_spring
+                        .set_target(<span class="kw">if </span><span class="self">self</span>.progress_expanding {
+                            height
+                        } <span class="kw">else if </span><span class="self">self</span>.should_display() {
+                            <span class="number">50.
+                        </span>} <span class="kw">else </span>{
+                            <span class="number">0.
+                        </span>});
+                    ctx.request_anim_frame();
                 }
             }
-            <span class="ident">Event::AnimFrame</span>(<span class="kw">_</span>) =&gt; {
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">should_update_progress</span>() <span class="op">|</span><span class="op">|</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">progress_height_spring</span>.<span class="ident">arrived</span>() {
-                    <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
-                    <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
-                    <span class="ident">ctx</span>.<span class="ident">request_layout</span>();
+            Event::AnimFrame(<span class="kw">_</span>) =&gt; {
+                <span class="kw">if </span><span class="self">self</span>.should_update_progress() || !<span class="self">self</span>.progress_height_spring.arrived() {
+                    ctx.request_paint();
+                    ctx.request_anim_frame();
+                    ctx.request_layout();
                 }
             }
-            <span class="ident">Event::Command</span>(<span class="ident">cmd</span>) =&gt; {
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="ident">p</span>) <span class="op">=</span> <span class="ident">cmd</span>.<span class="ident">get</span>(<span class="ident">NEW_PROGRESS</span>) {
-                    <span class="self">self</span>.<span class="ident">progress_height_spring</span>
-                        .<span class="ident">set_target</span>(<span class="kw">if</span> <span class="self">self</span>.<span class="ident">progress_map</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="number">1</span> {
-                            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">progress_expanding</span> {
-                                <span class="ident">ctx</span>.<span class="ident">size</span>().<span class="ident">height</span>
-                            } <span class="kw">else</span> {
-                                <span class="number">50.</span>
-                            }
-                        } <span class="kw">else</span> {
-                            <span class="number">50.</span>
-                        });
-                    <span class="self">self</span>.<span class="ident">progress_map</span>.<span class="ident">insert</span>(
-                        <span class="ident">p</span>,
-                        <span class="ident">ProgressState</span> {
-                            <span class="ident">max_progress</span>: <span class="number">0.</span>,
-                            <span class="ident">progress</span>: <span class="number">0.</span>,
-                            <span class="ident">current_progress</span>: <span class="number">0.</span>,
-                            <span class="ident">indeterminate</span>: <span class="bool-val">true</span>,
-                            <span class="ident">msg</span>: <span class="ident">String::new</span>(),
-                            <span class="ident">msg_layout</span>: <span class="prelude-val">None</span>,
-                            <span class="ident">sub_msg</span>: <span class="ident">String::new</span>(),
-                            <span class="ident">sub_msg_layout</span>: <span class="prelude-val">None</span>,
+            Event::Command(cmd) =&gt; {
+                <span class="kw">if let </span><span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>p) = cmd.get(NEW_PROGRESS) {
+                    <span class="self">self</span>.progress_height_spring
+                        .set_target(<span class="kw">if </span><span class="self">self</span>.progress_map.len() &gt; <span class="number">1 </span>{
+                            <span class="kw">if </span><span class="self">self</span>.progress_expanding {
+                                ctx.size().height
+                            } <span class="kw">else </span>{
+                                <span class="number">50.
+                            </span>}
+                        } <span class="kw">else </span>{
+                            <span class="number">50.
+                        </span>});
+                    <span class="self">self</span>.progress_map.insert(
+                        p,
+                        ProgressState {
+                            max_progress: <span class="number">0.</span>,
+                            progress: <span class="number">0.</span>,
+                            current_progress: <span class="number">0.</span>,
+                            indeterminate: <span class="bool-val">true</span>,
+                            msg: String::new(),
+                            msg_layout: <span class="prelude-val">None</span>,
+                            sub_msg: String::new(),
+                            sub_msg_layout: <span class="prelude-val">None</span>,
                         },
                     );
-                    <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="ident">p</span>) <span class="op">=</span> <span class="ident">cmd</span>.<span class="ident">get</span>(<span class="ident">REMOVE_PROGRESS</span>) {
-                    <span class="self">self</span>.<span class="ident">progress_map</span>.<span class="ident">remove</span>(<span class="kw-2">&amp;</span><span class="ident">p</span>);
-                    <span class="kw">if</span> <span class="self">self</span>.<span class="ident">progress_map</span>.<span class="ident">is_empty</span>() {
-                        <span class="self">self</span>.<span class="ident">progress_height_spring</span>.<span class="ident">set_target</span>(<span class="number">0.</span>);
+                    ctx.request_anim_frame();
+                } <span class="kw">else if let </span><span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>p) = cmd.get(REMOVE_PROGRESS) {
+                    <span class="self">self</span>.progress_map.remove(<span class="kw-2">&amp;</span>p);
+                    <span class="kw">if </span><span class="self">self</span>.progress_map.is_empty() {
+                        <span class="self">self</span>.progress_height_spring.set_target(<span class="number">0.</span>);
                     }
-                    <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">p</span>) <span class="op">=</span> <span class="ident">cmd</span>.<span class="ident">get</span>(<span class="ident">SET_PROGRESS</span>) {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">v</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">progress_map</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">p</span>.<span class="number">0</span>) {
-                        <span class="ident">v</span>.<span class="ident">progress</span> <span class="op">=</span> <span class="ident">p</span>.<span class="number">1</span>;
-                        <span class="kw">if</span> <span class="ident">v</span>.<span class="ident">indeterminate</span> {
-                            <span class="ident">v</span>.<span class="ident">indeterminate</span> <span class="op">=</span> <span class="bool-val">false</span>;
-                            <span class="ident">v</span>.<span class="ident">current_progress</span> <span class="op">=</span> <span class="ident">v</span>.<span class="ident">progress</span>;
+                    ctx.request_anim_frame();
+                } <span class="kw">else if let </span><span class="prelude-val">Some</span>(p) = cmd.get(SET_PROGRESS) {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(v) = <span class="self">self</span>.progress_map.get_mut(<span class="kw-2">&amp;</span>p.<span class="number">0</span>) {
+                        v.progress = p.<span class="number">1</span>;
+                        <span class="kw">if </span>v.indeterminate {
+                            v.indeterminate = <span class="bool-val">false</span>;
+                            v.current_progress = v.progress;
                         }
-                        <span class="kw">if</span> <span class="ident">v</span>.<span class="ident">sub_msg</span>.<span class="ident">is_empty</span>() {
-                            <span class="ident">v</span>.<span class="ident">sub_msg_layout</span> <span class="op">=</span> <span class="prelude-val">None</span>;
+                        <span class="kw">if </span>v.sub_msg.is_empty() {
+                            v.sub_msg_layout = <span class="prelude-val">None</span>;
                         }
-                        <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
+                        ctx.request_anim_frame();
                     }
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">p</span>) <span class="op">=</span> <span class="ident">cmd</span>.<span class="ident">get</span>(<span class="ident">ADD_PROGRESS</span>) {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">v</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">progress_map</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">p</span>.<span class="number">0</span>) {
-                        <span class="ident">v</span>.<span class="ident">progress</span> <span class="op">+</span><span class="op">=</span> <span class="ident">p</span>.<span class="number">1</span>;
-                        <span class="ident">v</span>.<span class="ident">indeterminate</span> <span class="op">=</span> <span class="bool-val">false</span>;
-                        <span class="kw">if</span> <span class="ident">v</span>.<span class="ident">sub_msg</span>.<span class="ident">is_empty</span>() {
-                            <span class="ident">v</span>.<span class="ident">sub_msg_layout</span> <span class="op">=</span> <span class="prelude-val">None</span>;
+                } <span class="kw">else if let </span><span class="prelude-val">Some</span>(p) = cmd.get(ADD_PROGRESS) {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(v) = <span class="self">self</span>.progress_map.get_mut(<span class="kw-2">&amp;</span>p.<span class="number">0</span>) {
+                        v.progress += p.<span class="number">1</span>;
+                        v.indeterminate = <span class="bool-val">false</span>;
+                        <span class="kw">if </span>v.sub_msg.is_empty() {
+                            v.sub_msg_layout = <span class="prelude-val">None</span>;
                         }
-                        <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
+                        ctx.request_anim_frame();
                     }
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">p</span>) <span class="op">=</span> <span class="ident">cmd</span>.<span class="ident">get</span>(<span class="ident">SET_MAX_PROGRESS</span>) {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">v</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">progress_map</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">p</span>.<span class="number">0</span>) {
-                        <span class="ident">v</span>.<span class="ident">max_progress</span> <span class="op">=</span> <span class="ident">p</span>.<span class="number">1</span>;
-                        <span class="ident">v</span>.<span class="ident">indeterminate</span> <span class="op">=</span> <span class="bool-val">false</span>;
-                        <span class="kw">if</span> <span class="ident">v</span>.<span class="ident">sub_msg</span>.<span class="ident">is_empty</span>() {
-                            <span class="ident">v</span>.<span class="ident">sub_msg_layout</span> <span class="op">=</span> <span class="prelude-val">None</span>;
+                } <span class="kw">else if let </span><span class="prelude-val">Some</span>(p) = cmd.get(SET_MAX_PROGRESS) {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(v) = <span class="self">self</span>.progress_map.get_mut(<span class="kw-2">&amp;</span>p.<span class="number">0</span>) {
+                        v.max_progress = p.<span class="number">1</span>;
+                        v.indeterminate = <span class="bool-val">false</span>;
+                        <span class="kw">if </span>v.sub_msg.is_empty() {
+                            v.sub_msg_layout = <span class="prelude-val">None</span>;
                         }
-                        <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
+                        ctx.request_anim_frame();
                     }
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">p</span>) <span class="op">=</span> <span class="ident">cmd</span>.<span class="ident">get</span>(<span class="ident">ADD_MAX_PROGRESS</span>) {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">v</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">progress_map</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">p</span>.<span class="number">0</span>) {
-                        <span class="ident">v</span>.<span class="ident">max_progress</span> <span class="op">+</span><span class="op">=</span> <span class="ident">p</span>.<span class="number">1</span>;
-                        <span class="ident">v</span>.<span class="ident">indeterminate</span> <span class="op">=</span> <span class="bool-val">false</span>;
-                        <span class="kw">if</span> <span class="ident">v</span>.<span class="ident">sub_msg</span>.<span class="ident">is_empty</span>() {
-                            <span class="ident">v</span>.<span class="ident">sub_msg_layout</span> <span class="op">=</span> <span class="prelude-val">None</span>;
+                } <span class="kw">else if let </span><span class="prelude-val">Some</span>(p) = cmd.get(ADD_MAX_PROGRESS) {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(v) = <span class="self">self</span>.progress_map.get_mut(<span class="kw-2">&amp;</span>p.<span class="number">0</span>) {
+                        v.max_progress += p.<span class="number">1</span>;
+                        v.indeterminate = <span class="bool-val">false</span>;
+                        <span class="kw">if </span>v.sub_msg.is_empty() {
+                            v.sub_msg_layout = <span class="prelude-val">None</span>;
                         }
-                        <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
+                        ctx.request_anim_frame();
                     }
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">p</span>) <span class="op">=</span> <span class="ident">cmd</span>.<span class="ident">get</span>(<span class="ident">HIDE_PROGRESS</span>) {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">v</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">progress_map</span>.<span class="ident">get_mut</span>(<span class="ident">p</span>) {
-                        <span class="ident">v</span>.<span class="ident">indeterminate</span> <span class="op">=</span> <span class="bool-val">true</span>;
-                        <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
+                } <span class="kw">else if let </span><span class="prelude-val">Some</span>(p) = cmd.get(HIDE_PROGRESS) {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(v) = <span class="self">self</span>.progress_map.get_mut(p) {
+                        v.indeterminate = <span class="bool-val">true</span>;
+                        ctx.request_anim_frame();
                     }
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">p</span>) <span class="op">=</span> <span class="ident">cmd</span>.<span class="ident">get</span>(<span class="ident">SET_MESSAGE</span>) {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">v</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">progress_map</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">p</span>.<span class="number">0</span>) {
-                        <span class="ident">v</span>.<span class="ident">msg</span> <span class="op">=</span> <span class="ident">p</span>.<span class="number">1</span>.<span class="ident">to_owned</span>();
-                        <span class="ident">v</span>.<span class="ident">msg_layout</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-                        <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
+                } <span class="kw">else if let </span><span class="prelude-val">Some</span>(p) = cmd.get(SET_MESSAGE) {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(v) = <span class="self">self</span>.progress_map.get_mut(<span class="kw-2">&amp;</span>p.<span class="number">0</span>) {
+                        v.msg = p.<span class="number">1</span>.to_owned();
+                        v.msg_layout = <span class="prelude-val">None</span>;
+                        ctx.request_anim_frame();
                     }
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">p</span>) <span class="op">=</span> <span class="ident">cmd</span>.<span class="ident">get</span>(<span class="ident">SET_SUB_MESSAGE</span>) {
-                    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">v</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">progress_map</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">p</span>.<span class="number">0</span>) {
-                        <span class="ident">v</span>.<span class="ident">sub_msg</span> <span class="op">=</span> <span class="ident">p</span>.<span class="number">1</span>.<span class="ident">to_owned</span>();
-                        <span class="ident">v</span>.<span class="ident">sub_msg_layout</span> <span class="op">=</span> <span class="prelude-val">None</span>;
-                        <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
+                } <span class="kw">else if let </span><span class="prelude-val">Some</span>(p) = cmd.get(SET_SUB_MESSAGE) {
+                    <span class="kw">if let </span><span class="prelude-val">Some</span>(v) = <span class="self">self</span>.progress_map.get_mut(<span class="kw-2">&amp;</span>p.<span class="number">0</span>) {
+                        v.sub_msg = p.<span class="number">1</span>.to_owned();
+                        v.sub_msg_layout = <span class="prelude-val">None</span>;
+                        ctx.request_anim_frame();
                     }
                 }
             }
-            <span class="kw">_</span> =&gt; {}
+            <span class="kw">_ </span>=&gt; {}
         }
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">event</span>(<span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>);
+        <span class="self">self</span>.inner.event(ctx, event, data, env);
     }
 
-    <span class="kw">fn</span> <span class="ident">lifecycle</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LifeCycleCtx</span>, <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">LifeCycle</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">lifecycle</span>(<span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>);
+    <span class="kw">fn </span>lifecycle(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>LifeCycleCtx, event: <span class="kw-2">&amp;</span>LifeCycle, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="self">self</span>.inner.lifecycle(ctx, event, data, env);
     }
 
-    <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">UpdateCtx</span>, <span class="ident">_old_data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">update</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>);
+    <span class="kw">fn </span>update(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>UpdateCtx, _old_data: <span class="kw-2">&amp;</span>T, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="self">self</span>.inner.update(ctx, data, env);
     }
 
-    <span class="kw">fn</span> <span class="ident">layout</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LayoutCtx</span>, <span class="ident">bc</span>: <span class="kw-2">&amp;</span><span class="ident">BoxConstraints</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) -&gt; <span class="ident">Size</span> {
-        <span class="kw">let</span> <span class="ident">progress_area_height</span> <span class="op">=</span> <span class="self">self</span>
-            .<span class="ident">progress_height_spring</span>
-            .<span class="ident">position_rounded</span>()
-            .<span class="ident">min</span>(<span class="number">50.</span>)
-            .<span class="ident">max</span>(<span class="number">0.</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">size</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">progress_area_height</span> <span class="op">==</span> <span class="number">0.</span> {
-            <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">layout</span>(<span class="ident">ctx</span>, <span class="ident">bc</span>, <span class="ident">data</span>, <span class="ident">env</span>)
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">inner</span>
-                .<span class="ident">layout</span>(<span class="ident">ctx</span>, <span class="kw-2">&amp;</span><span class="ident">bc</span>.<span class="ident">shrink</span>((<span class="number">0.</span>, <span class="ident">progress_area_height</span>)), <span class="ident">data</span>, <span class="ident">env</span>)
+    <span class="kw">fn </span>layout(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>LayoutCtx, bc: <span class="kw-2">&amp;</span>BoxConstraints, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) -&gt; Size {
+        <span class="kw">let </span>progress_area_height = <span class="self">self
+            </span>.progress_height_spring
+            .position_rounded()
+            .min(<span class="number">50.</span>)
+            .max(<span class="number">0.</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>size = <span class="kw">if </span>progress_area_height == <span class="number">0. </span>{
+            <span class="self">self</span>.inner.layout(ctx, bc, data, env)
+        } <span class="kw">else </span>{
+            <span class="self">self</span>.inner
+                .layout(ctx, <span class="kw-2">&amp;</span>bc.shrink((<span class="number">0.</span>, progress_area_height)), data, env)
         };
-        <span class="ident">size</span>.<span class="ident">height</span> <span class="op">+</span><span class="op">=</span> <span class="ident">progress_area_height</span>;
-        <span class="ident">bc</span>.<span class="ident">constrain</span>(<span class="ident">size</span>)
+        size.height += progress_area_height;
+        bc.constrain(size)
     }
 
-    <span class="kw">fn</span> <span class="ident">paint</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">PaintCtx</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="ident">ctx</span>.<span class="ident">with_save</span>(<span class="op">|</span><span class="ident">ctx</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">paint</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>));
-        <span class="self">self</span>.<span class="ident">paint_progress</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>);
+    <span class="kw">fn </span>paint(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>PaintCtx, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) {
+        ctx.with_save(|ctx| <span class="self">self</span>.inner.paint(ctx, data, env));
+        <span class="self">self</span>.paint_progress(ctx, data, env);
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

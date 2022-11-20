@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/download/curseforge.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>curseforge.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_core/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/download/curseforge.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>curseforge.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_core/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -279,11 +279,11 @@
 <span id="279">279</span>
 <span id="280">280</span>
 <span id="281">281</span>
-</pre><pre class="rust"><code><span class="doccomment">//! CurseForge 模组下载的结构和接口</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! 在使用这个模块提供的功能前，请先设定好 `CURSEFORGE_API_KEY` 环境变量为你 CurseForge 的开发者令牌，否则服务将无法使用</span>
+</pre><pre class="rust"><code><span class="doccomment">//! CurseForge 模组下载的结构和接口
+//!
+//! 在使用这个模块提供的功能前，请先设定好 `CURSEFORGE_API_KEY` 环境变量为你 CurseForge 的开发者令牌，否则服务将无法使用
 
-<span class="comment">/*
+</span><span class="comment">/*
     基本链接：https://addons-ecs.forgesvc.net/api/v2/addon/
     某个模组：https://addons-ecs.forgesvc.net/api/v2/addon/[MOD_ID]
     模组详情：https://addons-ecs.forgesvc.net/api/v2/addon/[MOD_ID]/description
@@ -303,262 +303,262 @@
                             NAME: 3
                             AUTHOR: 4
                             TOTAL_DOWNLOADS: 5
-*/</span>
+*/
 
-<span class="kw">use</span> <span class="ident">std</span>::{
-    <span class="ident">fmt::Write</span> <span class="kw">as</span> <span class="kw">_</span>,
-    <span class="ident">ops</span>::{<span class="ident">Deref</span>, <span class="ident">DerefMut</span>},
-    <span class="ident">path::PathBuf</span>,
+</span><span class="kw">use </span>std::{
+    fmt::Write <span class="kw">as _</span>,
+    ops::{Deref, DerefMut},
+    path::PathBuf,
 };
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::prelude::<span class="kw-2">*</span>;
 
-<span class="kw">const</span> <span class="ident">API_KEY</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span> <span class="op">=</span> <span class="macro">std::option_env!</span>(<span class="string">&quot;CURSEFORGE_API_KEY&quot;</span>);
-<span class="kw">const</span> <span class="ident">BASE_URL</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;https://api.curseforge.com/v1/&quot;</span>;
-<span class="kw">const</span> <span class="ident">BASE_URL_SEARCH</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;https://api.curseforge.com/v1/mods/search?gameId=432&amp;classId=6&quot;</span>;
+<span class="kw">const </span>API_KEY: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>str&gt; = <span class="macro">std::option_env!</span>(<span class="string">&quot;CURSEFORGE_API_KEY&quot;</span>);
+<span class="kw">const </span>BASE_URL: <span class="kw-2">&amp;</span>str = <span class="string">&quot;https://api.curseforge.com/v1/&quot;</span>;
+<span class="kw">const </span>BASE_URL_SEARCH: <span class="kw-2">&amp;</span>str = <span class="string">&quot;https://api.curseforge.com/v1/mods/search?gameId=432&amp;classId=6&quot;</span>;
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">struct</span> <span class="ident">Response</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="ident">data</span>: <span class="ident">T</span>,
+<span class="attribute">#[derive(Debug, Deserialize)]
+</span><span class="kw">struct </span>Response&lt;T&gt; {
+    <span class="kw">pub </span>data: T,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">Response</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="ident">T</span>;
-    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Target</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>
+<span class="kw">impl</span>&lt;T&gt; Deref <span class="kw">for </span>Response&lt;T&gt; {
+    <span class="kw">type </span>Target = T;
+    <span class="kw">fn </span>deref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="self">Self</span>::Target {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.data
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">DerefMut</span> <span class="kw">for</span> <span class="ident">Response</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">deref_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="ident"><span class="self">Self</span>::Target</span> {
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">data</span>
+<span class="kw">impl</span>&lt;T&gt; DerefMut <span class="kw">for </span>Response&lt;T&gt; {
+    <span class="kw">fn </span>deref_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>::Target {
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>.data
     }
 }
 
-<span class="doccomment">/// 一个模组资源信息</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename_all</span> <span class="op">=</span> <span class="string">&quot;camelCase&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ModAsset</span> {
-    <span class="doccomment">/// 此模组文件的文件 ID 编号</span>
-    <span class="kw">pub</span> <span class="ident">id</span>: <span class="ident">i32</span>,
-    <span class="doccomment">/// 此模组文件对应的模组 ID</span>
-    <span class="kw">pub</span> <span class="ident">mod_id</span>: <span class="ident">i32</span>,
-    <span class="doccomment">/// 模组文件的标题（不一定是文件名）</span>
-    <span class="kw">pub</span> <span class="ident">title</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 模组文件的介绍（一般是作者的更新记录什么的）</span>
-    <span class="kw">pub</span> <span class="ident">description</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 模组文件的缩略图</span>
-    <span class="kw">pub</span> <span class="ident">thumbnail_url</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 模组文件的下载链接</span>
-    <span class="kw">pub</span> <span class="ident">url</span>: <span class="ident">String</span>,
+<span class="doccomment">/// 一个模组资源信息
+</span><span class="attribute">#[derive(Debug, Deserialize)]
+#[serde(rename_all = <span class="string">&quot;camelCase&quot;</span>)]
+</span><span class="kw">pub struct </span>ModAsset {
+    <span class="doccomment">/// 此模组文件的文件 ID 编号
+    </span><span class="kw">pub </span>id: i32,
+    <span class="doccomment">/// 此模组文件对应的模组 ID
+    </span><span class="kw">pub </span>mod_id: i32,
+    <span class="doccomment">/// 模组文件的标题（不一定是文件名）
+    </span><span class="kw">pub </span>title: String,
+    <span class="doccomment">/// 模组文件的介绍（一般是作者的更新记录什么的）
+    </span><span class="kw">pub </span>description: String,
+    <span class="doccomment">/// 模组文件的缩略图
+    </span><span class="kw">pub </span>thumbnail_url: String,
+    <span class="doccomment">/// 模组文件的下载链接
+    </span><span class="kw">pub </span>url: String,
 }
 
-<span class="doccomment">/// 一个模组的信息</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ModInfo</span> {
-    <span class="doccomment">/// 模组的 ID</span>
-    <span class="kw">pub</span> <span class="ident">id</span>: <span class="ident">u64</span>,
-    <span class="doccomment">/// 模组的名称</span>
-    <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 模组的简短介绍</span>
-    <span class="kw">pub</span> <span class="ident">summary</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 模组的 Slug（一般是模组的字符串 ID）</span>
-    <span class="kw">pub</span> <span class="ident">slug</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 模组的 LOGO 图标</span>
-    <span class="kw">pub</span> <span class="ident">logo</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ModAsset</span><span class="op">&gt;</span>,
+<span class="doccomment">/// 一个模组的信息
+</span><span class="attribute">#[derive(Debug, Deserialize)]
+</span><span class="kw">pub struct </span>ModInfo {
+    <span class="doccomment">/// 模组的 ID
+    </span><span class="kw">pub </span>id: u64,
+    <span class="doccomment">/// 模组的名称
+    </span><span class="kw">pub </span>name: String,
+    <span class="doccomment">/// 模组的简短介绍
+    </span><span class="kw">pub </span>summary: String,
+    <span class="doccomment">/// 模组的 Slug（一般是模组的字符串 ID）
+    </span><span class="kw">pub </span>slug: String,
+    <span class="doccomment">/// 模组的 LOGO 图标
+    </span><span class="kw">pub </span>logo: <span class="prelude-ty">Option</span>&lt;ModAsset&gt;,
 }
 
-<span class="doccomment">/// 模组的所需依赖</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// TODO：完善模组依赖下载功能</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename_all</span> <span class="op">=</span> <span class="string">&quot;camelCase&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Dependency</span> {
-    <span class="comment">// mod_id: i32,</span>
-    <span class="comment">// relation_type: u8,</span>
+<span class="doccomment">/// 模组的所需依赖
+///
+/// TODO：完善模组依赖下载功能
+</span><span class="attribute">#[derive(Debug, Deserialize)]
+#[serde(rename_all = <span class="string">&quot;camelCase&quot;</span>)]
+</span><span class="kw">pub struct </span>Dependency {
+    <span class="comment">// mod_id: i32,
+    // relation_type: u8,
+</span>}
+
+<span class="doccomment">/// 一个模组文件信息
+</span><span class="attribute">#[derive(Debug, Deserialize)]
+#[serde(rename_all = <span class="string">&quot;camelCase&quot;</span>)]
+</span><span class="kw">pub struct </span>ModFile {
+    <span class="doccomment">/// 模组文件的文件名
+    </span><span class="kw">pub </span>file_name: String,
+    <span class="doccomment">/// 模组文件的下载链接
+    </span><span class="kw">pub </span>download_url: String,
+    <span class="doccomment">/// 模组的所需依赖
+    </span><span class="kw">pub </span>dependencies: Vec&lt;Dependency&gt;,
+    <span class="doccomment">/// 模组支持的游戏版本
+    </span><span class="kw">pub </span>game_versions: Vec&lt;String&gt;,
 }
 
-<span class="doccomment">/// 一个模组文件信息</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Deserialize</span>)]</span>
-<span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename_all</span> <span class="op">=</span> <span class="string">&quot;camelCase&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ModFile</span> {
-    <span class="doccomment">/// 模组文件的文件名</span>
-    <span class="kw">pub</span> <span class="ident">file_name</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 模组文件的下载链接</span>
-    <span class="kw">pub</span> <span class="ident">download_url</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 模组的所需依赖</span>
-    <span class="kw">pub</span> <span class="ident">dependencies</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Dependency</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// 模组支持的游戏版本</span>
-    <span class="kw">pub</span> <span class="ident">game_versions</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
+<span class="doccomment">/// 使用搜索 API 时的排序方式
+</span><span class="attribute">#[derive(Debug, Clone, Copy)]
+</span><span class="kw">pub enum </span>SearchSortMethod {
+    <span class="doccomment">/// 按推荐排序
+    </span>Featured,
+    <span class="doccomment">/// 按热门度排序
+    </span>Populatity,
+    <span class="doccomment">/// 按最新更新排序
+    </span>LastUpdate,
+    <span class="doccomment">/// 按名称排序
+    </span>Name,
+    <span class="doccomment">/// 按作者名称排序
+    </span>Author,
+    <span class="doccomment">/// 按总下载量排序
+    </span>TotalDownloads,
 }
 
-<span class="doccomment">/// 使用搜索 API 时的排序方式</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">SearchSortMethod</span> {
-    <span class="doccomment">/// 按推荐排序</span>
-    <span class="ident">Featured</span>,
-    <span class="doccomment">/// 按热门度排序</span>
-    <span class="ident">Populatity</span>,
-    <span class="doccomment">/// 按最新更新排序</span>
-    <span class="ident">LastUpdate</span>,
-    <span class="doccomment">/// 按名称排序</span>
-    <span class="ident">Name</span>,
-    <span class="doccomment">/// 按作者名称排序</span>
-    <span class="ident">Author</span>,
-    <span class="doccomment">/// 按总下载量排序</span>
-    <span class="ident">TotalDownloads</span>,
-}
-
-<span class="kw">impl</span> <span class="ident">SearchSortMethod</span> {
-    <span class="kw">fn</span> <span class="ident">to_query</span>(<span class="self">self</span>) -&gt; <span class="ident">u8</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">SearchSortMethod::Featured</span> =&gt; <span class="number">0</span>,
-            <span class="ident">SearchSortMethod::Populatity</span> =&gt; <span class="number">1</span>,
-            <span class="ident">SearchSortMethod::LastUpdate</span> =&gt; <span class="number">2</span>,
-            <span class="ident">SearchSortMethod::Name</span> =&gt; <span class="number">3</span>,
-            <span class="ident">SearchSortMethod::Author</span> =&gt; <span class="number">4</span>,
-            <span class="ident">SearchSortMethod::TotalDownloads</span> =&gt; <span class="number">5</span>,
+<span class="kw">impl </span>SearchSortMethod {
+    <span class="kw">fn </span>to_query(<span class="self">self</span>) -&gt; u8 {
+        <span class="kw">match </span><span class="self">self </span>{
+            SearchSortMethod::Featured =&gt; <span class="number">0</span>,
+            SearchSortMethod::Populatity =&gt; <span class="number">1</span>,
+            SearchSortMethod::LastUpdate =&gt; <span class="number">2</span>,
+            SearchSortMethod::Name =&gt; <span class="number">3</span>,
+            SearchSortMethod::Author =&gt; <span class="number">4</span>,
+            SearchSortMethod::TotalDownloads =&gt; <span class="number">5</span>,
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">SearchSortMethod</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident">SearchSortMethod::Featured</span>
+<span class="kw">impl </span>Default <span class="kw">for </span>SearchSortMethod {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        SearchSortMethod::Featured
     }
 }
 
-<span class="doccomment">/// 搜索参数，将其传入到 [`self::search_mods`] 方法以搜索模组</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SearchParams</span> {
-    <span class="doccomment">/// 搜索支持指定游戏版本的模组</span>
-    <span class="kw">pub</span> <span class="ident">game_version</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 当前的搜索页码</span>
-    <span class="kw">pub</span> <span class="ident">index</span>: <span class="ident">u64</span>,
-    <span class="doccomment">/// 当前搜索的每页项目数量</span>
-    <span class="kw">pub</span> <span class="ident">page_size</span>: <span class="ident">u64</span>,
-    <span class="doccomment">/// 模组类型 ID</span>
-    <span class="kw">pub</span> <span class="ident">category_id</span>: <span class="ident">u64</span>,
-    <span class="doccomment">/// 搜索的关键字</span>
-    <span class="kw">pub</span> <span class="ident">search_filter</span>: <span class="ident">String</span>,
-    <span class="doccomment">/// 搜索结果的排序方式</span>
-    <span class="kw">pub</span> <span class="ident">sort</span>: <span class="ident">SearchSortMethod</span>,
+<span class="doccomment">/// 搜索参数，将其传入到 [`self::search_mods`] 方法以搜索模组
+</span><span class="attribute">#[derive(Default)]
+</span><span class="kw">pub struct </span>SearchParams {
+    <span class="doccomment">/// 搜索支持指定游戏版本的模组
+    </span><span class="kw">pub </span>game_version: String,
+    <span class="doccomment">/// 当前的搜索页码
+    </span><span class="kw">pub </span>index: u64,
+    <span class="doccomment">/// 当前搜索的每页项目数量
+    </span><span class="kw">pub </span>page_size: u64,
+    <span class="doccomment">/// 模组类型 ID
+    </span><span class="kw">pub </span>category_id: u64,
+    <span class="doccomment">/// 搜索的关键字
+    </span><span class="kw">pub </span>search_filter: String,
+    <span class="doccomment">/// 搜索结果的排序方式
+    </span><span class="kw">pub </span>sort: SearchSortMethod,
 }
 
-<span class="doccomment">/// 根据关键词从 Curseforge 搜索模组列表</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">search_mods</span>(
-    <span class="ident">SearchParams</span> {
-        <span class="ident">game_version</span>,
-        <span class="ident">index</span>,
-        <span class="ident">page_size</span>,
-        <span class="ident">category_id</span>,
-        <span class="ident">search_filter</span>,
-        <span class="ident">sort</span>,
-    }: <span class="ident">SearchParams</span>,
-) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ModInfo</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">base_url</span> <span class="op">=</span> <span class="ident">BASE_URL_SEARCH</span>.<span class="ident">to_string</span>();
-    <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="macro">write!</span>(<span class="kw-2">&amp;mut</span> <span class="ident">base_url</span>, <span class="string">&quot;&amp;sort={}&quot;</span>, <span class="ident">sort</span>.<span class="ident">to_query</span>());
-    <span class="kw">if</span> <span class="op">!</span><span class="ident">search_filter</span>.<span class="ident">is_empty</span>() {
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="macro">write!</span>(
-            <span class="kw-2">&amp;mut</span> <span class="ident">base_url</span>,
+<span class="doccomment">/// 根据关键词从 Curseforge 搜索模组列表
+</span><span class="kw">pub async fn </span>search_mods(
+    SearchParams {
+        game_version,
+        index,
+        page_size,
+        category_id,
+        search_filter,
+        sort,
+    }: SearchParams,
+) -&gt; DynResult&lt;Vec&lt;ModInfo&gt;&gt; {
+    <span class="kw">let </span><span class="kw-2">mut </span>base_url = BASE_URL_SEARCH.to_string();
+    <span class="kw">let _ </span>= <span class="macro">write!</span>(<span class="kw-2">&amp;mut </span>base_url, <span class="string">&quot;&amp;sort={}&quot;</span>, sort.to_query());
+    <span class="kw">if </span>!search_filter.is_empty() {
+        <span class="kw">let _ </span>= <span class="macro">write!</span>(
+            <span class="kw-2">&amp;mut </span>base_url,
             <span class="string">&quot;&amp;searchFilter={}&quot;</span>,
-            <span class="ident">urlencoding::encode</span>(<span class="kw-2">&amp;</span><span class="ident">search_filter</span>)
+            urlencoding::encode(<span class="kw-2">&amp;</span>search_filter)
         );
     }
-    <span class="kw">if</span> <span class="op">!</span><span class="ident">game_version</span>.<span class="ident">is_empty</span>() {
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="macro">write!</span>(<span class="kw-2">&amp;mut</span> <span class="ident">base_url</span>, <span class="string">&quot;&amp;gameVersion={}&quot;</span>, <span class="ident">game_version</span>);
+    <span class="kw">if </span>!game_version.is_empty() {
+        <span class="kw">let _ </span>= <span class="macro">write!</span>(<span class="kw-2">&amp;mut </span>base_url, <span class="string">&quot;&amp;gameVersion={}&quot;</span>, game_version);
     }
-    <span class="kw">if</span> <span class="ident">index</span> <span class="op">&gt;</span> <span class="number">0</span> {
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="macro">write!</span>(<span class="kw-2">&amp;mut</span> <span class="ident">base_url</span>, <span class="string">&quot;&amp;index={}&quot;</span>, <span class="ident">index</span>);
+    <span class="kw">if </span>index &gt; <span class="number">0 </span>{
+        <span class="kw">let _ </span>= <span class="macro">write!</span>(<span class="kw-2">&amp;mut </span>base_url, <span class="string">&quot;&amp;index={}&quot;</span>, index);
     }
-    <span class="kw">if</span> <span class="ident">page_size</span> <span class="op">&gt;</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">page_size</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">30</span> {
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="macro">write!</span>(<span class="kw-2">&amp;mut</span> <span class="ident">base_url</span>, <span class="string">&quot;&amp;pageSize={}&quot;</span>, <span class="ident">page_size</span>);
-    } <span class="kw">else</span> {
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="macro">write!</span>(<span class="kw-2">&amp;mut</span> <span class="ident">base_url</span>, <span class="string">&quot;&amp;pageSize={}&quot;</span>, <span class="number">20</span>);
+    <span class="kw">if </span>page_size &gt; <span class="number">0 </span>&amp;&amp; page_size &lt;= <span class="number">30 </span>{
+        <span class="kw">let _ </span>= <span class="macro">write!</span>(<span class="kw-2">&amp;mut </span>base_url, <span class="string">&quot;&amp;pageSize={}&quot;</span>, page_size);
+    } <span class="kw">else </span>{
+        <span class="kw">let _ </span>= <span class="macro">write!</span>(<span class="kw-2">&amp;mut </span>base_url, <span class="string">&quot;&amp;pageSize={}&quot;</span>, <span class="number">20</span>);
     }
-    <span class="kw">if</span> <span class="ident">category_id</span> <span class="op">&gt;</span> <span class="number">0</span> {
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="macro">write!</span>(<span class="kw-2">&amp;mut</span> <span class="ident">base_url</span>, <span class="string">&quot;&amp;categoryID={}&quot;</span>, <span class="ident">category_id</span>);
+    <span class="kw">if </span>category_id &gt; <span class="number">0 </span>{
+        <span class="kw">let _ </span>= <span class="macro">write!</span>(<span class="kw-2">&amp;mut </span>base_url, <span class="string">&quot;&amp;categoryID={}&quot;</span>, category_id);
     }
-    <span class="macro">println!</span>(<span class="string">&quot;Searching by {}&quot;</span>, <span class="ident">base_url</span>);
-    <span class="kw">let</span> <span class="ident">data</span>: <span class="ident">Response</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ModInfo</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::http::get</span>(<span class="kw-2">&amp;</span><span class="ident">base_url</span>)
-        .<span class="ident">header</span>(<span class="string">&quot;x-api-key&quot;</span>, <span class="ident">API_KEY</span>.<span class="ident">unwrap_or_default</span>())
-        .<span class="kw">await</span>
-        .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>
-        .<span class="ident">body_json</span>()
-        .<span class="kw">await</span>
-        .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>;
-    <span class="prelude-val">Ok</span>(<span class="ident">data</span>.<span class="ident">data</span>)
+    <span class="macro">println!</span>(<span class="string">&quot;Searching by {}&quot;</span>, base_url);
+    <span class="kw">let </span>data: Response&lt;Vec&lt;ModInfo&gt;&gt; = <span class="kw">crate</span>::http::get(<span class="kw-2">&amp;</span>base_url)
+        .header(<span class="string">&quot;x-api-key&quot;</span>, API_KEY.unwrap_or_default())
+        .<span class="kw">await
+        </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?
+        </span>.body_json()
+        .<span class="kw">await
+        </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?</span>;
+    <span class="prelude-val">Ok</span>(data.data)
 }
 
-<span class="doccomment">/// 通过模组在 Curseforge 的 ID 获取详情信息</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_mod_info</span>(<span class="ident">modid</span>: <span class="ident">u64</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">ModInfo</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">data</span>: <span class="ident">Response</span><span class="op">&lt;</span><span class="ident">ModInfo</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::http::get</span>(<span class="kw-2">&amp;</span>(<span class="macro">format!</span>(<span class="string">&quot;{}mods/{}&quot;</span>, <span class="ident">BASE_URL</span>, <span class="ident">modid</span>)))
-        .<span class="ident">header</span>(<span class="string">&quot;x-api-key&quot;</span>, <span class="ident">API_KEY</span>.<span class="ident">unwrap_or_default</span>())
-        .<span class="kw">await</span>
-        .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>
-        .<span class="ident">body_json</span>()
-        .<span class="kw">await</span>
-        .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>;
-    <span class="prelude-val">Ok</span>(<span class="ident">data</span>.<span class="ident">data</span>)
+<span class="doccomment">/// 通过模组在 Curseforge 的 ID 获取详情信息
+</span><span class="kw">pub async fn </span>get_mod_info(modid: u64) -&gt; DynResult&lt;ModInfo&gt; {
+    <span class="kw">let </span>data: Response&lt;ModInfo&gt; = <span class="kw">crate</span>::http::get(<span class="kw-2">&amp;</span>(<span class="macro">format!</span>(<span class="string">&quot;{}mods/{}&quot;</span>, BASE_URL, modid)))
+        .header(<span class="string">&quot;x-api-key&quot;</span>, API_KEY.unwrap_or_default())
+        .<span class="kw">await
+        </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?
+        </span>.body_json()
+        .<span class="kw">await
+        </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?</span>;
+    <span class="prelude-val">Ok</span>(data.data)
 }
 
-<span class="doccomment">/// 获取模组在 Curseforge 的 ID 获取可下载的模组文件列表</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_mod_files</span>(<span class="ident">modid</span>: <span class="ident">u64</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ModFile</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">data</span>: <span class="ident">Response</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ModFile</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span>
-        <span class="ident"><span class="kw">crate</span>::http::get</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;{}mods/{}/files&quot;</span>, <span class="ident">BASE_URL</span>, <span class="ident">modid</span>))
-            .<span class="ident">header</span>(<span class="string">&quot;x-api-key&quot;</span>, <span class="ident">API_KEY</span>.<span class="ident">unwrap_or_default</span>())
-            .<span class="kw">await</span>
-            .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>
-            .<span class="ident">body_json</span>()
-            .<span class="kw">await</span>
-            .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>;
-    <span class="prelude-val">Ok</span>(<span class="ident">data</span>.<span class="ident">data</span>)
+<span class="doccomment">/// 获取模组在 Curseforge 的 ID 获取可下载的模组文件列表
+</span><span class="kw">pub async fn </span>get_mod_files(modid: u64) -&gt; DynResult&lt;Vec&lt;ModFile&gt;&gt; {
+    <span class="kw">let </span>data: Response&lt;Vec&lt;ModFile&gt;&gt; =
+        <span class="kw">crate</span>::http::get(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;{}mods/{}/files&quot;</span>, BASE_URL, modid))
+            .header(<span class="string">&quot;x-api-key&quot;</span>, API_KEY.unwrap_or_default())
+            .<span class="kw">await
+            </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?
+            </span>.body_json()
+            .<span class="kw">await
+            </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?</span>;
+    <span class="prelude-val">Ok</span>(data.data)
 }
 
-<span class="doccomment">/// 获取模组在 Curseforge 的 ID 获取模组的图标</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_mod_icon</span>(<span class="ident">mod_info</span>: <span class="kw-2">&amp;</span><span class="ident">ModInfo</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">image::DynamicImage</span><span class="op">&gt;</span> {
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">logo</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">mod_info</span>.<span class="ident">logo</span> {
-        <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::http::get</span>(<span class="kw-2">&amp;</span><span class="ident">logo</span>.<span class="ident">thumbnail_url</span>)
-            .<span class="kw">await</span>
-            .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>
-            .<span class="ident">body_bytes</span>()
-            .<span class="kw">await</span>
-            .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Ok</span>(<span class="ident">img</span>) <span class="op">=</span> <span class="ident">image::load_from_memory</span>(<span class="kw-2">&amp;</span><span class="ident">data</span>) {
-            <span class="prelude-val">Ok</span>(<span class="ident">img</span>)
-        } <span class="kw">else</span> {
+<span class="doccomment">/// 获取模组在 Curseforge 的 ID 获取模组的图标
+</span><span class="kw">pub async fn </span>get_mod_icon(mod_info: <span class="kw-2">&amp;</span>ModInfo) -&gt; DynResult&lt;image::DynamicImage&gt; {
+    <span class="kw">if let </span><span class="prelude-val">Some</span>(logo) = <span class="kw-2">&amp;</span>mod_info.logo {
+        <span class="kw">let </span>data = <span class="kw">crate</span>::http::get(<span class="kw-2">&amp;</span>logo.thumbnail_url)
+            .<span class="kw">await
+            </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?
+            </span>.body_bytes()
+            .<span class="kw">await
+            </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?</span>;
+        <span class="kw">if let </span><span class="prelude-val">Ok</span>(img) = image::load_from_memory(<span class="kw-2">&amp;</span>data) {
+            <span class="prelude-val">Ok</span>(img)
+        } <span class="kw">else </span>{
             <span class="macro">anyhow::bail!</span>(<span class="string">&quot;Can&#39;t load mod icon image&quot;</span>)
         }
-    } <span class="kw">else</span> {
+    } <span class="kw">else </span>{
         <span class="macro">anyhow::bail!</span>(<span class="string">&quot;Mod icon image is empty&quot;</span>)
     }
 }
 
-<span class="doccomment">/// 获取模组在 Curseforge 的 ID 获取模组的图标</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">get_mod_icon_by_id</span>(<span class="ident">modid</span>: <span class="ident">u64</span>) -&gt; <span class="ident">DynResult</span><span class="op">&lt;</span><span class="ident">image::DynamicImage</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">mod_info</span> <span class="op">=</span> <span class="ident">get_mod_info</span>(<span class="ident">modid</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-    <span class="ident">get_mod_icon</span>(<span class="kw-2">&amp;</span><span class="ident">mod_info</span>).<span class="kw">await</span>
-}
+<span class="doccomment">/// 获取模组在 Curseforge 的 ID 获取模组的图标
+</span><span class="kw">pub async fn </span>get_mod_icon_by_id(modid: u64) -&gt; DynResult&lt;image::DynamicImage&gt; {
+    <span class="kw">let </span>mod_info = get_mod_info(modid).<span class="kw">await</span><span class="question-mark">?</span>;
+    get_mod_icon(<span class="kw-2">&amp;</span>mod_info).<span class="kw">await
+</span>}
 
-<span class="doccomment">/// 下载模组</span>
-<span class="kw">pub</span> <span class="kw">async</span> <span class="kw">fn</span> <span class="ident">download_mod</span>(
-    <span class="ident">_ctx</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw">impl</span> <span class="ident">Reporter</span><span class="op">&gt;</span>,
-    <span class="ident">_name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-    <span class="ident">url</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-    <span class="ident">dest</span>: <span class="ident">PathBuf</span>,
-) -&gt; <span class="ident">DynResult</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">inner_future::fs::OpenOptions::new</span>()
-        .<span class="ident">create</span>(<span class="bool-val">true</span>)
-        .<span class="ident">truncate</span>(<span class="bool-val">true</span>)
-        .<span class="ident">write</span>(<span class="bool-val">true</span>)
-        .<span class="ident">open</span>(<span class="macro">format!</span>(<span class="string">&quot;{}.tmp&quot;</span>, <span class="ident">dest</span>.<span class="ident">to_str</span>().<span class="ident">unwrap</span>()))
+<span class="doccomment">/// 下载模组
+</span><span class="kw">pub async fn </span>download_mod(
+    _ctx: <span class="prelude-ty">Option</span>&lt;<span class="kw">impl </span>Reporter&gt;,
+    _name: <span class="kw-2">&amp;</span>str,
+    url: <span class="kw-2">&amp;</span>str,
+    dest: PathBuf,
+) -&gt; DynResult {
+    <span class="kw">let </span><span class="kw-2">mut </span>file = inner_future::fs::OpenOptions::new()
+        .create(<span class="bool-val">true</span>)
+        .truncate(<span class="bool-val">true</span>)
+        .write(<span class="bool-val">true</span>)
+        .open(<span class="macro">format!</span>(<span class="string">&quot;{}.tmp&quot;</span>, dest.to_str().unwrap()))
         .<span class="kw">await</span><span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::http::get</span>(<span class="ident">url</span>)
-        .<span class="kw">await</span>
-        .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">anyhow::anyhow!</span>(<span class="ident">e</span>))<span class="question-mark">?</span>;
-    <span class="ident">inner_future::io::copy</span>(<span class="ident">res</span>, <span class="kw-2">&amp;mut</span> <span class="ident">file</span>).<span class="kw">await</span><span class="question-mark">?</span>;
-    <span class="ident">inner_future::fs::rename</span>(<span class="macro">format!</span>(<span class="string">&quot;{}.tmp&quot;</span>, <span class="ident">dest</span>.<span class="ident">to_str</span>().<span class="ident">unwrap</span>()), <span class="ident">dest</span>).<span class="kw">await</span><span class="question-mark">?</span>;
+    <span class="kw">let </span>res = <span class="kw">crate</span>::http::get(url)
+        .<span class="kw">await
+        </span>.map_err(|e| <span class="macro">anyhow::anyhow!</span>(e))<span class="question-mark">?</span>;
+    inner_future::io::copy(res, <span class="kw-2">&amp;mut </span>file).<span class="kw">await</span><span class="question-mark">?</span>;
+    inner_future::fs::rename(<span class="macro">format!</span>(<span class="string">&quot;{}.tmp&quot;</span>, dest.to_str().unwrap()), dest).<span class="kw">await</span><span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(())
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

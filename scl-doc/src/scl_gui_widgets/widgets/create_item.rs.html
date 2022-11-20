@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/create_item.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>create_item.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/create_item.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>create_item.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -70,77 +70,77 @@
 <span id="70">70</span>
 <span id="71">71</span>
 <span id="72">72</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">druid</span>::{
-    <span class="ident">piet</span>::{<span class="ident">PaintBrush</span>, <span class="ident">Text</span>, <span class="ident">TextLayoutBuilder</span>},
-    <span class="ident">widget::LabelText</span>,
+</pre><pre class="rust"><code><span class="kw">use </span>druid::{
+    piet::{PaintBrush, Text, TextLayoutBuilder},
+    widget::LabelText,
     <span class="kw-2">*</span>,
 };
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::theme::color</span> <span class="kw">as</span> <span class="ident">theme</span>;
+<span class="kw">use </span><span class="kw">crate</span>::theme::color <span class="kw">as </span>theme;
 
-<span class="doccomment">/// 一个左侧有一个加号的可点击项目组件</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CreateItem</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="ident">name</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">druid::piet::PietTextLayout</span><span class="op">&gt;</span>,
-    <span class="ident">text</span>: <span class="ident">LabelText</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+<span class="doccomment">/// 一个左侧有一个加号的可点击项目组件
+</span><span class="kw">pub struct </span>CreateItem&lt;T&gt; {
+    name: <span class="prelude-ty">Option</span>&lt;druid::piet::PietTextLayout&gt;,
+    text: LabelText&lt;T&gt;,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">CreateItem</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// 给予文字作为参数创建组件，文字将会显示在图标的右侧</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">text</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">LabelText</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>) -&gt; <span class="ident">CreateItem</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="ident">CreateItem</span> {
-            <span class="ident">name</span>: <span class="prelude-val">None</span>,
-            <span class="ident">text</span>: <span class="ident">text</span>.<span class="ident">into</span>(),
+<span class="kw">impl</span>&lt;T&gt; CreateItem&lt;T&gt; {
+    <span class="doccomment">/// 给予文字作为参数创建组件，文字将会显示在图标的右侧
+    </span><span class="kw">pub fn </span>new(text: <span class="kw">impl </span>Into&lt;LabelText&lt;T&gt;&gt;) -&gt; CreateItem&lt;T&gt; {
+        CreateItem {
+            name: <span class="prelude-val">None</span>,
+            text: text.into(),
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Data</span><span class="op">&gt;</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CreateItem</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">event</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">_ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EventCtx</span>, <span class="ident">_event</span>: <span class="kw-2">&amp;</span><span class="ident">Event</span>, <span class="ident">_data</span>: <span class="kw-2">&amp;mut</span> <span class="ident">T</span>, <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {}
+<span class="kw">impl</span>&lt;T: Data&gt; Widget&lt;T&gt; <span class="kw">for </span>CreateItem&lt;T&gt; {
+    <span class="kw">fn </span>event(<span class="kw-2">&amp;mut </span><span class="self">self</span>, _ctx: <span class="kw-2">&amp;mut </span>EventCtx, _event: <span class="kw-2">&amp;</span>Event, _data: <span class="kw-2">&amp;mut </span>T, _env: <span class="kw-2">&amp;</span>Env) {}
 
-    <span class="kw">fn</span> <span class="ident">lifecycle</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">_ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LifeCycleCtx</span>, <span class="ident">_event</span>: <span class="kw-2">&amp;</span><span class="ident">LifeCycle</span>, <span class="ident">_data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {}
+    <span class="kw">fn </span>lifecycle(<span class="kw-2">&amp;mut </span><span class="self">self</span>, _ctx: <span class="kw-2">&amp;mut </span>LifeCycleCtx, _event: <span class="kw-2">&amp;</span>LifeCycle, _data: <span class="kw-2">&amp;</span>T, _env: <span class="kw-2">&amp;</span>Env) {}
 
-    <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">_ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">UpdateCtx</span>, <span class="ident">_old_data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">_data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {}
+    <span class="kw">fn </span>update(<span class="kw-2">&amp;mut </span><span class="self">self</span>, _ctx: <span class="kw-2">&amp;mut </span>UpdateCtx, _old_data: <span class="kw-2">&amp;</span>T, _data: <span class="kw-2">&amp;</span>T, _env: <span class="kw-2">&amp;</span>Env) {}
 
-    <span class="kw">fn</span> <span class="ident">layout</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">_ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LayoutCtx</span>, <span class="ident">bc</span>: <span class="kw-2">&amp;</span><span class="ident">BoxConstraints</span>, <span class="ident">_data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) -&gt; <span class="ident">Size</span> {
-        <span class="ident">bc</span>.<span class="ident">constrain</span>((<span class="number">150.</span>, <span class="number">50.</span>))
+    <span class="kw">fn </span>layout(<span class="kw-2">&amp;mut </span><span class="self">self</span>, _ctx: <span class="kw-2">&amp;mut </span>LayoutCtx, bc: <span class="kw-2">&amp;</span>BoxConstraints, _data: <span class="kw-2">&amp;</span>T, _env: <span class="kw-2">&amp;</span>Env) -&gt; Size {
+        bc.constrain((<span class="number">150.</span>, <span class="number">50.</span>))
     }
 
-    <span class="kw">fn</span> <span class="ident">paint</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">PaintCtx</span>, <span class="ident">_data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">size</span>();
-        <span class="kw">let</span> <span class="ident">is_hot</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">is_hot</span>();
-        <span class="kw">let</span> <span class="ident">is_active</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">is_active</span>();
-        <span class="kw">if</span> <span class="ident">is_hot</span> {
-            <span class="ident">ctx</span>.<span class="ident">fill</span>(
-                <span class="kw-2">&amp;</span><span class="ident">size</span>.<span class="ident">to_rect</span>(),
-                <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="kw">if</span> <span class="ident">is_active</span> {
-                    <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::base::LOW</span>)
-                } <span class="kw">else</span> {
-                    <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::list::LIST_LOW</span>)
+    <span class="kw">fn </span>paint(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>PaintCtx, _data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">let </span>size = ctx.size();
+        <span class="kw">let </span>is_hot = ctx.is_hot();
+        <span class="kw">let </span>is_active = ctx.is_active();
+        <span class="kw">if </span>is_hot {
+            ctx.fill(
+                <span class="kw-2">&amp;</span>size.to_rect(),
+                <span class="kw-2">&amp;</span>PaintBrush::Color(<span class="kw">if </span>is_active {
+                    env.get(<span class="kw">crate</span>::theme::color::base::LOW)
+                } <span class="kw">else </span>{
+                    env.get(<span class="kw">crate</span>::theme::color::list::LIST_LOW)
                 }),
             )
         }
 
-        <span class="kw">let</span> <span class="ident">text</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">text</span>();
-        <span class="kw">let</span> <span class="ident">font_color</span> <span class="op">=</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">theme::typography::FONT_COLOR</span>);
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">name</span>.<span class="ident">is_none</span>() {
-            <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">text</span>
-                .<span class="ident">new_text_layout</span>(<span class="self">self</span>.<span class="ident">text</span>.<span class="ident">display_text</span>())
-                .<span class="ident">text_color</span>(<span class="ident">font_color</span>.<span class="ident">to_owned</span>())
-                .<span class="ident">font</span>(<span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">theme::typography::BASE</span>).<span class="ident">family</span>, <span class="number">13.</span>)
-                .<span class="ident">build</span>()
-                .<span class="ident">unwrap</span>();
-            <span class="self">self</span>.<span class="ident">name</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">t</span>);
+        <span class="kw">let </span>text = ctx.text();
+        <span class="kw">let </span>font_color = env.get(theme::typography::FONT_COLOR);
+        <span class="kw">if </span><span class="self">self</span>.name.is_none() {
+            <span class="kw">let </span>t = text
+                .new_text_layout(<span class="self">self</span>.text.display_text())
+                .text_color(font_color.to_owned())
+                .font(env.get(theme::typography::BASE).family, <span class="number">13.</span>)
+                .build()
+                .unwrap();
+            <span class="self">self</span>.name = <span class="prelude-val">Some</span>(t);
         }
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">druid::kurbo::BezPath::new</span>();
-        <span class="ident">path</span>.<span class="ident">move_to</span>((<span class="number">26.</span>, <span class="number">13.</span>));
-        <span class="ident">path</span>.<span class="ident">line_to</span>((<span class="number">26.</span>, <span class="number">37.</span>));
-        <span class="ident">path</span>.<span class="ident">move_to</span>((<span class="number">14.</span>, <span class="number">25.</span>));
-        <span class="ident">path</span>.<span class="ident">line_to</span>((<span class="number">38.</span>, <span class="number">25.</span>));
-        <span class="ident">ctx</span>.<span class="ident">stroke</span>(<span class="ident">path</span>, <span class="kw-2">&amp;</span><span class="ident">PaintBrush::Color</span>(<span class="ident">font_color</span>), <span class="number">4.</span>);
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">name</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">name</span> {
-            <span class="ident">ctx</span>.<span class="ident">draw_text</span>(<span class="ident">name</span>, (<span class="number">50.</span>, <span class="number">17.</span>))
+        <span class="kw">let </span><span class="kw-2">mut </span>path = druid::kurbo::BezPath::new();
+        path.move_to((<span class="number">26.</span>, <span class="number">13.</span>));
+        path.line_to((<span class="number">26.</span>, <span class="number">37.</span>));
+        path.move_to((<span class="number">14.</span>, <span class="number">25.</span>));
+        path.line_to((<span class="number">38.</span>, <span class="number">25.</span>));
+        ctx.stroke(path, <span class="kw-2">&amp;</span>PaintBrush::Color(font_color), <span class="number">4.</span>);
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(name) = <span class="kw-2">&amp;</span><span class="self">self</span>.name {
+            ctx.draw_text(name, (<span class="number">50.</span>, <span class="number">17.</span>))
         }
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>

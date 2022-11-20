@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/slider.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>slider.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/slider.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>slider.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -940,947 +940,947 @@
 <span id="940">940</span>
 <span id="941">941</span>
 <span id="942">942</span>
-</pre><pre class="rust"><code><span class="doccomment">//! 一个滑块组件，修改自 [`druid::widget::Slider`]</span>
+</pre><pre class="rust"><code><span class="doccomment">//! 一个滑块组件，修改自 [`druid::widget::Slider`]
 
-<span class="kw">use</span> <span class="ident">druid</span>::{
-    <span class="ident">debug_state::DebugState</span>,
-    <span class="ident">kurbo</span>::{<span class="ident">Circle</span>, <span class="ident">Line</span>, <span class="ident">PathEl</span>, <span class="ident">Shape</span>},
-    <span class="ident">piet</span>::{<span class="ident">PietText</span>, <span class="ident">PietTextLayout</span>, <span class="ident">Text</span>, <span class="ident">TextLayout</span>, <span class="ident">TextLayoutBuilder</span>},
-    <span class="ident">theme</span>,
-    <span class="ident">theme::TEXT_COLOR</span>,
-    <span class="ident">widget</span>::{<span class="ident">prelude</span>::<span class="kw-2">*</span>, <span class="ident">Axis</span>},
-    <span class="ident">Color</span>, <span class="ident">Point</span>, <span class="ident">Rect</span>, <span class="ident">Vec2</span>, <span class="ident">WidgetPod</span>,
+</span><span class="kw">use </span>druid::{
+    debug_state::DebugState,
+    kurbo::{Circle, Line, PathEl, Shape},
+    piet::{PietText, PietTextLayout, Text, TextLayout, TextLayoutBuilder},
+    theme,
+    theme::TEXT_COLOR,
+    widget::{prelude::<span class="kw-2">*</span>, Axis},
+    Color, Point, Rect, Vec2, WidgetPod,
 };
-<span class="kw">use</span> <span class="ident">tracing</span>::{<span class="ident">instrument</span>, <span class="ident">trace</span>, <span class="ident">warn</span>};
+<span class="kw">use </span>tracing::{instrument, trace, warn};
 
-<span class="kw">const</span> <span class="ident">TRACK_THICKNESS</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="number">4.0</span>;
-<span class="kw">const</span> <span class="ident">KNOB_STROKE_WIDTH</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="number">2.0</span>;
+<span class="kw">const </span>TRACK_THICKNESS: f64 = <span class="number">4.0</span>;
+<span class="kw">const </span>KNOB_STROKE_WIDTH: f64 = <span class="number">2.0</span>;
 
-<span class="doccomment">/// A slider, allowing interactive update of a numeric value.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This slider implements `Widget&lt;f64&gt;`, and works on values clamped</span>
-<span class="doccomment">/// in the range `min..max`.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Slider</span> {
-    <span class="ident">mapping</span>: <span class="ident">SliderValueMapping</span>,
-    <span class="ident">knob</span>: <span class="ident">SliderKnob</span>,
-    <span class="ident">knob_style</span>: <span class="ident">KnobStyle</span>,
+<span class="doccomment">/// A slider, allowing interactive update of a numeric value.
+///
+/// This slider implements `Widget&lt;f64&gt;`, and works on values clamped
+/// in the range `min..max`.
+</span><span class="attribute">#[derive(Debug, Clone, Default)]
+</span><span class="kw">pub struct </span>Slider {
+    mapping: SliderValueMapping,
+    knob: SliderKnob,
+    knob_style: KnobStyle,
 }
 
-<span class="doccomment">/// A range slider, allowing interactive update of two numeric values .</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This slider implements `Widget&lt;(f64, f64)&gt;`, and works on value pairs clamped</span>
-<span class="doccomment">/// in the range `min..max`, where the left value is always smaller than the right.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RangeSlider</span> {
-    <span class="ident">mapping</span>: <span class="ident">SliderValueMapping</span>,
-    <span class="ident">left_knob</span>: <span class="ident">SliderKnob</span>,
-    <span class="ident">right_knob</span>: <span class="ident">SliderKnob</span>,
-    <span class="ident">knob_style</span>: <span class="ident">KnobStyle</span>,
+<span class="doccomment">/// A range slider, allowing interactive update of two numeric values .
+///
+/// This slider implements `Widget&lt;(f64, f64)&gt;`, and works on value pairs clamped
+/// in the range `min..max`, where the left value is always smaller than the right.
+</span><span class="attribute">#[derive(Debug, Clone, Default)]
+</span><span class="kw">pub struct </span>RangeSlider {
+    mapping: SliderValueMapping,
+    left_knob: SliderKnob,
+    right_knob: SliderKnob,
+    knob_style: KnobStyle,
 }
 
-<span class="doccomment">/// A annotated Slider or RangeSlider</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Annotated</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">W</span>: <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="ident">inner</span>: <span class="ident">WidgetPod</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">W</span><span class="op">&gt;</span>,
+<span class="doccomment">/// A annotated Slider or RangeSlider
+</span><span class="kw">pub struct </span>Annotated&lt;T, W: Widget&lt;T&gt;&gt; {
+    inner: WidgetPod&lt;T, W&gt;,
 
-    <span class="ident">mapping</span>: <span class="ident">SliderValueMapping</span>,
-    <span class="ident">labeled_steps</span>: <span class="ident">f64</span>,
-    <span class="ident">unlabeled_steps</span>: <span class="ident">f64</span>,
+    mapping: SliderValueMapping,
+    labeled_steps: f64,
+    unlabeled_steps: f64,
 
-    <span class="ident">labels</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">PietTextLayout</span><span class="op">&gt;</span>,
+    labels: Vec&lt;PietTextLayout&gt;,
 }
 
-<span class="doccomment">/// A stepped slider value mapping</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SliderValueMapping</span> {
-    <span class="ident">min</span>: <span class="ident">f64</span>,
-    <span class="ident">max</span>: <span class="ident">f64</span>,
-    <span class="ident">step</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
-    <span class="ident">axis</span>: <span class="ident">Axis</span>,
+<span class="doccomment">/// A stepped slider value mapping
+</span><span class="attribute">#[derive(Copy, Clone, Debug)]
+</span><span class="kw">pub struct </span>SliderValueMapping {
+    min: f64,
+    max: f64,
+    step: <span class="prelude-ty">Option</span>&lt;f64&gt;,
+    axis: Axis,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">struct</span> <span class="ident">SliderKnob</span> {
-    <span class="ident">hovered</span>: <span class="ident">bool</span>,
-    <span class="ident">active</span>: <span class="ident">bool</span>,
-    <span class="ident">inner_circle_target_radius</span>: <span class="ident">f64</span>,
-    <span class="ident">inner_circle_current_radius</span>: <span class="ident">f64</span>,
-    <span class="ident">offset</span>: <span class="ident">f64</span>,
+<span class="attribute">#[derive(Debug, Clone, Default)]
+</span><span class="kw">struct </span>SliderKnob {
+    hovered: bool,
+    active: bool,
+    inner_circle_target_radius: f64,
+    inner_circle_current_radius: f64,
+    offset: f64,
 }
 
-<span class="doccomment">/// The shape of the slider knobs.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">KnobStyle</span> {
-    <span class="doccomment">/// Circle</span>
-    <span class="ident">Circle</span>,
-    <span class="doccomment">/// Wedge</span>
-    <span class="ident">Wedge</span>,
+<span class="doccomment">/// The shape of the slider knobs.
+</span><span class="attribute">#[derive(Debug, Copy, Clone)]
+</span><span class="kw">pub enum </span>KnobStyle {
+    <span class="doccomment">/// Circle
+    </span>Circle,
+    <span class="doccomment">/// Wedge
+    </span>Wedge,
 }
 
-<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">KnobStyle</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::Circle</span>
+<span class="kw">impl </span>Default <span class="kw">for </span>KnobStyle {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::Circle
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Slider</span> {
-    <span class="doccomment">/// Create a new `Slider`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="ident">Slider</span> {
-        <span class="ident">Default::default</span>()
+<span class="kw">impl </span>Slider {
+    <span class="doccomment">/// Create a new `Slider`.
+    </span><span class="kw">pub fn </span>new() -&gt; Slider {
+        Default::default()
     }
 
-    <span class="doccomment">/// Builder-style method to set the range covered by this slider.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The default range is `0.0..1.0`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_range</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">min</span>: <span class="ident">f64</span>, <span class="ident">max</span>: <span class="ident">f64</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">min</span> <span class="op">=</span> <span class="ident">min</span>;
-        <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">max</span> <span class="op">=</span> <span class="ident">max</span>;
-        <span class="self">self</span>
-    }
+    <span class="doccomment">/// Builder-style method to set the range covered by this slider.
+    ///
+    /// The default range is `0.0..1.0`.
+    </span><span class="kw">pub fn </span>with_range(<span class="kw-2">mut </span><span class="self">self</span>, min: f64, max: f64) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.mapping.min = min;
+        <span class="self">self</span>.mapping.max = max;
+        <span class="self">self
+    </span>}
 
-    <span class="doccomment">/// Builder-style method to set the stepping.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The default step size is `0.0` (smooth).</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_step</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">step</span>: <span class="ident">f64</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="ident">step</span> <span class="op">&lt;</span> <span class="number">0.0</span> {
-            <span class="macro">warn!</span>(<span class="string">&quot;bad stepping (must be positive): {}&quot;</span>, <span class="ident">step</span>);
-            <span class="kw">return</span> <span class="self">self</span>;
+    <span class="doccomment">/// Builder-style method to set the stepping.
+    ///
+    /// The default step size is `0.0` (smooth).
+    </span><span class="kw">pub fn </span>with_step(<span class="kw-2">mut </span><span class="self">self</span>, step: f64) -&gt; <span class="self">Self </span>{
+        <span class="kw">if </span>step &lt; <span class="number">0.0 </span>{
+            <span class="macro">warn!</span>(<span class="string">&quot;bad stepping (must be positive): {}&quot;</span>, step);
+            <span class="kw">return </span><span class="self">self</span>;
         }
-        <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">step</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">step</span> <span class="op">&gt;</span> <span class="number">0.0</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">step</span>)
-        } <span class="kw">else</span> {
-            <span class="comment">// A stepping value of 0.0 would yield an infinite amount of steps.</span>
-            <span class="comment">// Enforce no stepping instead.</span>
-            <span class="prelude-val">None</span>
-        };
-        <span class="self">self</span>
+        <span class="self">self</span>.mapping.step = <span class="kw">if </span>step &gt; <span class="number">0.0 </span>{
+            <span class="prelude-val">Some</span>(step)
+        } <span class="kw">else </span>{
+            <span class="comment">// A stepping value of 0.0 would yield an infinite amount of steps.
+            // Enforce no stepping instead.
+            </span><span class="prelude-val">None
+        </span>};
+        <span class="self">self
+    </span>}
+
+    <span class="doccomment">/// Builder-style method to set the knob style.
+    ///
+    /// The default is `Circle`.
+    </span><span class="kw">pub fn </span>knob_style(<span class="kw-2">mut </span><span class="self">self</span>, knob_style: KnobStyle) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.knob_style = knob_style;
+        <span class="self">self
+    </span>}
+
+    <span class="doccomment">/// Builder-style method to the the axis on which the slider moves.
+    ///
+    /// The default is `Horizontal`.
+    </span><span class="kw">pub fn </span>axis(<span class="kw-2">mut </span><span class="self">self</span>, axis: Axis) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.mapping.axis = axis;
+        <span class="self">self
+    </span>}
+
+    <span class="doccomment">/// Returns the Mapping of this Slider.
+    </span><span class="kw">pub fn </span>get_mapping(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SliderValueMapping {
+        <span class="self">self</span>.mapping
     }
 
-    <span class="doccomment">/// Builder-style method to set the knob style.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The default is `Circle`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">knob_style</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">knob_style</span>: <span class="ident">KnobStyle</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">knob_style</span> <span class="op">=</span> <span class="ident">knob_style</span>;
-        <span class="self">self</span>
-    }
-
-    <span class="doccomment">/// Builder-style method to the the axis on which the slider moves.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The default is `Horizontal`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">axis</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">axis</span>: <span class="ident">Axis</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">axis</span> <span class="op">=</span> <span class="ident">axis</span>;
-        <span class="self">self</span>
-    }
-
-    <span class="doccomment">/// Returns the Mapping of this Slider.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_mapping</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">SliderValueMapping</span> {
-        <span class="self">self</span>.<span class="ident">mapping</span>
-    }
-
-    <span class="doccomment">/// Builder-style method to create an annotated range slider.</span>
-    <span class="doccomment">///</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">annotated</span>(<span class="self">self</span>, <span class="ident">named_steps</span>: <span class="ident">f64</span>, <span class="ident">unnamed_steps</span>: <span class="ident">f64</span>) -&gt; <span class="ident">Annotated</span><span class="op">&lt;</span><span class="ident">f64</span>, <span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">mapping</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">mapping</span>;
-        <span class="ident">Annotated::new</span>(<span class="self">self</span>, <span class="ident">mapping</span>, <span class="ident">named_steps</span>, <span class="ident">unnamed_steps</span>)
+    <span class="doccomment">/// Builder-style method to create an annotated range slider.
+    ///
+    </span><span class="kw">pub fn </span>annotated(<span class="self">self</span>, named_steps: f64, unnamed_steps: f64) -&gt; Annotated&lt;f64, <span class="self">Self</span>&gt; {
+        <span class="kw">let </span>mapping = <span class="self">self</span>.mapping;
+        Annotated::new(<span class="self">self</span>, mapping, named_steps, unnamed_steps)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Slider</span> {
-    <span class="attribute">#[<span class="ident">instrument</span>(<span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;Slider&quot;</span>, <span class="ident">level</span> <span class="op">=</span> <span class="string">&quot;trace&quot;</span>, <span class="ident">skip</span>(<span class="self">self</span>, <span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>))]</span>
-    <span class="kw">fn</span> <span class="ident">event</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EventCtx</span>, <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">Event</span>, <span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="ident">f64</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">ctx</span>.<span class="ident">is_disabled</span>() {
-            <span class="self">self</span>.<span class="ident">knob</span>
-                .<span class="ident">handle_input</span>(<span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>, <span class="self">self</span>.<span class="ident">mapping</span>, <span class="self">self</span>.<span class="ident">knob_style</span>);
+<span class="kw">impl </span>Widget&lt;f64&gt; <span class="kw">for </span>Slider {
+    <span class="attribute">#[instrument(name = <span class="string">&quot;Slider&quot;</span>, level = <span class="string">&quot;trace&quot;</span>, skip(<span class="self">self</span>, ctx, event, data, env))]
+    </span><span class="kw">fn </span>event(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>EventCtx, event: <span class="kw-2">&amp;</span>Event, data: <span class="kw-2">&amp;mut </span>f64, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">if </span>!ctx.is_disabled() {
+            <span class="self">self</span>.knob
+                .handle_input(ctx, event, data, env, <span class="self">self</span>.mapping, <span class="self">self</span>.knob_style);
 
-            <span class="ident">ctx</span>.<span class="ident">set_active</span>(<span class="self">self</span>.<span class="ident">knob</span>.<span class="ident">is_active</span>());
+            ctx.set_active(<span class="self">self</span>.knob.is_active());
 
-            <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Event::MouseDown</span>(<span class="ident">me</span>) <span class="op">=</span> <span class="ident">event</span> {
-                <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">knob</span>.<span class="ident">active</span> {
-                    <span class="self">self</span>.<span class="ident">knob</span>.<span class="ident">activate</span>(<span class="number">0.0</span>);
-                    <span class="kw">let</span> <span class="ident">knob_size</span> <span class="op">=</span> <span class="number">22.</span>;
-                    <span class="kw-2">*</span><span class="ident">data</span> <span class="op">=</span> <span class="self">self</span>
-                        .<span class="ident">mapping</span>
-                        .<span class="ident">calculate_value</span>(<span class="ident">me</span>.<span class="ident">pos</span>, <span class="ident">knob_size</span>, <span class="ident">ctx</span>.<span class="ident">size</span>(), <span class="number">0.0</span>);
-                    <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
-                    <span class="ident">ctx</span>.<span class="ident">set_active</span>(<span class="bool-val">true</span>);
+            <span class="kw">if let </span>Event::MouseDown(me) = event {
+                <span class="kw">if </span>!<span class="self">self</span>.knob.active {
+                    <span class="self">self</span>.knob.activate(<span class="number">0.0</span>);
+                    <span class="kw">let </span>knob_size = <span class="number">22.</span>;
+                    <span class="kw-2">*</span>data = <span class="self">self
+                        </span>.mapping
+                        .calculate_value(me.pos, knob_size, ctx.size(), <span class="number">0.0</span>);
+                    ctx.request_paint();
+                    ctx.set_active(<span class="bool-val">true</span>);
                 }
             }
         }
     }
 
-    <span class="attribute">#[<span class="ident">instrument</span>(<span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;Slider&quot;</span>, <span class="ident">level</span> <span class="op">=</span> <span class="string">&quot;trace&quot;</span>, <span class="ident">skip</span>(<span class="self">self</span>, <span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">_data</span>, <span class="ident">_env</span>))]</span>
-    <span class="kw">fn</span> <span class="ident">lifecycle</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LifeCycleCtx</span>, <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">LifeCycle</span>, <span class="ident">_data</span>: <span class="kw-2">&amp;</span><span class="ident">f64</span>, <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">match</span> <span class="ident">event</span> {
-            <span class="comment">// checked in LifeCycle::WidgetAdded because logging may not be setup in with_range</span>
-            <span class="ident">LifeCycle::WidgetAdded</span> =&gt; {
-                <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">check_range</span>();
-                <span class="self">self</span>.<span class="ident">knob</span>.<span class="ident">inner_circle_target_radius</span> <span class="op">=</span> <span class="number">6.</span>;
-                <span class="self">self</span>.<span class="ident">knob</span>.<span class="ident">inner_circle_current_radius</span> <span class="op">=</span> <span class="number">6.</span>;
+    <span class="attribute">#[instrument(name = <span class="string">&quot;Slider&quot;</span>, level = <span class="string">&quot;trace&quot;</span>, skip(<span class="self">self</span>, ctx, event, _data, _env))]
+    </span><span class="kw">fn </span>lifecycle(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>LifeCycleCtx, event: <span class="kw-2">&amp;</span>LifeCycle, _data: <span class="kw-2">&amp;</span>f64, _env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">match </span>event {
+            <span class="comment">// checked in LifeCycle::WidgetAdded because logging may not be setup in with_range
+            </span>LifeCycle::WidgetAdded =&gt; {
+                <span class="self">self</span>.mapping.check_range();
+                <span class="self">self</span>.knob.inner_circle_target_radius = <span class="number">6.</span>;
+                <span class="self">self</span>.knob.inner_circle_current_radius = <span class="number">6.</span>;
             }
-            <span class="ident">LifeCycle::DisabledChanged</span>(<span class="kw">_</span>) =&gt; <span class="ident">ctx</span>.<span class="ident">request_paint</span>(),
-            <span class="kw">_</span> =&gt; (),
+            LifeCycle::DisabledChanged(<span class="kw">_</span>) =&gt; ctx.request_paint(),
+            <span class="kw">_ </span>=&gt; (),
         }
     }
 
-    <span class="attribute">#[<span class="ident">instrument</span>(
-        <span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;Slider&quot;</span>,
-        <span class="ident">level</span> <span class="op">=</span> <span class="string">&quot;trace&quot;</span>,
-        <span class="ident">skip</span>(<span class="self">self</span>, <span class="ident">ctx</span>, <span class="ident">_old_data</span>, <span class="ident">_data</span>, <span class="ident">_env</span>)
-    )]</span>
-    <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">UpdateCtx</span>, <span class="ident">_old_data</span>: <span class="kw-2">&amp;</span><span class="ident">f64</span>, <span class="ident">_data</span>: <span class="kw-2">&amp;</span><span class="ident">f64</span>, <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+    <span class="attribute">#[instrument(
+        name = <span class="string">&quot;Slider&quot;</span>,
+        level = <span class="string">&quot;trace&quot;</span>,
+        skip(<span class="self">self</span>, ctx, _old_data, _data, _env)
+    )]
+    </span><span class="kw">fn </span>update(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>UpdateCtx, _old_data: <span class="kw-2">&amp;</span>f64, _data: <span class="kw-2">&amp;</span>f64, _env: <span class="kw-2">&amp;</span>Env) {
+        ctx.request_paint();
     }
 
-    <span class="attribute">#[<span class="ident">instrument</span>(<span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;Slider&quot;</span>, <span class="ident">level</span> <span class="op">=</span> <span class="string">&quot;trace&quot;</span>, <span class="ident">skip</span>(<span class="self">self</span>, <span class="ident">ctx</span>, <span class="ident">bc</span>, <span class="ident">_data</span>, <span class="ident">env</span>))]</span>
-    <span class="kw">fn</span> <span class="ident">layout</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LayoutCtx</span>, <span class="ident">bc</span>: <span class="kw-2">&amp;</span><span class="ident">BoxConstraints</span>, <span class="ident">_data</span>: <span class="kw-2">&amp;</span><span class="ident">f64</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) -&gt; <span class="ident">Size</span> {
-        <span class="ident">bc</span>.<span class="ident">debug_check</span>(<span class="string">&quot;Slider&quot;</span>);
-        <span class="ident">slider_layout</span>(<span class="ident">ctx</span>, <span class="ident">bc</span>, <span class="ident">env</span>, <span class="self">self</span>.<span class="ident">mapping</span>)
+    <span class="attribute">#[instrument(name = <span class="string">&quot;Slider&quot;</span>, level = <span class="string">&quot;trace&quot;</span>, skip(<span class="self">self</span>, ctx, bc, _data, env))]
+    </span><span class="kw">fn </span>layout(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>LayoutCtx, bc: <span class="kw-2">&amp;</span>BoxConstraints, _data: <span class="kw-2">&amp;</span>f64, env: <span class="kw-2">&amp;</span>Env) -&gt; Size {
+        bc.debug_check(<span class="string">&quot;Slider&quot;</span>);
+        slider_layout(ctx, bc, env, <span class="self">self</span>.mapping)
     }
 
-    <span class="attribute">#[<span class="ident">instrument</span>(<span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;Slider&quot;</span>, <span class="ident">level</span> <span class="op">=</span> <span class="string">&quot;trace&quot;</span>, <span class="ident">skip</span>(<span class="self">self</span>, <span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>))]</span>
-    <span class="kw">fn</span> <span class="ident">paint</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">PaintCtx</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">f64</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="ident">paint_slider_background</span>(<span class="ident">ctx</span>, <span class="number">0.0</span>, <span class="kw-2">*</span><span class="ident">data</span>, <span class="self">self</span>.<span class="ident">mapping</span>, <span class="ident">env</span>);
+    <span class="attribute">#[instrument(name = <span class="string">&quot;Slider&quot;</span>, level = <span class="string">&quot;trace&quot;</span>, skip(<span class="self">self</span>, ctx, data, env))]
+    </span><span class="kw">fn </span>paint(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>PaintCtx, data: <span class="kw-2">&amp;</span>f64, env: <span class="kw-2">&amp;</span>Env) {
+        paint_slider_background(ctx, <span class="number">0.0</span>, <span class="kw-2">*</span>data, <span class="self">self</span>.mapping, env);
 
-        <span class="self">self</span>.<span class="ident">knob</span>
-            .<span class="ident">paint</span>(<span class="ident">ctx</span>, <span class="kw-2">*</span><span class="ident">data</span>, <span class="ident">env</span>, <span class="self">self</span>.<span class="ident">mapping</span>, <span class="self">self</span>.<span class="ident">knob_style</span>);
+        <span class="self">self</span>.knob
+            .paint(ctx, <span class="kw-2">*</span>data, env, <span class="self">self</span>.mapping, <span class="self">self</span>.knob_style);
     }
 
-    <span class="kw">fn</span> <span class="ident">debug_state</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">f64</span>) -&gt; <span class="ident">DebugState</span> {
-        <span class="ident">DebugState</span> {
-            <span class="ident">display_name</span>: <span class="self">self</span>.<span class="ident">short_type_name</span>().<span class="ident">to_string</span>(),
-            <span class="ident">main_value</span>: <span class="ident">data</span>.<span class="ident">to_string</span>(),
-            ..<span class="ident">Default::default</span>()
+    <span class="kw">fn </span>debug_state(<span class="kw-2">&amp;</span><span class="self">self</span>, data: <span class="kw-2">&amp;</span>f64) -&gt; DebugState {
+        DebugState {
+            display_name: <span class="self">self</span>.short_type_name().to_string(),
+            main_value: data.to_string(),
+            ..Default::default()
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">RangeSlider</span> {
-    <span class="doccomment">/// Create a new `RangeSlider`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="ident">RangeSlider</span> {
-        <span class="ident">Default::default</span>()
+<span class="kw">impl </span>RangeSlider {
+    <span class="doccomment">/// Create a new `RangeSlider`.
+    </span><span class="kw">pub fn </span>new() -&gt; RangeSlider {
+        Default::default()
     }
 
-    <span class="doccomment">/// Builder-style method to set the range covered by this range slider.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The default range is `0.0..1.0`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_range</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">min</span>: <span class="ident">f64</span>, <span class="ident">max</span>: <span class="ident">f64</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">min</span> <span class="op">=</span> <span class="ident">min</span>;
-        <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">max</span> <span class="op">=</span> <span class="ident">max</span>;
-        <span class="self">self</span>
-    }
+    <span class="doccomment">/// Builder-style method to set the range covered by this range slider.
+    ///
+    /// The default range is `0.0..1.0`.
+    </span><span class="kw">pub fn </span>with_range(<span class="kw-2">mut </span><span class="self">self</span>, min: f64, max: f64) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.mapping.min = min;
+        <span class="self">self</span>.mapping.max = max;
+        <span class="self">self
+    </span>}
 
-    <span class="doccomment">/// Builder-style method to set the stepping.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The default step size is `0.0` (smooth).</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_step</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">step</span>: <span class="ident">f64</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="ident">step</span> <span class="op">&lt;</span> <span class="number">0.0</span> {
-            <span class="macro">warn!</span>(<span class="string">&quot;bad stepping (must be positive): {}&quot;</span>, <span class="ident">step</span>);
-            <span class="kw">return</span> <span class="self">self</span>;
+    <span class="doccomment">/// Builder-style method to set the stepping.
+    ///
+    /// The default step size is `0.0` (smooth).
+    </span><span class="kw">pub fn </span>with_step(<span class="kw-2">mut </span><span class="self">self</span>, step: f64) -&gt; <span class="self">Self </span>{
+        <span class="kw">if </span>step &lt; <span class="number">0.0 </span>{
+            <span class="macro">warn!</span>(<span class="string">&quot;bad stepping (must be positive): {}&quot;</span>, step);
+            <span class="kw">return </span><span class="self">self</span>;
         }
-        <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">step</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">step</span> <span class="op">&gt;</span> <span class="number">0.0</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">step</span>)
-        } <span class="kw">else</span> {
-            <span class="comment">// A stepping value of 0.0 would yield an infinite amount of steps.</span>
-            <span class="comment">// Enforce no stepping instead.</span>
-            <span class="prelude-val">None</span>
-        };
-        <span class="self">self</span>
+        <span class="self">self</span>.mapping.step = <span class="kw">if </span>step &gt; <span class="number">0.0 </span>{
+            <span class="prelude-val">Some</span>(step)
+        } <span class="kw">else </span>{
+            <span class="comment">// A stepping value of 0.0 would yield an infinite amount of steps.
+            // Enforce no stepping instead.
+            </span><span class="prelude-val">None
+        </span>};
+        <span class="self">self
+    </span>}
+
+    <span class="doccomment">/// Builder-style method to set the knob style.
+    ///
+    /// The default is `Circle`.
+    </span><span class="kw">pub fn </span>knob_style(<span class="kw-2">mut </span><span class="self">self</span>, knob_style: KnobStyle) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.knob_style = knob_style;
+        <span class="self">self
+    </span>}
+
+    <span class="doccomment">/// Builder-style method to the the axis on which the slider moves.
+    ///
+    /// The default is `Horizontal`.
+    </span><span class="kw">pub fn </span>axis(<span class="kw-2">mut </span><span class="self">self</span>, axis: Axis) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.mapping.axis = axis;
+        <span class="self">self
+    </span>}
+
+    <span class="doccomment">/// Returns the Mapping of this Slider.
+    </span><span class="kw">pub fn </span>get_mapping(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SliderValueMapping {
+        <span class="self">self</span>.mapping
     }
 
-    <span class="doccomment">/// Builder-style method to set the knob style.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The default is `Circle`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">knob_style</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">knob_style</span>: <span class="ident">KnobStyle</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">knob_style</span> <span class="op">=</span> <span class="ident">knob_style</span>;
-        <span class="self">self</span>
-    }
-
-    <span class="doccomment">/// Builder-style method to the the axis on which the slider moves.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The default is `Horizontal`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">axis</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">axis</span>: <span class="ident">Axis</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">axis</span> <span class="op">=</span> <span class="ident">axis</span>;
-        <span class="self">self</span>
-    }
-
-    <span class="doccomment">/// Returns the Mapping of this Slider.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_mapping</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">SliderValueMapping</span> {
-        <span class="self">self</span>.<span class="ident">mapping</span>
-    }
-
-    <span class="doccomment">/// Builder-style method to create an annotated range slider.</span>
-    <span class="doccomment">///</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">annotated</span>(<span class="self">self</span>, <span class="ident">named_steps</span>: <span class="ident">f64</span>, <span class="ident">unnamed_steps</span>: <span class="ident">f64</span>) -&gt; <span class="ident">Annotated</span><span class="op">&lt;</span>(<span class="ident">f64</span>, <span class="ident">f64</span>), <span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">mapping</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">mapping</span>;
-        <span class="ident">Annotated::new</span>(<span class="self">self</span>, <span class="ident">mapping</span>, <span class="ident">named_steps</span>, <span class="ident">unnamed_steps</span>)
+    <span class="doccomment">/// Builder-style method to create an annotated range slider.
+    ///
+    </span><span class="kw">pub fn </span>annotated(<span class="self">self</span>, named_steps: f64, unnamed_steps: f64) -&gt; Annotated&lt;(f64, f64), <span class="self">Self</span>&gt; {
+        <span class="kw">let </span>mapping = <span class="self">self</span>.mapping;
+        Annotated::new(<span class="self">self</span>, mapping, named_steps, unnamed_steps)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Widget</span><span class="op">&lt;</span>(<span class="ident">f64</span>, <span class="ident">f64</span>)<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">RangeSlider</span> {
-    <span class="attribute">#[<span class="ident">instrument</span>(
-        <span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;RangeSlider&quot;</span>,
-        <span class="ident">level</span> <span class="op">=</span> <span class="string">&quot;trace&quot;</span>,
-        <span class="ident">skip</span>(<span class="self">self</span>, <span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>)
-    )]</span>
-    <span class="kw">fn</span> <span class="ident">event</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EventCtx</span>, <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">Event</span>, <span class="ident">data</span>: <span class="kw-2">&amp;mut</span> (<span class="ident">f64</span>, <span class="ident">f64</span>), <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">ctx</span>.<span class="ident">is_disabled</span>() {
-            <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">right_knob</span>.<span class="ident">is_active</span>() {
-                <span class="self">self</span>.<span class="ident">left_knob</span>.<span class="ident">handle_input</span>(
-                    <span class="ident">ctx</span>,
-                    <span class="ident">event</span>,
-                    <span class="kw-2">&amp;mut</span> <span class="ident">data</span>.<span class="number">0</span>,
-                    <span class="ident">env</span>,
-                    <span class="self">self</span>.<span class="ident">mapping</span>,
-                    <span class="self">self</span>.<span class="ident">knob_style</span>,
+<span class="kw">impl </span>Widget&lt;(f64, f64)&gt; <span class="kw">for </span>RangeSlider {
+    <span class="attribute">#[instrument(
+        name = <span class="string">&quot;RangeSlider&quot;</span>,
+        level = <span class="string">&quot;trace&quot;</span>,
+        skip(<span class="self">self</span>, ctx, event, data, env)
+    )]
+    </span><span class="kw">fn </span>event(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>EventCtx, event: <span class="kw-2">&amp;</span>Event, data: <span class="kw-2">&amp;mut </span>(f64, f64), env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">if </span>!ctx.is_disabled() {
+            <span class="kw">if </span>!<span class="self">self</span>.right_knob.is_active() {
+                <span class="self">self</span>.left_knob.handle_input(
+                    ctx,
+                    event,
+                    <span class="kw-2">&amp;mut </span>data.<span class="number">0</span>,
+                    env,
+                    <span class="self">self</span>.mapping,
+                    <span class="self">self</span>.knob_style,
                 );
-                <span class="ident">data</span>.<span class="number">0</span> <span class="op">=</span> <span class="ident">data</span>.<span class="number">0</span>.<span class="ident">min</span>(<span class="ident">data</span>.<span class="number">1</span>);
-                <span class="comment">//Ensure that the left knob stays left</span>
+                data.<span class="number">0 </span>= data.<span class="number">0</span>.min(data.<span class="number">1</span>);
+                <span class="comment">//Ensure that the left knob stays left
 
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">left_knob</span>.<span class="ident">is_active</span>() {
-                    <span class="self">self</span>.<span class="ident">right_knob</span>.<span class="ident">deactivate</span>();
+                </span><span class="kw">if </span><span class="self">self</span>.left_knob.is_active() {
+                    <span class="self">self</span>.right_knob.deactivate();
                 }
             }
-            <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">left_knob</span>.<span class="ident">is_active</span>() {
-                <span class="self">self</span>.<span class="ident">right_knob</span>.<span class="ident">handle_input</span>(
-                    <span class="ident">ctx</span>,
-                    <span class="ident">event</span>,
-                    <span class="kw-2">&amp;mut</span> <span class="ident">data</span>.<span class="number">1</span>,
-                    <span class="ident">env</span>,
-                    <span class="self">self</span>.<span class="ident">mapping</span>,
-                    <span class="self">self</span>.<span class="ident">knob_style</span>,
+            <span class="kw">if </span>!<span class="self">self</span>.left_knob.is_active() {
+                <span class="self">self</span>.right_knob.handle_input(
+                    ctx,
+                    event,
+                    <span class="kw-2">&amp;mut </span>data.<span class="number">1</span>,
+                    env,
+                    <span class="self">self</span>.mapping,
+                    <span class="self">self</span>.knob_style,
                 );
-                <span class="comment">//Ensure that the right knob stays right</span>
-                <span class="ident">data</span>.<span class="number">1</span> <span class="op">=</span> <span class="ident">data</span>.<span class="number">1</span>.<span class="ident">max</span>(<span class="ident">data</span>.<span class="number">0</span>);
+                <span class="comment">//Ensure that the right knob stays right
+                </span>data.<span class="number">1 </span>= data.<span class="number">1</span>.max(data.<span class="number">0</span>);
 
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">right_knob</span>.<span class="ident">is_active</span>() {
-                    <span class="self">self</span>.<span class="ident">left_knob</span>.<span class="ident">deactivate</span>();
+                <span class="kw">if </span><span class="self">self</span>.right_knob.is_active() {
+                    <span class="self">self</span>.left_knob.deactivate();
                 }
             }
-            <span class="ident">ctx</span>.<span class="ident">set_active</span>(<span class="self">self</span>.<span class="ident">left_knob</span>.<span class="ident">is_active</span>() <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">right_knob</span>.<span class="ident">is_active</span>());
+            ctx.set_active(<span class="self">self</span>.left_knob.is_active() || <span class="self">self</span>.right_knob.is_active());
 
-            <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Event::MouseDown</span>(<span class="ident">me</span>) <span class="op">=</span> <span class="ident">event</span> {
-                <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">left_knob</span>.<span class="ident">is_active</span>() <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">right_knob</span>.<span class="ident">is_active</span>() {
-                    <span class="kw">let</span> <span class="ident">knob_size</span> <span class="op">=</span> <span class="number">22.</span>;
-                    <span class="kw">let</span> <span class="ident">press_value</span> <span class="op">=</span>
-                        <span class="self">self</span>.<span class="ident">mapping</span>
-                            .<span class="ident">calculate_value</span>(<span class="ident">me</span>.<span class="ident">pos</span>, <span class="ident">knob_size</span>, <span class="ident">ctx</span>.<span class="ident">size</span>(), <span class="number">0.0</span>);
+            <span class="kw">if let </span>Event::MouseDown(me) = event {
+                <span class="kw">if </span>!<span class="self">self</span>.left_knob.is_active() &amp;&amp; !<span class="self">self</span>.right_knob.is_active() {
+                    <span class="kw">let </span>knob_size = <span class="number">22.</span>;
+                    <span class="kw">let </span>press_value =
+                        <span class="self">self</span>.mapping
+                            .calculate_value(me.pos, knob_size, ctx.size(), <span class="number">0.0</span>);
 
-                    <span class="kw">if</span> <span class="ident">press_value</span> <span class="op">-</span> <span class="ident">data</span>.<span class="number">0</span> <span class="op">&lt;</span> <span class="ident">data</span>.<span class="number">1</span> <span class="op">-</span> <span class="ident">press_value</span> {
-                        <span class="self">self</span>.<span class="ident">left_knob</span>.<span class="ident">activate</span>(<span class="number">0.0</span>);
-                        <span class="ident">data</span>.<span class="number">0</span> <span class="op">=</span> <span class="ident">press_value</span>;
-                    } <span class="kw">else</span> {
-                        <span class="self">self</span>.<span class="ident">right_knob</span>.<span class="ident">activate</span>(<span class="number">0.0</span>);
-                        <span class="ident">data</span>.<span class="number">1</span> <span class="op">=</span> <span class="ident">press_value</span>;
+                    <span class="kw">if </span>press_value - data.<span class="number">0 </span>&lt; data.<span class="number">1 </span>- press_value {
+                        <span class="self">self</span>.left_knob.activate(<span class="number">0.0</span>);
+                        data.<span class="number">0 </span>= press_value;
+                    } <span class="kw">else </span>{
+                        <span class="self">self</span>.right_knob.activate(<span class="number">0.0</span>);
+                        data.<span class="number">1 </span>= press_value;
                     }
-                    <span class="ident">ctx</span>.<span class="ident">set_active</span>(<span class="bool-val">true</span>);
-                    <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+                    ctx.set_active(<span class="bool-val">true</span>);
+                    ctx.request_paint();
                 }
             }
         }
     }
 
-    <span class="attribute">#[<span class="ident">instrument</span>(
-        <span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;RangeSlider&quot;</span>,
-        <span class="ident">level</span> <span class="op">=</span> <span class="string">&quot;trace&quot;</span>,
-        <span class="ident">skip</span>(<span class="self">self</span>, <span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">_data</span>, <span class="ident">_env</span>)
-    )]</span>
-    <span class="kw">fn</span> <span class="ident">lifecycle</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LifeCycleCtx</span>,
-        <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">LifeCycle</span>,
-        <span class="ident">_data</span>: <span class="kw-2">&amp;</span>(<span class="ident">f64</span>, <span class="ident">f64</span>),
-        <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>,
+    <span class="attribute">#[instrument(
+        name = <span class="string">&quot;RangeSlider&quot;</span>,
+        level = <span class="string">&quot;trace&quot;</span>,
+        skip(<span class="self">self</span>, ctx, event, _data, _env)
+    )]
+    </span><span class="kw">fn </span>lifecycle(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        ctx: <span class="kw-2">&amp;mut </span>LifeCycleCtx,
+        event: <span class="kw-2">&amp;</span>LifeCycle,
+        _data: <span class="kw-2">&amp;</span>(f64, f64),
+        _env: <span class="kw-2">&amp;</span>Env,
     ) {
-        <span class="kw">match</span> <span class="ident">event</span> {
-            <span class="comment">// checked in LifeCycle::WidgetAdded because logging may not be setup in with_range</span>
-            <span class="ident">LifeCycle::WidgetAdded</span> =&gt; {
-                <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">check_range</span>();
-                <span class="self">self</span>.<span class="ident">left_knob</span>.<span class="ident">inner_circle_target_radius</span> <span class="op">=</span> <span class="number">6.</span>;
-                <span class="self">self</span>.<span class="ident">left_knob</span>.<span class="ident">inner_circle_current_radius</span> <span class="op">=</span> <span class="number">6.</span>;
-                <span class="self">self</span>.<span class="ident">right_knob</span>.<span class="ident">inner_circle_target_radius</span> <span class="op">=</span> <span class="number">6.</span>;
-                <span class="self">self</span>.<span class="ident">right_knob</span>.<span class="ident">inner_circle_current_radius</span> <span class="op">=</span> <span class="number">6.</span>;
+        <span class="kw">match </span>event {
+            <span class="comment">// checked in LifeCycle::WidgetAdded because logging may not be setup in with_range
+            </span>LifeCycle::WidgetAdded =&gt; {
+                <span class="self">self</span>.mapping.check_range();
+                <span class="self">self</span>.left_knob.inner_circle_target_radius = <span class="number">6.</span>;
+                <span class="self">self</span>.left_knob.inner_circle_current_radius = <span class="number">6.</span>;
+                <span class="self">self</span>.right_knob.inner_circle_target_radius = <span class="number">6.</span>;
+                <span class="self">self</span>.right_knob.inner_circle_current_radius = <span class="number">6.</span>;
             }
-            <span class="ident">LifeCycle::DisabledChanged</span>(<span class="kw">_</span>) =&gt; <span class="ident">ctx</span>.<span class="ident">request_paint</span>(),
-            <span class="kw">_</span> =&gt; (),
+            LifeCycle::DisabledChanged(<span class="kw">_</span>) =&gt; ctx.request_paint(),
+            <span class="kw">_ </span>=&gt; (),
         }
     }
 
-    <span class="attribute">#[<span class="ident">instrument</span>(
-        <span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;RangeSlider&quot;</span>,
-        <span class="ident">level</span> <span class="op">=</span> <span class="string">&quot;trace&quot;</span>,
-        <span class="ident">skip</span>(<span class="self">self</span>, <span class="ident">ctx</span>, <span class="ident">_old_data</span>, <span class="ident">_data</span>, <span class="ident">_env</span>)
-    )]</span>
-    <span class="kw">fn</span> <span class="ident">update</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">UpdateCtx</span>,
-        <span class="ident">_old_data</span>: <span class="kw-2">&amp;</span>(<span class="ident">f64</span>, <span class="ident">f64</span>),
-        <span class="ident">_data</span>: <span class="kw-2">&amp;</span>(<span class="ident">f64</span>, <span class="ident">f64</span>),
-        <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>,
+    <span class="attribute">#[instrument(
+        name = <span class="string">&quot;RangeSlider&quot;</span>,
+        level = <span class="string">&quot;trace&quot;</span>,
+        skip(<span class="self">self</span>, ctx, _old_data, _data, _env)
+    )]
+    </span><span class="kw">fn </span>update(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        ctx: <span class="kw-2">&amp;mut </span>UpdateCtx,
+        _old_data: <span class="kw-2">&amp;</span>(f64, f64),
+        _data: <span class="kw-2">&amp;</span>(f64, f64),
+        _env: <span class="kw-2">&amp;</span>Env,
     ) {
-        <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+        ctx.request_paint();
     }
 
-    <span class="attribute">#[<span class="ident">instrument</span>(<span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;RangeSlider&quot;</span>, <span class="ident">level</span> <span class="op">=</span> <span class="string">&quot;trace&quot;</span>, <span class="ident">skip</span>(<span class="self">self</span>, <span class="ident">ctx</span>, <span class="ident">bc</span>, <span class="ident">_data</span>, <span class="ident">env</span>))]</span>
-    <span class="kw">fn</span> <span class="ident">layout</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LayoutCtx</span>,
-        <span class="ident">bc</span>: <span class="kw-2">&amp;</span><span class="ident">BoxConstraints</span>,
-        <span class="ident">_data</span>: <span class="kw-2">&amp;</span>(<span class="ident">f64</span>, <span class="ident">f64</span>),
-        <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>,
-    ) -&gt; <span class="ident">Size</span> {
-        <span class="ident">bc</span>.<span class="ident">debug_check</span>(<span class="string">&quot;Slider&quot;</span>);
-        <span class="ident">slider_layout</span>(<span class="ident">ctx</span>, <span class="ident">bc</span>, <span class="ident">env</span>, <span class="self">self</span>.<span class="ident">mapping</span>)
+    <span class="attribute">#[instrument(name = <span class="string">&quot;RangeSlider&quot;</span>, level = <span class="string">&quot;trace&quot;</span>, skip(<span class="self">self</span>, ctx, bc, _data, env))]
+    </span><span class="kw">fn </span>layout(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        ctx: <span class="kw-2">&amp;mut </span>LayoutCtx,
+        bc: <span class="kw-2">&amp;</span>BoxConstraints,
+        _data: <span class="kw-2">&amp;</span>(f64, f64),
+        env: <span class="kw-2">&amp;</span>Env,
+    ) -&gt; Size {
+        bc.debug_check(<span class="string">&quot;Slider&quot;</span>);
+        slider_layout(ctx, bc, env, <span class="self">self</span>.mapping)
     }
 
-    <span class="attribute">#[<span class="ident">instrument</span>(<span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;RangeSlider&quot;</span>, <span class="ident">level</span> <span class="op">=</span> <span class="string">&quot;trace&quot;</span>, <span class="ident">skip</span>(<span class="self">self</span>, <span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>))]</span>
-    <span class="kw">fn</span> <span class="ident">paint</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">PaintCtx</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span>(<span class="ident">f64</span>, <span class="ident">f64</span>), <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="ident">paint_slider_background</span>(<span class="ident">ctx</span>, <span class="ident">data</span>.<span class="number">0</span>, <span class="ident">data</span>.<span class="number">1</span>, <span class="self">self</span>.<span class="ident">mapping</span>, <span class="ident">env</span>);
+    <span class="attribute">#[instrument(name = <span class="string">&quot;RangeSlider&quot;</span>, level = <span class="string">&quot;trace&quot;</span>, skip(<span class="self">self</span>, ctx, data, env))]
+    </span><span class="kw">fn </span>paint(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>PaintCtx, data: <span class="kw-2">&amp;</span>(f64, f64), env: <span class="kw-2">&amp;</span>Env) {
+        paint_slider_background(ctx, data.<span class="number">0</span>, data.<span class="number">1</span>, <span class="self">self</span>.mapping, env);
 
-        <span class="comment">// We paint the left knob at last since it receives events first and therefore behaves like</span>
-        <span class="comment">// being &quot;on top&quot;.</span>
-        <span class="self">self</span>.<span class="ident">right_knob</span>
-            .<span class="ident">paint</span>(<span class="ident">ctx</span>, <span class="ident">data</span>.<span class="number">1</span>, <span class="ident">env</span>, <span class="self">self</span>.<span class="ident">mapping</span>, <span class="self">self</span>.<span class="ident">knob_style</span>);
-        <span class="self">self</span>.<span class="ident">left_knob</span>
-            .<span class="ident">paint</span>(<span class="ident">ctx</span>, <span class="ident">data</span>.<span class="number">0</span>, <span class="ident">env</span>, <span class="self">self</span>.<span class="ident">mapping</span>, <span class="self">self</span>.<span class="ident">knob_style</span>);
+        <span class="comment">// We paint the left knob at last since it receives events first and therefore behaves like
+        // being &quot;on top&quot;.
+        </span><span class="self">self</span>.right_knob
+            .paint(ctx, data.<span class="number">1</span>, env, <span class="self">self</span>.mapping, <span class="self">self</span>.knob_style);
+        <span class="self">self</span>.left_knob
+            .paint(ctx, data.<span class="number">0</span>, env, <span class="self">self</span>.mapping, <span class="self">self</span>.knob_style);
     }
 
-    <span class="kw">fn</span> <span class="ident">debug_state</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span>(<span class="ident">f64</span>, <span class="ident">f64</span>)) -&gt; <span class="ident">DebugState</span> {
-        <span class="ident">DebugState</span> {
-            <span class="ident">display_name</span>: <span class="self">self</span>.<span class="ident">short_type_name</span>().<span class="ident">to_string</span>(),
-            <span class="ident">main_value</span>: <span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">data</span>),
-            ..<span class="ident">Default::default</span>()
+    <span class="kw">fn </span>debug_state(<span class="kw-2">&amp;</span><span class="self">self</span>, data: <span class="kw-2">&amp;</span>(f64, f64)) -&gt; DebugState {
+        DebugState {
+            display_name: <span class="self">self</span>.short_type_name().to_string(),
+            main_value: <span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, data),
+            ..Default::default()
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">W</span>: <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">Annotated</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">W</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Create a Annotated struct</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(
-        <span class="ident">inner</span>: <span class="ident">W</span>,
-        <span class="ident">mapping</span>: <span class="ident">SliderValueMapping</span>,
-        <span class="ident">labeled_steps</span>: <span class="ident">f64</span>,
-        <span class="ident">unlabeled_steps</span>: <span class="ident">f64</span>,
-    ) -&gt; <span class="self">Self</span> {
-        <span class="ident">Annotated</span> {
-            <span class="ident">inner</span>: <span class="ident">WidgetPod::new</span>(<span class="ident">inner</span>),
+<span class="kw">impl</span>&lt;T, W: Widget&lt;T&gt;&gt; Annotated&lt;T, W&gt; {
+    <span class="doccomment">/// Create a Annotated struct
+    </span><span class="kw">pub fn </span>new(
+        inner: W,
+        mapping: SliderValueMapping,
+        labeled_steps: f64,
+        unlabeled_steps: f64,
+    ) -&gt; <span class="self">Self </span>{
+        Annotated {
+            inner: WidgetPod::new(inner),
 
-            <span class="ident">mapping</span>,
-            <span class="ident">labeled_steps</span>: <span class="ident">labeled_steps</span>.<span class="ident">abs</span>(),
-            <span class="ident">unlabeled_steps</span>: <span class="ident">unlabeled_steps</span>.<span class="ident">abs</span>(),
+            mapping,
+            labeled_steps: labeled_steps.abs(),
+            unlabeled_steps: unlabeled_steps.abs(),
 
-            <span class="ident">labels</span>: <span class="ident">Vec::new</span>(),
+            labels: Vec::new(),
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">sanitise_values</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="kw">let</span> <span class="ident">labeled</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">range</span>() <span class="op">/</span> <span class="self">self</span>.<span class="ident">labeled_steps</span>;
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">labeled</span>.<span class="ident">is_finite</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">labeled</span> <span class="op">&gt;</span> <span class="number">100.0</span> {
-            <span class="macro">warn!</span>(<span class="string">&quot;Annotated: provided labeled interval \&quot;{}\&quot; has too many steps inside the sliders range {}..{}&quot;</span>, <span class="self">self</span>.<span class="ident">labeled_steps</span>, <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">min</span>, <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">max</span>);
-            <span class="self">self</span>.<span class="ident">labeled_steps</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">range</span>() <span class="op">/</span> <span class="number">5.0</span>;
+    <span class="kw">fn </span>sanitise_values(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="kw">let </span>labeled = <span class="self">self</span>.mapping.range() / <span class="self">self</span>.labeled_steps;
+        <span class="kw">if </span>!labeled.is_finite() || labeled &gt; <span class="number">100.0 </span>{
+            <span class="macro">warn!</span>(<span class="string">&quot;Annotated: provided labeled interval \&quot;{}\&quot; has too many steps inside the sliders range {}..{}&quot;</span>, <span class="self">self</span>.labeled_steps, <span class="self">self</span>.mapping.min, <span class="self">self</span>.mapping.max);
+            <span class="self">self</span>.labeled_steps = <span class="self">self</span>.mapping.range() / <span class="number">5.0</span>;
         }
 
-        <span class="kw">let</span> <span class="ident">unlabeled</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">range</span>() <span class="op">/</span> <span class="self">self</span>.<span class="ident">unlabeled_steps</span>;
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">unlabeled</span>.<span class="ident">is_finite</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">unlabeled</span> <span class="op">&gt;</span> <span class="number">10000.0</span> {
-            <span class="macro">warn!</span>(<span class="string">&quot;Annotated: provided unlabeled interval \&quot;{}\&quot; has too many steps inside the sliders range {}..{}&quot;</span>, <span class="self">self</span>.<span class="ident">unlabeled_steps</span>, <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">min</span>, <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">max</span>);
-            <span class="self">self</span>.<span class="ident">unlabeled_steps</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">range</span>() <span class="op">/</span> <span class="number">20.0</span>;
-        }
-    }
-
-    <span class="kw">fn</span> <span class="ident">build_labels</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">text</span>: <span class="kw-2">&amp;mut</span> <span class="ident">PietText</span>, <span class="ident">text_color</span>: <span class="ident">Color</span>) {
-        <span class="self">self</span>.<span class="ident">labels</span>.<span class="ident">clear</span>();
-
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">walk</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">min</span>;
-        <span class="kw">while</span> <span class="ident">walk</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">max</span> <span class="op">+</span> <span class="ident">f64::EPSILON</span> <span class="op">*</span> <span class="number">10.0</span> {
-            <span class="kw">let</span> <span class="ident">layout</span> <span class="op">=</span> <span class="ident">text</span>
-                .<span class="ident">new_text_layout</span>(<span class="macro">format!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">walk</span>))
-                .<span class="ident">text_color</span>(<span class="ident">text_color</span>.<span class="ident">clone</span>())
-                .<span class="ident">build</span>()
-                .<span class="ident">unwrap</span>();
-
-            <span class="self">self</span>.<span class="ident">labels</span>.<span class="ident">push</span>(<span class="ident">layout</span>);
-
-            <span class="ident">walk</span> <span class="op">+</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">labeled_steps</span>;
+        <span class="kw">let </span>unlabeled = <span class="self">self</span>.mapping.range() / <span class="self">self</span>.unlabeled_steps;
+        <span class="kw">if </span>!unlabeled.is_finite() || unlabeled &gt; <span class="number">10000.0 </span>{
+            <span class="macro">warn!</span>(<span class="string">&quot;Annotated: provided unlabeled interval \&quot;{}\&quot; has too many steps inside the sliders range {}..{}&quot;</span>, <span class="self">self</span>.unlabeled_steps, <span class="self">self</span>.mapping.min, <span class="self">self</span>.mapping.max);
+            <span class="self">self</span>.unlabeled_steps = <span class="self">self</span>.mapping.range() / <span class="number">20.0</span>;
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">line_dir</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Vec2</span> {
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">axis</span> {
-            <span class="ident">Axis::Horizontal</span> =&gt; <span class="ident">Vec2::new</span>(<span class="number">0.0</span>, <span class="number">1.0</span>),
-            <span class="ident">Axis::Vertical</span> =&gt; <span class="ident">Vec2::new</span>(<span class="op">-</span><span class="number">1.0</span>, <span class="number">0.0</span>),
+    <span class="kw">fn </span>build_labels(<span class="kw-2">&amp;mut </span><span class="self">self</span>, text: <span class="kw-2">&amp;mut </span>PietText, text_color: Color) {
+        <span class="self">self</span>.labels.clear();
+
+        <span class="kw">let </span><span class="kw-2">mut </span>walk = <span class="self">self</span>.mapping.min;
+        <span class="kw">while </span>walk &lt; <span class="self">self</span>.mapping.max + f64::EPSILON * <span class="number">10.0 </span>{
+            <span class="kw">let </span>layout = text
+                .new_text_layout(<span class="macro">format!</span>(<span class="string">&quot;{}&quot;</span>, walk))
+                .text_color(text_color.clone())
+                .build()
+                .unwrap();
+
+            <span class="self">self</span>.labels.push(layout);
+
+            walk += <span class="self">self</span>.labeled_steps;
+        }
+    }
+
+    <span class="kw">fn </span>line_dir(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec2 {
+        <span class="kw">match </span><span class="self">self</span>.mapping.axis {
+            Axis::Horizontal =&gt; Vec2::new(<span class="number">0.0</span>, <span class="number">1.0</span>),
+            Axis::Vertical =&gt; Vec2::new(-<span class="number">1.0</span>, <span class="number">0.0</span>),
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Data</span>, <span class="ident">W</span>: <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">Widget</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Annotated</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">W</span><span class="op">&gt;</span> {
-    <span class="attribute">#[<span class="ident">instrument</span>(<span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;Annotated&quot;</span>, <span class="ident">level</span> <span class="op">=</span> <span class="string">&quot;trace&quot;</span>, <span class="ident">skip</span>(<span class="self">self</span>, <span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>))]</span>
-    <span class="kw">fn</span> <span class="ident">event</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EventCtx</span>, <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">Event</span>, <span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">event</span>(<span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>);
+<span class="kw">impl</span>&lt;T: Data, W: Widget&lt;T&gt;&gt; Widget&lt;T&gt; <span class="kw">for </span>Annotated&lt;T, W&gt; {
+    <span class="attribute">#[instrument(name = <span class="string">&quot;Annotated&quot;</span>, level = <span class="string">&quot;trace&quot;</span>, skip(<span class="self">self</span>, ctx, event, data, env))]
+    </span><span class="kw">fn </span>event(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>EventCtx, event: <span class="kw-2">&amp;</span>Event, data: <span class="kw-2">&amp;mut </span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="self">self</span>.inner.event(ctx, event, data, env);
     }
 
-    <span class="attribute">#[<span class="ident">instrument</span>(<span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;Annotated&quot;</span>, <span class="ident">level</span> <span class="op">=</span> <span class="string">&quot;trace&quot;</span>, <span class="ident">skip</span>(<span class="self">self</span>, <span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>))]</span>
-    <span class="kw">fn</span> <span class="ident">lifecycle</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LifeCycleCtx</span>, <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">LifeCycle</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="ident">LifeCycle::WidgetAdded</span> <span class="op">=</span> <span class="ident">event</span> {
-            <span class="self">self</span>.<span class="ident">sanitise_values</span>();
-            <span class="self">self</span>.<span class="ident">build_labels</span>(<span class="ident">ctx</span>.<span class="ident">text</span>(), <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">TEXT_COLOR</span>));
+    <span class="attribute">#[instrument(name = <span class="string">&quot;Annotated&quot;</span>, level = <span class="string">&quot;trace&quot;</span>, skip(<span class="self">self</span>, ctx, event, data, env))]
+    </span><span class="kw">fn </span>lifecycle(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>LifeCycleCtx, event: <span class="kw-2">&amp;</span>LifeCycle, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">if let </span>LifeCycle::WidgetAdded = event {
+            <span class="self">self</span>.sanitise_values();
+            <span class="self">self</span>.build_labels(ctx.text(), env.get(TEXT_COLOR));
         }
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">lifecycle</span>(<span class="ident">ctx</span>, <span class="ident">event</span>, <span class="ident">data</span>, <span class="ident">env</span>);
+        <span class="self">self</span>.inner.lifecycle(ctx, event, data, env);
     }
 
-    <span class="attribute">#[<span class="ident">instrument</span>(
-        <span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;Annotated&quot;</span>,
-        <span class="ident">level</span> <span class="op">=</span> <span class="string">&quot;trace&quot;</span>,
-        <span class="ident">skip</span>(<span class="self">self</span>, <span class="ident">ctx</span>, <span class="ident">_old_data</span>, <span class="ident">data</span>, <span class="ident">env</span>)
-    )]</span>
-    <span class="kw">fn</span> <span class="ident">update</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">UpdateCtx</span>, <span class="ident">_old_data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">update</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>);
-        <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">env_key_changed</span>(<span class="kw-2">&amp;</span><span class="ident">TEXT_COLOR</span>) {
-            <span class="self">self</span>.<span class="ident">build_labels</span>(<span class="ident">ctx</span>.<span class="ident">text</span>(), <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">TEXT_COLOR</span>));
-            <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+    <span class="attribute">#[instrument(
+        name = <span class="string">&quot;Annotated&quot;</span>,
+        level = <span class="string">&quot;trace&quot;</span>,
+        skip(<span class="self">self</span>, ctx, _old_data, data, env)
+    )]
+    </span><span class="kw">fn </span>update(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>UpdateCtx, _old_data: <span class="kw-2">&amp;</span>T, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="self">self</span>.inner.update(ctx, data, env);
+        <span class="kw">if </span>ctx.env_key_changed(<span class="kw-2">&amp;</span>TEXT_COLOR) {
+            <span class="self">self</span>.build_labels(ctx.text(), env.get(TEXT_COLOR));
+            ctx.request_paint();
         }
     }
 
-    <span class="attribute">#[<span class="ident">instrument</span>(<span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;Annotated&quot;</span>, <span class="ident">level</span> <span class="op">=</span> <span class="string">&quot;trace&quot;</span>, <span class="ident">skip</span>(<span class="self">self</span>, <span class="ident">bc</span>, <span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>))]</span>
-    <span class="kw">fn</span> <span class="ident">layout</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LayoutCtx</span>, <span class="ident">bc</span>: <span class="kw-2">&amp;</span><span class="ident">BoxConstraints</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) -&gt; <span class="ident">Size</span> {
-        <span class="kw">let</span> <span class="ident">label_size</span> <span class="op">=</span> <span class="ident">Size::new</span>(<span class="number">40.0</span>, <span class="number">20.0</span>);
+    <span class="attribute">#[instrument(name = <span class="string">&quot;Annotated&quot;</span>, level = <span class="string">&quot;trace&quot;</span>, skip(<span class="self">self</span>, bc, ctx, data, env))]
+    </span><span class="kw">fn </span>layout(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>LayoutCtx, bc: <span class="kw-2">&amp;</span>BoxConstraints, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) -&gt; Size {
+        <span class="kw">let </span>label_size = Size::new(<span class="number">40.0</span>, <span class="number">20.0</span>);
 
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">axis</span> {
-            <span class="ident">Axis::Vertical</span> =&gt; {
-                <span class="kw">let</span> <span class="ident">child_bc</span> <span class="op">=</span> <span class="ident">bc</span>.<span class="ident">shrink</span>((<span class="ident">label_size</span>.<span class="ident">width</span>, <span class="number">0.0</span>));
-                <span class="kw">let</span> <span class="ident">child_size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">layout</span>(<span class="ident">ctx</span>, <span class="kw-2">&amp;</span><span class="ident">child_bc</span>, <span class="ident">data</span>, <span class="ident">env</span>);
-                <span class="self">self</span>.<span class="ident">inner</span>
-                    .<span class="ident">set_origin</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>, <span class="ident">Point::new</span>(<span class="ident">label_size</span>.<span class="ident">width</span>, <span class="number">0.0</span>));
+        <span class="kw">match </span><span class="self">self</span>.mapping.axis {
+            Axis::Vertical =&gt; {
+                <span class="kw">let </span>child_bc = bc.shrink((label_size.width, <span class="number">0.0</span>));
+                <span class="kw">let </span>child_size = <span class="self">self</span>.inner.layout(ctx, <span class="kw-2">&amp;</span>child_bc, data, env);
+                <span class="self">self</span>.inner
+                    .set_origin(ctx, data, env, Point::new(label_size.width, <span class="number">0.0</span>));
 
-                <span class="ident">Size::new</span>(<span class="ident">child_size</span>.<span class="ident">width</span> <span class="op">+</span> <span class="ident">label_size</span>.<span class="ident">width</span>, <span class="ident">child_size</span>.<span class="ident">height</span>)
+                Size::new(child_size.width + label_size.width, child_size.height)
             }
-            <span class="ident">Axis::Horizontal</span> =&gt; {
-                <span class="kw">let</span> <span class="ident">child_bc</span> <span class="op">=</span> <span class="ident">bc</span>.<span class="ident">shrink</span>((<span class="number">0.0</span>, <span class="ident">label_size</span>.<span class="ident">height</span>));
-                <span class="kw">let</span> <span class="ident">child_size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">layout</span>(<span class="ident">ctx</span>, <span class="kw-2">&amp;</span><span class="ident">child_bc</span>, <span class="ident">data</span>, <span class="ident">env</span>);
-                <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">set_origin</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>, <span class="ident">Point::ZERO</span>);
+            Axis::Horizontal =&gt; {
+                <span class="kw">let </span>child_bc = bc.shrink((<span class="number">0.0</span>, label_size.height));
+                <span class="kw">let </span>child_size = <span class="self">self</span>.inner.layout(ctx, <span class="kw-2">&amp;</span>child_bc, data, env);
+                <span class="self">self</span>.inner.set_origin(ctx, data, env, Point::ZERO);
 
-                <span class="ident">ctx</span>.<span class="ident">set_baseline_offset</span>(<span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">baseline_offset</span>() <span class="op">+</span> <span class="ident">label_size</span>.<span class="ident">height</span>);
-                <span class="ident">Size::new</span>(<span class="ident">child_size</span>.<span class="ident">width</span>, <span class="ident">child_size</span>.<span class="ident">height</span> <span class="op">+</span> <span class="ident">label_size</span>.<span class="ident">height</span>)
+                ctx.set_baseline_offset(<span class="self">self</span>.inner.baseline_offset() + label_size.height);
+                Size::new(child_size.width, child_size.height + label_size.height)
             }
         }
     }
 
-    <span class="attribute">#[<span class="ident">instrument</span>(<span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;Annotated&quot;</span>, <span class="ident">level</span> <span class="op">=</span> <span class="string">&quot;trace&quot;</span>, <span class="ident">skip</span>(<span class="self">self</span>, <span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>))]</span>
-    <span class="kw">fn</span> <span class="ident">paint</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">PaintCtx</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>) {
-        <span class="kw">let</span> <span class="ident">short_stroke</span> <span class="op">=</span> <span class="number">3.0</span>;
-        <span class="kw">let</span> <span class="ident">long_stroke</span> <span class="op">=</span> <span class="number">6.0</span>;
-        <span class="kw">let</span> <span class="ident">stroke_offset</span> <span class="op">=</span> <span class="number">6.0</span>;
+    <span class="attribute">#[instrument(name = <span class="string">&quot;Annotated&quot;</span>, level = <span class="string">&quot;trace&quot;</span>, skip(<span class="self">self</span>, ctx, data, env))]
+    </span><span class="kw">fn </span>paint(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ctx: <span class="kw-2">&amp;mut </span>PaintCtx, data: <span class="kw-2">&amp;</span>T, env: <span class="kw-2">&amp;</span>Env) {
+        <span class="kw">let </span>short_stroke = <span class="number">3.0</span>;
+        <span class="kw">let </span>long_stroke = <span class="number">6.0</span>;
+        <span class="kw">let </span>stroke_offset = <span class="number">6.0</span>;
 
-        <span class="kw">let</span> <span class="ident">slider_offset</span> <span class="op">=</span> <span class="ident">Point::new</span>(<span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">layout_rect</span>().<span class="ident">x0</span>, <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">layout_rect</span>().<span class="ident">y0</span>);
+        <span class="kw">let </span>slider_offset = Point::new(<span class="self">self</span>.inner.layout_rect().x0, <span class="self">self</span>.inner.layout_rect().y0);
 
-        <span class="kw">let</span> <span class="ident">knob_size</span> <span class="op">=</span> <span class="number">22.</span>;
-        <span class="kw">let</span> <span class="ident">slider_size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">layout_rect</span>().<span class="ident">size</span>();
+        <span class="kw">let </span>knob_size = <span class="number">22.</span>;
+        <span class="kw">let </span>slider_size = <span class="self">self</span>.inner.layout_rect().size();
 
-        <span class="kw">let</span> <span class="ident">text_color</span> <span class="op">=</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">TEXT_COLOR</span>);
+        <span class="kw">let </span>text_color = env.get(TEXT_COLOR);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">walk</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">min</span>;
-        <span class="kw">while</span> <span class="ident">walk</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">max</span> <span class="op">+</span> <span class="ident">f64::EPSILON</span> <span class="op">*</span> <span class="number">10.0</span> {
-            <span class="kw">let</span> <span class="ident">center</span> <span class="op">=</span> <span class="self">self</span>
-                .<span class="ident">mapping</span>
-                .<span class="ident">get_point</span>(<span class="ident">walk</span>, <span class="ident">knob_size</span>, <span class="ident">slider_size</span>)
-                .<span class="ident">to_vec2</span>()
-                <span class="op">+</span> <span class="ident">slider_offset</span>.<span class="ident">to_vec2</span>();
+        <span class="kw">let </span><span class="kw-2">mut </span>walk = <span class="self">self</span>.mapping.min;
+        <span class="kw">while </span>walk &lt; <span class="self">self</span>.mapping.max + f64::EPSILON * <span class="number">10.0 </span>{
+            <span class="kw">let </span>center = <span class="self">self
+                </span>.mapping
+                .get_point(walk, knob_size, slider_size)
+                .to_vec2()
+                + slider_offset.to_vec2();
 
-            <span class="kw">let</span> <span class="ident">line</span> <span class="op">=</span> <span class="ident">Line::new</span>(
-                (<span class="ident">center</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">line_dir</span>() <span class="op">*</span> <span class="ident">stroke_offset</span>).<span class="ident">to_point</span>(),
-                (<span class="ident">center</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">line_dir</span>() <span class="op">*</span> (<span class="ident">stroke_offset</span> <span class="op">+</span> <span class="ident">short_stroke</span>)).<span class="ident">to_point</span>(),
+            <span class="kw">let </span>line = Line::new(
+                (center + <span class="self">self</span>.line_dir() * stroke_offset).to_point(),
+                (center + <span class="self">self</span>.line_dir() * (stroke_offset + short_stroke)).to_point(),
             );
 
-            <span class="ident">ctx</span>.<span class="ident">stroke</span>(<span class="ident">line</span>, <span class="kw-2">&amp;</span><span class="ident">text_color</span>, <span class="number">1.0</span>);
-            <span class="ident">walk</span> <span class="op">+</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">unlabeled_steps</span>;
+            ctx.stroke(line, <span class="kw-2">&amp;</span>text_color, <span class="number">1.0</span>);
+            walk += <span class="self">self</span>.unlabeled_steps;
         }
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">walk</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">min</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">labels</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">labels</span>.<span class="ident">iter</span>();
-        <span class="kw">while</span> <span class="ident">walk</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">max</span> <span class="op">+</span> <span class="ident">f64::EPSILON</span> <span class="op">*</span> <span class="number">10.0</span> {
-            <span class="kw">let</span> <span class="ident">center</span> <span class="op">=</span> <span class="self">self</span>
-                .<span class="ident">mapping</span>
-                .<span class="ident">get_point</span>(<span class="ident">walk</span>, <span class="ident">knob_size</span>, <span class="ident">slider_size</span>)
-                .<span class="ident">to_vec2</span>()
-                <span class="op">+</span> <span class="ident">slider_offset</span>.<span class="ident">to_vec2</span>();
+        <span class="kw">let </span><span class="kw-2">mut </span>walk = <span class="self">self</span>.mapping.min;
+        <span class="kw">let </span><span class="kw-2">mut </span>labels = <span class="self">self</span>.labels.iter();
+        <span class="kw">while </span>walk &lt; <span class="self">self</span>.mapping.max + f64::EPSILON * <span class="number">10.0 </span>{
+            <span class="kw">let </span>center = <span class="self">self
+                </span>.mapping
+                .get_point(walk, knob_size, slider_size)
+                .to_vec2()
+                + slider_offset.to_vec2();
 
-            <span class="kw">let</span> <span class="ident">line</span> <span class="op">=</span> <span class="ident">Line::new</span>(
-                (<span class="ident">center</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">line_dir</span>() <span class="op">*</span> <span class="ident">stroke_offset</span>).<span class="ident">to_point</span>(),
-                (<span class="ident">center</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">line_dir</span>() <span class="op">*</span> (<span class="ident">stroke_offset</span> <span class="op">+</span> <span class="ident">long_stroke</span>)).<span class="ident">to_point</span>(),
+            <span class="kw">let </span>line = Line::new(
+                (center + <span class="self">self</span>.line_dir() * stroke_offset).to_point(),
+                (center + <span class="self">self</span>.line_dir() * (stroke_offset + long_stroke)).to_point(),
             );
 
-            <span class="ident">ctx</span>.<span class="ident">stroke</span>(<span class="ident">line</span>, <span class="kw-2">&amp;</span><span class="ident">text_color</span>, <span class="number">1.0</span>);
+            ctx.stroke(line, <span class="kw-2">&amp;</span>text_color, <span class="number">1.0</span>);
 
-            <span class="kw">let</span> <span class="ident">label</span> <span class="op">=</span> <span class="ident">labels</span>.<span class="ident">next</span>().<span class="ident">unwrap</span>();
-            <span class="kw">let</span> <span class="ident">origin</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">mapping</span>.<span class="ident">axis</span> {
-                <span class="ident">Axis::Horizontal</span> =&gt; <span class="ident">Vec2::new</span>(<span class="ident">label</span>.<span class="ident">size</span>().<span class="ident">width</span> <span class="op">/</span> <span class="number">2.0</span>, <span class="number">0.0</span>),
-                <span class="ident">Axis::Vertical</span> =&gt; <span class="ident">Vec2::new</span>(<span class="ident">label</span>.<span class="ident">size</span>().<span class="ident">width</span>, <span class="ident">label</span>.<span class="ident">size</span>().<span class="ident">height</span> <span class="op">/</span> <span class="number">2.0</span>),
+            <span class="kw">let </span>label = labels.next().unwrap();
+            <span class="kw">let </span>origin = <span class="kw">match </span><span class="self">self</span>.mapping.axis {
+                Axis::Horizontal =&gt; Vec2::new(label.size().width / <span class="number">2.0</span>, <span class="number">0.0</span>),
+                Axis::Vertical =&gt; Vec2::new(label.size().width, label.size().height / <span class="number">2.0</span>),
             };
 
-            <span class="ident">ctx</span>.<span class="ident">draw_text</span>(
-                <span class="ident">label</span>,
-                (<span class="ident">center</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">line_dir</span>() <span class="op">*</span> (<span class="ident">stroke_offset</span> <span class="op">+</span> <span class="ident">long_stroke</span>) <span class="op">-</span> <span class="ident">origin</span>).<span class="ident">to_point</span>(),
+            ctx.draw_text(
+                label,
+                (center + <span class="self">self</span>.line_dir() * (stroke_offset + long_stroke) - origin).to_point(),
             );
 
-            <span class="ident">walk</span> <span class="op">+</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">labeled_steps</span>;
+            walk += <span class="self">self</span>.labeled_steps;
         }
 
-        <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">paint</span>(<span class="ident">ctx</span>, <span class="ident">data</span>, <span class="ident">env</span>);
+        <span class="self">self</span>.inner.paint(ctx, data, env);
     }
 
-    <span class="kw">fn</span> <span class="ident">debug_state</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>) -&gt; <span class="ident">DebugState</span> {
-        <span class="ident">DebugState</span> {
-            <span class="ident">display_name</span>: <span class="string">&quot;Annotated&quot;</span>.<span class="ident">to_string</span>(),
-            <span class="ident">children</span>: <span class="macro">vec!</span>[<span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">widget</span>().<span class="ident">debug_state</span>(<span class="ident">data</span>)],
-            ..<span class="ident">Default::default</span>()
+    <span class="kw">fn </span>debug_state(<span class="kw-2">&amp;</span><span class="self">self</span>, data: <span class="kw-2">&amp;</span>T) -&gt; DebugState {
+        DebugState {
+            display_name: <span class="string">&quot;Annotated&quot;</span>.to_string(),
+            children: <span class="macro">vec!</span>[<span class="self">self</span>.inner.widget().debug_state(data)],
+            ..Default::default()
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">SliderValueMapping</span> {
-    <span class="doccomment">/// Create a Slider Value Mapping</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> {
-            <span class="ident">min</span>: <span class="number">0.0</span>,
-            <span class="ident">max</span>: <span class="number">1.0</span>,
-            <span class="ident">step</span>: <span class="prelude-val">None</span>,
-            <span class="ident">axis</span>: <span class="ident">Axis::Horizontal</span>,
+<span class="kw">impl </span>SliderValueMapping {
+    <span class="doccomment">/// Create a Slider Value Mapping
+    </span><span class="kw">pub fn </span>new() -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{
+            min: <span class="number">0.0</span>,
+            max: <span class="number">1.0</span>,
+            step: <span class="prelude-val">None</span>,
+            axis: Axis::Horizontal,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">calculate_value</span>(
+    <span class="kw">fn </span>calculate_value(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">mouse_pos</span>: <span class="ident">Point</span>,
-        <span class="ident">knob_size</span>: <span class="ident">f64</span>,
-        <span class="ident">slider_size</span>: <span class="ident">Size</span>,
-        <span class="ident">offset</span>: <span class="ident">f64</span>,
-    ) -&gt; <span class="ident">f64</span> {
-        <span class="comment">// The vertical slider has its lowest value at the bottom.</span>
-        <span class="kw">let</span> <span class="ident">mouse_pos</span> <span class="op">=</span> <span class="ident">Point::new</span>(<span class="ident">mouse_pos</span>.<span class="ident">x</span>, <span class="ident">slider_size</span>.<span class="ident">height</span> <span class="op">-</span> <span class="ident">mouse_pos</span>.<span class="ident">y</span>);
+        mouse_pos: Point,
+        knob_size: f64,
+        slider_size: Size,
+        offset: f64,
+    ) -&gt; f64 {
+        <span class="comment">// The vertical slider has its lowest value at the bottom.
+        </span><span class="kw">let </span>mouse_pos = Point::new(mouse_pos.x, slider_size.height - mouse_pos.y);
 
-        <span class="kw">let</span> <span class="ident">scalar</span> <span class="op">=</span> (<span class="self">self</span>.<span class="ident">axis</span>.<span class="ident">major_pos</span>(<span class="ident">mouse_pos</span>) <span class="op">-</span> <span class="ident">knob_size</span> <span class="op">/</span> <span class="number">2.</span>)
-            <span class="op">/</span> (<span class="self">self</span>.<span class="ident">axis</span>.<span class="ident">major</span>(<span class="ident">slider_size</span>) <span class="op">-</span> <span class="ident">knob_size</span>);
+        <span class="kw">let </span>scalar = (<span class="self">self</span>.axis.major_pos(mouse_pos) - knob_size / <span class="number">2.</span>)
+            / (<span class="self">self</span>.axis.major(slider_size) - knob_size);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">value</span> <span class="op">=</span> (<span class="self">self</span>.<span class="ident">min</span> <span class="op">+</span> <span class="ident">scalar</span> <span class="op">*</span> (<span class="self">self</span>.<span class="ident">max</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">min</span>) <span class="op">+</span> <span class="ident">offset</span>)
-            .<span class="ident">min</span>(<span class="self">self</span>.<span class="ident">max</span>)
-            .<span class="ident">max</span>(<span class="self">self</span>.<span class="ident">min</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>value = (<span class="self">self</span>.min + scalar * (<span class="self">self</span>.max - <span class="self">self</span>.min) + offset)
+            .min(<span class="self">self</span>.max)
+            .max(<span class="self">self</span>.min);
 
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">step</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">step</span> {
-            <span class="kw">let</span> <span class="ident">max_step_value</span> <span class="op">=</span> ((<span class="self">self</span>.<span class="ident">max</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">min</span>) <span class="op">/</span> <span class="ident">step</span>).<span class="ident">floor</span>() <span class="op">*</span> <span class="ident">step</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">min</span>;
-            <span class="kw">if</span> <span class="ident">value</span> <span class="op">&gt;</span> <span class="ident">max_step_value</span> {
-                <span class="comment">// edge case: make sure max is reachable</span>
-                <span class="kw">let</span> <span class="ident">left_dist</span> <span class="op">=</span> <span class="ident">value</span> <span class="op">-</span> <span class="ident">max_step_value</span>;
-                <span class="kw">let</span> <span class="ident">right_dist</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">max</span> <span class="op">-</span> <span class="ident">value</span>;
-                <span class="ident">value</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">left_dist</span> <span class="op">&lt;</span> <span class="ident">right_dist</span> {
-                    <span class="ident">max_step_value</span>
-                } <span class="kw">else</span> {
-                    <span class="self">self</span>.<span class="ident">max</span>
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(step) = <span class="self">self</span>.step {
+            <span class="kw">let </span>max_step_value = ((<span class="self">self</span>.max - <span class="self">self</span>.min) / step).floor() * step + <span class="self">self</span>.min;
+            <span class="kw">if </span>value &gt; max_step_value {
+                <span class="comment">// edge case: make sure max is reachable
+                </span><span class="kw">let </span>left_dist = value - max_step_value;
+                <span class="kw">let </span>right_dist = <span class="self">self</span>.max - value;
+                value = <span class="kw">if </span>left_dist &lt; right_dist {
+                    max_step_value
+                } <span class="kw">else </span>{
+                    <span class="self">self</span>.max
                 };
-            } <span class="kw">else</span> {
-                <span class="comment">// snap to discrete intervals</span>
-                <span class="ident">value</span> <span class="op">=</span> (((<span class="ident">value</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">min</span>) <span class="op">/</span> <span class="ident">step</span>).<span class="ident">round</span>() <span class="op">*</span> <span class="ident">step</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">min</span>).<span class="ident">min</span>(<span class="self">self</span>.<span class="ident">max</span>);
+            } <span class="kw">else </span>{
+                <span class="comment">// snap to discrete intervals
+                </span>value = (((value - <span class="self">self</span>.min) / step).round() * step + <span class="self">self</span>.min).min(<span class="self">self</span>.max);
             }
         }
-        <span class="ident">value</span>
+        value
     }
 
-    <span class="kw">fn</span> <span class="ident">get_point</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">value</span>: <span class="ident">f64</span>, <span class="ident">knob_size</span>: <span class="ident">f64</span>, <span class="ident">widget_size</span>: <span class="ident">Size</span>) -&gt; <span class="ident">Point</span> {
-        <span class="kw">let</span> <span class="ident">knob_major</span> <span class="op">=</span>
-            (<span class="self">self</span>.<span class="ident">axis</span>.<span class="ident">major</span>(<span class="ident">widget_size</span>) <span class="op">-</span> <span class="ident">knob_size</span>) <span class="op">*</span> <span class="self">self</span>.<span class="ident">normalize</span>(<span class="ident">value</span>) <span class="op">+</span> <span class="ident">knob_size</span> <span class="op">/</span> <span class="number">2.</span>;
-        <span class="kw">let</span> (<span class="ident">w</span>, <span class="ident">h</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">axis</span>.<span class="ident">pack</span>(<span class="ident">knob_major</span>, <span class="ident">knob_size</span> <span class="op">/</span> <span class="number">2.</span>);
-        <span class="ident">Point::new</span>(<span class="ident">w</span>, <span class="ident">widget_size</span>.<span class="ident">height</span> <span class="op">-</span> <span class="ident">h</span>)
+    <span class="kw">fn </span>get_point(<span class="kw-2">&amp;</span><span class="self">self</span>, value: f64, knob_size: f64, widget_size: Size) -&gt; Point {
+        <span class="kw">let </span>knob_major =
+            (<span class="self">self</span>.axis.major(widget_size) - knob_size) * <span class="self">self</span>.normalize(value) + knob_size / <span class="number">2.</span>;
+        <span class="kw">let </span>(w, h) = <span class="self">self</span>.axis.pack(knob_major, knob_size / <span class="number">2.</span>);
+        Point::new(w, widget_size.height - h)
     }
 
-    <span class="kw">fn</span> <span class="ident">normalize</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">data</span>: <span class="ident">f64</span>) -&gt; <span class="ident">f64</span> {
-        (<span class="ident">data</span>.<span class="ident">max</span>(<span class="self">self</span>.<span class="ident">min</span>).<span class="ident">min</span>(<span class="self">self</span>.<span class="ident">max</span>) <span class="op">-</span> <span class="self">self</span>.<span class="ident">min</span>) <span class="op">/</span> (<span class="self">self</span>.<span class="ident">max</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">min</span>)
+    <span class="kw">fn </span>normalize(<span class="kw-2">&amp;</span><span class="self">self</span>, data: f64) -&gt; f64 {
+        (data.max(<span class="self">self</span>.min).min(<span class="self">self</span>.max) - <span class="self">self</span>.min) / (<span class="self">self</span>.max - <span class="self">self</span>.min)
     }
 
-    <span class="doccomment">/// check self.min &lt;= self.max, if not swaps the values.</span>
-    <span class="kw">fn</span> <span class="ident">check_range</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">max</span> <span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">min</span> {
+    <span class="doccomment">/// check self.min &lt;= self.max, if not swaps the values.
+    </span><span class="kw">fn </span>check_range(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="kw">if </span><span class="self">self</span>.max &lt; <span class="self">self</span>.min {
             <span class="macro">warn!</span>(
                 <span class="string">&quot;min({}) should be less than max({}), swapping the values&quot;</span>,
-                <span class="self">self</span>.<span class="ident">min</span>, <span class="self">self</span>.<span class="ident">max</span>
+                <span class="self">self</span>.min, <span class="self">self</span>.max
             );
-            <span class="ident">std::mem::swap</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">max</span>, <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">min</span>);
+            std::mem::swap(<span class="kw-2">&amp;mut </span><span class="self">self</span>.max, <span class="kw-2">&amp;mut </span><span class="self">self</span>.min);
         }
     }
 
-    <span class="doccomment">/// the distance between min and max</span>
-    <span class="kw">fn</span> <span class="ident">range</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">f64</span> {
-        <span class="self">self</span>.<span class="ident">max</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">min</span>
+    <span class="doccomment">/// the distance between min and max
+    </span><span class="kw">fn </span>range(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64 {
+        <span class="self">self</span>.max - <span class="self">self</span>.min
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">SliderValueMapping</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
-        <span class="ident">SliderValueMapping</span> {
-            <span class="ident">min</span>: <span class="number">0.0</span>,
-            <span class="ident">max</span>: <span class="number">1.0</span>,
-            <span class="ident">step</span>: <span class="prelude-val">None</span>,
-            <span class="ident">axis</span>: <span class="ident">Axis::Horizontal</span>,
+<span class="kw">impl </span>Default <span class="kw">for </span>SliderValueMapping {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{
+        SliderValueMapping {
+            min: <span class="number">0.0</span>,
+            max: <span class="number">1.0</span>,
+            step: <span class="prelude-val">None</span>,
+            axis: Axis::Horizontal,
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">SliderKnob</span> {
-    <span class="kw">fn</span> <span class="ident">handle_input</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">EventCtx</span>,
-        <span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">Event</span>,
-        <span class="ident">data</span>: <span class="kw-2">&amp;mut</span> <span class="ident">f64</span>,
-        <span class="ident">_env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>,
-        <span class="ident">mapping</span>: <span class="ident">SliderValueMapping</span>,
-        <span class="ident">knob_style</span>: <span class="ident">KnobStyle</span>,
+<span class="kw">impl </span>SliderKnob {
+    <span class="kw">fn </span>handle_input(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        ctx: <span class="kw-2">&amp;mut </span>EventCtx,
+        event: <span class="kw-2">&amp;</span>Event,
+        data: <span class="kw-2">&amp;mut </span>f64,
+        _env: <span class="kw-2">&amp;</span>Env,
+        mapping: SliderValueMapping,
+        knob_style: KnobStyle,
     ) {
-        <span class="kw">let</span> <span class="ident">knob_size</span> <span class="op">=</span> <span class="number">22.</span>;
-        <span class="kw">let</span> <span class="ident">slider_size</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">size</span>();
+        <span class="kw">let </span>knob_size = <span class="number">22.</span>;
+        <span class="kw">let </span>slider_size = ctx.size();
 
-        <span class="kw">let</span> <span class="ident">point_to_val</span> <span class="op">=</span> <span class="op">|</span><span class="ident">point</span>: <span class="ident">Point</span>, <span class="ident">offset</span>: <span class="ident">f64</span><span class="op">|</span> {
-            <span class="ident">mapping</span>.<span class="ident">calculate_value</span>(<span class="ident">point</span>, <span class="ident">knob_size</span>, <span class="ident">slider_size</span>, <span class="ident">offset</span>)
+        <span class="kw">let </span>point_to_val = |point: Point, offset: f64| {
+            mapping.calculate_value(point, knob_size, slider_size, offset)
         };
 
-        <span class="kw">let</span> <span class="ident">hit_test</span> <span class="op">=</span> <span class="op">|</span><span class="ident">val</span>: <span class="kw-2">&amp;mut</span> <span class="ident">f64</span>, <span class="ident">mouse_pos</span>: <span class="ident">Point</span><span class="op">|</span> {
-            <span class="kw">let</span> <span class="ident">center</span> <span class="op">=</span> <span class="ident">mapping</span>.<span class="ident">get_point</span>(<span class="kw-2">*</span><span class="ident">val</span>, <span class="ident">knob_size</span>, <span class="ident">slider_size</span>);
-            <span class="kw">match</span> <span class="ident">knob_style</span> {
-                <span class="ident">KnobStyle::Circle</span> =&gt; <span class="ident">center</span>.<span class="ident">distance</span>(<span class="ident">mouse_pos</span>) <span class="op">&lt;</span> <span class="ident">knob_size</span>,
-                <span class="ident">KnobStyle::Wedge</span> =&gt; {
-                    (<span class="kw-2">&amp;</span><span class="ident">knob_wedge</span>(<span class="ident">center</span>, <span class="ident">knob_size</span>, <span class="ident">mapping</span>.<span class="ident">axis</span>)[..]).<span class="ident">winding</span>(<span class="ident">mouse_pos</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
-                }
+        <span class="kw">let </span>hit_test = |val: <span class="kw-2">&amp;mut </span>f64, mouse_pos: Point| {
+            <span class="kw">let </span>center = mapping.get_point(<span class="kw-2">*</span>val, knob_size, slider_size);
+            <span class="kw">match </span>knob_style {
+                KnobStyle::Circle =&gt; center.distance(mouse_pos) &lt; knob_size,
+                KnobStyle::Wedge =&gt; {
+                    (<span class="kw-2">&amp;</span>knob_wedge(center, knob_size, mapping.axis)[..]).winding(mouse_pos) != <span class="number">0
+                </span>}
             }
         };
 
-        <span class="kw">match</span> <span class="ident">event</span> {
-            <span class="ident">Event::MouseDown</span>(<span class="ident">mouse</span>) =&gt; {
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">ctx</span>.<span class="ident">is_disabled</span>() <span class="op">&amp;&amp;</span> <span class="ident">hit_test</span>(<span class="ident">data</span>, <span class="ident">mouse</span>.<span class="ident">pos</span>) {
-                    <span class="self">self</span>.<span class="ident">offset</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">data</span> <span class="op">-</span> <span class="ident">point_to_val</span>(<span class="ident">mouse</span>.<span class="ident">pos</span>, <span class="number">0.0</span>);
-                    <span class="self">self</span>.<span class="ident">active</span> <span class="op">=</span> <span class="bool-val">true</span>;
-                    <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
-                    <span class="kw">if</span> <span class="self">self</span>.<span class="ident">inner_circle_target_radius</span> <span class="op">!</span><span class="op">=</span> <span class="number">5.</span> {
-                        <span class="self">self</span>.<span class="ident">inner_circle_target_radius</span> <span class="op">=</span> <span class="number">5.</span>;
-                        <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
+        <span class="kw">match </span>event {
+            Event::MouseDown(mouse) =&gt; {
+                <span class="kw">if </span>!ctx.is_disabled() &amp;&amp; hit_test(data, mouse.pos) {
+                    <span class="self">self</span>.offset = <span class="kw-2">*</span>data - point_to_val(mouse.pos, <span class="number">0.0</span>);
+                    <span class="self">self</span>.active = <span class="bool-val">true</span>;
+                    ctx.request_paint();
+                    <span class="kw">if </span><span class="self">self</span>.inner_circle_target_radius != <span class="number">5. </span>{
+                        <span class="self">self</span>.inner_circle_target_radius = <span class="number">5.</span>;
+                        ctx.request_anim_frame();
                     }
                 }
             }
-            <span class="ident">Event::MouseUp</span>(<span class="ident">mouse</span>) =&gt; {
-                <span class="kw">if</span> <span class="self">self</span>.<span class="ident">active</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">ctx</span>.<span class="ident">is_disabled</span>() {
-                    <span class="kw-2">*</span><span class="ident">data</span> <span class="op">=</span> <span class="ident">point_to_val</span>(<span class="ident">mouse</span>.<span class="ident">pos</span>, <span class="self">self</span>.<span class="ident">offset</span>);
-                    <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+            Event::MouseUp(mouse) =&gt; {
+                <span class="kw">if </span><span class="self">self</span>.active &amp;&amp; !ctx.is_disabled() {
+                    <span class="kw-2">*</span>data = point_to_val(mouse.pos, <span class="self">self</span>.offset);
+                    ctx.request_paint();
                 }
-                <span class="kw">let</span> <span class="ident">last_inner_circle_target_radius</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner_circle_target_radius</span>;
-                <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_hot</span>() {
-                    <span class="self">self</span>.<span class="ident">inner_circle_target_radius</span> <span class="op">=</span> <span class="number">7.</span>;
-                } <span class="kw">else</span> {
-                    <span class="self">self</span>.<span class="ident">inner_circle_target_radius</span> <span class="op">=</span> <span class="number">6.</span>;
+                <span class="kw">let </span>last_inner_circle_target_radius = <span class="self">self</span>.inner_circle_target_radius;
+                <span class="kw">if </span>ctx.is_hot() {
+                    <span class="self">self</span>.inner_circle_target_radius = <span class="number">7.</span>;
+                } <span class="kw">else </span>{
+                    <span class="self">self</span>.inner_circle_target_radius = <span class="number">6.</span>;
                 }
-                <span class="kw">if</span> <span class="ident">last_inner_circle_target_radius</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">inner_circle_target_radius</span> {
-                    <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
+                <span class="kw">if </span>last_inner_circle_target_radius != <span class="self">self</span>.inner_circle_target_radius {
+                    ctx.request_anim_frame();
                 }
-                <span class="self">self</span>.<span class="ident">active</span> <span class="op">=</span> <span class="bool-val">false</span>;
+                <span class="self">self</span>.active = <span class="bool-val">false</span>;
             }
-            <span class="ident">Event::MouseMove</span>(<span class="ident">mouse</span>) =&gt; {
-                <span class="kw">if</span> <span class="op">!</span><span class="ident">ctx</span>.<span class="ident">is_disabled</span>() {
-                    <span class="kw">if</span> <span class="self">self</span>.<span class="ident">active</span> {
-                        <span class="kw-2">*</span><span class="ident">data</span> <span class="op">=</span> <span class="ident">point_to_val</span>(<span class="ident">mouse</span>.<span class="ident">pos</span>, <span class="self">self</span>.<span class="ident">offset</span>);
-                        <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+            Event::MouseMove(mouse) =&gt; {
+                <span class="kw">if </span>!ctx.is_disabled() {
+                    <span class="kw">if </span><span class="self">self</span>.active {
+                        <span class="kw-2">*</span>data = point_to_val(mouse.pos, <span class="self">self</span>.offset);
+                        ctx.request_paint();
                     }
-                    <span class="kw">let</span> <span class="ident">last_inner_circle_target_radius</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner_circle_target_radius</span>;
-                    <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_hot</span>() {
-                        <span class="kw">let</span> <span class="ident">knob_hover</span> <span class="op">=</span> <span class="ident">hit_test</span>(<span class="ident">data</span>, <span class="ident">mouse</span>.<span class="ident">pos</span>);
-                        <span class="kw">if</span> <span class="ident">knob_hover</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">hovered</span> {
-                            <span class="self">self</span>.<span class="ident">hovered</span> <span class="op">=</span> <span class="ident">knob_hover</span>;
-                            <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+                    <span class="kw">let </span>last_inner_circle_target_radius = <span class="self">self</span>.inner_circle_target_radius;
+                    <span class="kw">if </span>ctx.is_hot() {
+                        <span class="kw">let </span>knob_hover = hit_test(data, mouse.pos);
+                        <span class="kw">if </span>knob_hover != <span class="self">self</span>.hovered {
+                            <span class="self">self</span>.hovered = knob_hover;
+                            ctx.request_paint();
                         }
-                        <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_active</span>() {
-                            <span class="self">self</span>.<span class="ident">inner_circle_target_radius</span> <span class="op">=</span> <span class="number">5.</span>;
-                        } <span class="kw">else</span> {
-                            <span class="self">self</span>.<span class="ident">inner_circle_target_radius</span> <span class="op">=</span> <span class="number">7.</span>;
+                        <span class="kw">if </span>ctx.is_active() {
+                            <span class="self">self</span>.inner_circle_target_radius = <span class="number">5.</span>;
+                        } <span class="kw">else </span>{
+                            <span class="self">self</span>.inner_circle_target_radius = <span class="number">7.</span>;
                         }
-                    } <span class="kw">else</span> {
-                        <span class="self">self</span>.<span class="ident">inner_circle_target_radius</span> <span class="op">=</span> <span class="number">6.</span>;
+                    } <span class="kw">else </span>{
+                        <span class="self">self</span>.inner_circle_target_radius = <span class="number">6.</span>;
                     }
-                    <span class="kw">if</span> <span class="ident">last_inner_circle_target_radius</span> <span class="op">!</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">inner_circle_target_radius</span> {
-                        <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
+                    <span class="kw">if </span>last_inner_circle_target_radius != <span class="self">self</span>.inner_circle_target_radius {
+                        ctx.request_anim_frame();
                     }
-                } <span class="kw">else</span> {
-                    <span class="self">self</span>.<span class="ident">active</span> <span class="op">=</span> <span class="bool-val">false</span>
-                }
+                } <span class="kw">else </span>{
+                    <span class="self">self</span>.active = <span class="bool-val">false
+                </span>}
             }
-            <span class="ident">Event::AnimFrame</span>(<span class="kw">_</span>) =&gt; {
-                <span class="self">self</span>.<span class="ident">inner_circle_current_radius</span> <span class="op">+</span><span class="op">=</span>
-                    (<span class="self">self</span>.<span class="ident">inner_circle_target_radius</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">inner_circle_current_radius</span>) <span class="op">/</span> <span class="number">3.</span>;
-                <span class="kw">if</span> (<span class="self">self</span>.<span class="ident">inner_circle_target_radius</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">inner_circle_current_radius</span>).<span class="ident">abs</span>()
-                    <span class="op">&gt;</span> <span class="ident">f64::EPSILON</span>
+            Event::AnimFrame(<span class="kw">_</span>) =&gt; {
+                <span class="self">self</span>.inner_circle_current_radius +=
+                    (<span class="self">self</span>.inner_circle_target_radius - <span class="self">self</span>.inner_circle_current_radius) / <span class="number">3.</span>;
+                <span class="kw">if </span>(<span class="self">self</span>.inner_circle_target_radius - <span class="self">self</span>.inner_circle_current_radius).abs()
+                    &gt; f64::EPSILON
                 {
-                    <span class="ident">ctx</span>.<span class="ident">request_anim_frame</span>();
+                    ctx.request_anim_frame();
                 }
-                <span class="ident">ctx</span>.<span class="ident">request_paint</span>();
+                ctx.request_paint();
             }
-            <span class="kw">_</span> =&gt; (),
+            <span class="kw">_ </span>=&gt; (),
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">deactivate</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">hovered</span> <span class="op">=</span> <span class="bool-val">false</span>;
-        <span class="self">self</span>.<span class="ident">active</span> <span class="op">=</span> <span class="bool-val">false</span>;
+    <span class="kw">fn </span>deactivate(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="self">self</span>.hovered = <span class="bool-val">false</span>;
+        <span class="self">self</span>.active = <span class="bool-val">false</span>;
     }
 
-    <span class="kw">fn</span> <span class="ident">activate</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">x_offset</span>: <span class="ident">f64</span>) {
-        <span class="self">self</span>.<span class="ident">hovered</span> <span class="op">=</span> <span class="bool-val">true</span>;
-        <span class="self">self</span>.<span class="ident">active</span> <span class="op">=</span> <span class="bool-val">true</span>;
-        <span class="self">self</span>.<span class="ident">offset</span> <span class="op">=</span> <span class="ident">x_offset</span>;
+    <span class="kw">fn </span>activate(<span class="kw-2">&amp;mut </span><span class="self">self</span>, x_offset: f64) {
+        <span class="self">self</span>.hovered = <span class="bool-val">true</span>;
+        <span class="self">self</span>.active = <span class="bool-val">true</span>;
+        <span class="self">self</span>.offset = x_offset;
     }
 
-    <span class="kw">fn</span> <span class="ident">is_active</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">active</span>
+    <span class="kw">fn </span>is_active(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.active
     }
 
-    <span class="kw">fn</span> <span class="ident">paint</span>(
+    <span class="kw">fn </span>paint(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">PaintCtx</span>,
-        <span class="ident">value</span>: <span class="ident">f64</span>,
-        <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>,
-        <span class="ident">settings</span>: <span class="ident">SliderValueMapping</span>,
-        <span class="ident">knob_style</span>: <span class="ident">KnobStyle</span>,
+        ctx: <span class="kw-2">&amp;mut </span>PaintCtx,
+        value: f64,
+        env: <span class="kw-2">&amp;</span>Env,
+        settings: SliderValueMapping,
+        knob_style: KnobStyle,
     ) {
-        <span class="kw">let</span> <span class="ident">knob_size</span> <span class="op">=</span> <span class="number">22.</span>;
-        <span class="kw">let</span> <span class="ident">is_dark</span> <span class="op">=</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::main::IS_DARK</span>);
+        <span class="kw">let </span>knob_size = <span class="number">22.</span>;
+        <span class="kw">let </span>is_dark = env.get(<span class="kw">crate</span>::theme::color::main::IS_DARK);
 
-        <span class="kw">let</span> <span class="ident">knob_color</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">ctx</span>.<span class="ident">is_disabled</span>() {
-            <span class="kw">if</span> <span class="ident">is_dark</span> {
-                <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::chrome::DISABLED_LOW</span>)
-            } <span class="kw">else</span> {
-                <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::chrome::WHITE</span>)
+        <span class="kw">let </span>knob_color = <span class="kw">if </span>ctx.is_disabled() {
+            <span class="kw">if </span>is_dark {
+                env.get(<span class="kw">crate</span>::theme::color::chrome::DISABLED_LOW)
+            } <span class="kw">else </span>{
+                env.get(<span class="kw">crate</span>::theme::color::chrome::WHITE)
             }
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">is_dark</span> {
-            <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::chrome::DISABLED_HIGH</span>)
-        } <span class="kw">else</span> {
-            <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::chrome::WHITE</span>)
+        } <span class="kw">else if </span>is_dark {
+            env.get(<span class="kw">crate</span>::theme::color::chrome::DISABLED_HIGH)
+        } <span class="kw">else </span>{
+            env.get(<span class="kw">crate</span>::theme::color::chrome::WHITE)
         };
 
-        <span class="comment">//Paint the border</span>
-        <span class="kw">let</span> <span class="ident">border_color</span> <span class="op">=</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::base::LOW</span>);
+        <span class="comment">//Paint the border
+        </span><span class="kw">let </span>border_color = env.get(<span class="kw">crate</span>::theme::color::base::LOW);
 
-        <span class="kw">match</span> <span class="ident">knob_style</span> {
-            <span class="ident">KnobStyle::Circle</span> =&gt; {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">knob_circle</span> <span class="op">=</span> <span class="ident">Circle::new</span>(
-                    <span class="ident">settings</span>.<span class="ident">get_point</span>(<span class="ident">value</span>, <span class="ident">knob_size</span>, <span class="ident">ctx</span>.<span class="ident">size</span>()),
-                    (<span class="ident">knob_size</span> <span class="op">-</span> <span class="number">2.</span>) <span class="op">/</span> <span class="number">2.</span>,
+        <span class="kw">match </span>knob_style {
+            KnobStyle::Circle =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>knob_circle = Circle::new(
+                    settings.get_point(value, knob_size, ctx.size()),
+                    (knob_size - <span class="number">2.</span>) / <span class="number">2.</span>,
                 );
-                <span class="ident">ctx</span>.<span class="ident">fill</span>(<span class="ident">knob_circle</span>, <span class="kw-2">&amp;</span><span class="ident">knob_color</span>);
+                ctx.fill(knob_circle, <span class="kw-2">&amp;</span>knob_color);
 
-                <span class="ident">knob_circle</span>.<span class="ident">radius</span> <span class="op">-</span><span class="op">=</span> <span class="number">0.5</span>;
+                knob_circle.radius -= <span class="number">0.5</span>;
 
-                <span class="ident">ctx</span>.<span class="ident">stroke</span>(<span class="ident">knob_circle</span>, <span class="kw-2">&amp;</span><span class="ident">border_color</span>, <span class="number">1.</span>);
+                ctx.stroke(knob_circle, <span class="kw-2">&amp;</span>border_color, <span class="number">1.</span>);
 
-                <span class="ident">knob_circle</span>.<span class="ident">radius</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner_circle_current_radius</span>;
+                knob_circle.radius = <span class="self">self</span>.inner_circle_current_radius;
 
-                <span class="ident">ctx</span>.<span class="ident">fill</span>(<span class="ident">knob_circle</span>, <span class="kw-2">&amp;</span><span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::main::PRIMARY</span>));
+                ctx.fill(knob_circle, <span class="kw-2">&amp;</span>env.get(<span class="kw">crate</span>::theme::color::main::PRIMARY));
             }
-            <span class="ident">KnobStyle::Wedge</span> =&gt; {
-                <span class="kw">let</span> <span class="ident">center</span> <span class="op">=</span> <span class="ident">settings</span>.<span class="ident">get_point</span>(<span class="ident">value</span>, <span class="ident">knob_size</span>, <span class="ident">ctx</span>.<span class="ident">size</span>());
+            KnobStyle::Wedge =&gt; {
+                <span class="kw">let </span>center = settings.get_point(value, knob_size, ctx.size());
 
-                <span class="kw">let</span> <span class="ident">knob_wedge</span> <span class="op">=</span> <span class="ident">knob_wedge</span>(<span class="ident">center</span>, <span class="ident">knob_size</span>, <span class="ident">settings</span>.<span class="ident">axis</span>);
+                <span class="kw">let </span>knob_wedge = knob_wedge(center, knob_size, settings.axis);
 
-                <span class="ident">ctx</span>.<span class="ident">stroke</span>(<span class="kw-2">&amp;</span><span class="ident">knob_wedge</span>[..], <span class="kw-2">&amp;</span><span class="ident">border_color</span>, <span class="ident">KNOB_STROKE_WIDTH</span>);
+                ctx.stroke(<span class="kw-2">&amp;</span>knob_wedge[..], <span class="kw-2">&amp;</span>border_color, KNOB_STROKE_WIDTH);
 
-                <span class="comment">//Actually paint the knob</span>
-                <span class="ident">ctx</span>.<span class="ident">fill</span>(<span class="kw-2">&amp;</span><span class="ident">knob_wedge</span>[..], <span class="kw-2">&amp;</span><span class="ident">knob_color</span>);
+                <span class="comment">//Actually paint the knob
+                </span>ctx.fill(<span class="kw-2">&amp;</span>knob_wedge[..], <span class="kw-2">&amp;</span>knob_color);
             }
         }
     }
 }
 
-<span class="kw">fn</span> <span class="ident">knob_wedge</span>(<span class="ident">center</span>: <span class="ident">Point</span>, <span class="ident">knob_size</span>: <span class="ident">f64</span>, <span class="ident">axis</span>: <span class="ident">Axis</span>) -&gt; [<span class="ident">PathEl</span>; <span class="number">6</span>] {
-    <span class="kw">let</span> (<span class="ident">top</span>, <span class="ident">right</span>, <span class="ident">left</span>, <span class="ident">middle</span>, <span class="ident">down</span>) <span class="op">=</span> <span class="kw">match</span> <span class="ident">axis</span> {
-        <span class="ident">Axis::Horizontal</span> =&gt; (
-            <span class="ident">Vec2::new</span>(<span class="number">0.0</span>, <span class="ident">center</span>.<span class="ident">y</span> <span class="op">-</span> <span class="ident">knob_size</span> <span class="op">/</span> <span class="number">2.0</span>),
-            <span class="ident">Vec2::new</span>(<span class="ident">center</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">knob_size</span> <span class="op">/</span> <span class="number">3.5</span>, <span class="number">0.0</span>),
-            <span class="ident">Vec2::new</span>(<span class="ident">center</span>.<span class="ident">x</span> <span class="op">-</span> <span class="ident">knob_size</span> <span class="op">/</span> <span class="number">3.5</span>, <span class="number">0.0</span>),
-            <span class="ident">Vec2::new</span>(<span class="number">0.0</span>, <span class="ident">center</span>.<span class="ident">y</span> <span class="op">+</span> <span class="ident">knob_size</span> <span class="op">/</span> <span class="number">5.0</span>),
-            <span class="ident">Vec2::new</span>(<span class="ident">center</span>.<span class="ident">x</span>, <span class="ident">center</span>.<span class="ident">y</span> <span class="op">+</span> <span class="ident">knob_size</span> <span class="op">/</span> <span class="number">2.0</span>),
+<span class="kw">fn </span>knob_wedge(center: Point, knob_size: f64, axis: Axis) -&gt; [PathEl; <span class="number">6</span>] {
+    <span class="kw">let </span>(top, right, left, middle, down) = <span class="kw">match </span>axis {
+        Axis::Horizontal =&gt; (
+            Vec2::new(<span class="number">0.0</span>, center.y - knob_size / <span class="number">2.0</span>),
+            Vec2::new(center.x + knob_size / <span class="number">3.5</span>, <span class="number">0.0</span>),
+            Vec2::new(center.x - knob_size / <span class="number">3.5</span>, <span class="number">0.0</span>),
+            Vec2::new(<span class="number">0.0</span>, center.y + knob_size / <span class="number">5.0</span>),
+            Vec2::new(center.x, center.y + knob_size / <span class="number">2.0</span>),
         ),
-        <span class="ident">Axis::Vertical</span> =&gt; (
-            <span class="ident">Vec2::new</span>(<span class="ident">center</span>.<span class="ident">x</span> <span class="op">+</span> <span class="ident">knob_size</span> <span class="op">/</span> <span class="number">2.0</span>, <span class="number">0.0</span>),
-            <span class="ident">Vec2::new</span>(<span class="number">0.0</span>, <span class="ident">center</span>.<span class="ident">y</span> <span class="op">+</span> <span class="ident">knob_size</span> <span class="op">/</span> <span class="number">3.5</span>),
-            <span class="ident">Vec2::new</span>(<span class="number">0.0</span>, <span class="ident">center</span>.<span class="ident">y</span> <span class="op">-</span> <span class="ident">knob_size</span> <span class="op">/</span> <span class="number">3.5</span>),
-            <span class="ident">Vec2::new</span>(<span class="ident">center</span>.<span class="ident">x</span> <span class="op">-</span> <span class="ident">knob_size</span> <span class="op">/</span> <span class="number">5.0</span>, <span class="number">0.0</span>),
-            <span class="ident">Vec2::new</span>(<span class="ident">center</span>.<span class="ident">x</span> <span class="op">-</span> <span class="ident">knob_size</span> <span class="op">/</span> <span class="number">2.0</span>, <span class="ident">center</span>.<span class="ident">y</span>),
+        Axis::Vertical =&gt; (
+            Vec2::new(center.x + knob_size / <span class="number">2.0</span>, <span class="number">0.0</span>),
+            Vec2::new(<span class="number">0.0</span>, center.y + knob_size / <span class="number">3.5</span>),
+            Vec2::new(<span class="number">0.0</span>, center.y - knob_size / <span class="number">3.5</span>),
+            Vec2::new(center.x - knob_size / <span class="number">5.0</span>, <span class="number">0.0</span>),
+            Vec2::new(center.x - knob_size / <span class="number">2.0</span>, center.y),
         ),
     };
 
     [
-        <span class="ident">PathEl::MoveTo</span>(<span class="ident">down</span>.<span class="ident">to_point</span>()),
-        <span class="ident">PathEl::LineTo</span>((<span class="ident">right</span> <span class="op">+</span> <span class="ident">middle</span>).<span class="ident">to_point</span>()),
-        <span class="ident">PathEl::LineTo</span>((<span class="ident">right</span> <span class="op">+</span> <span class="ident">top</span>).<span class="ident">to_point</span>()),
-        <span class="ident">PathEl::LineTo</span>((<span class="ident">left</span> <span class="op">+</span> <span class="ident">top</span>).<span class="ident">to_point</span>()),
-        <span class="ident">PathEl::LineTo</span>((<span class="ident">left</span> <span class="op">+</span> <span class="ident">middle</span>).<span class="ident">to_point</span>()),
-        <span class="ident">PathEl::ClosePath</span>,
+        PathEl::MoveTo(down.to_point()),
+        PathEl::LineTo((right + middle).to_point()),
+        PathEl::LineTo((right + top).to_point()),
+        PathEl::LineTo((left + top).to_point()),
+        PathEl::LineTo((left + middle).to_point()),
+        PathEl::ClosePath,
     ]
 }
 
-<span class="kw">fn</span> <span class="ident">paint_slider_background</span>(
-    <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">PaintCtx</span>,
-    <span class="ident">lower</span>: <span class="ident">f64</span>,
-    <span class="ident">higher</span>: <span class="ident">f64</span>,
-    <span class="ident">mapping</span>: <span class="ident">SliderValueMapping</span>,
-    <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>,
+<span class="kw">fn </span>paint_slider_background(
+    ctx: <span class="kw-2">&amp;mut </span>PaintCtx,
+    lower: f64,
+    higher: f64,
+    mapping: SliderValueMapping,
+    env: <span class="kw-2">&amp;</span>Env,
 ) {
-    <span class="ident">ctx</span>.<span class="ident">with_save</span>(<span class="op">|</span><span class="ident">ctx</span><span class="op">|</span> {
-        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">ctx</span>.<span class="ident">size</span>();
-        <span class="kw">let</span> <span class="ident">knob_size</span> <span class="op">=</span> <span class="number">22.</span>;
+    ctx.with_save(|ctx| {
+        <span class="kw">let </span>size = ctx.size();
+        <span class="kw">let </span>knob_size = <span class="number">22.</span>;
 
-        <span class="comment">//Paint the background</span>
-        <span class="kw">let</span> <span class="ident">background_rect</span> <span class="op">=</span> <span class="ident">Rect::from_points</span>(
-            <span class="ident">mapping</span>.<span class="ident">get_point</span>(<span class="ident">mapping</span>.<span class="ident">min</span>, <span class="ident">knob_size</span>, <span class="ident">size</span>),
-            <span class="ident">mapping</span>.<span class="ident">get_point</span>(<span class="ident">mapping</span>.<span class="ident">max</span>, <span class="ident">knob_size</span>, <span class="ident">size</span>),
+        <span class="comment">//Paint the background
+        </span><span class="kw">let </span>background_rect = Rect::from_points(
+            mapping.get_point(mapping.min, knob_size, size),
+            mapping.get_point(mapping.max, knob_size, size),
         )
-        .<span class="ident">inset</span>(<span class="ident">TRACK_THICKNESS</span> <span class="op">/</span> <span class="number">2.</span>)
-        .<span class="ident">to_rounded_rect</span>(<span class="number">2.</span>);
+        .inset(TRACK_THICKNESS / <span class="number">2.</span>)
+        .to_rounded_rect(<span class="number">2.</span>);
 
-        <span class="ident">ctx</span>.<span class="ident">clip</span>(<span class="kw-2">&amp;</span><span class="ident">background_rect</span>);
+        ctx.clip(<span class="kw-2">&amp;</span>background_rect);
 
-        <span class="kw">let</span> <span class="ident">background_gradient</span> <span class="op">=</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::base::MEDIUM_LOW</span>);
+        <span class="kw">let </span>background_gradient = env.get(<span class="kw">crate</span>::theme::color::base::MEDIUM_LOW);
 
-        <span class="comment">// ctx.stroke(background_rect, &amp;env.get(theme::BORDER_DARK), BORDER_WIDTH);</span>
+        <span class="comment">// ctx.stroke(background_rect, &amp;env.get(theme::BORDER_DARK), BORDER_WIDTH);
 
-        <span class="ident">ctx</span>.<span class="ident">fill</span>(<span class="ident">background_rect</span>, <span class="kw-2">&amp;</span><span class="ident">background_gradient</span>);
+        </span>ctx.fill(background_rect, <span class="kw-2">&amp;</span>background_gradient);
 
-        <span class="kw">let</span> <span class="ident">color</span> <span class="op">=</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident"><span class="kw">crate</span>::theme::color::main::PRIMARY</span>);
+        <span class="kw">let </span>color = env.get(<span class="kw">crate</span>::theme::color::main::PRIMARY);
 
-        <span class="kw">let</span> <span class="ident">shape</span> <span class="op">=</span> <span class="ident">Rect::from_points</span>(
-            <span class="ident">mapping</span>.<span class="ident">get_point</span>(<span class="ident">lower</span>, <span class="ident">knob_size</span>, <span class="ident">size</span>),
-            <span class="ident">mapping</span>.<span class="ident">get_point</span>(<span class="ident">higher</span>, <span class="ident">knob_size</span>, <span class="ident">size</span>),
+        <span class="kw">let </span>shape = Rect::from_points(
+            mapping.get_point(lower, knob_size, size),
+            mapping.get_point(higher, knob_size, size),
         )
-        .<span class="ident">inset</span>(<span class="ident">TRACK_THICKNESS</span> <span class="op">/</span> <span class="number">2.</span>)
-        .<span class="ident">to_rounded_rect</span>(<span class="number">2.</span>);
+        .inset(TRACK_THICKNESS / <span class="number">2.</span>)
+        .to_rounded_rect(<span class="number">2.</span>);
 
-        <span class="ident">ctx</span>.<span class="ident">fill</span>(<span class="ident">shape</span>, <span class="kw-2">&amp;</span><span class="ident">color</span>);
+        ctx.fill(shape, <span class="kw-2">&amp;</span>color);
     })
 }
 
-<span class="kw">fn</span> <span class="ident">slider_layout</span>(
-    <span class="ident">ctx</span>: <span class="kw-2">&amp;mut</span> <span class="ident">LayoutCtx</span>,
-    <span class="ident">bc</span>: <span class="kw-2">&amp;</span><span class="ident">BoxConstraints</span>,
-    <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">Env</span>,
-    <span class="ident">mapping</span>: <span class="ident">SliderValueMapping</span>,
-) -&gt; <span class="ident">Size</span> {
-    <span class="kw">let</span> <span class="ident">height</span> <span class="op">=</span> <span class="number">22.</span>;
-    <span class="kw">let</span> <span class="ident">width</span> <span class="op">=</span> <span class="ident">env</span>.<span class="ident">get</span>(<span class="ident">theme::WIDE_WIDGET_WIDTH</span>);
-    <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">bc</span>.<span class="ident">constrain</span>(<span class="ident">mapping</span>.<span class="ident">axis</span>.<span class="ident">pack</span>(<span class="ident">width</span>, <span class="ident">height</span>));
+<span class="kw">fn </span>slider_layout(
+    ctx: <span class="kw-2">&amp;mut </span>LayoutCtx,
+    bc: <span class="kw-2">&amp;</span>BoxConstraints,
+    env: <span class="kw-2">&amp;</span>Env,
+    mapping: SliderValueMapping,
+) -&gt; Size {
+    <span class="kw">let </span>height = <span class="number">22.</span>;
+    <span class="kw">let </span>width = env.get(theme::WIDE_WIDGET_WIDTH);
+    <span class="kw">let </span>size = bc.constrain(mapping.axis.pack(width, height));
 
-    <span class="kw">if</span> <span class="ident">mapping</span>.<span class="ident">axis</span> <span class="op">==</span> <span class="ident">Axis::Horizontal</span> {
-        <span class="kw">let</span> <span class="ident">baseline_offset</span> <span class="op">=</span> (<span class="ident">height</span> <span class="op">/</span> <span class="number">2.0</span>) <span class="op">-</span> <span class="ident">TRACK_THICKNESS</span>;
+    <span class="kw">if </span>mapping.axis == Axis::Horizontal {
+        <span class="kw">let </span>baseline_offset = (height / <span class="number">2.0</span>) - TRACK_THICKNESS;
 
-        <span class="ident">ctx</span>.<span class="ident">set_baseline_offset</span>(<span class="ident">baseline_offset</span>);
+        ctx.set_baseline_offset(baseline_offset);
         <span class="macro">trace!</span>(
             <span class="string">&quot;Computed layout: size={}, baseline_offset={:?}&quot;</span>,
-            <span class="ident">size</span>,
-            <span class="ident">baseline_offset</span>
+            size,
+            baseline_offset
         );
-    } <span class="kw">else</span> {
-        <span class="macro">trace!</span>(<span class="string">&quot;Computed layout: size={}&quot;</span>, <span class="ident">size</span>,);
+    } <span class="kw">else </span>{
+        <span class="macro">trace!</span>(<span class="string">&quot;Computed layout: size={}&quot;</span>, size,);
     }
 
-    <span class="ident">size</span>
+    size
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0 (a55dd71d5 2022-09-19)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>
