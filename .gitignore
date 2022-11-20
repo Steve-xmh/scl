@@ -1,4 +1,5 @@
-node_modules
-dist
-site
-scl-src
+node_modules/
+dist/
+site/
+target/
+scl-src/
