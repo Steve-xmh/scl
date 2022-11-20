@@ -99,22 +99,43 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
                 .await
                 .map_err(|e| anyhow::anyhow!(e))?;
 
-        let recommended_version = if let Some(a) = version_promo
+        info.sort_by(|a, b| {
+            let a: u64 = {
+                let mut r = 0;
+                for (i, x) in a
+                    .version
+                    .split('.')
+                    .map(|x| str::parse::<u16>(x).unwrap_or_default())
+                    .enumerate()
+                {
+                    r |= (x as u64) << (64 - (i + 1) * 16);
+                }
+                r
+            };
+            let b: u64 = {
+                let mut r = 0;
+                for (i, x) in b
+                    .version
+                    .split('.')
+                    .map(|x| str::parse::<u16>(x).unwrap_or_default())
+                    .enumerate()
+                {
+                    r |= (x as u64) << (64 - (i + 1) * 16);
+                }
+                r
+            };
+            a.cmp(&b)
+        });
+
+        let recommended_version = version_promo
             .iter()
             .find(|a| a.name == format!("{}-recommended", vanilla_version))
-        {
-            a.build.to_owned()
-        } else {
-            None
-        };
-        let latest_version = if let Some(a) = version_promo
+            .and_then(|a| a.build.to_owned());
+        let latest_version = version_promo
             .iter()
             .find(|a| a.name == format!("{}-latest", vanilla_version))
-        {
-            a.build.to_owned()
-        } else {
-            None
-        };
+            .and_then(|a| a.build.to_owned());
+
         info.reverse(); // 调转顺序，从最新的开始
         Ok(ForgeVersionsData {
             recommended: recommended_version,
