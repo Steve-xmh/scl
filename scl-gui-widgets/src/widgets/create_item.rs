@@ -39,7 +39,7 @@ impl<T: Data> Widget<T> for CreateItem<T> {
         let is_active = ctx.is_active();
         if is_hot {
             ctx.fill(
-                &size.to_rect(),
+                size.to_rect(),
                 &PaintBrush::Color(if is_active {
                     env.get(crate::theme::color::base::LOW)
                 } else {

@@ -449,7 +449,7 @@ impl WebView {
             .to_string_lossy()
             .to_string();
         let user_data_path = std::path::Path::new(&user_data_path);
-        std::fs::remove_dir_all(&user_data_path).unwrap_or_default();
+        std::fs::remove_dir_all(user_data_path).unwrap_or_default();
         let final_url = Rc::new(RefCell::new(String::new()));
 
         if webview2::get_available_browser_version_string(None).is_ok() {

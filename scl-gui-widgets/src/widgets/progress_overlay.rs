@@ -99,9 +99,9 @@ impl<T> ProgressOverlay<T> {
             let height = ctx.size().height;
             let mut current_height = height - self.progress_height_spring.position();
             let rect = Rect::new(0., current_height, width, height);
-            ctx.fill(&rect, &bg);
+            ctx.fill(rect, &bg);
             let rect = Rect::new(0., current_height, width, current_height + 1.);
-            ctx.fill(&rect, &base_low);
+            ctx.fill(rect, &base_low);
 
             for (i, (_, item)) in self.progress_map.iter_mut().enumerate() {
                 if item.progress.round() == item.max_progress.round()
@@ -179,18 +179,18 @@ impl<T> ProgressOverlay<T> {
                     let progress_bar_rect =
                         Rect::from_origin_size((10., current_height + 35.), (width - 20., 4.));
                     ctx.fill(
-                        &progress_bar_rect.to_rounded_rect(progress_bar_rect.height() / 2.),
+                        progress_bar_rect.to_rounded_rect(progress_bar_rect.height() / 2.),
                         &base_low,
                     );
                     let progress_bar_current_rect = Rect::from_origin_size(
                         progress_bar_rect.origin(),
                         (
-                            progress_bar_rect.width() * item.current_progress.max(0.).min(1.),
+                            progress_bar_rect.width() * item.current_progress.clamp(0., 1.),
                             progress_bar_rect.height(),
                         ),
                     );
                     ctx.fill(
-                        &progress_bar_current_rect.to_rounded_rect(progress_bar_rect.height() / 2.),
+                        progress_bar_current_rect.to_rounded_rect(progress_bar_rect.height() / 2.),
                         &accent_sec,
                     );
                 }
@@ -351,8 +351,7 @@ impl<T: Data> Widget<T> for ProgressOverlay<T> {
         let progress_area_height = self
             .progress_height_spring
             .position_rounded()
-            .min(50.)
-            .max(0.);
+            .clamp(0., 50.);
         let mut size = if progress_area_height == 0. {
             self.inner.layout(ctx, bc, data, env)
         } else {

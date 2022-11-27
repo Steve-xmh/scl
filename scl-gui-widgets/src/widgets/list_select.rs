@@ -93,8 +93,8 @@ impl<T: Data> ListSelectController<T> {
         if let Some(mut index) = self.variants.iter().position(|variant| variant.same(data)) {
             if next_else_previous {
                 index += 1
-            } else if index > 0 {
-                index -= 1
+            } else {
+                index = index.saturating_sub(1);
             }
             if let Some(new_data) = self.variants.get(index) {
                 *data = (*new_data).clone();

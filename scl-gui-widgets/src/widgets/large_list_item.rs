@@ -141,7 +141,7 @@ impl<D: Data> Widget<D> for LargeListItem<D> {
 
         if is_hot {
             ctx.fill(
-                &size.to_rect(),
+                size.to_rect(),
                 &PaintBrush::Color(if is_active {
                     env.get(base::LOW)
                 } else {

@@ -477,9 +477,9 @@ impl Client {
 
         // 游戏主类
         args.push(meta.main_class.to_owned());
-        
+
         fn dedup_argument(args: &mut Vec<String>, arg: &String) {
-            let exist_arg = args.iter().enumerate().find(|x| &x.1 == &arg).map(|x| x.0);
+            let exist_arg = args.iter().enumerate().find(|x| x.1 == arg).map(|x| x.0);
             if let Some(exist_arg) = exist_arg {
                 args.remove(exist_arg);
                 if arg.starts_with('-') {

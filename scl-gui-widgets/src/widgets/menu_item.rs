@@ -145,7 +145,7 @@ impl Widget<bool> for MenuItem<bool> {
 
         if ctx.is_hot() && !is_disabled {
             ctx.fill(
-                &r,
+                r,
                 &PaintBrush::Color(if is_active {
                     env.get(crate::theme::color::base::LOW)
                 } else {
@@ -164,7 +164,7 @@ impl Widget<bool> for MenuItem<bool> {
             );
             // ctx.is_disabled() 21.69%
             ctx.stroke(
-                &rr,
+                rr,
                 &PaintBrush::Color(env.get(crate::theme::color::main::SECONDARY)),
                 1.,
             );
@@ -174,7 +174,7 @@ impl Widget<bool> for MenuItem<bool> {
                 3.,
             );
             ctx.fill(
-                &rr,
+                rr,
                 &PaintBrush::Color(env.get(crate::theme::color::main::PRIMARY)),
             );
             let mut check_path = BezPath::new();
@@ -203,23 +203,11 @@ impl Widget<bool> for MenuItem<bool> {
                 3.,
             );
             if env.get(crate::theme::color::main::IS_DARK) {
-                ctx.stroke(
-                    &srr,
-                    &PaintBrush::Color(Color::WHITE.with_alpha(0.5442)),
-                    1.,
-                );
-                ctx.stroke(&frr, &PaintBrush::Color(Color::BLACK.with_alpha(0.1)), 1.);
+                ctx.stroke(srr, &PaintBrush::Color(Color::WHITE.with_alpha(0.5442)), 1.);
+                ctx.stroke(frr, &PaintBrush::Color(Color::BLACK.with_alpha(0.1)), 1.);
             } else {
-                ctx.stroke(
-                    &srr,
-                    &PaintBrush::Color(Color::BLACK.with_alpha(0.4458)),
-                    1.,
-                );
-                ctx.stroke(
-                    &frr,
-                    &PaintBrush::Color(Color::BLACK.with_alpha(0.4458)),
-                    1.,
-                );
+                ctx.stroke(srr, &PaintBrush::Color(Color::BLACK.with_alpha(0.4458)), 1.);
+                ctx.stroke(frr, &PaintBrush::Color(Color::BLACK.with_alpha(0.4458)), 1.);
             }
         }
     }
@@ -297,7 +285,7 @@ impl Widget<String> for MenuItem<String> {
 
         if ctx.is_hot() {
             ctx.fill(
-                &r,
+                r,
                 &PaintBrush::Color(if is_active {
                     env.get(crate::theme::color::base::LOW)
                 } else {

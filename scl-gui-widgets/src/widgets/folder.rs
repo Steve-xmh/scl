@@ -113,7 +113,7 @@ impl<T: Data> Widget<T> for FolderList<T> {
 
         if is_hot {
             ctx.fill(
-                &text_size.to_rect(),
+                text_size.to_rect(),
                 &PaintBrush::Color(if is_active {
                     env.get(base::LOW)
                 } else {

@@ -206,7 +206,7 @@ impl<T: Data> Widget<T> for ListItem<T> {
 
         if is_hot && !self.disabled {
             ctx.fill(
-                &size.to_rect(),
+                size.to_rect(),
                 &PaintBrush::Color(if is_active {
                     env.get(theme::base::LOW)
                 } else {

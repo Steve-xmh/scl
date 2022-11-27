@@ -71,8 +71,7 @@ impl Widget<bool> for ToggleSwitch {
                     }
                     self.current_thumb_position = self
                         .current_thumb_position
-                        .max(0.)
-                        .min(20. - self.current_thumb_extension);
+                        .clamp(0., 20. - self.current_thumb_extension);
                 }
             }
             Event::AnimFrame(_) => {
@@ -157,7 +156,7 @@ impl Widget<bool> for ToggleSwitch {
         let outline = outline.to_rounded_rect(outline.height() / 2.);
 
         ctx.fill(
-            &outline,
+            outline,
             &if disabled {
                 if *data {
                     PaintBrush::Color(env.get(crate::theme::color::base::LOW))
@@ -171,7 +170,7 @@ impl Widget<bool> for ToggleSwitch {
             },
         );
         ctx.stroke(
-            &outline,
+            outline,
             &if disabled {
                 PaintBrush::Color(env.get(crate::theme::color::base::LOW))
             } else if *data {
@@ -193,7 +192,7 @@ impl Widget<bool> for ToggleSwitch {
         );
         let thumb_outline = thumb_outline.to_rounded_rect(thumb_outline.height() / 2.);
         ctx.fill(
-            &thumb_outline,
+            thumb_outline,
             &if disabled {
                 PaintBrush::Color(env.get(crate::theme::color::base::MEDIUM_LOW))
             } else if *data {
@@ -204,7 +203,7 @@ impl Widget<bool> for ToggleSwitch {
         );
         if !disabled {
             ctx.stroke(
-                &thumb_outline,
+                thumb_outline,
                 &PaintBrush::Color(env.get(crate::theme::color::base::LOW)),
                 1.,
             );
