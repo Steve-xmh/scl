@@ -477,12 +477,25 @@ impl Client {
 
         // 游戏主类
         args.push(meta.main_class.to_owned());
+        
+        fn dedup_argument(args: &mut Vec<String>, arg: &String) {
+            let exist_arg = args.iter().enumerate().find(|x| &x.1 == &arg).map(|x| x.0);
+            if let Some(exist_arg) = exist_arg {
+                args.remove(exist_arg);
+                if arg.starts_with('-') {
+                    // 将附带参数一并删除
+                    args.remove(exist_arg);
+                }
+            }
+        }
 
         // 游戏参数 旧版本 使用 minecraftArgument
         let splited = meta.minecraft_arguments.trim().split(' ');
         for arg in splited {
             if !arg.is_empty() {
-                args.push(replace_each(&variables, arg.to_owned()));
+                let arg = replace_each(&variables, arg.to_owned());
+                dedup_argument(&mut args, &arg);
+                args.push(arg);
             }
         }
 
@@ -491,7 +504,9 @@ impl Client {
             for arg in &arguments.game {
                 match arg {
                     Argument::Common(arg) => {
-                        args.push(replace_each(&variables, arg.to_owned()));
+                        let arg = replace_each(&variables, arg.to_owned());
+                        dedup_argument(&mut args, &arg);
+                        args.push(arg);
                     }
                     Argument::Specify(_) => {
                         // TODO: 是否为试玩版，自定义窗口大小等自定义参数
