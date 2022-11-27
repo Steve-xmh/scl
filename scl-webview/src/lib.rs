@@ -233,11 +233,11 @@ impl WebView {
                 NSViewWidthSizable, NSWindow, NSWindowStyleMask,
             },
             base::*,
-            foundation::{NSAutoreleasePool, NSString, NSURL},
+            foundation::NSString,
         };
         use core_graphics::geometry::{CGPoint, CGRect, CGSize};
         use darwin_webkit::{
-            foundation::NSURLRequest,
+            foundation::{NSURLRequest, NSURL},
             webkit::{WKUserContentController, WKWebViewConfiguration},
         };
         use objc::{
@@ -265,12 +265,12 @@ impl WebView {
 
                 // === WebViewWindowControllerClass ===
 
-                struct WebViewWindowControllerClass(*const objc::runtime::Class);
-                unsafe impl Sync for WebViewWindowControllerClass {}
-                unsafe impl Send for WebViewWindowControllerClass {}
+                struct WebViewWindowDelegate(*const objc::runtime::Class);
+                unsafe impl Sync for WebViewWindowDelegate {}
+                unsafe impl Send for WebViewWindowDelegate {}
 
-                static WEBVIEW_WINDOW_CONTROLLER: Lazy<WebViewWindowControllerClass> = Lazy::new(|| unsafe {
-                    let mut decl = ClassDecl::new("SCLWebViewWindowController", class!(NSWindowController)).unwrap();
+                static WEB_VIEW_WINDOW_DELEGATE: Lazy<WebViewWindowDelegate> = Lazy::new(|| unsafe {
+                    let mut decl = ClassDecl::new("SCLWebViewWindowDelegate", class!(NSObject)).unwrap();
 
                     decl.add_ivar::<id>("webview");
                     decl.add_ivar::<usize>("urlSender");
@@ -279,11 +279,11 @@ impl WebView {
                         unsafe {
                             println!("WindowWillClose");
                             let url_sender = *this.get_ivar::<usize>("urlSender");
+                            let webview = dbg!(*this.get_ivar::<id>("webview"));
                             if url_sender != 0 {
                                 let sx = &mut *(url_sender as *mut Sender<String>);
                                 let _ = dbg!(sx.send("".into()));
 
-                                let webview = *this.get_ivar::<id>("webview");
                                 if !webview.is_null() {
                                     (*webview).set_ivar("urlSender", 0usize);
                                 }
@@ -292,8 +292,9 @@ impl WebView {
                                 drop(Box::from_raw(sx));
                                 println!("Empty URL Sent");
                             }
-                            let webview = *this.get_ivar::<id>("webview");
                             if !webview.is_null() {
+                                this.set_ivar::<id>("webview", std::ptr::null_mut());
+                                println!("Release webview");
                                 let _: id = msg_send![webview, release];
                             }
                             let _: id = msg_send![this, release];
@@ -302,7 +303,7 @@ impl WebView {
 
                     decl.add_method(sel!(windowWillClose:), window_will_close as extern "C" fn(&mut Object, Sel, id),);
 
-                    WebViewWindowControllerClass(decl.register())
+                    WebViewWindowDelegate(decl.register())
                 });
 
                 // === SCLWebViewClass ===
@@ -324,8 +325,7 @@ impl WebView {
                                 // 出错了
                                 println!("WARNING: URL is null!");
                                 let win: id = msg_send![this, window];
-                                let win_ctl: id = msg_send![win, windowController];
-                                let url_sender = dbg!(*(*win_ctl).get_ivar::<usize>("urlSender"));
+                                let url_sender = *(*this).get_ivar::<usize>("urlSender");
                                 if url_sender != 0 {
                                     let sx = &mut *(url_sender as *mut Sender<String>);
                                     let _ = dbg!(sx.send("".into()));
@@ -333,8 +333,11 @@ impl WebView {
                                     drop(Box::from_raw(sx));
                                     println!("Empty URL Sent");
                                 }
-                                (*win_ctl).set_ivar("urlSender", 0usize);
-                                let _: id = msg_send![this, release];
+                                let delegate = win.delegate();
+                                if !delegate.is_null() {
+                                    (*delegate).set_ivar("webview", nil);
+                                    (*delegate).set_ivar("urlSender", 0usize);
+                                }
                                 win.close();
                                 return;
                             }
@@ -355,9 +358,12 @@ impl WebView {
                                     println!("URL Sent");
                                 }
                                 let win: id = msg_send![this, window];
-                                let win_ctl: id = msg_send![win, windowController];
-                                (*win_ctl).set_ivar("urlSender", 0usize);
                                 let _: id = msg_send![this, release];
+                                let delegate = win.delegate();
+                                if !delegate.is_null() {
+                                    (*delegate).set_ivar("webview", nil);
+                                    (*delegate).set_ivar("urlSender", 0usize);
+                                }
                                 win.close();
                             }
                         }
@@ -371,36 +377,30 @@ impl WebView {
                 // === Setup ==
 
                 // 创建窗口
-                let win_ctl_cls: id = msg_send![WEBVIEW_WINDOW_CONTROLLER.0, alloc];
-                (*win_ctl_cls).set_ivar("urlSender", sx);
-                let win_cls: id = msg_send![class!(NSWindow), alloc];
+                let win: id = msg_send![class!(NSWindow), alloc];
                 let mask = NSWindowStyleMask::NSTitledWindowMask | NSWindowStyleMask::NSClosableWindowMask | NSWindowStyleMask::NSFullSizeContentViewWindowMask;
-                let win: id = msg_send![win_cls, initWithContentRect: rect styleMask: mask  backing: NSBackingStoreBuffered defer: NO];
+                let _: id = msg_send![win, initWithContentRect: rect styleMask: mask  backing: NSBackingStoreBuffered defer: NO];
                 // 设置窗口标题
                 let title_string = NSString::alloc(nil)
                     .init_str(&title);
                 win.setTitle_(title_string);
-                let win_ctl: id = msg_send![win_ctl_cls, initWithWindow: win];
-                // 挂载关闭事件，否则不能退出模态状态
-                let ns_nc: id = msg_send![class!(NSNotificationCenter), defaultCenter];
-                let notif_string = NSString::alloc(nil)
-                    .init_str("NSWindowWillCloseNotification")
-                    .autorelease();
-                let _: id = msg_send![ns_nc, addObserver:win_ctl selector:sel!(windowWillClose:) name:notif_string object:nil];
+                // 准备窗口代理，接收窗口关闭的信息
+                let delegate: id = msg_send![WEB_VIEW_WINDOW_DELEGATE.0, alloc];
+                (*delegate).set_ivar("urlSender", sx);
+                win.setDelegate_(delegate);
                 // 准备 WKWebView 视图
                 let configuration = WKWebViewConfiguration::init(WKWebViewConfiguration::alloc(nil));
                 // 我们不保留任何数据，以避免自动登录的问题
                 let non_persistent_data_store: id = msg_send![class!(WKWebsiteDataStore), nonPersistentDataStore];
                 let _: id = msg_send![configuration, setWebsiteDataStore: non_persistent_data_store];
-                // (*configuration).set_ivar("websiteDataStore", non_persistent_data_store);
                 let content_controller = WKUserContentController::init(WKUserContentController::alloc(nil));
                 configuration.setUserContentController(content_controller);
-                // let frame = cocoa::appkit::NSWindow::frame(win);
                 let webview: id = msg_send![SCL_WEBVIEW.0, alloc];
                 let webview: id = msg_send![webview, initWithFrame:rect configuration:configuration];
                 // 把回调函数导入到 WebView 内
                 (*webview).set_ivar("urlChangeCallback", callback as *const libc::c_void);
                 (*webview).set_ivar("urlSender", sx);
+                (*delegate).set_ivar("webview", webview);
                 // 让视图和窗口一起缩放
                 NSView::setAutoresizingMask_(webview, NSViewWidthSizable | NSViewHeightSizable);
                 // 创建请求并让 WebView 去请求跳转
@@ -410,11 +410,9 @@ impl WebView {
                 let _: id = msg_send![webview, loadRequest: req];
                 // 挂载链接变化事件
                 let keypath_string = NSString::alloc(nil)
-                    .init_str("URL")
-                    .autorelease();
+                    .init_str("URL");
                 let change_string = NSString::alloc(nil)
-                    .init_str("NSKeyValueChangeNewKey")
-                    .autorelease();
+                    .init_str("NSKeyValueChangeNewKey");
                 let _: id = msg_send![webview, addObserver: webview forKeyPath: keypath_string options: change_string context: nil];
                 // 设置窗口的视图为 WKWebView
                 win.setContentView_(webview);
