@@ -101,6 +101,9 @@ impl<T: Data> WindowWidget<T> {
                 ),
             );
         }
+        
+        #[cfg(target_os = "macos")]
+        let _ = self.title.to_owned(); // 为了过 clippy（逃）
 
         // Title Bar
         ctx.with_save(|ctx| {

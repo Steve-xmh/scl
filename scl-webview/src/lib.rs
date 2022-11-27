@@ -1,4 +1,4 @@
-#![doc = "../README.md"]
+#![doc = include_str!("../README.md")]
 #![forbid(missing_docs)]
 
 #[cfg(target_os = "windows")]
