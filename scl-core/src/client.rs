@@ -478,7 +478,7 @@ impl Client {
         // 游戏主类
         args.push(meta.main_class.to_owned());
 
-        fn dedup_argument(args: &mut Vec<String>, arg: &String) {
+        fn dedup_argument(args: &mut Vec<String>, arg: &String) -> bool {
             let exist_arg = args.iter().enumerate().find(|x| x.1 == arg).map(|x| x.0);
             if let Some(exist_arg) = exist_arg {
                 args.remove(exist_arg);
@@ -486,26 +486,39 @@ impl Client {
                     // 将附带参数一并删除
                     args.remove(exist_arg);
                 }
+                true
+            } else {
+                false
             }
         }
 
         // 游戏参数 旧版本 使用 minecraftArgument
         let splited = meta.minecraft_arguments.trim().split(' ');
+        let mut skip_next_dedup = false;
         for arg in splited {
             if !arg.is_empty() {
                 let arg = replace_each(&variables, arg.to_owned());
-                dedup_argument(&mut args, &arg);
+                if skip_next_dedup {
+                    skip_next_dedup = false
+                } else {
+                    skip_next_dedup = dedup_argument(&mut args, &arg);
+                }
                 args.push(arg);
             }
         }
 
         // 游戏参数
         if let Some(arguments) = &meta.arguments {
+            let mut skip_next_dedup = false;
             for arg in &arguments.game {
                 match arg {
                     Argument::Common(arg) => {
                         let arg = replace_each(&variables, arg.to_owned());
-                        dedup_argument(&mut args, &arg);
+                        if skip_next_dedup {
+                            skip_next_dedup = false
+                        } else {
+                            skip_next_dedup = dedup_argument(&mut args, &arg);
+                        }
                         args.push(arg);
                     }
                     Argument::Specify(_) => {
