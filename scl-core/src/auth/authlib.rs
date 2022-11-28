@@ -3,7 +3,6 @@
 use std::str::FromStr;
 
 use anyhow::Context;
-use surf::StatusCode;
 
 use crate::{
     auth::structs::{mojang::*, AuthMethod},
@@ -46,12 +45,11 @@ async fn get_head_skin(api_location: &str, uuid: &str) -> DynResult<(Vec<u8>, Ve
         "{}sessionserver/session/minecraft/profile/{}",
         api_location, uuid
     );
-    let result: ProfileResponse = crate::http::no_retry::get(&uri)
+    let result: ProfileResponse = crate::http::get(&uri)
+        .with_context(|| anyhow::anyhow!("发送获取皮肤请求到 {} 时发生错误", uri))?
+        .recv_json()
         .await
-        .map_err(|e| anyhow::anyhow!("发送获取皮肤请求到 {} 时发生错误：{:?}", uri, e))?
-        .body_json()
-        .await
-        .map_err(|e| anyhow::anyhow!("接收获取皮肤响应到 {} 时发生错误：{:?}", uri, e))?;
+        .with_context(|| anyhow::anyhow!("接收获取皮肤响应到 {} 时发生错误", uri))?;
     if let Some(prop) = result
         .properties
         .iter()
@@ -64,7 +62,7 @@ async fn get_head_skin(api_location: &str, uuid: &str) -> DynResult<(Vec<u8>, Ve
             if let Some(skin) = textures.skin {
                 let skin_url = skin.url;
                 crate::auth::parse_head_skin(
-                    crate::http::no_retry::get(skin_url)
+                    crate::http::get(skin_url)?
                         .recv_bytes()
                         .await
                         .map_err(|e| anyhow::anyhow!(e))?,
@@ -174,11 +172,13 @@ pub async fn start_auth(
 ) -> DynResult<Vec<AuthMethod>> {
     // 找到 API 地址，使用 ALI
     let api_location = {
-        let a = crate::http::get(authlib_host)
+        let a = crate::http::get(authlib_host)?
+            .await?
+            .recv()
             .await
-            .map_err(|_| anyhow::anyhow!("无法请求 Authlib API 服务器：{}", authlib_host))?;
+            .with_context(|| anyhow::anyhow!("无法请求 Authlib API 服务器：{}", authlib_host))?;
         if let Some(h) = a.header("X-Authlib-Injector-API-Location") {
-            h.last().to_string()
+            h.to_string()
         } else {
             authlib_host.to_owned()
         }
@@ -231,10 +231,11 @@ pub async fn start_auth(
         )
     };
 
-    let server_meta = crate::http::no_retry::get(&api_location)
+    let server_meta = crate::http::get(&api_location)?
+        .await?
         .recv_bytes()
         .await
-        .map_err(|e| anyhow::anyhow!("无法接收登录接口元数据：{:?}", e))?;
+        .context("无法接收登录接口元数据")?;
     let server_meta = base64::encode(server_meta);
 
     // 登录链接
@@ -329,13 +330,13 @@ pub async fn validate(
     client_token: &str,
 ) -> DynResult<bool> {
     let post_url = url::Url::parse(api_location)?.join("authserver/validate")?;
-    let resp = crate::http::post(post_url)
+    let resp = crate::http::post(post_url)?
         .body_json(&ValidateResponse {
             access_token: access_token.to_owned(),
             client_token: client_token.to_owned(),
-        })
-        .map_err(|_| anyhow::anyhow!("无法序列化请求"))?
-        .await
-        .map_err(|_| anyhow::anyhow!("无法请求 Authlib API 服务器：{}", api_location))?;
-    Ok(resp.status() == StatusCode::NoContent)
+        })?
+        .await?
+        .recv()
+        .await?;
+    Ok(resp.status_code() == 204)
 }

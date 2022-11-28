@@ -70,7 +70,7 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
         &self,
         vanilla_version: &str,
     ) -> DynResult<ForgeVersionsData> {
-        let (mut versions_data, mut version_promo) = futures::future::try_join(
+        let (versions_data, version_promo) = futures::future::try_join(
             crate::http::retry_get(match self.source {
                 DownloadSource::BMCLAPI => format!(
                     "https://bmclapi2.bangbang93.com/forge/minecraft/{}",
@@ -95,7 +95,7 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
             )
         })?;
         let (version_promo, mut info): (Vec<ForgePromoItem>, Vec<ForgeItemInfo>) =
-            futures::future::try_join(version_promo.body_json(), versions_data.body_json())
+            futures::future::try_join(version_promo.recv_json(), versions_data.recv_json())
                 .await
                 .map_err(|e| anyhow::anyhow!(e))?;
 

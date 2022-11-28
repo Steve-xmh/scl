@@ -1,4 +1,5 @@
 //! Fabric 下载源数据结构
+use anyhow::Context;
 use async_trait::async_trait;
 use serde::Deserialize;
 
@@ -60,7 +61,7 @@ pub trait FabricDownloadExt: Sync {
 #[async_trait]
 impl<R: Reporter> FabricDownloadExt for Downloader<R> {
     async fn get_avaliable_loaders(&self, vanilla_version: &str) -> DynResult<Vec<LoaderMetaItem>> {
-        let mut result = crate::http::retry_get(match self.source {
+        let result = crate::http::retry_get(match self.source {
             DownloadSource::Default => format!(
                 "https://meta.fabricmc.net/v2/versions/loader/{}",
                 vanilla_version
@@ -85,10 +86,13 @@ impl<R: Reporter> FabricDownloadExt for Downloader<R> {
                 vanilla_version,
                 e
             )
-        })?;
-        if result.status().is_success() {
-            let result = result.body_json().await.map_err(|e| anyhow::anyhow!(e))?;
-            Ok(result)
+        })?
+        .recv()
+        .await?;
+        if result.status_code() == 200 {
+            let result = result.data();
+
+            Ok(serde_json::from_slice(result)?)
         } else {
             Ok(vec![])
         }
@@ -154,16 +158,13 @@ impl<R: Reporter> FabricDownloadExt for Downloader<R> {
         version_id: &str,
         loader_version: &str,
     ) -> DynResult {
-        let mut loader_meta_res = crate::http::retry_get(format!(
+        let loader_meta_res = crate::http::retry_get(format!(
             "https://meta.fabricmc.net/v2/versions/loader/{}/{}/profile/json",
             version_id, loader_version
         ))
         .await
-        .map_err(|e| anyhow::anyhow!("获取 Fabric 版本元数据失败：{:?}", e))?;
-        let res = loader_meta_res
-            .body_bytes()
-            .await
-            .map_err(|e| anyhow::anyhow!(e))?;
+        .context("获取 Fabric 版本元数据失败")?;
+        let res = loader_meta_res.recv_bytes().await?;
         inner_future::fs::write(
             format!(
                 "{}/{}/{}-fabric-loader.tmp.json",

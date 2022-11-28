@@ -74,22 +74,16 @@ pub struct SearchParams {
 
 /// 根据模组 ID 获取可以下载的模组文件
 pub async fn get_mod_files(modid: &str) -> DynResult<Vec<ModVersion>> {
-    crate::http::get(format!(
+    crate::http::retry_get_json(format!(
         "https://api.modrinth.com/api/v1/mod/{}/version",
         modid
     ))
-    .recv_json()
     .await
-    .map_err(|e| anyhow::anyhow!(e))
 }
 
 /// 根据模组 ID 获取模组信息
 pub async fn get_mod_info(modid: &str) -> DynResult<ModResult> {
-    let r: ModResult = crate::http::get(format!("https://api.modrinth.com/api/v1/mod/{}", modid))
-        .recv_json()
-        .await
-        .map_err(|e| anyhow::anyhow!(e))?;
-    Ok(r)
+    crate::http::retry_get_json(format!("https://api.modrinth.com/api/v1/mod/{}", modid)).await
 }
 
 /// 根据模组 ID 获取模组图标
@@ -102,10 +96,10 @@ pub async fn get_mod_icon(modid: &str) -> DynResult<DynamicImage> {
         img.put_pixel(0, 0, image::Rgba([0xFF, 0xFF, 0xFF, 0]));
         return Ok(image::DynamicImage::ImageRgba8(img));
     }
-    let data = crate::http::get(&info.icon_url)
+    let data = crate::http::get(&info.icon_url)?
+        .await?
         .recv_bytes()
-        .await
-        .map_err(|e| anyhow::anyhow!(e))?;
+        .await?;
     // Modrinth 允许的图片格式有： .bmp .gif .jpeg .png .svg .svgz .webp .rgb
     if info.icon_url.ends_with(".webp") {
         // 使用 webp 读取
@@ -153,15 +147,14 @@ pub async fn search_mods(
     }: SearchParams,
 ) -> DynResult<Vec<ModResult>> {
     let search_filter = urlencoding::encode(&search_filter);
-    let r: ModSearchResult = crate::http::get(format!(
+    let r = crate::http::get(format!(
         "https://api.modrinth.com/api/v1/mod?offset={}&limit={}&query={}",
         (index - 1) * page_size,
         page_size,
         search_filter
-    ))
-    .recv_json()
-    .await
-    .map_err(|e| anyhow::anyhow!(e))?;
+    ))?
+    .recv_json::<ModSearchResult>()
+    .await?;
     Ok(r.hits
         .into_iter()
         .map(|mut a| {

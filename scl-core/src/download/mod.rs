@@ -38,7 +38,7 @@ pub enum DownloadSource {
     /// 全部使用 MCBBS 提供的镜像源下载
     MCBBS,
     /// 使用符合 BMCLAPI 镜像链接格式的自定义镜像源下载
-    Custom(url::Url),
+    Custom(String),
 }
 
 impl Default for DownloadSource {
@@ -73,7 +73,7 @@ impl FromStr for DownloadSource {
             s => {
                 let url = s.parse::<url::Url>();
                 if let Ok(url) = url {
-                    Ok(Self::Custom(url))
+                    Ok(Self::Custom(url.to_string()))
                 } else {
                     Ok(Self::Default)
                 }

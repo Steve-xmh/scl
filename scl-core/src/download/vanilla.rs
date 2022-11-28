@@ -76,8 +76,7 @@ impl<R: Reporter> VanillaDownloadExt for Downloader<R> {
             DownloadSource::MCBBS => "https://download.mcbbs.net/mc/game/version_manifest.json",
             _ => "https://piston-meta.mojang.com/mc/game/version_manifest.json",
         })
-        .await
-        .map_err(|e| anyhow::anyhow!("获取可用原版列表失败：{:?}", e))?;
+        .await?;
         Ok(res)
     }
 
