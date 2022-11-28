@@ -345,7 +345,7 @@ impl Client {
         variables.insert(
             "${auth_access_token}",
             match &cfg.auth {
-                AuthMethod::Offline { uuid, .. } => uuid.to_owned(),
+                AuthMethod::Offline { uuid, .. } => uuid.repeat(2), // 防止因为参数去重而被删除
                 AuthMethod::Mojang { access_token, .. } => access_token.to_owned_string(),
 
                 AuthMethod::Microsoft { access_token, .. } => access_token.to_owned_string(),
