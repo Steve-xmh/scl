@@ -694,6 +694,7 @@ impl Client {
                 let mut file = inner_future::fs::OpenOptions::new()
                     .create(true)
                     .write(true)
+                    .truncate(true)
                     .attributes(0x2)
                     .open(".scl.launch.bat")
                     .await?;
