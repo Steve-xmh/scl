@@ -83,7 +83,7 @@ fn parse_uri_test() {
         assert!(result.is_ok());
         let result = result.unwrap().1;
         assert_eq!(input, &format!("{}", result));
-        dbg!("{}", result.to_maven_jar_path("https://maven.fabricmc.net"));
+        println!("{}", result.to_maven_jar_path("https://maven.fabricmc.net"));
     }
     test_package("net.fabricmc:sponge-mixin:0.9.2+mixin.0.8.2");
     test_package("net.fabricmc:tiny-remapper:0.3.0.70");
