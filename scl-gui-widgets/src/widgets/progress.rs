@@ -32,7 +32,7 @@ impl Default for ProgressRing {
 impl<T: Data> Widget<T> for ProgressRing {
     fn event(&mut self, ctx: &mut EventCtx, event: &Event, _data: &mut T, _env: &Env) {
         if let Event::AnimFrame(t) = event {
-            self.indeterminate_time -= *t as f64 / 1_000_000_000.;
+            self.indeterminate_time += *t as f64 / 1_000_000_000.;
             if self.indeterminate {
                 ctx.request_paint();
                 ctx.request_anim_frame();
@@ -57,38 +57,44 @@ impl<T: Data> Widget<T> for ProgressRing {
 
     fn paint(&mut self, ctx: &mut PaintCtx, _data: &T, env: &Env) {
         let front = env.get(theme::main::SECONDARY);
-        let back = env.get(theme::chrome::HIGH);
-
-        let size = Size::new(52., 52.);
-        let rect = size.to_rounded_rect(30.);
 
         let t = self.indeterminate_time;
-        let l = ((t * -std::f64::consts::PI).sin() + 1.) / 2.; // ((t * -std::f64::consts::PI).sin() + 1.) / 2.;
+
+        // 一些初始数据
+        // TODO: 使其可配置
+        let size = 60.; // 大小
+        let width = 8.; // 线条粗细
+        let radius = (size - width) / 2.; // 半径
+        let speed = std::f64::consts::PI * 3.;
+        let target = t * -speed;
 
         // 曲线的长度
-        let thera = l * std::f64::consts::PI;
+        let l = ((t * std::f64::consts::PI) % std::f64::consts::TAU - std::f64::consts::PI).abs(); // ((t * -std::f64::consts::PI).sin() + 1.) / 2.; // ((t * -std::f64::consts::PI).sin() + 1.) / 2.;
+        let thera = l; // * std::f64::consts::PI;
 
         // 计算切线长度
         let rad = thera.cos().acos();
         let tangent_scale = 4. / 3. * (1. - (rad / 2.).cos()) / (rad / 2.).sin();
-        let tangent_len = tangent_scale * 26.;
+        let tangent_len = tangent_scale * radius;
 
         // 计算各个点的正弦余弦
-        let (sx, sy) = (t * 8.).sin_cos();
-        let (p1ox, p1oy) = (t * 8. + std::f64::consts::FRAC_PI_2).sin_cos();
-        let (ex, ey) = (t * 8. + thera).sin_cos();
-        let (p2ox, p2oy) = (t * 8. + thera - std::f64::consts::FRAC_PI_2).sin_cos();
+        let start = target - thera / 2.;
+        let end = target + thera / 2.;
+        let (sx, sy) = start.sin_cos();
+        let (p1ox, p1oy) = (start + std::f64::consts::FRAC_PI_2).sin_cos();
+        let (ex, ey) = end.sin_cos();
+        let (p2ox, p2oy) = (end - std::f64::consts::FRAC_PI_2).sin_cos();
 
         // 点的坐标
-        let start_point = (26. + sx * 26., 26. + sy * 26.);
-        let end_point = (26. + ex * 26., 26. + ey * 26.);
+        let start_point = (radius + sx * radius, radius + sy * radius);
+        let end_point = (radius + ex * radius, radius + ey * radius);
         let control_1_point = (
-            26. + sx * 26. + p1ox * tangent_len,
-            26. + sy * 26. + p1oy * tangent_len,
+            radius + sx * radius + p1ox * tangent_len,
+            radius + sy * radius + p1oy * tangent_len,
         );
         let control_2_point = (
-            26. + ex * 26. + p2ox * tangent_len,
-            26. + ey * 26. + p2oy * tangent_len,
+            radius + ex * radius + p2ox * tangent_len,
+            radius + ey * radius + p2oy * tangent_len,
         );
 
         let mut path = BezPath::new();
@@ -96,8 +102,10 @@ impl<T: Data> Widget<T> for ProgressRing {
         path.curve_to(control_1_point, control_2_point, end_point);
 
         // 绘制
+        let region = ctx.region().bounding_box();
+
+        ctx.clip(region);
         ctx.transform(Affine::translate((4., 4.)));
-        ctx.stroke(rect, &PaintBrush::Color(back), 8.);
         ctx.stroke_styled(
             path,
             &PaintBrush::Color(front),
