@@ -2,7 +2,7 @@
 //!
 //! 或者在二次开发的时候更换成你喜欢的版本
 
-use std::sync::Arc;
+use std::{sync::Arc, time::Duration};
 
 use alhc::*;
 use once_cell::sync::Lazy;
@@ -10,7 +10,11 @@ use serde::de::DeserializeOwned;
 
 use crate::prelude::*;
 
-static GLOBAL_CLIENT: Lazy<Arc<Client>> = Lazy::new(|| Arc::new(ClientBuilder::default().build()));
+static GLOBAL_CLIENT: Lazy<Arc<Client>> = Lazy::new(|| {
+    let mut client = ClientBuilder::default().build();
+    client.set_timeout(Duration::from_millis(10 * 1000));
+    Arc::new(client)
+});
 
 /// Future 重试调用函数，为下载文件失败重试而准备
 ///
