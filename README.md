@@ -6,6 +6,8 @@
     </span>
 </div>
 
+![预览图](https://user-images.githubusercontent.com/39523898/208238006-900bd5fe-f9f7-42a9-b726-da829162fbed.png)
+
 使用 Rust 编程语言编写，内存占用相当之小，性能相当之优秀，针对二进制大小做了力所能及的压缩优化。
 
 原生跨平台，支持 Windows，Linux，MacOS 三大主流操作系统。
