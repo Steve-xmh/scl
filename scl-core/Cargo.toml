@@ -30,6 +30,7 @@ uuid = { version = "1.0.0", features = ["v4"] }
 zip = "^0.6.2"
 dirs = "^4.0"
 async-trait = "^0.1"
+shellwords = "1.1.0"
 
 [target.'cfg(target_os = "windows")'.dependencies]
 winreg = "^0.10"
