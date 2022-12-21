@@ -134,7 +134,7 @@ impl Widget<bool> for MenuItem<bool> {
     ) -> druid::Size {
         let _ = self.title.layout(ctx, bc, data, env);
         self.title
-            .set_origin(ctx, data, env, (8. + LEFT_RIGHT_PADDING, 7.).into());
+            .set_origin(ctx, (8. + LEFT_RIGHT_PADDING, 7.).into());
         bc.constrain((100., 32.))
     }
 
@@ -274,7 +274,7 @@ impl Widget<String> for MenuItem<String> {
     ) -> druid::Size {
         let _ = self.title.layout(ctx, bc, data, env);
         self.title
-            .set_origin(ctx, data, env, (8. + LEFT_RIGHT_PADDING, 7.).into());
+            .set_origin(ctx, (8. + LEFT_RIGHT_PADDING, 7.).into());
         self.desc_text = None;
         bc.constrain((100., 32.))
     }

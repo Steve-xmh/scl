@@ -98,7 +98,7 @@ impl<T: Data> Widget<T> for FolderList<T> {
         if self.opened {
             let list_bc = bc.shrink((40., 40.));
             let size = self.inner.layout(ctx, &list_bc, data, env);
-            self.inner.set_origin(ctx, data, env, (40., 40.).into());
+            self.inner.set_origin(ctx, (40., 40.).into());
             bc.constrain(size + (40., 40.).into())
         } else {
             bc.constrain((0., 40.))

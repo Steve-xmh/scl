@@ -122,10 +122,9 @@ impl<D: Data> Widget<D> for LargeListItem<D> {
         let desc_height = desc_size.height;
         let height = (desc_height + text_height + 27.).max(60.);
         let start_pos = (height - text_height - desc_height) / 2.;
-        self.text
-            .set_origin(ctx, data, env, Point::new(60., start_pos));
+        self.text.set_origin(ctx, Point::new(60., start_pos));
         self.desc
-            .set_origin(ctx, data, env, Point::new(60., start_pos + text_height));
+            .set_origin(ctx, Point::new(60., start_pos + text_height));
         bc.constrain((0., height))
     }
 
