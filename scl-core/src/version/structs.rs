@@ -539,10 +539,12 @@ impl VersionInfo {
     /// 根据元数据猜测版本的种类
     pub fn guess_version_type(&self) -> VersionType {
         let mut has_optifine = false;
+        let mut has_fabric = false;
         if let Some(meta) = &self.meta {
             for lib in &meta.libraries {
                 if lib.name.starts_with("net.fabricmc:") {
-                    return VersionType::Fabric;
+                    // 也有可能是 QuiltMC
+                    has_fabric = true;
                 } else if lib.name.starts_with("net.minecraftforge:") {
                     return VersionType::Forge;
                 } else if lib.name.starts_with("org.quiltmc:") {
@@ -552,7 +554,9 @@ impl VersionInfo {
                     has_optifine = true;
                 }
             }
-            if has_optifine {
+            if has_fabric {
+                VersionType::Fabric
+            } else if has_optifine {
                 VersionType::Optifine
             } else {
                 VersionType::Vanilla
