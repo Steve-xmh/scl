@@ -135,7 +135,7 @@ pub async fn get_mod_icon_by_url(url: &str) -> DynResult<DynamicImage> {
         Ok(image::DynamicImage::ImageRgba8(img))
     } else if let Ok(img) = image::load_from_memory_with_format(
         &data,
-        image::ImageFormat::from_path(&url).map_err(|e| anyhow::anyhow!(e))?,
+        image::ImageFormat::from_path(url).map_err(|e| anyhow::anyhow!(e))?,
     ) {
         Ok(img)
     } else {

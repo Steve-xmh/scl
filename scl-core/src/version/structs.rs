@@ -270,6 +270,20 @@ pub struct Logging {
     pub client: Option<LoggingConfig>,
 }
 
+/// 新版本的 Java 版本元数据
+///
+/// 如果存在则可以根据此数据选择对应的 Java 运行时
+#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone)]
+pub struct JavaVersion {
+    /// 该 Java 运行时版本在官方启动器中的代号
+    ///
+    /// 通过该代号可以找到官方使用的 JVM 运行时
+    pub component: String,
+    /// 该 Java 运行时的主要版本号
+    #[serde(rename = "majorVersion")]
+    pub major_version: u8,
+}
+
 /// 版本元数据
 #[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Clone)]
 pub struct VersionMeta {
@@ -281,6 +295,12 @@ pub struct VersionMeta {
     #[serde(default)]
     #[serde(rename = "clientVersion")]
     pub client_version: String,
+    #[serde(default)]
+    #[serde(rename = "javaVersion")]
+    /// 新版本的 Java 版本元数据
+    ///
+    /// 如果存在则可以根据此数据选择对应的 Java 运行时
+    pub java_version: Option<JavaVersion>,
     /// 游戏启动参数
     #[serde(skip_serializing_if = "Option::is_none")]
     pub arguments: Option<Arguments>,
@@ -329,6 +349,27 @@ impl VersionMeta {
                     })
                 }
             }
+        }
+    }
+
+    /// 根据元数据判断需要的最低 Java 运行时版本
+    pub fn required_java_version(&self) -> u8 {
+        if let Some(java_version) = &self.java_version {
+            java_version.major_version
+        } else if let Some(assets) = &self.asset_index {
+            if let Ok((_, ver)) = crate::semver::parse_version(&assets.id) {
+                ver.required_java_version()
+            } else {
+                8
+            }
+        } else if !self.inherits_from.is_empty() {
+            if let Ok((_, ver)) = crate::semver::parse_version(&self.inherits_from) {
+                ver.required_java_version()
+            } else {
+                8
+            }
+        } else {
+            8
         }
     }
 }
@@ -418,15 +459,13 @@ impl VersionInfo {
                 if jar_path.is_file() {
                     meta.main_jars.push(get_full_path(jar_path));
                 }
-                self.required_java = 8;
+                self.required_java = meta.required_java_version();
                 if let Some(assets) = &meta.asset_index {
                     if let Ok((_, ver)) = crate::semver::parse_version(&assets.id) {
-                        self.required_java = ver.required_java_version();
                         self.minecraft_version = ver;
                     }
                 } else if !meta.inherits_from.is_empty() {
                     if let Ok((_, ver)) = crate::semver::parse_version(&meta.inherits_from) {
-                        self.required_java = ver.required_java_version();
                         self.minecraft_version = ver;
                     }
                 }
@@ -506,6 +545,8 @@ impl VersionInfo {
                     return VersionType::Fabric;
                 } else if lib.name.starts_with("net.minecraftforge:") {
                     return VersionType::Forge;
+                } else if lib.name.starts_with("org.quiltmc:") {
+                    return VersionType::QuiltMC;
                 } else if lib.name.starts_with("optifine:") {
                     // 我们要优先 Forge 和 Fabric
                     has_optifine = true;

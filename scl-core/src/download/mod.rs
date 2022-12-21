@@ -7,6 +7,7 @@ pub mod forge;
 pub mod mcmod;
 pub mod modrinth;
 pub mod optifine;
+pub mod quiltmc;
 pub mod structs;
 pub mod vanilla;
 
@@ -18,6 +19,7 @@ pub use authlib::AuthlibDownloadExt;
 pub use fabric::FabricDownloadExt;
 pub use forge::ForgeDownloadExt;
 pub use optifine::OptifineDownloadExt;
+pub use quiltmc::QuiltMCDownloadExt;
 use serde::{Deserialize, Serialize};
 pub use vanilla::VanillaDownloadExt;
 
@@ -245,13 +247,16 @@ impl<R: Reporter> Default for Downloader<R> {
 
 /// 一个游戏安装特质，如果你并不需要单独安装其它部件，则可以单独引入这个特质来安装游戏
 #[async_trait]
-pub trait GameDownload<'a>: FabricDownloadExt + ForgeDownloadExt + VanillaDownloadExt {
+pub trait GameDownload<'a>:
+    FabricDownloadExt + ForgeDownloadExt + VanillaDownloadExt + QuiltMCDownloadExt
+{
     /// 根据参数安装一个游戏，允许安装模组加载器
     async fn download_game(
         &self,
         version_name: &str,
         vanilla: VersionInfo,
         fabric: &str,
+        quiltmc: &str,
         forge: &str,
         optifine: &str,
     ) -> DynResult;
@@ -264,6 +269,7 @@ impl<R: Reporter> GameDownload<'_> for Downloader<R> {
         version_name: &str,
         vanilla: VersionInfo,
         fabric: &str,
+        quiltmc: &str,
         forge: &str,
         optifine: &str,
     ) -> DynResult {
@@ -285,6 +291,13 @@ impl<R: Reporter> GameDownload<'_> for Downloader<R> {
             )
             .await?;
             self.download_fabric_post(version_name).await?;
+        } else if !quiltmc.is_empty() {
+            crate::prelude::inner_future::future::try_zip(
+                self.install_vanilla(version_name, &vanilla),
+                self.download_quiltmc_pre(version_name, &vanilla.id, quiltmc),
+            )
+            .await?;
+            self.download_quiltmc_post(version_name).await?;
         } else if !forge.is_empty() {
             self.install_vanilla(&vanilla.id, &vanilla).await?; // Forge 安装需要原版，如果安装器没有解析到则会从官方源下载，速度很慢
             crate::prelude::inner_future::future::try_zip(
