@@ -161,7 +161,7 @@ impl WebView {
 
         // Channel
         let deleted = Arc::new(atomic::AtomicBool::new(false));
-        let (tx, rx) = mpsc::channel();
+        let (tx, rx) = mpsc::channel::<String>();
 
         idle_add_once(move || {
             if !gtk::is_initialized_main_thread() {
@@ -188,7 +188,7 @@ impl WebView {
             let _loaded = loaded.clone();
             w.connect_load_changed(move |w, load_event| {
                 if load_event == LoadEvent::Finished {
-                    let url = w.uri().unwrap().to_string();
+                    let url = w.get_uri().unwrap().to_string();
                     if let Some(callback) = callback {
                         if callback(&url) {
                             _loaded.store(true, atomic::Ordering::SeqCst);
@@ -203,7 +203,7 @@ impl WebView {
             win.connect_destroy(move |_| {
                 _deleted.store(true, atomic::Ordering::SeqCst);
                 if !loaded.load(atomic::Ordering::SeqCst) {
-                    tx.send("".into()).unwrap();
+                    tx.send("".to_string()).unwrap();
                 }
             });
 
