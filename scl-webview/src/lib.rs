@@ -151,6 +151,8 @@ impl WebView {
 
     // // 由于 webkit2gtk-rs 不跟进更新，导致原生依赖库版本冲突，故暂时移除支持
 
+    #[cfg(target_os = "linux")]
+    #[inline(always)]
     fn run_linux(&mut self) -> DynResult<String> {
         Ok("".into())
     }
