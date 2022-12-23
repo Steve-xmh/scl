@@ -10,7 +10,7 @@ pub struct ModResult {
     /// 这个不是真正的模组 ID，而是服务器中记录的数字 ID
     #[serde(deserialize_with = "deserialize_null_default")]
     #[serde(default)]
-    pub mod_id: String,
+    pub project_id: String,
     /// 用于短链接的模组名，大部分应该都是模组 ID
     #[serde(deserialize_with = "deserialize_null_default")]
     pub slug: String,
@@ -166,7 +166,7 @@ pub async fn search_mods(
     Ok(r.hits
         .into_iter()
         .map(|mut a| {
-            a.mod_id = a.mod_id.trim_start_matches("local-").to_owned();
+            a.project_id = a.project_id.trim_start_matches("local-").to_owned();
             a
         })
         .collect())
