@@ -30,7 +30,11 @@ pub fn is_supported() -> bool {
     {
         webview2::get_available_browser_version_string(None).is_ok()
     }
-    #[cfg(not(target_os = "windows"))]
+    #[cfg(target_os = "linux")]
+    {
+        false
+    }
+    #[cfg(not(any(target_os = "windows", target_os = "linux")))]
     {
         true
     }
@@ -145,82 +149,88 @@ impl WebView {
         }
     }
 
-    #[cfg(target_os = "linux")]
-    #[inline(always)]
+    // // 由于 webkit2gtk-rs 不跟进更新，导致原生依赖库版本冲突，故暂时移除支持
+
     fn run_linux(&mut self) -> DynResult<String> {
-        use std::sync::*;
-
-        use ::glib::idle_add_once;
-        use gtk::{prelude::*, WindowType};
-        use webkit2gtk::{traits::*, *};
-
-        let title = self.title.to_owned();
-        let size = self.fixed_size.to_owned();
-        let begin_url = self.begin_url.to_owned();
-        let callback = self.url_change_callback.to_owned();
-
-        // Channel
-        let deleted = Arc::new(atomic::AtomicBool::new(false));
-        let (tx, rx) = mpsc::channel::<String>();
-
-        idle_add_once(move || {
-            if !gtk::is_initialized_main_thread() {
-                gtk::init().unwrap();
-            }
-
-            let win = Arc::new(gtk::Window::new(WindowType::Toplevel));
-            let loaded = Arc::new(atomic::AtomicBool::new(false));
-
-            win.set_resizable(false);
-            win.set_title(&title);
-
-            if let Some((width, height)) = size {
-                win.set_size_request(width as _, height as _);
-            } else {
-                win.set_size_request(640, 480);
-            }
-
-            let w = webkit2gtk::WebView::new();
-            w.load_uri(&begin_url);
-
-            let _win = win.clone();
-            let _tx = tx.clone();
-            let _loaded = loaded.clone();
-            w.connect_load_changed(move |w, load_event| {
-                if load_event == LoadEvent::Finished {
-                    let url = w.get_uri().unwrap().to_string();
-                    if let Some(callback) = callback {
-                        if callback(&url) {
-                            _loaded.store(true, atomic::Ordering::SeqCst);
-                            _win.close();
-                            _tx.send(url).unwrap();
-                        }
-                    }
-                }
-            });
-
-            let _deleted = deleted.clone();
-            win.connect_destroy(move |_| {
-                _deleted.store(true, atomic::Ordering::SeqCst);
-                if !loaded.load(atomic::Ordering::SeqCst) {
-                    tx.send("".to_string()).unwrap();
-                }
-            });
-
-            win.add(&w);
-            win.show_all();
-
-            loop {
-                gtk::main_iteration_do(false);
-                if deleted.load(atomic::Ordering::SeqCst) {
-                    break;
-                }
-            }
-        });
-        let result = rx.recv().unwrap();
-
-        Ok(result)
+        Ok("".into())
     }
+
+    // #[cfg(target_os = "linux")]
+    // #[inline(always)]
+    // fn run_linux(&mut self) -> DynResult<String> {
+    //     use std::sync::*;
+
+    //     use ::glib::idle_add_once;
+    //     use gtk::{prelude::*, WindowType};
+    //     use webkit2gtk::{traits::*, *};
+
+    //     let title = self.title.to_owned();
+    //     let size = self.fixed_size.to_owned();
+    //     let begin_url = self.begin_url.to_owned();
+    //     let callback = self.url_change_callback.to_owned();
+
+    //     // Channel
+    //     let deleted = Arc::new(atomic::AtomicBool::new(false));
+    //     let (tx, rx) = mpsc::channel::<String>();
+
+    //     idle_add_once(move || {
+    //         if !gtk::is_initialized_main_thread() {
+    //             gtk::init().unwrap();
+    //         }
+
+    //         let win = Arc::new(gtk::Window::new(WindowType::Toplevel));
+    //         let loaded = Arc::new(atomic::AtomicBool::new(false));
+
+    //         win.set_resizable(false);
+    //         win.set_title(&title);
+
+    //         if let Some((width, height)) = size {
+    //             win.set_size_request(width as _, height as _);
+    //         } else {
+    //             win.set_size_request(640, 480);
+    //         }
+
+    //         let w = webkit2gtk::WebView::new();
+    //         w.load_uri(&begin_url);
+
+    //         let _win = win.clone();
+    //         let _tx = tx.clone();
+    //         let _loaded = loaded.clone();
+    //         w.connect_load_changed(move |w, load_event| {
+    //             if load_event == LoadEvent::Finished {
+    //                 let url = w.get_uri().unwrap().to_string();
+    //                 if let Some(callback) = callback {
+    //                     if callback(&url) {
+    //                         _loaded.store(true, atomic::Ordering::SeqCst);
+    //                         _win.close();
+    //                         _tx.send(url).unwrap();
+    //                     }
+    //                 }
+    //             }
+    //         });
+
+    //         let _deleted = deleted.clone();
+    //         win.connect_destroy(move |_| {
+    //             _deleted.store(true, atomic::Ordering::SeqCst);
+    //             if !loaded.load(atomic::Ordering::SeqCst) {
+    //                 tx.send("".to_string()).unwrap();
+    //             }
+    //         });
+
+    //         win.add(&w);
+    //         win.show_all();
+
+    //         loop {
+    //             gtk::main_iteration_do(false);
+    //             if deleted.load(atomic::Ordering::SeqCst) {
+    //                 break;
+    //             }
+    //         }
+    //     });
+    //     let result = rx.recv().unwrap();
+
+    //     Ok(result)
+    // }
 
     #[cfg(target_os = "macos")]
     #[inline(always)]

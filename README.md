@@ -22,7 +22,7 @@
 - `scl-webview`: 启动器 WebView 网页浏览器库，提供了用于微软正版登录的浏览器窗口
 - `scl-marco`: 启动器过程宏库，包含了部分用于代码生成的过程宏代码，目前包含图标代码生成的简易过程宏
 - `scl-gui-animation`: 启动器图形页面动画函数库，包含了一些方便用来制作非线性动画的函数和工具类
-- `scl-gui-widgets`: 启动器图形页面组件库，基于 Druid 框架，提供了大量基于 WinUI3 设计规范制作的图形页面组件
+- `scl-gui-widgets`: 启动器图形页面组件库，基于 [Druid](https://github.com/linebender/druid) 框架，提供了大量基于 WinUI3 设计规范制作的图形页面组件
 
 ## 关于开源协议和代码协作协议
 
@@ -69,6 +69,14 @@
 - [ ] 可视化主题设置
 - [ ] 后台任务可中断
 - [ ] 应用程序体积优化
+
+## 与 SCL 有关联的项目
+
+这里列出了由作者自行开发/二次开发的一些项目，它们都将计划用在 SCL 启动器的开发中。一部分项目使用的是更加宽松甚至是 CC0 的开源共享协议，所以请随意使用吧！
+
+- [optifine-installer](https://github.com/Steve-xmh/optifine-installer): 一个可安装几乎所有 1.7.2+ Optifine 的命令行安装器模块，支持指定安装的版本名称，可以用于启动器的 Optifine 安装自动化。使用 CC0 开源协议开源。
+- [forge-install-bootstrapper](https://github.com/Steve-xmh/forge-install-bootstrapper): 一个基于 [bangbang93/forge-install-bootstrapper](https://github.com/bangbang93/forge-install-bootstrapper) 的改版，目的是支持 Forge 全部版本安装器的自动化安装（自 1.5.2 以来的任何提供安装器的版本）
+- [alhc](https://github.com/Steve-xmh/alhc): 一个正在开发中的轻量级系统异步 HTTP 客户端框架，通过调用系统自带的框架实现 HTTP 请求并实现异步
 
 ## 支持
 
