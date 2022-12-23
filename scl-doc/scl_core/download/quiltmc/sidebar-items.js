@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":[["IntermediaryStruct","源码对照表的信息"],["LoaderMetaItem","QuiltMC 加载器的版本元数据和其源码对照表的版本元数据"],["LoaderStruct","QuiltMC 加载器的信息"]],"trait":[["QuiltMCDownloadExt","QuiltMC 模组加载器的安装特质"]]};

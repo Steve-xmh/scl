@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/client.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>client.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../scl_core/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/client.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>client.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../scl_core/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -740,6 +740,20 @@
 <span id="740">740</span>
 <span id="741">741</span>
 <span id="742">742</span>
+<span id="743">743</span>
+<span id="744">744</span>
+<span id="745">745</span>
+<span id="746">746</span>
+<span id="747">747</span>
+<span id="748">748</span>
+<span id="749">749</span>
+<span id="750">750</span>
+<span id="751">751</span>
+<span id="752">752</span>
+<span id="753">753</span>
+<span id="754">754</span>
+<span id="755">755</span>
+<span id="756">756</span>
 </pre><pre class="rust"><code><span class="doccomment">//! 客户端结构，用于启动游戏
 </span><span class="kw">use </span>std::{
     collections::HashMap,
@@ -867,34 +881,7 @@
         <span class="comment">// let build_args_timer = std::time::Instant::now();
         </span><span class="kw">let </span><span class="kw-2">mut </span>args = Vec::&lt;String&gt;::with_capacity(<span class="number">64</span>);
 
-        <span class="comment">// 检查 log4jc 是否被安装，否则将 LOG4J_PATCH 的数据复制到库文件夹里
-        // if !cfg.version_info.version_base.is_empty() {
-        //     let lib_path = std::path::Path::new(&amp;cfg.version_info.version_base);
-        //     let lib_path = lib_path
-        //         .parent()
-        //         .ok_or_else(|| anyhow::anyhow!(&quot;There&#39;s no parent from the library path&quot;))?
-        //         .join(&quot;libraries&quot;)
-        //         .join(&quot;org&quot;)
-        //         .join(&quot;glavo&quot;)
-        //         .join(&quot;1.0&quot;)
-        //         .join(&quot;log4j-patch&quot;);
-        //     if !lib_path.is_dir() {
-        //         inner_future::fs::create_dir_all(&amp;lib_path).await?;
-        //     }
-        //     let log4j_path = lib_path.join(&quot;log4j-patch-agent-1.0.jar&quot;);
-        //     if !log4j_path.is_file() {
-        //         inner_future::fs::OpenOptions::new()
-        //             .write(true)
-        //             .create(true)
-        //             .truncate(true)
-        //             .open(&amp;log4j_path)
-        //             .await?
-        //             .write_all(LOG4J_PATCH)
-        //             .await?;
-        //     }
-        // }
-
-        // 检查是否继承版本
+        <span class="comment">// 检查是否继承版本
         </span><span class="kw">let </span>meta = parse_inheritsed_meta(<span class="kw-2">&amp;</span>cfg).<span class="kw">await</span>;
 
         cfg.version_info.meta = <span class="prelude-val">Some</span>(meta.to_owned());
@@ -1087,8 +1074,8 @@
         variables.insert(
             <span class="string">&quot;${auth_access_token}&quot;</span>,
             <span class="kw">match </span><span class="kw-2">&amp;</span>cfg.auth {
-                AuthMethod::Offline { uuid, .. } =&gt; uuid.to_owned(),
-                AuthMethod::Mojang { access_token, .. } =&gt; access_token.to_owned_string(),
+                AuthMethod::Offline { uuid, .. } =&gt; uuid.repeat(<span class="number">2</span>), <span class="comment">// 防止因为参数去重而被删除
+                </span>AuthMethod::Mojang { access_token, .. } =&gt; access_token.to_owned_string(),
 
                 AuthMethod::Microsoft { access_token, .. } =&gt; access_token.to_owned_string(),
                 AuthMethod::AuthlibInjector { access_token, .. } =&gt; access_token.to_owned_string(),
@@ -1153,8 +1140,14 @@
 
         // 用户自定义JVM参数
         </span><span class="kw">if let </span><span class="prelude-val">Some</span>(scl_config) = <span class="kw-2">&amp;</span>cfg.version_info.scl_launch_config {
-            <span class="kw">if </span>!scl_config.jvm_args.is_empty() {
-                args.push(scl_config.jvm_args.to_owned());
+            <span class="kw">if </span>!scl_config.jvm_args.trim().is_empty() {
+                <span class="kw">if let </span><span class="prelude-val">Ok</span>(jvm_args) = shell_words::split(<span class="kw-2">&amp;</span>scl_config.jvm_args) {
+                    <span class="kw">for </span>arg <span class="kw">in </span>jvm_args {
+                        args.push(arg);
+                    }
+                } <span class="kw">else </span>{
+                    args.push(scl_config.jvm_args.to_owned());
+                }
             }
         }
 
@@ -1220,20 +1213,48 @@
         <span class="comment">// 游戏主类
         </span>args.push(meta.main_class.to_owned());
 
+        <span class="kw">fn </span>dedup_argument(args: <span class="kw-2">&amp;mut </span>Vec&lt;String&gt;, arg: <span class="kw-2">&amp;</span>String) -&gt; bool {
+            <span class="kw">let </span>exist_arg = args.iter().enumerate().find(|x| x.<span class="number">1 </span>== arg).map(|x| x.<span class="number">0</span>);
+            <span class="kw">if let </span><span class="prelude-val">Some</span>(exist_arg) = exist_arg {
+                args.remove(exist_arg);
+                <span class="kw">if </span>arg.starts_with(<span class="string">&#39;-&#39;</span>) {
+                    <span class="comment">// 将附带参数一并删除
+                    </span>args.remove(exist_arg);
+                }
+                <span class="bool-val">true
+            </span>} <span class="kw">else </span>{
+                <span class="bool-val">false
+            </span>}
+        }
+
         <span class="comment">// 游戏参数 旧版本 使用 minecraftArgument
         </span><span class="kw">let </span>splited = meta.minecraft_arguments.trim().split(<span class="string">&#39; &#39;</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>skip_next_dedup = <span class="bool-val">false</span>;
         <span class="kw">for </span>arg <span class="kw">in </span>splited {
             <span class="kw">if </span>!arg.is_empty() {
-                args.push(replace_each(<span class="kw-2">&amp;</span>variables, arg.to_owned()));
+                <span class="kw">let </span>arg = replace_each(<span class="kw-2">&amp;</span>variables, arg.to_owned());
+                <span class="kw">if </span>skip_next_dedup {
+                    skip_next_dedup = <span class="bool-val">false
+                </span>} <span class="kw">else </span>{
+                    skip_next_dedup = dedup_argument(<span class="kw-2">&amp;mut </span>args, <span class="kw-2">&amp;</span>arg);
+                }
+                args.push(arg);
             }
         }
 
         <span class="comment">// 游戏参数
         </span><span class="kw">if let </span><span class="prelude-val">Some</span>(arguments) = <span class="kw-2">&amp;</span>meta.arguments {
+            <span class="kw">let </span><span class="kw-2">mut </span>skip_next_dedup = <span class="bool-val">false</span>;
             <span class="kw">for </span>arg <span class="kw">in </span><span class="kw-2">&amp;</span>arguments.game {
                 <span class="kw">match </span>arg {
                     Argument::Common(arg) =&gt; {
-                        args.push(replace_each(<span class="kw-2">&amp;</span>variables, arg.to_owned()));
+                        <span class="kw">let </span>arg = replace_each(<span class="kw-2">&amp;</span>variables, arg.to_owned());
+                        <span class="kw">if </span>skip_next_dedup {
+                            skip_next_dedup = <span class="bool-val">false
+                        </span>} <span class="kw">else </span>{
+                            skip_next_dedup = dedup_argument(<span class="kw-2">&amp;mut </span>args, <span class="kw-2">&amp;</span>arg);
+                        }
+                        args.push(arg);
                     }
                     Argument::Specify(<span class="kw">_</span>) =&gt; {
                         <span class="comment">// TODO: 是否为试玩版，自定义窗口大小等自定义参数
@@ -1244,8 +1265,14 @@
 
         <span class="comment">// 用户自定义游戏参数
         </span><span class="kw">if let </span><span class="prelude-val">Some</span>(scl_config) = <span class="kw-2">&amp;</span>cfg.version_info.scl_launch_config {
-            <span class="kw">if </span>!scl_config.game_args.is_empty() {
-                args.push(scl_config.game_args.to_owned());
+            <span class="kw">if </span>!scl_config.game_args.trim().is_empty() {
+                <span class="kw">if let </span><span class="prelude-val">Ok</span>(game_args) = shell_words::split(<span class="kw-2">&amp;</span>scl_config.game_args) {
+                    <span class="kw">for </span>arg <span class="kw">in </span>game_args {
+                        args.push(arg);
+                    }
+                } <span class="kw">else </span>{
+                    args.push(scl_config.game_args.to_owned());
+                }
             }
         }
 
@@ -1408,6 +1435,7 @@
                 <span class="kw">let </span><span class="kw-2">mut </span>file = inner_future::fs::OpenOptions::new()
                     .create(<span class="bool-val">true</span>)
                     .write(<span class="bool-val">true</span>)
+                    .truncate(<span class="bool-val">true</span>)
                     .attributes(<span class="number">0x2</span>)
                     .open(<span class="string">&quot;.scl.launch.bat&quot;</span>)
                     .<span class="kw">await</span><span class="question-mark">?</span>;
@@ -1483,4 +1511,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0 (69f9c33d7 2022-12-12)" ></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/slider.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>slider.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_gui_widgets/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-gui-widgets/src/widgets/slider.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>slider.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../scl_gui_widgets/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -939,7 +939,6 @@
 <span id="939">939</span>
 <span id="940">940</span>
 <span id="941">941</span>
-<span id="942">942</span>
 </pre><pre class="rust"><code><span class="doccomment">//! 一个滑块组件，修改自 [`druid::widget::Slider`]
 
 </span><span class="kw">use </span>druid::{
@@ -1393,7 +1392,7 @@
         <span class="kw">while </span>walk &lt; <span class="self">self</span>.mapping.max + f64::EPSILON * <span class="number">10.0 </span>{
             <span class="kw">let </span>layout = text
                 .new_text_layout(<span class="macro">format!</span>(<span class="string">&quot;{}&quot;</span>, walk))
-                .text_color(text_color.clone())
+                .text_color(text_color)
                 .build()
                 .unwrap();
 
@@ -1448,14 +1447,14 @@
                 <span class="kw">let </span>child_bc = bc.shrink((label_size.width, <span class="number">0.0</span>));
                 <span class="kw">let </span>child_size = <span class="self">self</span>.inner.layout(ctx, <span class="kw-2">&amp;</span>child_bc, data, env);
                 <span class="self">self</span>.inner
-                    .set_origin(ctx, data, env, Point::new(label_size.width, <span class="number">0.0</span>));
+                    .set_origin(ctx, Point::new(label_size.width, <span class="number">0.0</span>));
 
                 Size::new(child_size.width + label_size.width, child_size.height)
             }
             Axis::Horizontal =&gt; {
                 <span class="kw">let </span>child_bc = bc.shrink((<span class="number">0.0</span>, label_size.height));
                 <span class="kw">let </span>child_size = <span class="self">self</span>.inner.layout(ctx, <span class="kw-2">&amp;</span>child_bc, data, env);
-                <span class="self">self</span>.inner.set_origin(ctx, data, env, Point::ZERO);
+                <span class="self">self</span>.inner.set_origin(ctx, Point::ZERO);
 
                 ctx.set_baseline_offset(<span class="self">self</span>.inner.baseline_offset() + label_size.height);
                 Size::new(child_size.width, child_size.height + label_size.height)
@@ -1559,9 +1558,8 @@
         <span class="kw">let </span>scalar = (<span class="self">self</span>.axis.major_pos(mouse_pos) - knob_size / <span class="number">2.</span>)
             / (<span class="self">self</span>.axis.major(slider_size) - knob_size);
 
-        <span class="kw">let </span><span class="kw-2">mut </span>value = (<span class="self">self</span>.min + scalar * (<span class="self">self</span>.max - <span class="self">self</span>.min) + offset)
-            .min(<span class="self">self</span>.max)
-            .max(<span class="self">self</span>.min);
+        <span class="kw">let </span><span class="kw-2">mut </span>value =
+            (<span class="self">self</span>.min + scalar * (<span class="self">self</span>.max - <span class="self">self</span>.min) + offset).clamp(<span class="self">self</span>.min, <span class="self">self</span>.max);
 
         <span class="kw">if let </span><span class="prelude-val">Some</span>(step) = <span class="self">self</span>.step {
             <span class="kw">let </span>max_step_value = ((<span class="self">self</span>.max - <span class="self">self</span>.min) / step).floor() * step + <span class="self">self</span>.min;
@@ -1590,7 +1588,7 @@
     }
 
     <span class="kw">fn </span>normalize(<span class="kw-2">&amp;</span><span class="self">self</span>, data: f64) -&gt; f64 {
-        (data.max(<span class="self">self</span>.min).min(<span class="self">self</span>.max) - <span class="self">self</span>.min) / (<span class="self">self</span>.max - <span class="self">self</span>.min)
+        (data.clamp(<span class="self">self</span>.min, <span class="self">self</span>.max) - <span class="self">self</span>.min) / (<span class="self">self</span>.max - <span class="self">self</span>.min)
     }
 
     <span class="doccomment">/// check self.min &lt;= self.max, if not swaps the values.
@@ -1836,7 +1834,7 @@
         .inset(TRACK_THICKNESS / <span class="number">2.</span>)
         .to_rounded_rect(<span class="number">2.</span>);
 
-        ctx.clip(<span class="kw-2">&amp;</span>background_rect);
+        ctx.clip(background_rect);
 
         <span class="kw">let </span>background_gradient = env.get(<span class="kw">crate</span>::theme::color::base::MEDIUM_LOW);
 
@@ -1883,4 +1881,4 @@
     size
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_gui_widgets" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0 (69f9c33d7 2022-12-12)" ></div></body></html>

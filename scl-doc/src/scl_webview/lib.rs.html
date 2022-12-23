@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-webview/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../scl_webview/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../scl_webview/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../scl_webview/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-webview/src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../scl_webview/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -758,7 +758,18 @@
 <span id="758">758</span>
 <span id="759">759</span>
 <span id="760">760</span>
-</pre><pre class="rust"><code><span class="attribute">#![doc = <span class="string">&quot;../README.md&quot;</span>]
+<span id="761">761</span>
+<span id="762">762</span>
+<span id="763">763</span>
+<span id="764">764</span>
+<span id="765">765</span>
+<span id="766">766</span>
+<span id="767">767</span>
+<span id="768">768</span>
+<span id="769">769</span>
+<span id="770">770</span>
+<span id="771">771</span>
+</pre><pre class="rust"><code><span class="attribute">#![doc = <span class="macro">include_str!</span>(<span class="string">&quot;../README.md&quot;</span>)]
 #![forbid(missing_docs)]
 
 #[cfg(target_os = <span class="string">&quot;windows&quot;</span>)]
@@ -790,7 +801,11 @@
     </span>{
         webview2::get_available_browser_version_string(<span class="prelude-val">None</span>).is_ok()
     }
-    <span class="attribute">#[cfg(not(target_os = <span class="string">&quot;windows&quot;</span>))]
+    <span class="attribute">#[cfg(target_os = <span class="string">&quot;linux&quot;</span>)]
+    </span>{
+        <span class="bool-val">false
+    </span>}
+    <span class="attribute">#[cfg(not(any(target_os = <span class="string">&quot;windows&quot;</span>, target_os = <span class="string">&quot;linux&quot;</span>)))]
     </span>{
         <span class="bool-val">true
     </span>}
@@ -828,7 +843,8 @@
     }
 }
 
-<span class="kw">fn </span>utf_16_null_terminiated(x: <span class="kw-2">&amp;</span>str) -&gt; Vec&lt;u16&gt; {
+<span class="attribute">#[cfg(target_os = <span class="string">&quot;windows&quot;</span>)]
+</span><span class="kw">fn </span>utf_16_null_terminiated(x: <span class="kw-2">&amp;</span>str) -&gt; Vec&lt;u16&gt; {
     x.encode_utf16().chain(std::iter::once(<span class="number">0</span>)).collect()
 }
 
@@ -904,84 +920,92 @@
         }
     }
 
-    <span class="attribute">#[cfg(target_os = <span class="string">&quot;linux&quot;</span>)]
+    <span class="comment">// // 由于 webkit2gtk-rs 不跟进更新，导致原生依赖库版本冲突，故暂时移除支持
+
+    </span><span class="attribute">#[cfg(target_os = <span class="string">&quot;linux&quot;</span>)]
     #[inline(always)]
     </span><span class="kw">fn </span>run_linux(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; DynResult&lt;String&gt; {
-        <span class="kw">use </span>std::sync::<span class="kw-2">*</span>;
-
-        <span class="kw">use </span>::glib::idle_add_once;
-        <span class="kw">use </span>gtk::{prelude::<span class="kw-2">*</span>, WindowType};
-        <span class="kw">use </span>webkit2gtk::{traits::<span class="kw-2">*</span>, <span class="kw-2">*</span>};
-
-        <span class="kw">let </span>title = <span class="self">self</span>.title.to_owned();
-        <span class="kw">let </span>size = <span class="self">self</span>.fixed_size.to_owned();
-        <span class="kw">let </span>begin_url = <span class="self">self</span>.begin_url.to_owned();
-        <span class="kw">let </span>callback = <span class="self">self</span>.url_change_callback.to_owned();
-
-        <span class="comment">// Channel
-        </span><span class="kw">let </span>deleted = Arc::new(atomic::AtomicBool::new(<span class="bool-val">false</span>));
-        <span class="kw">let </span>(tx, rx) = mpsc::channel();
-
-        idle_add_once(<span class="kw">move </span>|| {
-            <span class="kw">if </span>!gtk::is_initialized_main_thread() {
-                gtk::init().unwrap();
-            }
-
-            <span class="kw">let </span>win = Arc::new(gtk::Window::new(WindowType::Toplevel));
-            <span class="kw">let </span>loaded = Arc::new(atomic::AtomicBool::new(<span class="bool-val">false</span>));
-
-            win.set_resizable(<span class="bool-val">false</span>);
-            win.set_title(<span class="kw-2">&amp;</span>title);
-
-            <span class="kw">if let </span><span class="prelude-val">Some</span>((width, height)) = size {
-                win.set_size_request(width <span class="kw">as _</span>, height <span class="kw">as _</span>);
-            } <span class="kw">else </span>{
-                win.set_size_request(<span class="number">640</span>, <span class="number">480</span>);
-            }
-
-            <span class="kw">let </span>w = webkit2gtk::WebView::new();
-            w.load_uri(<span class="kw-2">&amp;</span>begin_url);
-
-            <span class="kw">let </span>_win = win.clone();
-            <span class="kw">let </span>_tx = tx.clone();
-            <span class="kw">let </span>_loaded = loaded.clone();
-            w.connect_load_changed(<span class="kw">move </span>|w, load_event| {
-                <span class="kw">if </span>load_event == LoadEvent::Finished {
-                    <span class="kw">let </span>url = w.uri().unwrap().to_string();
-                    <span class="kw">if let </span><span class="prelude-val">Some</span>(callback) = callback {
-                        <span class="kw">if </span>callback(<span class="kw-2">&amp;</span>url) {
-                            _loaded.store(<span class="bool-val">true</span>, atomic::Ordering::SeqCst);
-                            _win.close();
-                            _tx.send(url).unwrap();
-                        }
-                    }
-                }
-            });
-
-            <span class="kw">let </span>_deleted = deleted.clone();
-            win.connect_destroy(<span class="kw">move </span>|<span class="kw">_</span>| {
-                _deleted.store(<span class="bool-val">true</span>, atomic::Ordering::SeqCst);
-                <span class="kw">if </span>!loaded.load(atomic::Ordering::SeqCst) {
-                    tx.send(<span class="string">&quot;&quot;</span>.into()).unwrap();
-                }
-            });
-
-            win.add(<span class="kw-2">&amp;</span>w);
-            win.show_all();
-
-            <span class="kw">loop </span>{
-                gtk::main_iteration_do(<span class="bool-val">false</span>);
-                <span class="kw">if </span>deleted.load(atomic::Ordering::SeqCst) {
-                    <span class="kw">break</span>;
-                }
-            }
-        });
-        <span class="kw">let </span>result = rx.recv().unwrap();
-
-        <span class="prelude-val">Ok</span>(result)
+        <span class="prelude-val">Ok</span>(<span class="string">&quot;&quot;</span>.into())
     }
 
-    <span class="attribute">#[cfg(target_os = <span class="string">&quot;macos&quot;</span>)]
+    <span class="comment">// #[cfg(target_os = &quot;linux&quot;)]
+    // #[inline(always)]
+    // fn run_linux(&amp;mut self) -&gt; DynResult&lt;String&gt; {
+    //     use std::sync::*;
+
+    //     use ::glib::idle_add_once;
+    //     use gtk::{prelude::*, WindowType};
+    //     use webkit2gtk::{traits::*, *};
+
+    //     let title = self.title.to_owned();
+    //     let size = self.fixed_size.to_owned();
+    //     let begin_url = self.begin_url.to_owned();
+    //     let callback = self.url_change_callback.to_owned();
+
+    //     // Channel
+    //     let deleted = Arc::new(atomic::AtomicBool::new(false));
+    //     let (tx, rx) = mpsc::channel::&lt;String&gt;();
+
+    //     idle_add_once(move || {
+    //         if !gtk::is_initialized_main_thread() {
+    //             gtk::init().unwrap();
+    //         }
+
+    //         let win = Arc::new(gtk::Window::new(WindowType::Toplevel));
+    //         let loaded = Arc::new(atomic::AtomicBool::new(false));
+
+    //         win.set_resizable(false);
+    //         win.set_title(&amp;title);
+
+    //         if let Some((width, height)) = size {
+    //             win.set_size_request(width as _, height as _);
+    //         } else {
+    //             win.set_size_request(640, 480);
+    //         }
+
+    //         let w = webkit2gtk::WebView::new();
+    //         w.load_uri(&amp;begin_url);
+
+    //         let _win = win.clone();
+    //         let _tx = tx.clone();
+    //         let _loaded = loaded.clone();
+    //         w.connect_load_changed(move |w, load_event| {
+    //             if load_event == LoadEvent::Finished {
+    //                 let url = w.get_uri().unwrap().to_string();
+    //                 if let Some(callback) = callback {
+    //                     if callback(&amp;url) {
+    //                         _loaded.store(true, atomic::Ordering::SeqCst);
+    //                         _win.close();
+    //                         _tx.send(url).unwrap();
+    //                     }
+    //                 }
+    //             }
+    //         });
+
+    //         let _deleted = deleted.clone();
+    //         win.connect_destroy(move |_| {
+    //             _deleted.store(true, atomic::Ordering::SeqCst);
+    //             if !loaded.load(atomic::Ordering::SeqCst) {
+    //                 tx.send(&quot;&quot;.to_string()).unwrap();
+    //             }
+    //         });
+
+    //         win.add(&amp;w);
+    //         win.show_all();
+
+    //         loop {
+    //             gtk::main_iteration_do(false);
+    //             if deleted.load(atomic::Ordering::SeqCst) {
+    //                 break;
+    //             }
+    //         }
+    //     });
+    //     let result = rx.recv().unwrap();
+
+    //     Ok(result)
+    // }
+
+    </span><span class="attribute">#[cfg(target_os = <span class="string">&quot;macos&quot;</span>)]
     #[inline(always)]
     </span><span class="kw">fn </span>run_macos(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; DynResult&lt;String&gt; {
         <span class="kw">use </span>std::sync::mpsc::Sender;
@@ -992,11 +1016,11 @@
                 NSViewWidthSizable, NSWindow, NSWindowStyleMask,
             },
             base::<span class="kw-2">*</span>,
-            foundation::{NSAutoreleasePool, NSString, NSURL},
+            foundation::NSString,
         };
         <span class="kw">use </span>core_graphics::geometry::{CGPoint, CGRect, CGSize};
         <span class="kw">use </span>darwin_webkit::{
-            foundation::NSURLRequest,
+            foundation::{NSURLRequest, NSURL},
             webkit::{WKUserContentController, WKWebViewConfiguration},
         };
         <span class="kw">use </span>objc::{
@@ -1024,12 +1048,12 @@
 
                 <span class="comment">// === WebViewWindowControllerClass ===
 
-                </span><span class="kw">struct </span>WebViewWindowControllerClass(<span class="kw-2">*const </span>objc::runtime::Class);
-                <span class="kw">unsafe impl </span>Sync <span class="kw">for </span>WebViewWindowControllerClass {}
-                <span class="kw">unsafe impl </span>Send <span class="kw">for </span>WebViewWindowControllerClass {}
+                </span><span class="kw">struct </span>WebViewWindowDelegate(<span class="kw-2">*const </span>objc::runtime::Class);
+                <span class="kw">unsafe impl </span>Sync <span class="kw">for </span>WebViewWindowDelegate {}
+                <span class="kw">unsafe impl </span>Send <span class="kw">for </span>WebViewWindowDelegate {}
 
-                <span class="kw">static </span>WEBVIEW_WINDOW_CONTROLLER: Lazy&lt;WebViewWindowControllerClass&gt; = Lazy::new(|| <span class="kw">unsafe </span>{
-                    <span class="kw">let </span><span class="kw-2">mut </span>decl = ClassDecl::new(<span class="string">&quot;SCLWebViewWindowController&quot;</span>, <span class="macro">class!</span>(NSWindowController)).unwrap();
+                <span class="kw">static </span>WEB_VIEW_WINDOW_DELEGATE: Lazy&lt;WebViewWindowDelegate&gt; = Lazy::new(|| <span class="kw">unsafe </span>{
+                    <span class="kw">let </span><span class="kw-2">mut </span>decl = ClassDecl::new(<span class="string">&quot;SCLWebViewWindowDelegate&quot;</span>, <span class="macro">class!</span>(NSObject)).unwrap();
 
                     decl.add_ivar::&lt;id&gt;(<span class="string">&quot;webview&quot;</span>);
                     decl.add_ivar::&lt;usize&gt;(<span class="string">&quot;urlSender&quot;</span>);
@@ -1038,11 +1062,11 @@
                         <span class="kw">unsafe </span>{
                             <span class="macro">println!</span>(<span class="string">&quot;WindowWillClose&quot;</span>);
                             <span class="kw">let </span>url_sender = <span class="kw-2">*</span>this.get_ivar::&lt;usize&gt;(<span class="string">&quot;urlSender&quot;</span>);
+                            <span class="kw">let </span>webview = <span class="macro">dbg!</span>(<span class="kw-2">*</span>this.get_ivar::&lt;id&gt;(<span class="string">&quot;webview&quot;</span>));
                             <span class="kw">if </span>url_sender != <span class="number">0 </span>{
                                 <span class="kw">let </span>sx = <span class="kw-2">&amp;mut *</span>(url_sender <span class="kw">as </span><span class="kw-2">*mut </span>Sender&lt;String&gt;);
                                 <span class="kw">let _ </span>= <span class="macro">dbg!</span>(sx.send(<span class="string">&quot;&quot;</span>.into()));
 
-                                <span class="kw">let </span>webview = <span class="kw-2">*</span>this.get_ivar::&lt;id&gt;(<span class="string">&quot;webview&quot;</span>);
                                 <span class="kw">if </span>!webview.is_null() {
                                     (<span class="kw-2">*</span>webview).set_ivar(<span class="string">&quot;urlSender&quot;</span>, <span class="number">0usize</span>);
                                 }
@@ -1051,8 +1075,9 @@
                                 drop(Box::from_raw(sx));
                                 <span class="macro">println!</span>(<span class="string">&quot;Empty URL Sent&quot;</span>);
                             }
-                            <span class="kw">let </span>webview = <span class="kw-2">*</span>this.get_ivar::&lt;id&gt;(<span class="string">&quot;webview&quot;</span>);
                             <span class="kw">if </span>!webview.is_null() {
+                                this.set_ivar::&lt;id&gt;(<span class="string">&quot;webview&quot;</span>, std::ptr::null_mut());
+                                <span class="macro">println!</span>(<span class="string">&quot;Release webview&quot;</span>);
                                 <span class="kw">let _</span>: id = <span class="macro">msg_send!</span>[webview, release];
                             }
                             <span class="kw">let _</span>: id = <span class="macro">msg_send!</span>[this, release];
@@ -1061,7 +1086,7 @@
 
                     decl.add_method(<span class="macro">sel!</span>(windowWillClose:), window_will_close <span class="kw">as extern </span><span class="string">&quot;C&quot; </span><span class="kw">fn</span>(<span class="kw-2">&amp;mut </span>Object, Sel, id),);
 
-                    WebViewWindowControllerClass(decl.register())
+                    WebViewWindowDelegate(decl.register())
                 });
 
                 <span class="comment">// === SCLWebViewClass ===
@@ -1083,8 +1108,7 @@
                                 <span class="comment">// 出错了
                                 </span><span class="macro">println!</span>(<span class="string">&quot;WARNING: URL is null!&quot;</span>);
                                 <span class="kw">let </span>win: id = <span class="macro">msg_send!</span>[this, window];
-                                <span class="kw">let </span>win_ctl: id = <span class="macro">msg_send!</span>[win, windowController];
-                                <span class="kw">let </span>url_sender = <span class="macro">dbg!</span>(<span class="kw-2">*</span>(<span class="kw-2">*</span>win_ctl).get_ivar::&lt;usize&gt;(<span class="string">&quot;urlSender&quot;</span>));
+                                <span class="kw">let </span>url_sender = <span class="kw-2">*</span>(<span class="kw-2">*</span>this).get_ivar::&lt;usize&gt;(<span class="string">&quot;urlSender&quot;</span>);
                                 <span class="kw">if </span>url_sender != <span class="number">0 </span>{
                                     <span class="kw">let </span>sx = <span class="kw-2">&amp;mut *</span>(url_sender <span class="kw">as </span><span class="kw-2">*mut </span>Sender&lt;String&gt;);
                                     <span class="kw">let _ </span>= <span class="macro">dbg!</span>(sx.send(<span class="string">&quot;&quot;</span>.into()));
@@ -1092,8 +1116,11 @@
                                     drop(Box::from_raw(sx));
                                     <span class="macro">println!</span>(<span class="string">&quot;Empty URL Sent&quot;</span>);
                                 }
-                                (<span class="kw-2">*</span>win_ctl).set_ivar(<span class="string">&quot;urlSender&quot;</span>, <span class="number">0usize</span>);
-                                <span class="kw">let _</span>: id = <span class="macro">msg_send!</span>[this, release];
+                                <span class="kw">let </span>delegate = win.delegate();
+                                <span class="kw">if </span>!delegate.is_null() {
+                                    (<span class="kw-2">*</span>delegate).set_ivar(<span class="string">&quot;webview&quot;</span>, nil);
+                                    (<span class="kw-2">*</span>delegate).set_ivar(<span class="string">&quot;urlSender&quot;</span>, <span class="number">0usize</span>);
+                                }
                                 win.close();
                                 <span class="kw">return</span>;
                             }
@@ -1114,9 +1141,12 @@
                                     <span class="macro">println!</span>(<span class="string">&quot;URL Sent&quot;</span>);
                                 }
                                 <span class="kw">let </span>win: id = <span class="macro">msg_send!</span>[this, window];
-                                <span class="kw">let </span>win_ctl: id = <span class="macro">msg_send!</span>[win, windowController];
-                                (<span class="kw-2">*</span>win_ctl).set_ivar(<span class="string">&quot;urlSender&quot;</span>, <span class="number">0usize</span>);
                                 <span class="kw">let _</span>: id = <span class="macro">msg_send!</span>[this, release];
+                                <span class="kw">let </span>delegate = win.delegate();
+                                <span class="kw">if </span>!delegate.is_null() {
+                                    (<span class="kw-2">*</span>delegate).set_ivar(<span class="string">&quot;webview&quot;</span>, nil);
+                                    (<span class="kw-2">*</span>delegate).set_ivar(<span class="string">&quot;urlSender&quot;</span>, <span class="number">0usize</span>);
+                                }
                                 win.close();
                             }
                         }
@@ -1130,36 +1160,30 @@
                 <span class="comment">// === Setup ==
 
                 // 创建窗口
-                </span><span class="kw">let </span>win_ctl_cls: id = <span class="macro">msg_send!</span>[WEBVIEW_WINDOW_CONTROLLER.<span class="number">0</span>, alloc];
-                (<span class="kw-2">*</span>win_ctl_cls).set_ivar(<span class="string">&quot;urlSender&quot;</span>, sx);
-                <span class="kw">let </span>win_cls: id = <span class="macro">msg_send!</span>[<span class="macro">class!</span>(NSWindow), alloc];
+                </span><span class="kw">let </span>win: id = <span class="macro">msg_send!</span>[<span class="macro">class!</span>(NSWindow), alloc];
                 <span class="kw">let </span>mask = NSWindowStyleMask::NSTitledWindowMask | NSWindowStyleMask::NSClosableWindowMask | NSWindowStyleMask::NSFullSizeContentViewWindowMask;
-                <span class="kw">let </span>win: id = <span class="macro">msg_send!</span>[win_cls, initWithContentRect: rect styleMask: mask  backing: NSBackingStoreBuffered defer: NO];
+                <span class="kw">let _</span>: id = <span class="macro">msg_send!</span>[win, initWithContentRect: rect styleMask: mask  backing: NSBackingStoreBuffered defer: NO];
                 <span class="comment">// 设置窗口标题
                 </span><span class="kw">let </span>title_string = NSString::alloc(nil)
                     .init_str(<span class="kw-2">&amp;</span>title);
                 win.setTitle_(title_string);
-                <span class="kw">let </span>win_ctl: id = <span class="macro">msg_send!</span>[win_ctl_cls, initWithWindow: win];
-                <span class="comment">// 挂载关闭事件，否则不能退出模态状态
-                </span><span class="kw">let </span>ns_nc: id = <span class="macro">msg_send!</span>[<span class="macro">class!</span>(NSNotificationCenter), defaultCenter];
-                <span class="kw">let </span>notif_string = NSString::alloc(nil)
-                    .init_str(<span class="string">&quot;NSWindowWillCloseNotification&quot;</span>)
-                    .autorelease();
-                <span class="kw">let _</span>: id = <span class="macro">msg_send!</span>[ns_nc, addObserver:win_ctl selector:<span class="macro">sel!</span>(windowWillClose:) name:notif_string object:nil];
+                <span class="comment">// 准备窗口代理，接收窗口关闭的信息
+                </span><span class="kw">let </span>delegate: id = <span class="macro">msg_send!</span>[WEB_VIEW_WINDOW_DELEGATE.<span class="number">0</span>, alloc];
+                (<span class="kw-2">*</span>delegate).set_ivar(<span class="string">&quot;urlSender&quot;</span>, sx);
+                win.setDelegate_(delegate);
                 <span class="comment">// 准备 WKWebView 视图
                 </span><span class="kw">let </span>configuration = WKWebViewConfiguration::init(WKWebViewConfiguration::alloc(nil));
                 <span class="comment">// 我们不保留任何数据，以避免自动登录的问题
                 </span><span class="kw">let </span>non_persistent_data_store: id = <span class="macro">msg_send!</span>[<span class="macro">class!</span>(WKWebsiteDataStore), nonPersistentDataStore];
                 <span class="kw">let _</span>: id = <span class="macro">msg_send!</span>[configuration, setWebsiteDataStore: non_persistent_data_store];
-                <span class="comment">// (*configuration).set_ivar(&quot;websiteDataStore&quot;, non_persistent_data_store);
-                </span><span class="kw">let </span>content_controller = WKUserContentController::init(WKUserContentController::alloc(nil));
+                <span class="kw">let </span>content_controller = WKUserContentController::init(WKUserContentController::alloc(nil));
                 configuration.setUserContentController(content_controller);
-                <span class="comment">// let frame = cocoa::appkit::NSWindow::frame(win);
-                </span><span class="kw">let </span>webview: id = <span class="macro">msg_send!</span>[SCL_WEBVIEW.<span class="number">0</span>, alloc];
+                <span class="kw">let </span>webview: id = <span class="macro">msg_send!</span>[SCL_WEBVIEW.<span class="number">0</span>, alloc];
                 <span class="kw">let </span>webview: id = <span class="macro">msg_send!</span>[webview, initWithFrame:rect configuration:configuration];
                 <span class="comment">// 把回调函数导入到 WebView 内
                 </span>(<span class="kw-2">*</span>webview).set_ivar(<span class="string">&quot;urlChangeCallback&quot;</span>, callback <span class="kw">as </span><span class="kw-2">*const </span>libc::c_void);
                 (<span class="kw-2">*</span>webview).set_ivar(<span class="string">&quot;urlSender&quot;</span>, sx);
+                (<span class="kw-2">*</span>delegate).set_ivar(<span class="string">&quot;webview&quot;</span>, webview);
                 <span class="comment">// 让视图和窗口一起缩放
                 </span>NSView::setAutoresizingMask_(webview, NSViewWidthSizable | NSViewHeightSizable);
                 <span class="comment">// 创建请求并让 WebView 去请求跳转
@@ -1169,11 +1193,9 @@
                 <span class="kw">let _</span>: id = <span class="macro">msg_send!</span>[webview, loadRequest: req];
                 <span class="comment">// 挂载链接变化事件
                 </span><span class="kw">let </span>keypath_string = NSString::alloc(nil)
-                    .init_str(<span class="string">&quot;URL&quot;</span>)
-                    .autorelease();
+                    .init_str(<span class="string">&quot;URL&quot;</span>);
                 <span class="kw">let </span>change_string = NSString::alloc(nil)
-                    .init_str(<span class="string">&quot;NSKeyValueChangeNewKey&quot;</span>)
-                    .autorelease();
+                    .init_str(<span class="string">&quot;NSKeyValueChangeNewKey&quot;</span>);
                 <span class="kw">let _</span>: id = <span class="macro">msg_send!</span>[webview, addObserver: webview forKeyPath: keypath_string options: change_string context: nil];
                 <span class="comment">// 设置窗口的视图为 WKWebView
                 </span>win.setContentView_(webview);
@@ -1208,7 +1230,7 @@
             .to_string_lossy()
             .to_string();
         <span class="kw">let </span>user_data_path = std::path::Path::new(<span class="kw-2">&amp;</span>user_data_path);
-        std::fs::remove_dir_all(<span class="kw-2">&amp;</span>user_data_path).unwrap_or_default();
+        std::fs::remove_dir_all(user_data_path).unwrap_or_default();
         <span class="kw">let </span>final_url = Rc::new(RefCell::new(String::new()));
 
         <span class="kw">if </span>webview2::get_available_browser_version_string(<span class="prelude-val">None</span>).is_ok() {
@@ -1519,4 +1541,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="scl_webview" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="scl_webview" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0 (69f9c33d7 2022-12-12)" ></div></body></html>

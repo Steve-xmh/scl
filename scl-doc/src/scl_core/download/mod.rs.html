@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/download/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../scl_core/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../scl_core/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `scl-core/src/download/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../scl_core/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -337,6 +337,19 @@
 <span id="337">337</span>
 <span id="338">338</span>
 <span id="339">339</span>
+<span id="340">340</span>
+<span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
+<span id="347">347</span>
+<span id="348">348</span>
+<span id="349">349</span>
+<span id="350">350</span>
+<span id="351">351</span>
+<span id="352">352</span>
 </pre><pre class="rust"><code><span class="doccomment">//! 游戏资源下载模块，所有的游戏/模组/模组中文名称等数据的获取和安装都在这里
 
 </span><span class="kw">pub mod </span>authlib;
@@ -346,6 +359,7 @@
 <span class="kw">pub mod </span>mcmod;
 <span class="kw">pub mod </span>modrinth;
 <span class="kw">pub mod </span>optifine;
+<span class="kw">pub mod </span>quiltmc;
 <span class="kw">pub mod </span>structs;
 <span class="kw">pub mod </span>vanilla;
 
@@ -357,6 +371,7 @@
 <span class="kw">pub use </span>fabric::FabricDownloadExt;
 <span class="kw">pub use </span>forge::ForgeDownloadExt;
 <span class="kw">pub use </span>optifine::OptifineDownloadExt;
+<span class="kw">pub use </span>quiltmc::QuiltMCDownloadExt;
 <span class="kw">use </span>serde::{Deserialize, Serialize};
 <span class="kw">pub use </span>vanilla::VanillaDownloadExt;
 
@@ -584,13 +599,16 @@
 
 <span class="doccomment">/// 一个游戏安装特质，如果你并不需要单独安装其它部件，则可以单独引入这个特质来安装游戏
 </span><span class="attribute">#[async_trait]
-</span><span class="kw">pub trait </span>GameDownload&lt;<span class="lifetime">&#39;a</span>&gt;: FabricDownloadExt + ForgeDownloadExt + VanillaDownloadExt {
+</span><span class="kw">pub trait </span>GameDownload&lt;<span class="lifetime">&#39;a</span>&gt;:
+    FabricDownloadExt + ForgeDownloadExt + VanillaDownloadExt + QuiltMCDownloadExt
+{
     <span class="doccomment">/// 根据参数安装一个游戏，允许安装模组加载器
     </span><span class="kw">async fn </span>download_game(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         version_name: <span class="kw-2">&amp;</span>str,
         vanilla: VersionInfo,
         fabric: <span class="kw-2">&amp;</span>str,
+        quiltmc: <span class="kw-2">&amp;</span>str,
         forge: <span class="kw-2">&amp;</span>str,
         optifine: <span class="kw-2">&amp;</span>str,
     ) -&gt; DynResult;
@@ -603,6 +621,7 @@
         version_name: <span class="kw-2">&amp;</span>str,
         vanilla: VersionInfo,
         fabric: <span class="kw-2">&amp;</span>str,
+        quiltmc: <span class="kw-2">&amp;</span>str,
         forge: <span class="kw-2">&amp;</span>str,
         optifine: <span class="kw-2">&amp;</span>str,
     ) -&gt; DynResult {
@@ -624,6 +643,13 @@
             )
             .<span class="kw">await</span><span class="question-mark">?</span>;
             <span class="self">self</span>.download_fabric_post(version_name).<span class="kw">await</span><span class="question-mark">?</span>;
+        } <span class="kw">else if </span>!quiltmc.is_empty() {
+            <span class="kw">crate</span>::prelude::inner_future::future::try_zip(
+                <span class="self">self</span>.install_vanilla(version_name, <span class="kw-2">&amp;</span>vanilla),
+                <span class="self">self</span>.download_quiltmc_pre(version_name, <span class="kw-2">&amp;</span>vanilla.id, quiltmc),
+            )
+            .<span class="kw">await</span><span class="question-mark">?</span>;
+            <span class="self">self</span>.download_quiltmc_post(version_name).<span class="kw">await</span><span class="question-mark">?</span>;
         } <span class="kw">else if </span>!forge.is_empty() {
             <span class="self">self</span>.install_vanilla(<span class="kw-2">&amp;</span>vanilla.id, <span class="kw-2">&amp;</span>vanilla).<span class="kw">await</span><span class="question-mark">?</span>; <span class="comment">// Forge 安装需要原版，如果安装器没有解析到则会从官方源下载，速度很慢
             </span><span class="kw">crate</span>::prelude::inner_future::future::try_zip(
@@ -677,4 +703,4 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0 (897e37553 2022-11-02)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="scl_core" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0 (69f9c33d7 2022-12-12)" ></div></body></html>
