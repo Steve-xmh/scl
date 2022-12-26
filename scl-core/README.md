@@ -19,7 +19,8 @@
 - 自定义启动参数
 - 正版登录（Mojang, Microsoft（你需要自行获取到回调链接））
 - 多下载源（BMCLAPI MCBBS MC）
-- Curseforge 模组检索/下载
+- Curseforge/Modrinth 模组检索/下载
+- 整合包安装下载，仅支持 Curseforge 整合包
 
 ## 部分引用的 JAR 的原仓库
 
