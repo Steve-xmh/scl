@@ -133,7 +133,7 @@ pub async fn auth_mojang(
 /// 刷新/续期访问令牌
 pub async fn refresh_auth(am: &mut AuthMethod, client_token: &str) -> DynResult<bool> {
     if let &mut AuthMethod::Microsoft { .. } = am {
-        return Ok(microsoft::refresh_auth(am).await.is_ok());
+        return Ok(microsoft::leagcy::refresh_auth(am).await.is_ok());
     }
     match am {
         AuthMethod::Mojang { access_token, .. } => {
