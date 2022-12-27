@@ -183,7 +183,7 @@
     <span class="doccomment">/// 这个不是真正的模组 ID，而是服务器中记录的数字 ID
     </span><span class="attribute">#[serde(deserialize_with = <span class="string">&quot;deserialize_null_default&quot;</span>)]
     #[serde(default)]
-    </span><span class="kw">pub </span>mod_id: String,
+    </span><span class="kw">pub </span>project_id: String,
     <span class="doccomment">/// 用于短链接的模组名，大部分应该都是模组 ID
     </span><span class="attribute">#[serde(deserialize_with = <span class="string">&quot;deserialize_null_default&quot;</span>)]
     </span><span class="kw">pub </span>slug: String,
@@ -339,7 +339,7 @@
     <span class="prelude-val">Ok</span>(r.hits
         .into_iter()
         .map(|<span class="kw-2">mut </span>a| {
-            a.mod_id = a.mod_id.trim_start_matches(<span class="string">&quot;local-&quot;</span>).to_owned();
+            a.project_id = a.project_id.trim_start_matches(<span class="string">&quot;local-&quot;</span>).to_owned();
             a
         })
         .collect())
