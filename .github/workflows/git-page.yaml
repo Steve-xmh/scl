@@ -38,6 +38,13 @@ jobs:
         run: |
           cargo doc --manifest-path=scl-src/Cargo.toml --all-features --no-deps
           cp -rf scl-src/target/doc site/scl-doc
+      - name: 写入 Microsoft 应用代码
+        uses: DamianReeves/write-file-action@master
+        with:
+          path: ./site/.well-known/microsoft-identity-association.json
+          contents: |
+            {"associatedApplications":[{"applicationId":"baa479dc-3c41-47e5-8bf4-b468d4c989c7"}]}
+          write-mode: append
       - name: 部署到 Github Pages 分支
         uses: peaceiris/actions-gh-pages@v3
         with:
