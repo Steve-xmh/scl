@@ -1,5 +1,7 @@
 //! 微软登录模块，通过设备码方式获取玩家的 Microsoft 账户令牌，进而获取 Minecraft 用户令牌
 
+use std::fmt::Display;
+
 use serde::Deserialize;
 
 use super::structs::AuthMethod;
@@ -13,16 +15,14 @@ use leagcy::*;
 /// 注册一个应用，并将其客户端 ID 提供至此使用。
 ///
 /// 具体请查阅 <https://wiki.vg/Microsoft_Authentication_Scheme>
-pub struct MicrosoftOAuth {
-    client_id: String,
+pub struct MicrosoftOAuth<T> {
+    client_id: T,
 }
 
-impl MicrosoftOAuth {
+impl<T: Display> MicrosoftOAuth<T> {
     /// 通过客户端 ID 创建一个新的验证对象
-    pub fn new(client_id: &str) -> Self {
-        Self {
-            client_id: client_id.to_string(),
-        }
+    pub const fn new(client_id: T) -> Self {
+        Self { client_id }
     }
 
     /// 获取一个设备码，将其展示给用户以完成浏览器验证
@@ -38,8 +38,6 @@ impl MicrosoftOAuth {
         .recv_json::<DeviceCodeResponse>()
         .await
         .map_err(|err| anyhow::anyhow!("请求设备码时发生错误：{}", err))?;
-
-        println!("res: {:#?}", res);
 
         Ok(res)
     }
