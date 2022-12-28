@@ -215,20 +215,20 @@ impl<T: Display> MicrosoftOAuth<T> {
         {
             println!("正在刷新令牌");
             let new_token = self.refresh_token(refresh_token.as_str()).await?;
-            
+
             *refresh_token = new_token.refresh_token.into();
-            
+
             let (uhs, xsts_token) = self.auth_xbox_live(&new_token.access_token).await?;
-            
+
             println!("正在获取 Mojang 访问令牌");
             let new_access_token = leagcy::get_mojang_access_token(&uhs, &xsts_token).await?;
-            
+
             anyhow::ensure!(
                 !new_access_token.is_empty(),
                 "刷新令牌失败: {}",
                 new_access_token
             );
-            
+
             *access_token = new_access_token.into();
             Ok(())
         } else {
