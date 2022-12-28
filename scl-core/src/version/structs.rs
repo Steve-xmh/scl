@@ -478,6 +478,45 @@ impl VersionInfo {
         }
     }
 
+    /// 删除版本文件夹，约等于删除整个版本
+    ///
+    /// 但是注意本操作不会清理 assets 文件夹和 libraries 文件夹的内容
+    pub async fn delete(self) {
+        let version_base_path = Path::new(&self.version_base);
+        if version_base_path.is_dir() {
+            let version_path = version_base_path.join(&self.version);
+            let _ = inner_future::fs::remove_dir_all(version_path).await;
+        }
+    }
+
+    /// 重命名版本，如果目标版本名没有已有版本则会尝试重命名版本文件夹到该名称下
+    pub async fn rename_version(&mut self, new_version_name: &str) -> DynResult {
+        let version_base_path = Path::new(&self.version_base);
+        if version_base_path.is_dir() {
+            let version_path = version_base_path.join(&self.version);
+            let version_jar_path = version_path.join(format!("{}.jar", self.version));
+            let version_json_path = version_path.join(format!("{}.json", self.version));
+            let new_version_path = version_base_path.join(new_version_name);
+            let new_version_jar_path = version_path.join(format!("{}.jar", new_version_name));
+            let new_version_json_path = version_path.join(format!("{}.json", new_version_name));
+            if new_version_path.is_dir() {
+                anyhow::bail!("目标版本名称已存在")
+            } else {
+                if version_jar_path.is_file() {
+                    inner_future::fs::rename(version_jar_path, new_version_jar_path).await?;
+                }
+                if version_json_path.is_file() {
+                    inner_future::fs::rename(version_json_path, new_version_json_path).await?
+                };
+                inner_future::fs::rename(version_path, new_version_path).await?;
+                self.version = new_version_name.to_owned();
+                Ok(())
+            }
+        } else {
+            anyhow::bail!("文件夹不存在")
+        }
+    }
+
     /// 保存元数据和独立版本设置
     pub async fn save(&self) -> DynResult {
         let version_base_path = Path::new(&self.version_base);
