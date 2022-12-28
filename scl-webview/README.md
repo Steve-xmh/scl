@@ -6,6 +6,4 @@
 - 在 Linux 上使用 Webkit2GTK
 - 在 MacOS 上使用 WebKit
 
-目前已知问题：
-
-- MacOS 上的 WebKit 渲染进程在 WebView 关闭后仍然存在并占用内存
+由于自 SCL 1.1.0 开始使用设备流验证，故本框架不再维护使用。
