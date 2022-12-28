@@ -155,8 +155,8 @@ impl<D: Data> Widget<D> for DownloadModuleItem<D> {
         let desc_bc = min_bc.shrink((50., 0.));
         let _text_size = self.text.layout(ctx, &text_bc, data, env);
         let _desc_size = self.desc.layout(ctx, &desc_bc, data, env);
-        self.text.set_origin(ctx, data, env, (40., 0.).into());
-        self.desc.set_origin(ctx, data, env, (40., 0.).into());
+        self.text.set_origin(ctx, (40., 0.).into());
+        self.desc.set_origin(ctx, (40., 0.).into());
         min_bc.constrain((0., min_height))
     }
 

@@ -10,7 +10,7 @@ pub struct ModResult {
     /// 这个不是真正的模组 ID，而是服务器中记录的数字 ID
     #[serde(deserialize_with = "deserialize_null_default")]
     #[serde(default)]
-    pub mod_id: String,
+    pub project_id: String,
     /// 用于短链接的模组名，大部分应该都是模组 ID
     #[serde(deserialize_with = "deserialize_null_default")]
     pub slug: String,
@@ -75,7 +75,7 @@ pub struct SearchParams {
 /// 根据模组 ID 获取可以下载的模组文件
 pub async fn get_mod_files(modid: &str) -> DynResult<Vec<ModVersion>> {
     crate::http::retry_get_json(format!(
-        "https://api.modrinth.com/api/v1/mod/{}/version",
+        "https://api.modrinth.com/v2/project/{}/version",
         modid
     ))
     .await
@@ -83,7 +83,7 @@ pub async fn get_mod_files(modid: &str) -> DynResult<Vec<ModVersion>> {
 
 /// 根据模组 ID 获取模组信息
 pub async fn get_mod_info(modid: &str) -> DynResult<ModResult> {
-    crate::http::retry_get_json(format!("https://api.modrinth.com/api/v1/mod/{}", modid)).await
+    crate::http::retry_get_json(format!("https://api.modrinth.com/v2/project/{}", modid)).await
 }
 
 /// 根据模组 ID 获取模组图标
@@ -91,17 +91,23 @@ pub async fn get_mod_info(modid: &str) -> DynResult<ModResult> {
 /// 如果图标不存在则返回一个 1x1 的透明像素图片
 pub async fn get_mod_icon(modid: &str) -> DynResult<DynamicImage> {
     let info = get_mod_info(modid).await?;
-    if info.icon_url.is_empty() {
+    get_mod_icon_by_url(&info.icon_url).await
+}
+
+/// 根据模组图片直链获取模组图标
+///
+/// 如果图标不存在则返回一个 1x1 的透明像素图片
+pub async fn get_mod_icon_by_url(url: &str) -> DynResult<DynamicImage> {
+    if url.is_empty() {
         let mut img = image::RgbaImage::new(1, 1);
         img.put_pixel(0, 0, image::Rgba([0xFF, 0xFF, 0xFF, 0]));
         return Ok(image::DynamicImage::ImageRgba8(img));
     }
-    let data = crate::http::get(&info.icon_url)?
-        .await?
+    let data = crate::http::get(url)
         .recv_bytes()
         .await?;
     // Modrinth 允许的图片格式有： .bmp .gif .jpeg .png .svg .svgz .webp .rgb
-    if info.icon_url.ends_with(".webp") {
+    if url.ends_with(".webp") {
         // 使用 webp 读取
         let img = webp::Decoder::new(&data)
             .decode()
@@ -121,14 +127,14 @@ pub async fn get_mod_icon(modid: &str) -> DynResult<DynamicImage> {
             }
             _ => anyhow::bail!("unknown webp data struct"),
         }
-    } else if info.icon_url.ends_with(".svg") || info.icon_url.ends_with(".svgz") {
+    } else if url.ends_with(".svg") || url.ends_with(".svgz") {
         // 因为 resvg 版本冲突，故不处理
         let mut img = image::RgbaImage::new(1, 1);
         img.put_pixel(0, 0, image::Rgba([0xFF, 0xFF, 0xFF, 0]));
         Ok(image::DynamicImage::ImageRgba8(img))
     } else if let Ok(img) = image::load_from_memory_with_format(
         &data,
-        image::ImageFormat::from_path(&info.icon_url).map_err(|e| anyhow::anyhow!(e))?,
+        image::ImageFormat::from_path(url).map_err(|e| anyhow::anyhow!(e))?,
     ) {
         Ok(img)
     } else {
@@ -147,8 +153,8 @@ pub async fn search_mods(
     }: SearchParams,
 ) -> DynResult<Vec<ModResult>> {
     let search_filter = urlencoding::encode(&search_filter);
-    let r = crate::http::get(format!(
-        "https://api.modrinth.com/api/v1/mod?offset={}&limit={}&query={}",
+    let r: ModSearchResult = crate::http::get(format!(
+        "https://api.modrinth.com/v2/search?offset={}&limit={}&query={}",
         (index - 1) * page_size,
         page_size,
         search_filter
@@ -158,7 +164,7 @@ pub async fn search_mods(
     Ok(r.hits
         .into_iter()
         .map(|mut a| {
-            a.mod_id = a.mod_id.trim_start_matches("local-").to_owned();
+            a.project_id = a.project_id.trim_start_matches("local-").to_owned();
             a
         })
         .collect())

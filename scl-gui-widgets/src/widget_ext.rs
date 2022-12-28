@@ -1,9 +1,9 @@
 use druid::{
     widget::{prelude::*, ControllerHost},
-    Selector, WidgetExt as _, WindowHandle,
+    Selector, WidgetExt as _,
 };
 
-use crate::widgets::{OnChange, OnCmd, OnMonitor, OnNotify, ShowIf, ShowIfCallback};
+use crate::widgets::{OnChange, OnCmd, OnNotify, ShowIf, ShowIfCallback};
 
 /// 一些常用的组件扩展特质
 pub trait WidgetExt<T: Data>: Widget<T> + Sized + 'static {
@@ -40,15 +40,6 @@ pub trait WidgetExt<T: Data>: Widget<T> + Sized + 'static {
     /// 且隐藏时不会占用布局体积
     fn show_if(self, f: ShowIfCallback<T>) -> ShowIf<T> {
         ShowIf::new(self, f)
-    }
-
-    /// A convenience method for ensuring that this widget is fully visible on the same monitor as
-    /// some other window.
-    fn on_monitor(self, parent: &WindowHandle) -> OnMonitor<Self> {
-        OnMonitor {
-            inner: self,
-            parent: parent.clone(),
-        }
     }
 }
 

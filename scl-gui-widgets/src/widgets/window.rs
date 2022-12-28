@@ -508,8 +508,7 @@ impl<T: Data> Widget<T> for WindowWidget<T> {
         let wbc = *bc;
         let child_bc = wbc.shrink((0., TITLE_HEIGHT));
         let mut size = self.inner.layout(ctx, &child_bc, data, env);
-        self.inner
-            .set_origin(ctx, data, env, (0., TITLE_HEIGHT).into());
+        self.inner.set_origin(ctx, (0., TITLE_HEIGHT).into());
         size.height += TITLE_HEIGHT;
         bc.constrain(size)
     }

@@ -125,33 +125,6 @@ impl Client {
         // let build_args_timer = std::time::Instant::now();
         let mut args = Vec::<String>::with_capacity(64);
 
-        // 检查 log4jc 是否被安装，否则将 LOG4J_PATCH 的数据复制到库文件夹里
-        // if !cfg.version_info.version_base.is_empty() {
-        //     let lib_path = std::path::Path::new(&cfg.version_info.version_base);
-        //     let lib_path = lib_path
-        //         .parent()
-        //         .ok_or_else(|| anyhow::anyhow!("There's no parent from the library path"))?
-        //         .join("libraries")
-        //         .join("org")
-        //         .join("glavo")
-        //         .join("1.0")
-        //         .join("log4j-patch");
-        //     if !lib_path.is_dir() {
-        //         inner_future::fs::create_dir_all(&lib_path).await?;
-        //     }
-        //     let log4j_path = lib_path.join("log4j-patch-agent-1.0.jar");
-        //     if !log4j_path.is_file() {
-        //         inner_future::fs::OpenOptions::new()
-        //             .write(true)
-        //             .create(true)
-        //             .truncate(true)
-        //             .open(&log4j_path)
-        //             .await?
-        //             .write_all(LOG4J_PATCH)
-        //             .await?;
-        //     }
-        // }
-
         // 检查是否继承版本
         let meta = parse_inheritsed_meta(&cfg).await;
 
@@ -411,8 +384,14 @@ impl Client {
 
         // 用户自定义JVM参数
         if let Some(scl_config) = &cfg.version_info.scl_launch_config {
-            if !scl_config.jvm_args.is_empty() {
-                args.push(scl_config.jvm_args.to_owned());
+            if !scl_config.jvm_args.trim().is_empty() {
+                if let Ok(jvm_args) = shell_words::split(&scl_config.jvm_args) {
+                    for arg in jvm_args {
+                        args.push(arg);
+                    }
+                } else {
+                    args.push(scl_config.jvm_args.to_owned());
+                }
             }
         }
 
@@ -530,8 +509,14 @@ impl Client {
 
         // 用户自定义游戏参数
         if let Some(scl_config) = &cfg.version_info.scl_launch_config {
-            if !scl_config.game_args.is_empty() {
-                args.push(scl_config.game_args.to_owned());
+            if !scl_config.game_args.trim().is_empty() {
+                if let Ok(game_args) = shell_words::split(&scl_config.game_args) {
+                    for arg in game_args {
+                        args.push(arg);
+                    }
+                } else {
+                    args.push(scl_config.game_args.to_owned());
+                }
             }
         }
 

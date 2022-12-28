@@ -1,4 +1,4 @@
-//! 用于处理微软登录的小型服务器
+//! 传统微软登录模块，通过模仿 Minecraft 官方启动器来接收授权令牌回调链接完成登录验证
 
 use serde::Deserialize;
 
@@ -36,7 +36,7 @@ struct OAuth20TokenResponse {
 }
 
 #[derive(Debug, Clone, Deserialize)]
-struct XBoxAuthResponse {
+pub(super) struct XBoxAuthResponse {
     #[serde(rename = "Token")]
     pub token: String,
     #[serde(rename = "DisplayClaims")]
@@ -44,22 +44,22 @@ struct XBoxAuthResponse {
 }
 
 #[derive(Debug, Clone, Deserialize)]
-struct XBoxAuthResponse1 {
+pub(super) struct XBoxAuthResponse1 {
     pub xui: Vec<XBoxAuthResponse2>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
-struct XBoxAuthResponse2 {
+pub(super) struct XBoxAuthResponse2 {
     pub uhs: String,
 }
 
 #[derive(Debug, Clone, Deserialize)]
-struct MinecraftStoreResponse {
-    items: Vec<serde_json::Value>,
+pub(super) struct MinecraftStoreResponse {
+    pub items: Vec<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
-struct MinecraftXBoxLoginResponse {
+pub(super) struct MinecraftXBoxLoginResponse {
     // pub username: String,
     pub access_token: String,
     // pub token_type: String,

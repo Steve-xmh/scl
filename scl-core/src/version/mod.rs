@@ -104,6 +104,8 @@ pub enum VersionType {
     Forge,
     /// Fabric 版本
     Fabric,
+    /// QuiltMC 版本
+    QuiltMC,
     /// Optifine 画质增强版本
     ///
     /// 如果其是通过其它模组加载器加载的（Forge 或 Fabric），则优先为模组加载器版本
