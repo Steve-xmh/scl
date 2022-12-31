@@ -22,12 +22,24 @@
 <span id="22">22</span>
 <span id="23">23</span>
 <span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
 </pre><pre class="rust"><code><span class="doccomment">//! 获取模组中文名称的模块
 
 /// 获取模组中文名称，如果没有则为空字符串，名称来自 MCMOD - Minecraft 模组中文百科
 </span><span class="kw">pub async fn </span>get_mod_cname(modid: <span class="kw-2">&amp;</span>str) -&gt; String {
     <span class="comment">// https://gitee.com/SteveXMH/scl-data/raw/master/mcmod/cname/chisel
-    </span><span class="kw">let </span>modid = base64::encode_config(modid, base64::URL_SAFE);
+    </span><span class="kw">let </span>modid = base64::encode_engine(
+        modid,
+        <span class="kw-2">&amp;</span>base64::engine::fast_portable::FastPortable::from(
+            <span class="kw-2">&amp;</span>base64::alphabet::URL_SAFE,
+            base64::engine::fast_portable::FastPortableConfig::new(),
+        ),
+    );
     <span class="kw">if let </span><span class="prelude-val">Ok</span>(<span class="kw-2">mut </span>resp) = <span class="kw">crate</span>::http::get(<span class="macro">format!</span>(
         <span class="string">&quot;https://gitee.com/SteveXMH/scl-data/raw/master/mcmod/cname/{}&quot;</span>,
         modid

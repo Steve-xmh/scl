@@ -311,7 +311,7 @@
 <span class="doccomment">/// 刷新/续期访问令牌
 </span><span class="kw">pub async fn </span>refresh_auth(am: <span class="kw-2">&amp;mut </span>AuthMethod, client_token: <span class="kw-2">&amp;</span>str) -&gt; DynResult&lt;bool&gt; {
     <span class="kw">if let </span><span class="kw-2">&amp;mut </span>AuthMethod::Microsoft { .. } = am {
-        <span class="kw">return </span><span class="prelude-val">Ok</span>(microsoft::refresh_auth(am).<span class="kw">await</span>.is_ok());
+        <span class="kw">return </span><span class="prelude-val">Ok</span>(microsoft::leagcy::refresh_auth(am).<span class="kw">await</span>.is_ok());
     }
     <span class="kw">match </span>am {
         AuthMethod::Mojang { access_token, .. } =&gt; {

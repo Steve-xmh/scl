@@ -753,6 +753,45 @@
 <span id="753">753</span>
 <span id="754">754</span>
 <span id="755">755</span>
+<span id="756">756</span>
+<span id="757">757</span>
+<span id="758">758</span>
+<span id="759">759</span>
+<span id="760">760</span>
+<span id="761">761</span>
+<span id="762">762</span>
+<span id="763">763</span>
+<span id="764">764</span>
+<span id="765">765</span>
+<span id="766">766</span>
+<span id="767">767</span>
+<span id="768">768</span>
+<span id="769">769</span>
+<span id="770">770</span>
+<span id="771">771</span>
+<span id="772">772</span>
+<span id="773">773</span>
+<span id="774">774</span>
+<span id="775">775</span>
+<span id="776">776</span>
+<span id="777">777</span>
+<span id="778">778</span>
+<span id="779">779</span>
+<span id="780">780</span>
+<span id="781">781</span>
+<span id="782">782</span>
+<span id="783">783</span>
+<span id="784">784</span>
+<span id="785">785</span>
+<span id="786">786</span>
+<span id="787">787</span>
+<span id="788">788</span>
+<span id="789">789</span>
+<span id="790">790</span>
+<span id="791">791</span>
+<span id="792">792</span>
+<span id="793">793</span>
+<span id="794">794</span>
 </pre><pre class="rust"><code><span class="doccomment">//! 所有的启动器元数据结构都在这里
 
 </span><span class="kw">use </span>std::{
@@ -1230,6 +1269,45 @@
             }
         } <span class="kw">else </span>{
             <span class="macro">anyhow::bail!</span>(<span class="string">&quot;游戏文件夹 {} 不是正确的文件夹&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.version_base)
+        }
+    }
+
+    <span class="doccomment">/// 删除版本文件夹，约等于删除整个版本
+    ///
+    /// 但是注意本操作不会清理 assets 文件夹和 libraries 文件夹的内容
+    </span><span class="kw">pub async fn </span>delete(<span class="self">self</span>) {
+        <span class="kw">let </span>version_base_path = Path::new(<span class="kw-2">&amp;</span><span class="self">self</span>.version_base);
+        <span class="kw">if </span>version_base_path.is_dir() {
+            <span class="kw">let </span>version_path = version_base_path.join(<span class="kw-2">&amp;</span><span class="self">self</span>.version);
+            <span class="kw">let _ </span>= inner_future::fs::remove_dir_all(version_path).<span class="kw">await</span>;
+        }
+    }
+
+    <span class="doccomment">/// 重命名版本，如果目标版本名没有已有版本则会尝试重命名版本文件夹到该名称下
+    </span><span class="kw">pub async fn </span>rename_version(<span class="kw-2">&amp;mut </span><span class="self">self</span>, new_version_name: <span class="kw-2">&amp;</span>str) -&gt; DynResult {
+        <span class="kw">let </span>version_base_path = Path::new(<span class="kw-2">&amp;</span><span class="self">self</span>.version_base);
+        <span class="kw">if </span>version_base_path.is_dir() {
+            <span class="kw">let </span>version_path = version_base_path.join(<span class="kw-2">&amp;</span><span class="self">self</span>.version);
+            <span class="kw">let </span>version_jar_path = version_path.join(<span class="macro">format!</span>(<span class="string">&quot;{}.jar&quot;</span>, <span class="self">self</span>.version));
+            <span class="kw">let </span>version_json_path = version_path.join(<span class="macro">format!</span>(<span class="string">&quot;{}.json&quot;</span>, <span class="self">self</span>.version));
+            <span class="kw">let </span>new_version_path = version_base_path.join(new_version_name);
+            <span class="kw">let </span>new_version_jar_path = version_path.join(<span class="macro">format!</span>(<span class="string">&quot;{}.jar&quot;</span>, new_version_name));
+            <span class="kw">let </span>new_version_json_path = version_path.join(<span class="macro">format!</span>(<span class="string">&quot;{}.json&quot;</span>, new_version_name));
+            <span class="kw">if </span>new_version_path.is_dir() {
+                <span class="macro">anyhow::bail!</span>(<span class="string">&quot;目标版本名称已存在&quot;</span>)
+            } <span class="kw">else </span>{
+                <span class="kw">if </span>version_jar_path.is_file() {
+                    inner_future::fs::rename(version_jar_path, new_version_jar_path).<span class="kw">await</span><span class="question-mark">?</span>;
+                }
+                <span class="kw">if </span>version_json_path.is_file() {
+                    inner_future::fs::rename(version_json_path, new_version_json_path).<span class="kw">await</span><span class="question-mark">?
+                </span>};
+                inner_future::fs::rename(version_path, new_version_path).<span class="kw">await</span><span class="question-mark">?</span>;
+                <span class="self">self</span>.version = new_version_name.to_owned();
+                <span class="prelude-val">Ok</span>(())
+            }
+        } <span class="kw">else </span>{
+            <span class="macro">anyhow::bail!</span>(<span class="string">&quot;文件夹不存在&quot;</span>)
         }
     }
 
