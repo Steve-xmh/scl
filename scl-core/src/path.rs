@@ -9,11 +9,11 @@ type LazyString = Lazy<String>;
 ///
 /// 如果是 Linux 系统，这将尝试指向当前主目录（Home Directory）的 `.minecraft` 文件夹
 pub(crate) static MINECRAFT_PATH: LazyString = Lazy::new(|| {
-    #[cfg(not(target_os = "linux"))]
+    #[cfg(target_os = "windows")]
     {
         ".minecraft".into()
     }
-    #[cfg(target_os = "linux")]
+    #[cfg(any(target_os = "macos", target_os = "linux"))]
     {
         if let Some(dir) = dirs::home_dir() {
             dir.join(".minecraft").to_str().unwrap().to_string()

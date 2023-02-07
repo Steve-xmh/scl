@@ -49,8 +49,6 @@ pub struct ClientConfig {
 pub struct Client {
     /// 客户端的实际指令对象
     pub cmd: Command,
-    /// 是否使用批处理登录，仅 Windows 可用
-    pub terminal_launch: bool,
     /// 当前游戏目录路径
     pub game_dir: String,
     /// 当前使用的 Java 运行时路径
@@ -567,17 +565,10 @@ impl Client {
 
         args.insert(0, java_path.to_owned());
 
-        let terminal_launch = if let Some(scl_config) = &cfg.version_info.scl_launch_config {
-            scl_config.use_terminal_launch
-        } else {
-            false
-        };
-
         println!("CMD: {:?}", cmd);
 
         Ok(Self {
             cmd,
-            terminal_launch,
             game_dir: get_game_directory(&cfg),
             java_path,
             args,
@@ -642,91 +633,13 @@ impl Client {
 
     /// 启动游戏，并返回进程 ID
     pub async fn launch(&mut self) -> DynResult<u32> {
-        let c = {
-            #[cfg(target_os = "windows")]
-            {
-                use inner_future::process::windows::CommandExt;
-                // 写入到 bat 再启动
-                let args = self
-                    .args
-                    .iter()
-                    .map(|a| {
-                        if a.contains(' ') {
-                            format!("\"{}\"", a)
-                        } else {
-                            a.to_owned()
-                        }
-                    })
-                    .collect::<Vec<_>>();
-                let batdata = format!(
-                    "\
-                    @chcp 65001\r\n\
-                    @echo off\r\n\
-                    :: 这是 Sharp Craft Launcher 为启动游戏创建的启动脚本\r\n\
-                    :: 如果你的游戏启动出现了问题，你可以尝试手动运行这个脚本以确认原因\r\n\
-                    set APPDATA=\"{gamedir}\"\r\n\
-                    set CURRENT=\"%~dp0\"\r\n\
-                    cd /d \"{gamedir}\"\r\n\
-                    {args}\r\n\
-                    cd /d %CURRENT%\r\n\
-                    pause\r\n\
-                ",
-                    gamedir = self.game_dir,
-                    args = args.join(" ")
-                );
-                use futures::AsyncWriteExt;
-                use inner_future::fs::windows::OpenOptionsExt;
-                let mut file = inner_future::fs::OpenOptions::new()
-                    .create(true)
-                    .write(true)
-                    .truncate(true)
-                    .attributes(0x2)
-                    .open(".scl.launch.bat")
-                    .await?;
-                file.write_all(batdata.as_bytes()).await?;
-                if self.terminal_launch {
-                    let _ = file.sync_all().await;
-                    let _ = file.sync_data().await;
-                    drop(file);
-                    inner_future::process::Command::new(".scl.launch.bat")
-                        // .stdout(Stdio::piped())
-                        // .stderr(Stdio::piped())
-                        .creation_flags(0x08000000 | 0x00000400)
-                        .spawn()?
+        let c = match self.cmd.spawn() {
+            Ok(c) => c,
+            Err(e) => {
+                if e.kind() == std::io::ErrorKind::NotFound {
+                    anyhow::bail!("启动游戏时发生错误：找不到 Java 执行文件，请确认你的 Java 文件是否存在 {:?}", e)
                 } else {
-                    match self
-                        .cmd
-                        // .stdout(Stdio::piped())
-                        // .stderr(Stdio::piped())
-                        .creation_flags(0x08000000)
-                        .spawn()
-                    {
-                        Ok(c) => c,
-                        Err(e) => {
-                            if e.kind() == std::io::ErrorKind::NotFound {
-                                anyhow::bail!("使用 Java {} 启动游戏时发生错误：找不到 Java 执行文件，请确认你的 Java 文件是否存在 {:?}", self.java_path, e)
-                            } else {
-                                anyhow::bail!(
-                                    "使用 Java {} 启动游戏时发生错误 {:?}",
-                                    self.java_path,
-                                    e
-                                )
-                            }
-                        }
-                    }
-                }
-            }
-            #[cfg(not(target_os = "windows"))]
-            {
-                match self.cmd.spawn() {
-                    Ok(c) => c,
-                    Err(e) => {
-                        if e.kind() == std::io::ErrorKind::NotFound {
-                            anyhow::bail!("启动游戏时发生错误：找不到 Java 执行文件，请确认你的 Java 文件是否存在 {:?}", e)
-                        } else {
-                            anyhow::bail!("启动游戏时发生错误 {:?}", e)
-                        }
-                    }
+                    anyhow::bail!("启动游戏时发生错误 {:?}", e)
                 }
             }
         };

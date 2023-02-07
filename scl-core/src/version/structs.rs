@@ -249,8 +249,6 @@ pub struct SCLLaunchConfig {
     pub java_path: String,
     /// 是否使用版本独立
     pub game_independent: bool,
-    /// 是否使用命令行启动（仅 Windows 可用）
-    pub use_terminal_launch: bool,
     /// 设定游戏窗口标题
     pub window_title: String,
     /// 额外的 JVM 参数，将会附加到 Class Path 前面
