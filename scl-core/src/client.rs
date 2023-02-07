@@ -561,8 +561,6 @@ impl Client {
 
         args.insert(0, java_path.to_owned());
 
-        println!("CMD: {cmd:?}");
-
         Ok(Self {
             cmd,
             game_dir: get_game_directory(&cfg),
