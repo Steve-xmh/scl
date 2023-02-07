@@ -82,7 +82,7 @@ fn parse_uri_test() {
         let result = parse_package_name(input);
         assert!(result.is_ok());
         let result = result.unwrap().1;
-        assert_eq!(input, &format!("{}", result));
+        assert_eq!(input, &format!("{result}"));
         println!("{}", result.to_maven_jar_path("https://maven.fabricmc.net"));
     }
     test_package("net.fabricmc:sponge-mixin:0.9.2+mixin.0.8.2");

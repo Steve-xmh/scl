@@ -86,7 +86,7 @@ impl<R: Reporter> VanillaDownloadExt for Downloader<R> {
         let r = self.reporter.sub();
         r.add_max_progress(1.);
         let name = &save_path[save_path.rfind(std::path::is_separator).unwrap_or(0) + 1..];
-        r.set_message(format!("正在下载原版 {}", name));
+        r.set_message(format!("正在下载原版 {name}"));
         inner_future::fs::create_dir_all(
             &save_path[..save_path
                 .rfind(std::path::is_separator)
@@ -120,8 +120,8 @@ impl<R: Reporter> VanillaDownloadExt for Downloader<R> {
     async fn download_library(&self, sha1: &str, path: &str, save_path: &str) -> DynResult {
         let l = self.parallel_lock.acquire().await;
         let r = self.reporter.sub();
-        let full_path = format!("{}/{}", save_path, path);
-        r.set_message(format!("正在下载原版库 {}", path));
+        let full_path = format!("{save_path}/{path}");
+        r.set_message(format!("正在下载原版库 {path}"));
         r.add_max_progress(1.);
         if std::path::Path::new(&full_path).is_file() {
             if self.verify_data {
@@ -149,17 +149,17 @@ impl<R: Reporter> VanillaDownloadExt for Downloader<R> {
         let default_uris = [
             match self.source {
                 DownloadSource::Default => {
-                    format!("https://libraries.minecraft.net/{}", path)
+                    format!("https://libraries.minecraft.net/{path}")
                 }
                 DownloadSource::BMCLAPI => {
-                    format!("https://bmclapi2.bangbang93.com/maven/{}", path)
+                    format!("https://bmclapi2.bangbang93.com/maven/{path}")
                 }
-                DownloadSource::MCBBS => format!("https://download.mcbbs.net/maven/{}", path),
-                _ => format!("https://libraries.minecraft.net/{}", path),
+                DownloadSource::MCBBS => format!("https://download.mcbbs.net/maven/{path}"),
+                _ => format!("https://libraries.minecraft.net/{path}"),
             },
-            format!("https://bmclapi2.bangbang93.com/maven/{}", path),
-            format!("https://download.mcbbs.net/maven/{}", path),
-            format!("https://libraries.minecraft.net/{}", path),
+            format!("https://bmclapi2.bangbang93.com/maven/{path}"),
+            format!("https://download.mcbbs.net/maven/{path}"),
+            format!("https://libraries.minecraft.net/{path}"),
         ];
         crate::http::download(&default_uris, &full_path, 0)
             .await
@@ -176,8 +176,8 @@ impl<R: Reporter> VanillaDownloadExt for Downloader<R> {
         save_path: &str,
     ) -> DynResult<AssetIndexes> {
         let r = self.reporter.sub();
-        r.set_message(format!("正在下载原版资源索引 {}", name));
-        let full_path = format!("{}/indexes/{}.json", save_path, name);
+        r.set_message(format!("正在下载原版资源索引 {name}"));
+        let full_path = format!("{save_path}/indexes/{name}.json");
         inner_future::fs::create_dir_all(
             &full_path[..full_path
                 .rfind(std::path::is_separator)
@@ -192,17 +192,17 @@ impl<R: Reporter> VanillaDownloadExt for Downloader<R> {
         let uris = [
             match self.source {
                 DownloadSource::Default => {
-                    format!("https://launchermeta.mojang.com{}", p)
+                    format!("https://launchermeta.mojang.com{p}")
                 }
                 DownloadSource::BMCLAPI => {
-                    format!("https://bmclapi2.bangbang93.com{}", p)
+                    format!("https://bmclapi2.bangbang93.com{p}")
                 }
-                DownloadSource::MCBBS => format!("https://download.mcbbs.net{}", p),
-                _ => format!("https://launchermeta.mojang.com{}", p),
+                DownloadSource::MCBBS => format!("https://download.mcbbs.net{p}"),
+                _ => format!("https://launchermeta.mojang.com{p}"),
             },
-            format!("https://bmclapi2.bangbang93.com{}", p),
-            format!("https://download.mcbbs.net{}", p),
-            format!("https://launchermeta.mojang.com{}", p),
+            format!("https://bmclapi2.bangbang93.com{p}"),
+            format!("https://download.mcbbs.net{p}"),
+            format!("https://launchermeta.mojang.com{p}"),
         ];
         for uri in &uris {
             let res = crate::http::retry_get_bytes(uri).await;
@@ -223,12 +223,12 @@ impl<R: Reporter> VanillaDownloadExt for Downloader<R> {
     ) -> DynResult {
         let sub_hash = &sha1[..2];
         let full_path = if is_pre {
-            format!("{}/../virtual/pre-1.6/{}", save_path, name)
+            format!("{save_path}/../virtual/pre-1.6/{name}")
         } else {
-            format!("{}/{}/{}", save_path, sub_hash, sha1)
+            format!("{save_path}/{sub_hash}/{sha1}")
         };
 
-        r.set_message(format!("正在下载原版资源 {}", name));
+        r.set_message(format!("正在下载原版资源 {name}"));
         let l = self.parallel_lock.acquire().await;
         if if is_pre {
             Path::new(&full_path).exists()
@@ -260,34 +260,19 @@ impl<R: Reporter> VanillaDownloadExt for Downloader<R> {
         let uris = [
             match self.source {
                 DownloadSource::Default => {
-                    format!(
-                        "https://resources.download.minecraft.net/{}/{}",
-                        sub_hash, sha1
-                    )
+                    format!("https://resources.download.minecraft.net/{sub_hash}/{sha1}")
                 }
                 DownloadSource::BMCLAPI => {
-                    format!(
-                        "https://bmclapi2.bangbang93.com/assets/{}/{}",
-                        sub_hash, sha1
-                    )
+                    format!("https://bmclapi2.bangbang93.com/assets/{sub_hash}/{sha1}")
                 }
                 DownloadSource::MCBBS => {
-                    format!("https://download.mcbbs.net/assets/{}/{}", sub_hash, sha1)
+                    format!("https://download.mcbbs.net/assets/{sub_hash}/{sha1}")
                 }
-                _ => format!(
-                    "https://resources.download.minecraft.net/{}/{}",
-                    sub_hash, sha1
-                ),
+                _ => format!("https://resources.download.minecraft.net/{sub_hash}/{sha1}"),
             },
-            format!(
-                "https://bmclapi2.bangbang93.com/assets/{}/{}",
-                sub_hash, sha1
-            ),
-            format!("https://download.mcbbs.net/assets/{}/{}", sub_hash, sha1),
-            format!(
-                "https://resources.download.minecraft.net/{}/{}",
-                sub_hash, sha1
-            ),
+            format!("https://bmclapi2.bangbang93.com/assets/{sub_hash}/{sha1}"),
+            format!("https://download.mcbbs.net/assets/{sub_hash}/{sha1}"),
+            format!("https://resources.download.minecraft.net/{sub_hash}/{sha1}"),
         ];
         crate::http::download(&uris, &full_path, 0)
             .await
@@ -401,7 +386,7 @@ impl<R: Reporter> VanillaDownloadExt for Downloader<R> {
             version_name,
             version_name
         );
-        r.set_message(format!("正在下载原版游戏 {}", version_name));
+        r.set_message(format!("正在下载原版游戏 {version_name}"));
         let main_jar = version_meta
             .downloads
             .as_ref()
@@ -555,7 +540,7 @@ impl<R: Reporter> VanillaDownloadExt for Downloader<R> {
     async fn install_vanilla(&self, version_name: &str, version_info: &VersionInfo) -> DynResult {
         self.reporter.set_max_progress(4.);
         self.reporter
-            .set_message(format!("正在获取版本元数据 {}", version_name));
+            .set_message(format!("正在获取版本元数据 {version_name}"));
 
         create_dir_all(format!("{}/indexes", self.minecraft_assets_path)).await?;
         create_dir_all(format!("{}/objects", self.minecraft_assets_path)).await?;
@@ -577,10 +562,10 @@ impl<R: Reporter> VanillaDownloadExt for Downloader<R> {
         let url_path = url.path();
 
         let res = crate::http::retry_get_bytes(match self.source {
-            DownloadSource::Default => format!("https://launchermeta.mojang.com{}", url_path),
-            DownloadSource::BMCLAPI => format!("https://bmclapi2.bangbang93.com{}", url_path),
-            DownloadSource::MCBBS => format!("https://download.mcbbs.net{}", url_path),
-            _ => format!("https://launchermeta.mojang.com{}", url_path),
+            DownloadSource::Default => format!("https://launchermeta.mojang.com{url_path}"),
+            DownloadSource::BMCLAPI => format!("https://bmclapi2.bangbang93.com{url_path}"),
+            DownloadSource::MCBBS => format!("https://download.mcbbs.net{url_path}"),
+            _ => format!("https://launchermeta.mojang.com{url_path}"),
         })
         .await
         .map_err(|e| anyhow::anyhow!("下载版本元数据失败：{:?}", e))?;
@@ -588,7 +573,7 @@ impl<R: Reporter> VanillaDownloadExt for Downloader<R> {
         inner_future::fs::write(&version_file, &res).await?;
 
         self.reporter
-            .set_message(format!("正在下载游戏文件 {}", version_name));
+            .set_message(format!("正在下载游戏文件 {version_name}"));
 
         let mut version_meta: VersionMeta = serde_json::from_slice(&res)?;
 
@@ -603,7 +588,7 @@ impl<R: Reporter> VanillaDownloadExt for Downloader<R> {
 
 fn is_asset_exists(hash: &str, save_path: &str) -> bool {
     let sub_hash = &hash[..2];
-    let full_path = format!("{}/{}/{}", save_path, sub_hash, hash);
+    let full_path = format!("{save_path}/{sub_hash}/{hash}");
     std::path::Path::new(&full_path).is_file()
 }
 
@@ -624,7 +609,7 @@ pub async fn unzip_natives(unzip_file: &str, unzip_dir: &str) -> DynResult {
         let file = std::fs::File::open(&unzip_file)?;
         let dir = std::path::PathBuf::from(unzip_dir);
         let mut archive = zip::ZipArchive::new(file)
-            .with_context(|| format!("解压原生库 {} 时发生错误", unzip_file))?;
+            .with_context(|| format!("解压原生库 {unzip_file} 时发生错误"))?;
         for i in 0..archive.len() {
             let mut file = archive.by_index(i)?;
             let p = match file.enclosed_name() {

@@ -405,13 +405,9 @@ impl Client {
                 cfg.version_info.version_base,
                 sep = std::path::MAIN_SEPARATOR
             ));
+            args.push(format!("-javaagent:{authlib_injector_path}={api_location}"));
             args.push(format!(
-                "-javaagent:{}={}",
-                authlib_injector_path, api_location
-            ));
-            args.push(format!(
-                "-Dauthlibinjector.yggdrasil.prefetched={}",
-                server_meta
+                "-Dauthlibinjector.yggdrasil.prefetched={server_meta}"
             ));
         }
         if let Some(max_mem) = variables.get("${max_memory}") {
@@ -565,7 +561,7 @@ impl Client {
 
         args.insert(0, java_path.to_owned());
 
-        println!("CMD: {:?}", cmd);
+        println!("CMD: {cmd:?}");
 
         Ok(Self {
             cmd,

@@ -22,7 +22,7 @@ fn logger(
             .map(|x| &x == "true")
             .unwrap_or(false);
         if should_log {
-            println!("[SCL-Core-HTTP] 正在请求 {}", url);
+            println!("[SCL-Core-HTTP] 正在请求 {url}");
         }
         let res = next.run(req, client).await?;
         if let Some(content_type) = res.content_type() {
@@ -73,7 +73,7 @@ static GLOBAL_CLIENT: Lazy<Arc<Client>> = Lazy::new(|| {
             proxy
         };
         if let Ok(uri) = url::Url::parse(&proxy) {
-            println!("Using http proxy: {}", uri);
+            println!("Using http proxy: {uri}");
             client.set_base_url(uri)
         } else {
             client
@@ -120,7 +120,7 @@ pub async fn download(
         match res {
             Ok(Ok(res)) => {
                 if res.status().is_success() {
-                    let tmp_dest_path = format!("{}.tmp", dest_path);
+                    let tmp_dest_path = format!("{dest_path}.tmp");
                     let tmp_file = inner_future::fs::OpenOptions::new()
                         .create(true)
                         .write(true)
@@ -136,10 +136,10 @@ pub async fn download(
                 }
             }
             Ok(Err(e)) => {
-                println!("Error {:?} {}", uri, e)
+                println!("Error {uri:?} {e}")
             }
             Err(e) => {
-                println!("Error {:?} {}", uri, e)
+                println!("Error {uri:?} {e}")
             }
         }
     }

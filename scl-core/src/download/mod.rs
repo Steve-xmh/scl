@@ -274,7 +274,7 @@ impl<R: Reporter> GameDownload<'_> for Downloader<R> {
         optifine: &str,
     ) -> DynResult {
         self.reporter
-            .set_message(format!("正在下载游戏 {}", version_name));
+            .set_message(format!("正在下载游戏 {version_name}"));
 
         let launcher_profiles_path =
             std::path::Path::new(&self.minecraft_path).join("launcher_profiles.json");

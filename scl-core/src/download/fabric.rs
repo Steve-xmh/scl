@@ -61,22 +61,16 @@ pub trait FabricDownloadExt: Sync {
 impl<R: Reporter> FabricDownloadExt for Downloader<R> {
     async fn get_avaliable_loaders(&self, vanilla_version: &str) -> DynResult<Vec<LoaderMetaItem>> {
         let mut result = crate::http::retry_get(match self.source {
-            DownloadSource::Default => format!(
-                "https://meta.fabricmc.net/v2/versions/loader/{}",
-                vanilla_version
-            ),
+            DownloadSource::Default => {
+                format!("https://meta.fabricmc.net/v2/versions/loader/{vanilla_version}")
+            }
             DownloadSource::BMCLAPI => format!(
-                "https://bmclapi2.bangbang93.com/fabric-meta/v2/versions/loader/{}",
-                vanilla_version
+                "https://bmclapi2.bangbang93.com/fabric-meta/v2/versions/loader/{vanilla_version}"
             ),
             DownloadSource::MCBBS => format!(
-                "https://download.mcbbs.net/fabric-meta/v2/versions/loader/{}",
-                vanilla_version
+                "https://download.mcbbs.net/fabric-meta/v2/versions/loader/{vanilla_version}"
             ),
-            _ => format!(
-                "https://meta.fabricmc.net/v2/versions/loader/{}",
-                vanilla_version
-            ),
+            _ => format!("https://meta.fabricmc.net/v2/versions/loader/{vanilla_version}"),
         })
         .await
         .map_err(|e| {
@@ -103,7 +97,7 @@ impl<R: Reporter> FabricDownloadExt for Downloader<R> {
         )
         .await
         .unwrap_or_default();
-        r.set_message(format!("正在下载 Fabric 支持库 {}", name));
+        r.set_message(format!("正在下载 Fabric 支持库 {name}"));
         r.add_max_progress(1.);
         if std::path::Path::new(&full_path).is_file() {
             if self.verify_data {
@@ -111,7 +105,7 @@ impl<R: Reporter> FabricDownloadExt for Downloader<R> {
                     .read(true)
                     .open(&full_path)
                     .await?;
-                r.set_message(format!("正在获取数据摘要以验证完整性 {}", name));
+                r.set_message(format!("正在获取数据摘要以验证完整性 {name}"));
                 r.add_max_progress(1.);
                 let sha1 = crate::http::retry_get_string(format!(
                     "{}.sha1",
@@ -155,8 +149,7 @@ impl<R: Reporter> FabricDownloadExt for Downloader<R> {
         loader_version: &str,
     ) -> DynResult {
         let mut loader_meta_res = crate::http::retry_get(format!(
-            "https://meta.fabricmc.net/v2/versions/loader/{}/{}/profile/json",
-            version_id, loader_version
+            "https://meta.fabricmc.net/v2/versions/loader/{version_id}/{loader_version}/profile/json"
         ))
         .await
         .map_err(|e| anyhow::anyhow!("获取 Fabric 版本元数据失败：{:?}", e))?;

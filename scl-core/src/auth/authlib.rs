@@ -42,10 +42,7 @@ pub(crate) struct RefreshBody {
 }
 
 async fn get_head_skin(api_location: &str, uuid: &str) -> DynResult<(Vec<u8>, Vec<u8>)> {
-    let uri = format!(
-        "{}sessionserver/session/minecraft/profile/{}",
-        api_location, uuid
-    );
+    let uri = format!("{api_location}sessionserver/session/minecraft/profile/{uuid}");
     let result: ProfileResponse = crate::http::no_retry::get(&uri)
         .await
         .map_err(|e| anyhow::anyhow!("发送获取皮肤请求到 {} 时发生错误：{:?}", uri, e))?
@@ -100,7 +97,7 @@ pub async fn refresh_token(
     } = auth_method
     {
         let res: RequestResult<AuthenticateResponse> = dbg!(crate::http::no_retry::post_data(
-            dbg!(&format!("{}authserver/refresh", api_location)),
+            dbg!(&format!("{api_location}authserver/refresh")),
             dbg!(&RefreshBody {
                 access_token: access_token.to_owned_string(),
                 client_token: client_token.to_owned(),
@@ -197,7 +194,7 @@ pub async fn start_auth(
     let api_location = if api_location.ends_with('/') {
         api_location
     } else {
-        format!("{}/", api_location)
+        format!("{api_location}/")
     };
     let api_location_url = url::Url::from_str(&api_location)?;
 
@@ -238,7 +235,7 @@ pub async fn start_auth(
     let server_meta = base64::encode(server_meta);
 
     // 登录链接
-    let auth_url = format!("{}authserver/authenticate", api_location);
+    let auth_url = format!("{api_location}authserver/authenticate");
     let auth_body = AuthenticateBody {
         username: username.to_owned(),
         password: password.take_string(),

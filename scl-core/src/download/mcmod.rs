@@ -11,8 +11,7 @@ pub async fn get_mod_cname(modid: &str) -> String {
         ),
     );
     if let Ok(mut resp) = crate::http::get(format!(
-        "https://gitee.com/SteveXMH/scl-data/raw/master/mcmod/cname/{}",
-        modid
+        "https://gitee.com/SteveXMH/scl-data/raw/master/mcmod/cname/{modid}"
     ))
     .await
     {

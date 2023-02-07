@@ -89,7 +89,7 @@ pub(super) struct XBoxPresenceRescord {
 /// 获取 XUID，用途不明，但是在新版本的 Minecraft 有发现需要使用这个 XUID 的地方
 pub async fn get_xuid(userhash: &str, token: &str) -> DynResult<String> {
     let res = crate::http::get("https://userpresence.xboxlive.com/users/me?level=user")
-        .header("Authorization", format!("XBL3.0 x={};{}", userhash, token))
+        .header("Authorization", format!("XBL3.0 x={userhash};{token}"))
         .header("x-xbl-contract-version", "3.2")
         .header("Accept", "application/json")
         .header("Accept-Language", "zh-CN")
@@ -132,7 +132,7 @@ pub async fn request_token(credit: &str, is_refresh: bool) -> DynResult<(String,
 /// 传递给 [`get_mojang_access_token`] 进行下一步验证
 pub async fn get_userhash_and_token(access_token: &str) -> DynResult<(String, String)> {
     // println!("Getting xbox auth body");
-    let xbox_auth_body = format!("{{\"Properties\":{{\"AuthMethod\":\"RPS\",\"SiteName\":\"user.auth.xboxlive.com\",\"RpsTicket\":\"{}\"}},\"RelyingParty\":\"http://auth.xboxlive.com\",\"TokenType\":\"JWT\"}}", access_token);
+    let xbox_auth_body = format!("{{\"Properties\":{{\"AuthMethod\":\"RPS\",\"SiteName\":\"user.auth.xboxlive.com\",\"RpsTicket\":\"{access_token}\"}},\"RelyingParty\":\"http://auth.xboxlive.com\",\"TokenType\":\"JWT\"}}");
     let xbox_auth_resp: XBoxAuthResponse =
         crate::http::post("https://user.auth.xboxlive.com/user/authenticate")
             .header("Content-Type", "application/json")
@@ -146,7 +146,7 @@ pub async fn get_userhash_and_token(access_token: &str) -> DynResult<(String, St
     let token = xbox_auth_resp.token.to_owned();
     if let Some(uhs) = xbox_auth_resp.display_claims.xui.first() {
         let uhs = uhs.uhs.to_owned();
-        let xsts_body = format!("{{\"Properties\":{{\"SandboxId\":\"RETAIL\",\"UserTokens\":[\"{}\"]}},\"RelyingParty\":\"rp://api.minecraftservices.com/\",\"TokenType\":\"JWT\"}}", token);
+        let xsts_body = format!("{{\"Properties\":{{\"SandboxId\":\"RETAIL\",\"UserTokens\":[\"{token}\"]}},\"RelyingParty\":\"rp://api.minecraftservices.com/\",\"TokenType\":\"JWT\"}}");
         println!("Getting xbox xsts token");
         let xsts_resp: XBoxAuthResponse =
             crate::http::post("https://xsts.auth.xboxlive.com/xsts/authorize")
@@ -171,8 +171,7 @@ pub async fn get_userhash_and_token(access_token: &str) -> DynResult<(String, St
 pub async fn get_mojang_access_token(uhs: &str, xsts_token: &str) -> DynResult<String> {
     if !uhs.is_empty() && !xsts_token.is_empty() {
         // println!("Getting mojang access token");
-        let minecraft_xbox_body =
-            format!("{{\"identityToken\":\"XBL3.0 x={};{}\"}}", uhs, xsts_token);
+        let minecraft_xbox_body = format!("{{\"identityToken\":\"XBL3.0 x={uhs};{xsts_token}\"}}");
         let minecraft_xbox_resp: MinecraftXBoxLoginResponse =
             crate::http::post("https://api.minecraftservices.com/authentication/login_with_xbox")
                 .header("Content-Type", "application/json")

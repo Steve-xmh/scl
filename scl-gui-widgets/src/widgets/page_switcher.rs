@@ -111,7 +111,7 @@ impl<T: Data> PageSwitcher<T> {
         #[cfg(debug_assertions)]
         {
             if self.inner_builder.contains_key(key) {
-                panic!("Page {} has already registered", key);
+                panic!("Page {key} has already registered");
             }
         }
         self.inner_builder.insert(key, page_widget);
@@ -216,7 +216,7 @@ impl<T: Data> Widget<T> for PageSwitcher<T> {
                     }
                     ctx.request_anim_frame();
                 } else {
-                    panic!("Can't find inner page called {}", page);
+                    panic!("Can't find inner page called {page}");
                 }
             } else if let Some(to_page) = cmd.get(QUERY_POP_PAGE) {
                 if self.page_anime_queue.is_empty() {

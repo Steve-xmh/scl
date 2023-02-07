@@ -72,12 +72,12 @@ pub(crate) fn impl_icons_def(input: IconsInput) -> TokenStream {
     tokens.append_all(input.icons.iter().map(|icon| {
         let icon_func_name = icon.name.to_owned();
         let icon_key_pair_name = format_ident!("{}", icon.name.to_owned().to_string().to_uppercase());
-        let icon_path_key_name = format_ident!("{}", format!("{}_PATH", icon_func_name).to_uppercase());
-        let icon_path_key = format!("net.stevexmh.scl-macro.icon.{}", icon_func_name).to_lowercase();
-        let icon_light_color_key_name = format_ident!("{}", format!("{}_LIGHT_COLOR", icon_func_name).to_uppercase());
-        let icon_light_color_key = format!("net.stevexmh.scl-macro.icon-color.light.{}", icon_func_name).to_lowercase();
-        let icon_dark_color_key_name = format_ident!("{}", format!("{}_DARK_COLOR", icon_func_name).to_uppercase());
-        let icon_dark_color_key = format!("net.stevexmh.scl-macro.icon-color.dark.{}", icon_func_name).to_lowercase();
+        let icon_path_key_name = format_ident!("{}", format!("{icon_func_name}_PATH").to_uppercase());
+        let icon_path_key = format!("net.stevexmh.scl-macro.icon.{icon_func_name}").to_lowercase();
+        let icon_light_color_key_name = format_ident!("{}", format!("{icon_func_name}_LIGHT_COLOR").to_uppercase());
+        let icon_light_color_key = format!("net.stevexmh.scl-macro.icon-color.light.{icon_func_name}").to_lowercase();
+        let icon_dark_color_key_name = format_ident!("{}", format!("{icon_func_name}_DARK_COLOR").to_uppercase());
+        let icon_dark_color_key = format!("net.stevexmh.scl-macro.icon-color.dark.{icon_func_name}").to_lowercase();
         let default_light_color = icon.light_color;
         let default_dark_color = icon.dark_color;
         let svg_path = icon.svg_path.to_owned();
@@ -121,20 +121,16 @@ pub(crate) fn impl_icons_def(input: IconsInput) -> TokenStream {
         let _icon_key_pair_name =
             format_ident!("{}", icon.name.to_owned().to_string().to_uppercase());
         let icon_path_key_name =
-            format_ident!("{}", format!("{}_PATH", icon_func_name).to_uppercase());
-        let _icon_path_key = format!("net.stevexmh.scl.icon.{}", icon_func_name).to_lowercase();
-        let icon_light_color_key_name = format_ident!(
-            "{}",
-            format!("{}_LIGHT_COLOR", icon_func_name).to_uppercase()
-        );
+            format_ident!("{}", format!("{icon_func_name}_PATH").to_uppercase());
+        let _icon_path_key = format!("net.stevexmh.scl.icon.{icon_func_name}").to_lowercase();
+        let icon_light_color_key_name =
+            format_ident!("{}", format!("{icon_func_name}_LIGHT_COLOR").to_uppercase());
         let _icon_light_color_key =
-            format!("net.stevexmh.scl.icon-color.light.{}", icon_func_name).to_lowercase();
-        let icon_dark_color_key_name = format_ident!(
-            "{}",
-            format!("{}_DARK_COLOR", icon_func_name).to_uppercase()
-        );
+            format!("net.stevexmh.scl.icon-color.light.{icon_func_name}").to_lowercase();
+        let icon_dark_color_key_name =
+            format_ident!("{}", format!("{icon_func_name}_DARK_COLOR").to_uppercase());
         let _icon_dark_color_key =
-            format!("net.stevexmh.scl.icon-color.dark.{}", icon_func_name).to_lowercase();
+            format!("net.stevexmh.scl.icon-color.dark.{icon_func_name}").to_lowercase();
         let default_light_color = icon.light_color;
         let default_dark_color = icon.dark_color;
         let svg_path = icon.svg_path.to_owned();

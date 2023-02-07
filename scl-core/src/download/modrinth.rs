@@ -75,15 +75,14 @@ pub struct SearchParams {
 /// 根据模组 ID 获取可以下载的模组文件
 pub async fn get_mod_files(modid: &str) -> DynResult<Vec<ModVersion>> {
     crate::http::retry_get_json(format!(
-        "https://api.modrinth.com/v2/project/{}/version",
-        modid
+        "https://api.modrinth.com/v2/project/{modid}/version"
     ))
     .await
 }
 
 /// 根据模组 ID 获取模组信息
 pub async fn get_mod_info(modid: &str) -> DynResult<ModResult> {
-    crate::http::retry_get_json(format!("https://api.modrinth.com/v2/project/{}", modid)).await
+    crate::http::retry_get_json(format!("https://api.modrinth.com/v2/project/{modid}")).await
 }
 
 /// 根据模组 ID 获取模组图标

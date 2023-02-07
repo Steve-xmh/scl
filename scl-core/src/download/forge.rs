@@ -72,14 +72,10 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
     ) -> DynResult<ForgeVersionsData> {
         let (mut versions_data, mut version_promo) = futures::future::try_join(
             crate::http::retry_get(match self.source {
-                DownloadSource::BMCLAPI => format!(
-                    "https://bmclapi2.bangbang93.com/forge/minecraft/{}",
-                    vanilla_version
-                ),
-                _ => format!(
-                    "https://bmclapi2.bangbang93.com/forge/minecraft/{}",
-                    vanilla_version
-                ),
+                DownloadSource::BMCLAPI => {
+                    format!("https://bmclapi2.bangbang93.com/forge/minecraft/{vanilla_version}")
+                }
+                _ => format!("https://bmclapi2.bangbang93.com/forge/minecraft/{vanilla_version}"),
             }),
             crate::http::retry_get(match self.source {
                 DownloadSource::BMCLAPI => "https://bmclapi2.bangbang93.com/forge/promos",
@@ -129,11 +125,11 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
 
         let recommended_version = version_promo
             .iter()
-            .find(|a| a.name == format!("{}-recommended", vanilla_version))
+            .find(|a| a.name == format!("{vanilla_version}-recommended"))
             .and_then(|a| a.build.to_owned());
         let latest_version = version_promo
             .iter()
-            .find(|a| a.name == format!("{}-latest", vanilla_version))
+            .find(|a| a.name == format!("{vanilla_version}-latest"))
             .and_then(|a| a.build.to_owned());
 
         info.reverse(); // 调转顺序，从最新的开始
@@ -188,19 +184,19 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
             )
             .await?;
 
-            r.set_message(format!("下载 Forge 安装覆盖包 {}", forge_version));
+            r.set_message(format!("下载 Forge 安装覆盖包 {forge_version}"));
             r.add_max_progress(1.);
 
             let uris = [
                 match self.source {
-                    DownloadSource::Default => format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{mc}-{forge}/forge-{mc}-{forge}-{suffix}.zip", mc = vanilla_version, forge = forge_version, suffix = suffix),
-                    DownloadSource::BMCLAPI => format!("https://bmclapi2.bangbang93.com/maven/net/minecraftforge/forge/{mc}-{forge}/forge-{mc}-{forge}-{suffix}.zip", mc = vanilla_version, forge = forge_version, suffix = suffix),
-                    DownloadSource::MCBBS => format!("https://download.mcbbs.net/maven/net/minecraftforge/forge/{mc}-{forge}/forge-{mc}-{forge}-{suffix}.zip", mc = vanilla_version, forge = forge_version, suffix = suffix),
-                    _ => format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{mc}-{forge}/forge-{mc}-{forge}-{suffix}.zip", mc = vanilla_version, forge = forge_version, suffix = suffix)
+                    DownloadSource::Default => format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-{suffix}.zip"),
+                    DownloadSource::BMCLAPI => format!("https://bmclapi2.bangbang93.com/maven/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-{suffix}.zip"),
+                    DownloadSource::MCBBS => format!("https://download.mcbbs.net/maven/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-{suffix}.zip"),
+                    _ => format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-{suffix}.zip")
                 },
-                format!("https://bmclapi2.bangbang93.com/maven/net/minecraftforge/forge/{mc}-{forge}/forge-{mc}-{forge}-{suffix}.zip", mc = vanilla_version, forge = forge_version, suffix = suffix),
-                format!("https://download.mcbbs.net/maven/net/minecraftforge/forge/{mc}-{forge}/forge-{mc}-{forge}-{suffix}.zip", mc = vanilla_version, forge = forge_version, suffix = suffix),
-                format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{mc}-{forge}/forge-{mc}-{forge}-{suffix}.zip", mc = vanilla_version, forge = forge_version, suffix = suffix),
+                format!("https://bmclapi2.bangbang93.com/maven/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-{suffix}.zip"),
+                format!("https://download.mcbbs.net/maven/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-{suffix}.zip"),
+                format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-{suffix}.zip"),
             ];
 
             crate::http::download(&uris, &full_path, 0)
@@ -220,7 +216,7 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
                 mc = vanilla_version,
                 forge = forge_version
             );
-            println!("Downloading Forge Installer {}", full_path);
+            println!("Downloading Forge Installer {full_path}");
             if std::path::Path::new(&full_path).is_file() {
                 return Ok(());
             }
@@ -229,7 +225,7 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
             )
             .await?;
 
-            r.set_message(format!("下载 Forge 安装器 {}", forge_version));
+            r.set_message(format!("下载 Forge 安装器 {forge_version}"));
             r.add_max_progress(1.);
 
             let build_id =
@@ -238,26 +234,26 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
             let uris = if forge_version.split('.').count() == 3 {
                 [
                     match self.source {
-                        DownloadSource::Default => format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{mc}-{forge}/forge-{mc}-{forge}-installer.jar", mc = vanilla_version, forge = forge_version),
-                        DownloadSource::BMCLAPI => format!("https://bmclapi2.bangbang93.com/maven/net/minecraftforge/forge/{mc}-{forge}/forge-{mc}-{forge}-installer.jar", mc = vanilla_version, forge = forge_version),
-                        DownloadSource::MCBBS => format!("https://download.mcbbs.net/maven/net/minecraftforge/forge/{mc}-{forge}/forge-{mc}-{forge}-installer.jar", mc = vanilla_version, forge = forge_version),
-                        _ => format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{mc}-{forge}/forge-{mc}-{forge}-installer.jar", mc = vanilla_version, forge = forge_version)
+                        DownloadSource::Default => format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-installer.jar"),
+                        DownloadSource::BMCLAPI => format!("https://bmclapi2.bangbang93.com/maven/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-installer.jar"),
+                        DownloadSource::MCBBS => format!("https://download.mcbbs.net/maven/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-installer.jar"),
+                        _ => format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-installer.jar")
                     },
-                    format!("https://bmclapi2.bangbang93.com/maven/net/minecraftforge/forge/{mc}-{forge}/forge-{mc}-{forge}-installer.jar", mc = vanilla_version, forge = forge_version),
-                    format!("https://download.mcbbs.net/maven/net/minecraftforge/forge/{mc}-{forge}/forge-{mc}-{forge}-installer.jar", mc = vanilla_version, forge = forge_version),
-                    format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{mc}-{forge}/forge-{mc}-{forge}-installer.jar", mc = vanilla_version, forge = forge_version),
+                    format!("https://bmclapi2.bangbang93.com/maven/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-installer.jar"),
+                    format!("https://download.mcbbs.net/maven/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-installer.jar"),
+                    format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-installer.jar"),
                 ]
             } else {
                 [
                     match self.source {
-                        DownloadSource::Default => format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{mc}-{forge}/forge-{mc}-{forge}-installer.jar", mc = vanilla_version, forge = forge_version),
-                        DownloadSource::BMCLAPI => format!("https://bmclapi2.bangbang93.com/forge/download/{build_id}", build_id = build_id),
-                        DownloadSource::MCBBS => format!("https://download.mcbbs.net/forge/download/{build_id}", build_id = build_id),
-                        _ => format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{mc}-{forge}/forge-{mc}-{forge}-installer.jar", mc = vanilla_version, forge = forge_version)
+                        DownloadSource::Default => format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-installer.jar"),
+                        DownloadSource::BMCLAPI => format!("https://bmclapi2.bangbang93.com/forge/download/{build_id}"),
+                        DownloadSource::MCBBS => format!("https://download.mcbbs.net/forge/download/{build_id}"),
+                        _ => format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-installer.jar")
                     },
-                    format!("https://bmclapi2.bangbang93.com/forge/download/{build_id}", build_id = build_id),
-                    format!("https://download.mcbbs.net/forge/download/{build_id}", build_id = build_id),
-                    format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{mc}-{forge}/forge-{mc}-{forge}-installer.jar", mc = vanilla_version, forge = forge_version),
+                    format!("https://bmclapi2.bangbang93.com/forge/download/{build_id}"),
+                    format!("https://download.mcbbs.net/forge/download/{build_id}"),
+                    format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-installer.jar"),
                 ]
             };
 
@@ -412,10 +408,7 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
         forge = forge_version,
         tempid = std::time::SystemTime::now().elapsed().unwrap_or_default().as_secs()
     );
-            println!(
-                "Writing temp forge installer from {} to {}",
-                full_path, tmp_full_path
-            );
+            println!("Writing temp forge installer from {full_path} to {tmp_full_path}");
             {
                 let version_name = version_name.to_owned();
                 let full_path = full_path.to_owned();
@@ -440,8 +433,7 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
                     .await
                     .with_context(|| {
                         format!(
-                            "修改 Forge 模组安装器文件 {} 到 {} 时发生错误",
-                            full_path_c, tmp_full_path_c
+                            "修改 Forge 模组安装器文件 {full_path_c} 到 {tmp_full_path_c} 时发生错误"
                         )
                     })?;
             }
@@ -474,7 +466,7 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
             r.add_progress(1.);
             r.set_message("运行 Forge 安装器安装 Forge".into());
 
-            println!("Start running installer bootstrapper {:?}", cmd);
+            println!("Start running installer bootstrapper {cmd:?}");
 
             let mut child = cmd.spawn()?;
             let install_succeed = AtomicBool::new(false);
@@ -505,20 +497,20 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
                             } else if delayed {
                                 pr.set_message(line.to_owned());
                             }
-                            println!("[FIB] {}", line);
+                            println!("[FIB] {line}");
 
                             if let Some(class_name) = line.strip_prefix("Patching ") {
                                 // 数量太多可以缓一缓
                                 if delayed {
-                                    ir.set_message(format!("正在修补类 {}", class_name));
+                                    ir.set_message(format!("正在修补类 {class_name}"));
                                 }
                             } else if let Some(url) = line.strip_prefix("Downloading library from ")
                             {
-                                ir.set_message(format!("正在下载依赖 {}", url));
+                                ir.set_message(format!("正在下载依赖 {url}"));
                             } else if let Some(url) = line.strip_prefix("Following redirect: ") {
-                                ir.set_message(format!("下载重定向至 {}", url));
+                                ir.set_message(format!("下载重定向至 {url}"));
                             } else if let Some(class_name) = line.strip_prefix("Reading patch ") {
-                                ir.set_message(format!("正在读取修补信息 {}", class_name));
+                                ir.set_message(format!("正在读取修补信息 {class_name}"));
                             } else if line == "Task: DOWNLOAD_MOJMAPS" {
                                 ir.set_message("正在下载源码对照表".into());
                             } else if line == "Task: MERGE_MAPPING" {
@@ -586,12 +578,12 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
                             if let Value::Object(obj) = &mut install_profile {
                                 if let Some(Value::String(version)) = obj.get_mut("version") {
                                     *version = name.to_owned();
-                                    println!("已修改 version 字段为 {}", version);
+                                    println!("已修改 version 字段为 {version}");
                                 }
                                 if let Some(Value::Object(obj)) = obj.get_mut("install") {
                                     if let Some(Value::String(target)) = obj.get_mut("target") {
                                         *target = name.to_owned();
-                                        println!("已修改 install.target 字段为 {}", target);
+                                        println!("已修改 install.target 字段为 {target}");
                                     }
                                 }
                                 let replace_source = match self.source {
@@ -621,12 +613,10 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
                                                             )
                                                         {
                                                             *down_url = format!(
-                                                                "{}{}",
-                                                                replace_source, down_path
+                                                                "{replace_source}{down_path}"
                                                             );
                                                             println!(
-                                                                "已修改 libraries[{}].download.artifact.url 字段",
-                                                                i
+                                                                "已修改 libraries[{i}].download.artifact.url 字段"
                                                             );
                                                         }
                                                     }
@@ -639,15 +629,15 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
                                                     "https://maven.minecraftforge.net",
                                                 ) {
                                                     *down_url =
-                                                        format!("{}{}", replace_source, down_path);
-                                                    println!("已修改 libraries[{}].url 字段", i);
+                                                        format!("{replace_source}{down_path}");
+                                                    println!("已修改 libraries[{i}].url 字段");
                                                 }
                                                 if let Some(down_path) = down_url.strip_prefix(
                                                     "https://files.minecraftforge.net",
                                                 ) {
                                                     *down_url =
-                                                        format!("{}{}", replace_source, down_path);
-                                                    println!("已修改 libraries[{}].url 字段", i);
+                                                        format!("{replace_source}{down_path}");
+                                                    println!("已修改 libraries[{i}].url 字段");
                                                 }
                                             }
                                         }
@@ -675,12 +665,10 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
                                                                 "https://maven.minecraftforge.net",
                                                             ) {
                                                                 *down_url = format!(
-                                                                    "{}{}",
-                                                                    replace_source, down_path
+                                                                    "{replace_source}{down_path}"
                                                                 );
                                                                 println!(
-                                                                    "已修改 libraries[{}].download.artifact.url 字段",
-                                                                    i
+                                                                    "已修改 libraries[{i}].download.artifact.url 字段"
                                                                 );
                                                             }
                                                         }
@@ -692,20 +680,16 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
                                                     if let Some(down_path) = down_url.strip_prefix(
                                                         "https://maven.minecraftforge.net/",
                                                     ) {
-                                                        *down_url = format!(
-                                                            "{}{}",
-                                                            replace_source, down_path
-                                                        );
-                                                        println!("已修改 versionInfo.libraries[{}].url 字段", i);
+                                                        *down_url =
+                                                            format!("{replace_source}{down_path}");
+                                                        println!("已修改 versionInfo.libraries[{i}].url 字段");
                                                     }
                                                     if let Some(down_path) = down_url.strip_prefix(
                                                         "https://files.minecraftforge.net",
                                                     ) {
-                                                        *down_url = format!(
-                                                            "{}{}",
-                                                            replace_source, down_path
-                                                        );
-                                                        println!("已修改 versionInfo.libraries[{}].url 字段", i);
+                                                        *down_url =
+                                                            format!("{replace_source}{down_path}");
+                                                        println!("已修改 versionInfo.libraries[{i}].url 字段");
                                                     }
                                                 }
                                             }

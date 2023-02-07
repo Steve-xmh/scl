@@ -46,7 +46,7 @@ impl<R: Reporter> AuthlibDownloadExt for Downloader<R> {
         let resp = crate::http::get(download_url)
             .await
             .map_err(|e| anyhow::anyhow!(e))?;
-        let temp_dest_path = format!("{}.tmp", dest_path);
+        let temp_dest_path = format!("{dest_path}.tmp");
         let f = inner_future::fs::OpenOptions::new()
             .write(true)
             .truncate(true)

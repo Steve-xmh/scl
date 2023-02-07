@@ -495,8 +495,8 @@ impl VersionInfo {
             let version_jar_path = version_path.join(format!("{}.jar", self.version));
             let version_json_path = version_path.join(format!("{}.json", self.version));
             let new_version_path = version_base_path.join(new_version_name);
-            let new_version_jar_path = version_path.join(format!("{}.jar", new_version_name));
-            let new_version_json_path = version_path.join(format!("{}.json", new_version_name));
+            let new_version_jar_path = version_path.join(format!("{new_version_name}.jar"));
+            let new_version_json_path = version_path.join(format!("{new_version_name}.json"));
             if new_version_path.is_dir() {
                 anyhow::bail!("目标版本名称已存在")
             } else {

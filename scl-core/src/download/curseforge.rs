@@ -185,20 +185,20 @@ pub async fn search_mods(
         );
     }
     if !game_version.is_empty() {
-        let _ = write!(&mut base_url, "&gameVersion={}", game_version);
+        let _ = write!(&mut base_url, "&gameVersion={game_version}");
     }
     if index > 0 {
-        let _ = write!(&mut base_url, "&index={}", index);
+        let _ = write!(&mut base_url, "&index={index}");
     }
     if page_size > 0 && page_size <= 30 {
-        let _ = write!(&mut base_url, "&pageSize={}", page_size);
+        let _ = write!(&mut base_url, "&pageSize={page_size}");
     } else {
         let _ = write!(&mut base_url, "&pageSize={}", 20);
     }
     if category_id > 0 {
-        let _ = write!(&mut base_url, "&categoryID={}", category_id);
+        let _ = write!(&mut base_url, "&categoryID={category_id}");
     }
-    println!("Searching by {}", base_url);
+    println!("Searching by {base_url}");
     let data: Response<Vec<ModInfo>> = crate::http::get(&base_url)
         .header("x-api-key", API_KEY.unwrap_or_default())
         .await
@@ -211,7 +211,7 @@ pub async fn search_mods(
 
 /// 通过模组在 Curseforge 的 ID 获取详情信息
 pub async fn get_mod_info(modid: u64) -> DynResult<ModInfo> {
-    let data: Response<ModInfo> = crate::http::get(&(format!("{}mods/{}", BASE_URL, modid)))
+    let data: Response<ModInfo> = crate::http::get(&(format!("{BASE_URL}mods/{modid}")))
         .header("x-api-key", API_KEY.unwrap_or_default())
         .await
         .map_err(|e| anyhow::anyhow!(e))?
@@ -223,14 +223,13 @@ pub async fn get_mod_info(modid: u64) -> DynResult<ModInfo> {
 
 /// 获取模组在 Curseforge 的 ID 获取可下载的模组文件列表
 pub async fn get_mod_files(modid: u64) -> DynResult<Vec<ModFile>> {
-    let data: Response<Vec<ModFile>> =
-        crate::http::get(&format!("{}mods/{}/files", BASE_URL, modid))
-            .header("x-api-key", API_KEY.unwrap_or_default())
-            .await
-            .map_err(|e| anyhow::anyhow!(e))?
-            .body_json()
-            .await
-            .map_err(|e| anyhow::anyhow!(e))?;
+    let data: Response<Vec<ModFile>> = crate::http::get(&format!("{BASE_URL}mods/{modid}/files"))
+        .header("x-api-key", API_KEY.unwrap_or_default())
+        .await
+        .map_err(|e| anyhow::anyhow!(e))?
+        .body_json()
+        .await
+        .map_err(|e| anyhow::anyhow!(e))?;
     Ok(data.data)
 }
 

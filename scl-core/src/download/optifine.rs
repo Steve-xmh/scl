@@ -54,12 +54,9 @@ impl<R: Reporter> OptifineDownloadExt for Downloader<R> {
     ) -> DynResult<Vec<OptifineVersionMeta>> {
         let mut res: Vec<OptifineVersionMeta> = crate::http::retry_get_json(&match self.source {
             DownloadSource::MCBBS => {
-                format!("https://download.mcbbs.net/optifine/{}", vanilla_version)
+                format!("https://download.mcbbs.net/optifine/{vanilla_version}")
             }
-            _ => format!(
-                "https://bmclapi2.bangbang93.com/optifine/{}",
-                vanilla_version
-            ),
+            _ => format!("https://bmclapi2.bangbang93.com/optifine/{vanilla_version}"),
         })
         .await
         .map_err(|e| anyhow::anyhow!("获取可用Optifine版本列表失败：{:?}", e))?;
@@ -76,29 +73,24 @@ impl<R: Reporter> OptifineDownloadExt for Downloader<R> {
     ) -> DynResult {
         let r = self.reporter.sub();
         r.set_message(format!(
-            "正在下载 Optifine {} {} {}",
-            vanilla_version, optifine_patch, optifine_type
+            "正在下载 Optifine {vanilla_version} {optifine_patch} {optifine_type}"
         ));
         let uris = [
             match self.source {
                 DownloadSource::MCBBS => {
                     format!(
-                        "https://download.mcbbs.net/optifine/{}/{}/{}",
-                        vanilla_version, optifine_type, optifine_patch
+                        "https://download.mcbbs.net/optifine/{vanilla_version}/{optifine_type}/{optifine_patch}"
                     )
                 }
                 _ => format!(
-                    "https://bmclapi2.bangbang93.com/optifine/{}/{}/{}",
-                    vanilla_version, optifine_type, optifine_patch
+                    "https://bmclapi2.bangbang93.com/optifine/{vanilla_version}/{optifine_type}/{optifine_patch}"
                 ),
             },
             format!(
-                "https://download.mcbbs.net/optifine/{}/{}/{}",
-                vanilla_version, optifine_type, optifine_patch
+                "https://download.mcbbs.net/optifine/{vanilla_version}/{optifine_type}/{optifine_patch}"
             ),
             format!(
-                "https://bmclapi2.bangbang93.com/optifine/{}/{}/{}",
-                vanilla_version, optifine_type, optifine_patch
+                "https://bmclapi2.bangbang93.com/optifine/{vanilla_version}/{optifine_type}/{optifine_patch}"
             ),
         ];
         crate::http::download(&uris, dest_path, 0).await?;
@@ -114,12 +106,10 @@ impl<R: Reporter> OptifineDownloadExt for Downloader<R> {
         as_mod: bool,
     ) -> DynResult {
         let r = self.reporter.sub();
-        r.set_message(format!("正在给 {} 安装 Optifine", version_name));
+        r.set_message(format!("正在给 {version_name} 安装 Optifine"));
         if as_mod {
-            let mod_file_name = format!(
-                "Optifine-{}-{}-{}.jar",
-                vanilla_version, optifine_type, optifine_patch
-            );
+            let mod_file_name =
+                format!("Optifine-{vanilla_version}-{optifine_type}-{optifine_patch}.jar");
             let mod_path = if self.game_independent {
                 std::path::Path::new(&self.minecraft_version_path)
                     .join(version_name)

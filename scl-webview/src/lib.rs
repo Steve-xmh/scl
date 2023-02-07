@@ -357,7 +357,7 @@ impl WebView {
                             let url = NSString::UTF8String(url);
                             let url = std::ffi::CStr::from_ptr(url);
                             let url = url.to_str().unwrap_or_default().to_string();
-                            println!("URL Has Changed: {}", url);
+                            println!("URL Has Changed: {url}");
                             let callback: *const libc::c_void = *this.get_ivar("urlChangeCallback");
                             let callback: fn(&str) -> bool = std::mem::transmute(callback);
                             if dbg!((callback)(url.as_str())) {
@@ -433,7 +433,7 @@ impl WebView {
             });
             println!("Waiting for URL");
             let url = rx.recv()?;
-            println!("Got URL: {}", url);
+            println!("Got URL: {url}");
             Ok(url)
         }
     }

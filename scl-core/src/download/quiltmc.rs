@@ -58,8 +58,7 @@ pub trait QuiltMCDownloadExt: Sync {
 impl<R: Reporter> QuiltMCDownloadExt for Downloader<R> {
     async fn get_avaliable_loaders(&self, vanilla_version: &str) -> DynResult<Vec<LoaderMetaItem>> {
         let mut result = crate::http::retry_get(format!(
-            "https://meta.quiltmc.org/v3/versions/loader/{}",
-            vanilla_version
+            "https://meta.quiltmc.org/v3/versions/loader/{vanilla_version}"
         ))
         .await
         .map_err(|e| {
@@ -91,7 +90,7 @@ impl<R: Reporter> QuiltMCDownloadExt for Downloader<R> {
         )
         .await
         .unwrap_or_default();
-        r.set_message(format!("正在下载 QuiltMC 支持库 {}", name));
+        r.set_message(format!("正在下载 QuiltMC 支持库 {name}"));
         r.add_max_progress(1.);
         if std::path::Path::new(&full_path).is_file() {
             if self.verify_data {
@@ -99,7 +98,7 @@ impl<R: Reporter> QuiltMCDownloadExt for Downloader<R> {
                     .read(true)
                     .open(&full_path)
                     .await?;
-                r.set_message(format!("正在获取数据摘要以验证完整性 {}", name));
+                r.set_message(format!("正在获取数据摘要以验证完整性 {name}"));
                 r.add_max_progress(1.);
                 let sha1 = crate::http::retry_get_string(format!(
                     "{}.sha1",
@@ -130,8 +129,7 @@ impl<R: Reporter> QuiltMCDownloadExt for Downloader<R> {
         loader_version: &str,
     ) -> DynResult {
         let mut loader_meta_res = crate::http::retry_get(dbg!(format!(
-            "https://meta.quiltmc.org/v3/versions/loader/{}/{}/profile/json",
-            version_id, loader_version
+            "https://meta.quiltmc.org/v3/versions/loader/{version_id}/{loader_version}/profile/json"
         )))
         .await
         .map_err(|e| anyhow::anyhow!("获取 QuiltMC 版本元数据失败：{:?}", e))?;

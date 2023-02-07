@@ -38,13 +38,13 @@ impl Display for MinecraftVersion {
         match self {
             MinecraftVersion::Release(a, b, c) => {
                 if c == &0 {
-                    write!(f, "{}.{}", a, b)
+                    write!(f, "{a}.{b}")
                 } else {
-                    write!(f, "{}.{}.{}", a, b, c)
+                    write!(f, "{a}.{b}.{c}")
                 }
             }
-            MinecraftVersion::Snapshot(a, b, c) => write!(f, "{:02}w{:02}{}", a, b, c),
-            Self::Custom(c) => write!(f, "{}", c),
+            MinecraftVersion::Snapshot(a, b, c) => write!(f, "{a:02}w{b:02}{c}"),
+            Self::Custom(c) => write!(f, "{c}"),
         }
     }
 }

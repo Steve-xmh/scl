@@ -49,10 +49,7 @@ pub fn parse_head_skin(result: Vec<u8>) -> DynResult<(Vec<u8>, Vec<u8>)> {
 
 async fn get_head_skin(uuid: &str) -> DynResult<(Vec<u8>, Vec<u8>)> {
     // https://sessionserver.mojang.com/session/minecraft/profile/{uuid}
-    let uri = format!(
-        "https://sessionserver.mojang.com/session/minecraft/profile/{}",
-        uuid
-    );
+    let uri = format!("https://sessionserver.mojang.com/session/minecraft/profile/{uuid}");
     let result: ProfileResponse = crate::http::get(uri)
         .await
         .map_err(|e| anyhow::anyhow!(e))?

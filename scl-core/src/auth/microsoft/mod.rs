@@ -83,14 +83,13 @@ impl<T: Display> MicrosoftOAuth<T> {
                     {\
                         \"AuthMethod\":\"RPS\",\
                         \"SiteName\":\"user.auth.xboxlive.com\",\
-                        \"RpsTicket\":\"d={}\"\
+                        \"RpsTicket\":\"d={access_token}\"\
                     }\
                 },\
                 \"RelyingParty\":\"http://auth.xboxlive.com\",\
                 \"TokenType\":\"JWT\"\
             }\
-        }",
-            access_token
+        }"
         );
         let xbox_auth_resp: XBoxAuthResponse =
             crate::http::post("https://user.auth.xboxlive.com/user/authenticate")
@@ -109,14 +108,13 @@ impl<T: Display> MicrosoftOAuth<T> {
                     \"Properties\":{\
                         {\
                             \"SandboxId\":\"RETAIL\",\
-                            \"UserTokens\":[\"{}\"]\
+                            \"UserTokens\":[\"{token}\"]\
                         }\
                     },\
                     \"RelyingParty\":\"rp://api.minecraftservices.com/\",\
                     \"TokenType\":\"JWT\"\
                 }\
-            }",
-                token
+            }"
             );
             println!("正在获取 XSTS");
             let xsts_resp: XBoxAuthResponse =
