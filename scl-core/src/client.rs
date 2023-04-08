@@ -337,7 +337,7 @@ impl Client {
             match &cfg.auth {
                 AuthMethod::Offline { .. } => "Legacy".into(),
                 AuthMethod::Mojang { .. } | AuthMethod::AuthlibInjector { .. } => "Mojang".into(),
-                AuthMethod::Microsoft { uuid: _, .. } => "Mojang".into(),
+                AuthMethod::Microsoft { uuid: _, .. } => "msa".into(),
             },
         );
         variables.insert("${version_type}", cfg.version_type.to_owned());
