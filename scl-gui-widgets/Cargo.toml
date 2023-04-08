@@ -15,7 +15,7 @@ window-vibrancy = "*"
 raw-window-handle-5 = { package = "raw-window-handle", version = "0.5.0" }
 serde = { version = "1.0", features = ["derive"] }
 tracing = "*"
-taskbar_interface = { path = "../../taskbar_interface" }
+taskbar_interface = { git = "https://github.com/Steve-xmh/taskbar_interface.git" }
 
 [target.'cfg(target_os = "macos")'.dependencies]
 objc = "*"
