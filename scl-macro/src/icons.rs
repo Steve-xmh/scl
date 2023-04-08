@@ -2,7 +2,7 @@ use proc_macro::TokenStream;
 use quote::*;
 use syn::{parse::*, *};
 
-#[derive(Debug, Clone)]
+#[derive(Clone)]
 pub struct Icon {
     pub name: Ident,
     pub light_color: u32,
@@ -10,7 +10,7 @@ pub struct Icon {
     pub svg_path: LitStr,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Clone)]
 pub struct IconsInput {
     pub icons: Vec<Icon>,
 }

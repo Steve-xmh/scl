@@ -45,6 +45,9 @@ struct ProgressState {
 /// 在没有进度时会隐藏，当存在进度时将会占用一点位置来显示进度。
 /// 此时如果鼠标悬浮在这个区域则会放大进度组件以查看正在处理的所有进度。
 pub struct ProgressOverlay<T> {
+    #[cfg(any(target_os = "windows", target_os = "linux"))]
+    show_progress_on_taskbar: bool,
+
     progress_expanding: bool,
     progress_height_spring: Spring,
     progress_map: BTreeMap<usize, ProgressState>,
@@ -56,11 +59,23 @@ impl<T> ProgressOverlay<T> {
     /// 以一个将会显示进度的组件为参数创建此组件
     pub fn new(inner: impl Widget<T> + 'static) -> Self {
         Self {
+            show_progress_on_taskbar: false,
             progress_expanding: false,
             progress_height_spring: Spring::new(0.),
             progress_map: BTreeMap::new(),
             inner: WidgetPod::new(Box::new(inner)),
         }
+    }
+
+    /// 是否将接收的进度通过系统接口显示在任务栏的应用程序图标上
+    ///
+    /// 目前支持 Linux 和 Windows 环境，其它平台下调用该函数将没有任何作用。
+    pub fn show_progress_on_taskbar(mut self) -> Self {
+        #[cfg(any(target_os = "windows", target_os = "linux"))]
+        {
+            self.show_progress_on_taskbar = true;
+        }
+        self
     }
 
     fn should_display(&self) -> bool {
@@ -76,6 +91,35 @@ impl<T> ProgressOverlay<T> {
             }
         }
         false
+    }
+
+    fn update_taskbar_progress(&self, handle: RawWindowHandle) {
+        #[cfg(any(target_os = "windows", target_os = "linux"))]
+        {
+            use taskbar_interface::*;
+            if let Ok(mut indicator) = TaskbarInterface::new(handle) {
+                if self.progress_map.is_empty() {
+                    let _ = indicator.set_progress_state(ProgressIndicatorState::NoProgress);
+                } else if self.progress_map.iter().all(|x| x.1.indeterminate) {
+                    let _ = indicator.set_progress_state(ProgressIndicatorState::Indeterminate);
+                } else {
+                    // let _ = indicator.set_progress_state(ProgressIndicatorState::Normal);
+                    let max_progress: f64 = self
+                        .progress_map
+                        .iter()
+                        .filter(|x| !x.1.indeterminate)
+                        .map(|x| x.1.max_progress)
+                        .sum();
+                    let cur_progress: f64 = self
+                        .progress_map
+                        .iter()
+                        .filter(|x| !x.1.indeterminate)
+                        .map(|x| x.1.progress.max(0.0))
+                        .sum();
+                    let _ = indicator.set_progress((cur_progress / max_progress).clamp(0.0, 1.0));
+                }
+            }
+        }
     }
 
     fn paint_progress(&mut self, ctx: &mut PaintCtx, _data: &T, env: &Env) {
@@ -239,6 +283,7 @@ impl<T: Data> Widget<T> for ProgressOverlay<T> {
             }
             Event::AnimFrame(_) => {
                 if self.should_update_progress() || !self.progress_height_spring.arrived() {
+                    self.update_taskbar_progress(ctx.window().raw_window_handle());
                     ctx.request_paint();
                     ctx.request_anim_frame();
                     ctx.request_layout();
@@ -274,6 +319,15 @@ impl<T: Data> Widget<T> for ProgressOverlay<T> {
                     self.progress_map.remove(&p);
                     if self.progress_map.is_empty() {
                         self.progress_height_spring.set_target(0.);
+                    }
+                    #[cfg(any(target_os = "windows", target_os = "linux"))]
+                    if self.progress_map.is_empty() && self.show_progress_on_taskbar {
+                        use taskbar_interface::*;
+                        if let Ok(mut indicator) =
+                            TaskbarInterface::new(ctx.window().raw_window_handle())
+                        {
+                            let _ = indicator.needs_attention(true);
+                        }
                     }
                     ctx.request_anim_frame();
                 } else if let Some(p) = cmd.get(SET_PROGRESS) {

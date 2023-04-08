@@ -159,9 +159,9 @@ impl Mod {
                 Ok(ModMeta::Fabric(meta))
             } else if let Ok(meta) = z.by_name("mods.toml").and_then(|mut r| {
                 // mods.toml https://docs.minecraftforge.net/en/1.19.x/gettingstarted/structuring/
-                let mut buf = Vec::with_capacity(r.size() as _);
-                r.read_to_end(&mut buf).unwrap_or_default();
-                toml::from_slice::<NewForgeModMeta>(&buf)
+                let mut buf = String::with_capacity(r.size() as _);
+                r.read_to_string(&mut buf).unwrap_or_default();
+                toml::from_str::<NewForgeModMeta>(&buf)
                     .map_err(|_| zip::result::ZipError::InvalidArchive("mods.toml"))
             }) {
                 Ok(ModMeta::Forge(meta.mods.first().cloned().ok_or_else(

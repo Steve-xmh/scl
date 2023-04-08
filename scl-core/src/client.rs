@@ -627,6 +627,11 @@ impl Client {
 
     /// 启动游戏，并返回进程 ID
     pub async fn launch(&mut self) -> DynResult<u32> {
+        #[cfg(windows)]
+        {
+            use inner_future::process::windows::*;
+            self.cmd.creation_flags(0x08000000);
+        }
         let c = match self.cmd.spawn() {
             Ok(c) => c,
             Err(e) => {

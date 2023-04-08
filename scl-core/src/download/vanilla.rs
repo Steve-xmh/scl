@@ -488,6 +488,7 @@ impl<R: Reporter> VanillaDownloadExt for Downloader<R> {
                 }
             });
 
+        ar.set_message("下载资源文件".into());
         ar.add_max_progress(amounts as _);
 
         let assets_index_objects = assets_download_tasks.map(|(rpath, obj)| {
@@ -499,8 +500,6 @@ impl<R: Reporter> VanillaDownloadExt for Downloader<R> {
                 ar.sub(),
             )
         });
-
-        ar.set_message("下载资源文件".into());
 
         // Wait all threads
         let native_jars = if is_repair {
