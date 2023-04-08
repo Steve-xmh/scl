@@ -112,9 +112,10 @@ pub struct ModFile {
 }
 
 /// 使用搜索 API 时的排序方式
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Default)]
 pub enum SearchSortMethod {
     /// 按推荐排序
+    #[default]
     Featured,
     /// 按热门度排序
     Populatity,
@@ -138,12 +139,6 @@ impl SearchSortMethod {
             SearchSortMethod::Author => 4,
             SearchSortMethod::TotalDownloads => 5,
         }
-    }
-}
-
-impl Default for SearchSortMethod {
-    fn default() -> Self {
-        SearchSortMethod::Featured
     }
 }
 

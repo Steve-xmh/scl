@@ -4,6 +4,7 @@
 
 use std::io::Cursor;
 
+use base64::prelude::*;
 use image::{GenericImageView, Pixel};
 use structs::mojang::{ProfileResponse, ProfileTexture};
 
@@ -62,7 +63,7 @@ async fn get_head_skin(uuid: &str) -> DynResult<(Vec<u8>, Vec<u8>)> {
         .find(|a| a.name.as_str() == "textures")
     {
         let texture_raw = &prop.value;
-        let texture_raw = base64::decode(texture_raw)?;
+        let texture_raw = BASE64_STANDARD.decode(texture_raw)?;
         let texture_data: ProfileTexture = serde_json::from_slice(&texture_raw)?;
         if let Some(textures) = texture_data.textures {
             if let Some(skin) = textures.skin {

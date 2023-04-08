@@ -3,6 +3,7 @@
 use std::str::FromStr;
 
 use anyhow::Context;
+use base64::prelude::*;
 use surf::StatusCode;
 
 use crate::{
@@ -55,7 +56,7 @@ async fn get_head_skin(api_location: &str, uuid: &str) -> DynResult<(Vec<u8>, Ve
         .find(|a| a.name.as_str() == "textures")
     {
         let texture_raw = &prop.value;
-        let texture_raw = base64::decode(texture_raw)?;
+        let texture_raw = BASE64_STANDARD.decode(texture_raw)?;
         let texture_data: ProfileTexture = serde_json::from_slice(&texture_raw)?;
         if let Some(textures) = texture_data.textures {
             if let Some(skin) = textures.skin {
@@ -232,7 +233,7 @@ pub async fn start_auth(
         .recv_bytes()
         .await
         .map_err(|e| anyhow::anyhow!("无法接收登录接口元数据：{:?}", e))?;
-    let server_meta = base64::encode(server_meta);
+    let server_meta = BASE64_STANDARD.encode(server_meta);
 
     // 登录链接
     let auth_url = format!("{api_location}authserver/authenticate");
