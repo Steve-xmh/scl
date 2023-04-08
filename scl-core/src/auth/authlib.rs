@@ -101,7 +101,7 @@ pub async fn refresh_token(
             dbg!(&RefreshBody {
                 access_token: access_token.to_owned_string(),
                 client_token: client_token.to_owned(),
-                request_user: true,
+                request_user: provide_selected_profile,
                 selected_profile: if provide_selected_profile {
                     Some(AvaliableProfile {
                         name: player_name.to_owned(),
