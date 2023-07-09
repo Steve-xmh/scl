@@ -384,10 +384,7 @@ impl<T: Data> Widget<T> for WindowWidget<T> {
 
                     use raw_window_handle_5::Win32WindowHandle;
                     use winapi::{
-                        shared::{
-                            minwindef::*,
-                            windef::*,
-                        },
+                        shared::{minwindef::*, windef::*},
                         um::winuser::{LoadImageW, SendMessageW, IMAGE_ICON, WM_SETICON},
                     };
                     let small_icon = LoadImageW(
