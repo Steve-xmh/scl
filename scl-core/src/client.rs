@@ -146,7 +146,7 @@ impl Client {
             let lib_base_path = variables
                 .get("${library_directory}")
                 .unwrap()
-                .replace('/', &std::path::MAIN_SEPARATOR.to_string());
+                .replace('/', std::path::MAIN_SEPARATOR_STR);
             // 使用 HashMap 以将模组加载器中的 Jar 进行覆盖
             let mut lib_args: HashMap<String, String> =
                 HashMap::with_capacity(meta.libraries.len());
@@ -165,7 +165,7 @@ impl Client {
                     format!(
                         "{}{sep}{}{sep}{}{sep}{}{sep}{}-{}.jar",
                         lib_base_path,
-                        package_path.join(&std::path::MAIN_SEPARATOR.to_string()),
+                        package_path.join(std::path::MAIN_SEPARATOR_STR),
                         name,
                         version,
                         name,
@@ -179,10 +179,8 @@ impl Client {
                         format!(
                             "{}{sep}{}",
                             lib_base_path,
-                            d.path.replace(
-                                |a| a == '/' || a == '\\',
-                                &std::path::MAIN_SEPARATOR.to_string()
-                            ),
+                            d.path
+                                .replace(|a| a == '/' || a == '\\', std::path::MAIN_SEPARATOR_STR),
                             sep = std::path::MAIN_SEPARATOR
                         )
                     } else {
@@ -214,10 +212,9 @@ impl Client {
                             lib_path += CLASSPATH_SEPARATOR;
                             lib_path += &lib_base_path;
                             lib_path.push(std::path::MAIN_SEPARATOR);
-                            lib_path += &classifier.path.replace(
-                                |a| a == '/' || a == '\\',
-                                &std::path::MAIN_SEPARATOR.to_string(),
-                            );
+                            lib_path += &classifier
+                                .path
+                                .replace(|a| a == '/' || a == '\\', std::path::MAIN_SEPARATOR_STR);
                             // TODO: 解压原生库
                         }
                     }
@@ -235,10 +232,7 @@ impl Client {
                         .into_iter()
                         .map(|x| x.1)
                         .chain(meta.main_jars.iter().map(|a| {
-                            a.replace(
-                                |a| a == '/' || a == '\\',
-                                &std::path::MAIN_SEPARATOR.to_string(),
-                            )
+                            a.replace(|a| a == '/' || a == '\\', std::path::MAIN_SEPARATOR_STR)
                         }))
                         .collect()
                 };
@@ -293,7 +287,22 @@ impl Client {
                 })
                 .unwrap_or_default()
             {
+                // 使用旧版 Minecraft 资源文件结构的版本需要将资源文件复制到 gameDir/resources 文件夹下方可正确读取游戏资源
+                let game_dir = get_game_directory(&cfg);
+                let resources_path = Path::new(&game_dir).join("resources");
                 let assets_path = assets_path.join("virtual").join("pre-1.6");
+                println!(
+                    "正在映射 {} 至 {}",
+                    assets_path.to_string_lossy(),
+                    resources_path.to_string_lossy()
+                );
+                let _ = dbg!(fs_extra::dir::copy(
+                    &assets_path,
+                    &resources_path,
+                    &fs_extra::dir::CopyOptions::new()
+                        .skip_exist(true)
+                        .content_only(true),
+                ));
                 get_full_path(assets_path)
             } else {
                 get_full_path(assets_path)
@@ -359,26 +368,9 @@ impl Client {
         // -- JVM 参数
         // JVM 参数
         // Encoding
-        args.push("-Dfile.encoding=UTF-8".into());
 
         // 禁用 JNDI
         args.push("-Dlog4j2.formatMsgNoLookups=true".into());
-
-        // 注入 log4j-patch
-
-        // args.push(format!("-javaagent:{}", {
-        //     let lib_path = std::path::Path::new(&cfg.version_info.version_base);
-        //     let lib_path = lib_path
-        //         .parent()
-        //         .ok_or_else(|| anyhow::anyhow!("There's no parent from the library path"))?
-        //         .join("libraries")
-        //         .join("org")
-        //         .join("glavo")
-        //         .join("1.0")
-        //         .join("log4j-patch")
-        //         .join("log4j-patch-agent-1.0.jar");
-        //     lib_path.to_string_lossy().to_string()
-        // }));
 
         // 用户自定义JVM参数
         if let Some(scl_config) = &cfg.version_info.scl_launch_config {

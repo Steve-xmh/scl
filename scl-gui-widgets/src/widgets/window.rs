@@ -385,7 +385,7 @@ impl<T: Data> Widget<T> for WindowWidget<T> {
                     use raw_window_handle_5::Win32WindowHandle;
                     use winapi::{
                         shared::{
-                            minwindef::{LPARAM, *},
+                            minwindef::*,
                             windef::*,
                         },
                         um::winuser::{LoadImageW, SendMessageW, IMAGE_ICON, WM_SETICON},

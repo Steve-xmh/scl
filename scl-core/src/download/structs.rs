@@ -41,8 +41,13 @@ pub struct VersionInfo {
 }
 
 /// 资源索引信息
-#[derive(Debug, Deserialize, PartialEq, Eq)]
+#[derive(Debug, Deserialize, PartialEq, Eq, Default)]
 pub struct AssetIndexes {
+    /// 是否需要在启动游戏前将资源文件映射（复制）到 游戏目录/resources 文件夹内
+    /// 
+    /// 该参数会出现在 pre-1.6 的资源文件内，且都是 `true`
+    #[serde(default)]
+    pub map_to_resources: bool,
     /// 所有的资源文件哈希对照表，键为原文件路径
     pub objects: Map<String, AssetItem>,
 }
