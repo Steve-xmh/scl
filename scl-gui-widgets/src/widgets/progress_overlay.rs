@@ -94,12 +94,12 @@ impl<T> ProgressOverlay<T> {
     }
 
     fn update_taskbar_progress(&self, _handle: RawWindowHandle) {
-        #[cfg(any(target_os = "windows"))]
+        #[cfg(target_os = "windows")]
         {
             use taskbar_interface::*;
             if let Ok(mut indicator) = TaskbarInterface::new(
                 _handle,
-                RawDisplayHandle::Windows(raw_window_handle_5::WindowsDisplayHandle::empty()),
+                raw_window_handle_5::RawDisplayHandle::Windows(raw_window_handle_5::WindowsDisplayHandle::empty()),
             ) {
                 if self.progress_map.is_empty() {
                     let _ = indicator.set_progress_state(ProgressIndicatorState::NoProgress);
@@ -328,7 +328,7 @@ impl<T: Data> Widget<T> for ProgressOverlay<T> {
                         use taskbar_interface::*;
                         if let Ok(mut indicator) = TaskbarInterface::new(
                             ctx.window().raw_window_handle(),
-                            RawDisplayHandle::Windows(
+                            raw_window_handle_5::RawDisplayHandle::Windows(
                                 raw_window_handle_5::WindowsDisplayHandle::empty(),
                             ),
                         ) {
