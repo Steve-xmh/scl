@@ -93,11 +93,14 @@ impl<T> ProgressOverlay<T> {
         false
     }
 
-    fn update_taskbar_progress(&self, handle: RawWindowHandle) {
-        #[cfg(any(target_os = "windows", target_os = "linux"))]
+    fn update_taskbar_progress(&self, _handle: RawWindowHandle) {
+        #[cfg(any(target_os = "windows"))]
         {
             use taskbar_interface::*;
-            if let Ok(mut indicator) = TaskbarInterface::new(handle) {
+            if let Ok(mut indicator) = TaskbarInterface::new(
+                _handle,
+                RawDisplayHandle::Windows(raw_window_handle_5::WindowsDisplayHandle::empty()),
+            ) {
                 if self.progress_map.is_empty() {
                     let _ = indicator.set_progress_state(ProgressIndicatorState::NoProgress);
                 } else if self.progress_map.iter().all(|x| x.1.indeterminate) {
@@ -320,12 +323,15 @@ impl<T: Data> Widget<T> for ProgressOverlay<T> {
                     if self.progress_map.is_empty() {
                         self.progress_height_spring.set_target(0.);
                     }
-                    #[cfg(any(target_os = "windows", target_os = "linux"))]
+                    #[cfg(any(target_os = "windows"))]
                     if self.progress_map.is_empty() && self.show_progress_on_taskbar {
                         use taskbar_interface::*;
-                        if let Ok(mut indicator) =
-                            TaskbarInterface::new(ctx.window().raw_window_handle())
-                        {
+                        if let Ok(mut indicator) = TaskbarInterface::new(
+                            ctx.window().raw_window_handle(),
+                            RawDisplayHandle::Windows(
+                                raw_window_handle_5::WindowsDisplayHandle::empty(),
+                            ),
+                        ) {
                             let _ = indicator.needs_attention(true);
                         }
                     }
