@@ -281,7 +281,7 @@ impl<R: Reporter> GameDownload<'_> for Downloader<R> {
 
         if !launcher_profiles_path.exists() {
             inner_future::fs::create_dir_all(launcher_profiles_path.parent().unwrap()).await?;
-            inner_future::fs::write(launcher_profiles_path, r##"{"profiles":{},"selectedProfile":null,"authenticationDatabase":{},"selectedUser":{"account":"00000111112222233333444445555566","profile":"66666555554444433333222221111100"}}"##).await?;
+            inner_future::fs::write(launcher_profiles_path, r#"{"profiles":{},"selectedProfile":null,"authenticationDatabase":{},"selectedUser":{"account":"00000111112222233333444445555566","profile":"66666555554444433333222221111100"}}"#).await?;
         }
 
         if !fabric.is_empty() {

@@ -35,7 +35,7 @@ struct APIMetaData {
 #[derive(Debug, Deserialize, Serialize, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
 pub(crate) struct RefreshBody {
-    pub access_token: String,
+    pub access_token: Password,
     #[serde(skip_serializing_if = "String::is_empty")]
     pub client_token: String,
     pub request_user: bool,
@@ -100,7 +100,7 @@ pub async fn refresh_token(
         let res: RequestResult<AuthenticateResponse> = dbg!(crate::http::no_retry::post_data(
             dbg!(&format!("{api_location}authserver/refresh")),
             dbg!(&RefreshBody {
-                access_token: access_token.to_owned_string(),
+                access_token: access_token.to_owned(),
                 client_token: client_token.to_owned(),
                 request_user: provide_selected_profile,
                 selected_profile: if provide_selected_profile {
@@ -131,7 +131,7 @@ pub async fn refresh_token(
                     server_name: server_name.to_owned(),
                     server_homepage,
                     server_meta,
-                    access_token: res.access_token.into(),
+                    access_token: res.access_token,
                     uuid: selected_profile.id,
                     player_name: selected_profile.name,
                     head_skin,
@@ -239,7 +239,7 @@ pub async fn start_auth(
     let auth_url = format!("{api_location}authserver/authenticate");
     let auth_body = AuthenticateBody {
         username: username.to_owned(),
-        password: password.take_string(),
+        password,
         client_token: client_token.to_owned(),
         ..Default::default()
     };
@@ -259,7 +259,7 @@ pub async fn start_auth(
                         server_name,
                         server_homepage,
                         server_meta,
-                        access_token: a.access_token.into(),
+                        access_token: a.access_token,
                         uuid: selected_profile.id,
                         player_name: selected_profile.name,
                         head_skin,
@@ -275,7 +275,7 @@ pub async fn start_auth(
                         server_name,
                         server_homepage,
                         server_meta,
-                        access_token: a.access_token.into(),
+                        access_token: a.access_token,
                         uuid: profile.id.to_owned(),
                         player_name: profile.name.to_owned(),
                         head_skin,
@@ -293,7 +293,7 @@ pub async fn start_auth(
                             server_name: server_name.to_owned(),
                             server_homepage: server_homepage.to_owned(),
                             server_meta: server_meta.to_owned(),
-                            access_token: a.access_token.to_owned().into(),
+                            access_token: a.access_token.to_owned(),
                             uuid: x.id,
                             player_name: x.name,
                             head_skin,
@@ -329,7 +329,7 @@ pub async fn validate(
     let post_url = url::Url::parse(api_location)?.join("authserver/validate")?;
     let resp = crate::http::post(post_url)
         .body_json(&ValidateResponse {
-            access_token: access_token.to_owned(),
+            access_token: access_token.into(),
             client_token: client_token.to_owned(),
         })
         .map_err(|_| anyhow::anyhow!("无法序列化请求"))?

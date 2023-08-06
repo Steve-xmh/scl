@@ -5,7 +5,7 @@ use std::fmt::Display;
 use serde::Deserialize;
 
 use super::structs::AuthMethod;
-use crate::prelude::*;
+use crate::{password::Password, prelude::*};
 pub mod leagcy;
 use leagcy::*;
 
@@ -184,7 +184,7 @@ impl<T: Display> MicrosoftOAuth<T> {
                     let (head_skin, hat_skin) = crate::auth::parse_head_skin(skin_data)?;
                     println!("微软账户验证成功！");
                     Ok(AuthMethod::Microsoft {
-                        access_token: access_token.into(),
+                        access_token,
                         refresh_token: refresh_token.to_string().into(),
                         xuid,
                         head_skin,
@@ -227,7 +227,7 @@ impl<T: Display> MicrosoftOAuth<T> {
                 new_access_token
             );
 
-            *access_token = new_access_token.into();
+            *access_token = new_access_token;
             Ok(())
         } else {
             anyhow::bail!("不支持的方法");
@@ -271,7 +271,7 @@ pub struct TokenResponse {
     /// 包含的访问令牌有效的秒数。
     pub expires_in: usize,
     /// 针对请求的范围颁发。
-    pub access_token: String,
+    pub access_token: Password,
     /// 如果原始 `scope` 参数包含 `openid` 范围，则颁发。
     pub id_token: String,
     /// 如果原始 `scope` 参数包含 `offline_access`，则颁发。

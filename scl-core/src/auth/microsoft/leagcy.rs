@@ -4,6 +4,7 @@ use serde::Deserialize;
 
 use crate::{
     auth::{parse_head_skin, structs::AuthMethod},
+    password::Password,
     prelude::*,
 };
 
@@ -29,7 +30,7 @@ struct OAuth20TokenResponse {
     // expires_in: usize,
     // scope: String,
     pub error: String,
-    pub access_token: String,
+    pub access_token: Password,
     pub refresh_token: String,
     // user_id: String,
     // foci: String,
@@ -61,7 +62,7 @@ pub(super) struct MinecraftStoreResponse {
 #[derive(Debug, Clone, Deserialize)]
 pub(super) struct MinecraftXBoxLoginResponse {
     // pub username: String,
-    pub access_token: String,
+    pub access_token: Password,
     // pub token_type: String,
 }
 
@@ -105,7 +106,7 @@ pub async fn get_xuid(userhash: &str, token: &str) -> DynResult<String> {
 /// 如果请求一个新令牌，则 credit 为从登录页面里传来的 code 请求字符串
 ///
 /// 如果续期一个令牌，则 credit 为需要续期的旧令牌
-pub async fn request_token(credit: &str, is_refresh: bool) -> DynResult<(String, String)> {
+pub async fn request_token(credit: &str, is_refresh: bool) -> DynResult<(Password, String)> {
     let body = format!(
         "client_id=00000000402b5328&{}={}&grant_type={}&redirect_uri=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf&scope=service%3A%3Auser.auth.xboxlive.com%3A%3AMBI_SSL",
         if is_refresh { "refresh_token" } else { "code" }, // Grant Tag
@@ -168,7 +169,7 @@ pub async fn get_userhash_and_token(access_token: &str) -> DynResult<(String, St
 /// 通过 [`get_userhash_and_token`] 返回的 `userhash` 和 `xsts_token` 获取 Mojang 的访问令牌
 ///
 /// 在拥有 Minecraft 游戏的情况下，此令牌可用于正版启动游戏
-pub async fn get_mojang_access_token(uhs: &str, xsts_token: &str) -> DynResult<String> {
+pub async fn get_mojang_access_token(uhs: &str, xsts_token: &str) -> DynResult<Password> {
     if !uhs.is_empty() && !xsts_token.is_empty() {
         // println!("Getting mojang access token");
         let minecraft_xbox_body = format!("{{\"identityToken\":\"XBL3.0 x={uhs};{xsts_token}\"}}");
@@ -186,7 +187,7 @@ pub async fn get_mojang_access_token(uhs: &str, xsts_token: &str) -> DynResult<S
         let access_token = minecraft_xbox_resp.access_token;
         Ok(access_token)
     } else {
-        Ok("".into())
+        Ok(Password::default())
     }
 }
 
@@ -207,7 +208,7 @@ pub async fn refresh_auth(method: &mut AuthMethod) -> DynResult {
                 "刷新令牌失败: {}",
                 new_access_token
             );
-            *access_token = new_access_token.into();
+            *access_token = new_access_token;
             *refresh_token = new_refresh_token.into();
         }
         _ => {
@@ -260,7 +261,7 @@ pub async fn start_auth(_ctx: Option<impl Reporter>, url: &str) -> DynResult<Aut
                     let (head_skin, hat_skin) = parse_head_skin(skin_data)?;
                     println!("Successfully authed!");
                     return Ok(AuthMethod::Microsoft {
-                        access_token: access_token.into(),
+                        access_token,
                         refresh_token: refresh_token.into(),
                         xuid,
                         head_skin,

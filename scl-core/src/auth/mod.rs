@@ -97,7 +97,7 @@ pub async fn auth_mojang(
     // https://authserver.mojang.com/authenticate
     let body = structs::mojang::AuthenticateBody {
         username: username.into(),
-        password: password.to_string(),
+        password: password.to_owned(),
         client_token: client_token.into(),
         ..Default::default()
     };
@@ -114,7 +114,7 @@ pub async fn auth_mojang(
             };
             let (head_skin, hat_skin) = get_head_skin(&selected_profile.id).await?;
             Ok(AuthMethod::Mojang {
-                access_token: a.access_token.into(),
+                access_token: a.access_token,
                 uuid: selected_profile.id,
                 player_name: selected_profile.name,
                 head_skin,
@@ -136,7 +136,7 @@ pub async fn refresh_auth(am: &mut AuthMethod, client_token: &str) -> DynResult<
     match am {
         AuthMethod::Mojang { access_token, .. } => {
             let body = structs::mojang::ValidateResponse {
-                access_token: access_token.to_string(),
+                access_token: access_token.to_owned(),
                 client_token: client_token.to_owned(),
             };
             let result = crate::http::post("https://authserver.mojang.com/validate")

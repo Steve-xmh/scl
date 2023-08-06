@@ -71,12 +71,14 @@ pub enum AuthMethod {
 pub(crate) mod mojang {
     use serde::{Deserialize, Serialize};
 
+    use crate::password::Password;
+
     #[derive(Debug, Deserialize, Serialize, PartialEq, Eq)]
     #[serde(rename_all = "camelCase")]
     pub(crate) struct AuthenticateBody {
         pub agent: AuthenticateAgent,
         pub username: String,
-        pub password: String,
+        pub password: Password,
         #[serde(skip_serializing_if = "String::is_empty")]
         pub client_token: String,
         pub request_user: bool,
@@ -112,7 +114,7 @@ pub(crate) mod mojang {
     #[derive(Debug, Deserialize, PartialEq, Eq)]
     #[serde(rename_all = "camelCase")]
     pub(crate) struct AuthenticateResponse {
-        pub access_token: String,
+        pub access_token: Password,
         pub client_token: String,
         pub available_profiles: Vec<AvaliableProfile>,
         pub selected_profile: Option<AvaliableProfile>,
@@ -121,7 +123,7 @@ pub(crate) mod mojang {
     #[derive(Debug, Serialize, PartialEq, Eq)]
     #[serde(rename_all = "camelCase")]
     pub(crate) struct ValidateResponse {
-        pub access_token: String,
+        pub access_token: Password,
         pub client_token: String,
     }
 

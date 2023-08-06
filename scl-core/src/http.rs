@@ -258,6 +258,7 @@ pub mod no_retry {
     /// 返回的数据结构需要实现 [`serde::de::DeserializeOwned`]
     pub async fn get_data<D: DeserializeOwned>(uri: &str) -> DynResult<RequestResult<D>> {
         let result = surf::get(uri)
+            .middleware(surf::middleware::Redirect::default())
             .recv_string()
             .await
             .map_err(|e| anyhow::anyhow!("无法接收来自 {} 的响应：{:?}", uri, e))?;
