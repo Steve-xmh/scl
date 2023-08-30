@@ -5,7 +5,7 @@ edition = "2021"
 description = "Some useful macros can be used in scl coding. (Highly unstable and all in Chinese!)"
 homepage = "https://github.com/Steve-xmh/scl"
 repository = "https://github.com/Steve-xmh/scl"
-license = "LGPL-3.0-only with static-linking-expection"
+license = "LGPL-3.0-only"
 readme = "README.md"
 authors = ["Steve-xmh <stevexmh@qq.com>"]
 
