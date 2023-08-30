@@ -2,6 +2,12 @@
 name = "scl-gui-widgets"
 version = "1.0.0"
 edition = "2021"
+description = "WinUI-style Druid widgets for SCL. (Highly unstable and all in Chinese!)"
+homepage = "https://github.com/Steve-xmh/scl"
+repository = "https://github.com/Steve-xmh/scl"
+license = "LGPL-3.0 with static-linking-expection"
+readme = "README.md"
+authors = ["Steve-xmh <stevexmh@qq.com>"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

@@ -1,7 +1,11 @@
 [package]
 name = "scl-core"
-description = "A fully featured minecraft launcher core."
+description = "A fully featured minecraft launcher core. (Highly unstable and all in Chinese!)"
 version = "1.0.2"
+homepage = "https://github.com/Steve-xmh/scl"
+repository = "https://github.com/Steve-xmh/scl"
+license = "LGPL-3.0 with static-linking-expection"
+readme = "README.md"
 authors = ["Steve-xmh <stevexmh@qq.com>"]
 edition = "2021"
 

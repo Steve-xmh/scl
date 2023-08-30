@@ -2,7 +2,12 @@
 name = "scl-macro"
 version = "0.1.1"
 edition = "2021"
-description = "Some useful macros can be used in scl coding"
+description = "Some useful macros can be used in scl coding. (Highly unstable and all in Chinese!)"
+homepage = "https://github.com/Steve-xmh/scl"
+repository = "https://github.com/Steve-xmh/scl"
+license = "LGPL-3.0 with static-linking-expection"
+readme = "README.md"
+authors = ["Steve-xmh <stevexmh@qq.com>"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
