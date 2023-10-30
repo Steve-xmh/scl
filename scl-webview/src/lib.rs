@@ -289,7 +289,7 @@ impl WebView {
 
                     extern "C" fn window_will_close(this: &mut Object, _: Sel, _: id) {
                         unsafe {
-                            println!("WindowWillClose");
+                            tracing::trace!("WindowWillClose");
                             let url_sender = *this.get_ivar::<usize>("urlSender");
                             let webview = dbg!(*this.get_ivar::<id>("webview"));
                             if url_sender != 0 {
@@ -300,13 +300,13 @@ impl WebView {
                                     (*webview).set_ivar("urlSender", 0usize);
                                 }
 
-                                println!("Dropping sender");
+                                tracing::trace!("Dropping sender");
                                 drop(Box::from_raw(sx));
-                                println!("Empty URL Sent");
+                                tracing::trace!("Empty URL Sent");
                             }
                             if !webview.is_null() {
                                 this.set_ivar::<id>("webview", std::ptr::null_mut());
-                                println!("Release webview");
+                                tracing::trace!("Release webview");
                                 let _: id = msg_send![webview, release];
                             }
                             let _: id = msg_send![this, release];
@@ -335,15 +335,15 @@ impl WebView {
                             let url: id = msg_send![this, URL];
                             if url.is_null() {
                                 // 出错了
-                                println!("WARNING: URL is null!");
+                                tracing::trace!("WARNING: URL is null!");
                                 let win: id = msg_send![this, window];
                                 let url_sender = *(*this).get_ivar::<usize>("urlSender");
                                 if url_sender != 0 {
                                     let sx = &mut *(url_sender as *mut Sender<String>);
                                     let _ = dbg!(sx.send("".into()));
-                                    println!("Dropping sender");
+                                    tracing::trace!("Dropping sender");
                                     drop(Box::from_raw(sx));
-                                    println!("Empty URL Sent");
+                                    tracing::trace!("Empty URL Sent");
                                 }
                                 let delegate = win.delegate();
                                 if !delegate.is_null() {
@@ -357,7 +357,7 @@ impl WebView {
                             let url = NSString::UTF8String(url);
                             let url = std::ffi::CStr::from_ptr(url);
                             let url = url.to_str().unwrap_or_default().to_string();
-                            println!("URL Has Changed: {url}");
+                            tracing::trace!("URL Has Changed: {url}");
                             let callback: *const libc::c_void = *this.get_ivar("urlChangeCallback");
                             let callback: fn(&str) -> bool = std::mem::transmute(callback);
                             if dbg!((callback)(url.as_str())) {
@@ -365,9 +365,9 @@ impl WebView {
                                 if url_sender != 0 {
                                     let sx = &mut *(url_sender as *mut Sender<String>);
                                     let _ = dbg!(sx.send(url));
-                                    println!("Dropping sender");
+                                    tracing::trace!("Dropping sender");
                                     drop(Box::from_raw(sx));
-                                    println!("URL Sent");
+                                    tracing::trace!("URL Sent");
                                 }
                                 let win: id = msg_send![this, window];
                                 let _: id = msg_send![this, release];
@@ -431,9 +431,9 @@ impl WebView {
                 win.makeKeyAndOrderFront_(nil);
                 win.center();
             });
-            println!("Waiting for URL");
+            tracing::trace!("Waiting for URL");
             let url = rx.recv()?;
-            println!("Got URL: {url}");
+            tracing::trace!("Got URL: {url}");
             Ok(url)
         }
     }
@@ -632,8 +632,8 @@ impl WebView {
                         s.put_is_built_in_error_page_enabled(false)?;
                         w.add_navigation_starting(move |_, s| {
                             if let Some(callback) = &callback {
-                                // println!("Navigation starting");
-                                // println!("{:?}", s);
+                                // tracing::trace!("Navigation starting");
+                                // tracing::trace!("{:?}", s);
                                 let uri = s.get_uri().unwrap_or_else(|_| "".into());
                                 if callback(&uri) {
                                     let mut url = final_url.borrow_mut();
@@ -646,7 +646,7 @@ impl WebView {
                             Ok(())
                         })?;
                         w.navigate(&begin_url)?;
-                        // println!("Navigated to {}", begin_url);
+                        // tracing::trace!("Navigated to {}", begin_url);
                         controller_clone.set(c).unwrap();
                         Ok(())
                     })?;
@@ -671,12 +671,12 @@ impl WebView {
             let pid = webview_pid.borrow().to_owned();
             let user_data_path = user_data_path.to_owned();
             std::thread::spawn(move || {
-                println!("Waiting WebView exitting");
+                tracing::trace!("Waiting WebView exitting");
                 unsafe {
                     let ph = OpenProcess(SYNCHRONIZE, 0, pid);
                     WaitForSingleObject(ph, INFINITE);
                 }
-                println!("Removing WebView userdata");
+                tracing::trace!("Removing WebView userdata");
                 while user_data_path.is_dir() {
                     std::thread::sleep(std::time::Duration::from_millis(100));
                     std::fs::remove_dir_all(&user_data_path).unwrap_or_default();

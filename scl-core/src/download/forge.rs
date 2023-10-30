@@ -216,7 +216,7 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
                 mc = vanilla_version,
                 forge = forge_version
             );
-            println!("Downloading Forge Installer {full_path}");
+            tracing::trace!("Downloading Forge Installer {full_path}");
             if std::path::Path::new(&full_path).is_file() {
                 return Ok(());
             }
@@ -341,7 +341,7 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
                         } else if entry.is_file() {
                             temp_override_file.raw_copy_file(entry)?;
                         } else if entry.is_dir() {
-                            // println!("Added dir {}", entry.name());
+                            // tracing::trace!("Added dir {}", entry.name());
                             temp_override_file.add_directory(entry.name(), Default::default())?;
                         }
                     }
@@ -354,7 +354,7 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
                         } else if entry.is_file() {
                             temp_override_file.raw_copy_file(entry)?;
                         } else if entry.is_dir() {
-                            // println!("Added dir {}", entry.name());
+                            // tracing::trace!("Added dir {}", entry.name());
                             temp_override_file.add_directory(entry.name(), Default::default())?;
                         }
                     }
@@ -408,7 +408,7 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
         forge = forge_version,
         tempid = std::time::SystemTime::now().elapsed().unwrap_or_default().as_secs()
     );
-            println!("Writing temp forge installer from {full_path} to {tmp_full_path}");
+            tracing::trace!("Writing temp forge installer from {full_path} to {tmp_full_path}");
             {
                 let version_name = version_name.to_owned();
                 let full_path = full_path.to_owned();
@@ -428,7 +428,7 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
                     }),
                 )
                 .await?;
-                println!("Modifying");
+                tracing::trace!("Modifying");
                 self.modify_forge_installer(from_file, to_file, &version_name)
                     .await
                     .with_context(|| {
@@ -466,7 +466,7 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
             r.add_progress(1.);
             r.set_message("运行 Forge 安装器安装 Forge".into());
 
-            println!("Start running installer bootstrapper {cmd:?}");
+            tracing::trace!("Start running installer bootstrapper {cmd:?}");
 
             let mut child = cmd.spawn()?;
             let install_succeed = AtomicBool::new(false);
@@ -497,7 +497,7 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
                             } else if delayed {
                                 pr.set_message(line.to_owned());
                             }
-                            println!("[FIB] {line}");
+                            tracing::trace!("[FIB] {line}");
 
                             if let Some(class_name) = line.strip_prefix("Patching ") {
                                 // 数量太多可以缓一缓
@@ -557,19 +557,19 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
         to_writer: std::fs::File,
         name: &str,
     ) -> DynResult {
-        println!("Opening file");
+        tracing::trace!("Opening file");
         let mut file = zip::ZipArchive::new(std::io::BufReader::new(from_reader))
             .context("打开 Forge 安装器时发生错误")?;
-        println!("Opening file");
+        tracing::trace!("Opening file");
         let mut out_file = zip::ZipWriter::new(to_writer);
-        println!("Reading file");
+        tracing::trace!("Reading file");
         for index in 0..file.len() {
             if let Ok(mut entry) = file.by_index(index) {
                 if entry.name().starts_with("META-INF") {
                     continue;
                 }
                 if entry.is_file() {
-                    // println!("Writting file {}", entry.name());
+                    // tracing::trace!("Writting file {}", entry.name());
                     match entry.name() {
                         "install_profile.json" => {
                             let mut data = String::with_capacity(entry.size() as usize);
@@ -578,12 +578,12 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
                             if let Value::Object(obj) = &mut install_profile {
                                 if let Some(Value::String(version)) = obj.get_mut("version") {
                                     *version = name.to_owned();
-                                    println!("已修改 version 字段为 {version}");
+                                    tracing::trace!("已修改 version 字段为 {version}");
                                 }
                                 if let Some(Value::Object(obj)) = obj.get_mut("install") {
                                     if let Some(Value::String(target)) = obj.get_mut("target") {
                                         *target = name.to_owned();
-                                        println!("已修改 install.target 字段为 {target}");
+                                        tracing::trace!("已修改 install.target 字段为 {target}");
                                     }
                                 }
                                 let replace_source = match self.source {
@@ -615,7 +615,7 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
                                                             *down_url = format!(
                                                                 "{replace_source}{down_path}"
                                                             );
-                                                            println!(
+                                                            tracing::trace!(
                                                                 "已修改 libraries[{i}].download.artifact.url 字段"
                                                             );
                                                         }
@@ -630,14 +630,14 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
                                                 ) {
                                                     *down_url =
                                                         format!("{replace_source}{down_path}");
-                                                    println!("已修改 libraries[{i}].url 字段");
+                                                    tracing::trace!("已修改 libraries[{i}].url 字段");
                                                 }
                                                 if let Some(down_path) = down_url.strip_prefix(
                                                     "https://files.minecraftforge.net",
                                                 ) {
                                                     *down_url =
                                                         format!("{replace_source}{down_path}");
-                                                    println!("已修改 libraries[{i}].url 字段");
+                                                    tracing::trace!("已修改 libraries[{i}].url 字段");
                                                 }
                                             }
                                         }
@@ -667,7 +667,7 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
                                                                 *down_url = format!(
                                                                     "{replace_source}{down_path}"
                                                                 );
-                                                                println!(
+                                                                tracing::trace!(
                                                                     "已修改 libraries[{i}].download.artifact.url 字段"
                                                                 );
                                                             }
@@ -682,14 +682,14 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
                                                     ) {
                                                         *down_url =
                                                             format!("{replace_source}{down_path}");
-                                                        println!("已修改 versionInfo.libraries[{i}].url 字段");
+                                                        tracing::trace!("已修改 versionInfo.libraries[{i}].url 字段");
                                                     }
                                                     if let Some(down_path) = down_url.strip_prefix(
                                                         "https://files.minecraftforge.net",
                                                     ) {
                                                         *down_url =
                                                             format!("{replace_source}{down_path}");
-                                                        println!("已修改 versionInfo.libraries[{i}].url 字段");
+                                                        tracing::trace!("已修改 versionInfo.libraries[{i}].url 字段");
                                                     }
                                                 }
                                             }
@@ -698,7 +698,7 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
                                 }
                             }
                             #[cfg(debug_assertions)]
-                            println!(
+                            tracing::trace!(
                                 "修改完毕：\n{}",
                                 serde_json::to_string_pretty(&install_profile)?
                             );
@@ -707,12 +707,12 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
                             out_file.write_all(&output)?;
                         }
                         _ => {
-                            // println!("Copied file {}", entry.name());
+                            // tracing::trace!("Copied file {}", entry.name());
                             out_file.raw_copy_file(entry)?
                         }
                     }
                 } else if entry.is_dir() {
-                    // println!("Added dir {}", entry.name());
+                    // tracing::trace!("Added dir {}", entry.name());
                     out_file.add_directory(entry.name(), Default::default())?;
                 }
             }

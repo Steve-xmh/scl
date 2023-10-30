@@ -233,7 +233,7 @@ impl<T: Data> Widget<T> for PageSwitcher<T> {
                             self.skip_first_anime_frame = 1;
                             ctx.request_anim_frame();
                         } else {
-                            println!("WARNING: Back page invoked when the page is only one!")
+                            tracing::trace!("WARNING: Back page invoked when the page is only one!")
                         }
                     } else if self.page_chain.len() > 1 {
                         let to_page = self.page_chain[self.page_chain.len() - 2];
@@ -247,7 +247,7 @@ impl<T: Data> Widget<T> for PageSwitcher<T> {
                         self.skip_first_anime_frame = 1;
                         ctx.request_anim_frame();
                     } else {
-                        println!("WARNING: Back page invoked when the page is only one!")
+                        tracing::trace!("WARNING: Back page invoked when the page is only one!")
                     }
                 }
             } else if let Some(&t) = cmd.get(SET_SLIDE_PAGE_ANIMATION) {

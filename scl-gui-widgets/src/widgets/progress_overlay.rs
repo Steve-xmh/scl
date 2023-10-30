@@ -45,7 +45,6 @@ struct ProgressState {
 /// 在没有进度时会隐藏，当存在进度时将会占用一点位置来显示进度。
 /// 此时如果鼠标悬浮在这个区域则会放大进度组件以查看正在处理的所有进度。
 pub struct ProgressOverlay<T> {
-    #[cfg(any(target_os = "windows", target_os = "linux"))]
     show_progress_on_taskbar: bool,
 
     progress_expanding: bool,
@@ -71,10 +70,7 @@ impl<T> ProgressOverlay<T> {
     ///
     /// 目前支持 Linux 和 Windows 环境，其它平台下调用该函数将没有任何作用。
     pub fn show_progress_on_taskbar(mut self) -> Self {
-        #[cfg(any(target_os = "windows", target_os = "linux"))]
-        {
-            self.show_progress_on_taskbar = true;
-        }
+        self.show_progress_on_taskbar = true;
         self
     }
 
@@ -99,7 +95,40 @@ impl<T> ProgressOverlay<T> {
             use taskbar_interface::*;
             if let Ok(mut indicator) = TaskbarInterface::new(
                 _handle,
-                raw_window_handle_5::RawDisplayHandle::Windows(raw_window_handle_5::WindowsDisplayHandle::empty()),
+                raw_window_handle_5::RawDisplayHandle::Windows(
+                    raw_window_handle_5::WindowsDisplayHandle::empty(),
+                ),
+            ) {
+                if self.progress_map.is_empty() {
+                    let _ = indicator.set_progress_state(ProgressIndicatorState::NoProgress);
+                } else if self.progress_map.iter().all(|x| x.1.indeterminate) {
+                    let _ = indicator.set_progress_state(ProgressIndicatorState::Indeterminate);
+                } else {
+                    // let _ = indicator.set_progress_state(ProgressIndicatorState::Normal);
+                    let max_progress: f64 = self
+                        .progress_map
+                        .iter()
+                        .filter(|x| !x.1.indeterminate)
+                        .map(|x| x.1.max_progress)
+                        .sum();
+                    let cur_progress: f64 = self
+                        .progress_map
+                        .iter()
+                        .filter(|x| !x.1.indeterminate)
+                        .map(|x| x.1.progress.max(0.0))
+                        .sum();
+                    let _ = indicator.set_progress((cur_progress / max_progress).clamp(0.0, 1.0));
+                }
+            }
+        }
+        #[cfg(target_os = "macos")]
+        {
+            use taskbar_interface::*;
+            if let Ok(mut indicator) = TaskbarInterface::new(
+                _handle,
+                raw_window_handle_5::RawDisplayHandle::AppKit(
+                    raw_window_handle_5::AppKitDisplayHandle::empty(),
+                ),
             ) {
                 if self.progress_map.is_empty() {
                     let _ = indicator.set_progress_state(ProgressIndicatorState::NoProgress);

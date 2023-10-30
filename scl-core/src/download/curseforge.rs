@@ -193,7 +193,7 @@ pub async fn search_mods(
     if category_id > 0 {
         let _ = write!(&mut base_url, "&categoryID={category_id}");
     }
-    println!("Searching by {base_url}");
+    tracing::trace!("Searching by {base_url}");
     let data: Response<Vec<ModInfo>> = crate::http::get(&base_url)
         .header("x-api-key", API_KEY.unwrap_or_default())
         .await

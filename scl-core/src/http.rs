@@ -22,32 +22,32 @@ fn logger(
             .map(|x| &x == "true")
             .unwrap_or(false);
         if should_log {
-            println!("[SCL-Core-HTTP] 正在请求 {url}");
+            tracing::trace!("[SCL-Core-HTTP] 正在请求 {url}");
         }
         let res = next.run(req, client).await?;
         if let Some(content_type) = res.content_type() {
             if should_log {
-                println!(
+                tracing::trace!(
                     "[SCL-Core-HTTP] 请求 {} 完成 状态码：{} 响应类型：{}",
                     url,
                     res.status(),
                     content_type
                 );
                 if res.status().is_redirection() {
-                    println!(
+                    tracing::trace!(
                         "[SCL-Core-HTTP] 正在重定向至 {}",
                         res.header("Location").map(|x| x.as_str()).unwrap_or("")
                     );
                 }
             }
         } else if should_log {
-            println!(
+            tracing::trace!(
                 "[SCL-Core-HTTP] 请求 {} 完成 状态码：{} 响应类型：无",
                 url,
                 res.status()
             );
             if res.status().is_redirection() {
-                println!(
+                tracing::trace!(
                     "[SCL-Core-HTTP] 正在重定向至 {}",
                     res.header("Location").map(|x| x.as_str()).unwrap_or("")
                 );
@@ -73,7 +73,7 @@ static GLOBAL_CLIENT: Lazy<Arc<Client>> = Lazy::new(|| {
             proxy
         };
         if let Ok(uri) = url::Url::parse(&proxy) {
-            println!("Using http proxy: {uri}");
+            tracing::trace!("Using http proxy: {uri}");
             client.set_base_url(uri)
         } else {
             client
@@ -132,14 +132,14 @@ pub async fn download(
                         return Ok(());
                     }
                 } else {
-                    println!("Error {:?} 状态码错误 {}", uri, res.status());
+                    tracing::trace!("Error {:?} 状态码错误 {}", uri, res.status());
                 }
             }
             Ok(Err(e)) => {
-                println!("Error {uri:?} {e}")
+                tracing::trace!("Error {uri:?} {e}")
             }
             Err(e) => {
-                println!("Error {uri:?} {e}")
+                tracing::trace!("Error {uri:?} {e}")
             }
         }
     }

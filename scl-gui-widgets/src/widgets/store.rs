@@ -49,13 +49,13 @@ impl<F: Data, T: Data> Widget<F> for Store<F, T> {
         data: &mut F,
         env: &druid::Env,
     ) {
-        println!("Event Called");
+        tracing::trace!("Event Called");
         let mut post_data = self.post_data.to_owned();
         self.inner.event(ctx, event, &mut post_data, env);
         if !post_data.same(&self.post_data) {
             self.post_data = post_data;
             (self.post_data_processor)(&self.post_data, data);
-            println!("Post Data Updated");
+            tracing::trace!("Post Data Updated");
             ctx.request_update();
         }
     }
@@ -67,7 +67,7 @@ impl<F: Data, T: Data> Widget<F> for Store<F, T> {
         _data: &F,
         env: &druid::Env,
     ) {
-        println!("Lifecycle Called");
+        tracing::trace!("Lifecycle Called");
         self.inner.lifecycle(ctx, event, &self.post_data, env)
     }
 
@@ -75,7 +75,7 @@ impl<F: Data, T: Data> Widget<F> for Store<F, T> {
         let mut post_data = self.post_data.to_owned();
         (self.pre_data_processor)(data, &mut post_data);
         if !post_data.same(&self.post_data) {
-            println!("Update Called");
+            tracing::trace!("Update Called");
             self.inner.update(ctx, &self.post_data, env);
         }
     }
@@ -87,12 +87,12 @@ impl<F: Data, T: Data> Widget<F> for Store<F, T> {
         _data: &F,
         env: &druid::Env,
     ) -> druid::Size {
-        println!("Layout Called");
+        tracing::trace!("Layout Called");
         self.inner.layout(ctx, bc, &self.post_data, env)
     }
 
     fn paint(&mut self, ctx: &mut druid::PaintCtx, _data: &F, env: &druid::Env) {
-        println!("Paint Called");
+        tracing::trace!("Paint Called");
         self.inner.paint(ctx, &self.post_data, env)
     }
 }

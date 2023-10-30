@@ -291,7 +291,7 @@ impl Client {
                 let game_dir = get_game_directory(&cfg);
                 let resources_path = Path::new(&game_dir).join("resources");
                 let assets_path = assets_path.join("virtual").join("pre-1.6");
-                println!(
+                tracing::trace!(
                     "正在映射 {} 至 {}",
                     assets_path.to_string_lossy(),
                     resources_path.to_string_lossy()

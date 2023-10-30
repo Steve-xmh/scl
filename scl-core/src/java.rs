@@ -158,7 +158,7 @@ fn get_java_version(java_version_string: &str) -> u8 {
 pub async fn search_for_java() -> Vec<String> {
     // 从安装目录中搜索 Java
     async fn check_bin_java_directory(path: impl AsRef<Path>, result: &mut Vec<String>) {
-        println!("Searching {}", path.as_ref().to_string_lossy());
+        tracing::trace!("Searching {}", path.as_ref().to_string_lossy());
         if let Ok(mut d) = inner_future::fs::read_dir(path).await {
             while let Ok(Some(d)) = d.try_next().await {
                 let mut path = d.path();

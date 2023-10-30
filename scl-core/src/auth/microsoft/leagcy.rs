@@ -132,7 +132,7 @@ pub async fn request_token(credit: &str, is_refresh: bool) -> DynResult<(Passwor
 ///
 /// 传递给 [`get_mojang_access_token`] 进行下一步验证
 pub async fn get_userhash_and_token(access_token: &str) -> DynResult<(String, String)> {
-    // println!("Getting xbox auth body");
+    // tracing::trace!("Getting xbox auth body");
     let xbox_auth_body = format!("{{\"Properties\":{{\"AuthMethod\":\"RPS\",\"SiteName\":\"user.auth.xboxlive.com\",\"RpsTicket\":\"{access_token}\"}},\"RelyingParty\":\"http://auth.xboxlive.com\",\"TokenType\":\"JWT\"}}");
     let xbox_auth_resp: XBoxAuthResponse =
         crate::http::post("https://user.auth.xboxlive.com/user/authenticate")
@@ -148,7 +148,7 @@ pub async fn get_userhash_and_token(access_token: &str) -> DynResult<(String, St
     if let Some(uhs) = xbox_auth_resp.display_claims.xui.first() {
         let uhs = uhs.uhs.to_owned();
         let xsts_body = format!("{{\"Properties\":{{\"SandboxId\":\"RETAIL\",\"UserTokens\":[\"{token}\"]}},\"RelyingParty\":\"rp://api.minecraftservices.com/\",\"TokenType\":\"JWT\"}}");
-        println!("Getting xbox xsts token");
+        tracing::trace!("Getting xbox xsts token");
         let xsts_resp: XBoxAuthResponse =
             crate::http::post("https://xsts.auth.xboxlive.com/xsts/authorize")
                 .header("Content-Type", "application/json")
@@ -171,7 +171,7 @@ pub async fn get_userhash_and_token(access_token: &str) -> DynResult<(String, St
 /// 在拥有 Minecraft 游戏的情况下，此令牌可用于正版启动游戏
 pub async fn get_mojang_access_token(uhs: &str, xsts_token: &str) -> DynResult<Password> {
     if !uhs.is_empty() && !xsts_token.is_empty() {
-        // println!("Getting mojang access token");
+        // tracing::trace!("Getting mojang access token");
         let minecraft_xbox_body = format!("{{\"identityToken\":\"XBL3.0 x={uhs};{xsts_token}\"}}");
         let minecraft_xbox_resp: MinecraftXBoxLoginResponse =
             crate::http::post("https://api.minecraftservices.com/authentication/login_with_xbox")
@@ -183,7 +183,7 @@ pub async fn get_mojang_access_token(uhs: &str, xsts_token: &str) -> DynResult<P
                 .body_json()
                 .await
                 .map_err(|e| anyhow::anyhow!(e))?;
-        // println!("Getting minecraft access token");
+        // tracing::trace!("Getting minecraft access token");
         let access_token = minecraft_xbox_resp.access_token;
         Ok(access_token)
     } else {
@@ -259,7 +259,7 @@ pub async fn start_auth(_ctx: Option<impl Reporter>, url: &str) -> DynResult<Aut
                         .await
                         .map_err(|e| anyhow::anyhow!(e))?;
                     let (head_skin, hat_skin) = parse_head_skin(skin_data)?;
-                    println!("Successfully authed!");
+                    tracing::trace!("Successfully authed!");
                     return Ok(AuthMethod::Microsoft {
                         access_token,
                         refresh_token: refresh_token.into(),

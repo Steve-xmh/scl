@@ -131,7 +131,7 @@ pub fn get_full_path(p: impl AsRef<std::path::Path>) -> String {
             p.to_string_lossy().to_string()
         }
         Err(e) => {
-            println!(
+            tracing::trace!(
                 "Warning: Can't convert path {} to full path: {}",
                 p.to_string_lossy(),
                 e

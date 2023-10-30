@@ -165,7 +165,7 @@ impl<R: Reporter> QuiltMCDownloadExt for Downloader<R> {
 
     async fn download_quiltmc_post(&self, version_name: &str) -> DynResult {
         // 将元数据与加载器的元数据进行合并
-        println!("合并元数据中");
+        tracing::trace!("合并元数据中");
 
         let vanilla_path = format!(
             "{}/{}/{}.json",
