@@ -97,9 +97,9 @@ pub async fn refresh_token(
         ..
     } = auth_method
     {
-        let res: RequestResult<AuthenticateResponse> = dbg!(crate::http::no_retry::post_data(
-            dbg!(&format!("{api_location}authserver/refresh")),
-            dbg!(&RefreshBody {
+        let res: RequestResult<AuthenticateResponse> = crate::http::no_retry::post_data(
+            &format!("{api_location}authserver/refresh"),
+            &RefreshBody {
                 access_token: access_token.to_owned(),
                 client_token: client_token.to_owned(),
                 request_user: provide_selected_profile,
@@ -111,10 +111,10 @@ pub async fn refresh_token(
                 } else {
                     None
                 },
-            }),
+            },
         )
         .await
-        .context("无法请求刷新令牌接口")?);
+        .context("无法请求刷新令牌接口")?;
 
         match res {
             RequestResult::Ok(res) => {

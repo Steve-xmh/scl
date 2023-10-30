@@ -352,7 +352,7 @@ impl<T: Data> Widget<T> for ProgressOverlay<T> {
                     if self.progress_map.is_empty() {
                         self.progress_height_spring.set_target(0.);
                     }
-                    #[cfg(any(target_os = "windows"))]
+                    #[cfg(target_os = "windows")]
                     if self.progress_map.is_empty() && self.show_progress_on_taskbar {
                         use taskbar_interface::*;
                         if let Ok(mut indicator) = TaskbarInterface::new(

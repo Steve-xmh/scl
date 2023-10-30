@@ -14,6 +14,7 @@ authors = ["Steve-xmh <stevexmh@qq.com>"]
 [dependencies]
 anyhow = { version = "^1.0" }
 once_cell = "^1.7"
+tracing = "0.1.40"
 
 [target.'cfg(target_os = "windows")'.dependencies]
 webview2 = "^0.1"

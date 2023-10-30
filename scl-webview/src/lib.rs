@@ -260,7 +260,7 @@ impl WebView {
         use once_cell::sync::Lazy;
 
         let size = self.fixed_size.unwrap_or((600, 800));
-        let start_url = dbg!(self.begin_url.to_owned());
+        let start_url = self.begin_url.to_owned();
         let title = self.title.to_owned();
         let callback = self.url_change_callback.unwrap_or(|_| true);
         let (sx, rx) = std::sync::mpsc::channel::<String>();
@@ -273,7 +273,7 @@ impl WebView {
                     &CGPoint::new(0., 0.),
                     &CGSize::new(size.0 as _, size.1 as _),
                 );
-                let sx = dbg!(sx as *mut _) as usize;
+                let sx = (sx as *mut _) as usize;
 
                 // === WebViewWindowControllerClass ===
 
@@ -291,10 +291,10 @@ impl WebView {
                         unsafe {
                             tracing::trace!("WindowWillClose");
                             let url_sender = *this.get_ivar::<usize>("urlSender");
-                            let webview = dbg!(*this.get_ivar::<id>("webview"));
+                            let webview = *this.get_ivar::<id>("webview");
                             if url_sender != 0 {
                                 let sx = &mut *(url_sender as *mut Sender<String>);
-                                let _ = dbg!(sx.send("".into()));
+                                let _ = sx.send("".into());
 
                                 if !webview.is_null() {
                                     (*webview).set_ivar("urlSender", 0usize);
@@ -340,7 +340,7 @@ impl WebView {
                                 let url_sender = *(*this).get_ivar::<usize>("urlSender");
                                 if url_sender != 0 {
                                     let sx = &mut *(url_sender as *mut Sender<String>);
-                                    let _ = dbg!(sx.send("".into()));
+                                    let _ = sx.send("".into());
                                     tracing::trace!("Dropping sender");
                                     drop(Box::from_raw(sx));
                                     tracing::trace!("Empty URL Sent");
@@ -360,11 +360,11 @@ impl WebView {
                             tracing::trace!("URL Has Changed: {url}");
                             let callback: *const libc::c_void = *this.get_ivar("urlChangeCallback");
                             let callback: fn(&str) -> bool = std::mem::transmute(callback);
-                            if dbg!((callback)(url.as_str())) {
-                                let url_sender = dbg!(*this.get_ivar::<usize>("urlSender"));
+                            if (callback)(url.as_str()) {
+                                let url_sender = *this.get_ivar::<usize>("urlSender");
                                 if url_sender != 0 {
                                     let sx = &mut *(url_sender as *mut Sender<String>);
-                                    let _ = dbg!(sx.send(url));
+                                    let _ = sx.send(url);
                                     tracing::trace!("Dropping sender");
                                     drop(Box::from_raw(sx));
                                     tracing::trace!("URL Sent");

@@ -128,9 +128,9 @@ impl<R: Reporter> QuiltMCDownloadExt for Downloader<R> {
         version_id: &str,
         loader_version: &str,
     ) -> DynResult {
-        let mut loader_meta_res = crate::http::retry_get(dbg!(format!(
+        let mut loader_meta_res = crate::http::retry_get(format!(
             "https://meta.quiltmc.org/v3/versions/loader/{version_id}/{loader_version}/profile/json"
-        )))
+        ))
         .await
         .map_err(|e| anyhow::anyhow!("获取 QuiltMC 版本元数据失败：{:?}", e))?;
         let res = loader_meta_res

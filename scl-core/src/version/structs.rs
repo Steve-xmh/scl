@@ -660,7 +660,7 @@ impl VersionInfo {
     /// 代码参考自 <https://github.com/Hex-Dragon/PCL2/blob/f1310f18fda13b79b7a6189f02df15cd8300b28d/Plain%20Craft%20Launcher%202/Pages/PageSetup/PageSetupLaunch.xaml.vb#L327>
     pub async fn get_automated_maxium_memory(&self) -> u64 {
         let mem_status = crate::utils::get_mem_status();
-        let mut free = dbg!(mem_status.free as i64);
+        let mut free = mem_status.free as i64;
         let mods = self.get_mods().await.unwrap_or_default();
         let (mem_min, mem_t1, mem_t2, mem_t3) = if !mods.is_empty() {
             (

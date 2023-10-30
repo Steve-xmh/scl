@@ -296,13 +296,13 @@ impl Client {
                     assets_path.to_string_lossy(),
                     resources_path.to_string_lossy()
                 );
-                let _ = dbg!(fs_extra::dir::copy(
+                let _ = fs_extra::dir::copy(
                     &assets_path,
                     &resources_path,
                     &fs_extra::dir::CopyOptions::new()
                         .skip_exist(true)
                         .content_only(true),
-                ));
+                );
                 get_full_path(assets_path)
             } else {
                 get_full_path(assets_path)
