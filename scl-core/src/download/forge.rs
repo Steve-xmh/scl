@@ -630,14 +630,18 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
                                                 ) {
                                                     *down_url =
                                                         format!("{replace_source}{down_path}");
-                                                    tracing::trace!("已修改 libraries[{i}].url 字段");
+                                                    tracing::trace!(
+                                                        "已修改 libraries[{i}].url 字段"
+                                                    );
                                                 }
                                                 if let Some(down_path) = down_url.strip_prefix(
                                                     "https://files.minecraftforge.net",
                                                 ) {
                                                     *down_url =
                                                         format!("{replace_source}{down_path}");
-                                                    tracing::trace!("已修改 libraries[{i}].url 字段");
+                                                    tracing::trace!(
+                                                        "已修改 libraries[{i}].url 字段"
+                                                    );
                                                 }
                                             }
                                         }
