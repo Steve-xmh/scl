@@ -607,7 +607,16 @@ impl Client {
         self.cmd.stderr(cfg);
     }
 
+    /// 获取参数引用，参数数组的第一个成员为提供的 Java 执行文件
+    ///
+    /// 注意参数可能包含用户的个人令牌等敏感信息，如需输出请自行确保信息安全
+    pub fn get_args(&self) -> &[String] {
+        &self.args
+    }
+
     /// 拿出参数，参数数组的第一个成员为提供的 Java 执行文件
+    ///
+    /// 注意参数可能包含用户的个人令牌等敏感信息，如需输出请自行确保信息安全
     pub fn take_args(self) -> Vec<String> {
         self.args
     }

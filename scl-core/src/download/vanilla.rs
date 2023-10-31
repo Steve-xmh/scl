@@ -309,8 +309,9 @@ impl<R: Reporter> VanillaDownloadExt for Downloader<R> {
         #[cfg(windows)]
         let native_postfixes: &[&str] = &[":natives-windows", ":natives-windows-x86"];
 
+        // TODO: 对于 ARM 系 macOS 平台，考虑到存在 Rosetta 2 转译层，和运行旧版本的需求，我们需要把所有的架构都下载下来
         #[cfg(all(target_os = "macos", target_arch = "aarch64"))]
-        let native_postfixes: &[&str] = &[":natives-macos-arm64"];
+        let native_postfixes: &[&str] = &[":natives-macos"];
 
         #[cfg(all(target_os = "macos", target_arch = "x86_64"))]
         let native_postfixes: &[&str] = &[":natives-macos"];
