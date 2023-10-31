@@ -2,7 +2,7 @@
 
 use druid::{
     widget::{prelude::*, Click, ControllerHost, Label, LabelText},
-    Affine, Data, Insets, LocalizedString, Vec2,
+    Affine, Data, Insets, Vec2,
 };
 
 use super::label;
@@ -67,10 +67,7 @@ impl<T: Data> StartGameButton<T> {
     /// [`.on_click`]: #method.on_click
     pub fn from_label(sub_label: Label<T>) -> StartGameButton<T> {
         StartGameButton {
-            label: label::new(
-                LocalizedString::new("net.stevexmh.scl.start-game").with_placeholder("启动游戏"),
-            )
-            .with_font(theme::typography::BODY),
+            label: label::new("启动游戏").with_font(theme::typography::BODY),
             sub_label: sub_label.with_line_break_mode(druid::widget::LineBreaking::Clip),
             label_size: Size::ZERO,
             sub_label_size: Size::ZERO,

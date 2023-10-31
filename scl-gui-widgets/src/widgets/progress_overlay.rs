@@ -447,6 +447,7 @@ impl<T: Data> Widget<T> for ProgressOverlay<T> {
             self.inner
                 .layout(ctx, &bc.shrink((0., progress_area_height)), data, env)
         };
+        self.inner.set_origin(ctx, druid::Point::ZERO);
         size.height += progress_area_height;
         bc.constrain(size)
     }

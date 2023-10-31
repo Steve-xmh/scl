@@ -95,6 +95,7 @@ impl<T: Data> Widget<T> for FolderList<T> {
         let text_bc =
             BoxConstraints::new((bc.min().width, 40.).into(), (bc.max().width, 40.).into());
         self.text.layout(ctx, &text_bc, data, env);
+        self.text.set_origin(ctx, Point::ZERO);
         if self.opened {
             let list_bc = bc.shrink((40., 40.));
             let size = self.inner.layout(ctx, &list_bc, data, env);

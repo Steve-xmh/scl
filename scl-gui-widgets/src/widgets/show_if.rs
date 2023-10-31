@@ -76,7 +76,9 @@ impl<T: Data> Widget<T> for ShowIf<T> {
     ) -> druid::Size {
         let should_show = (self.callback)(data, env);
         if should_show {
-            self.inner.layout(ctx, bc, data, env)
+            let size = self.inner.layout(ctx, bc, data, env);
+            self.inner.set_origin(ctx, druid::Point::ZERO);
+            size
         } else {
             bc.constrain((0., 0.))
         }

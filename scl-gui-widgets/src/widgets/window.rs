@@ -354,7 +354,7 @@ impl<T: Data> Widget<T> for WindowWidget<T> {
             if self.down_hovering == self.hovering {
                 match self.hovering {
                     1 => {
-                        ctx.submit_notification(QUERY_CLOSE_WINDOW);
+                        ctx.submit_notification_without_warning(QUERY_CLOSE_WINDOW);
                         ctx.set_handled();
                     }
                     2 => {
@@ -364,7 +364,7 @@ impl<T: Data> Widget<T> for WindowWidget<T> {
                         ctx.set_handled();
                     }
                     4 if self.show_back_btn => {
-                        ctx.submit_notification(BACK_PAGE_CLICKED);
+                        ctx.submit_notification_without_warning(BACK_PAGE_CLICKED);
                         ctx.set_handled();
                     }
                     _ => ctx.set_active(false),
@@ -374,7 +374,7 @@ impl<T: Data> Widget<T> for WindowWidget<T> {
         } else if let Event::WindowSize(_) = event {
             ctx.request_paint();
         } else if let Event::WindowCloseRequested = event {
-            ctx.submit_notification(QUERY_CLOSE_WINDOW);
+            ctx.submit_notification_without_warning(QUERY_CLOSE_WINDOW);
             ctx.set_handled();
         } else if let Event::WindowConnected = event {
             #[cfg(target_os = "windows")]

@@ -163,15 +163,19 @@ impl<T: Data> Widget<T> for PageSwitcher<T> {
                                     ctx.children_changed();
                                     ctx.request_update();
                                     self.active_page = page;
-                                    ctx.submit_notification(ON_PAGE.with(page).to(Target::Global));
+                                    ctx.submit_notification_without_warning(
+                                        ON_PAGE.with(page).to(Target::Global),
+                                    );
                                     self.page_chain.push(page);
                                 }
                                 Some(AnimationType::PopZoom(page))
                                 | Some(AnimationType::PopSlide(page)) => {
                                     if !page.is_empty() && self.page_chain.contains(&page) {
-                                        ctx.submit_notification(POP_PAGE.with(self.active_page));
+                                        ctx.submit_notification_without_warning(
+                                            POP_PAGE.with(self.active_page),
+                                        );
                                         self.active_page = page;
-                                        ctx.submit_notification(
+                                        ctx.submit_notification_without_warning(
                                             ON_PAGE.with(page).to(Target::Global),
                                         );
                                         while self.page_chain.last().unwrap() != &page {
@@ -299,6 +303,7 @@ impl<T: Data> Widget<T> for PageSwitcher<T> {
         bc.debug_check("PageSwitcher");
         for (_, inner) in self.inner.iter_mut() {
             inner.layout(ctx, bc, data, env);
+            inner.set_origin(ctx, druid::Point::ZERO);
         }
         bc.max()
     }
