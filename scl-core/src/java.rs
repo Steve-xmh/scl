@@ -6,6 +6,7 @@ use inner_future::stream::StreamExt;
 use crate::{prelude::*, utils::Arch};
 
 /// 一个 Java 运行时类型
+#[derive(Debug, Clone)]
 pub struct JavaRuntime {
     java_path: String,
     java_version: String,
@@ -23,36 +24,8 @@ impl JavaRuntime {
         let version = query_java_version(&output);
         let java_main_version = get_java_version(version);
         let java_64bit = query_java_is_64bit(&output);
-        let java_arch = {
-            #[cfg(target_os = "macos")]
-            {
-                crate::utils::get_exec_arch(std::path::PathBuf::from(java_path.as_ref())).await?
-            }
-            #[cfg(target_os = "windows")]
-            {
-                // TODO: 这里要给 ARM 架构做支持
-                if java_64bit {
-                    Arch::X64
-                } else {
-                    Arch::X86
-                }
-            }
-            #[cfg(target_os = "linux")]
-            {
-                #[cfg(target_arch = "i686")]
-                {
-                    Arch::X86
-                }
-                #[cfg(target_arch = "x86_64")]
-                {
-                    Arch::X64
-                }
-                #[cfg(target_arch = "aarch64")]
-                {
-                    Arch::ARM64
-                }
-            }
-        };
+        let java_arch =
+            crate::utils::get_exec_arch(std::path::PathBuf::from(java_path.as_ref())).await?;
         Ok(Self {
             java_path: java_path.as_ref().to_string_lossy().to_string(),
             java_64bit,
@@ -158,23 +131,24 @@ fn get_java_version(java_version_string: &str) -> u8 {
 pub async fn search_for_java() -> Vec<String> {
     // 从安装目录中搜索 Java
     async fn check_bin_java_directory(path: impl AsRef<Path>, result: &mut Vec<String>) {
-        tracing::trace!("Searching {}", path.as_ref().to_string_lossy());
         if let Ok(mut d) = inner_future::fs::read_dir(path).await {
             while let Ok(Some(d)) = d.try_next().await {
                 let mut path = d.path();
                 #[cfg(target_os = "macos")]
                 path.push("Contents/Home");
                 path.push("bin");
-                #[cfg(windows)]
+                #[cfg(target_os = "windows")]
                 {
                     path.push("java.exe");
                     if path.is_file() {
+                        tracing::debug!("Added {}", path.display());
                         result.push(d.path().to_string_lossy().to_string());
                     }
                     {
                         path.pop();
                         path.push("javaw.exe");
                         if path.is_file() {
+                            tracing::debug!("Added {}", path.display());
                             result.push(path.to_string_lossy().to_string());
                         }
                     }

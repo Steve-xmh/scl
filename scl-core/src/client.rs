@@ -1,6 +1,7 @@
 //! 客户端结构，用于启动游戏
 use std::{
     collections::HashMap,
+    ffi::OsString,
     fmt::{Display, Formatter, Result},
     path::Path,
 };
@@ -12,6 +13,7 @@ use super::{
     version::structs::{Argument, VersionInfo},
 };
 use crate::{
+    java::JavaRuntime,
     prelude::*,
     utils::{get_full_path, CLASSPATH_SEPARATOR, NATIVE_ARCH_LAZY, TARGET_OS},
     version::structs::{Allowed, VersionMeta},
@@ -37,8 +39,8 @@ pub struct ClientConfig {
     pub custom_java_args: Vec<String>,
     /// 自定义游戏参数，这将会附加在参数的最后部分
     pub custom_args: Vec<String>,
-    /// 需要使用的 Java 运行时文件路径
-    pub java_path: String,
+    /// 需要使用的 Java 运行时
+    pub java_runtime: JavaRuntime,
     /// 最高内存，以 MB 为单位
     pub max_mem: u32,
     /// 是否进行预先资源及依赖检查
@@ -127,6 +129,16 @@ impl Client {
         let meta = parse_inheritsed_meta(&cfg).await;
 
         cfg.version_info.meta = Some(meta.to_owned());
+
+        let java_runtime = if let Some(scl_config) = &cfg.version_info.scl_launch_config {
+            if scl_config.java_path.is_empty() {
+                cfg.java_runtime.to_owned()
+            } else {
+                JavaRuntime::from_java_path(OsString::from(&scl_config.java_path)).await?
+            }
+        } else {
+            cfg.java_runtime.to_owned()
+        };
 
         // 变量集，用来给参数中 ${VAR} 做文本替换
         let mut variables: HashMap<&'static str, String> = HashMap::with_capacity(19);
@@ -260,11 +272,25 @@ impl Client {
                 AuthMethod::AuthlibInjector { player_name, .. } => player_name.to_owned(),
             },
         );
+        #[cfg(target_os = "windows")]
+        let sub_native_dir = match java_runtime.arch() {
+            crate::utils::Arch::X86 => "natives-windows-x86",
+            crate::utils::Arch::X64 => "natives-windows",
+            crate::utils::Arch::ARM64 => "natives-windows-arm64",
+        };
+        #[cfg(target_os = "linux")]
+        let sub_native_dir = "natives-linux";
+        #[cfg(target_os = "macos")]
+        let sub_native_dir = match java_runtime.arch() {
+            crate::utils::Arch::X86 | crate::utils::Arch::X64 => "natives-macos",
+            crate::utils::Arch::ARM64 => "natives-macos-arm64",
+        };
         variables.insert(
             "${natives_directory}",
             get_full_path(Path::new(&format!(
-                "{}{sep}{ver}{sep}natives",
+                "{}{sep}{ver}{sep}natives/{}",
                 cfg.version_info.version_base,
+                sub_native_dir,
                 ver = cfg.version_info.version,
                 sep = std::path::MAIN_SEPARATOR,
             ))),
@@ -506,16 +532,6 @@ impl Client {
             }
         }
 
-        let java_path = if let Some(scl_config) = &cfg.version_info.scl_launch_config {
-            if scl_config.java_path.is_empty() {
-                cfg.java_path.to_owned()
-            } else {
-                scl_config.java_path.to_owned()
-            }
-        } else {
-            cfg.java_path.to_owned()
-        };
-
         let wrapper_path = cfg
             .version_info
             .scl_launch_config
@@ -524,7 +540,7 @@ impl Client {
             .unwrap_or_default();
 
         let mut cmd = if wrapper_path.is_empty() {
-            Command::new(&java_path)
+            Command::new(java_runtime.path())
         } else {
             let mut cmd = Command::new(&wrapper_path);
 
@@ -539,7 +555,7 @@ impl Client {
                 cmd.arg(wrapper_args);
             }
 
-            cmd.arg(&java_path);
+            cmd.arg(java_runtime.path());
             cmd
         };
 
@@ -551,12 +567,12 @@ impl Client {
         }
         cmd.env("FORMAT_MESSAGES_PATTERN_DISABLE_LOOKUPS", "true");
 
-        args.insert(0, java_path.to_owned());
+        args.insert(0, java_runtime.path().to_owned());
 
         Ok(Self {
             cmd,
             game_dir: get_game_directory(&cfg),
-            java_path,
+            java_path: java_runtime.path().to_owned(),
             args,
             process: None,
         })

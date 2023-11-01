@@ -146,7 +146,7 @@ pub fn get_full_path(p: impl AsRef<std::path::Path>) -> String {
 /// 目前根据 SCL 自身会支持的平台增加此处的枚举值
 ///
 /// 用于启动参数的条件判断组合
-#[derive(Clone, Copy)]
+#[derive(Debug, Clone, Copy)]
 pub enum Arch {
     /// 一个 `x86` 平台
     X86,
@@ -211,21 +211,68 @@ pub struct MemoryStatus {
     pub free: u64,
 }
 
-/// 获取一个可执行程序所对应的运行架构，仅 MacOS 可用。
+/// 获取一个可执行程序所对应的运行架构，对应不同系统有不同的实现。
 ///
-/// 这用于判定 MacOS 上 Java 运行时的架构类型
+/// 用于 SCL 识别对应的 Java 运行时架构，以选择正确的原生库路径
 ///
-/// 对于 MacOS 的可执行文件格式描述，请参阅 "OS X ABI Mach-O File Format Reference"
-#[cfg(not(target_os = "macos"))]
-pub async fn get_exec_arch(_file_path: impl AsRef<std::path::Path>) -> DynResult<Arch> {
-    unimplemented!("此函数仅 MacOS 可用")
+/// - 对于 Windows 的可执行文件格式描述，请参阅 "Microsoft PE and COFF Specification"
+/// - 对于 MacOS 的可执行文件格式描述，请参阅 "OS X ABI Mach-O File Format Reference"
+/// - 对于 Linux 的可执行文件格式描述，请参阅 "ELF-64 Object File Format"
+#[cfg(target_os = "windows")]
+pub async fn get_exec_arch(file_path: impl AsRef<std::path::Path>) -> DynResult<Arch> {
+    use inner_future::io::AsyncSeekExt;
+
+    let mut file = inner_future::fs::OpenOptions::new()
+        .read(true)
+        .open(file_path.as_ref())
+        .await?;
+
+    let mut buf = [0u8; 2];
+
+    file.read_exact(&mut buf).await?;
+
+    // PE Magic Number
+
+    if !(buf[0] == 0x4D && buf[1] == 0x5A) {
+        anyhow::bail!("文件不是一个合法的 PE 可执行文件");
+    }
+
+    file.seek(inner_future::io::SeekFrom::Start(0x3C)).await?;
+
+    let mut buf = [0u8; 4];
+
+    file.read_exact(&mut buf).await?;
+
+    let pe_header_offset = u32::from_le_bytes(buf);
+
+    file.seek(inner_future::io::SeekFrom::Start(pe_header_offset as u64))
+        .await?;
+
+    file.read_exact(&mut buf).await?;
+
+    if !(buf[0] == 0x50 && buf[1] == 0x45 && buf[2] == 0x00 && buf[3] == 0x00) {
+        anyhow::bail!("文件不是一个合法的 PE 可执行文件");
+    }
+
+    let mut buf = [0u8; 2];
+
+    file.read_exact(&mut buf).await?;
+
+    match dbg!(buf) {
+        [0x4C, 0x01] => Ok(Arch::X86),   // X86 I386
+        [0x64, 0x86] => Ok(Arch::X64),   // X86_64
+        [0x64, 0xAA] => Ok(Arch::ARM64), // ARM64
+        _ => anyhow::bail!("不支持判定此架构"),
+    }
 }
 
-/// 获取一个可执行程序所对应的运行架构，仅 MacOS 可用。
+/// 获取一个可执行程序所对应的运行架构，对应不同系统有不同的实现。
 ///
-/// 这用于判定 MacOS 上 Java 运行时的架构类型
+/// 用于 SCL 识别对应的 Java 运行时架构，以选择正确的原生库路径
 ///
-/// 对于 MacOS 的可执行文件格式描述，请参阅 "OS X ABI Mach-O File Format Reference"
+/// - 对于 Windows 的可执行文件格式描述，请参阅 "Microsoft PE and COFF Specification"
+/// - 对于 MacOS 的可执行文件格式描述，请参阅 "OS X ABI Mach-O File Format Reference"
+/// - 对于 Linux 的可执行文件格式描述，请参阅 "ELF-64 Object File Format"
 #[cfg(target_os = "macos")]
 pub async fn get_exec_arch(file_path: impl AsRef<std::path::Path>) -> DynResult<Arch> {
     let mut file = inner_future::fs::OpenOptions::new()
@@ -248,6 +295,50 @@ pub async fn get_exec_arch(file_path: impl AsRef<std::path::Path>) -> DynResult<
         (7, 0) => Ok(Arch::X86),    // X86 I386
         (7, 1) => Ok(Arch::X64),    // X86_64
         (12, 1) => Ok(Arch::ARM64), // ARM64
+        (_, _) => anyhow::bail!("不支持判定此架构"),
+    }
+}
+
+/// 获取一个可执行程序所对应的运行架构，对应不同系统有不同的实现。
+///
+/// 用于 SCL 识别对应的 Java 运行时架构，以选择正确的原生库路径
+///
+/// - 对于 Windows 的可执行文件格式描述，请参阅 "Microsoft PE and COFF Specification"
+/// - 对于 MacOS 的可执行文件格式描述，请参阅 "OS X ABI Mach-O File Format Reference"
+/// - 对于 Linux 的可执行文件格式描述，请参阅 "ELF-64 Object File Format"
+#[cfg(target_os = "linux")]
+pub async fn get_exec_arch(file_path: impl AsRef<std::path::Path>) -> DynResult<Arch> {
+    use inner_future::io::AsyncSeekExt;
+
+    let mut file = inner_future::fs::OpenOptions::new()
+        .read(true)
+        .open(file_path.as_ref())
+        .await?;
+
+    let mut buf = [0u8; 4];
+    file.read_exact(&mut buf).await?;
+
+    // ELF Magic Number
+    // 7F 45 4C 46
+    if !(buf[0] == 0x7F && buf[1] == 0x45 && buf[2] == 0x4C && buf[3] == 0x46) {
+        anyhow::bail!("文件不是一个合法的 ELF 可执行文件");
+    }
+
+    file.seek(inner_future::io::SeekFrom::Start(0x12)).await?;
+
+    let mut buf = [0u8; 2];
+    file.read_exact(&mut buf).await?;
+
+    let elf_type = u16::from_le_bytes(buf);
+
+    if elf_type != 2 {
+        anyhow::bail!("文件不是一个合法的 ELF 可执行文件");
+    }
+
+    match u16::from_le_bytes(buf) {
+        0x03 => Ok(Arch::X86),   // X86
+        0x3E => Ok(Arch::X64),   // X86_64
+        0xB7 => Ok(Arch::ARM64), // ARM64
         (_, _) => anyhow::bail!("不支持判定此架构"),
     }
 }

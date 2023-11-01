@@ -1,10 +1,11 @@
 //! 原版游戏的下载模块
 
-use std::path::Path;
+use std::{borrow::Cow, collections::HashMap, path::Path};
 
 use anyhow::Context;
 use async_trait::async_trait;
 use inner_future::{fs::create_dir_all, io::AsyncWriteExt};
+use tracing::*;
 
 use super::{
     structs::{AssetIndexes, VersionManifest},
@@ -14,7 +15,6 @@ use crate::{
     download::VersionInfo,
     prelude::*,
     progress::Reporter,
-    utils::NATIVE_ARCH_LAZY,
     version::structs::{Allowed, Library, VersionMeta},
 };
 
@@ -28,10 +28,13 @@ pub trait VanillaDownloadExt: Sync {
     async fn download_vanilla_jar(&self, path: &str, save_path: &str, sha1: &str) -> DynResult;
 
     /// 下载一个依赖库，并存放到指定位置
-    async fn download_library(&self, sha1: &str, path: &str, save_path: &str) -> DynResult;
+    async fn download_library(&self, sha1: String, path: String, save_path: &str) -> DynResult;
 
     /// 下载一组依赖库，安装位置由特质实现而定
-    async fn download_libraries(&self, libraries: &[Library]) -> DynResult<Vec<String>>;
+    async fn download_libraries(
+        &self,
+        libraries: &[Library],
+    ) -> DynResult<HashMap<String, Vec<String>>>;
 
     /// 下载游戏资源索引
     async fn download_asset_index(
@@ -81,18 +84,35 @@ impl<R: Reporter> VanillaDownloadExt for Downloader<R> {
         Ok(res)
     }
 
-    async fn download_vanilla_jar(&self, path: &str, save_path: &str, _sha1: &str) -> DynResult {
+    async fn download_vanilla_jar(&self, path: &str, save_path: &str, sha1: &str) -> DynResult {
         let l = self.parallel_lock.acquire().await;
         let r = self.reporter.sub();
         r.add_max_progress(1.);
         let name = &save_path[save_path.rfind(std::path::is_separator).unwrap_or(0) + 1..];
         r.set_message(format!("正在下载原版 {name}"));
-        inner_future::fs::create_dir_all(
-            &save_path[..save_path
-                .rfind(std::path::is_separator)
-                .unwrap_or(save_path.len())],
-        )
-        .await?;
+        if std::path::Path::new(&save_path).is_file() {
+            if self.verify_data {
+                let mut file = inner_future::fs::OpenOptions::new()
+                    .read(true)
+                    .open(&save_path)
+                    .await?;
+                let current_sha1 = crate::utils::get_data_sha1(&mut file).await?;
+                if sha1 == current_sha1 {
+                    r.add_progress(1.);
+                    return Ok(());
+                }
+            } else {
+                r.add_progress(1.);
+                return Ok(());
+            }
+        } else {
+            inner_future::fs::create_dir_all(
+                &save_path[..save_path
+                    .rfind(std::path::is_separator)
+                    .unwrap_or(save_path.len())],
+            )
+            .await?;
+        }
         let path = path.parse::<url::Url>()?;
         let uris = [
             match self.source {
@@ -117,7 +137,7 @@ impl<R: Reporter> VanillaDownloadExt for Downloader<R> {
         Ok(())
     }
 
-    async fn download_library(&self, sha1: &str, path: &str, save_path: &str) -> DynResult {
+    async fn download_library(&self, sha1: String, path: String, save_path: &str) -> DynResult {
         let l = self.parallel_lock.acquire().await;
         let r = self.reporter.sub();
         let full_path = format!("{save_path}/{path}");
@@ -288,81 +308,107 @@ impl<R: Reporter> VanillaDownloadExt for Downloader<R> {
         Ok(())
     }
 
-    async fn download_libraries(&self, libraries: &[Library]) -> DynResult<Vec<String>> {
+    async fn download_libraries(
+        &self,
+        libraries: &[Library],
+    ) -> DynResult<HashMap<String, Vec<String>>> {
         // Libraries
         let mut _libraries_size = 0;
-        let mut native_jars = Vec::with_capacity(libraries.len());
+        let mut native_jars_mapping: HashMap<String, Vec<String>> =
+            HashMap::with_capacity(libraries.len());
 
         let lr = self.reporter.sub();
         lr.set_message("正在检索并安装需要安装的依赖库".into());
 
-        // 截止至 1.19.2 原生库的后缀有以下类型：
-        // :natives-windows
-        // :natives-windows-x86
-        // :natives-linux
-        // :natives-macos
-        // :natives-macos-arm64
+        // Minecraft 在早期和现在对记录原生库的方式不一样
+        // 早期会记录一个 `natives` 字段，键代表平台 `windows`/`osx`/`linux`
+        // 值代表在 `classifiers` 字段中对应的键，如 `natives-windows`
+        // 然后即可查询到对应的原生库和下载链接
+        // 现在直接记录在 `name` 字段中，如 `org.lwjgl:lwjgl:3.2.2:natives-windows`
+        // 故只需检测是否可以通过 `:natives-` 分割字符串即可判定是否为原生库
 
-        #[allow(unused_variables)]
-        let native_postfixes: &[String] = &[format!(":natives-{}", crate::utils::TARGET_OS)];
+        // SCL 对此的原生库的下载方式为，下载所有平台和架构的原生库，并按照后缀名分别解压到对应的文件夹中
 
-        #[cfg(windows)]
-        let native_postfixes: &[&str] = &[":natives-windows", ":natives-windows-x86"];
+        enum LibraryTask<'a> {
+            Common {
+                sha1: Cow<'a, str>,
+                path: Cow<'a, str>,
+            },
+            Native {
+                platform: Cow<'a, str>,
+                sha1: Cow<'a, str>,
+                path: Cow<'a, str>,
+            },
+        }
 
-        // TODO: 对于 ARM 系 macOS 平台，考虑到存在 Rosetta 2 转译层，和运行旧版本的需求，我们需要把所有的架构都下载下来
-        #[cfg(all(target_os = "macos", target_arch = "aarch64"))]
-        let native_postfixes: &[&str] = &[":natives-macos"];
+        let mut tasks = Vec::with_capacity(libraries.len() * 2);
 
-        #[cfg(all(target_os = "macos", target_arch = "x86_64"))]
-        let native_postfixes: &[&str] = &[":natives-macos"];
-
-        let libraries_threads = libraries.iter().filter_map(|lib| {
-            if lib.rules.is_allowed() {
-                if let Some(downloads) = &lib.downloads {
-                    if let Some(natives) = &lib.natives {
-                        if let Some(classifier) = natives.get(crate::utils::TARGET_OS) {
-                            if let Some(classifiers) = &downloads.classifiers {
-                                let classifier =
-                                    classifier.replace("${arch}", NATIVE_ARCH_LAZY.as_ref());
-                                if let Some(artifact) = classifiers.get(&classifier) {
-                                    let p = format!(
-                                        "{}/{}",
-                                        self.minecraft_library_path.as_str(),
-                                        &artifact.path
-                                    );
-                                    if !native_jars.contains(&p) {
-                                        native_jars.push(p);
-                                        return Some(self.download_library(
-                                            &artifact.sha1,
-                                            &artifact.path,
-                                            self.minecraft_library_path.as_str(),
-                                        ));
-                                    }
-                                }
-                            }
-                        }
+        for lib in libraries.iter() {
+            // 遍历老版本的原生库元数据
+            if let Some(downloads) = &lib.downloads {
+                if let Some(classifier) = &downloads.classifiers {
+                    for (platform, meta) in classifier.iter() {
+                        let target_platform = match platform.as_str() {
+                            "natives-osx" => "natives-macos",
+                            other => other,
+                        };
+                        tasks.push(LibraryTask::Native {
+                            platform: target_platform.into(),
+                            sha1: meta.sha1.as_str().into(),
+                            path: meta.path.as_str().into(),
+                        });
                     }
-                    if let Some(artifact) = &downloads.artifact {
-                        for postfix in native_postfixes {
-                            if lib.name.ends_with(postfix) {
-                                let p = format!(
-                                    "{}/{}",
-                                    self.minecraft_library_path.as_str(),
-                                    &artifact.path
-                                );
-                                native_jars.push(p);
-                                break;
-                            }
-                        }
-                        return Some(self.download_library(
-                            &artifact.sha1,
-                            &artifact.path,
-                            self.minecraft_library_path.as_str(),
-                        ));
+                }
+                if let Some(artifact) = &downloads.artifact {
+                    if let Some(i) = lib.name.find(":natives-") {
+                        let (_, platform) = lib.name.split_at(i + 1);
+                        tasks.push(LibraryTask::Native {
+                            platform: platform.into(),
+                            sha1: artifact.sha1.as_str().into(),
+                            path: artifact.path.as_str().into(),
+                        });
+                    } else if lib.rules.is_allowed() {
+                        tasks.push(LibraryTask::Common {
+                            sha1: artifact.sha1.as_str().into(),
+                            path: artifact.path.as_str().into(),
+                        });
                     }
                 }
             }
-            None
+        }
+
+        for task in &tasks {
+            if let LibraryTask::Native {
+                platform,
+                sha1,
+                path,
+            } = task
+            {
+                debug!("原生库 {platform} {sha1} {path}");
+                let p = format!("{}/{}", self.minecraft_library_path.as_str(), path);
+                if let Some(native_jars) = native_jars_mapping.get_mut(&platform.to_string()) {
+                    if !native_jars.contains(&p) {
+                        native_jars.push(p);
+                    }
+                } else {
+                    let mut native_jars = Vec::with_capacity(tasks.len());
+                    native_jars.push(p);
+                    native_jars_mapping.insert(platform.to_string(), native_jars);
+                }
+            }
+        }
+
+        let libraries_threads = tasks.into_iter().map(|x| match x {
+            LibraryTask::Common { sha1, path } => self.download_library(
+                sha1.to_string(),
+                path.to_string(),
+                self.minecraft_library_path.as_str(),
+            ),
+            LibraryTask::Native { sha1, path, .. } => self.download_library(
+                sha1.to_string(),
+                path.to_string(),
+                self.minecraft_library_path.as_str(),
+            ),
         });
 
         for v in futures::future::join_all(libraries_threads).await {
@@ -371,7 +417,7 @@ impl<R: Reporter> VanillaDownloadExt for Downloader<R> {
 
         lr.remove_progress();
 
-        Ok(native_jars)
+        Ok(native_jars_mapping)
     }
 
     async fn download_vanilla(
@@ -380,6 +426,7 @@ impl<R: Reporter> VanillaDownloadExt for Downloader<R> {
         version_meta: &VersionMeta,
         is_repair: bool,
     ) -> DynResult {
+        info!("开始下载原版游戏 {version_name}");
         let r = self.reporter.sub();
         let game_file = format!(
             "{}/{}/{}.jar",
@@ -528,12 +575,16 @@ impl<R: Reporter> VanillaDownloadExt for Downloader<R> {
         let nr = r.sub();
         nr.set_max_progress(native_jars.len() as f64);
         nr.set_message("正在解压原生库".into());
-        for item in native_jars.iter() {
-            unzip_natives(item, &native_dir).await?;
+        for (platform, items) in native_jars.iter() {
+            let native_dir = format!("{native_dir}/{platform}");
+            for item in items {
+                unzip_natives(item, &native_dir).await?;
+            }
             nr.add_progress(1.);
         }
         r.remove_progress();
 
+        info!("原版游戏 {version_name} 下载完成！");
         Ok(())
     }
 
@@ -592,12 +643,7 @@ fn is_asset_exists(hash: &str, save_path: &str) -> bool {
     std::path::Path::new(&full_path).is_file()
 }
 
-#[cfg(target_os = "windows")]
-const NATIVE_EXT: &str = "dll";
-#[cfg(target_os = "linux")]
-const NATIVE_EXT: &str = "so";
-#[cfg(target_os = "macos")]
-const NATIVE_EXT: &str = "dylib";
+const NATIVE_EXTS: &[&str] = &["dll", "so", "dylib", "jnilib"];
 
 /// 解压指定 ZIP 压缩文件的内容到指定文件夹
 ///
@@ -612,20 +658,25 @@ pub async fn unzip_natives(unzip_file: &str, unzip_dir: &str) -> DynResult {
             .with_context(|| format!("解压原生库 {unzip_file} 时发生错误"))?;
         for i in 0..archive.len() {
             let mut file = archive.by_index(i)?;
-            let p = match file.enclosed_name() {
+            let p = match file.enclosed_name().and_then(|p| p.file_name()) {
                 Some(p) => p.to_owned(),
                 None => continue,
             };
-            if let Some(ext) = p.extension() {
-                if ext != std::ffi::OsStr::new(NATIVE_EXT) {
+            if let Some(ext) = Path::new(&p).extension() {
+                if !NATIVE_EXTS.contains(&ext.to_str().unwrap_or_default()) {
                     continue;
                 }
             } else {
                 continue;
             }
-            let save_path = dir.join(p);
+            let save_path = dir.join(&p);
             let save_dir = save_path.parent().unwrap();
-            std::fs::create_dir_all(save_dir).unwrap_or_default();
+            let _ = std::fs::create_dir_all(save_dir);
+            debug!(
+                "解压原生库 {} 到 {}",
+                p.to_string_lossy(),
+                save_path.display()
+            );
             let mut output = std::fs::File::create(save_path)?;
             std::io::copy(&mut file, &mut output)?;
         }
