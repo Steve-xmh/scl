@@ -2,7 +2,7 @@ use druid::{
     kurbo::{BezPath, Shape},
     piet::{PaintBrush, TextStorage},
     widget::{Click, ControllerHost, LabelText},
-    Affine, BoxConstraints, Data, Event, LifeCycle, Point, RenderContext, Size, Widget, WidgetPod,
+    Affine, Data, Event, LifeCycle, Point, RenderContext, Widget, WidgetPod,
 };
 
 use super::label;
