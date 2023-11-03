@@ -1,4 +1,4 @@
-use druid::{widget::prelude::*, Selector, WidgetPod, Point};
+use druid::{widget::prelude::*, Point, Selector, WidgetPod};
 
 type OnNotifyHandler<CT, WT> = Box<dyn Fn(&mut EventCtx, &CT, &mut WT)>;
 
