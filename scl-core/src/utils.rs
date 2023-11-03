@@ -339,7 +339,7 @@ pub async fn get_exec_arch(file_path: impl AsRef<std::path::Path>) -> DynResult<
         0x03 => Ok(Arch::X86),   // X86
         0x3E => Ok(Arch::X64),   // X86_64
         0xB7 => Ok(Arch::ARM64), // ARM64
-        (_, _) => anyhow::bail!("不支持判定此架构"),
+        _ => anyhow::bail!("不支持判定此架构"),
     }
 }
 
