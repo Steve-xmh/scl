@@ -6,6 +6,7 @@ use druid::{
     widget::{prelude::*, Click, ControllerHost},
     Affine, Data,
 };
+use tracing::warn;
 
 use crate::theme::{color as theme, icons::IconKeyPair};
 
@@ -89,7 +90,16 @@ impl<T: Data> IconButton<T> {
     }
 
     fn reload_icon(&mut self, env: &Env) {
-        self.icon_path = BezPath::from_svg(env.get(&self.icon_key.0).as_str()).unwrap_or_default();
+        let key = env.get(&self.icon_key.0);
+        let svg_path = key.as_str();
+        match BezPath::from_svg(svg_path) {
+            Ok(path) => {
+                self.icon_path = path;
+            }
+            Err(err) => {
+                warn!("无法读取 SVG 填充路径字符串 {svg_path:?}: {err:?}");
+            }
+        }
     }
 }
 

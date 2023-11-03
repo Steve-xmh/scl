@@ -1,4 +1,4 @@
-use druid::{widget::prelude::*, Selector, WidgetPod};
+use druid::{widget::prelude::*, Selector, WidgetPod, Point};
 
 type OnNotifyHandler<CT, WT> = Box<dyn Fn(&mut EventCtx, &CT, &mut WT)>;
 
@@ -47,7 +47,9 @@ impl<WT: Data, CT: 'static> Widget<WT> for OnNotify<CT, WT> {
     }
 
     fn layout(&mut self, ctx: &mut LayoutCtx, bc: &BoxConstraints, data: &WT, env: &Env) -> Size {
-        self.inner.layout(ctx, bc, data, env)
+        let size = self.inner.layout(ctx, bc, data, env);
+        self.inner.set_origin(ctx, Point::ZERO);
+        size
     }
 
     fn paint(&mut self, ctx: &mut PaintCtx, data: &WT, env: &Env) {
