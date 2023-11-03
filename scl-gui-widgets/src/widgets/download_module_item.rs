@@ -64,14 +64,12 @@ impl<D: Data> DownloadModuleItem<D> {
                     .with_text_size(14.)
                     .with_text_color(base::MEDIUM)
                     .with_font(BODY)
-                    .with_line_break_mode(druid::widget::LineBreaking::Clip)
                     .align_vertical(druid::UnitPoint::LEFT),
             )),
             desc: WidgetPod::new(Box::new(
                 label::dynamic(desc)
                     .with_text_color(base::MEDIUM)
                     .with_font(CAPTION_ALT)
-                    .with_line_break_mode(druid::widget::LineBreaking::Clip)
                     .align_vertical(druid::UnitPoint::RIGHT),
             )),
         }
@@ -145,19 +143,15 @@ impl<D: Data> Widget<D> for DownloadModuleItem<D> {
         data: &D,
         env: &druid::Env,
     ) -> druid::Size {
-        bc.debug_check("LoginMethodItem");
-        let min_height = 40.;
-        let min_bc = BoxConstraints::new(
-            (bc.min().width, min_height).into(),
-            (bc.max().width, min_height).into(),
-        );
-        let text_bc = min_bc.shrink((40., 0.));
-        let desc_bc = min_bc.shrink((50., 0.));
-        let _text_size = self.text.layout(ctx, &text_bc, data, env);
-        let _desc_size = self.desc.layout(ctx, &desc_bc, data, env);
+        bc.debug_check("DownloadModuleItem");
+        let bc = bc.shrink_max_height_to(40.);
+        let text_bc = bc.shrink((40., 0.));
+        let desc_bc = bc.shrink((50., 0.));
+        let text_size = self.text.layout(ctx, &text_bc, data, env);
+        let desc_size = self.desc.layout(ctx, &desc_bc, data, env);
         self.text.set_origin(ctx, (40., 0.).into());
         self.desc.set_origin(ctx, (40., 0.).into());
-        min_bc.constrain((0., min_height))
+        bc.constrain((text_size.width.max(desc_size.width) + 40., 40.))
     }
 
     fn paint(&mut self, ctx: &mut druid::PaintCtx, data: &D, env: &druid::Env) {

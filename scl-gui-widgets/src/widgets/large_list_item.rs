@@ -113,19 +113,19 @@ impl<D: Data> Widget<D> for LargeListItem<D> {
         data: &D,
         env: &druid::Env,
     ) -> druid::Size {
-        bc.debug_check("LoginMethodItem");
-        let text_bc =
-            BoxConstraints::new(Size::ZERO, Size::new(bc.max().width - 60., bc.max().height));
+        bc.debug_check("LargeListItem");
+        let text_bc = bc
+            .shrink_max_width_to(bc.max().width - 60.)
+            .shrink_max_height_to(bc.max().height / 2.)
+            .loosen();
         let text_size = self.text.layout(ctx, &text_bc, data, env);
         let desc_size = self.desc.layout(ctx, &text_bc, data, env);
-        let text_height = text_size.height;
-        let desc_height = desc_size.height;
-        let height = (desc_height + text_height + 27.).max(60.);
-        let start_pos = (height - text_height - desc_height) / 2.;
+        let height = text_size.height + desc_size.height + 27.;
+        let start_pos = (height - text_size.height - desc_size.height) / 2. - 2.;
         self.text.set_origin(ctx, Point::new(60., start_pos));
         self.desc
-            .set_origin(ctx, Point::new(60., start_pos + text_height));
-        bc.constrain((0., height))
+            .set_origin(ctx, Point::new(60., start_pos + text_size.height + 2.));
+        bc.constrain((text_size.width.max(desc_size.width) + 60., height))
     }
 
     fn paint(&mut self, ctx: &mut druid::PaintCtx, data: &D, env: &druid::Env) {
