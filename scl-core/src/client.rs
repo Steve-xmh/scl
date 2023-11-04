@@ -399,6 +399,9 @@ impl Client {
         args.push("-Dlog4j2.formatMsgNoLookups=true".into());
 
         // 用户自定义JVM参数
+        for arg in &cfg.custom_java_args {
+            args.push(arg.to_owned());
+        }
         if let Some(scl_config) = &cfg.version_info.scl_launch_config {
             if !scl_config.jvm_args.trim().is_empty() {
                 if let Ok(jvm_args) = shell_words::split(&scl_config.jvm_args) {
@@ -520,6 +523,9 @@ impl Client {
         }
 
         // 用户自定义游戏参数
+        for arg in &cfg.custom_args {
+            args.push(arg.to_owned());
+        }
         if let Some(scl_config) = &cfg.version_info.scl_launch_config {
             if !scl_config.game_args.trim().is_empty() {
                 if let Ok(game_args) = shell_words::split(&scl_config.game_args) {
