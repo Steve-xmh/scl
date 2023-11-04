@@ -38,7 +38,7 @@ jobs:
       - name: 克隆仓库
         uses: actions/checkout@v2
 
-      - name: Linux - 安装 GTK 3.0 和 Webkit2GTK 4.0 依赖
+      - name: Linux - 安装相关依赖
         env:
           DEBIAN_FRONTEND: noninteractive
         run: |
