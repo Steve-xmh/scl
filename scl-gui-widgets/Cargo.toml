@@ -11,6 +11,10 @@ authors = ["Steve-xmh <stevexmh@qq.com>"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[features]
+defaults = []
+druid-ext = []
+
 [dependencies]
 scl-gui-animation = { path = "../scl-gui-animation" }
 scl-macro = { path = "../scl-macro" }

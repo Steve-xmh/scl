@@ -3,7 +3,10 @@ use std::path::{Path, PathBuf};
 
 use inner_future::stream::StreamExt;
 
-use crate::{prelude::*, utils::Arch};
+use crate::{
+    prelude::*,
+    utils::{locate_path, Arch},
+};
 
 /// 一个 Java 运行时类型
 #[derive(Debug, Clone)]
@@ -20,14 +23,19 @@ impl JavaRuntime {
     ///
     /// 在此会尝试运行这个文件并获取相关的版本信息，确认无误后返回
     pub async fn from_java_path(java_path: impl AsRef<std::ffi::OsStr>) -> DynResult<Self> {
+        tracing::debug!(
+            "正在重新定位 Java 执行文件: {}",
+            java_path.as_ref().to_string_lossy()
+        );
+        let java_path = locate_path(java_path.as_ref());
+        tracing::debug!("Java 执行文件已重新定位: {}", java_path.display());
         let output = query_java_version_output(&java_path).await?;
         let version = query_java_version(&output);
         let java_main_version = get_java_version(version);
         let java_64bit = query_java_is_64bit(&output);
-        let java_arch =
-            crate::utils::get_exec_arch(std::path::PathBuf::from(java_path.as_ref())).await?;
+        let java_arch = crate::utils::get_exec_arch(&java_path).await?;
         Ok(Self {
-            java_path: java_path.as_ref().to_string_lossy().to_string(),
+            java_path: java_path.to_string_lossy().to_string(),
             java_64bit,
             java_version: version.to_owned(),
             java_main_version,

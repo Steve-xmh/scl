@@ -425,14 +425,20 @@ impl<T: Data> Widget<T> for WindowWidget<T> {
                             RawWindowHandle::Win32(handle)
                         }
                     }
-                    window_shadows::set_shadow(
+                    let _ = window_shadows::set_shadow(
                         WinHandle {
                             handle: handle.hwnd as _,
                             instance: handle.hinstance as _,
                         },
                         true,
-                    )
-                    .unwrap_or_default();
+                    );
+                    let _ = window_vibrancy::apply_acrylic(
+                        WinHandle {
+                            handle: handle.hwnd as _,
+                            instance: handle.hinstance as _,
+                        },
+                        None,
+                    );
                 }
             }
             #[cfg(target_os = "macos")]

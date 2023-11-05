@@ -309,6 +309,7 @@ impl<T: Data> Widget<T> for PageSwitcher<T> {
     }
 
     fn paint(&mut self, ctx: &mut druid::PaintCtx, data: &T, env: &druid::Env) {
+        #[cfg(not(feature = "druid-ext"))]
         let page_mask = env.get(druid::theme::WINDOW_BACKGROUND_COLOR);
         let anime_timer = self.page_anime_timer.min(ANIMATION_TIME);
         let size = ctx.size();
@@ -330,12 +331,18 @@ impl<T: Data> Widget<T> for PageSwitcher<T> {
                                     size.height * s * -SCALE_LEVEL / 2.,
                                 )),
                         );
-                        // ctx.apply_global_transparency(1. - s);
+                        #[cfg(feature = "druid-ext")]
+                        ctx.set_global_alpha(1. - s);
+                        ctx.save().unwrap();
                         inner.paint(ctx, data, env);
-                        ctx.fill(
-                            transparent_rect.to_owned(),
-                            &PaintBrush::Color(page_mask.with_alpha(s)),
-                        );
+                        #[cfg(not(feature = "druid-ext"))]
+                        {
+                            ctx.fill(
+                                transparent_rect.to_owned(),
+                                &PaintBrush::Color(page_mask.with_alpha(s)),
+                            );
+                        }
+                        ctx.restore().unwrap();
                     }
                 } else {
                     let s = (s - 0.5) * 2.;
@@ -348,12 +355,16 @@ impl<T: Data> Widget<T> for PageSwitcher<T> {
                                     size.height * (1. - s) * SCALE_LEVEL / 2.,
                                 )),
                         );
-                        // ctx.apply_global_transparency(s);
+                        #[cfg(feature = "druid-ext")]
+                        ctx.set_global_alpha(s);
+                        ctx.save().unwrap();
                         inner.paint(ctx, data, env);
+                        #[cfg(not(feature = "druid-ext"))]
                         ctx.fill(
                             transparent_rect.to_owned(),
                             &PaintBrush::Color(page_mask.with_alpha(1. - s)),
                         );
+                        ctx.restore().unwrap();
                     }
                 }
             }
@@ -371,12 +382,16 @@ impl<T: Data> Widget<T> for PageSwitcher<T> {
                                     size.height * s * SCALE_LEVEL / 2.,
                                 )),
                         );
-                        // ctx.apply_global_transparency(1. - s);
+                        #[cfg(feature = "druid-ext")]
+                        ctx.set_global_alpha(1. - s);
+                        ctx.save().unwrap();
                         inner.paint(ctx, data, env);
+                        #[cfg(not(feature = "druid-ext"))]
                         ctx.fill(
                             transparent_rect.to_owned(),
                             &PaintBrush::Color(page_mask.with_alpha(s)),
                         );
+                        ctx.restore().unwrap();
                     }
                 } else {
                     let s = (s - 0.5) * 2.;
@@ -389,12 +404,16 @@ impl<T: Data> Widget<T> for PageSwitcher<T> {
                                     transparent_size.height * (1. - s) * -SCALE_LEVEL / 2.,
                                 )),
                         );
-                        // ctx.apply_global_transparency(s);
+                        #[cfg(feature = "druid-ext")]
+                        ctx.set_global_alpha(s);
+                        ctx.save().unwrap();
                         inner.paint(ctx, data, env);
+                        #[cfg(not(feature = "druid-ext"))]
                         ctx.fill(
                             transparent_rect.to_owned(),
                             &PaintBrush::Color(page_mask.with_alpha(1. - s)),
                         );
+                        ctx.restore().unwrap();
                     }
                 }
             }
@@ -435,7 +454,6 @@ impl<T: Data> Widget<T> for PageSwitcher<T> {
                     // 要退出的页面
                     if let Some(inner) = self.inner.get_mut(self.active_page) {
                         ctx.transform(Affine::translate((size.width * s, 0.)));
-                        // ctx.apply_global_transparency(1. - s);
                         inner.paint(ctx, data, env);
                     }
                 } else {
@@ -443,12 +461,7 @@ impl<T: Data> Widget<T> for PageSwitcher<T> {
                     // 要进入的页面
                     if let Some(inner) = self.inner.get_mut(page) {
                         ctx.transform(Affine::translate((size.width * (s - 1.), 0.)));
-                        // ctx.apply_global_transparency(s);
                         inner.paint(ctx, data, env);
-                        // ctx.fill(
-                        //     transparent_rect.to_owned(),
-                        //     &PaintBrush::Color(page_mask.with_alpha(1. - s)),
-                        // );
                     }
                 }
             }
@@ -457,12 +470,16 @@ impl<T: Data> Widget<T> for PageSwitcher<T> {
                     let x = ((anime_timer) as f64) / ANIMATION_TIME as f64;
                     let s = 1. - scl_gui_animation::tween::ease_out_expo(x);
                     ctx.transform(Affine::translate((0., s * size.height.min(100.))));
-                    // ctx.apply_global_transparency(1. - s);
+                    #[cfg(feature = "druid-ext")]
+                    ctx.set_global_alpha(1. - s);
+                    ctx.save().unwrap();
                     inner.paint(ctx, data, env);
+                    #[cfg(not(feature = "druid-ext"))]
                     ctx.fill(
                         transparent_rect.to_owned(),
                         &PaintBrush::Color(page_mask.with_alpha(s)),
                     );
+                    ctx.restore().unwrap();
                 }
             }
             None => {
