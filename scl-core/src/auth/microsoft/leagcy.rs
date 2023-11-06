@@ -173,16 +173,18 @@ pub async fn get_mojang_access_token(uhs: &str, xsts_token: &str) -> DynResult<P
     if !uhs.is_empty() && !xsts_token.is_empty() {
         // tracing::trace!("Getting mojang access token");
         let minecraft_xbox_body = format!("{{\"identityToken\":\"XBL3.0 x={uhs};{xsts_token}\"}}");
-        let minecraft_xbox_resp: MinecraftXBoxLoginResponse =
+        let minecraft_xbox_resp =
             crate::http::post("https://api.minecraftservices.com/authentication/login_with_xbox")
                 .header("Content-Type", "application/json")
                 .header("Accept", "application/json")
                 .body(minecraft_xbox_body.as_bytes())
                 .await
                 .map_err(|e| anyhow::anyhow!(e))?
-                .body_json()
+                .body_string()
                 .await
                 .map_err(|e| anyhow::anyhow!(e))?;
+        let minecraft_xbox_resp: MinecraftXBoxLoginResponse =
+            serde_json::from_str(&minecraft_xbox_resp)?;
         // tracing::trace!("Getting minecraft access token");
         let access_token = minecraft_xbox_resp.access_token;
         Ok(access_token)
@@ -231,7 +233,10 @@ pub async fn start_auth(_ctx: Option<impl Reporter>, url: &str) -> DynResult<Aut
         } else {
             let mcstore_resp: MinecraftStoreResponse =
                 crate::http::get("https://api.minecraftservices.com/entitlements/mcstore")
-                    .header("Authorization", &format!("Bearer {}", &access_token))
+                    .header(
+                        "Authorization",
+                        &format!("Bearer {}", access_token.as_string()),
+                    )
                     .await
                     .map_err(|e| anyhow::anyhow!(e))?
                     .body_json()
@@ -244,7 +249,10 @@ pub async fn start_auth(_ctx: Option<impl Reporter>, url: &str) -> DynResult<Aut
             }
             let profile_resp: MinecraftXBoxProfileResponse =
                 crate::http::get("https://api.minecraftservices.com/minecraft/profile")
-                    .header("Authorization", &format!("Bearer {}", &access_token))
+                    .header(
+                        "Authorization",
+                        &format!("Bearer {}", access_token.as_string()),
+                    )
                     .await
                     .map_err(|e| anyhow::anyhow!(e))?
                     .body_json()

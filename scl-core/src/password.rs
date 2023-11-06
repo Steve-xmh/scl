@@ -8,6 +8,8 @@ use std::{
 use serde::{de::Visitor, Deserialize, Deserializer, Serialize};
 
 /// 一个密码类，String 的壳子，用来在调试输出时挡住真实密码，防止泄露
+///
+/// 任何格式化输出都会返回 `***Password***`，所以如果需要取用密码，请使用 [`Password::take_string`] [`Password::to_owned_string`] [`Password::as_string`]
 #[derive(Clone, PartialEq, Eq, Default)]
 pub struct Password(String);
 

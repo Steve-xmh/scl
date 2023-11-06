@@ -2,6 +2,7 @@
 
 use std::fmt::Display;
 
+use anyhow::Context;
 use serde::Deserialize;
 
 use super::structs::AuthMethod;
@@ -75,7 +76,7 @@ impl<T: Display> MicrosoftOAuth<T> {
     }
 
     async fn auth_xbox_live(&self, access_token: &str) -> DynResult<(String, String)> {
-        tracing::trace!("正在验证 Xbox Live 账户");
+        tracing::debug!("正在验证 Xbox Live 账户");
         let xbox_auth_body = format!(
             "{\
             {\
@@ -116,7 +117,7 @@ impl<T: Display> MicrosoftOAuth<T> {
                 }\
             }"
             );
-            tracing::trace!("正在获取 XSTS");
+            tracing::debug!("正在获取 XSTS");
             let xsts_resp: XBoxAuthResponse =
                 crate::http::post("https://xsts.auth.xboxlive.com/xsts/authorize")
                     .header("Content-Type", "application/json")
@@ -140,33 +141,40 @@ impl<T: Display> MicrosoftOAuth<T> {
     ) -> DynResult<AuthMethod> {
         let (uhs, xsts_token) = self.auth_xbox_live(access_token).await?;
 
-        tracing::trace!("正在获取 XUID");
+        tracing::debug!("正在获取 XUID");
         let xuid = leagcy::get_xuid(&uhs, &xsts_token).await?;
 
-        tracing::trace!("正在获取 Mojang 访问令牌");
+        tracing::debug!("正在获取 Mojang 访问令牌");
         let access_token = leagcy::get_mojang_access_token(&uhs, &xsts_token).await?;
 
         if access_token.is_empty() {
             anyhow::bail!("获取令牌失败")
         } else {
-            tracing::trace!("正在检查是否拥有 Minecraft");
-            let mcstore_resp: MinecraftStoreResponse =
+            tracing::debug!("正在检查是否拥有 Minecraft");
+            let mcstore_resp =
                 crate::http::get("https://api.minecraftservices.com/entitlements/mcstore")
-                    .header("Authorization", &format!("Bearer {}", &access_token))
+                    .header(
+                        "Authorization",
+                        &format!("Bearer {}", &access_token.as_string()),
+                    )
                     .await
                     .map_err(|e| anyhow::anyhow!(e))?
-                    .body_json()
+                    .body_string()
                     .await
                     .map_err(|e| anyhow::anyhow!(e))?;
+            let mcstore_resp: MinecraftStoreResponse = serde_json::from_str(&mcstore_resp)?;
             if mcstore_resp.items.is_empty() {
                 anyhow::bail!(
                     "没有在已购项目中找到 Minecraft！请检查你的账户是否已购买 Minecraft！"
                 );
             }
-            tracing::trace!("正在获取 Minecraft 账户信息");
+            tracing::debug!("正在获取 Minecraft 账户信息");
             let profile_resp: MinecraftXBoxProfileResponse =
                 crate::http::get("https://api.minecraftservices.com/minecraft/profile")
-                    .header("Authorization", &format!("Bearer {}", &access_token))
+                    .header(
+                        "Authorization",
+                        &format!("Bearer {}", &access_token.as_string()),
+                    )
                     .await
                     .map_err(|e| anyhow::anyhow!(e))?
                     .body_json()
@@ -174,15 +182,16 @@ impl<T: Display> MicrosoftOAuth<T> {
                     .map_err(|e| anyhow::anyhow!(e))?;
             if profile_resp.error.is_empty() {
                 if let Some(skin) = profile_resp.skins.iter().find(|a| a.state == "ACTIVE") {
-                    tracing::trace!("正在解析皮肤");
+                    tracing::debug!("正在解析皮肤: {}", skin.url);
                     let skin_data = crate::http::get(&skin.url)
                         .await
                         .map_err(|e| anyhow::anyhow!(e))?
                         .body_bytes()
                         .await
                         .map_err(|e| anyhow::anyhow!(e))?;
-                    let (head_skin, hat_skin) = crate::auth::parse_head_skin(skin_data)?;
-                    tracing::trace!("微软账户验证成功！");
+                    let (head_skin, hat_skin) =
+                        crate::auth::parse_head_skin(skin_data).context("解析皮肤数据失败")?;
+                    tracing::debug!("微软账户验证成功！");
                     Ok(AuthMethod::Microsoft {
                         access_token,
                         refresh_token: refresh_token.to_string().into(),
@@ -211,14 +220,14 @@ impl<T: Display> MicrosoftOAuth<T> {
             ..
         } = method
         {
-            tracing::trace!("正在刷新令牌");
+            tracing::debug!("正在刷新令牌");
             let new_token = self.refresh_token(refresh_token.as_str()).await?;
 
             *refresh_token = new_token.refresh_token.into();
 
             let (uhs, xsts_token) = self.auth_xbox_live(&new_token.access_token).await?;
 
-            tracing::trace!("正在获取 Mojang 访问令牌");
+            tracing::debug!("正在获取 Mojang 访问令牌");
             let new_access_token = leagcy::get_mojang_access_token(&uhs, &xsts_token).await?;
 
             anyhow::ensure!(
