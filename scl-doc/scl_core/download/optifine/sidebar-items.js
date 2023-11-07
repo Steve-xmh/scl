@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"trait":[["OptifineDownloadExt","一个用于下载 Optifine 模组下载安装的扩展特质，可以使用 [`crate::download::Downloader`] 来安装"]]};
+window.SIDEBAR_ITEMS = {"trait":["OptifineDownloadExt"]};

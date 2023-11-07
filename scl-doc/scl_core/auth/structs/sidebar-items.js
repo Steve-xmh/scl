@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["AuthMethod","账户类型枚举，需要提供一个账户种类方可启动游戏"]]};
+window.SIDEBAR_ITEMS = {"enum":["AuthMethod"]};

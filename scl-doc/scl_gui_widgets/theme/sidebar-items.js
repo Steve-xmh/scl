@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":[["color","根据 Windows UI （原 Fluent Design）规范制成的颜色和字体模块"],["icons","图标模块，提供了显示图标所需要的东西"]]};
+window.SIDEBAR_ITEMS = {"mod":["color","icons"]};

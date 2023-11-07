@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"trait":[["AuthlibDownloadExt","Authlib 第三方正版登录模块的下载特质"]]};
+window.SIDEBAR_ITEMS = {"trait":["AuthlibDownloadExt"]};

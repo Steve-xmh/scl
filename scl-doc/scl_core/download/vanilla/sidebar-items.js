@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":[["unzip_natives","解压指定 ZIP 压缩文件的内容到指定文件夹"]],"trait":[["VanillaDownloadExt","一个用于下载安装原版的扩展特质，可以使用 [`crate::download::Downloader`] 来安装"]]};
+window.SIDEBAR_ITEMS = {"fn":["unzip_natives"],"trait":["VanillaDownloadExt"]};

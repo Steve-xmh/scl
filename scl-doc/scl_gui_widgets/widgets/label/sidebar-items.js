@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":[["dynamic","以默认主题字体 [`crate::theme::color::typography::BASE`] 和颜色 [`crate::theme::color::typography::FONT_COLOR`] 创建一个动态标签组件 [`druid::widget::Label`]"],["new","以默认主题字体 [`crate::theme::color::typography::BASE`] 和颜色 [`crate::theme::color::typography::FONT_COLOR`] 创建一个标签组件 [`druid::widget::Label`]"]]};
+window.SIDEBAR_ITEMS = {"fn":["dynamic","new"]};

@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["FabricModIcon","一个 Fabric 模组的图标集，其内的成员都是文件路径"],["ModMeta","一个模组的元数据信息"]],"struct":[["FabricModMeta","一个 Fabric 模组的元数据信息"],["ForgeModMeta","一个 Forge 模组的元数据信息"],["Mod","模组文件数据 可通过 [`crate::version::structs::VersionInfo::get_mods`] 获取"],["NewForgeModMeta","新版 Forge 模组的元数据信息"]]};
+window.SIDEBAR_ITEMS = {"enum":["FabricModIcon","ModMeta"],"struct":["FabricModMeta","ForgeModMeta","Mod","NewForgeModMeta"]};

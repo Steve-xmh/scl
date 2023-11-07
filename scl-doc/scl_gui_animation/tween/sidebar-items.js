@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":[["ease_in_circ","Circ 算法滑入，输入输出均为 [0.0 - 1.0]"],["ease_in_expo","Expo 算法滑入，输入输出均为 [0.0 - 1.0]"],["ease_inout_circ","Circ 算法滑入滑出，输入输出均为 [0.0 - 1.0]"],["ease_out_circ","Circ 算法滑出，输入输出均为 [0.0 - 1.0]"],["ease_out_expo","Expo 算法滑出，输入输出均为 [0.0 - 1.0]"]]};
+window.SIDEBAR_ITEMS = {"fn":["ease_in_circ","ease_in_expo","ease_inout_circ","ease_out_circ","ease_out_expo"]};

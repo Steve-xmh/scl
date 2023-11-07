@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"constant":[["LOG4J_PATCH","用于修复 CVE-2021-44228 远程代码执行漏洞"]],"struct":[["Client","一个客户端结构，通过 [`ClientConfig`] 提供的信息组合启动参数，运行游戏"],["ClientConfig","一个客户端配置结构，开发者需要填充内部的一部分数据后传递给 [`Client::new`] 方可正确启动游戏"]]};
+window.SIDEBAR_ITEMS = {"constant":["LOG4J_PATCH"],"struct":["Client","ClientConfig"]};

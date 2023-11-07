@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["MinecraftVersion","一个用于表达当前 Minecraft 版本号的枚举结构"]],"fn":[["parse_version","尝试解析版本字符串，并转换成 [`MinecraftVersion`] 枚举类型"]]};
+window.SIDEBAR_ITEMS = {"enum":["MinecraftVersion"],"fn":["parse_version"]};

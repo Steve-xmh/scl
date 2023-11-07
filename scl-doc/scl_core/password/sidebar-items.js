@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":[["Password","一个密码类，String 的壳子，用来在调试输出时挡住真实密码，防止泄露"]]};
+window.SIDEBAR_ITEMS = {"struct":["Password"]};

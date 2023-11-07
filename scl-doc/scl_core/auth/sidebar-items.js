@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":[["auth_mojang","进行 Mojang 正版验证"],["parse_head_skin","提取一个皮肤位图的正面头部部分，用于 GUI 展示头像"],["refresh_auth","刷新/续期访问令牌"]],"mod":[["authlib","用于 authlib-injector 第三方登录的登录逻辑"],["microsoft","微软登录模块，通过设备码方式获取玩家的 Microsoft 账户令牌，进而获取 Minecraft 用户令牌"],["structs","登录验证数据结构"]]};
+window.SIDEBAR_ITEMS = {"fn":["auth_mojang","parse_head_skin","refresh_auth"],"mod":["authlib","microsoft","structs"]};

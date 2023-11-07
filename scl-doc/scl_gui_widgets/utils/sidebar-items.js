@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":[["color","一些用于颜色计算的模块"]]};
+window.SIDEBAR_ITEMS = {"mod":["color"]};

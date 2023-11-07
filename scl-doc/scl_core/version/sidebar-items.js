@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["LoadVersionInfoError","当解析出错时，此处为错误枚举值"],["VersionType","版本类型"]],"fn":[["get_avaliable_versions","通过指定的版本文件夹，搜索所有可启动的游戏版本"]],"mod":[["mods","模组文件的管理"],["structs","所有的启动器元数据结构都在这里"]],"struct":[["Version","一个游戏版本的信息"]]};
+window.SIDEBAR_ITEMS = {"enum":["LoadVersionInfoError","VersionType"],"fn":["get_avaliable_versions"],"mod":["mods","structs"],"struct":["Version"]};

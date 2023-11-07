@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":[["AssetIndexes","资源索引信息"],["AssetItem","资源项目信息"],["ForgeFile","该文件的下载信息"],["ForgeItemInfo","一个加载器的版本信息"],["ForgePromoItem","被特殊标记的 Forge 版本"],["ForgeVersionsData","Forge 加载器的版本信息"],["LatestVersion","最新的正式版本和快照版本数据结构"],["OptifineVersionMeta","Optifine 的版本信息"],["VersionInfo","其中一个游戏版本的信息"],["VersionManifest","当前的最新版本和全部版本信息"]]};
+window.SIDEBAR_ITEMS = {"struct":["AssetIndexes","AssetItem","ForgeFile","ForgeItemInfo","ForgePromoItem","ForgeVersionsData","LatestVersion","OptifineVersionMeta","VersionInfo","VersionManifest"]};

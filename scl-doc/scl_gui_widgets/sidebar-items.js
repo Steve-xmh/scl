@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":[["theme","主题相关的模块，包括对颜色、字体、图标的定义和使用"],["utils","某些常用的模块"],["widgets","SCL 组件库主模块"]],"trait":[["WidgetExt","一些常用的组件扩展特质"]]};
+window.SIDEBAR_ITEMS = {"mod":["theme","utils","widgets"],"trait":["WidgetExt"]};

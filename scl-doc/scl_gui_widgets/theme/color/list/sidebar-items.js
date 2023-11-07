@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"constant":[["ACCENT_HIGH","默认情况下 亮色模式为 `#0078D4 - 70%` 黑暗模式为 `#0078D4 - 90%`"],["ACCENT_LOW","默认情况下 亮色模式为 `#0078D4 - 40%` 黑暗模式为 `#0078D4 - 60%`"],["ACCENT_MEDIUM","默认情况下 亮色模式为 `#0078D4 - 60%` 黑暗模式为 `#0078D4 - 80%`"],["LIST_LOW","默认情况下 亮色模式为 `#000000 - 10%` 黑暗模式为 `#000000 - 10%`"],["LIST_MEDIUM","默认情况下 亮色模式为 `#000000 - 20%` 黑暗模式为 `#000000 - 20%`"]]};
+window.SIDEBAR_ITEMS = {"constant":["ACCENT_HIGH","ACCENT_LOW","ACCENT_MEDIUM","LIST_LOW","LIST_MEDIUM"]};

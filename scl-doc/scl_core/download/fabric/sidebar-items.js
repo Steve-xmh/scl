@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":[["IntermediaryStruct","源码对照表的信息"],["LoaderMetaItem","Fabric 加载器的版本元数据和其源码对照表的版本元数据"],["LoaderStruct","Fabric 加载器的信息"]],"trait":[["FabricDownloadExt","Fabric 模组加载器的安装特质"]]};
+window.SIDEBAR_ITEMS = {"struct":["IntermediaryStruct","LoaderMetaItem","LoaderStruct"],"trait":["FabricDownloadExt"]};

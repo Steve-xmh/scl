@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"constant":[["HIGH","默认情况下 亮色模式为 `#000000 - 100%` 黑暗模式为 `#FFFFFF - 100%`"],["LOW","默认情况下 亮色模式为 `#000000 - 20%` 黑暗模式为 `#FFFFFF - 20%`"],["MEDIUM","默认情况下 亮色模式为 `#000000 - 60%` 黑暗模式为 `#FFFFFF - 60%`"],["MEDIUM_HIGH","默认情况下 亮色模式为 `#000000 - 80%` 黑暗模式为 `#FFFFFF - 80%`"],["MEDIUM_LOW","默认情况下 亮色模式为 `#000000 - 40%` 黑暗模式为 `#FFFFFF - 40%`"]]};
+window.SIDEBAR_ITEMS = {"constant":["HIGH","LOW","MEDIUM","MEDIUM_HIGH","MEDIUM_LOW"]};
