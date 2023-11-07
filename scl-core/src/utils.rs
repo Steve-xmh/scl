@@ -200,6 +200,17 @@ pub enum Arch {
     ARM64,
 }
 
+impl Default for Arch {
+    fn default() -> Self {
+        #[cfg(target_arch = "x86")]
+        return Arch::X86;
+        #[cfg(target_arch = "x86_64")]
+        return Arch::X64;
+        #[cfg(target_arch = "aarch64")]
+        return Arch::ARM64;
+    }
+}
+
 impl Display for Arch {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.write_str(self.as_ref())
@@ -328,6 +339,11 @@ pub async fn get_exec_arch(file_path: impl AsRef<std::path::Path>) -> DynResult<
 
     file.read_exact(&mut buf).await?;
 
+    // 多架构 Mach-O，默认取当前运行架构
+    // 一般出现于 /usr/bin/java 中
+    if buf[0] == 0xCA && buf[1] == 0xFE && buf[2] == 0xBA && buf[3] == 0xBE {
+        return Ok(Arch::default());
+    }
     // Mach-O Magic Number
     // CF FA ED FE
     if !(buf[0] == 0xCF && buf[1] == 0xFA && buf[2] == 0xED && buf[3] == 0xFE) {
