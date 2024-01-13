@@ -384,18 +384,23 @@ pub async fn get_exec_arch(file_path: impl AsRef<std::path::Path>) -> DynResult<
         anyhow::bail!("文件不是一个合法的 ELF 可执行文件");
     }
 
-    file.seek(inner_future::io::SeekFrom::Start(0x12)).await?;
+    file.seek(inner_future::io::SeekFrom::Start(0x10)).await?;
 
     let mut buf = [0u8; 2];
     file.read_exact(&mut buf).await?;
 
     let elf_type = u16::from_le_bytes(buf);
+    file.read_exact(&mut buf).await?;
+    let arch = u16::from_le_bytes(buf);
 
-    if elf_type != 2 {
-        anyhow::bail!("文件不是一个合法的 ELF 可执行文件");
+    if elf_type != 0x02 && elf_type != 0x03 {
+        anyhow::bail!(
+            "文件不是一个合法的 ELF 可执行文件，ELF 类型不是可执行文件或共享对象库：{:04X}",
+            elf_type
+        );
     }
 
-    match u16::from_le_bytes(buf) {
+    match arch {
         0x03 => Ok(Arch::X86),   // X86
         0x3E => Ok(Arch::X64),   // X86_64
         0xB7 => Ok(Arch::ARM64), // ARM64
