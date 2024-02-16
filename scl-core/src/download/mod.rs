@@ -6,6 +6,7 @@ pub mod fabric;
 pub mod forge;
 pub mod mcmod;
 pub mod modrinth;
+pub mod neoforge;
 pub mod optifine;
 pub mod quiltmc;
 pub mod structs;
@@ -17,6 +18,7 @@ use anyhow::Context;
 pub use authlib::AuthlibDownloadExt;
 pub use fabric::FabricDownloadExt;
 pub use forge::ForgeDownloadExt;
+pub use neoforge::NeoForgeDownloadExt;
 pub use optifine::OptifineDownloadExt;
 pub use quiltmc::QuiltMCDownloadExt;
 use serde::{Deserialize, Serialize};
@@ -249,6 +251,7 @@ pub trait GameDownload:
     FabricDownloadExt + ForgeDownloadExt + VanillaDownloadExt + QuiltMCDownloadExt
 {
     /// 根据参数安装一个游戏，允许安装模组加载器
+    #[allow(clippy::too_many_arguments)]
     async fn download_game(
         &self,
         version_name: &str,
@@ -256,6 +259,7 @@ pub trait GameDownload:
         fabric: &str,
         quiltmc: &str,
         forge: &str,
+        neoforge: &str,
         optifine: &str,
     ) -> DynResult;
 }
@@ -268,6 +272,7 @@ impl<R: Reporter> GameDownload for Downloader<R> {
         fabric: &str,
         quiltmc: &str,
         forge: &str,
+        neoforge: &str,
         optifine: &str,
     ) -> DynResult {
         self.reporter
@@ -303,6 +308,15 @@ impl<R: Reporter> GameDownload for Downloader<R> {
             )
             .await?;
             self.install_forge_post(version_name, &vanilla.id, forge)
+                .await?;
+        } else if !neoforge.is_empty() {
+            self.install_vanilla(&vanilla.id, &vanilla).await?; // NeoForge 安装需要原版，如果安装器没有解析到则会从官方源下载，速度很慢
+            crate::prelude::inner_future::future::try_zip(
+                self.install_vanilla(version_name, &vanilla),
+                self.install_neoforge_pre(version_name, &vanilla.id, neoforge),
+            )
+            .await?;
+            self.install_neoforge_post(version_name, &vanilla.id, neoforge)
                 .await?;
         } else {
             self.install_vanilla(version_name, &vanilla).await?;

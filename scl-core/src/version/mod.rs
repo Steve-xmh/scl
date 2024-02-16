@@ -102,6 +102,8 @@ pub enum VersionType {
     Vanilla,
     /// Forge 版本
     Forge,
+    /// NeoForge 版本
+    NeoForge,
     /// Fabric 版本
     Fabric,
     /// QuiltMC 版本

@@ -16,7 +16,7 @@ rust-version = "1.75"
 anyhow = "^1.0"
 base64 = "^0.21"
 futures = "^0.3.21"
-surf = { version = "^2.3", default-features = false, features = [ "h1-client", "encoding" ] }
+surf = { version = "^2.3", default-features = false, features = [ "h1-client" ] }
 image = { version = "^0.24", default-features = false, features = ["jpeg", "png", "gif", "bmp", "rgb"] }
 webp = "^0.2"
 nom = "^7.1"

@@ -186,18 +186,22 @@ impl<D: Data> Widget<D> for DownloadModuleItem<D> {
     }
 
     fn update(&mut self, ctx: &mut druid::UpdateCtx, old_data: &D, data: &D, env: &druid::Env) {
-        if ctx.env_key_changed(&self.icon_key.0) {
-            self.reload_icon(env);
-        }
-        if ctx.env_key_changed(&self.icon_key.1) {
-            ctx.request_paint();
-        }
         if ctx.has_requested_update() || !old_data.same(data) {
             self.text.update(ctx, data, env);
             self.desc.update(ctx, data, env);
         }
-        if let Icon::Image(img) = &mut self.icon {
-            img.update(ctx, data, env);
+        match &mut self.icon {
+            Icon::Image(img) => {
+                img.update(ctx, data, env);
+            }
+            Icon::BezPath(_) => {
+                if ctx.env_key_changed(&self.icon_key.0) {
+                    self.reload_icon(env);
+                }
+                if ctx.env_key_changed(&self.icon_key.1) {
+                    ctx.request_paint();
+                }
+            }
         }
     }
 
@@ -228,11 +232,6 @@ impl<D: Data> Widget<D> for DownloadModuleItem<D> {
     }
 
     fn paint(&mut self, ctx: &mut druid::PaintCtx, data: &D, env: &druid::Env) {
-        let icon_brush = PaintBrush::Color(env.get(if env.get(IS_DARK) {
-            &self.icon_key.2
-        } else {
-            &self.icon_key.1
-        }));
         let size = ctx.size();
         let is_hot = ctx.is_hot();
         let is_active = ctx.is_active();
@@ -250,6 +249,11 @@ impl<D: Data> Widget<D> for DownloadModuleItem<D> {
         let icon_size = druid::Size::new(size.height, size.height);
         ctx.with_save(|ctx| match &mut self.icon {
             Icon::BezPath(p) => {
+                let icon_brush = PaintBrush::Color(env.get(if env.get(IS_DARK) {
+                    &self.icon_key.2
+                } else {
+                    &self.icon_key.1
+                }));
                 ctx.transform(Affine::translate(
                     ((icon_size - p.bounding_box().size()) / 2.).to_vec2(),
                 ));

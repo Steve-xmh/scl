@@ -582,6 +582,8 @@ impl VersionInfo {
                 if lib.name.starts_with("net.fabricmc:") {
                     // 也有可能是 QuiltMC
                     has_fabric = true;
+                } else if lib.name.starts_with("net.neoforged:") {
+                    return VersionType::NeoForge;
                 } else if lib.name.starts_with("net.minecraftforge:") {
                     return VersionType::Forge;
                 } else if lib.name.starts_with("org.quiltmc:") {

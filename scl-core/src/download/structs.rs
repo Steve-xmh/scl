@@ -63,6 +63,36 @@ pub struct AssetItem {
     pub size: usize,
 }
 
+/// NeoForge 加载器的版本信息
+#[derive(Clone, Debug)]
+pub struct NeoForgeVersionsData {
+    /// 推荐下载的加载器版本
+    pub recommended: Option<NeoForgeItemInfo>,
+    /// 最新的加载器版本
+    pub latest: Option<NeoForgeItemInfo>,
+    /// 所有加载器版本
+    pub all_versions: Vec<NeoForgeItemInfo>,
+}
+
+/// 一个 NeoForge 加载器的版本信息
+#[derive(Clone, Default, Debug, Deserialize)]
+pub struct NeoForgeItemInfo {
+    /// 该加载器的版本号
+    ///
+    /// 从 NeoForge 建立（1.20.1）到现在，版本格式保持 `[MC版本号]-[主版本号].[次版本号].[修订版本号][-[测试版后缀]]`
+    ///
+    /// 例如 `1.20.1-47.1.99` 或 `neoforge-20.4.0-beta`
+    pub version: String,
+    /// 该加载器的原始版本号
+    #[serde(default, rename = "rawVersion")]
+    pub raw_version: String,
+    /// 该加载器的安装包下载链接
+    #[serde(default, rename = "installerPath")]
+    pub installer_path: String,
+    /// 该加载器对应支持的原版版本号
+    pub mcversion: String,
+}
+
 /// Forge 加载器的版本信息
 #[derive(Clone, Debug)]
 pub struct ForgeVersionsData {
@@ -74,7 +104,7 @@ pub struct ForgeVersionsData {
     pub all_versions: Vec<ForgeItemInfo>,
 }
 
-/// 一个加载器的版本信息
+/// 一个 Forge 加载器的版本信息
 #[derive(Clone, Debug, Deserialize, PartialEq, Eq)]
 pub struct ForgeItemInfo {
     /// 该加载器的版本号
