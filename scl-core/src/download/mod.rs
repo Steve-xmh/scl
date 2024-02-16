@@ -14,7 +14,6 @@ pub mod vanilla;
 use std::{fmt::Display, path::Path, str::FromStr};
 
 use anyhow::Context;
-use async_trait::async_trait;
 pub use authlib::AuthlibDownloadExt;
 pub use fabric::FabricDownloadExt;
 pub use forge::ForgeDownloadExt;
@@ -246,8 +245,7 @@ impl<R: Reporter> Default for Downloader<R> {
 }
 
 /// 一个游戏安装特质，如果你并不需要单独安装其它部件，则可以单独引入这个特质来安装游戏
-#[async_trait]
-pub trait GameDownload<'a>:
+pub trait GameDownload:
     FabricDownloadExt + ForgeDownloadExt + VanillaDownloadExt + QuiltMCDownloadExt
 {
     /// 根据参数安装一个游戏，允许安装模组加载器
@@ -262,8 +260,7 @@ pub trait GameDownload<'a>:
     ) -> DynResult;
 }
 
-#[async_trait]
-impl<R: Reporter> GameDownload<'_> for Downloader<R> {
+impl<R: Reporter> GameDownload for Downloader<R> {
     async fn download_game(
         &self,
         version_name: &str,

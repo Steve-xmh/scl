@@ -9,7 +9,7 @@ use icons::*;
 
 /// 使用简易的语法定义图标们
 /// 中间的颜色值为可选，分别为亮色主题色和暗色主题色
-/// ```
+/// ```rust
 /// use druid::{ArcStr, Color, Data, Key};
 /// use serde::{Deserialize, Serialize};
 /// /// 一个存放明色，暗色，填充路径字符串的类型

@@ -7,7 +7,6 @@ use std::{
 };
 
 use anyhow::Context;
-use async_trait::async_trait;
 use inner_future::io::{AsyncBufReadExt, AsyncWriteExt};
 use serde_json::Value;
 
@@ -32,7 +31,6 @@ const CLASS_PATH_SPAREATOR: &str = ":";
 /// Forge 模组加载器的安装特质
 ///
 /// 可以通过引入本特质和使用 [`crate::download::Downloader`] 来安装模组加载器
-#[async_trait]
 pub trait ForgeDownloadExt: Sync {
     /// 根据纯净版本号获取当前可用的所有 Forge 版本
     async fn get_avaliable_installers(&self, vanilla_version: &str)
@@ -64,7 +62,6 @@ pub trait ForgeDownloadExt: Sync {
     ) -> DynResult;
 }
 
-#[async_trait]
 impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
     async fn get_avaliable_installers(
         &self,

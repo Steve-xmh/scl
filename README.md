@@ -8,21 +8,26 @@
 
 ![预览图](https://user-images.githubusercontent.com/39523898/208238006-900bd5fe-f9f7-42a9-b726-da829162fbed.png)
 
+![MSRV 1.75.0](https://img.shields.io/badge/MSRV-1.75.0-orange)
+
 使用 Rust 编程语言编写，内存占用相当之小，性能相当之优秀，针对二进制大小做了力所能及的压缩优化。
 
 原生跨平台，支持 Windows，Linux，MacOS 三大主流操作系统。
 
+- 官网：[https://steve-xmh.github.io/scl](https://steve-xmh.github.io/scl)
+- 开发文档：[https://steve-xmh.github.io/scl/scl-docs](https://steve-xmh.github.io/scl/scl-docs)
 - 设计图：[https://www.figma.com/file/i2Sl8uD5nKS4dIki0yK29n/Sharp-Craft-Launcher-%E8%AE%BE%E8%AE%A1%E5%9B%BE](https://www.figma.com/file/i2Sl8uD5nKS4dIki0yK29n/Sharp-Craft-Launcher-%E8%AE%BE%E8%AE%A1%E5%9B%BE)
-- 介绍/发布贴：[https://www.mcbbs.net/thread-1223867-1-1.html](https://www.mcbbs.net/thread-1223867-1-1.html)
+- 介绍/发布贴（MineBBS）：[https://www.minebbs.com/resources/sharp-craft-launcher-_-_.7177/](https://www.minebbs.com/resources/sharp-craft-launcher-_-_.7177/)
+- 介绍/发布贴（MCBBS）：[https://www.mcbbs.net/thread-1223867-1-1.html](https://www.mcbbs.net/thread-1223867-1-1.html)
 - 官网源代码分支：[https://github.com/Steve-xmh/scl/tree/site](https://github.com/Steve-xmh/scl/tree/site)
 
 ## 源代码架构
 
-- `scl-core`: 启动器核心库，包含了游戏启动，游戏下载，正版登录，模组下载等游戏操作功能
-- `scl-webview`: 启动器 WebView 网页浏览器库，提供了用于微软正版登录的浏览器窗口
-- `scl-macro`: 启动器过程宏库，包含了部分用于代码生成的过程宏代码，目前包含图标代码生成的简易过程宏
-- `scl-gui-animation`: 启动器图形页面动画函数库，包含了一些方便用来制作非线性动画的函数和工具类
-- `scl-gui-widgets`: 启动器图形页面组件库，基于 [Druid](https://github.com/linebender/druid) 框架，提供了大量基于 WinUI3 设计规范制作的图形页面组件
+- `scl-core`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_core/index.html) 启动器核心库，包含了游戏启动，游戏下载，正版登录，模组下载等游戏操作功能
+- `scl-webview`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_webview/index.html) 启动器 WebView 网页浏览器库，提供了用于微软正版登录的浏览器窗口
+- `scl-macro`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_macro/index.html) 启动器过程宏库，包含了部分用于代码生成的过程宏代码，目前包含图标代码生成的简易过程宏
+- `scl-gui-animation`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_gui_animation/index.html) 启动器图形页面动画函数库，包含了一些方便用来制作非线性动画的函数和工具类
+- `scl-gui-widgets`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_gui_widgets/index.html) 启动器图形页面组件库，基于 [Druid](https://github.com/linebender/druid) 框架，提供了大量基于 WinUI3 设计规范制作的图形页面组件
 
 ## 关于开源协议和代码协作协议
 

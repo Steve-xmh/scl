@@ -1,6 +1,5 @@
 //! QuiltMC 下载源数据结构
 use anyhow::Context;
-use async_trait::async_trait;
 use serde::Deserialize;
 
 use super::Downloader;
@@ -36,7 +35,6 @@ pub struct LoaderStruct {
 /// QuiltMC 模组加载器的安装特质
 ///
 /// 可以通过引入本特质和使用 [`crate::download::Downloader`] 来安装模组加载器
-#[async_trait]
 pub trait QuiltMCDownloadExt: Sync {
     /// 根据原版版本号获取该版本下可用的 QuiltMC 模组加载器
     async fn get_avaliable_loaders(&self, vanilla_version: &str) -> DynResult<Vec<LoaderMetaItem>>;
@@ -54,7 +52,6 @@ pub trait QuiltMCDownloadExt: Sync {
     async fn download_quiltmc_post(&self, version_name: &str) -> DynResult;
 }
 
-#[async_trait]
 impl<R: Reporter> QuiltMCDownloadExt for Downloader<R> {
     async fn get_avaliable_loaders(&self, vanilla_version: &str) -> DynResult<Vec<LoaderMetaItem>> {
         let mut result = crate::http::retry_get(format!(

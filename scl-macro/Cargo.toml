@@ -15,9 +15,9 @@ authors = ["Steve-xmh <stevexmh@qq.com>"]
 proc-macro = true
 
 [dependencies]
-quote = "^1.0"
-syn = "^2.0"
+quote = "^1"
+syn = "^2"
 
 [dev-dependencies]
 druid = { git = "https://github.com/linebender/druid.git", features = ["im", "serde", "raw-win-handle"] }
-serde = { version = "1.0", features = ["derive"] }
+serde = { version = "^1", features = ["derive"] }

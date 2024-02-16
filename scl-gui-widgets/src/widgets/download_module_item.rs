@@ -1,8 +1,8 @@
 use druid::{
     kurbo::{BezPath, Shape},
     piet::{PaintBrush, TextStorage},
-    widget::{Click, ControllerHost, LabelText},
-    Affine, Data, Env, Event, LifeCycle, RenderContext, Widget, WidgetExt, WidgetPod,
+    widget::{Click, ControllerHost, Image, LabelText},
+    Affine, Data, Env, Event, LifeCycle, Point, RenderContext, Widget, WidgetExt, WidgetPod,
 };
 
 use super::label;
@@ -15,10 +15,15 @@ use crate::theme::{
     icons::IconKeyPair,
 };
 
+enum Icon<D> {
+    BezPath(BezPath),
+    Image(Box<WidgetPod<D, Image>>),
+}
+
 /// 一个左侧有图标和说明信息，右侧有副文本信息的可点击项组件
 pub struct DownloadModuleItem<D> {
     icon_key: IconKeyPair,
-    icon_path: BezPath,
+    icon: Icon<D>,
     text: WidgetPod<D, Box<dyn Widget<D>>>,
     desc: WidgetPod<D, Box<dyn Widget<D>>>,
 }
@@ -32,7 +37,32 @@ impl<D: Data> DownloadModuleItem<D> {
     ) -> Self {
         Self {
             icon_key,
-            icon_path: BezPath::new(),
+            icon: Icon::BezPath(BezPath::new()),
+            text: WidgetPod::new(Box::new(
+                label::new(text)
+                    .with_text_size(14.)
+                    .with_text_color(base::MEDIUM)
+                    .with_font(BODY)
+                    .align_vertical(druid::UnitPoint::LEFT),
+            )),
+            desc: WidgetPod::new(Box::new(
+                label::new(desc)
+                    .with_text_color(base::MEDIUM)
+                    .with_font(CAPTION_ALT)
+                    .align_vertical(druid::UnitPoint::RIGHT),
+            )),
+        }
+    }
+
+    /// 根据所给的图像组件创建组件
+    pub fn new_image(
+        img: Image,
+        text: impl Into<LabelText<D>>,
+        desc: impl Into<LabelText<D>>,
+    ) -> Self {
+        Self {
+            icon_key: crate::theme::icons::EMPTY,
+            icon: Icon::Image(Box::new(WidgetPod::new(img))),
             text: WidgetPod::new(Box::new(
                 label::new(text)
                     .with_text_size(14.)
@@ -57,7 +87,7 @@ impl<D: Data> DownloadModuleItem<D> {
     ) -> Self {
         Self {
             icon_key,
-            icon_path: BezPath::new(),
+            icon: Icon::BezPath(BezPath::new()),
             text: WidgetPod::new(Box::new(
                 label::dynamic(text)
                     .with_text_size(14.)
@@ -74,6 +104,31 @@ impl<D: Data> DownloadModuleItem<D> {
         }
     }
 
+    /// 根据所给的图像组件创建组件，但可以是动态文字
+    pub fn dynamic_image(
+        img: Image,
+        text: impl Fn(&D, &Env) -> String + 'static,
+        desc: impl Fn(&D, &Env) -> String + 'static,
+    ) -> Self {
+        Self {
+            icon_key: crate::theme::icons::EMPTY,
+            icon: Icon::Image(Box::new(WidgetPod::new(img))),
+            text: WidgetPod::new(Box::new(
+                label::new(text)
+                    .with_text_size(14.)
+                    .with_text_color(base::MEDIUM)
+                    .with_font(BODY)
+                    .align_vertical(druid::UnitPoint::LEFT),
+            )),
+            desc: WidgetPod::new(Box::new(
+                label::new(desc)
+                    .with_text_color(base::MEDIUM)
+                    .with_font(CAPTION_ALT)
+                    .align_vertical(druid::UnitPoint::RIGHT),
+            )),
+        }
+    }
+
     /// Provide a closure to be called when this button is clicked.
     pub fn on_click(
         self,
@@ -83,7 +138,9 @@ impl<D: Data> DownloadModuleItem<D> {
     }
 
     fn reload_icon(&mut self, env: &druid::Env) {
-        self.icon_path = BezPath::from_svg(env.get(&self.icon_key.0).as_str()).unwrap_or_default();
+        if let Icon::BezPath(p) = &mut self.icon {
+            *p = BezPath::from_svg(env.get(&self.icon_key.0).as_str()).unwrap_or_default();
+        }
     }
 }
 
@@ -104,6 +161,9 @@ impl<D: Data> Widget<D> for DownloadModuleItem<D> {
         }
         self.text.event(ctx, event, data, env);
         self.desc.event(ctx, event, data, env);
+        if let Icon::Image(img) = &mut self.icon {
+            img.event(ctx, event, data, env);
+        }
     }
 
     fn lifecycle(
@@ -120,6 +180,9 @@ impl<D: Data> Widget<D> for DownloadModuleItem<D> {
         }
         self.text.lifecycle(ctx, event, data, env);
         self.desc.lifecycle(ctx, event, data, env);
+        if let Icon::Image(img) = &mut self.icon {
+            img.lifecycle(ctx, event, data, env);
+        }
     }
 
     fn update(&mut self, ctx: &mut druid::UpdateCtx, old_data: &D, data: &D, env: &druid::Env) {
@@ -132,6 +195,9 @@ impl<D: Data> Widget<D> for DownloadModuleItem<D> {
         if ctx.has_requested_update() || !old_data.same(data) {
             self.text.update(ctx, data, env);
             self.desc.update(ctx, data, env);
+        }
+        if let Icon::Image(img) = &mut self.icon {
+            img.update(ctx, data, env);
         }
     }
 
@@ -150,6 +216,14 @@ impl<D: Data> Widget<D> for DownloadModuleItem<D> {
         let desc_size = self.desc.layout(ctx, &desc_bc, data, env);
         self.text.set_origin(ctx, (40., 0.).into());
         self.desc.set_origin(ctx, (40., 0.).into());
+        if let Icon::Image(img) = &mut self.icon {
+            let img_size = img.layout(ctx, &bc, data, env);
+            let top_left = Point::new(
+                (40.0 - img_size.width) / 2.0,
+                (40.0 - img_size.height) / 2.0,
+            );
+            img.set_origin(ctx, top_left);
+        }
         bc.constrain((text_size.width.max(desc_size.width) + 40., 40.))
     }
 
@@ -174,11 +248,16 @@ impl<D: Data> Widget<D> for DownloadModuleItem<D> {
             )
         }
         let icon_size = druid::Size::new(size.height, size.height);
-        ctx.with_save(|ctx| {
-            ctx.transform(Affine::translate(
-                ((icon_size - self.icon_path.bounding_box().size()) / 2.).to_vec2(),
-            ));
-            ctx.fill_even_odd(&self.icon_path, &icon_brush)
+        ctx.with_save(|ctx| match &mut self.icon {
+            Icon::BezPath(p) => {
+                ctx.transform(Affine::translate(
+                    ((icon_size - p.bounding_box().size()) / 2.).to_vec2(),
+                ));
+                ctx.fill_even_odd(p.to_owned(), &icon_brush);
+            }
+            Icon::Image(img) => {
+                img.paint(ctx, data, env);
+            }
         });
         self.text.paint(ctx, data, env);
         self.desc.paint(ctx, data, env);

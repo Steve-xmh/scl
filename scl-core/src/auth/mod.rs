@@ -19,6 +19,31 @@ pub mod authlib;
 pub mod microsoft;
 pub mod structs;
 
+/// 根据玩家名称生成一个固定的离线 UUID
+///
+/// 返回值可以通过传入 `format!("{:x}", uuid)` 来转换为十六进制字符串形式
+///
+/// 代码参考：
+/// ```rust
+/// # use scl_core::auth::generate_offline_uuid;
+/// # fn main() {
+/// assert_eq!(format!("{:x}", generate_offline_uuid("Steve")), "5627dd98e6be3c21b8a8e92344183641");
+/// assert_eq!(format!("{:x}", generate_offline_uuid("Alex")), "36532b5ec4423dbba24cc7e55d0f979a");
+/// # }
+/// ```
+/// 生成方式参考： <https://github.com/PrismarineJS/node-minecraft-protocol/blob/21240f8ab2fd41c76f50b64e3b3a945f50b25b5e/src/datatypes/uuid.js#L14>
+pub fn generate_offline_uuid(player_name: &str) -> md5::Digest {
+    let mut ctx = md5::Context::new();
+    ctx.consume("OfflinePlayer:");
+    ctx.consume(player_name);
+    let mut result = ctx.compute().0;
+
+    result[6] = (result[6] & 0x0f) | 0x30;
+    result[8] = (result[8] & 0x3f) | 0x80;
+
+    md5::Digest(result)
+}
+
 /// 提取一个皮肤位图的正面头部部分，用于 GUI 展示头像
 ///
 /// 传入的皮肤大小必须是 32x64 或 64x64

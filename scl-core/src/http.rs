@@ -58,13 +58,16 @@ fn logger(
 }
 
 static GLOBAL_CLIENT: Lazy<Arc<Client>> = Lazy::new(|| {
+    let scl_version = std::option_env!("SCL_VERSION_TYPE").unwrap_or("0.0.0");
     let client = Config::new()
         .add_header(
             "User-Agent",
-            "github.com/Steve-xmh/SharpCraftLauncher (stevexmh@qq.com)",
+            format!("SharpCraftLauncher/{scl_version} (github.com/Steve-xmh/SharpCraftLauncher) (stevexmh@qq.com)"),
         )
         .unwrap()
-        .set_timeout(Some(Duration::from_secs(30)));
+        .set_timeout(Some(Duration::from_secs(30)))
+        .set_http_keep_alive(false) // async-h1 似乎不兼容使用 Keep Alive，会导致解析响应出错
+        .set_max_connections_per_host(1024);
     let client = if let Ok(mut proxy) = std::env::var("HTTP_PROXY") {
         let proxy = if proxy.ends_with('/') {
             proxy

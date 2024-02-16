@@ -1,5 +1,4 @@
 //! Fabric 下载源数据结构
-use async_trait::async_trait;
 use serde::Deserialize;
 
 use super::{DownloadSource, Downloader};
@@ -39,7 +38,6 @@ pub struct LoaderStruct {
 /// Fabric 模组加载器的安装特质
 ///
 /// 可以通过引入本特质和使用 [`crate::download::Downloader`] 来安装模组加载器
-#[async_trait]
 pub trait FabricDownloadExt: Sync {
     /// 根据原版版本号获取该版本下可用的 Fabric 模组加载器
     async fn get_avaliable_loaders(&self, vanilla_version: &str) -> DynResult<Vec<LoaderMetaItem>>;
@@ -57,7 +55,6 @@ pub trait FabricDownloadExt: Sync {
     async fn download_fabric_post(&self, version_name: &str) -> DynResult;
 }
 
-#[async_trait]
 impl<R: Reporter> FabricDownloadExt for Downloader<R> {
     async fn get_avaliable_loaders(&self, vanilla_version: &str) -> DynResult<Vec<LoaderMetaItem>> {
         let mut result = crate::http::retry_get(match self.source {

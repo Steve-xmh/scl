@@ -3,7 +3,6 @@
 use std::{borrow::Cow, collections::HashMap, path::Path};
 
 use anyhow::Context;
-use async_trait::async_trait;
 use inner_future::{fs::create_dir_all, io::AsyncWriteExt};
 use tracing::*;
 
@@ -19,7 +18,6 @@ use crate::{
 };
 
 /// 一个用于下载安装原版的扩展特质，可以使用 [`crate::download::Downloader`] 来安装
-#[async_trait]
 pub trait VanillaDownloadExt: Sync {
     /// 获取现在所有可下载版本
     async fn get_avaliable_vanilla_versions(&self) -> DynResult<VersionManifest>;
@@ -66,7 +64,6 @@ pub trait VanillaDownloadExt: Sync {
     async fn install_vanilla(&self, version_name: &str, version_info: &VersionInfo) -> DynResult;
 }
 
-#[async_trait]
 impl<R: Reporter> VanillaDownloadExt for Downloader<R> {
     async fn get_avaliable_vanilla_versions(&self) -> DynResult<VersionManifest> {
         let res = crate::http::retry_get_json(match self.source {

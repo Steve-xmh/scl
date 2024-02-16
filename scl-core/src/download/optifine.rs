@@ -2,7 +2,6 @@
 //!
 //! 因 Optifine 并不提供一个稳定的下载方式，故此处会使用镜像源的额外 API 来获取版本下载信息
 
-use async_trait::async_trait;
 use inner_future::io::AsyncWriteExt;
 
 use super::{structs::OptifineVersionMeta, Downloader};
@@ -18,7 +17,6 @@ const CLASS_PATH_SPAREATOR: &str = ":";
 const CLASS_PATH_SPAREATOR: &str = ":";
 
 /// 一个用于下载 Optifine 模组下载安装的扩展特质，可以使用 [`crate::download::Downloader`] 来安装
-#[async_trait]
 pub trait OptifineDownloadExt: Sync {
     /// 根据纯净版本号获取当前可用的所有 Optifine 版本
     async fn get_avaliable_installers(
@@ -46,7 +44,6 @@ pub trait OptifineDownloadExt: Sync {
     ) -> DynResult;
 }
 
-#[async_trait]
 impl<R: Reporter> OptifineDownloadExt for Downloader<R> {
     async fn get_avaliable_installers(
         &self,
