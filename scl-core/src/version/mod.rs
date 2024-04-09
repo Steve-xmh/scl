@@ -11,6 +11,8 @@ use self::structs::VersionInfo;
 use crate::prelude::*;
 
 /// 一个游戏版本的信息
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Version {
     /// 版本名称，通常和其文件夹同名
     pub name: String,
@@ -96,7 +98,8 @@ pub async fn get_avaliable_versions(
 }
 
 /// 版本类型
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub enum VersionType {
     /// 纯净版本
     Vanilla,

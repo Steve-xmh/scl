@@ -54,7 +54,18 @@ impl MinecraftVersion {
     /// 目前检测到 1.17+ 的正式版本都会返回 16，其余的返回 8
     pub fn required_java_version(&self) -> u8 {
         if let Self::Release(mayor, minor, _) = *self {
-            if mayor >= 1 && minor >= 17 {
+            if mayor >= 1 && minor >= 21 {
+                21
+            } else if mayor >= 1 && minor >= 17 {
+                16
+            } else {
+                8
+            }
+        } else if let Self::Snapshot(year, week, num) = *self {
+            // https://www.minecraft.net/zh-hans/article/minecraft-snapshot-24w14a
+            if year >= 24 && week >= 14 && num >= 'a' {
+                21
+            } else if year >= 21 && week >= 8 {
                 16
             } else {
                 8
