@@ -2,7 +2,7 @@
 <div align="left">
     <h1>Sharp Craft Launcher Open Source Project</h1>
     <span>
-        A awsome lightweight, fast, clean launcher dependency framework, including launcher core library, launcher component library, Webview, etc! 
+        An awsome lightweight, fast, clean launcher dependency framework, including launcher core library, launcher component library, Webview, etc! 
     </span>
 </div>
 
