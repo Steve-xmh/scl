@@ -27,7 +27,7 @@ Cross-platform support for Windows, Linux, MacOS.
 
 - `scl-core`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_core/index.html)
 
-    Launcher core library, including game start, game download,authentic login, mod download and more other function.
+    Launcher core library, including game start, game download, authentic login, mod download and more other function.
 - `scl-webview`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_webview/index.html)
 
     Launcher Webview. A web browser library offers webview for Microsoft genuine login.
@@ -92,7 +92,7 @@ Therefore, if you agree to this contribution agreement, please specify the follo
 Here's a list of projects developed/secondarily developed by the authors, all of which are planned to be used in the development of the SCL launcher. Some of the projects use more relaxed or even CC0 open source license, so feel free to use them!
 
 - [optifine-installer](https://github.com/Steve-xmh/optifine-installer): A command line installer module that can install almost all 1.7.2+Optimize, supports specifying the version name of the installation, and can be used for optimizing the installation automation of initiators. Open source using the CC0 open source protocol.
-- [forge-install-bootstrapper](https://github.com/Steve-xmh/forge-install-bootstrapper): A revised version base  [bangbang93/forge-install-bootstrapper](https://github.com/bangbang93/forge-install-bootstrapper) ,aim to support automated installation of all versions of the Forge installer (any version since 1.5.2 that provides an installer)
+- [forge-install-bootstrapper](https://github.com/Steve-xmh/forge-install-bootstrapper): A revised version base  [bangbang93/forge-install-bootstrapper](https://github.com/bangbang93/forge-install-bootstrapper) , aim to support automated installation of all versions of the Forge installer (any version since 1.5.2 that provides an installer)
 - [alhc](https://github.com/Steve-xmh/alhc): A lightweight system under development asynchronous HTTP client framework, by calling the system's own framework to realize HTTP requests and asynchronous
 
 ## Support Me 
