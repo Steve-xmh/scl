@@ -88,3 +88,6 @@ Here's a list of projects developed/secondarily developed by the authors, all of
 The author has been working on this project since January 2021, please give it a Star if you like it!
 
 If you can, [Come website 'afdian' and support me](https://afdian.net/a/SteveXMH)！
+
+
+[PixelQz]无条件同意[SteveXMH](https://github.com/Steve-xmh)使用[PixelQz]所贡献的代码以任何形式盈利且不会撤销。
