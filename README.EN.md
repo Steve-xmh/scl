@@ -10,28 +10,28 @@
 
 ![MSRV 1.75.0](https://img.shields.io/badge/MSRV-1.75.0-orange)
 
-Written in Rust,fairly small memory footprint, excellent  performence,and is optimized for binary size compression.
+Written in Rust, fairly small memory footprint, excellent performence, and is optimized for binary size compression.
 
 Cross-platform support for Windows, Linux, MacOS.
 
-- Official website:[https://steve-xmh.github.io/scl](https://steve-xmh.github.io/scl)
-- Develpment docs:[https://steve-xmh.github.io/scl/scl-docs](https://steve-xmh.github.io/scl/scl-docs)
-- Design drawings:[https://www.figma.com/file/i2Sl8uD5nKS4dIki0yK29n/Sharp-Craft-Launcher-%E8%AE%BE%E8%AE%A1%E5%9B%BE](https://www.figma.com/file/i2Sl8uD5nKS4dIki0yK29n/Sharp-Craft-Launcher-%E8%AE%BE%E8%AE%A1%E5%9B%BE)
-- Intro/Post(MineBBS):[https://www.minebbs.com/resources/sharp-craft-launcher-_-_.7177/](https://www.minebbs.com/resources/sharp-craft-launcher-_-_.7177/)
-- Intro/Post(MineBBS):[https://www.mcbbs.net/thread-1223867-1-1.html](https://www.mcbbs.net/thread-1223867-1-1.html)
+- Official website: [https://steve-xmh.github.io/scl](https://steve-xmh.github.io/scl)
+- Develpment docs: [https://steve-xmh.github.io/scl/scl-docs](https://steve-xmh.github.io/scl/scl-docs)
+- Design drawings: [https://www.figma.com/file/i2Sl8uD5nKS4dIki0yK29n/Sharp-Craft-Launcher-%E8%AE%BE%E8%AE%A1%E5%9B%BE](https://www.figma.com/file/i2Sl8uD5nKS4dIki0yK29n/Sharp-Craft-Launcher-%E8%AE%BE%E8%AE%A1%E5%9B%BE)
+- Intro/Post(MineBBS): [https://www.minebbs.com/resources/sharp-craft-launcher-_-_.7177/](https://www.minebbs.com/resources/sharp-craft-launcher-_-_.7177/)
+- Intro/Post(MCBBS): [https://www.mcbbs.net/thread-1223867-1-1.html](https://www.mcbbs.net/thread-1223867-1-1.html)
 - Sourse code branch: [https://github.com/Steve-xmh/scl/tree/site](https://github.com/Steve-xmh/scl/tree/site)
 
 ## Source Code Architecture
 
-- `scl-core`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_core/index.html) Launcher core library,including game start,game download,authentic login,mod download and more other function.
-- `scl-webview`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_webview/index.html) Launcher Webview.A web browser library offers webview for Microsoft genuine login.
+- `scl-core`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_core/index.html) Launcher core library, including game start, game download,authentic login, mod download and more other function.
+- `scl-webview`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_webview/index.html) Launcher Webview. A web browser library offers webview for Microsoft genuine login.
 - `scl-macro`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_macro/index.html) Launcher procedural macro library, contains part of the procedural macro code for code generation, currently contains simple procedural macros for icon code generation
-- `scl-gui-animation`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_gui_animation/index.html) The launcher graphic page animation function library contains some convenient functions and tool classes for creating non-linear animations
-- `scl-gui-widgets`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_gui_widgets/index.html) Launcher graphic page component library,base [Druid](https://github.com/linebender/druid) framework,provides a large number of graphic page components based on WinUI3 design specifications
+- `scl-gui-animation`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_gui_animation/index.html) The launcher graphic page animation function library, contains some convenient functions and tool classes for creating non-linear animations
+- `scl-gui-widgets`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_gui_widgets/index.html) Launcher graphic page component library, base [Druid](https://github.com/linebender/druid) framework, provides a large number of graphic page components based on WinUI3 design specifications
 
 ## About Open Source LICENSE and Code Collaboration LICENSE
 
-Combining Rust's single executable file feature,this SCL project uses the [LGPL 3.0 Open Source LICENSE](./LICENSE)  and eliminates static linking restrictions,please find more details in the [COPYING](./COPYING) Or [参考译文](./COPYING-CN)
+Combining Rust's single executable file feature, this SCL project uses the [LGPL 3.0 Open Source LICENSE](./LICENSE)  and eliminates static linking restrictions, please find more details in the [COPYING](./COPYING).
 
 To put it simply, you can statically link the project's libraries without the need for open source.
 
@@ -88,6 +88,3 @@ Here's a list of projects developed/secondarily developed by the authors, all of
 The author has been working on this project since January 2021, please give it a Star if you like it!
 
 If you can, [Come website 'afdian' and support me](https://afdian.net/a/SteveXMH)！
-
-
-[PixelQz]无条件同意[SteveXMH](https://github.com/Steve-xmh)使用[PixelQz]所贡献的代码以任何形式盈利且不会撤销。
