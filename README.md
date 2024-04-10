@@ -1,4 +1,4 @@
-[English version](./README.EN.md)
+[English](./README.EN.md)
 <img src="./assets/logo.svg" alt="scl-core logo" width="144" align="right">
 <div align="left">
     <h1>Sharp Craft Launcher Open Source Project</h1>
