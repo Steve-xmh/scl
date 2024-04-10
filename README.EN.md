@@ -6,7 +6,7 @@
     </span>
 </div>
 
-![预览图](https://user-images.githubusercontent.com/39523898/208238006-900bd5fe-f9f7-42a9-b726-da829162fbed.png)
+![preview](https://user-images.githubusercontent.com/39523898/208238006-900bd5fe-f9f7-42a9-b726-da829162fbed.png)
 
 ![MSRV 1.75.0](https://img.shields.io/badge/MSRV-1.75.0-orange)
 
