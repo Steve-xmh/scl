@@ -1,3 +1,4 @@
+[English version](./README.EN.md)
 <img src="./assets/logo.svg" alt="scl-core logo" width="144" align="right">
 <div align="left">
     <h1>Sharp Craft Launcher Open Source Project</h1>
@@ -9,6 +10,7 @@
 ![预览图](https://user-images.githubusercontent.com/39523898/208238006-900bd5fe-f9f7-42a9-b726-da829162fbed.png)
 
 ![MSRV 1.75.0](https://img.shields.io/badge/MSRV-1.75.0-orange)
+
 
 使用 Rust 编程语言编写，内存占用相当之小，性能相当之优秀，针对二进制大小做了力所能及的压缩优化。
 
