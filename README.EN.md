@@ -12,6 +12,8 @@
 
 Written in Rust, fairly small memory footprint, excellent performence, and is optimized for binary size compression.
 
+Note:the launcher only chinese version.
+
 Cross-platform support for Windows, Linux, MacOS.
 
 - Official website: [https://steve-xmh.github.io/scl](https://steve-xmh.github.io/scl)
@@ -23,11 +25,21 @@ Cross-platform support for Windows, Linux, MacOS.
 
 ## Source Code Architecture
 
-- `scl-core`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_core/index.html) Launcher core library, including game start, game download,authentic login, mod download and more other function.
-- `scl-webview`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_webview/index.html) Launcher Webview. A web browser library offers webview for Microsoft genuine login.
-- `scl-macro`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_macro/index.html) Launcher procedural macro library, contains part of the procedural macro code for code generation, currently contains simple procedural macros for icon code generation
-- `scl-gui-animation`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_gui_animation/index.html) The launcher graphic page animation function library, contains some convenient functions and tool classes for creating non-linear animations
-- `scl-gui-widgets`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_gui_widgets/index.html) Launcher graphic page component library, base [Druid](https://github.com/linebender/druid) framework, provides a large number of graphic page components based on WinUI3 design specifications
+- `scl-core`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_core/index.html)
+
+    Launcher core library, including game start, game download,authentic login, mod download and more other function.
+- `scl-webview`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_webview/index.html)
+
+    Launcher Webview. A web browser library offers webview for Microsoft genuine login.
+- `scl-macro`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_macro/index.html)
+
+    Launcher procedural macro library, contains part of the procedural macro code for code generation, currently contains simple procedural macros for icon code generation
+- `scl-gui-animation`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_gui_animation/index.html)
+
+    The launcher graphic page animation function library, contains some convenient functions and tool classes for creating non-linear animations
+- `scl-gui-widgets`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_gui_widgets/index.html)
+
+    Launcher graphic page component library, base [Druid](https://github.com/linebender/druid) framework, provides a large number of graphic page components based on WinUI3 design specifications
 
 ## About Open Source LICENSE and Code Collaboration LICENSE
 
