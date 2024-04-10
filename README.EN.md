@@ -77,7 +77,7 @@ If you agree to this contribution agreement, please include the following text i
 - [x] Multiple .minecraft folders.
 - [x] MacOS support.
 - [ ] Code structure optimization (currently the code is messy and naming conventions are not well-defined).
-- [ ]Visual theme settings (this feature is indefinitely postponed due to memory leak bugs in Druid).
+- [ ] Visual theme settings (this feature is indefinitely postponed due to memory leak bugs in Druid).
 
 ### 2.0 Schedule
 
