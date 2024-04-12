@@ -60,6 +60,12 @@ use crate::prelude::*;
 //     })
 // }
 
+const USER_AGENT: &str = concat!(
+    "SharpCraftLauncher/",
+    env!("CARGO_PKG_VERSION"),
+    " (github.com/Steve-xmh/SharpCraftLauncher) (stevexmh@qq.com)"
+);
+
 static GLOBAL_CLIENT: Lazy<Arc<alhc::Client>> = Lazy::new(|| {
     Arc::new(alhc::get_client_builder().build().unwrap())
     // let scl_version = std::option_env!("SCL_VERSION_TYPE").unwrap_or("0.0.0");
@@ -123,10 +129,11 @@ pub async fn download(
 ) -> DynResult {
     for uri in uris {
         // 尝试重试两次，都失败的话就换下一个链接
+        tracing::info!("正在下载文件到 {}，链接：{}", dest_path, uri.as_ref());
         let res = GLOBAL_CLIENT.get(uri.as_ref());
         // let res = retry_future(5, || get(uri), surf::Result::is_ok).await;
         match res {
-            Ok(res) => match res.await {
+            Ok(res) => match res.header("User-Agent", USER_AGENT).await {
                 Ok(res) => {
                     let tmp_dest_path = format!("{dest_path}.tmp");
                     let tmp_file = inner_future::fs::OpenOptions::new()
@@ -135,17 +142,23 @@ pub async fn download(
                         .truncate(true)
                         .open(&tmp_dest_path)
                         .await?;
-                    if inner_future::io::copy(res, tmp_file).await.is_ok() {
-                        inner_future::fs::rename(tmp_dest_path, dest_path).await?;
-                        return Ok(());
+                    match inner_future::io::copy(res, tmp_file).await {
+                        Ok(_) => {
+                            inner_future::fs::rename(tmp_dest_path, dest_path).await?;
+                            tracing::info!("成功下载文件到 {dest_path}，链接：{}", uri.as_ref());
+                            return Ok(());
+                        }
+                        Err(e) => {
+                            tracing::warn!("下载文件到 {dest_path} 失败： {e}")
+                        }
                     }
                 }
                 Err(e) => {
-                    tracing::trace!("Error {uri:?} {e}")
+                    tracing::warn!("轮询下载链接 {} 失败： {e}", uri.as_ref())
                 }
             },
             Err(e) => {
-                tracing::trace!("Error {uri:?} {e}")
+                tracing::warn!("轮询下载链接 {} 失败： {e}", uri.as_ref())
             }
         }
     }
