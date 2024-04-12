@@ -4,6 +4,8 @@
 
 use std::io::Cursor;
 
+use alhc::prelude::*;
+use anyhow::Context;
 use base64::prelude::*;
 use image::{GenericImageView, Pixel};
 use structs::mojang::{ProfileResponse, ProfileTexture};
@@ -76,12 +78,7 @@ pub fn parse_head_skin(result: Vec<u8>) -> DynResult<(Vec<u8>, Vec<u8>)> {
 async fn get_head_skin(uuid: &str) -> DynResult<(Vec<u8>, Vec<u8>)> {
     // https://sessionserver.mojang.com/session/minecraft/profile/{uuid}
     let uri = format!("https://sessionserver.mojang.com/session/minecraft/profile/{uuid}");
-    let result: ProfileResponse = crate::http::get(uri)
-        .await
-        .map_err(|e| anyhow::anyhow!(e))?
-        .body_json()
-        .await
-        .map_err(|e| anyhow::anyhow!(e))?;
+    let result: ProfileResponse = crate::http::get(uri)?.await?.recv_json().await?;
     if let Some(prop) = result
         .properties
         .iter()
@@ -93,12 +90,7 @@ async fn get_head_skin(uuid: &str) -> DynResult<(Vec<u8>, Vec<u8>)> {
         if let Some(textures) = texture_data.textures {
             if let Some(skin) = textures.skin {
                 let skin_url = skin.url;
-                parse_head_skin(
-                    crate::http::get(skin_url)
-                        .recv_bytes()
-                        .await
-                        .map_err(|e| anyhow::anyhow!(e))?,
-                )
+                parse_head_skin(crate::http::get(skin_url)?.await?.recv_bytes().await?)
             } else {
                 Ok(Default::default())
             }
@@ -164,12 +156,14 @@ pub async fn refresh_auth(am: &mut AuthMethod, client_token: &str) -> DynResult<
                 access_token: access_token.to_owned(),
                 client_token: client_token.to_owned(),
             };
-            let result = crate::http::post("https://authserver.mojang.com/validate")
-                .body(serde_json::to_vec(&body)?)
+            let result = crate::http::post("https://authserver.mojang.com/validate")?
+                .body_bytes(serde_json::to_vec(&body)?)
                 .header("Content-Type", "application/json")
                 .await
-                .map_err(|e| anyhow::anyhow!("发送用户信息请求失败，可能是网络问题：{:?}", e))?;
-            if result.status().is_success() {
+                .context("发送用户信息请求失败，可能是网络问题")?
+                .recv()
+                .await?;
+            if result.status_code() >= 200 && result.status_code() < 300 {
                 Ok(true)
             } else {
                 Ok(false)
@@ -178,13 +172,17 @@ pub async fn refresh_auth(am: &mut AuthMethod, client_token: &str) -> DynResult<
         AuthMethod::Microsoft { access_token, .. } => {
             // TODO: 增加正确的检测方式
             let profile_resp =
-                crate::http::get("https://api.minecraftservices.com/minecraft/profile")
+                crate::http::get("https://api.minecraftservices.com/minecraft/profile")?
                     .header("Authorization", &format!("Bearer {}", &access_token))
                     .await
-                    .map_err(|e| {
-                        anyhow::anyhow!("发送用户信息请求失败，有可能是网络问题：{:?}", e)
-                    })?;
-            Ok(profile_resp.status().is_success())
+                    .context("发送用户信息请求失败，可能是网络问题")?
+                    .recv()
+                    .await?;
+            if profile_resp.status_code() >= 200 && profile_resp.status_code() < 300 {
+                Ok(true)
+            } else {
+                Ok(false)
+            }
         }
         AuthMethod::AuthlibInjector { .. } => {
             if let Ok(new_am) =

@@ -67,7 +67,7 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
         &self,
         vanilla_version: &str,
     ) -> DynResult<ForgeVersionsData> {
-        let (mut versions_data, mut version_promo) = futures::future::try_join(
+        let (versions_data, version_promo) = futures::future::try_join(
             crate::http::retry_get(match self.source {
                 DownloadSource::BMCLAPI => {
                     format!("https://bmclapi2.bangbang93.com/forge/minecraft/{vanilla_version}")
@@ -80,17 +80,9 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
             }),
         )
         .await
-        .map_err(|e| {
-            anyhow::anyhow!(
-                "下载 Forge {} 安装器版本元数据失败：{:?}",
-                vanilla_version,
-                e
-            )
-        })?;
-        let (version_promo, mut info): (Vec<ForgePromoItem>, Vec<ForgeItemInfo>) =
-            futures::future::try_join(version_promo.body_json(), versions_data.body_json())
-                .await
-                .map_err(|e| anyhow::anyhow!(e))?;
+        .with_context(|| format!("下载 Forge {vanilla_version} 安装器版本元数据失败"))?;
+        let version_promo: Vec<ForgePromoItem> = version_promo.data_json()?;
+        let mut info: Vec<ForgeItemInfo> = versions_data.data_json()?;
 
         info.sort_by(|a, b| {
             let a: u64 = {

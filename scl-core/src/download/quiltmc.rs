@@ -54,7 +54,7 @@ pub trait QuiltMCDownloadExt: Sync {
 
 impl<R: Reporter> QuiltMCDownloadExt for Downloader<R> {
     async fn get_avaliable_loaders(&self, vanilla_version: &str) -> DynResult<Vec<LoaderMetaItem>> {
-        let mut result = crate::http::retry_get(format!(
+        let result = crate::http::retry_get(format!(
             "https://meta.quiltmc.org/v3/versions/loader/{vanilla_version}"
         ))
         .await
@@ -65,9 +65,8 @@ impl<R: Reporter> QuiltMCDownloadExt for Downloader<R> {
                 e
             )
         })?;
-        if result.status().is_success() {
-            let result = result.body_json().await.map_err(|e| anyhow::anyhow!(e))?;
-            Ok(result)
+        if result.status_code() >= 200 && result.status_code() < 300 {
+            Ok(result.data_json()?)
         } else {
             Ok(vec![])
         }
@@ -125,15 +124,12 @@ impl<R: Reporter> QuiltMCDownloadExt for Downloader<R> {
         version_id: &str,
         loader_version: &str,
     ) -> DynResult {
-        let mut loader_meta_res = crate::http::retry_get(format!(
+        let loader_meta_res = crate::http::retry_get(format!(
             "https://meta.quiltmc.org/v3/versions/loader/{version_id}/{loader_version}/profile/json"
         ))
         .await
         .map_err(|e| anyhow::anyhow!("获取 QuiltMC 版本元数据失败：{:?}", e))?;
-        let res = loader_meta_res
-            .body_bytes()
-            .await
-            .map_err(|e| anyhow::anyhow!(e))?;
+        let res = loader_meta_res.data();
         inner_future::fs::write(
             format!(
                 "{}/{}/{}-quiltmc-loader.tmp.json",
@@ -145,7 +141,7 @@ impl<R: Reporter> QuiltMCDownloadExt for Downloader<R> {
         )
         .await?;
         let meta: VersionMeta =
-            serde_json::from_slice(&res).context("无法解析 QuiltMC 版本元数据")?;
+            serde_json::from_slice(res).context("无法解析 QuiltMC 版本元数据")?;
         let mut libraries_threads = Vec::with_capacity(meta.libraries.len());
 
         for lib in &meta.libraries {

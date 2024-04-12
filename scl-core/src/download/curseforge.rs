@@ -194,49 +194,41 @@ pub async fn search_mods(
         let _ = write!(&mut base_url, "&categoryID={category_id}");
     }
     tracing::trace!("Searching by {base_url}");
-    let data: Response<Vec<ModInfo>> = crate::http::get(&base_url)
+    let data: Response<Vec<ModInfo>> = crate::http::get(&base_url)?
         .header("x-api-key", API_KEY.unwrap_or_default())
-        .await
-        .map_err(|e| anyhow::anyhow!(e))?
-        .body_json()
-        .await
-        .map_err(|e| anyhow::anyhow!(e))?;
+        .await?
+        .recv_json()
+        .await?;
     Ok(data.data)
 }
 
 /// 通过模组在 Curseforge 的 ID 获取详情信息
 pub async fn get_mod_info(modid: u64) -> DynResult<ModInfo> {
-    let data: Response<ModInfo> = crate::http::get(&(format!("{BASE_URL}mods/{modid}")))
+    let data: Response<ModInfo> = crate::http::get(&(format!("{BASE_URL}mods/{modid}")))?
         .header("x-api-key", API_KEY.unwrap_or_default())
-        .await
-        .map_err(|e| anyhow::anyhow!(e))?
-        .body_json()
-        .await
-        .map_err(|e| anyhow::anyhow!(e))?;
+        .await?
+        .recv_json()
+        .await?;
     Ok(data.data)
 }
 
 /// 获取模组在 Curseforge 的 ID 获取可下载的模组文件列表
 pub async fn get_mod_files(modid: u64) -> DynResult<Vec<ModFile>> {
-    let data: Response<Vec<ModFile>> = crate::http::get(&format!("{BASE_URL}mods/{modid}/files"))
+    let data: Response<Vec<ModFile>> = crate::http::get(&format!("{BASE_URL}mods/{modid}/files"))?
         .header("x-api-key", API_KEY.unwrap_or_default())
-        .await
-        .map_err(|e| anyhow::anyhow!(e))?
-        .body_json()
-        .await
-        .map_err(|e| anyhow::anyhow!(e))?;
+        .await?
+        .recv_json()
+        .await?;
     Ok(data.data)
 }
 
 /// 获取模组在 Curseforge 的 ID 获取模组的图标
 pub async fn get_mod_icon(mod_info: &ModInfo) -> DynResult<image::DynamicImage> {
     if let Some(logo) = &mod_info.logo {
-        let data = crate::http::get(&logo.thumbnail_url)
-            .await
-            .map_err(|e| anyhow::anyhow!(e))?
-            .body_bytes()
-            .await
-            .map_err(|e| anyhow::anyhow!(e))?;
+        let data = crate::http::get(&logo.thumbnail_url)?
+            .await?
+            .recv_bytes()
+            .await?;
         if let Ok(img) = image::load_from_memory(&data) {
             Ok(img)
         } else {
@@ -266,9 +258,7 @@ pub async fn download_mod(
         .write(true)
         .open(format!("{}.tmp", dest.to_str().unwrap()))
         .await?;
-    let res = crate::http::get(url)
-        .await
-        .map_err(|e| anyhow::anyhow!(e))?;
+    let res = crate::http::get(url)?.await?;
     inner_future::io::copy(res, &mut file).await?;
     inner_future::fs::rename(format!("{}.tmp", dest.to_str().unwrap()), dest).await?;
     Ok(())

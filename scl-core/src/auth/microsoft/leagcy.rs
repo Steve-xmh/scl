@@ -1,5 +1,6 @@
 //! 传统微软登录模块，通过模仿 Minecraft 官方启动器来接收授权令牌回调链接完成登录验证
 
+use alhc::prelude::*;
 use serde::Deserialize;
 
 use crate::{
@@ -89,15 +90,15 @@ pub(super) struct XBoxPresenceRescord {
 
 /// 获取 XUID，用途不明，但是在新版本的 Minecraft 有发现需要使用这个 XUID 的地方
 pub async fn get_xuid(userhash: &str, token: &str) -> DynResult<String> {
-    let res = crate::http::get("https://userpresence.xboxlive.com/users/me?level=user")
-        .header("Authorization", format!("XBL3.0 x={userhash};{token}"))
+    let res = crate::http::get("https://userpresence.xboxlive.com/users/me?level=user")?
+        .header("Authorization", &format!("XBL3.0 x={userhash};{token}"))
         .header("x-xbl-contract-version", "3.2")
         .header("Accept", "application/json")
         .header("Accept-Language", "zh-CN")
         .header("Host", "userpresence.xboxlive.com")
+        .await?
         .recv_string()
-        .await
-        .map_err(|e| anyhow::anyhow!(e))?;
+        .await?;
     Ok(res)
 }
 
@@ -113,12 +114,12 @@ pub async fn request_token(credit: &str, is_refresh: bool) -> DynResult<(Passwor
         credit,
         if is_refresh { "refresh_token" } else { "authorization_code" }, // Grant Type
     );
-    let res: OAuth20TokenResponse = crate::http::post(MICROSOFT_TOKEN_URL)
+    let res: OAuth20TokenResponse = crate::http::post(MICROSOFT_TOKEN_URL)?
         .header("Content-Type", "application/x-www-form-urlencoded")
-        .body(body.as_bytes())
+        .body_string(body)
+        .await?
         .recv_json()
-        .await
-        .map_err(|e| anyhow::anyhow!(e))?;
+        .await?;
     anyhow::ensure!(
         res.error.is_empty(),
         "{}令牌失败: {}",
@@ -135,30 +136,26 @@ pub async fn get_userhash_and_token(access_token: &str) -> DynResult<(String, St
     // tracing::trace!("Getting xbox auth body");
     let xbox_auth_body = format!("{{\"Properties\":{{\"AuthMethod\":\"RPS\",\"SiteName\":\"user.auth.xboxlive.com\",\"RpsTicket\":\"{access_token}\"}},\"RelyingParty\":\"http://auth.xboxlive.com\",\"TokenType\":\"JWT\"}}");
     let xbox_auth_resp: XBoxAuthResponse =
-        crate::http::post("https://user.auth.xboxlive.com/user/authenticate")
+        crate::http::post("https://user.auth.xboxlive.com/user/authenticate")?
             .header("Content-Type", "application/json")
             .header("Accept", "application/json")
-            .body(xbox_auth_body.as_bytes())
-            .await
-            .map_err(|e| anyhow::anyhow!(e))?
-            .body_json()
-            .await
-            .map_err(|e| anyhow::anyhow!(e))?;
+            .body_string(xbox_auth_body)
+            .await?
+            .recv_json()
+            .await?;
     let token = xbox_auth_resp.token.to_owned();
     if let Some(uhs) = xbox_auth_resp.display_claims.xui.first() {
         let uhs = uhs.uhs.to_owned();
         let xsts_body = format!("{{\"Properties\":{{\"SandboxId\":\"RETAIL\",\"UserTokens\":[\"{token}\"]}},\"RelyingParty\":\"rp://api.minecraftservices.com/\",\"TokenType\":\"JWT\"}}");
         tracing::trace!("Getting xbox xsts token");
         let xsts_resp: XBoxAuthResponse =
-            crate::http::post("https://xsts.auth.xboxlive.com/xsts/authorize")
+            crate::http::post("https://xsts.auth.xboxlive.com/xsts/authorize")?
                 .header("Content-Type", "application/json")
                 .header("Accept", "application/json")
-                .body(xsts_body.as_bytes())
-                .await
-                .map_err(|e| anyhow::anyhow!(e))?
-                .body_json()
-                .await
-                .map_err(|e| anyhow::anyhow!(e))?;
+                .body_string(xsts_body)
+                .await?
+                .recv_json()
+                .await?;
         let xsts_token = xsts_resp.token;
         Ok((uhs, xsts_token))
     } else {
@@ -173,19 +170,14 @@ pub async fn get_mojang_access_token(uhs: &str, xsts_token: &str) -> DynResult<P
     if !uhs.is_empty() && !xsts_token.is_empty() {
         // tracing::trace!("Getting mojang access token");
         let minecraft_xbox_body = format!("{{\"identityToken\":\"XBL3.0 x={uhs};{xsts_token}\"}}");
-        let minecraft_xbox_resp =
-            crate::http::post("https://api.minecraftservices.com/authentication/login_with_xbox")
+        let minecraft_xbox_resp: MinecraftXBoxLoginResponse =
+            crate::http::post("https://api.minecraftservices.com/authentication/login_with_xbox")?
                 .header("Content-Type", "application/json")
                 .header("Accept", "application/json")
-                .body(minecraft_xbox_body.as_bytes())
-                .await
-                .map_err(|e| anyhow::anyhow!(e))?
-                .body_string()
-                .await
-                .map_err(|e| anyhow::anyhow!(e))?;
-        let minecraft_xbox_resp: MinecraftXBoxLoginResponse =
-            serde_json::from_str(&minecraft_xbox_resp)?;
-        // tracing::trace!("Getting minecraft access token");
+                .body_string(minecraft_xbox_body)
+                .await?
+                .recv_json()
+                .await?;
         let access_token = minecraft_xbox_resp.access_token;
         Ok(access_token)
     } else {
@@ -232,40 +224,31 @@ pub async fn start_auth(_ctx: Option<impl Reporter>, url: &str) -> DynResult<Aut
             return Err(anyhow::anyhow!("获取令牌失败"));
         } else {
             let mcstore_resp: MinecraftStoreResponse =
-                crate::http::get("https://api.minecraftservices.com/entitlements/mcstore")
+                crate::http::get("https://api.minecraftservices.com/entitlements/mcstore")?
                     .header(
                         "Authorization",
                         &format!("Bearer {}", access_token.as_string()),
                     )
-                    .await
-                    .map_err(|e| anyhow::anyhow!(e))?
-                    .body_json()
-                    .await
-                    .map_err(|e| anyhow::anyhow!(e))?;
+                    .await?
+                    .recv_json()
+                    .await?;
             if mcstore_resp.items.is_empty() {
                 anyhow::bail!(
                     "没有在已购项目中找到 Minecraft！请检查你的账户是否已购买 Minecraft！"
                 );
             }
             let profile_resp: MinecraftXBoxProfileResponse =
-                crate::http::get("https://api.minecraftservices.com/minecraft/profile")
+                crate::http::get("https://api.minecraftservices.com/minecraft/profile")?
                     .header(
                         "Authorization",
                         &format!("Bearer {}", access_token.as_string()),
                     )
-                    .await
-                    .map_err(|e| anyhow::anyhow!(e))?
-                    .body_json()
-                    .await
-                    .map_err(|e| anyhow::anyhow!(e))?;
+                    .await?
+                    .recv_json()
+                    .await?;
             if profile_resp.error.is_empty() {
                 if let Some(skin) = profile_resp.skins.iter().find(|a| a.state == "ACTIVE") {
-                    let skin_data = crate::http::get(&skin.url)
-                        .await
-                        .map_err(|e| anyhow::anyhow!(e))?
-                        .body_bytes()
-                        .await
-                        .map_err(|e| anyhow::anyhow!(e))?;
+                    let skin_data = crate::http::get(&skin.url)?.await?.recv_bytes().await?;
                     let (head_skin, hat_skin) = parse_head_skin(skin_data)?;
                     tracing::trace!("Successfully authed!");
                     return Ok(AuthMethod::Microsoft {

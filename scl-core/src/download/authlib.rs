@@ -32,16 +32,14 @@ impl<R: Reporter> AuthlibDownloadExt for Downloader<R> {
                 "https://bmclapi2.bangbang93.com/mirrors/authlib-injector/artifact/latest.json"
             }
             _ => "https://authlib-injector.yushi.moe/artifact/latest.json",
-        })
+        })?
+        .await?
         .recv_json()
-        .await
-        .map_err(|e| anyhow::anyhow!(e))?;
+        .await?;
         r.add_progress(1.);
         r.set_message(format!("正在下载 Authlib-Injector {}", latest_data.version));
         let download_url = latest_data.download_url;
-        let resp = crate::http::get(download_url)
-            .await
-            .map_err(|e| anyhow::anyhow!(e))?;
+        let resp = crate::http::get(download_url)?.await?;
         let temp_dest_path = format!("{dest_path}.tmp");
         let f = inner_future::fs::OpenOptions::new()
             .write(true)
