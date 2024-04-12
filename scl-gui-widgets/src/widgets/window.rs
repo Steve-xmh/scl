@@ -382,7 +382,6 @@ impl<T: Data> Widget<T> for WindowWidget<T> {
                 unsafe {
                     use std::{ffi::OsStr, os::windows::ffi::OsStrExt};
 
-                    use raw_window_handle_5::Win32WindowHandle;
                     use winapi::{
                         shared::{minwindef::*, windef::*},
                         um::winuser::{LoadImageW, SendMessageW, IMAGE_ICON, WM_SETICON},
@@ -417,12 +416,34 @@ impl<T: Data> Widget<T> for WindowWidget<T> {
                         handle: HWND,
                         instance: HINSTANCE,
                     }
-                    unsafe impl HasRawWindowHandle for WinHandle {
-                        fn raw_window_handle(&self) -> RawWindowHandle {
-                            let mut handle = Win32WindowHandle::empty();
-                            handle.hwnd = self.handle as _;
-                            handle.hinstance = self.instance as _;
-                            RawWindowHandle::Win32(handle)
+                    {
+                        use raw_window_handle_5::*;
+                        unsafe impl HasRawWindowHandle for WinHandle {
+                            fn raw_window_handle(&self) -> RawWindowHandle {
+                                let mut handle = Win32WindowHandle::empty();
+                                handle.hwnd = self.handle as _;
+                                handle.hinstance = self.instance as _;
+                                RawWindowHandle::Win32(handle)
+                            }
+                        }
+                    }
+                    {
+                        use std::num::NonZeroIsize;
+
+                        use raw_window_handle_6::*;
+                        impl HasWindowHandle for WinHandle {
+                            fn window_handle(&self) -> Result<WindowHandle<'_>, HandleError> {
+                                let mut handle = Win32WindowHandle::new(
+                                    NonZeroIsize::new(self.handle as _).unwrap(),
+                                );
+                                handle.hinstance =
+                                    Some(NonZeroIsize::new(self.instance as _).unwrap());
+                                Ok(unsafe {
+                                    raw_window_handle_6::WindowHandle::borrow_raw(
+                                        raw_window_handle_6::RawWindowHandle::Win32(handle),
+                                    )
+                                })
+                            }
                         }
                     }
                     let _ = window_shadows::set_shadow(
