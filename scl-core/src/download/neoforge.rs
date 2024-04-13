@@ -128,11 +128,9 @@ impl<R: Reporter> NeoForgeDownloadExt for Downloader<R> {
             match self.source {
                 DownloadSource::Default => format!("https://maven.neoforged.net/releases/net/neoforged/neoforge/{neoforge_version}/neoforge-{neoforge_version}-installer.jar"),
                 DownloadSource::BMCLAPI => format!("https://bmclapi2.bangbang93.com/maven/net/neoforged/neoforge/{neoforge_version}/neoforge-{neoforge_version}-installer.jar"),
-                DownloadSource::MCBBS => format!("https://download.mcbbs.net/maven/net/neoforged/neoforge/{neoforge_version}/neoforge-{neoforge_version}-installer.jar"),
                 _ => format!("https://maven.neoforged.net/releases/net/neoforged/neoforge/{neoforge_version}/neoforge-{neoforge_version}-installer.jar")
             },
             format!("https://bmclapi2.bangbang93.com/maven/net/neoforged/neoforge/{neoforge_version}/neoforge-{neoforge_version}-installer.jar"),
-            format!("https://download.mcbbs.net/maven/net/neoforged/neoforge/{neoforge_version}/neoforge-{neoforge_version}-installer.jar"),
             format!("https://maven.neoforged.net/releases/net/neoforged/neoforge/{neoforge_version}/neoforge-{neoforge_version}-installer.jar"),
         ];
 
@@ -376,7 +374,6 @@ impl<R: Reporter> NeoForgeDownloadExt for Downloader<R> {
                                     DownloadSource::BMCLAPI => {
                                         "https://bmclapi2.bangbang93.com/maven"
                                     }
-                                    DownloadSource::MCBBS => "https://download.mcbbs.net/maven",
                                     _ => "https://maven.neoforged.net/releases",
                                 };
                                 if let Some(Value::Array(array)) = obj.get_mut("libraries") {

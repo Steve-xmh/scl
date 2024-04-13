@@ -49,12 +49,9 @@ impl<R: Reporter> OptifineDownloadExt for Downloader<R> {
         &self,
         vanilla_version: &str,
     ) -> DynResult<Vec<OptifineVersionMeta>> {
-        let mut res: Vec<OptifineVersionMeta> = crate::http::retry_get_json(&match self.source {
-            DownloadSource::MCBBS => {
-                format!("https://download.mcbbs.net/optifine/{vanilla_version}")
-            }
-            _ => format!("https://bmclapi2.bangbang93.com/optifine/{vanilla_version}"),
-        })
+        let mut res: Vec<OptifineVersionMeta> = crate::http::retry_get_json(format!(
+            "https://bmclapi2.bangbang93.com/optifine/{vanilla_version}"
+        ))
         .await
         .map_err(|e| anyhow::anyhow!("获取可用Optifine版本列表失败：{:?}", e))?;
         res.reverse();
@@ -72,23 +69,9 @@ impl<R: Reporter> OptifineDownloadExt for Downloader<R> {
         r.set_message(format!(
             "正在下载 Optifine {vanilla_version} {optifine_patch} {optifine_type}"
         ));
-        let uris = [
-            match self.source {
-                DownloadSource::MCBBS => {
-                    format!(
-                        "https://download.mcbbs.net/optifine/{vanilla_version}/{optifine_type}/{optifine_patch}"
-                    )
-                }
-                _ => format!(
-                    "https://bmclapi2.bangbang93.com/optifine/{vanilla_version}/{optifine_type}/{optifine_patch}"
-                ),
-            },
-            format!(
-                "https://download.mcbbs.net/optifine/{vanilla_version}/{optifine_type}/{optifine_patch}"
-            ),
-            format!(
-                "https://bmclapi2.bangbang93.com/optifine/{vanilla_version}/{optifine_type}/{optifine_patch}"
-            ),
+        let uris = [format!(
+            "https://bmclapi2.bangbang93.com/optifine/{vanilla_version}/{optifine_type}/{optifine_patch}"
+        ),
         ];
         crate::http::download(&uris, dest_path, 0).await?;
         Ok(())

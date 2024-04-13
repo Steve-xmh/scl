@@ -18,7 +18,7 @@
    - 下载 Optifine 模组
    - 自定义启动参数
    - 正版登录（Mojang, Microsoft（你需要自行获取到回调链接））
-   - 多下载源（BMCLAPI MCBBS MC）
+   - 多下载源（BMCLAPI MC）
    - Curseforge 模组检索/下载
 
    ## 部分引用的 JAR 的原仓库

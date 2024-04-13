@@ -411,13 +411,13 @@ impl<T: Data> Widget<T> for ProgressOverlay<T> {
                     }
                 } else if let Some(p) = cmd.get(SET_MESSAGE) {
                     if let Some(v) = self.progress_map.get_mut(&p.0) {
-                        v.msg = p.1.to_owned();
+                        p.1.clone_into(&mut v.msg);
                         v.msg_layout = None;
                         ctx.request_anim_frame();
                     }
                 } else if let Some(p) = cmd.get(SET_SUB_MESSAGE) {
                     if let Some(v) = self.progress_map.get_mut(&p.0) {
-                        v.sub_msg = p.1.to_owned();
+                        p.1.clone_into(&mut v.sub_msg);
                         v.sub_msg_layout = None;
                         ctx.request_anim_frame();
                     }

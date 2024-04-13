@@ -129,7 +129,7 @@ pub async fn download(
 ) -> DynResult {
     for uri in uris {
         // 尝试重试两次，都失败的话就换下一个链接
-        tracing::info!("正在下载文件到 {}，链接：{}", dest_path, uri.as_ref());
+        tracing::trace!("正在下载文件到 {}，链接：{}", dest_path, uri.as_ref());
         let res = GLOBAL_CLIENT.get(uri.as_ref());
         // let res = retry_future(5, || get(uri), surf::Result::is_ok).await;
         match res {
@@ -145,7 +145,7 @@ pub async fn download(
                     match inner_future::io::copy(res, tmp_file).await {
                         Ok(_) => {
                             inner_future::fs::rename(tmp_dest_path, dest_path).await?;
-                            tracing::info!("成功下载文件到 {dest_path}，链接：{}", uri.as_ref());
+                            tracing::trace!("成功下载文件到 {dest_path}，链接：{}", uri.as_ref());
                             return Ok(());
                         }
                         Err(e) => {

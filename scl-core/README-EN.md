@@ -17,7 +17,7 @@
 - Install Optifine (with Forge or not)
 - Customize launch arguments
 - Auth support (Microsoft, Authlib and so on)
-- Multiply download source (Official, BMCLAPI, MCBBS)
+- Multiply download source (Official, BMCLAPI)
 - Search / Install mods on Curseforge / Modrinth
 
 ## Repositories of used JAR files

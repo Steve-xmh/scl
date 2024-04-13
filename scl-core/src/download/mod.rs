@@ -12,7 +12,11 @@ pub mod quiltmc;
 pub mod structs;
 pub mod vanilla;
 
-use std::{fmt::Display, path::Path, str::FromStr};
+use std::{
+    fmt::Display,
+    path::{Path, PathBuf},
+    str::FromStr,
+};
 
 use anyhow::Context;
 pub use authlib::AuthlibDownloadExt;
@@ -27,6 +31,26 @@ pub use vanilla::VanillaDownloadExt;
 use self::structs::VersionInfo;
 use crate::{path::*, prelude::*, progress::*};
 
+/// 当前下载任务的类型
+pub enum DownloadTaskType {
+    /// 游戏资源素材文件
+    Asset,
+    /// 游戏JAR运行库文件
+    Library,
+    /// 游戏原生运行库文件
+    NativeLibrary,
+}
+
+/// 一个下载任务
+pub struct DownloadTask {
+    /// 下载任务的类型
+    pub task_type: DownloadTaskType,
+    /// 下载任务的链接
+    pub url: String,
+    /// 下载任务的目标文件名
+    pub path: PathBuf,
+}
+
 /// 游戏的下载来源，支持和 BMCLAPI 同格式的自定义镜像源
 ///
 /// 通常国内的镜像源速度是比官方快的，但是更新不如官方的及时
@@ -38,8 +62,6 @@ pub enum DownloadSource {
     ///
     /// 为了支持镜像源，在这里鼓励大家前去支持一下：<https://afdian.net/a/bangbang93>
     BMCLAPI,
-    /// 全部使用 MCBBS 提供的镜像源下载
-    MCBBS,
     /// 使用符合 BMCLAPI 镜像链接格式的自定义镜像源下载
     Custom(String),
 }
@@ -58,7 +80,6 @@ impl Display for DownloadSource {
             match self {
                 DownloadSource::Default => "默认（官方）下载源",
                 DownloadSource::BMCLAPI => "BMCLAPI 下载源",
-                DownloadSource::MCBBS => "MCBBS 下载源",
                 DownloadSource::Custom(_) => "自定义",
             }
         )
@@ -72,7 +93,6 @@ impl FromStr for DownloadSource {
         match s {
             "Offical" => Ok(Self::Default),
             "BMCLAPI" => Ok(Self::BMCLAPI),
-            "MCBBS" => Ok(Self::MCBBS),
             s => Ok(Self::Custom(s.to_owned())),
         }
     }

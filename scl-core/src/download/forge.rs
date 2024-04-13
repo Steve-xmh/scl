@@ -180,11 +180,9 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
                 match self.source {
                     DownloadSource::Default => format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-{suffix}.zip"),
                     DownloadSource::BMCLAPI => format!("https://bmclapi2.bangbang93.com/maven/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-{suffix}.zip"),
-                    DownloadSource::MCBBS => format!("https://download.mcbbs.net/maven/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-{suffix}.zip"),
                     _ => format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-{suffix}.zip")
                 },
                 format!("https://bmclapi2.bangbang93.com/maven/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-{suffix}.zip"),
-                format!("https://download.mcbbs.net/maven/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-{suffix}.zip"),
                 format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-{suffix}.zip"),
             ];
 
@@ -225,11 +223,9 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
                     match self.source {
                         DownloadSource::Default => format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-installer.jar"),
                         DownloadSource::BMCLAPI => format!("https://bmclapi2.bangbang93.com/maven/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-installer.jar"),
-                        DownloadSource::MCBBS => format!("https://download.mcbbs.net/maven/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-installer.jar"),
                         _ => format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-installer.jar")
                     },
                     format!("https://bmclapi2.bangbang93.com/maven/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-installer.jar"),
-                    format!("https://download.mcbbs.net/maven/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-installer.jar"),
                     format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-installer.jar"),
                 ]
             } else {
@@ -237,11 +233,9 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
                     match self.source {
                         DownloadSource::Default => format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-installer.jar"),
                         DownloadSource::BMCLAPI => format!("https://bmclapi2.bangbang93.com/forge/download/{build_id}"),
-                        DownloadSource::MCBBS => format!("https://download.mcbbs.net/forge/download/{build_id}"),
                         _ => format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-installer.jar")
                     },
                     format!("https://bmclapi2.bangbang93.com/forge/download/{build_id}"),
-                    format!("https://download.mcbbs.net/forge/download/{build_id}"),
                     format!("https://maven.minecraftforge.net/net/minecraftforge/forge/{vanilla_version}-{forge_version}/forge-{vanilla_version}-{forge_version}-installer.jar"),
                 ]
             };
@@ -579,7 +573,6 @@ impl<R: Reporter> ForgeDownloadExt for Downloader<R> {
                                     DownloadSource::BMCLAPI => {
                                         "https://bmclapi2.bangbang93.com/maven"
                                     }
-                                    DownloadSource::MCBBS => "https://download.mcbbs.net/maven",
                                     _ => "https://files.minecraftforge.net",
                                 };
                                 if let Some(Value::Array(array)) = obj.get_mut("libraries") {

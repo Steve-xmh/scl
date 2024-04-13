@@ -64,9 +64,6 @@ impl<R: Reporter> FabricDownloadExt for Downloader<R> {
             DownloadSource::BMCLAPI => format!(
                 "https://bmclapi2.bangbang93.com/fabric-meta/v2/versions/loader/{vanilla_version}"
             ),
-            DownloadSource::MCBBS => format!(
-                "https://download.mcbbs.net/fabric-meta/v2/versions/loader/{vanilla_version}"
-            ),
             _ => format!("https://meta.fabricmc.net/v2/versions/loader/{vanilla_version}"),
         })
         .await
@@ -106,7 +103,6 @@ impl<R: Reporter> FabricDownloadExt for Downloader<R> {
                     "{}.sha1",
                     package_name.to_maven_jar_path(match self.source {
                         DownloadSource::BMCLAPI => "https://bmclapi2.bangbang93.com/maven",
-                        DownloadSource::MCBBS => "https://download.mcbbs.net/maven",
                         _ => "https://maven.fabricmc.net",
                     })
                 ))
@@ -124,11 +120,9 @@ impl<R: Reporter> FabricDownloadExt for Downloader<R> {
         let uris = [
             package_name.to_maven_jar_path(match self.source {
                 DownloadSource::BMCLAPI => "https://bmclapi2.bangbang93.com/maven",
-                DownloadSource::MCBBS => "https://download.mcbbs.net/maven",
                 _ => "https://maven.fabricmc.net",
             }),
             package_name.to_maven_jar_path("https://bmclapi2.bangbang93.com/maven"),
-            package_name.to_maven_jar_path("https://download.mcbbs.net/maven"),
             package_name.to_maven_jar_path("https://maven.fabricmc.net"),
         ];
         crate::http::download(&uris, &full_path, 0)
