@@ -10,9 +10,9 @@
 
 ![MSRV 1.75.0](https://img.shields.io/badge/MSRV-1.75.0-orange)
 
-Written in the Rust programming language, with very low memory usage and excellent performance, it has made efforts to optimize binary size.
+Written in the Rust programming language, with very low memory usage and excellent performance, and has made efforts to optimize binary size.
 
-Note:the launcher only chinese version.
+Note: Only simplified Chinese version for the launcher.
 
 Cross-platform support for Windows, Linux, MacOS.
 
@@ -26,8 +26,6 @@ Cross-platform support for Windows, Linux, MacOS.
 ## Source Code Architecture
 
 - `scl-core`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_core/index.html)
-
-    Launcher core library, including game start, game download, authentic login, mod download and more other function.
     The launcher core library, including game launching, game downloading, authentic login, mod downloading, and other game-related functionalities.
 - `scl-webview`: [![](https://img.shields.io/badge/docs-passing-green)](https://steve-xmh.github.io/scl/scl-doc/scl_webview/index.html)
 
