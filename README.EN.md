@@ -12,7 +12,7 @@
 
 Written in the Rust programming language, with very low memory usage and excellent performance, and has made efforts to optimize binary size.
 
-Note: Currently, this launcher only contains Chinese version.
+Note: Currently, this launcher is only designed for Chinese users.
 
 Cross-platform support for Windows, Linux, MacOS.
 
